@@ -25,7 +25,8 @@ hs_err_pid*
 
 **/users/
 
-**/target/**
+**/target/
+**/web-resources/
 
 # Directories #
 /build/
