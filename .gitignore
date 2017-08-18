@@ -27,7 +27,7 @@ hs_err_pid*
 
 **/target/
 **/web-resources/
-
+*/META-INF/*
 # Directories #
 /build/
 /bin/
