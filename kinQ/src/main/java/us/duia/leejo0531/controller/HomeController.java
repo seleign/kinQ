@@ -1,4 +1,4 @@
-package us.duia.leejo0531;
+package us.duia.leejo0531.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
