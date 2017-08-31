@@ -578,3 +578,124 @@ INSERT INTO Major values(Major_SEQ.nextval, '社会・政治');
 INSERT INTO Major values(Major_SEQ.nextval, '経済');
 INSERT INTO Major values(Major_SEQ.nextval, '旅行');
 INSERT INTO Major values(Major_SEQ.nextval, 'スポーツ');
+
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '乳幼児教育');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '小学校');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '中学校');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '高等学校');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '大学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '留学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '生涯学習');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '語学・外国語');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '文学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '歴史');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '哲学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '社会学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '数学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '物理学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '科学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '生物学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '地球科学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '電気工学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '建築学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '農学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '環境工学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '畜産学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '海洋学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '機械工学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '政治・外交学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '統計学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '天文学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '心理学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '工学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 1, '科学');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'コンピューター');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'ハードウェア');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'ソフトウェア');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'OS');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'プログラミング');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'ウェブサイト');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'インターネット');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, '通信ネットワーク');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, '放送通信');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, '保安');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'IT資格試験');
+INSERT INTO Minor values(Minor_SEQ.nextval, 2, 'アプリケーション');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'RPGゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'Simulationゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'シューティングゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'アクションゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'レーシングゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'スポーツゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'ボード・パズルゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'モバゲー');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'ビデオゲーム');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'ゲーマー');
+INSERT INTO Minor values(Minor_SEQ.nextval, 3, 'インディーズゲーム');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, 'TV・ラジオ');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, '音楽');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, '映画');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, 'アニメ');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, '漫画');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, 'ビデオ・DVD');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, '演劇');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, 'ミュージカル');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, 'オペラ');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, 'ダンス');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, '美術');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, 'デザイン');
+INSERT INTO Minor values(Minor_SEQ.nextval, 4, '写真');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 5, '飲食');
+INSERT INTO Minor values(Minor_SEQ.nextval, 5, '美容');
+INSERT INTO Minor values(Minor_SEQ.nextval, 5, 'ファッション');
+INSERT INTO Minor values(Minor_SEQ.nextval, 5, 'ペット');
+INSERT INTO Minor values(Minor_SEQ.nextval, 5, 'インテリア');
+INSERT INTO Minor values(Minor_SEQ.nextval, 5, '車');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 6, '歯学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 6, '薬学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 6, '栄養学');
+INSERT INTO Minor values(Minor_SEQ.nextval, 6, '運動');
+INSERT INTO Minor values(Minor_SEQ.nextval, 6, '医療');
+INSERT INTO Minor values(Minor_SEQ.nextval, 6, '保険');
+INSERT INTO Minor values(Minor_SEQ.nextval, 6, '健康常識');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '行政');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '法律');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '国防');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '外交');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '選挙');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '雇用・労働');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '宗教');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '福祉');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '環境');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '災害');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '社会文化');
+INSERT INTO Minor values(Minor_SEQ.nextval, 7, '機関・団体・人物');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '金融');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '不動産');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '税務');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '経営');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '貿易');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '就職');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '創業');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '経済制度');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '経済動向');
+INSERT INTO Minor values(Minor_SEQ.nextval, 8, '経済団体');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 9, '国内旅行');
+INSERT INTO Minor values(Minor_SEQ.nextval, 9, '海外旅行');
+
+INSERT INTO Minor values(Minor_SEQ.nextval, 10, '球技スポーツ');
+INSERT INTO Minor values(Minor_SEQ.nextval, 10, '陸上・水上スポーツ');
+INSERT INTO Minor values(Minor_SEQ.nextval, 10, 'ウインタースポーツ');
+INSERT INTO Minor values(Minor_SEQ.nextval, 10, '武芸');
+INSERT INTO Minor values(Minor_SEQ.nextval, 10, 'レジャー');
+
+commit;
