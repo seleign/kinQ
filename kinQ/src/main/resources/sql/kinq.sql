@@ -1,4 +1,4 @@
--- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 
 
@@ -723,3 +723,15 @@ ON R_Comment( R_Comment)
 INDEXTYPE IS ctxsys.context;
 
 
+
+
+INSERT INTO Major values(Major_SEQ.nextval, '教育・学習');
+INSERT INTO Major values(Major_SEQ.nextval, 'IT');
+INSERT INTO Major values(Major_SEQ.nextval, 'ゲーム');
+INSERT INTO Major values(Major_SEQ.nextval, 'エンタテインメント');
+INSERT INTO Major values(Major_SEQ.nextval, '生活');
+INSERT INTO Major values(Major_SEQ.nextval, '健康');
+INSERT INTO Major values(Major_SEQ.nextval, '社会・政治');
+INSERT INTO Major values(Major_SEQ.nextval, '経済');
+INSERT INTO Major values(Major_SEQ.nextval, '旅行');
+INSERT INTO Major values(Major_SEQ.nextval, 'スポーツ');
