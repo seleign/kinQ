@@ -5,7 +5,10 @@
 <mapper namespace="us.duia.leejo0531.dao.UserMapper">
 
 	<insert id="insertUserInfo" parameterType="User">
-		insert into users values(#{num}, #{userid}, #{password}, #{birthdate}, #{username}, #{tel1}, #{tel2}, #{tel3}, #{image})
+		insert into userInfo values(userInfo_seq.nextval, #{id}, #{pw}, #{userName}, #{age}, #{birth}, #{phone}, #{email})
 	</insert>
 
+	<insert id="insertUserField" parameterType="Field">
+		insert into field values(#{fieldNum}, #{userNum}, #{majorNum}, #{minorNum});
+	</insert>
 </mapper>

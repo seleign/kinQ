@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新規取得</title>
+<title>join</title>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="../resources/jquery.datetimepicker.min.css" rel="stylesheet">
@@ -27,19 +27,19 @@
 <h1>新規取得</h1>
 
 <div>
-	<label for="name">Name</label><input type="text" name="userName" id="userName">
-	<label for="id">ID</label><input type="text" name="id" id="id"><input type="button" value="重複チェック">
-	<label for="pw">Password</label><input type="password" name="pw" id="pw">
-	<label for="pwCheck">Password Check</label><input type="password" name="pwCheck" id="pwCheck">
-	<label for="birth">Birthday</label><input type="text" id="birth" name="birth">
-	<label for="email">Email</label><input type="text"  id="email" name="email">
-	<label for="phone">Tel</label><input type="text"  id="phone" name="phone">
+	<label for="name">Name</label><input type="text" name="userName" id="userName"><br>
+	<label for="id">ID</label><input type="text" name="id" id="id"><input type="button" value="重複チェック"><br>
+	<label for="pw">Password</label><input type="password" name="pw" id="pw"><br>
+	<label for="pwCheck">Password チェック</label><input type="password" name="pwCheck" id="pwCheck"><br>
+	<label for="birth">Birthday</label><input type="text" id="birth" name="birth"><br>
+	<label for="email">Email</label><input type="text"  id="email" name="email"><br>
+	<label for="phone">Phone</label><input type="text"  id="phone" name="phone"><br>
 	<label for="phone">Interest</label>
 		<select id="major" name="major">
 			<option>教育・学習</option>
 			<option>IT</option>
 			<option>ゲーム</option>
-			<option>エンタテインメント・芸術</option>
+			<option>エンタテインメント</option>
 			<option>生活</option>
 			<option>健康</option>
 			<option>社会・政治</option>

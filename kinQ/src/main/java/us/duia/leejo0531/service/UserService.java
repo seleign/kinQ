@@ -7,12 +7,18 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.UserDAO;
+import us.duia.leejo0531.vo.UserVo;
 
 @Service
 @Repository
 public class UserService {
 	@Autowired
-	private UserDAO uDao;
+	private UserDAO userDao;
+
+	public void insertUserInfo(UserVo user, String major, String[] minor) {
+		
+	}
 	
+		
 	
 }
