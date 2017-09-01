@@ -8,6 +8,7 @@
 		<typeAlias type="us.duia.leejo0531.vo.FieldVO" alias="Field" />
 		<typeAlias type="us.duia.leejo0531.vo.MajorVO" alias="Major" />
 		<typeAlias type="us.duia.leejo0531.vo.MinorVO" alias="Minor" />
+		<typeAlias type="us.duia.leejo0531.vo.IdCheckVO" alias="IdCheck" />
 		<typeAlias type="us.duia.leejo0531.vo.QuestionVO" alias="Question" />
 	</typeAliases>
 	<mappers>

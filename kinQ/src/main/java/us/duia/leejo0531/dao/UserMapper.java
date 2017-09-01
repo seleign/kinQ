@@ -12,5 +12,6 @@ public interface UserMapper {
 	public int insertUserField(String field);
 	public ArrayList<MajorVO> getMajorList();
 	public ArrayList<MinorVO> getMinorList();
+	public UserVO getUser(String searchId);
 
 }

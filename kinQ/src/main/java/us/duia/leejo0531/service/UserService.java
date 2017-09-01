@@ -38,6 +38,11 @@ public class UserService {
 		ArrayList<MinorVO> minorList = userDao.getMinorList();
 		return minorList;
 	}
+
+	public UserVO getUser(String searchId) {
+		UserVO searchResult = userDao.getUser(searchId);
+		return searchResult;
+	}
 	
 		
 	
