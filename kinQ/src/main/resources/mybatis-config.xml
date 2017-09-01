@@ -6,6 +6,8 @@
 	<typeAliases>
 		<typeAlias type="us.duia.leejo0531.vo.UserVo" alias="User" />
 		<typeAlias type="us.duia.leejo0531.vo.FieldVo" alias="Field" />
+		<typeAlias type="us.duia.leejo0531.vo.MajorVo" alias="Major" />
+		<typeAlias type="us.duia.leejo0531.vo.MinorVo" alias="Minor" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 
