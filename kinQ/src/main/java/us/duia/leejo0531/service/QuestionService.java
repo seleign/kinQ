@@ -17,4 +17,10 @@ public class QuestionService {
 		int result = qstnDao.insertQuestion( qstn);
 		return result;
 	}
+
+	public QuestionVO getQuestion(QuestionVO qstn) {
+		QuestionVO result = qstnDao.selectOneQuestion( qstn);
+		return result;
+	}
+
 }

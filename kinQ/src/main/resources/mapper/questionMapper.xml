@@ -5,7 +5,7 @@
 <mapper namespace="us.duia.leejo0531.dao.QuestionMapper">
 	<!-- 질문글을 게시한다. -->
 	<insert id="insertQuestion" parameterType="Question">
-		insert into Q_board(
+		insert into Q_Board(
 			questionNum,
 			userNum,
 			timeLimit,
@@ -29,4 +29,9 @@
 			#{questionContent}
 		)
 	</insert>
+	<select id="selectOneQuestion" parameterType="Question" resultType="Question">
+		select *
+		from Q_Board
+		where questionNum = #{questionNum}
+	</select>
 </mapper>

@@ -17,5 +17,11 @@ public class QuestionDAO {
 		int result = mapper.insertQuestion( qstn);
 		return result;
 	}
+	
+	public QuestionVO selectOneQuestion(QuestionVO qstn) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		QuestionVO result = mapper.selectOneQuestion( qstn);
+		return result;
+	}
 
 }
