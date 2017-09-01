@@ -29,7 +29,9 @@ public class QuestionController {
 	@RequestMapping(value="addquestion", method=RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn){
 		qstnSvc.writeQuestion( qstn);
+		
 		//code here
+		
 		return "redirect:/"; 
 	}
 	
