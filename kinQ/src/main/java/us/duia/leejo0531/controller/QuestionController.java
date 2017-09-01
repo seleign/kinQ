@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.UserVO;
 
 @Controller
@@ -18,15 +19,16 @@ public class QuestionController {
 	@Autowired
 	QuestionService qstnSvc;
 	
-	// 회원가입 양식 보기
+	//질문글 게시 양식 보기
 	@RequestMapping(value="question", method=RequestMethod.GET)
-	public String addQuestion(){
-		return "question/joinPage";
+	public String showQuestionForm(){
+		return "question/questionForm";
 	}
 	
+	//입력받은 정보로 질문글 게시
 	@RequestMapping(value="question", method=RequestMethod.POST)
-	public String join(UserVO user, String major, String[] minor){
-		
+	public String addQuestion(QuestionVO qstn){
+		qstnSvc.writeQuestion( qstn);
 		
 		return "redirect:/"; 
 	}

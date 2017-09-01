@@ -3,29 +3,38 @@ package us.duia.leejo0531.vo;
 import java.util.Date;
 
 public class QuestionVO {
+	private int questionNum;
 	private int userNum;
+	private Date timeLimit;
 	private String id;
-	private String password;
-	private String userName;
-	private int aga;
-	private Date birth;
-	private String phone;
-	private String eMail;
-	
-	public QuestionVO(int userNum, String id, String password, String userName, int aga, Date birth, String phone,
-			String eMail) {
-		super();
-		this.userNum = userNum;
-		this.id = id;
-		this.password = password;
-		this.userName = userName;
-		this.aga = aga;
-		this.birth = birth;
-		this.phone = phone;
-		this.eMail = eMail;
-	}
+	private Date regDate;
+	private Date modDate;
+	private String title;
+	private String relatedTag;
+	private int hit;
+	private String questionContent;
 	public QuestionVO() {
 		super();
+	}
+	public QuestionVO(int questionNum, int userNum, Date timeLimit, String id, Date regDate, Date modDate, String title,
+			String relatedTag, int hit, String questionContent) {
+		super();
+		this.questionNum = questionNum;
+		this.userNum = userNum;
+		this.timeLimit = timeLimit;
+		this.id = id;
+		this.regDate = regDate;
+		this.modDate = modDate;
+		this.title = title;
+		this.relatedTag = relatedTag;
+		this.hit = hit;
+		this.questionContent = questionContent;
+	}
+	public int getQuestionNum() {
+		return questionNum;
+	}
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
 	}
 	public int getUserNum() {
 		return userNum;
@@ -33,54 +42,59 @@ public class QuestionVO {
 	public void setUserNum(int userNum) {
 		this.userNum = userNum;
 	}
+	public Date getTimeLimit() {
+		return timeLimit;
+	}
+	public void setTimeLimit(Date timeLimit) {
+		this.timeLimit = timeLimit;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPassword() {
-		return password;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
-	public String getUserName() {
-		return userName;
+	public Date getModDate() {
+		return modDate;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setModDate(Date modDate) {
+		this.modDate = modDate;
 	}
-	public int getAga() {
-		return aga;
+	public String getTitle() {
+		return title;
 	}
-	public void setAga(int aga) {
-		this.aga = aga;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public Date getBirth() {
-		return birth;
+	public String getRelatedTag() {
+		return relatedTag;
 	}
-	public void setBirth(Date birth) {
-		this.birth = birth;
+	public void setRelatedTag(String relatedTag) {
+		this.relatedTag = relatedTag;
 	}
-	public String getPhone() {
-		return phone;
+	public int getHit() {
+		return hit;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
-	public String geteMail() {
-		return eMail;
+	public String getQuestionContent() {
+		return questionContent;
 	}
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
 	}
 	@Override
 	public String toString() {
-		return "QuestionVO [userNum=" + userNum + ", id=" + id + ", password=" + password + ", userName=" + userName
-				+ ", aga=" + aga + ", birth=" + birth + ", phone=" + phone + ", eMail=" + eMail + "]";
+		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", id="
+				+ id + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
+				+ relatedTag + ", hit=" + hit + ", questionContent=" + questionContent + "]";
 	}
-	
-	
 	
 }

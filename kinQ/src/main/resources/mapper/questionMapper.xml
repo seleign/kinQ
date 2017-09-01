@@ -3,5 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="us.duia.leejo0531.dao.QuestionMapper">
-
+	<!-- 질문글을 게시한다. -->
+	<insert id="insertQuestion" parameterType="Question">
+		insert into Q_board(
+			questionNum,
+			userNum,
+			timeLimit,
+			id,
+			regDate,
+			modDate,
+			title,
+			RelatedTag,
+			hit,
+			questionContent
+		) values(
+			Q_Board_SEQ.nextval,
+			#{userNum},
+			#{timeLimit},
+			#{id},
+			#{regDate},
+			#{modDate},
+			#{title},
+			#{relatedTag},
+			#{hit},
+			#{questionContent}
+		)
+	</insert>
 </mapper>
