@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.UserService;
@@ -45,9 +46,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(UserVO user, String major, String[] minor){
+	public String join(UserVO user, @RequestParam String major, String[] minor){
 		userSvc.insertUserInfo(user, major, minor);
-
 		return "redirect:/"; 
 	}
 }

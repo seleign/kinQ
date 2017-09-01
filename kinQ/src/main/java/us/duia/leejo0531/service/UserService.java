@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.FieldVO;
@@ -18,13 +19,19 @@ public class UserService {
 	@Autowired
 	private UserDAO userDao;
 	public void insertUserInfo(UserVO user, String major, String[] minorList) {
-/*			userDao.insertUserInfo(user);
-			//스트링
+		
+			//userInfo 시퀀스 불러오기
+			int userNum = userDao.selectUserInfoSeq();
+			user.setUserNum(userNum);
+			// 회원 가입 정보 DB에 저장하기
+			userDao.insertUserInfo(user);
 			int majorNum = Integer.parseInt(major);
 			
-			for(String minorNum : minorList){
-				userDao.insertUserField(new FieldVo(0, user.getUserNum(), majorNum, minorNum));
-			}*/
+			//회원 관심사 DB에 저장하기
+			for(String minor : minorList){
+				int minorNum = Integer.parseInt(minor);
+				userDao.insertUserField(new FieldVO(0, userNum, majorNum, minorNum));
+			}
 	}
 
 	public ArrayList<MajorVO> getMajorList() {
@@ -43,6 +50,8 @@ public class UserService {
 		UserVO searchResult = userDao.getUser(searchId);
 		return searchResult;
 	}
+
+
 	
 		
 	

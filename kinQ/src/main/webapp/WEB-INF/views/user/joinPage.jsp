@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,47 +13,59 @@
 <script src="./resources/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
 
+	var search = false;
+	
 	// 폼체크 및 submit
 	function submission(){
 		// 이름 체크		
 		var userName = $('#userName').val();
 		if(userName==''){
-			alert('お名前を入力して下さい。'); return;
+			alert('お名前を入力して下さい。'); return false;
 		}
 		// 아이디 체크
 		var id = $('#id').val();
 		if(id==''){
-			alert('IDを入力して下さい。'); return;
+			alert('IDを入力して下さい。'); return false;
 		}
 		
-		var search = false;
 		if(search == false){
-			alert('IDの重複チェックをなさってください。');
+			alert('IDの重複チェックをなさってください。'); return false;
 		}
 		
 		// 패스워드 체크
 		var pw = $('#pw').val();
 		var pwCheck = $('#pwCheck').val();
 		if(pw=='' || pwCheck==''){
-			alert('パスワードを入力して下さい。'); return;
+			alert('パスワードを入力して下さい。'); return false;
 		}
 		if(pw != pwCheck){
-			alert('パスワードを正確に入力してください。'); return;
+			alert('パスワードを正確に入力してください。'); return false;
 		}
 		// 생일 체크
 		var birth = $('#birth').val();
 		if(birth == ''){
-			alert('生年月日を記入してください。'); return;
+			alert('生年月日を記入してください。'); return false;
+		}
+		// 나이 체크
+		var age = $('#age').val();
+		if(age == ''|| isNaN(age)){
+			alert('年を記入してください。'); return false;
 		}
 		//이메일 체크
 		var email = $('#email').val();
 		if(email == ''){
-			alert('イーメールを入力してください。'); return;
+			alert('イーメールを入力してください。'); return false;
 		}
 		// 전화번호 체크
 		var phone = $('#phone').val();
 		if(phone == '' || isNaN(phone)){
-			alert('電話番号を正確に入力してください。'); return;
+			alert('電話番号を正確に入力してください。'); return false;
+		}
+		
+		var interest = $('input[type="checkbox"]:checked').val();
+		
+		if(interest == null){
+			alert('教える分野を選んで下さい。'); return false;
 		}
 		
 		$('#form').submit();
@@ -61,6 +73,18 @@
 
 	//ID 중복체크
 	function idCheck(){
+		
+		var id = $('#id');
+		id.on('keydown', function(e){
+			$('#idCheckResult').html('');
+		});
+		
+		if(id==''){
+			$('#idCheckResult').html('');
+			alert('IDを入力して下さい。'); 
+			return;
+		}
+		
 		$.ajax({
 			url: 'idCheck',
 			method: 'post',
@@ -89,7 +113,7 @@
 				var html = '';
 				$.each(minorList, function(index, element){
 					if(element.majorNum == major){
-						html +=	'<input type="checkbox" value="'+element.minorNum+'">'+element.minorName+'<br>';
+						html +=	'<input type="checkbox" name="minor" value="'+element.minorNum+'">'+element.minorName+'<br>';
 					}
 				});
 				$('#minorSection').html(html);				
@@ -120,13 +144,14 @@
 		<label for="pw">Password</label><input type="password" name="pw" id="pw"><br>
 		<label for="pwCheck">Password Check</label><input type="password" name="pwCheck" id="pwCheck"><br>
 		<label for="birth">Birthday</label><input type="text" id="birth" name="birth"><br>
+		<label for="age">Age</label><input type="text" id="age" name="age"><br>
 		<label for="email">Email</label><input type="text"  id="email" name="email"><br>
 		<label for="phone">Phone</label><input type="text"  id="phone"  placeholder="例)　08012345678" name="phone"><br>
 		<label for="phone">Interest</label>
 			<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
 					<option value="0" selected="selected">選択</option>
 				<c:forEach var="major" items="${majorList }">
-					<option value="${major.majorNum} ">${major.majorName}</option>
+					<option value="${major.majorNum}">${major.majorName}</option>
 				</c:forEach>
 			</select>
 			<div id="minorSection"></div>

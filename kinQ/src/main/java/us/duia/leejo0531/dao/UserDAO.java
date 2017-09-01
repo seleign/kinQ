@@ -19,13 +19,12 @@ public class UserDAO {
 
 	public void insertUserInfo(UserVO user) {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		
-		
+		mapper.insertUserInfo(user);
 	}
 
-	public void insertUserField(FieldVO fieldVo) {
-		// TODO Auto-generated method stub
-		
+	public void insertUserField(FieldVO field) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		mapper.insertUserField(field);
 	}
 
 	public ArrayList<MajorVO> getMajorList() {
@@ -44,6 +43,12 @@ public class UserDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		UserVO searchResult = mapper.getUser(searchId);
 		return searchResult;
+	}
+
+	public int selectUserInfoSeq() {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int userNum = mapper.selectUserInfoSeq();
+		return userNum;
 	}
 
 	
