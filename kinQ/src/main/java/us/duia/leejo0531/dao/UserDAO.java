@@ -40,5 +40,11 @@ public class UserDAO {
 		return minorList;
 	}
 
+	public UserVO getUser(String searchId) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		UserVO searchResult = mapper.getUser(searchId);
+		return searchResult;
+	}
+
 	
 }

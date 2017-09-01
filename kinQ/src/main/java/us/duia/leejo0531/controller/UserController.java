@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.vo.IdCheckVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.UserVO;
@@ -35,6 +36,12 @@ public class UserController {
 	public @ResponseBody ArrayList<MinorVO> minorList(){
 		ArrayList<MinorVO> minorList = userSvc.getMinorList();
 		return minorList;
+	}
+	
+	@RequestMapping(value="idCheck", method=RequestMethod.POST)
+	public @ResponseBody IdCheckVO idCheck(String searchId){
+		UserVO searchResult = userSvc.getUser(searchId);
+		return new IdCheckVO(searchId, searchResult, true);
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)

@@ -4,10 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="us.duia.leejo0531.vo.UserVo" alias="User" />
-		<typeAlias type="us.duia.leejo0531.vo.FieldVo" alias="Field" />
-		<typeAlias type="us.duia.leejo0531.vo.MajorVo" alias="Major" />
-		<typeAlias type="us.duia.leejo0531.vo.MinorVo" alias="Minor" />
+		<typeAlias type="us.duia.leejo0531.vo.UserVO" alias="User" />
+		<typeAlias type="us.duia.leejo0531.vo.FieldVO" alias="Field" />
+		<typeAlias type="us.duia.leejo0531.vo.MajorVO" alias="Major" />
+		<typeAlias type="us.duia.leejo0531.vo.MinorVO" alias="Minor" />
+		<typeAlias type="us.duia.leejo0531.vo.IdCheckVO" alias="IdCheck" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 
