@@ -25,7 +25,7 @@
 			#{modDate},
 			#{title},
 			#{relatedTag},
-			#{hit},
+			0,
 			#{questionContent}
 		)
 	</insert>
