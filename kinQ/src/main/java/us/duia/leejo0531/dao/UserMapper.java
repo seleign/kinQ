@@ -2,15 +2,15 @@ package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
 
-import us.duia.leejo0531.vo.MajorVo;
-import us.duia.leejo0531.vo.MinorVo;
-import us.duia.leejo0531.vo.UserVo;
+import us.duia.leejo0531.vo.MajorVO;
+import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.UserVO;
 
 public interface UserMapper {
 
-	public int insertUserInfo(UserVo user);
+	public int insertUserInfo(UserVO user);
 	public int insertUserField(String field);
-	public ArrayList<MajorVo> getMajorList();
-	public ArrayList<MinorVo> getMinorList();
+	public ArrayList<MajorVO> getMajorList();
+	public ArrayList<MinorVO> getMinorList();
 
 }

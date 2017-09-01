@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.UserService;
-import us.duia.leejo0531.vo.MajorVo;
-import us.duia.leejo0531.vo.MinorVo;
-import us.duia.leejo0531.vo.UserVo;
+import us.duia.leejo0531.vo.MajorVO;
+import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.UserVO;
 
 @Controller
 public class UserController {
@@ -26,19 +26,19 @@ public class UserController {
 	// 회원가입 양식 보기
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public String joinForm(Model model){
-		ArrayList<MajorVo> majorList = userSvc.getMajorList();
+		ArrayList<MajorVO> majorList = userSvc.getMajorList();
 		model.addAttribute("majorList", majorList);
 		return "user/joinPage";
 	}
 	
 	@RequestMapping(value="minorList", method=RequestMethod.GET)
-	public @ResponseBody ArrayList<MinorVo> minorList(){
-		ArrayList<MinorVo> minorList = userSvc.getMinorList();
+	public @ResponseBody ArrayList<MinorVO> minorList(){
+		ArrayList<MinorVO> minorList = userSvc.getMinorList();
 		return minorList;
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(UserVo user, String major, String[] minor){
+	public String join(UserVO user, String major, String[] minor){
 		userSvc.insertUserInfo(user, major, minor);
 
 		return "redirect:/"; 

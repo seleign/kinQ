@@ -1,6 +1,6 @@
 package us.duia.leejo0531.vo;
 
-public class UserVo {
+public class UserVO {
 	private int userNum;
 	private String id;
 	private String pw;
@@ -11,9 +11,9 @@ public class UserVo {
 	private String email;
 	
 	// Constructor
-	public UserVo(){};
+	public UserVO(){};
 	
-	public UserVo(int userNum, String id, String pw, String userName, int age, String birth, String phone,
+	public UserVO(int userNum, String id, String pw, String userName, int age, String birth, String phone,
 			String email) {
 		super();
 		this.userNum = userNum;

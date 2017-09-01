@@ -1,12 +1,12 @@
 package us.duia.leejo0531.vo;
 
-public class MajorVo {
+public class MajorVO {
 	private int majorNum;
 	private String majorName;
 	
-	public MajorVo(){}
+	public MajorVO(){}
 
-	public MajorVo(int majorNum, String majorName) {
+	public MajorVO(int majorNum, String majorName) {
 		super();
 		this.majorNum = majorNum;
 		this.majorName = majorName;

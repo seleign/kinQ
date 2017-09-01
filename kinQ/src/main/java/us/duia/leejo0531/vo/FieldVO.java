@@ -1,14 +1,14 @@
 package us.duia.leejo0531.vo;
 
-public class FieldVo {
+public class FieldVO {
 	private int fieldNum;
 	private int userNum;
 	private int majorNum;
 	private int minorNum;
 	
-	public FieldVo(){}
+	public FieldVO(){}
 
-	public FieldVo(int fieldNum, int userNum, int majorNum, int minorNum) {
+	public FieldVO(int fieldNum, int userNum, int majorNum, int minorNum) {
 		super();
 		this.fieldNum = fieldNum;
 		this.userNum = userNum;

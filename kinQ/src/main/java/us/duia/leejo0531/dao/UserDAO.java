@@ -6,10 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import us.duia.leejo0531.vo.FieldVo;
-import us.duia.leejo0531.vo.MajorVo;
-import us.duia.leejo0531.vo.MinorVo;
-import us.duia.leejo0531.vo.UserVo;
+import us.duia.leejo0531.vo.FieldVO;
+import us.duia.leejo0531.vo.MajorVO;
+import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.UserVO;
 
 @Repository
 public class UserDAO {
@@ -17,26 +17,26 @@ public class UserDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	public void insertUserInfo(UserVo user) {
+	public void insertUserInfo(UserVO user) {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		
 		
 	}
 
-	public void insertUserField(FieldVo fieldVo) {
+	public void insertUserField(FieldVO fieldVo) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public ArrayList<MajorVo> getMajorList() {
+	public ArrayList<MajorVO> getMajorList() {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		ArrayList<MajorVo> majorList = mapper.getMajorList();
+		ArrayList<MajorVO> majorList = mapper.getMajorList();
 		return majorList;
 	}
 
-	public ArrayList<MinorVo> getMinorList() {
+	public ArrayList<MinorVO> getMinorList() {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		ArrayList<MinorVo> minorList = mapper.getMinorList();
+		ArrayList<MinorVO> minorList = mapper.getMinorList();
 		return minorList;
 	}
 

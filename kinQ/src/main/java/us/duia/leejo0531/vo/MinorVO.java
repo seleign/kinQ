@@ -1,13 +1,13 @@
 package us.duia.leejo0531.vo;
 
-public class MinorVo {
+public class MinorVO {
 	private int minorNum;
 	private int majorNum;
 	private String minorName;
 
-	public MinorVo(){}
+	public MinorVO(){}
 
-	public MinorVo(int minorNum, int majorNum, String minorName) {
+	public MinorVO(int minorNum, int majorNum, String minorName) {
 		super();
 		this.minorNum = minorNum;
 		this.majorNum = majorNum;
