@@ -46,6 +46,7 @@ DROP TABLE Q_board;
 DROP TABLE UserInfo;
 
 -- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 -- UserInfo Table Create SQL
 CREATE TABLE UserInfo
@@ -67,12 +68,16 @@ START WITH 1
 INCREMENT BY 1;
 
 
+
 -- Q_Board Table Create SQL
 CREATE TABLE Q_Board
 (
     QuestionNum        NUMBER            NOT NULL, 
     UserNum            NUMBER            NOT NULL, 
+    timeLimit          DATE              NULL, 
     ID                 VARCHAR2(30)      NOT NULL, 
+    RegDate            DATE              NOT NULL, 
+    ModDate            DATE              NOT NULL, 
     Title              VARCHAR2(90)      NOT NULL, 
     RelatedTag         VARCHAR2(30)      NOT NULL, 
     Hit                NUMBER            NOT NULL, 
@@ -84,6 +89,7 @@ CREATE TABLE Q_Board
 CREATE SEQUENCE Q_Board_SEQ
 START WITH 1
 INCREMENT BY 1;
+
 
 ALTER TABLE Q_Board
     ADD CONSTRAINT FK_Q_Board_UserNum_UserInfo_Us FOREIGN KEY (UserNum)
@@ -98,6 +104,8 @@ CREATE TABLE Q_Reply
     QuestionNum     NUMBER            NOT NULL, 
     UserNum         NUMBER            NOT NULL, 
     ID              VARCHAR2(30)      NOT NULL, 
+    R_RegDate       DATE              NOT NULL, 
+    R_ModDate       DATE              NOT NULL, 
     ReplyTitle      VARCHAR2(90)      NOT NULL, 
     ReplyContent    VARCHAR2(1500)    NOT NULL, 
     CONSTRAINT Q_REPLY_PK PRIMARY KEY (ReplyNum)
@@ -126,6 +134,7 @@ CREATE TABLE Qna_Answer
 (
     QnaAnswerNum        NUMBER            NOT NULL, 
     UserNum             NUMBER            NOT NULL, 
+    QnaA_RegDate        DATE              NOT NULL, 
     QnaAnswerTitle      VARCHAR2(90)      NOT NULL, 
     QnaAnswerContent    VARCHAR2(3000)    NOT NULL, 
     CONSTRAINT QNA_ANSWER_PK PRIMARY KEY (QnaAnswerNum)
@@ -164,6 +173,7 @@ CREATE TABLE Qna
 (
     QnaNum          NUMBER            NOT NULL, 
     UserNum         NUMBER            NOT NULL, 
+    Qna_RegDate     DATE              NOT NULL, 
     QnaTitle        VARCHAR2(90)      NOT NULL, 
     QnaContent      VARCHAR2(3000)    NOT NULL, 
     QnaAnswerNum    NUMBER            NULL, 
@@ -174,6 +184,7 @@ CREATE TABLE Qna
 CREATE SEQUENCE Qna_SEQ
 START WITH 1
 INCREMENT BY 1;
+
 
 
 ALTER TABLE Qna
@@ -200,7 +211,6 @@ CREATE TABLE Minor
 CREATE SEQUENCE Minor_SEQ
 START WITH 1
 INCREMENT BY 1;
-
 
 
 ALTER TABLE Minor
@@ -253,6 +263,8 @@ CREATE SEQUENCE Q_Attach_SEQ
 START WITH 1
 INCREMENT BY 1;
 
+
+
 ALTER TABLE Q_Attach
     ADD CONSTRAINT FK_Q_Attach_QuestionNum_Q_Boar FOREIGN KEY (QuestionNum)
         REFERENCES Q_Board (QuestionNum)
@@ -290,10 +302,12 @@ ALTER TABLE R_Attach
 -- R_Comment Table Create SQL
 CREATE TABLE R_Comment
 (
-    ReplyNum     NUMBER           NOT NULL, 
-    UserNum      NUMBER           NOT NULL, 
-    ID           VARCHAR2(30)     NOT NULL, 
-    R_Comment    VARCHAR2(900)    NOT NULL
+    ReplyNum      NUMBER           NOT NULL, 
+    UserNum       NUMBER           NOT NULL, 
+    ID            VARCHAR2(30)     NOT NULL, 
+    R_Comment     VARCHAR2(900)    NOT NULL, 
+    RC_RegDate    DATE             NOT NULL, 
+    RC_ModDate    DATE             NULL   
 )
 /
 
@@ -394,7 +408,6 @@ START WITH 1
 INCREMENT BY 1;
 
 
-
 ALTER TABLE PointLog
     ADD CONSTRAINT FK_PointLog_PUserNum_UserInfo_ FOREIGN KEY (PUserNum)
         REFERENCES UserInfo (UserNum)
@@ -415,7 +428,6 @@ CREATE TABLE Field
 CREATE SEQUENCE Field_SEQ
 START WITH 1
 INCREMENT BY 1;
-
 
 
 ALTER TABLE Field
@@ -496,7 +508,9 @@ CREATE TABLE QNotify
     QNotifyNum       NUMBER           NOT NULL, 
     QuestionNum      NUMBER           NOT NULL, 
     UserNum          NUMBER           NOT NULL, 
+    QN_RegDate       DATE             NOT NULL, 
     QNotifyReason    VARCHAR2(300)    NOT NULL, 
+    QN_AnswerDate    DATE             NULL, 
     QNotifyResult    VARCHAR2(600)    NULL, 
     CONSTRAINT QNOTIFY_PK PRIMARY KEY (QNotifyNum)
 )
@@ -505,6 +519,7 @@ CREATE TABLE QNotify
 CREATE SEQUENCE QNotify_SEQ
 START WITH 1
 INCREMENT BY 1;
+
 
 
 ALTER TABLE QNotify
@@ -524,7 +539,9 @@ CREATE TABLE RNotify
     RNotifyNum       NUMBER           NOT NULL, 
     ReplyNum         NUMBER           NOT NULL, 
     UserNum          NUMBER           NOT NULL, 
+    RN_RegDate       DATE             NOT NULL, 
     RNotifyReason    VARCHAR2(300)    NOT NULL, 
+    RN_AnswerDate    DATE             NULL, 
     RNotifyResult    VARCHAR2(600)    NULL, 
     CONSTRAINT RNOTIFY_PK PRIMARY KEY (RNotifyNum)
 )
@@ -533,6 +550,8 @@ CREATE TABLE RNotify
 CREATE SEQUENCE RNotify_SEQ
 START WITH 1
 INCREMENT BY 1;
+
+
 
 ALTER TABLE RNotify
     ADD CONSTRAINT FK_RNotify_UserNum_UserInfo_Us FOREIGN KEY (UserNum)
@@ -543,6 +562,7 @@ ALTER TABLE RNotify
     ADD CONSTRAINT FK_RNotify_ReplyNum_Q_Reply_Re FOREIGN KEY (ReplyNum)
         REFERENCES Q_Reply (ReplyNum)
 /
+
 
 
 
@@ -699,3 +719,4 @@ INSERT INTO Minor values(Minor_SEQ.nextval, 10, '武芸');
 INSERT INTO Minor values(Minor_SEQ.nextval, 10, 'レジャー');
 
 commit;
+
