@@ -50,10 +50,10 @@ public class UserService {
 		return searchResult;
 	}
 
-	ArrayList<String> temp = new ArrayList<>();
-	ArrayList<String> chk = new ArrayList<>();
 
-	public ArrayList<String> getCheckboxList(String minorName, String minorNum) {
+	public ArrayList<String> getCheckboxList(String minorName) {
+		ArrayList<String> chk = new ArrayList<>();
+		ArrayList<String> temp = new ArrayList<>();
 		temp.add(minorName);
 		
 		for(int i = 0; i<temp.size() ;i++){
@@ -78,7 +78,16 @@ public class UserService {
 		return chk;
 	}
 
+/*	public ArrayList<String> getDeleteResult(String minorName) {
+		for(int i=0; i<chk.size(); i++){
+			if(chk.get(i).equals(minorName)){
+				chk.remove(i);
+			}
+		}
+		return chk;
+	}
 
+*/
 	
 		
 	

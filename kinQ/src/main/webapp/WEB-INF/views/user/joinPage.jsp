@@ -108,7 +108,7 @@
 		$.ajax({
 			url: 'minorList',
 			method: 'get',
-			data: {},
+			data: {major},
 			success: function(minorList){
 				var html = '';
 				$.each(minorList, function(index, element){
@@ -121,30 +121,10 @@
 		});
 	}
 	
- 	function addCheckboxList(minorName, minorNum){
-		$.ajax({
-			url: 'checkboxList',
-			method: 'get',
-			data: {
-				minorName: minorName, 
-				minorNum: minorNum
-			},
-			success: function(checkboxList){
-				var checkboxHtml='';
-				$.each(checkboxList, function(index, element){
-					checkboxHtml+=element+'<input type="button" value="削除" onclick=""><br>'
-					
-					$('#allInterests').html(checkboxHtml);
-				});
-			}
-		});
-	} 
-	
-	
-/* 
+	var checkboxArray = new Array();
 	var checkboxHtml ='';
 	
-	 function addCheckboxList(minorName, minorNum){
+	function addCheckboxList(minorName, minorNum){
 		$('#allInterests').remove();
 		$('#outerDiv').append('<div id="allInterests"></div>');
 		
@@ -175,7 +155,7 @@
 			$('#allInterests').html(checkboxHtml);
 
 		}
-		  */
+		
 	
 	
 	$(function(){

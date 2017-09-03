@@ -46,10 +46,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="checkboxList", method=RequestMethod.GET)
-	public @ResponseBody ArrayList<String> checkboxList(String minorName, String minorNum){
-		ArrayList<String> checkboxList = userSvc.getCheckboxList(minorName, minorNum);
+	public @ResponseBody ArrayList<String> checkboxList(String minorName){
+		ArrayList<String> checkboxList = userSvc.getCheckboxList(minorName);
 		return checkboxList;
-	}  
+	}
 	
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
