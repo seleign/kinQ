@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.FieldVO;
@@ -49,6 +48,34 @@ public class UserService {
 	public UserVO getUser(String searchId) {
 		UserVO searchResult = userDao.getUser(searchId);
 		return searchResult;
+	}
+
+	ArrayList<String> temp = new ArrayList<>();
+	ArrayList<String> chk = new ArrayList<>();
+
+	public ArrayList<String> getCheckboxList(String minorName, String minorNum) {
+		temp.add(minorName);
+		
+		for(int i = 0; i<temp.size() ;i++){
+			if(chk.size()==0){
+				chk.add(temp.get(i));		
+			}else{
+				boolean flag = true;
+				for(int j=0;j<chk.size();j++){
+					if(chk.get(j)==temp.get(i)){
+						flag = false;
+						break;
+					}
+				}
+				if(flag){
+					chk.add(temp.get(i));
+				}
+			}
+		}
+		System.out.println(chk+" 체크");
+		
+		
+		return chk;
 	}
 
 

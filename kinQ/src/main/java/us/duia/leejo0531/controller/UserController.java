@@ -45,6 +45,13 @@ public class UserController {
 		return new IdCheckVO(searchId, searchResult, true);
 	}
 	
+	@RequestMapping(value="checkboxList", method=RequestMethod.GET)
+	public @ResponseBody ArrayList<String> checkboxList(String minorName, String minorNum){
+		ArrayList<String> checkboxList = userSvc.getCheckboxList(minorName, minorNum);
+		return checkboxList;
+	}  
+	
+	
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String join(UserVO user, @RequestParam String major, String[] minor){
 		userSvc.insertUserInfo(user, major, minor);

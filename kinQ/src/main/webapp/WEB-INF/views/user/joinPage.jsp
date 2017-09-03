@@ -108,18 +108,74 @@
 		$.ajax({
 			url: 'minorList',
 			method: 'get',
-			data: {major},
+			data: {},
 			success: function(minorList){
 				var html = '';
 				$.each(minorList, function(index, element){
 					if(element.majorNum == major){
-						html +=	'<input type="checkbox" name="minor" value="'+element.minorNum+'">'+element.minorName+'<br>';
+						html +=	'<input type="checkbox" name="minor" onclick="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
 					}
 				});
 				$('#minorSection').html(html);				
 			}
 		});
 	}
+	
+ 	function addCheckboxList(minorName, minorNum){
+		$.ajax({
+			url: 'checkboxList',
+			method: 'get',
+			data: {
+				minorName: minorName, 
+				minorNum: minorNum
+			},
+			success: function(checkboxList){
+				var checkboxHtml='';
+				$.each(checkboxList, function(index, element){
+					checkboxHtml+=element+'<input type="button" value="削除" onclick=""><br>'
+					
+					$('#allInterests').html(checkboxHtml);
+				});
+			}
+		});
+	} 
+	
+	
+/* 
+	var checkboxHtml ='';
+	
+	 function addCheckboxList(minorName, minorNum){
+		$('#allInterests').remove();
+		$('#outerDiv').append('<div id="allInterests"></div>');
+		
+		
+		checkboxArray.push(minorName);
+			
+		var chk = [];
+			for(var i = 0; i<checkboxArray.length ;i++){
+				if(chk.length==0){
+					chk.push(checkboxArray[i]);		
+				}else{
+					var flag = true;
+					for(var j=0;j<chk.length;j++){
+						if(chk[j]==checkboxArray[i]){
+							flag = false;
+							break;
+						}
+					}
+					if(flag){
+						chk.push(checkboxArray[i]);
+					}
+				}
+			}
+					
+			for(var i in chk){	
+				checkboxHtml+=chk[i]+'<input type="button" value="削除" onclick=""><br>'
+			}
+			$('#allInterests').html(checkboxHtml);
+
+		}
+		  */
 	
 	
 	$(function(){
@@ -155,9 +211,14 @@
 				</c:forEach>
 			</select>
 			<div id="minorSection"></div>
-			
+			<br>
+ 			<div id="outerDiv"><div id="allInterests"></div></div>
+			 
 			<input type="button" value="加入" onclick="javascript:submission()"><input type="button" value="前のページ" onclick="history.go(-1)">
 	</div>
+	
+	
+
 </form>
 </body>
 </html>
