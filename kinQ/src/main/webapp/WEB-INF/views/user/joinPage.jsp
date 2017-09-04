@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -68,6 +67,9 @@
 			alert('教える分野を選んで下さい。'); return false;
 		}
 		
+		var checkboxArray = document.getElementById('checkboxArray');
+		checkboxArray.value = chkNum;
+		
 		$('#form').submit();
 	}
 
@@ -122,19 +124,23 @@
 	}
 	
 	var checkboxArray = new Array();
-	var checkboxHtml ='';
+	var checkedNumArray = new Array();
+	var chkNum = new Array();
 	
 	function addCheckboxList(minorName, minorNum){
-		$('#allInterests').remove();
-		$('#outerDiv').append('<div id="allInterests"></div>');
-		
+		chkNum = [];
+		$('#allInterests').empty();
+		checkboxHtml = '';
 		
 		checkboxArray.push(minorName);
-			
+		checkedNumArray.push(minorNum);
+		
 		var chk = [];
+
 			for(var i = 0; i<checkboxArray.length ;i++){
 				if(chk.length==0){
-					chk.push(checkboxArray[i]);		
+					chk.push(checkboxArray[i]);
+					chkNum.push(checkedNumArray[i]);
 				}else{
 					var flag = true;
 					for(var j=0;j<chk.length;j++){
@@ -145,17 +151,21 @@
 					}
 					if(flag){
 						chk.push(checkboxArray[i]);
+						chkNum.push(checkedNumArray[i]);
 					}
 				}
 			}
-					
+			
+/* 			for(var i in chkNum){
+				$(':checkbox[value='+chkNum[i]+']').prop("checked", "true");
+			}
+			 */
 			for(var i in chk){	
-				checkboxHtml+=chk[i]+'<input type="button" value="削除" onclick=""><br>'
+				checkboxHtml+='<li>'+chk[i]+'<input type="button" value="削除" onclick=""></li>'
 			}
 			$('#allInterests').html(checkboxHtml);
-
 		}
-		
+	
 	
 	
 	$(function(){
@@ -193,7 +203,7 @@
 			<div id="minorSection"></div>
 			<br>
  			<div id="outerDiv"><div id="allInterests"></div></div>
-			 
+			 <input type="hidden" id="checkboxArray" value="" name="checkboxArray[]">
 			<input type="button" value="加入" onclick="javascript:submission()"><input type="button" value="前のページ" onclick="history.go(-1)">
 	</div>
 	
