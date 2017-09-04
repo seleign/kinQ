@@ -125,9 +125,11 @@
 	
 	var checkboxArray = new Array();
 	var checkedNumArray = new Array();
+	var chk = new Array();
 	var chkNum = new Array();
 	
 	function addCheckboxList(minorName, minorNum){
+		chk = [];
 		chkNum = [];
 		$('#allInterests').empty();
 		checkboxHtml = '';
@@ -135,7 +137,6 @@
 		checkboxArray.push(minorName);
 		checkedNumArray.push(minorNum);
 		
-		var chk = [];
 
 			for(var i = 0; i<checkboxArray.length ;i++){
 				if(chk.length==0){
@@ -161,10 +162,31 @@
 			}
 			 */
 			for(var i in chk){	
-				checkboxHtml+='<li>'+chk[i]+'<input type="button" value="削除" onclick=""></li>'
+				checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
 			}
 			$('#allInterests').html(checkboxHtml);
 		}
+	
+	
+	function unchecking(deleteNum){
+		alert(deleteNum);
+		console.log(chkNum);
+		for(var i=0;i<chkNum.length;i++){
+			if(chkNum[i]==deleteNum){
+				var index = chkNum.indexOf(chkNum[i]);
+				chk.splice(index, 1);
+				chkNum.splice(index, 1);
+				console.log(chkNum);
+				
+				checkboxHtml = '';
+				
+				for(var i in chk){	
+					checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
+				}
+				$('#allInterests').html(checkboxHtml);
+			}
+		}
+	}
 	
 	
 	
@@ -202,7 +224,8 @@
 			</select>
 			<div id="minorSection"></div>
 			<br>
- 			<div id="outerDiv"><div id="allInterests"></div></div>
+			<h4>選んだ関心分野</h4>
+ 			<ul id="allInterests"></ul>
 			 <input type="hidden" id="checkboxArray" value="" name="checkboxArray[]">
 			<input type="button" value="加入" onclick="javascript:submission()"><input type="button" value="前のページ" onclick="history.go(-1)">
 	</div>
