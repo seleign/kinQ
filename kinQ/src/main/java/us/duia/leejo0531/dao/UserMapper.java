@@ -15,5 +15,6 @@ public interface UserMapper {
 	public ArrayList<MinorVO> getMinorList();
 	public UserVO getUser(String searchId);
 	public int selectUserInfoSeq();
+	public MinorVO selectFieldInfo(String minor);
 
 }

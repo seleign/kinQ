@@ -17,19 +17,19 @@ import us.duia.leejo0531.vo.UserVO;
 public class UserService {
 	@Autowired
 	private UserDAO userDao;
-	public void insertUserInfo(UserVO user, String major, String[] minorList) {
+	public void insertUserInfo(UserVO user, ArrayList<String> field) {
 		
 			//userInfo 시퀀스 불러오기
 			int userNum = userDao.selectUserInfoSeq();
 			user.setUserNum(userNum);
 			// 회원 가입 정보 DB에 저장하기
 			userDao.insertUserInfo(user);
-			int majorNum = Integer.parseInt(major);
 			
 			//회원 관심사 DB에 저장하기
-			for(String minor : minorList){
-				int minorNum = Integer.parseInt(minor);
-				userDao.insertUserField(new FieldVO(0, userNum, majorNum, minorNum));
+			for(String minor : field){
+				MinorVO selectedField = userDao.selectFieldInfo(minor);
+				System.out.println(selectedField);
+				userDao.insertUserField(new FieldVO(0, userNum, selectedField.getMajorNum(), selectedField.getMinorNum()));
 			}
 	}
 

@@ -51,5 +51,11 @@ public class UserDAO {
 		return userNum;
 	}
 
+	public MinorVO selectFieldInfo(String minor) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		MinorVO selectedField = mapper.selectFieldInfo(minor);
+		return selectedField;
+	}
+
 	
 }

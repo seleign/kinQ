@@ -53,11 +53,8 @@ public class UserController {
 	
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(UserVO user, @RequestParam String major, @RequestParam("checkboxArray[]") ArrayList<String> field, String[] minor){
-		for(String o:field){
-				System.out.println(o);
-		}
-		userSvc.insertUserInfo(user, major, minor);
+	public String join(UserVO user, @RequestParam("checkboxArray[]") ArrayList<String> field){
+		userSvc.insertUserInfo(user, field);
 		return "redirect:/"; 
 	}
 }
