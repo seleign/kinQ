@@ -114,13 +114,17 @@
 				var html = '';
 				$.each(minorList, function(index, element){
 					if(element.majorNum == major){
-//						for( var i in chkNum) {
-//							if( element.minorNum == chkNum[i]) {
-//								html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" checked="checked" disabled="true" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
-//							}else {
-								html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
-//							}
-//						}
+						var isPrinted = false;
+						for( var i in chkNum) {
+							if( element.minorNum == chkNum[i]) {
+								html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" checked="checked" disabled="true" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
+								isPrinted = true;
+								break;
+							}
+						}
+						if( !isPrinted) {
+							html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
+						}
 					}//outer if
 				});
 				$('#minorSection').html(html);				
