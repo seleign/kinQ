@@ -180,7 +180,7 @@
 				chk.splice(index, 1);
 				chkNum.splice(index, 1);
 				console.log(chkNum);
-				$('input[type=checkbox][value='+chkNum[i]+']').prop(':checked', false);
+				$('#chk'+chkNum[i]).prop(":checked", false);
 				
 				
 				for(var i in chk){	
