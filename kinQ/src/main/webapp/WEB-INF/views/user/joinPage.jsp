@@ -129,6 +129,7 @@
 	var chkNum = new Array();
 	
 	function addCheckboxList(minorName, minorNum){
+			
 
 
 			checkboxHtml = '';
