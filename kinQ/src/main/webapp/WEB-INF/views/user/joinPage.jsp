@@ -115,7 +115,7 @@
 				var html = '';
 				$.each(minorList, function(index, element){
 					if(element.majorNum == major){
-						html +=	'<input type="checkbox" name="minor" onclick="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
+						html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
 					}
 				});
 				$('#minorSection').html(html);				
@@ -129,59 +129,62 @@
 	var chkNum = new Array();
 	
 	function addCheckboxList(minorName, minorNum){
-		chk = [];
-		chkNum = [];
-		$('#allInterests').empty();
-		checkboxHtml = '';
-		
-		checkboxArray.push(minorName);
-		checkedNumArray.push(minorNum);
-		
 
-			for(var i = 0; i<checkboxArray.length ;i++){
-				if(chk.length==0){
-					chk.push(checkboxArray[i]);
-					chkNum.push(checkedNumArray[i]);
-				}else{
-					var flag = true;
-					for(var j=0;j<chk.length;j++){
-						if(chk[j]==checkboxArray[i]){
-							flag = false;
-							break;
-						}
-					}
-					if(flag){
+
+			checkboxHtml = '';
+				chk = [];
+				chkNum = [];
+				$('#allInterests').empty();
+			
+				checkboxArray.push(minorName);
+				checkedNumArray.push(minorNum);
+			
+	
+				for(var i = 0; i<checkboxArray.length ;i++){
+					if(chk.length==0){
 						chk.push(checkboxArray[i]);
 						chkNum.push(checkedNumArray[i]);
+					}else{
+						var flag = true;
+						for(var j=0;j<chk.length;j++){
+							if(chk[j]==checkboxArray[i]){
+								flag = false;
+								break;
+							}
+						}
+						if(flag){
+							chk.push(checkboxArray[i]);
+							chkNum.push(checkedNumArray[i]);
+						}
 					}
 				}
-			}
 			
-/* 			for(var i in chkNum){
-				$(':checkbox[value='+chkNum[i]+']').prop("checked", "true");
-			}
-			 */
+			
+		
+
 			for(var i in chk){	
 				checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
 			}
 			$('#allInterests').html(checkboxHtml);
+			
 		}
 	
 	
+	
 	function unchecking(deleteNum){
-		alert(deleteNum);
 		console.log(chkNum);
+		checkboxHtml = '';
 		for(var i=0;i<chkNum.length;i++){
 			if(chkNum[i]==deleteNum){
 				var index = chkNum.indexOf(chkNum[i]);
 				chk.splice(index, 1);
 				chkNum.splice(index, 1);
 				console.log(chkNum);
+				$('input[type=checkbox][value='+chkNum[i]+']').prop(':checked', false);
 				
-				checkboxHtml = '';
 				
 				for(var i in chk){	
-					checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
+					checkboxHtml+='<li id="del'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
 				}
 				$('#allInterests').html(checkboxHtml);
 			}
