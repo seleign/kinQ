@@ -105,18 +105,23 @@
 		});
 	}
 	
-	
 	function loadMinorList(major){
 		$.ajax({
 			url: 'minorList',
 			method: 'get',
-			data: {major},
+			data: {major : major},
 			success: function(minorList){
 				var html = '';
 				$.each(minorList, function(index, element){
 					if(element.majorNum == major){
-						html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
-					}
+//						for( var i in chkNum) {
+//							if( element.minorNum == chkNum[i]) {
+//								html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" checked="checked" disabled="true" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
+//							}else {
+								html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
+//							}
+//						}
+					}//outer if
 				});
 				$('#minorSection').html(html);				
 			}
@@ -125,12 +130,12 @@
 	
 	var checkboxArray = new Array();
 	var checkedNumArray = new Array();
-	var chk = new Array();
-	var chkNum = new Array();
+	var chk = new Array(); // 소분류 일본명
+	var chkNum = new Array(); // 소분류 고유 번호
 	
 	function addCheckboxList(minorName, minorNum){
 			
-
+		 	$('#chk'+minorNum).prop('disabled', true);
 
 			checkboxHtml = '';
 				chk = [];
@@ -181,7 +186,9 @@
 				chk.splice(index, 1);
 				chkNum.splice(index, 1);
 				console.log(chkNum);
-				$('#chk'+chkNum[i]).prop(":checked", false);
+				
+				$('#chk'+deleteNum).prop('checked', false);
+				$('#chk'+deleteNum).prop('disabled', false);
 				
 				
 				for(var i in chk){	
