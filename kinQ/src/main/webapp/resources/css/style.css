@@ -28,7 +28,9 @@ body {
 	height: 530px;
 	background-color: #FFF;
 }
-
+.joinPageBack {
+	background-color: #FFF;
+}
 
 #warp {
 	background-color: #f3f3f3;

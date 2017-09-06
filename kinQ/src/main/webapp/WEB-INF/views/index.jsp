@@ -74,9 +74,7 @@
 	
 	<div class="panel-pop" id="signup">
 	<h2>新規取得<i class="icon-remove"></i></h2>
-	<div class="signupdiv">
 		<iframe src="join" class="signupIframe"></iframe>
-	</div>
 	</div><!-- End signup -->
 	
 	<div class="panel-pop" id="lost-password">

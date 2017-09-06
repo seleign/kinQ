@@ -240,7 +240,7 @@
 
 
 <!-- 	부트스트랩코드 확인용(신경쓰지 않으셔도 됩니다~ 확인다하면 지울게요) -->
-
+		<div class="joinPageBack">
 		<div class="form-style form-style-3">
 			<form action="join" id="joinform" method="post">
 				<div class="form-inputs clearfix">
@@ -298,7 +298,7 @@
 				</p>
 			</form>
 		</div> 
-		
+		</div>
 
 
 <!-- js -->
