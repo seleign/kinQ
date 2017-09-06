@@ -7,11 +7,10 @@
 <title>join</title>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="./resources/jquery.datetimepicker.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="./resources/jquery.datetimepicker.full.min.js"></script>
+<link href="./resources/css/jquery.datetimepicker.min.css" rel="stylesheet">
+<script src="./resources/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
-
 	var search = false;
 	
 	// 폼체크 및 submit
@@ -70,7 +69,7 @@
 		var checkboxArray = document.getElementById('checkboxArray');
 		checkboxArray.value = chkNum;
 		
-		$('#form').submit();
+		$('#joinform').submit();
 	}
 
 	//ID 중복체크
@@ -219,7 +218,7 @@
 
 <h1>新規取得</h1>
 
-<form action="join" id="form" method="post">
+<form action="join" id="joinform" method="post">
 	<div>
 		<label for="name">Name</label><input type="text" name="userName" id="userName"><br>
 		<label for="id">ID</label><input type="text" name="id" id="id"><input type="button" value="重複チェック" onclick="javascript:idCheck()"><br>
