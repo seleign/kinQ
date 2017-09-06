@@ -65,7 +65,7 @@
 					<div class="page-content Register">
 						<h2>Register Now</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravdio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequa. Vivamus vulputate posuere nisl quis consequat.</p>
-						<a class="button color small signup">Create an account</a>
+						<a class="button color small signup" id="joinpagebutton">Create an account</a>
 					</div><!-- End page-content -->
 				</div><!-- End col-md-6 -->
 			</div>

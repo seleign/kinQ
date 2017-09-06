@@ -1,5 +1,12 @@
 jQuery(document).ready(function($) {
 	
+	jQuery("#joinpagebutton").click(
+		function(){
+			var url = $(".signupIframe").attr('src');
+			$(".signupIframe").attr('src',url);
+		}	
+	);
+	
 	/* Menu */
 	
 	jQuery(".navigation  ul li ul").parent("li").addClass("parent-list");

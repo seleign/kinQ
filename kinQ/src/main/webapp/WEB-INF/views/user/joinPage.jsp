@@ -191,12 +191,12 @@
 		}
 	}
 	
- 	$(function(){
+ /* 	$(function(){
 		$('#birth').datetimepicker({
 			timepicker:false,
 			format:'Ymd'
 		});	
-	}); 
+	});  */
 
 </script>
 
