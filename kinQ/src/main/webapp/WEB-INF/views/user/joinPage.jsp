@@ -140,13 +140,13 @@
 						}
 					}//outer if
 				});
-				$('#minorSection').html(html);				
+				$('#minorSection').html(html);		
+				html ='';
 			}
 		});
 	}
 	
-	var checkboxArray = new Array();
-	var checkedNumArray = new Array();
+
 	var chk = new Array(); // 소분류 일본명
 	var chkNum = new Array(); // 소분류 고유 번호
 	
@@ -155,54 +155,29 @@
 		 	$('#chk'+minorNum).prop('disabled', true);
 
 			checkboxHtml = '';
-				chk = [];
-				chkNum = [];
-				$('#allInterests').empty();
-			
-				checkboxArray.push(minorName);
-				checkedNumArray.push(minorNum);
-			
-	
-				for(var i = 0; i<checkboxArray.length ;i++){
-					if(chk.length==0){
-						chk.push(checkboxArray[i]);
-						chkNum.push(checkedNumArray[i]);
-					}else{
-						var flag = true;
-						for(var j=0;j<chk.length;j++){
-							if(chk[j]==checkboxArray[i]){
-								flag = false;
-								break;
-							}
-						}
-						if(flag){
-							chk.push(checkboxArray[i]);
-							chkNum.push(checkedNumArray[i]);
-						}
-					}
-				}
-			
-			
-		
 
+				$('#allInterests').empty();
+
+
+				chk.push(minorName);
+				chkNum.push(minorNum);
+					
 			for(var i in chk){	
 				checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
 			}
 			$('#allInterests').html(checkboxHtml);
-			
+	
 		}
 	
 	
 	
 	function unchecking(deleteNum){
-		console.log(chkNum);
 		checkboxHtml = '';
 		for(var i=0;i<chkNum.length;i++){
 			if(chkNum[i]==deleteNum){
 				var index = chkNum.indexOf(chkNum[i]);
 				chk.splice(index, 1);
 				chkNum.splice(index, 1);
-				console.log(chkNum);
 				
 				$('#chk'+deleteNum).prop('checked', false);
 				$('#chk'+deleteNum).prop('disabled', false);
@@ -218,12 +193,12 @@
 	
 	
 	
-	$(function(){
+/* 	$(function(){
 		$('#birth').datetimepicker({
 			timepicker:false,
 			format:'Ymd'
 		});	
-	});
+	}); */
 
 </script>
 
