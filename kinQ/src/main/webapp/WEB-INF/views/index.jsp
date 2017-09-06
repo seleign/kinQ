@@ -1,3 +1,4 @@
+<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -72,61 +73,10 @@
 	</div><!-- End login-panel -->
 	
 	<div class="panel-pop" id="signup">
-		<h2>新規取得<i class="icon-remove"></i></h2>
-		<div class="form-style form-style-3">
-			<form action="join" id="joinform" method="post">
-				<div class="form-inputs clearfix">
-					<p>
-						<label for="name">Name</label>
-						<input type="text" name="userName" id="userName">
-					</p>
-					<p>
-						<label for="id">ID</label><input type="text" name="id" id="id">
-						<input type="button" value="重複チェック" onclick="javascript:idCheck()"><br>
-						<div id="idCheckResult"></div>
-					</p>
-					<p>
-						<label for="pw">Password</label>
-						<input type="password" name="pw" id="pw">
-						<label for="pwCheck">Password Check</label>
-						<input type="password" name="pwCheck" id="pwCheck">
-					</p>
-					<p>
-						<label for="birth">Birthday</label>
-						<input type="text" id="birth" name="birth">
-					</p>
-					<p>
-						<label for="age">Age</label>
-						<input type="text" id="age" name="age">
-					</p>
-					<p>
-						<label for="email">Email</label>
-						<input type="text"  id="email" name="email">
-					</p>
-					<p>
-						<label for="phone">Phone</label>
-						<input type="text"  id="phone"  placeholder="例)　08012345678" name="phone">
-					</p>
-					<p>
-						<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
-							<option value="0" selected="selected">選択</option>
-							<c:forEach var="major" items="${majorList }">
-							<option value="${major.majorNum}">${major.majorName}</option>
-							</c:forEach>
-						</select>
-						<div id="minorSection"></div>
-					</p>
-					<p>
-						<h4>選んだ関心分野</h4>
- 						<ul id="allInterests"></ul>
-					</p>
-				</div>
-				<p class="form-submit">
-					 <input type="hidden" id="checkboxArray" value="" name="checkboxArray[]">
-					<input type="submit" value="Signup" class="button color small submit">
-				</p>
-			</form>
-		</div>
+	<h2>新規取得<i class="icon-remove"></i></h2>
+	<div class="signupdiv">
+		<iframe src="join" class="signupIframe"></iframe>
+	</div>
 	</div><!-- End signup -->
 	
 	<div class="panel-pop" id="lost-password">

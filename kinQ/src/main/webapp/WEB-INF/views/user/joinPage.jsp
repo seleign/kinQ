@@ -5,7 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>join</title>
-
+<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<!-- Main Style -->
+	<link rel="stylesheet" href="./resources/css/style.css">
+	
+	<!-- Skins -->
+	<link rel="stylesheet" href="./resources/css/purple.css">
+	
+	<!-- Responsive Style -->
+	<link rel="stylesheet" href="./resources/css/responsive.css">
+	
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="./resources/images/favicon.png">
+	
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="./resources/css/jquery.datetimepicker.min.css" rel="stylesheet">
@@ -215,6 +229,7 @@
 
 </head>
 <body>
+<%-- <iframe src="join"></iframe>
 
 <h1>新規取得</h1>
 
@@ -244,8 +259,92 @@
 			<input type="button" value="加入" onclick="javascript:submission()"><input type="button" value="前のページ" onclick="history.go(-1)">
 	</div>
 	
-	
 
-</form>
+</form> --%>
+
+
+
+<!-- 	부트스트랩코드 확인용(신경쓰지 않으셔도 됩니다~ 확인다하면 지울게요) -->
+
+		<div class="form-style form-style-3">
+			<form action="join" id="joinform" method="post">
+				<div class="form-inputs clearfix">
+					<p>
+						<label for="name">Name</label>
+						<input type="text" name="userName" id="userName">
+					</p>
+					<p>
+						<label for="id">ID</label><input type="text" name="id" id="id">
+						<input type="button" value="重複チェック" onclick="javascript:idCheck()"><br>
+						<div id="idCheckResult"></div>
+					</p>
+					<p>
+						<label for="pw">Password</label>
+						<input type="password" name="pw" id="pw">
+					</p>
+					<p>
+						<label for="pwCheck">Password Check</label>
+						<input type="password" name="pwCheck" id="pwCheck">
+					</p>
+					<p>
+						<label for="birth">Birthday</label>
+						<input type="text" id="birth" name="birth">
+					</p>
+					<p>
+						<label for="age">Age</label>
+						<input type="text" id="age" name="age">
+					</p>
+					<p>
+						<label for="email">Email</label>
+						<input type="text"  id="email" name="email">
+					</p>
+					<p>
+						<label for="phone">Phone</label>
+						<input type="text"  id="phone"  placeholder="例)　08012345678" name="phone">
+					</p>
+					<p>
+						<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
+							<option value="0" selected="selected">選択</option>
+							<c:forEach var="major" items="${majorList }">
+							<option value="${major.majorNum}">${major.majorName}</option>
+							</c:forEach>
+						</select>
+						<div id="minorSection"></div>
+					</p>
+					<p>
+						<h4>選んだ関心分野</h4>
+			 			<ul id="allInterests"></ul>
+					</p>
+				</div>
+				<p class="form-submit">
+					 <input type="hidden" id="checkboxArray" value="" name="checkboxArray[]">
+					<input type="button" value="加入" onclick="javascript:submission()" class="button color small submit">
+<!-- 					<input type="button" value="前のページ" onclick="history.go(-1)"> -->
+				</p>
+			</form>
+		</div> 
+		
+
+
+<!-- js -->
+<script src="./resources/js/jquery.min.js"></script>
+<script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="./resources/js/jquery.easing.1.3.min.js"></script>
+<script src="./resources/js/html5.js"></script>
+<script src="./resources/js/twitter/jquery.tweet.js"></script>
+<script src="./resources/js/jflickrfeed.min.js"></script>
+<script src="./resources/js/jquery.inview.min.js"></script>
+<script src="./resources/js/jquery.tipsy.js"></script>
+<script src="./resources/js/tabs.js"></script>
+<script src="./resources/js/jquery.flexslider.js"></script>
+<script src="./resources/js/jquery.prettyPhoto.js"></script>
+<script src="./resources/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="./resources/js/jquery.scrollTo.js"></script>
+<script src="./resources/js/jquery.nav.js"></script>
+<script src="./resources/js/tags.js"></script>
+<script src="./resources/js/jquery.bxslider.min.js"></script>
+<script src="./resources/js/custom.js"></script>
+<!-- End js -->
+
 </body>
 </html>
