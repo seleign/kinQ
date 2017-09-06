@@ -576,7 +576,7 @@ url: www.2code.info
 		width: 60% !important;
 	}
 	.form-style input.submit {
-		width: auto;
+		width: 100%;
 	}
 	.form-style-4 .form-inputs p {
 		width: 100% !important;

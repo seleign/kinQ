@@ -2642,12 +2642,11 @@ span.date i,span.comment i {
 }
 .form-style input,.form-style textarea {
 	display: block;
-	width: 50%;
+	width: 100%;
 	margin: 0;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	height: 25px;
 }
 .form-style select {
 	display: block;

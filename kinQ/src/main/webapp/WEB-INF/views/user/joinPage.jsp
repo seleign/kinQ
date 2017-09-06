@@ -163,7 +163,7 @@
 				chkNum.push(minorNum);
 					
 			for(var i in chk){	
-				checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
+				checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+chkNum[i]+')"><a></li>'
 			}
 			$('#allInterests').html(checkboxHtml);
 	
@@ -184,21 +184,19 @@
 				
 				
 				for(var i in chk){	
-					checkboxHtml+='<li id="del'+chkNum[i]+'">'+chk[i]+'<input type="button" value="削除" onclick="javascript:unchecking('+chkNum[i]+')"></li>'
+					checkboxHtml+='<li id="del'+chkNum[i]+'">'+chk[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+chkNum[i]+')"><a></li>'
 				}
 				$('#allInterests').html(checkboxHtml);
 			}
 		}
 	}
 	
-	
-	
-/* 	$(function(){
+ 	$(function(){
 		$('#birth').datetimepicker({
 			timepicker:false,
 			format:'Ymd'
 		});	
-	}); */
+	}); 
 
 </script>
 
@@ -219,7 +217,7 @@
 		<label for="age">Age</label><input type="text" id="age" name="age"><br>
 		<label for="email">Email</label><input type="text"  id="email" name="email"><br>
 		<label for="phone">Phone</label><input type="text"  id="phone"  placeholder="例)　08012345678" name="phone"><br>
-		<label for="phone">Interest</label>
+		<label for="interest">Interest</label>
 			<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
 					<option value="0" selected="selected">選択</option>
 				<c:forEach var="major" items="${majorList }">
@@ -248,9 +246,9 @@
 						<label for="name">Name</label>
 						<input type="text" name="userName" id="userName">
 					</p>
-					<p>
+					<p class="form-submit">
 						<label for="id">ID</label><input type="text" name="id" id="id">
-						<input type="button" value="重複チェック" onclick="javascript:idCheck()"><br>
+						<input type="button" value="重複チェック" onclick="javascript:idCheck()" class="button color small submit"><br>
 						<div id="idCheckResult"></div>
 					</p>
 					<p>
@@ -278,6 +276,7 @@
 						<input type="text"  id="phone"  placeholder="例)　08012345678" name="phone">
 					</p>
 					<p>
+						<label for="interest">Interest</label>
 						<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
 							<option value="0" selected="selected">選択</option>
 							<c:forEach var="major" items="${majorList }">
