@@ -236,11 +236,15 @@
 </form> --%>
 
 
-
-<!-- 	부트스트랩코드 확인용(신경쓰지 않으셔도 됩니다~ 확인다하면 지울게요) -->
+		<script type="text/javascript">
+		function test() {
+			$('.icon-remove', parent.document).click();
+			return true;
+		}
+		</script>
 		<div class="joinPageBack">
 		<div class="form-style form-style-3">
-			<form action="join" id="joinform" method="post">
+			<form action="join" id="joinform" method="post" onsubmit="return test();">
 				<div class="form-inputs clearfix">
 					<p>
 						<label for="name">Name</label>
