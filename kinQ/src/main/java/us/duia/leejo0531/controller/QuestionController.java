@@ -73,10 +73,10 @@ public class QuestionController {
 	
 	//file_upload
 	@RequestMapping(value="file_upload", method=RequestMethod.POST)
-	public @ResponseBody String file_upload(MultipartFile blob) {
+	public @ResponseBody String file_upload(MultipartFile blob, String fileName) {
 		System.out.println(blob.getSize());
 		System.out.println(blob.getContentType());
-		System.out.println(blob.getName());
+		System.out.println(fileName);
 		return "success";
 	}
 }

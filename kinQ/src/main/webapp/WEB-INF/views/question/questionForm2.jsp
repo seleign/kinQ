@@ -35,7 +35,7 @@
 	        isDraggingMedia = false;
 	        // blah
 	    }
-	});
+		});
 		
 		//동영상 녹화 코드
 		document.getElementById('btn-record-webm').onclick = function() {
@@ -82,11 +82,15 @@
 								+ URL.createObjectURL(blob)
 								+ '" autoplay loop></video>';
 						$("#canvas").remove(); //재생중이던 화면 정지
-						//$("#blob").val = blob;
-						var filename = String(URL.createObjectURL(blob)).
+						var URL_BLOB = String(URL.createObjectURL(blob));
+						var fileName = URL_BLOB.substring(URL_BLOB.lastIndexOf("/")+1 , URL_BLOB.length);
+
+						//ajax로 서버에 파일 전송
+						var filename = String(URL.createObjectURL(blob));
 						var formElement = document.querySelector("form");
 						var formData = new FormData(formElement);
 						formData.append("blob", blob);
+						formData.append("fileName", fileName);
 
 						$.ajax({
 		                    url: 'file_upload',
@@ -160,7 +164,7 @@
 		<!-- DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
 		<!-- 여기에 글쓰기 에디터를 넣어야한다. -->
 		<div id="part-of-screen-to-be-shared" contenteditable="true"
-			style="text-align: center; border-top: 5px solid gray; background-color: #FBFBEE;">
+			style="text-align: center; border-top: 5px solid gray; width: 500px; background-color: #FBFBEE;">
 			<h2 style="color: red;">여기에 글쓰기 에디터가 들어가야 됨.</h2>
 			<p>
 				화면 녹화를 누르면 녹화 시작, 녹화 끝나면 히든 textarea나 input에 blob 를 담아서 컨트롤러로 전달.
