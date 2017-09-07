@@ -36,6 +36,14 @@ public class QuestionController {
 		return "question/questionForm";
 	}
 	
+	//질문글 게시 양식 보기 --테스트용입니다.
+		@RequestMapping(value="addquestion2", method=RequestMethod.GET)
+		public String showQuestionForm2(Model model){
+			ArrayList<MajorVO> majorList = userSvc.getMajorList();
+			model.addAttribute("majorList", majorList);
+			return "question/questionForm2";
+		}
+	
 	@RequestMapping( value="searchTag", method=RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<TagVO> searchTag() {
@@ -69,9 +77,6 @@ public class QuestionController {
 		System.out.println(blob.getSize());
 		System.out.println(blob.getContentType());
 		System.out.println(blob.getName());
-		
 		return "success";
 	}
-	
-	
 }
