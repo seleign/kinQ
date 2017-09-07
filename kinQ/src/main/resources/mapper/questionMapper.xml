@@ -29,6 +29,24 @@
 			#{questionContent}
 		)
 	</insert>
+	
+	<!-- 대분류 리스트 불러오기 -->	
+	<select id="getMajorList" resultType="Major">
+		select * from major order by majorNum
+	</select>
+	
+	<!-- 소분류 리스트 불러오기 -->
+	<select id="getMinorList" resultType="Minor">
+		select * from minor order by minorNum
+	</select>
+	
+	<!-- 모든 태그를 가져온다. -->
+	<select id="selectTags" resultType="Tag">
+		select *
+		from Tag
+	</select>
+	
+	<!-- 대상 질문글 정보를 가져온다.(임시) -->
 	<select id="selectOneQuestion" parameterType="Question" resultType="Question">
 		select *
 		from Q_Board

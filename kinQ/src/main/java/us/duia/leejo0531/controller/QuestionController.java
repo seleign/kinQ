@@ -10,12 +10,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
+=======
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.QuestionVO;
+<<<<<<< HEAD
+=======
+import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.UserVO;
 
 @Controller
 public class QuestionController {
@@ -33,9 +40,16 @@ public class QuestionController {
 		model.addAttribute("majorList", majorList);
 		return "question/questionForm";
 	}
+	
+	@RequestMapping( value="searchTag", method=RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<TagVO> searchTag() {
+		ArrayList<TagVO> result = qstnSvc.searchTag();
+		return result;
+	}
 
 	//입력받은 정보로 질문글 게시
-	@RequestMapping(value="addquestion", method=RequestMethod.POST)
+	@RequestMapping(value="addQuestion", method=RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn){
 		qstnSvc.writeQuestion( qstn);
 		
