@@ -1,32 +1,58 @@
 package us.duia.leejo0531.controller;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.UserVO;
 
 @Controller
 public class QuestionController {
 	private static final Logger logger=LoggerFactory.getLogger(QuestionController.class);
 	
-	@Autowired
+	@Autowired 
 	QuestionService qstnSvc;
+	@Autowired
+	UserService userSvc;
 	
 	//질문글 게시 양식 보기
 	@RequestMapping(value="addquestion", method=RequestMethod.GET)
-	public String showQuestionForm(){
+	public String showQuestionForm(Model model){
+		ArrayList<MajorVO> majorList = userSvc.getMajorList();
+		model.addAttribute("majorList", majorList);
 		return "question/questionForm";
+	}
+	
+	//질문글 게시 양식 보기 --테스트용입니다.
+		@RequestMapping(value="addquestion2", method=RequestMethod.GET)
+		public String showQuestionForm2(Model model){
+			ArrayList<MajorVO> majorList = userSvc.getMajorList();
+			model.addAttribute("majorList", majorList);
+			return "question/questionForm2";
+		}
+	
+	@RequestMapping( value="searchTag", method=RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<TagVO> searchTag() {
+		ArrayList<TagVO> result = qstnSvc.searchTag();
+		return result;
 	}
 
 	//입력받은 정보로 질문글 게시
-	@RequestMapping(value="addquestion", method=RequestMethod.POST)
+	@RequestMapping(value="addQuestion", method=RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn){
 		qstnSvc.writeQuestion( qstn);
 		
@@ -45,5 +71,12 @@ public class QuestionController {
 		return "redirect:/"; 
 	}
 	
-	
+	//file_upload
+	@RequestMapping(value="file_upload", method=RequestMethod.POST)
+	public @ResponseBody String file_upload(MultipartFile blob) {
+		System.out.println(blob.getSize());
+		System.out.println(blob.getContentType());
+		System.out.println(blob.getName());
+		return "success";
+	}
 }
