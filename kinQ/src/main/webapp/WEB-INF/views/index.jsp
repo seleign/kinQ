@@ -30,7 +30,7 @@
 
 <div class="loader"><div class="loader_html"></div></div>
 
-<c:if test="${sessionScope.username == null }">
+<c:if test="${sessionScope.userName == null }">
 <div id="wrap" class="grid_1200">
 	<div class="login-panel">
 		<section class="container">
@@ -39,14 +39,14 @@
 					<div class="page-content">
 						<h2>Login</h2>
 						<div class="form-style form-style-3">
-							<form>
+							<form action="login" id="loginform" method="get">
 								<div class="form-inputs clearfix">
 									<p class="login-text">
-										<input type="text" value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Username';}">
+										<input type="text"  name="id" value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Username';}">
 										<i class="icon-user"></i>
 									</p>
 									<p class="login-password">
-										<input type="password" value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Password';}">
+										<input type="password" name="pw" value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Password';}">
 										<i class="icon-lock"></i>
 										<a href="#">Forget</a>
 									</p>
@@ -108,10 +108,11 @@
 <!-- 					<li><a href="#"><i class="icon-headphones"></i>Support</a></li> -->
 					<c:choose>
 						<c:when test="${sessionScope.userName == null}">
-							<li><a href="login.html" id="login-panel"><i class="icon-user"></i>Login Area</a></li>
+							<li><a href="#" id="login-panel"><i class="icon-user"></i>Login Area</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="#"><i class="icon-user"></i>${sessionScope.userName }様 Login 中…</a></li>
+							<li><a href="logout">Logout</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -126,7 +127,7 @@
 	</div><!-- End header-top -->
 	<header id="header">
 		<section class="container clearfix">
-			<div class="logo"><a href="index.html"><img alt="" src="images/logo.png"></a></div>
+			<div class="logo"><a href="#"><img alt="" src="images/logo.png"></a></div>
 			<nav class="navigation">
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a>
@@ -1041,7 +1042,7 @@
 						</li>
 					</ul>
 				</div>
-				
+				<c:if test="${sessionScope.userName == null }">
 				<div class="widget widget_login">
 					<h3 class="widget_title">Login</h3>
 					<div class="form-style form-style-2">
@@ -1070,7 +1071,7 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				
+				</c:if>
 				<div class="widget widget_highest_points">
 					<h3 class="widget_title">Highest points</h3>
 					<ul>
