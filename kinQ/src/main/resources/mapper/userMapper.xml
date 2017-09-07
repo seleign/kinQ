@@ -38,4 +38,8 @@
 	<select id="selectFieldInfo" parameterType="string" resultType="Minor">
 		select * from minor where minorNum=#{minorNum}
 	</select>
+<!-- 로그인확인 -->
+	<select id="requestLogin" parameterType="User" resultType="User">
+		select * from userInfo where id=#{id} and pw=#{pw}
+	</select>
 </mapper>

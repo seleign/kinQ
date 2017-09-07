@@ -2,6 +2,8 @@ package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.IdCheckVO;
@@ -56,5 +60,18 @@ public class UserController {
 	public String join(UserVO user, @RequestParam("checkboxArray[]") ArrayList<String> field){
 		userSvc.insertUserInfo(user, field);
 		return "redirect:/"; 
+	}
+	
+	@RequestMapping(value="login", method=RequestMethod.GET)
+	public String requestLogin(UserVO user,HttpSession session){
+		UserVO loginUser = userSvc.requestLogin(user);
+		session.setAttribute("userName", loginUser.getUserName());
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="logout", method=RequestMethod.GET)
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "redirect:/";
 	}
 }
