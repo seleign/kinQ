@@ -12,6 +12,27 @@
 <!-- 수정된 플러그인입니다. 교체 불가. -->
 <script src="./resources/js/chosen.jquery.js"></script>
 <script type="text/javascript">
+	function formCheck() {
+		var title = $('#title').val();
+		if(title==''){
+			alert('おタイトルを入力して下さい。');
+			return false;
+		}
+		
+		var minor = $('#minor').val();
+		if( minor=='') {
+			alert( '分類を選んでください。');
+			return false;
+		}
+		
+		if (!$('.answerType').is(":checked"))
+		{
+			alert( '望む答え方を選んでください。');
+			return false;
+		}
+		return true;
+	}
+
 	function loadMinorList(major){
 		$.ajax({
 			url: 'minorList',
@@ -33,8 +54,6 @@
 		$('#tags').chosen();
 	});
 	
-	$
-	
 	$(".chosen-select").chosen({
 		max_select_options: 5,
 		no_result_text: "No result found. Press enter to add"
@@ -46,10 +65,10 @@
 
 <h1>質問する</h1>
 	<div>
-		<form action="addquestion" id="qForm" method="post">
-			<label for="qtitle">タイトル</label><input type="text" id="qtitle" name="title"><br>
+		<form action="addQuestion" id="qForm" method="post" onsubmit="return formCheck();">
+			<label for="qtitle">タイトル</label><input type="text" id="title" name="title"><br>
 			<!-- 질문글 내용 시작. 수정 필요. -->
-			<label for="qcontent">内容</label><input type="text" id="qcontent" name="questionContent"><br>
+			<label for="qcontent">内容</label><input type="text" id="questionContent" name="questionContent"><br>
 			<!-- 질문글 내용 끝. 수정 필요. -->
 			<!-- 분류 선택 -->
 			<label for="field">分類</label>
@@ -65,14 +84,14 @@
 			<select id="tags" multiple class="chosen-select" style="width:300px;"></select><br>
 			<!-- 답변방식 선택(체크박스) -->
 			<label for="answerType">答え方</label><br>
-			<input type="checkbox" id="textAnswer" name="answerType" value="text">テキスト<br>
-			<input type="checkbox" id="voiceAnswer" name="answerType" value="voice">音声<br>
-			<input type="checkbox" id="drawingAnswer" name="answerType" value="drawing">ドローイング<br>
-			<input type="checkbox" id="videoAnswer" name="answerType" value="video">動画<br>
-			<input type="checkbox" id="textAnswerRealTime" name="answerType" value="text-realtime">テキスト（リアルタイム）<br>
-			<input type="checkbox" id="voiceAnswerRealTime" name="answerType" value="voice-realtime">音声（リアルタイム）<br>
-			<input type="checkbox" id="drawingAnswerRealTime" name="answerType" value="drawing-realtime">ドローイング（リアルタイム）<br>
-			<input type="checkbox" id="videoAnswerRealTime" name="answerType" value="video-realtime">動画（リアルタイム）<br>
+			<input type="checkbox" id="textAnswer" name="answerType" class="answerType" value="text">テキスト<br>
+			<input type="checkbox" id="voiceAnswer" name="answerType" class="answerType" value="voice">音声<br>
+			<input type="checkbox" id="drawingAnswer" name="answerType" class="answerType" value="drawing">ドローイング<br>
+			<input type="checkbox" id="videoAnswer" name="answerType" class="answerType" value="video">動画<br>
+			<input type="checkbox" id="textAnswerRealTime" name="answerType" class="answerType" value="text-realtime">テキスト（リアルタイム）<br>
+			<input type="checkbox" id="voiceAnswerRealTime" name="answerType" class="answerType" value="voice-realtime">音声（リアルタイム）<br>
+			<input type="checkbox" id="drawingAnswerRealTime" name="answerType" class="answerType" value="drawing-realtime">ドローイング（リアルタイム）<br>
+			<input type="checkbox" id="videoAnswerRealTime" name="answerType" class="answerType" value="video-realtime">動画（リアルタイム）<br>
 			<!-- 실시간 답변 선택(체크박스) -->
 			<hr>
 			<label for="urgent">緊急質問</label><br>
