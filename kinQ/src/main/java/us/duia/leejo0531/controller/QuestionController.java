@@ -10,17 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
-=======
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.QuestionVO;
-<<<<<<< HEAD
-=======
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.UserVO;
 
@@ -28,7 +23,7 @@ import us.duia.leejo0531.vo.UserVO;
 public class QuestionController {
 	private static final Logger logger=LoggerFactory.getLogger(QuestionController.class);
 	
-	@Autowired
+	@Autowired 
 	QuestionService qstnSvc;
 	@Autowired
 	UserService userSvc;
