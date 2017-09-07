@@ -11,6 +11,8 @@ public class QuestionVO {
 	private Date modDate;
 	private String title;
 	private String relatedTag;
+	private String MinorNum;
+	private String blob; //동영상 파일(blob)
 	private int hit;
 	private String questionContent;
 	public QuestionVO() {
@@ -89,6 +91,18 @@ public class QuestionVO {
 	}
 	public void setQuestionContent(String questionContent) {
 		this.questionContent = questionContent;
+	}
+	public String getMinorNum() {
+		return MinorNum;
+	}
+	public void setMinorNum(String minorNum) {
+		MinorNum = minorNum;
+	}
+	public String getBlob() {
+		return blob;
+	}
+	public void setBlob(String blob) {
+		this.blob = blob;
 	}
 	@Override
 	public String toString() {
