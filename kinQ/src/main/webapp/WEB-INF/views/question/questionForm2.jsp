@@ -35,7 +35,7 @@
 	        isDraggingMedia = false;
 	        // blah
 	    }
-	});
+		});
 		
 		//동영상 녹화 코드
 		document.getElementById('btn-record-webm').onclick = function() {
@@ -82,8 +82,8 @@
 								+ URL.createObjectURL(blob)
 								+ '" autoplay loop></video>';
 						$("#canvas").remove(); //재생중이던 화면 정지
-						//$("#blob").val = blob;
-						var filename = String(URL.createObjectURL(blob)).
+						
+						var filename = String(URL.createObjectURL(blob));
 						var formElement = document.querySelector("form");
 						var formData = new FormData(formElement);
 						formData.append("blob", blob);
