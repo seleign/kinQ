@@ -10,6 +10,7 @@
 		<typeAlias type="us.duia.leejo0531.vo.MinorVO" alias="Minor" />
 		<typeAlias type="us.duia.leejo0531.vo.IdCheckVO" alias="IdCheck" />
 		<typeAlias type="us.duia.leejo0531.vo.QuestionVO" alias="Question" />
+		<typeAlias type="us.duia.leejo0531.vo.TagVO" alias="Tag" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 
