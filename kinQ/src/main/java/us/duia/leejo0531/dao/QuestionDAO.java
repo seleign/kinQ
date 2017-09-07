@@ -11,12 +11,22 @@ import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 
+/**
+ * 
+ * @author leejunyeon
+ *
+ */
 @Repository
 public class QuestionDAO {
 
 	@Autowired
 	SqlSession sqlSession;
-
+	
+	/***
+	 * Question VO를 DB에 insert한다.
+	 * @param qstn 질문(Question) VO
+	 * @return DB저장 결과
+	 */
 	public int insertQuestion(QuestionVO qstn) {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		int result = mapper.insertQuestion( qstn);

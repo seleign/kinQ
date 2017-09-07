@@ -142,7 +142,7 @@
 
 <h1>질문 페이지</h1>
 
-<form action="file_upload" id="form" method="post" enctype="multipart/form-data">
+<form action="addQuestion" id="form" method="post">
 <label>title <input type="text" name="title"> </label>
 <label>긴급 질문<input type="checkbox" onchange=""></label>
 <input type="text" name="timeLimit" disabled="disabled" placeholder="datetimepicker"> 
@@ -164,7 +164,7 @@
 		<!-- DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
 		<!-- 여기에 글쓰기 에디터를 넣어야한다. -->
 		<div id="part-of-screen-to-be-shared" contenteditable="true"
-			style="text-align: center; border-top: 5px solid gray; width: 500px; background-color: #FBFBEE;">
+			style="text-align: center; border-top: 5px solid gray; width: 500px; background-color: #FBFBEE; height: 500px">
 			<h2 style="color: red;">여기에 글쓰기 에디터가 들어가야 됨.</h2>
 			<p>
 				화면 녹화를 누르면 녹화 시작, 녹화 끝나면 히든 textarea나 input에 blob 를 담아서 컨트롤러로 전달.
