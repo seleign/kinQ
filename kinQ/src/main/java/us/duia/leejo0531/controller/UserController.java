@@ -2,6 +2,8 @@ package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.IdCheckVO;
@@ -19,6 +22,7 @@ import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.UserVO;
 
 @Controller
+@SessionAttributes({"userName"})
 public class UserController {
 	private static final Logger logger=LoggerFactory.getLogger(UserController.class);
 	
@@ -56,5 +60,14 @@ public class UserController {
 	public String join(UserVO user, @RequestParam("checkboxArray[]") ArrayList<String> field){
 		userSvc.insertUserInfo(user, field);
 		return "redirect:/"; 
+	}
+	
+	@RequestMapping(value="login", method=RequestMethod.GET)
+	public String requestLogin(UserVO user,HttpSession session){
+		logger.info("로그인 컨트롤러 in id: "+user.getId()+" pw : "+user.getPw());
+		UserVO loginUser = userSvc.requestLogin(user);
+		logger.info("db에서 얻어온 값 username : "+loginUser.getUserName());
+		session.setAttribute("userName", loginUser.getUserName());
+		return "redirect:/";
 	}
 }

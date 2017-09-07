@@ -16,5 +16,5 @@ public interface UserMapper {
 	public UserVO getUser(String searchId);
 	public int selectUserInfoSeq();
 	public MinorVO selectFieldInfo(String minor);
-
+	public UserVO requestLogin(UserVO user);
 }

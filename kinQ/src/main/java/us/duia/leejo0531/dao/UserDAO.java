@@ -57,5 +57,9 @@ public class UserDAO {
 		return selectedField;
 	}
 
-	
+	public UserVO requestLogin(UserVO user){
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		UserVO loginUser = mapper.requestLogin(user);
+		return loginUser;
+	}
 }
