@@ -29,7 +29,7 @@ public class QuestionController {
 	UserService userSvc;
 	
 	//질문글 게시 양식 보기
-	@RequestMapping(value="addquestion", method=RequestMethod.GET)
+	@RequestMapping(value="addQuestion", method=RequestMethod.GET)
 	public String showQuestionForm(Model model){
 		ArrayList<MajorVO> majorList = userSvc.getMajorList();
 		model.addAttribute("majorList", majorList);

@@ -59,17 +59,43 @@
 		no_result_text: "No result found. Press enter to add"
 	});
 	
+	$(function() {
+        $("#attach").on('change', function(){
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+        		console.log(e);
+//        		var html = $('#attached').html();
+//        		html += '<img id="attached' +e.size +'">'
+				$('#attached').attr('src', e.target.result);
+            }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+    }
+	
 </script>
 </head>
 <body>
 
 <h1>質問する</h1>
 	<div>
-		<form action="addQuestion" id="qForm" method="post" onsubmit="return formCheck();">
-			<label for="qtitle">タイトル</label><input type="text" id="title" name="title"><br>
+		<form action="addQuestion" id="qForm" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
+			<label for="title">タイトル</label><input type="text" id="title" name="title"><br>
 			<!-- 질문글 내용 시작. 수정 필요. -->
-			<label for="qcontent">内容</label><input type="text" id="questionContent" name="questionContent"><br>
+			<label for="questionContent">内容</label><input type="text" id="questionContent" name="questionContent"><br>
 			<!-- 질문글 내용 끝. 수정 필요. -->
+			<!-- 파일 첨부 -->
+<!-- 			<label for="attach">添付<input type="file" multiple="multiple" id="attach[]" name="attach[]" size="30"><br> -->
+			<label for="attach">添付<input type="file" id="attach" name="attach" size="30"><br>
+			<img id="attached" src=""><br>
+<!-- 			<div id="attached"></div><br> -->
 			<!-- 분류 선택 -->
 			<label for="field">分類</label>
 			<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
