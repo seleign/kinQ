@@ -29,7 +29,7 @@ public class QuestionController {
 	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
 	
 	@Autowired
-	QuestionService qstnSvc; //QuestionService 비즈니스 로직
+	private QuestionService qstnSvc; //QuestionService 비즈니스 로직
 
 	/***
 	 * GET 방식으로 질문 페이지에 접근하는데 사용된다.

@@ -14,7 +14,7 @@ import us.duia.leejo0531.vo.TagVO;
 
 /**
  * 1) 이 서비스는 Question관련 서비스이다.
- * 2) 
+ * 2) 비즈니스 로직은 이곳에 작성한다.
  * @author leejunyeon
  */
 @Service

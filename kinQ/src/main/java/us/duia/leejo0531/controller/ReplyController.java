@@ -17,6 +17,6 @@ import us.duia.leejo0531.service.ReplyService;
 public class ReplyController {
 	
 	//@Autowired
-	//ReplyService reSvc;
+	//private ReplyService reSvc;
 	
 }
