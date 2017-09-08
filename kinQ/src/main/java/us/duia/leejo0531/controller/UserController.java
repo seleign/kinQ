@@ -89,4 +89,10 @@ public class UserController {
 		userSvc.updateUserInfo(user, field);
 		return "redirect:/";
 	}
+	
+	
+	@RequestMapping(value="myPage", method=RequestMethod.GET)
+	public String myPage(){
+		return "user/myPage";
+	}
 }
