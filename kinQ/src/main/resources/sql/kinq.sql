@@ -4,7 +4,7 @@
 
 
 
-
+DROP SEQUENCE Follow;
 DROP SEQUENCE RNotify_SEQ;
 DROP SEQUENCE QNotify_SEQ;
 DROP SEQUENCE Qna_Answer_Attach_SEQ;
@@ -24,6 +24,7 @@ DROP SEQUENCE UserInfo_SEQ;
 DROP INDEX r_comment_idx;
 DROP INDEX r_content_idx;
 DROP INDEX q_content_idx;
+DROP TABLE Follow;
 DROP TABLE RNotify;
 DROP TABLE QNotify;
 DROP TABLE Qna_Answer_Attach;
@@ -531,6 +532,33 @@ ALTER TABLE QNotify
     ADD CONSTRAINT FK_QNotify_UserNum_UserInfo_Us FOREIGN KEY (UserNum)
         REFERENCES UserInfo (UserNum)
 /
+
+-- Follow Table Create SQL
+CREATE TABLE Follow
+(
+    followNum     NUMBER    NOT NULL, 
+    StudentNum    NUMBER    NOT NULL, 
+    TeacherNum    NUMBER    NOT NULL, 
+    CONSTRAINT FOLLOW_PK PRIMARY KEY (followNum)
+)
+/
+
+CREATE SEQUENCE Follow_SEQ
+START WITH 1
+INCREMENT BY 1;
+
+
+ALTER TABLE Follow
+    ADD CONSTRAINT FK_Follow_StudentNum_UserInfo_ FOREIGN KEY (StudentNum)
+        REFERENCES UserInfo (UserNum)
+/
+
+ALTER TABLE Follow
+    ADD CONSTRAINT FK_Follow_TeacherNum_UserInfo_ FOREIGN KEY (TeacherNum)
+        REFERENCES UserInfo (UserNum)
+/
+
+
 
 
 -- RNotify Table Create SQL
