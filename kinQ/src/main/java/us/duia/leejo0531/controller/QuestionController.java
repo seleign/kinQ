@@ -38,7 +38,7 @@ public class QuestionController {
 	 * @param model major리스트를 ${majorList}로 사용
 	 * @return question/questionForm.jsp로 이동
 	 */
-	@RequestMapping(value = "addquestion", method = RequestMethod.GET)
+	@RequestMapping(value = "addQuestion", method = RequestMethod.GET)
 	public String showQuestionForm(Model model) {
 		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
 		model.addAttribute("majorList", majorList);
@@ -50,7 +50,7 @@ public class QuestionController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "addquestion2", method = RequestMethod.GET)
+	@RequestMapping(value = "addQuestion2", method = RequestMethod.GET)
 	public String showQuestionForm2(Model model) {
 		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();;
 		model.addAttribute("majorList", majorList);
