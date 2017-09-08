@@ -82,16 +82,11 @@ public class UserService {
 		UserVO loginUser = userDao.requestLogin(user);
 		return loginUser;
 	}
-/*	public ArrayList<String> getDeleteResult(String minorName) {
-		for(int i=0; i<chk.size(); i++){
-			if(chk.get(i).equals(minorName)){
-				chk.remove(i);
-			}
-		}
-		return chk;
+
+	public void updateUserInfo(UserVO user, ArrayList<String> field) {
+		
 	}
 
-*/
 	
 		
 	

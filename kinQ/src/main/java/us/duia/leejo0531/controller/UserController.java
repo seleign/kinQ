@@ -74,4 +74,10 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updateProfile(UserVO user, @RequestParam("updatedCheckboxArray[]") ArrayList<String> field){
+		userSvc.updateUserInfo(user, field);
+		return "redirect:/";
+	}
 }
