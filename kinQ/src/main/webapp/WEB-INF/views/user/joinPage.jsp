@@ -202,39 +202,6 @@
 
 </head>
 <body>
-<%-- <iframe src="join"></iframe>
-
-<h1>新規取得</h1>
-
-<form action="join" id="joinform" method="post">
-	<div>
-		<label for="name">Name</label><input type="text" name="userName" id="userName"><br>
-		<label for="id">ID</label><input type="text" name="id" id="id"><input type="button" value="重複チェック" onclick="javascript:idCheck()"><br>
-		<div id="idCheckResult"></div>
-		<label for="pw">Password</label><input type="password" name="pw" id="pw"><br>
-		<label for="pwCheck">Password Check</label><input type="password" name="pwCheck" id="pwCheck"><br>
-		<label for="birth">Birthday</label><input type="text" id="birth" name="birth"><br>
-		<label for="age">Age</label><input type="text" id="age" name="age"><br>
-		<label for="email">Email</label><input type="text"  id="email" name="email"><br>
-		<label for="phone">Phone</label><input type="text"  id="phone"  placeholder="例)　08012345678" name="phone"><br>
-		<label for="interest">Interest</label>
-			<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
-					<option value="0" selected="selected">選択</option>
-				<c:forEach var="major" items="${majorList }">
-					<option value="${major.majorNum}">${major.majorName}</option>
-				</c:forEach>
-			</select>
-			<div id="minorSection"></div>
-			<br>
-			<h4>選んだ関心分野</h4>
- 			<ul id="allInterests"></ul>
-			 <input type="hidden" id="checkboxArray" value="" name="checkboxArray[]">
-			<input type="button" value="加入" onclick="javascript:submission()"><input type="button" value="前のページ" onclick="history.go(-1)">
-	</div>
-	
-
-</form> --%>
-
 
 		<script type="text/javascript">
 		function test() {
