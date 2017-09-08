@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.util.FileService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
@@ -95,15 +96,18 @@ public class QuestionController {
 		return "redirect:/";
 	}
 
-	// file_upload
 	/**
-	 * -테스트용 글쓸 때, 화면녹화한거 업로드용 // 서비스단으로 이동해야함
+	 * -테스트용 글쓸 때, 화면녹화한거 업로드용
 	 * @param blob
 	 * @param fileName
 	 * @return
 	 */
 	@RequestMapping(value = "file_upload", method = RequestMethod.POST)
 	public @ResponseBody String file_upload(MultipartFile blob, String fileName) {
+		
+		
+		//FileService.saveFile(mfile, uploadPath);
+		// code here
 		System.out.println(blob.getSize());
 		System.out.println(blob.getContentType());
 		System.out.println(fileName);
