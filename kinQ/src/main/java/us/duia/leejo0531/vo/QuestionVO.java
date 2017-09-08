@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class QuestionVO {
 	private int questionNum;
-	private int userNum;
+	private int userNum; //질문자
 	private Date timeLimit;
 	private String id;
 	private Date regDate;
@@ -108,7 +108,8 @@ public class QuestionVO {
 	public String toString() {
 		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", id="
 				+ id + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
-				+ relatedTag + ", hit=" + hit + ", questionContent=" + questionContent + "]";
+				+ relatedTag + ", MinorNum=" + MinorNum + ", blob=" + blob + ", hit=" + hit + ", questionContent="
+				+ questionContent + "]";
 	}
 	
 }

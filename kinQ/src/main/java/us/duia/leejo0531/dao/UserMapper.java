@@ -17,4 +17,6 @@ public interface UserMapper {
 	public int selectUserInfoSeq();
 	public MinorVO selectFieldInfo(String minor);
 	public UserVO requestLogin(UserVO user);
+	public void updateUserInfo(UserVO user);
+	public void deleteOriginalField(int userNum);
 }

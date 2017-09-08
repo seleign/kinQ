@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.IdCheckVO;
@@ -66,6 +64,8 @@ public class UserController {
 	public String requestLogin(UserVO user,HttpSession session){
 		UserVO loginUser = userSvc.requestLogin(user);
 		session.setAttribute("userName", loginUser.getUserName());
+		session.setAttribute("userId", loginUser.getId());
+		session.setAttribute("userNum", loginUser.getUserNum());
 		return "redirect:/";
 	}
 	
@@ -75,9 +75,24 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="updateUserInfo", method=RequestMethod.GET)
+	public String updateUserInfoPage(Model model, HttpSession session){
+		ArrayList<MajorVO> majorList = userSvc.getMajorList();
+		model.addAttribute("majorList", majorList);
+		return "user/updateUserInfoPage";
+	}
+	
+	
 	@RequestMapping(value="update", method=RequestMethod.POST)
-	public String updateProfile(UserVO user, @RequestParam("updatedCheckboxArray[]") ArrayList<String> field){
+	public String updateUserInfo(UserVO user, @RequestParam("updatedCheckboxArray[]") ArrayList<String> field, HttpSession session){
+		user.setUserNum((int)session.getAttribute("userNum"));
 		userSvc.updateUserInfo(user, field);
 		return "redirect:/";
+	}
+	
+	
+	@RequestMapping(value="myPage", method=RequestMethod.GET)
+	public String myPage(){
+		return "user/myPage";
 	}
 }
