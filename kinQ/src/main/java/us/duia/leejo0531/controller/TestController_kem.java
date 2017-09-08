@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-//Å×½ºÆ®ÇÒ°Ô ÀÖ¾î¼­ ÀÓÀÇ·Î ¸¸µé¾ú¾î¿ä ´Ù¾²°í ¼öÁ¤ÇÏ°Ú½À´Ï´Ù(±Ý)
+//ï¿½×½ï¿½Æ®ï¿½Ò°ï¿½ ï¿½Ö¾î¼­ ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú½ï¿½ï¿½Ï´ï¿½(ï¿½ï¿½)
 @Controller
 public class TestController_kem {
 	
