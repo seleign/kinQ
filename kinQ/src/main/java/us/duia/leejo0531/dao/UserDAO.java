@@ -62,4 +62,14 @@ public class UserDAO {
 		UserVO loginUser = mapper.requestLogin(user);
 		return loginUser;
 	}
+
+	public void updateUserInfo(UserVO user) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		mapper.updateUserInfo(user);
+	}
+
+	public void deleteOriginalField(int userNum) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		mapper.deleteOriginalField(userNum);
+	}
 }
