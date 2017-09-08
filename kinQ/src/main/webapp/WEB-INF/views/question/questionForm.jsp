@@ -12,57 +12,14 @@
 <!-- 수정된 플러그인입니다. 교체 불가. -->
 <script src="./resources/js/chosen.jquery.js"></script>
 
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="./resources/blueImp_jQuery_file_upload/js/vendor/jquery.ui.widget.js"></script>
 
-<!-- The Templates plugin is included to render the upload/download listings -->
-<script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-
-<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<!-- blueimp Gallery script -->
-<script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.iframe-transport.js"></script>
-
-<!-- The basic File Upload plugin -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload.js"></script>
-
-<!-- The File Upload processing plugin -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-process.js"></script>
-
-<!-- The File Upload image preview & resize plugin -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-image.js"></script>
-
-<!-- The File Upload audio preview plugin -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-audio.js"></script>
-
-<!-- The File Upload video preview plugin -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-video.js"></script>
-
-<!-- The File Upload validation plugin -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-validate.js"></script>
-
-<!-- The File Upload user interface plugin -->
-<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-ui.js"></script>
-
-<!-- The main application script -->
-<script src="./resources/blueImp_jQuery_file_upload/js/main.js"></script>
-
+<!-- Bootstrap styles -->
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <!-- blueimp Gallery styles -->
-<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-
+<link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="/resources/blueImp_jQuery_file_upload/css/jquery.fileupload.css">
-<link rel="stylesheet" href="/resources/blueImp_jQuery_file_upload/css/jquery.fileupload-ui.css">
+<link rel="stylesheet" href="./resources/blueImp_jQuery_file_upload/css/jquery.fileupload.css">
+<link rel="stylesheet" href="./resources/blueImp_jQuery_file_upload/css/jquery.fileupload-ui.css">
 
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
@@ -141,6 +98,37 @@
 </script>
 
 
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="./resources/blueImp_jQuery_file_upload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-ui.js"></script>
+<!-- The main application script -->
+<script src="./resources/blueImp_jQuery_file_upload/js/main.js"></script>
+
 <script type="text/javascript">
 	function formCheck() {
 		var title = $('#title').val();
@@ -211,7 +199,7 @@
     } */
     $(function () {
 		// Change this to the location of your server-side upload handler:
-		var url = '/attachFiles';  // 사용
+		var url = '/fileupload';  // 사용
 		$('#fileupload').fileupload({
 			url: url,
 			dataType: 'json',
@@ -235,7 +223,7 @@
 
 <h1>質問する</h1>
 	<div>
-		<form action="addQuestion" id="qForm" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
+		<form action="addQuestion" id="fileupload" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
 			<label for="title">タイトル</label><input type="text" id="title" name="title"><br>
 			<!-- 질문글 내용 시작. 수정 필요. -->
 			<label for="questionContent">内容</label><input type="text" id="questionContent" name="questionContent"><br>
