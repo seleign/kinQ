@@ -108,10 +108,10 @@
 			},
 			success: function(result){
 				if(result.search == true && result.searchResult == null){
-					$('#idCheckResult').html(result.searchId+'는 사용 가능합니다.');
+					$('#idCheckResult').html(result.searchId+'は使えます.');
 					search = true;
 				}else{
-					$('#idCheckResult').html(result.searchId+'는 사용 불가능합니다.');
+					$('#idCheckResult').html(result.searchId+'は使えません');
 					search = false;
 				}
 			}
