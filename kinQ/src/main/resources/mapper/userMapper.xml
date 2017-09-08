@@ -42,4 +42,17 @@
 	<select id="requestLogin" parameterType="User" resultType="User">
 		select * from userInfo where id=#{id} and pw=#{pw}
 	</select>
+	
+<!-- 회원 정보 수정 -->
+	<update id="updateUserInfo" parameterType="User">
+		update userInfo
+		set pw = #{pw}, age=#{age}, birth=#{birth}, phone=#{phone}, email=#{email} 
+		where userNum = #{userNum}
+	</update>
+	
+<!-- 회원 정보 수정 시 우선 Field 전체 삭제 -->	
+	<delete id="deleteOriginalField" parameterType="int">
+		delete from field 
+		where userNum=#{userNum}
+	</delete>
 </mapper>

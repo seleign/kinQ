@@ -5,6 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>join</title>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="./resources/css/jquery.datetimepicker.min.css" rel="stylesheet">
+	<script src="./resources/js/jquery.datetimepicker.full.min.js"></script> -->
 <!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
@@ -20,30 +24,12 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon.png">
 	
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="./resources/css/jquery.datetimepicker.min.css" rel="stylesheet">
-<script src="./resources/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript">
 	var search = false;
 	
 	// 폼체크 및 submit
 	function submission(){
-		// 이름 체크		
-		var userName = $('#userName').val();
-		if(userName==''){
-			alert('お名前を入力して下さい。'); return false;
-		}
-		// 아이디 체크
-		var id = $('#id').val();
-		if(id==''){
-			alert('IDを入力して下さい。'); return false;
-		}
-		
-		if(search == false){
-			alert('IDの重複チェックをなさってください。'); return false;
-		}
-		
+
 		// 패스워드 체크
 		var pw = $('#pw').val();
 		var pwCheck = $('#pwCheck').val();
@@ -56,7 +42,7 @@
 		// 생일 체크
 		var birth = $('#birth').val();
 		if(birth == ''){
-			alert('生年月日を記入してください。'); return false;
+			alert('生年月日を例のように記入してください。'); return false;
 		}
 		// 나이 체크
 		var age = $('#age').val();
@@ -83,40 +69,9 @@
 		var checkboxArray = document.getElementById('checkboxArray');
 		checkboxArray.value = chkNum;
 		
-		$('#joinform').submit();
+		$('#updateform').submit();
 	}
 
-	//ID 중복체크
-	function idCheck(){
-		
-		var id = $('#id');
-		id.on('keydown', function(e){
-			$('#idCheckResult').html('');
-		});
-		
-		if(id==''){
-			$('#idCheckResult').html('');
-			alert('IDを入力して下さい。'); 
-			return;
-		}
-		
-		$.ajax({
-			url: 'idCheck',
-			method: 'post',
-			data: {
-				searchId: $('#id').val()
-			},
-			success: function(result){
-				if(result.search == true && result.searchResult == null){
-					$('#idCheckResult').html(result.searchId+'は使えます.');
-					search = true;
-				}else{
-					$('#idCheckResult').html(result.searchId+'は使えません');
-					search = false;
-				}
-			}
-		});
-	}
 	
 	function loadMinorList(major){
 		$.ajax({
@@ -191,50 +146,17 @@
 		}
 	}
 	
- /* 	$(function(){
+/*   	$(function(){
 		$('#birth').datetimepicker({
 			timepicker:false,
 			format:'Ymd'
 		});	
-	});  */
+	});   */
 
 </script>
 
 </head>
 <body>
-<%-- <iframe src="join"></iframe>
-
-<h1>新規取得</h1>
-
-<form action="join" id="joinform" method="post">
-	<div>
-		<label for="name">Name</label><input type="text" name="userName" id="userName"><br>
-		<label for="id">ID</label><input type="text" name="id" id="id"><input type="button" value="重複チェック" onclick="javascript:idCheck()"><br>
-		<div id="idCheckResult"></div>
-		<label for="pw">Password</label><input type="password" name="pw" id="pw"><br>
-		<label for="pwCheck">Password Check</label><input type="password" name="pwCheck" id="pwCheck"><br>
-		<label for="birth">Birthday</label><input type="text" id="birth" name="birth"><br>
-		<label for="age">Age</label><input type="text" id="age" name="age"><br>
-		<label for="email">Email</label><input type="text"  id="email" name="email"><br>
-		<label for="phone">Phone</label><input type="text"  id="phone"  placeholder="例)　08012345678" name="phone"><br>
-		<label for="interest">Interest</label>
-			<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
-					<option value="0" selected="selected">選択</option>
-				<c:forEach var="major" items="${majorList }">
-					<option value="${major.majorNum}">${major.majorName}</option>
-				</c:forEach>
-			</select>
-			<div id="minorSection"></div>
-			<br>
-			<h4>選んだ関心分野</h4>
- 			<ul id="allInterests"></ul>
-			 <input type="hidden" id="checkboxArray" value="" name="checkboxArray[]">
-			<input type="button" value="加入" onclick="javascript:submission()"><input type="button" value="前のページ" onclick="history.go(-1)">
-	</div>
-	
-
-</form> --%>
-
 
 		<script type="text/javascript">
 		function test() {
@@ -244,16 +166,13 @@
 		</script>
 		<div class="joinPageBack">
 		<div class="form-style form-style-3">
-			<form action="join" id="joinform" method="post" onsubmit="return test();">
+			<form action="update" id="updateform" method="post" onsubmit="return test();">
 				<div class="form-inputs clearfix">
-					<p>
-						<label for="name">Name</label>
-						<input type="text" name="userName" id="userName">
-					</p>
 					<p class="form-submit">
-						<label for="id">ID</label><input type="text" name="id" id="id">
-						<input type="button" value="重複チェック" onclick="javascript:idCheck()" class="button color small submit"><br>
-						<div id="idCheckResult"></div>
+						<label for="id">ID</label>${sessionScope.userId}<br>
+					</p>
+					<p>
+						<label for="name">Name</label>${sessionScope.userName}<br>
 					</p>
 					<p>
 						<label for="pw">Password</label>
@@ -265,7 +184,7 @@
 					</p>
 					<p>
 						<label for="birth">Birthday</label>
-						<input type="text" id="birth" name="birth">
+						<input type="text" id="birth" name="birth" placeholder="例）　20170101">
 					</p>
 					<p>
 						<label for="age">Age</label>
@@ -295,8 +214,9 @@
 					</p>
 				</div>
 				<p class="form-submit">
-					 <input type="hidden" id="checkboxArray" value="" name="checkboxArray[]">
-					<input type="button" value="加入" onclick="javascript:submission()" class="button color small submit">
+					 <input type="hidden" id="checkboxArray" value="" name="updatedCheckboxArray[]">
+					 <input type="hidden" id="userNum" value="${sessionScope.userNum }">
+					<input type="button" value="修正" onclick="javascript:submission()" class="button color small submit">
 <!-- 					<input type="button" value="前のページ" onclick="history.go(-1)"> -->
 				</p>
 			</form>
