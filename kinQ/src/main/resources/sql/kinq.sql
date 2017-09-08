@@ -75,7 +75,7 @@ CREATE TABLE Q_Board
     QuestionNum        NUMBER            NOT NULL, 
     UserNum            NUMBER            NOT NULL, 
     timeLimit          DATE              NULL, 
-    ID                 VARCHAR2(30)      NOT NULL, 
+    urgent             VARCHAR2(30)      NOT NULL, 
     RegDate            DATE              NOT NULL, 
     ModDate            DATE              NOT NULL, 
     Title              VARCHAR2(90)      NOT NULL, 

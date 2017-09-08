@@ -59,7 +59,7 @@
 		no_result_text: "No result found. Press enter to add"
 	});
 	
-	$(function() {
+	$(function() {"C:/Users/seleign/Downloads/test.js"
         $("#attach").on('change', function(){
             readURL(this);
         });
@@ -93,9 +93,10 @@
 			<!-- 질문글 내용 끝. 수정 필요. -->
 			<!-- 파일 첨부 -->
 <!-- 			<label for="attach">添付<input type="file" multiple="multiple" id="attach[]" name="attach[]" size="30"><br> -->
-			<label for="attach">添付<input type="file" id="attach" name="attach" size="30"><br>
+<!-- 			<label for="attach">添付<input type="file" id="attach" name="attach" size="30"><br>
 			<img id="attached" src=""><br>
-<!-- 			<div id="attached"></div><br> -->
+ --><!-- 			<div id="attached"></div><br> -->
+ 			
 			<!-- 분류 선택 -->
 			<label for="field">分類</label>
 			<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
