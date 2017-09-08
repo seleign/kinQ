@@ -1,5 +1,7 @@
 package us.duia.leejo0531.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,4 +31,35 @@ public class ReplyDAO {
 		return result;
 	}
 	
+	/**
+	 * DB에 답변을 삭제한다.
+	 * @param target 삭제할 답변 VO
+	 * @return 삭제 결과
+	 */
+	public int deleteReply(ReplyVO target) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.deleteReply(target);
+		return result;
+	}
+	
+	/**
+	 * DB에서 답변을 1개 가져온다.
+	 * @return
+	 */
+	public ReplyVO selectOneReply(ReplyVO Reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ReplyVO restult = mapper.selectOneReply(Reply);
+		return restult;
+	}
+	
+	/**
+	 * DB로부터 context가 포함된 모든 답변을 가져온다.
+	 * @param context 답변에 포함된 단어
+	 * @return ArrayList<ReplyVO>
+	 */
+	public ArrayList<ReplyVO> searchByContext(String context){
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ArrayList<ReplyVO> result = mapper.searchByContext(context);
+		return result;
+	}
 }

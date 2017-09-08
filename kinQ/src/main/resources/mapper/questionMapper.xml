@@ -30,6 +30,11 @@
 		)
 	</insert>
 	
+	<!-- 질문글을 삭제한다. (임시) 테스트 되지않음.-->
+	<delete id="deleteQuestion" parameterType="Question">
+	delete Q_BOARD where usernum = #{usernum} and QuestionNum = #{QuestionNum}
+	</delete>
+	
 	<!-- 대분류 리스트 불러오기 -->	
 	<select id="getMajorList" resultType="Major">
 		select * from major order by majorNum
@@ -40,16 +45,17 @@
 		select * from minor order by minorNum
 	</select>
 	
-	<!-- 모든 태그를 가져온다. -->
-	<select id="selectTags" resultType="Tag">
-		select *
-		from Tag
-	</select>
-	
 	<!-- 대상 질문글 정보를 가져온다.(임시) -->
 	<select id="selectOneQuestion" parameterType="Question" resultType="Question">
 		select *
 		from Q_Board
 		where questionNum = #{questionNum}
+	</select>
+	
+	<!-- context가 포함된 모든 질문글을 가져온다. -->
+	<select id="searchByContext">
+	
+	<!-- code here -->
+	
 	</select>
 </mapper>

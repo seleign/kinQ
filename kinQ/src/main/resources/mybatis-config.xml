@@ -11,10 +11,12 @@
 		<typeAlias type="us.duia.leejo0531.vo.IdCheckVO" alias="IdCheck" />
 		<typeAlias type="us.duia.leejo0531.vo.QuestionVO" alias="Question" />
 		<typeAlias type="us.duia.leejo0531.vo.TagVO" alias="Tag" />
+		<typeAlias type="us.duia.leejo0531.vo.ReplyVO" alias="Reply"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 
 		<mapper resource="mapper/questionMapper.xml"/>
 		<mapper resource="mapper/replyMapper.xml"/>
+		<mapper resource="mapper/tagMapper.xml"/>
 	</mappers>
 </configuration>

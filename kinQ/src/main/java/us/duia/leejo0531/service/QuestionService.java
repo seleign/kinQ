@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.QuestionDAO;
+import us.duia.leejo0531.dao.TagDAO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
@@ -22,9 +23,10 @@ import us.duia.leejo0531.vo.TagVO;
 public class QuestionService {
 	@Autowired
 	private QuestionDAO qstnDao;
+	private TagDAO tagDao;
 	
 	/**
-	 * DB에 질문을 등록한다.
+	 * 질문을 등록한다.
 	 * @param qstn QuestionVO
 	 * @return 등록 결과
 	 */
@@ -34,7 +36,7 @@ public class QuestionService {
 	}
 	
 	/**
-	 * DB에서 Question(질문)을 가져온다.
+	 * Question(질문)을 1개 가져온다.
 	 * @param qstn QuestionVO
 	 * @return 가져온 결과
 	 */
@@ -44,16 +46,16 @@ public class QuestionService {
 	}
 	
 	/**
-	 * DB로부터 Tag(태그)를 ArrayList로 가져온다.
+	 * Tag(태그)를 ArrayList로 가져온다.
 	 * @return
 	 */
 	public ArrayList<TagVO> searchTag() {
-		ArrayList<TagVO> result = qstnDao.selectTags();
+		ArrayList<TagVO> result = tagDao.selectTags();
 		return result;
 	}
 	
 	/**
-	 * DB로부터 Major(대분류)를 ArrayList로 가져온다.
+	 * Major(대분류)를 ArrayList로 가져온다.
 	 * @return MajorVO Major
 	 */
 	public ArrayList<MajorVO> getMajorList() {
@@ -62,11 +64,21 @@ public class QuestionService {
 	}
 	
 	/**
-	 * DB로부터 Minor(소분류)를 ArrayList로 가져온다.
+	 * Minor(소분류)를 ArrayList로 가져온다.
 	 * @return MinorVO Minor
 	 */
 	public ArrayList<MinorVO> getMinorList() {
 		ArrayList<MinorVO> minorList = qstnDao.getMinorList();
 		return minorList;
+	}
+	
+	/**
+	 * context가 포함된 모든 질문글을 가져온다.
+	 * @param context 검색할 텍스트
+	 * @return ArrayList
+	 */
+	public ArrayList<QuestionVO> searchByContext(String context){
+		ArrayList<QuestionVO> result = qstnDao.searchByContext(context);
+		return result;
 	}
 }

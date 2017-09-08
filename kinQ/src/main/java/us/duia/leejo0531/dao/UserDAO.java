@@ -83,14 +83,15 @@ public class UserDAO {
 	}
 	
 	/**
-	 * 누가 이거 메소드 만든건지 설명 좀 써주세요. 난 모르겠따-
-	 * @param minor 검색할 소분류이름
-	 * 근데 이거 스트링으로 검색하면, 일치하는게 없을 때 에러나서 뻗을텐데?...
+	 * Field 테이블에 minorNum로 검색해서 나오는
+	 * FieldNum, UserNum, MajorNum, MinorNum 를 가져옴
+	 * @param minor 검색할 minorNum
+	 * 근데 일치하는게 없을 때는 어떻게 될려나?
 	 * @return MinorVO
 	 */
-	public MinorVO selectFieldInfo(String minor) {
+	public MinorVO selectFieldInfo(String minorNum) {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		MinorVO selectedField = mapper.selectFieldInfo(minor);
+		MinorVO selectedField = mapper.selectFieldInfo(minorNum);
 		return selectedField;
 	}
 	

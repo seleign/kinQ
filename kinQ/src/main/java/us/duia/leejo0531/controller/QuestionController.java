@@ -108,6 +108,7 @@ public class QuestionController {
 		
 		//FileService.saveFile(mfile, uploadPath);
 		// code here
+		
 		System.out.println(blob.getSize());
 		System.out.println(blob.getContentType());
 		System.out.println(fileName);

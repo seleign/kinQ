@@ -1,9 +1,17 @@
 package us.duia.leejo0531.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.ReplyService;
+import us.duia.leejo0531.service.SearchService;
+import us.duia.leejo0531.vo.ReplyVO;
+import us.duia.leejo0531.vo.TagVO;
 
 /**
  * 1) 이 컨트롤러는 Reply관련 컨트롤러이다.
@@ -16,7 +24,19 @@ import us.duia.leejo0531.service.ReplyService;
 @Controller
 public class ReplyController {
 	
-	//@Autowired
-	//private ReplyService reSvc;
+	@Autowired
+	private ReplyService reSvc;
+	
+	/**
+	 * 답변을 작성한다. 
+	 * 리퀘스트 메소드를 수정해야한다.
+	 * @param Reply
+	 * @return
+	 */
+	@RequestMapping(value = "addReply", method = {RequestMethod.GET, RequestMethod.POST})
+	public String addReply(ReplyVO Reply) {
+		reSvc.writeReply(Reply);
+		return "/";
+	}
 	
 }

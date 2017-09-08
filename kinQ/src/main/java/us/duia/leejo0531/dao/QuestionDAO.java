@@ -40,17 +40,7 @@ public class QuestionDAO {
 	 */
 	public QuestionVO selectOneQuestion(QuestionVO qstn) {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		QuestionVO result = mapper.selectOneQuestion( qstn);
-		return result;
-	}
-	
-	/**
-	 * DB로부터 Tag(태그)를 ArrayList로 가져온다.
-	 * @return
-	 */
-	public ArrayList<TagVO> selectTags() {
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<TagVO> result = mapper.selectTags();
+		QuestionVO result = mapper.selectOneQuestion(qstn);
 		return result;
 	}
 
@@ -72,5 +62,27 @@ public class QuestionDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		ArrayList<MinorVO> minorList = mapper.getMinorList();
 		return minorList;
+	}
+	
+	/**
+	 * DB에서 질문을 삭제한다.
+	 * @param target 삭제할 질문 VO
+	 * @return 삭제 결과
+	 */
+	public int deleteQuestion(QuestionVO target) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		int result = mapper.deleteQuestion(target);
+		return result;
+	}
+	
+	/**
+	 * DB로부터 context가 포함된 모든 질문글을 가져온다.
+	 * @param context 질문글에 포함된 단어
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> searchByContext(String context){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchByContext(context);
+		return result;
 	}
 }
