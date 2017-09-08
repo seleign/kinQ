@@ -7,6 +7,15 @@
 <title>My Page</title>
 </head>
 <body>
+<h1>マイページ</h1>
 
+<label for="id">ID:</label>${sessionScope.userId }<br>
+<label for="rank">ランキング:</label>___位<br>
+<label for="point">ポイント:</label>___ポイント　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="ポイントショップ"><br>
+<label for="myFollower">私のフォロワー:</label>___人<br>
+<label for="myTeacher">私の先生:</label>___人<br>
+
+<input type="button" onclick="location.href='updateUserInfo'" value="個人情報修正">
 </body>
 </html>
