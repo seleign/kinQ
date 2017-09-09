@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.QuestionVO;
@@ -22,9 +22,11 @@ import us.duia.leejo0531.vo.TagVO;
  * 3) Question의 Move(Page 이동), Create(생성), Read(읽기), Update(갱신), Delete(삭제) 기능이 있다.
  * @author leejunyeon
  */
+@CrossOrigin(origins = "*")
 @Controller
 public class QuestionController {
 	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
+	private String tempFileSavePath = QuestionController.class.getResource(".").getPath().substring(0, QuestionController.class.getResource(".").getPath().lastIndexOf("classes/us")) + "resources/";
 	
 	@Autowired
 	private QuestionService qstnSvc; //QuestionService 비즈니스 로직
@@ -60,8 +62,16 @@ public class QuestionController {
 	 * @return
 	 */
 	@RequestMapping(value = "addQuestion3", method = RequestMethod.GET)
-	public String showQuestionForm3() {
+	public String showQuestionForm3(Model model) {
+		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
+		model.addAttribute("majorList", majorList);
 		return "question/questionForm3";
+	}
+	@RequestMapping(value = "addQuestion4", method = RequestMethod.GET)
+	public String showQuestionForm4(Model model) {
+		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
+		model.addAttribute("majorList", majorList);
+		return "question/questionForm4";
 	}
 
 	/**
@@ -81,8 +91,8 @@ public class QuestionController {
 	 */
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn) {
-		qstnSvc.writeQuestion(qstn);
-
+		//qstnSvc.writeQuestion(qstn);
+		System.out.println("qstn: " + qstn);
 		// code here
 
 		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
@@ -95,8 +105,8 @@ public class QuestionController {
 	 */
 	@RequestMapping(value = "questionView", method = RequestMethod.GET)
 	public String viewQuestion(QuestionVO qstn) {
-		qstnSvc.getQuestion(qstn);
-
+		//qstnSvc.getQuestion(qstn);
+		System.out.println(qstn);
 		// code here
 
 		return "redirect:/";
