@@ -32,6 +32,10 @@ body {
 	background-color: #FFF;
 }
 
+.icon-chevron-up {
+	margin-top: 25%;
+}
+/* ±Ý ³¡ */
 #warp {
 	background-color: #f3f3f3;
 	display: none;
@@ -3293,6 +3297,7 @@ span.small_arrow_dowm {
 	font-size: 20px;
 	float: left;
 	margin-right: 10px;
+	margin-top: 20px;
 }
 .ul_icons li [class^="icon-"],.ul_icons li [class*=" icon-"] {
 	margin-top: -2px;

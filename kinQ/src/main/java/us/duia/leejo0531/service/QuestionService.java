@@ -21,6 +21,7 @@ import us.duia.leejo0531.vo.TagVO;
 @Service
 @Repository
 public class QuestionService {
+	
 	@Autowired
 	private QuestionDAO qstnDao;
 	private TagDAO tagDao;

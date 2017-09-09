@@ -8,6 +8,12 @@ import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.ReplyDAO;
 import us.duia.leejo0531.vo.ReplyVO;
 
+/**
+ * 1) 이 서비스는 Reply관련 서비스이다.
+ * 2) 비즈니스 로직은 여기에 작성한다.
+ * @author leejunyeon
+ *
+ */
 @Service
 @Repository
 public class ReplyService {

@@ -84,16 +84,18 @@
 						$("#canvas").remove(); //재생중이던 화면 정지
 						var URL_BLOB = String(URL.createObjectURL(blob));
 						var fileName = URL_BLOB.substring(URL_BLOB.lastIndexOf("/")+1 , URL_BLOB.length);
-
+						var fileExt = blob.type.substring(blob.type.lastIndexOf("/")+1, blob.type.length);
+					
+						
 						//ajax로 서버에 파일 전송
 						var filename = String(URL.createObjectURL(blob));
 						var formElement = document.querySelector("form");
 						var formData = new FormData(formElement);
-						formData.append("blob", blob);
-						formData.append("fileName", fileName);
+						
+						formData.append("blob", blob, fileName+ "." +fileExt);
 
 						$.ajax({
-		                    url: 'file_upload',
+		                    url: 'blob_upload',
 		                    processData: false,
 		                    contentType: false,
 		                    data: formData,
@@ -111,7 +113,7 @@
 
 				(function looper() {
 					html2canvas(elementToShare, {
-						grabMouse : true,
+						grabMouse : false,
 						onrendered : function(canvas) {
 							context.clearRect(0, 0, canvas2d.width,
 									canvas2d.height);

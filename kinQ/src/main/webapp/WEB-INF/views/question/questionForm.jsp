@@ -5,8 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>質問する</title>
-
+<script src="/resources/ckeditor/ckeditor.js"></script> <!-- 에디터용 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
 <script src="./resources/js/chosen.proto.min.js"></script>
 <!-- 수정된 플러그인입니다. 교체 불가. -->
@@ -202,6 +203,17 @@
 			<label for="title">タイトル</label><input type="text" id="title" name="title"><br>
 			<!-- 질문글 내용 시작. 수정 필요. -->
 			<label for="questionContent">内容</label><input type="text" id="questionContent" name="questionContent"><br>
+			
+			<textarea name="editor"></textarea>
+			<script src="/resources/ckeditor/adapters/jquery.js"></script>
+			<script type="text/javascript">
+				window.onload = function() {
+					CKEDITOR.replace('editor',{
+      				 filebrowserUploadUrl: 'cKEditorFileUpload'
+    					});
+				}
+			</script>
+
 			<!-- 질문글 내용 끝. 수정 필요. -->
 			<!-- 파일 첨부 -->
 			<label for="fileupload">添付</label>
