@@ -202,7 +202,7 @@
 		<form action="addQuestion" id="fileupload" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
 			<label for="title">タイトル</label><input type="text" id="title" name="title"><br>
 			<!-- 질문글 내용 시작. 수정 필요. -->
-			<label for="questionContent">内容</label><input type="text" id="questionContent" name="questionContent"><br>
+			<label for="questionContent">内容</label>
 			
 			<textarea name="editor"></textarea>
 			<script src="/resources/ckeditor/adapters/jquery.js"></script>
