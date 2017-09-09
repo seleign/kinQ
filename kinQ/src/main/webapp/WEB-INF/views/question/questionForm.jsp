@@ -37,12 +37,6 @@
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
         </td>
         <td>
-            {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn btn-primary start" disabled>
-                    <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start</span>
-                </button>
-            {% } %}
             {% if (!i) { %}
                 <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
@@ -176,33 +170,14 @@
 		max_select_options: 5,
 		no_result_text: "No result found. Press enter to add"
 	});
-	/* 
-	$(function() {"C:/Users/seleign/Downloads/test.js"
-        $("#attach").on('change', function(){
-            readURL(this);
-        });
-    });
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-			var reader = new FileReader();
-
-			reader.onload = function (e) {
-        		console.log(e);
-//        		var html = $('#attached').html();
-//        		html += '<img id="attached' +e.size +'">'
-				$('#attached').attr('src', e.target.result);
-            }
-
-          reader.readAsDataURL(input.files[0]);
-        }
-    } */
     $(function () {
 		// Change this to the location of your server-side upload handler:
 		var url = '/fileupload';  // 사용
 		$('#fileupload').fileupload({
 			url: url,
 			dataType: 'json',
+	       	singleFileUploads: false,
+//			autoUpload : true,
 			done: function (e, data) {
 				$.each(data.result.files, function (index, file) {
 					$('<p/>').text(file.name).appendTo('#files');
@@ -229,16 +204,7 @@
 			<label for="questionContent">内容</label><input type="text" id="questionContent" name="questionContent"><br>
 			<!-- 질문글 내용 끝. 수정 필요. -->
 			<!-- 파일 첨부 -->
-			<label for="fileupload">添付</label><br>
-			<!-- The file input field used as target for the file upload widget -->
-<!-- 		<input id="fileupload" type="file" name="files[]" multiple>
-			The global progress bar
-			<div id="progress" class="progress">
-   			<div class="progress-bar progress-bar-success"></div>
-			</div>
-			The container for the uploaded files
-			<div id="files" class="files"></div>
- -->
+			<label for="fileupload">添付</label>
  			<!-- Redirect browsers with JavaScript disabled to the origin page -->
 	        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
 	        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -247,25 +213,25 @@
 	                <!-- The fileinput-button span is used to style the file input field as button -->
 	                <span class="btn btn-success fileinput-button">
 	                    <i class="glyphicon glyphicon-plus"></i>
-	                    <span>Add files...</span>
+	                    <span>添付…</span>
 	                    <input type="file" name="files[]" multiple>
 	                </span>
-	                <button type="submit" class="btn btn-primary start">
+<!-- 	                <button type="submit" class="btn btn-primary start">
 	                    <i class="glyphicon glyphicon-upload"></i>
 	                    <span>Start upload</span>
 	                </button>
-	                <button type="reset" class="btn btn-warning cancel">
+ -->	                <button type="reset" class="btn btn-warning cancel">
 	                    <i class="glyphicon glyphicon-ban-circle"></i>
-	                    <span>Cancel upload</span>
+	                    <span>キャンセル</span>
 	                </button>
-	                <button type="button" class="btn btn-danger delete">
+<!-- 	                <button type="button" class="btn btn-danger delete">
 	                    <i class="glyphicon glyphicon-trash"></i>
 	                    <span>Delete</span>
 	                </button>
 	                <input type="checkbox" class="toggle">
-	                <!-- The global file processing state -->
+	                The global file processing state
 	                <span class="fileupload-process"></span>
-	            </div>
+ -->	            </div>
 	            <!-- The global progress state -->
 	            <div class="col-lg-5 fileupload-progress fade">
 	                <!-- The global progress bar -->
