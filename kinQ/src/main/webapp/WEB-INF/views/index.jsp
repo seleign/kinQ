@@ -17,13 +17,13 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
 	
 	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/purple.css">
+	<link rel="stylesheet" href="./resources/css/gray.css">
 	
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
 	
 	<!-- Favicons -->
-	<link rel="shortcut icon" href="./resources/images/favicon.png">
+	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   
 </head>
 <body>
@@ -127,7 +127,7 @@
 	</div><!-- End header-top -->
 	<header id="header">
 		<section class="container clearfix">
-			<div class="logo"><a href="#"><img alt="" src="images/logo.png"></a></div>
+			<div class="logo"><a href="index"><img alt="" src="images/logo_ws.png"></a></div>
 			<nav class="navigation">
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a></li>
