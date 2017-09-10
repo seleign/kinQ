@@ -201,7 +201,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -224,7 +224,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -246,7 +246,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -269,7 +269,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -292,7 +292,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -315,7 +315,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -338,7 +338,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -361,7 +361,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -389,7 +389,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -412,7 +412,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -434,7 +434,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -457,7 +457,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -480,7 +480,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -503,7 +503,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -526,7 +526,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -549,7 +549,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -577,7 +577,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -600,7 +600,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -622,7 +622,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -645,7 +645,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -668,7 +668,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -691,7 +691,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -714,7 +714,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -737,7 +737,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -765,7 +765,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -788,7 +788,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -810,7 +810,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -833,7 +833,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -856,7 +856,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -879,7 +879,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -902,7 +902,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -925,7 +925,7 @@
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
+									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
 								</div>
 								<div class="question-inner">
 									<div class="clearfix"></div>
@@ -1033,21 +1033,21 @@
 					<ul>
 						<li>
 							<div class="author-img">
-								<a href="#"><img width="60" height="60" src="http://placehold.it/60x60/FFF/444" alt=""></a>
+								<a href="#"><img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt=""></a>
 							</div> 
 							<h6><a href="#">admin</a></h6>
 							<span class="comment">12 Points</span>
 						</li>
 						<li>
 							<div class="author-img">
-								<a href="#"><img width="60" height="60" src="http://placehold.it/60x60/FFF/444" alt=""></a>
+								<a href="#"><img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt=""></a>
 							</div> 
 							<h6><a href="#">vbegy</a></h6>
 							<span class="comment">10 Points</span>
 						</li>
 						<li>
 							<div class="author-img">
-								<a href="#"><img width="60" height="60" src="http://placehold.it/60x60/FFF/444" alt=""></a>
+								<a href="#"><img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt=""></a>
 							</div> 
 							<h6><a href="#">ahmed</a></h6>
 							<span class="comment">5 Points</span>

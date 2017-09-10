@@ -6,7 +6,7 @@
 
 
 CKEDITOR.editorConfig = function( config ) {
-	config.extraPlugins = 'uploadimage,uploadwidget,widget,widgetselection,notificationaggregator,uploadfile';
+	config.extraPlugins = 'uploadimage,uploadwidget,widget,widgetselection,notificationaggregator,uploadfile,dragresize,tableresize';
 	//config.imageUploadUrl = 'cKEditorDragAndDropFileUpload';
 	config.uploadUrl = 'cKEditorDragAndDropFileUpload';
 	config.enterMode = CKEDITOR.ENTER_BR;

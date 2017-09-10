@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -35,15 +34,14 @@ public class FileController {
 	}
 	
 	/**
-	 * Ajax로 업로드 된다. 질문/답변에서 녹화한 화면을 업로드할 떄 사용한다.
+	 * Ajax로 업로드 된다. 질문/답변에서 녹화한 화면을 업로드할 때 사용한다.
 	 * @param blob 형식의 녹화된 webm 파일
-	 * @param fileName blob의 파일명
 	 * @return --작성 필요???
 	 */
 	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
 	public @ResponseBody void blob_upload(MultipartFile blob) {
-		System.out.println(blob.getOriginalFilename());
-		FileService.saveFile(blob, "/Users/leejunyeon/Desktop/");
+		logger.info("blob_upload: " + blob.getOriginalFilename());
+		FileService.saveFile(blob, FileService.fileSaveDirPath);
 	}
 	
 	/**
@@ -55,30 +53,27 @@ public class FileController {
 	 */
 	@RequestMapping(value = "cKEditorFileUpload", method = RequestMethod.POST)
 	public @ResponseBody String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum) {
-		System.out.println(upload.getOriginalFilename());
-		FileService.saveFile(upload, "/Users/leejunyeon/Desktop/");
-		//"http://images.goodsmile.info/cgm/images/product/20151005/5261/35771/large/06279a95903ea162cc97f533c57b3843.jpg
-		return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + "http://images.goodsmile.info/cgm/images/product/20151005/5261/35771/large/06279a95903ea162cc97f533c57b3843.jpg" + "','이미지를 업로드 하였습니다.'" + ")</script>"; //
+		return FileService.cKEditorFileUpload(upload, CKEditorFuncNum);
 	}
 	
 	/**
 	 * CKEditor에 드래그 앤 드랍으로 이미지 파일을 넣을 때 사용한다.
 	 * filetools 의 설정을 변경했음.....-- 기록사항
 	 * @param blob 업로드 할 파일
-	 * @return
+	 * @return 업로드 결과
 	 */
-	//cKEditorDragAndDropFileUpload
 	@RequestMapping(value = "cKEditorDragAndDropFileUpload", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, String> cKEditorDragAndDropFileUpload(MultipartFile blob) {
-		System.out.println(blob.getOriginalFilename());
-		HashMap<String, String> result = new HashMap<>();
-		result.put("uploaded", "1");
-		result.put("fileName", "06279a95903ea162cc97f533c57b3843.jpg");
-		result.put("url", "http://images.goodsmile.info/cgm/images/product/20151005/5261/35771/large/06279a95903ea162cc97f533c57b3843.jpg");
-		//"uploaded": 1,  <- success일때 1, fail일때0
-	    //"fileName": "foo.jpg",  <-파일명
-	    //"url": "/files/foo.jpg" <-파일 url
-		//"error" : "실패 메시지"  <- 업로드 실패했을 때 메시지
-		return result;
+		return FileService.cKEditorDragAndDropFileUpload(blob);
+	}
+	
+	/**
+	 * Ajax로 받은 img의 src를 Base64로 바꿔준다.
+	 * @param imgSrc 이미지의 주소
+	 * @return Base64화 된 이미지
+	 */
+	@RequestMapping(value = "imgToBase64", method = RequestMethod.GET)
+	public @ResponseBody HashMap<String, String> imgToBase64(String imgSrc) {
+		return FileService.imgToBase64(imgSrc);
 	}
 }

@@ -26,7 +26,6 @@ import us.duia.leejo0531.vo.TagVO;
 @Controller
 public class QuestionController {
 	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
-	private String tempFileSavePath = QuestionController.class.getResource(".").getPath().substring(0, QuestionController.class.getResource(".").getPath().lastIndexOf("classes/us")) + "resources/";
 	
 	@Autowired
 	private QuestionService qstnSvc; //QuestionService 비즈니스 로직
@@ -92,7 +91,7 @@ public class QuestionController {
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn) {
 		//qstnSvc.writeQuestion(qstn);
-		System.out.println("qstn: " + qstn);
+		logger.info(qstn.toString());
 		// code here
 
 		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함

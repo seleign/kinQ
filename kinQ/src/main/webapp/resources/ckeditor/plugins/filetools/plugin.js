@@ -46,6 +46,13 @@
 			}, null, null, 5 );
 
 			editor.on( 'fileUploadRequest', function( evt ) {
+//				for (var key in evt) { //오브젝트 obj
+//					   if (evt.hasOwnProperty(key)) {
+//					       var data = evt[key];
+//					       console.log(data);
+//					   }
+//					}
+
 				var fileLoader = evt.data.fileLoader,
 					$formData = new FormData(),
 					requestData = evt.data.requestData;
