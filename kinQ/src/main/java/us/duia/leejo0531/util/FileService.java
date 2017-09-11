@@ -37,6 +37,15 @@ public class FileService {
 	public static String fileSaveDirPath = "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator; // OS마다 다르니까 알아서...
 		// 서버운영시:  "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator;
 	
+	// 각자의 컴퓨터를 확인해서, tmpPath와  resources 폴더를 지정한
+		public FileService() {
+				super();
+				if( System.getProperty("user.name").equals("leejunyeon") ) {
+					fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/";
+				}
+			}
+		
+	
 	/**
 	 * 업로드 된 파일을 지정된 경로에 저장하고, 저장된 파일명을 리턴
 	 * 
