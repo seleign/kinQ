@@ -50,4 +50,10 @@ public class TagDAO{
 		ArrayList<TagVO> result = mapper.getReplyListByTag(tag);
 		return result;
 	}
+	
+	/*//더미용 
+	public void dummytag(TagVO tag){
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		mapper.dummytag(tag);
+	}*/
 }

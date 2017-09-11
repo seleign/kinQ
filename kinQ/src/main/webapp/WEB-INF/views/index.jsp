@@ -34,8 +34,8 @@
 			<div class="box_icon box_warp box_no_border box_no_background" box_border="transparent" box_background="transparent" box_color="#FFF">
 				<div class="row">
 					<div class="col-md-3">
-						<h2>Welcome to Ask me</h2>
-						<p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque.</p>
+						<h2>なんでも質問して!</h2>
+						<p>一日にも、多くの情報を接して数多くの質問を接するあなたに最も最適化されたサイト!今、早速質問して返事して知識を共有してください</p>
 						<div class="clearfix"></div>
 						<a class="color button dark_button medium" href="#">About Us</a>
 						<a class="color button dark_button medium" href="#">Join Now</a>
@@ -43,9 +43,9 @@
 					<div class="col-md-9">
 						<form class="form-style form-style-2">
 							<p>
-								<textarea rows="4" id="question_title" onfocus="if(this.value=='Ask any question and you be sure find your answer ?')this.value='';" onblur="if(this.value=='')this.value='Ask any question and you be sure find your answer ?';">Ask any question and you be sure find your answer ?</textarea>
+								<textarea rows="4" id="question_title" onfocus="if(this.value=='今あなたが一番知りたいことは何ですか?')this.value='';" onblur="if(this.value=='')this.value='今あなたが一番知りたいことは何ですか?';">今あなたが一番知りたいことは何ですか?</textarea>
 								<i class="icon-pencil"></i>
-								<span class="color button small publish-question">Ask Now</span>
+								<span class="color button small publish-question">質問</span>
 							</p>
 						</form>
 					</div>

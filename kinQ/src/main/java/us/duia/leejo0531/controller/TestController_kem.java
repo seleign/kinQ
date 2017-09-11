@@ -22,4 +22,9 @@ public class TestController_kem {
 	public String mypage(){
 		return "mypage";
 	}
+	
+	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
+	public String ask_question(){
+		return "askQuestion";
+	}
 }
