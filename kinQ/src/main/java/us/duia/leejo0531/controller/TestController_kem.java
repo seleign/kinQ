@@ -17,4 +17,9 @@ public class TestController_kem {
 		logger.info("****short in****");
 		return "shortcodes";
 	}
+	
+	@RequestMapping(value="mypage",method=RequestMethod.GET)
+	public String mypage(){
+		return "mypage";
+	}
 }
