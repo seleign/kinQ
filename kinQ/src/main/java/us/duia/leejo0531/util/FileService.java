@@ -28,13 +28,14 @@ public class FileService {
 	 */
 
 	// resources/ 하단에 존재하는 파일이 업로드될 폴더명
-	public static String uploadFolderName = "uploadedFile" + File.separator;  // 앞에 '/'는 없어야하고, 뒤에는 '/'가 있어야한다.
+	public static String uploadFolderName = "uploadedFile";  // 앞에 '/'는 없어야함
 	
 	// WAS의 임시폴더의 resources/ + uploadFolderName의 경로를 찾는다.
-	public static String tmpPath = FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF" + File.separator + "classes" + File.separator)) + "resources" + File.separator + uploadFolderName; 
-	
+	public static String tmpPath = FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF")) + "resources/" + uploadFolderName + "/"; 
+		// 서버 운영시: FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF")) + "resources/" + uploadFolderName + "/";
 	// resources 폴더가 존재하는 절대경로
-	public static String fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/" + uploadFolderName; // OS마다 다르니까 알아서...
+	public static String fileSaveDirPath = "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator; // OS마다 다르니까 알아서...
+		// 서버운영시:  "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator;
 	
 	/**
 	 * 업로드 된 파일을 지정된 경로에 저장하고, 저장된 파일명을 리턴
@@ -90,7 +91,10 @@ public class FileService {
 		// 파일 저장
 		try {
 			mfile.transferTo(serverFile);
-			
+			logger.info(  FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF")) + "resources/" + uploadFolderName + "/" );
+			///C:/Users/SCITMaster/Documents/workspace-sts-3.9.0.RELEASE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/kinQ/WEB-INF/classes/us/duia/leejo0531/util/
+
+			//FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF" + File.separator + "classes" + File.separator)) + "resources" + File.separator + uploadFolderName; 
 			/* transferTo로 저장하면, 프로젝트 폴더 resources에 바로 생기는 것이 아니라 톰캣이 임시로 사용중인 폴더에 복사되게 되더라구요.
 			 * 제 경우에는 fullPath: /Users/leejunyeon/GoogleDrive/SCIT/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/kinQ/WEB-INF/classes/us/duia/leejo0531/util/
 			 * 이렇게 tmp폴더에 저장되고, 이클립스에서 F5눌러서 다시 스프링을 소프트 초기화하면, 이 tmp 폴더로부터 resources로 파일을 다시 복사해 오는 것을 확인했습니다.
@@ -159,7 +163,7 @@ public class FileService {
 	public static String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum, String id) {
 		logger.info( "cKEditorFileUpload: "	+ upload.getOriginalFilename() );
 		String fileName = FileService.saveFile(upload, fileSaveDirPath, id);
-		String url = "/resources/" + id + "/" + uploadFolderName + fileName;
+		String url = "/resources/"  + uploadFolderName+ "/" + id + "/" + fileName;
 		return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + url + "','Image Uploaded'" + ")</script>"; //
 	}
 	
@@ -190,7 +194,7 @@ public class FileService {
 			String fileName = saveFile(blob, fileSaveDirPath, id);
 			result.put("uploaded", "1");
 			result.put("fileName", fileName);
-			result.put("url", "/resources/" + uploadFolderName + id + "/" + fileName);
+			result.put("url", "/resources/" + uploadFolderName + "/" + id + "/" + fileName);
 		} else {
 			logger.warn("파일 업로드 실패");
 			result.put("uploaded", "0");
