@@ -28,10 +28,10 @@ public class FileService {
 	 */
 
 	// resources/ 하단에 존재하는 파일이 업로드될 폴더명
-	public static String uploadFolderName = "uploadTest/";  // 앞에 '/'는 없어야하고, 뒤에는 '/'가 있어야한다.
+	public static String uploadFolderName = "uploadedFile" + File.separator;  // 앞에 '/'는 없어야하고, 뒤에는 '/'가 있어야한다.
 	
 	// WAS의 임시폴더의 resources/ + uploadFolderName의 경로를 찾는다.
-	public static String tmpPath = FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF/classes/")) + "resources/" + uploadFolderName; 
+	public static String tmpPath = FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF" + File.separator + "classes" + File.separator)) + "resources" + File.separator + uploadFolderName; 
 	
 	// resources 폴더가 존재하는 절대경로
 	public static String fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/" + uploadFolderName; // OS마다 다르니까 알아서...
@@ -43,14 +43,14 @@ public class FileService {
 	 * @param uploadPath 저장할 경로
 	 * @return 저장된 파일명
 	 */
-	public static String saveFile(MultipartFile mfile, String uploadPath) {
+	public static String saveFile(MultipartFile mfile, String uploadPath, String id) {
 		// 업로드된 파일이 없거나 크기가 0이면 저장하지 않고 null을 리턴
 		if (mfile == null || mfile.isEmpty() || mfile.getSize() == 0) {
 			return null;
 		}
 
 		// 저장 폴더가 없으면 생성
-		File path = new File(uploadPath);
+		File path = new File(uploadPath + File.separator + id);
 		if (!path.isDirectory()) {
 			path.mkdirs();
 		}
@@ -79,7 +79,7 @@ public class FileService {
 
 		// 같은 이름의 파일이 있는 경우의 처리
 		while (true) {
-			serverFile = new File(uploadPath + "/" + savedFilename + ext);
+			serverFile = new File(uploadPath + File.separator + id + File.separator + savedFilename + ext);
 			// 같은 이름의 파일이 없으면 나감.
 			if (!serverFile.isFile())
 				break;
@@ -104,9 +104,10 @@ public class FileService {
 			// 클래스가 있는 폴더로부터 resources/uploadTest로 업로할 파일 경로를 수정한다.
 			//String tmpPath = thisClassPath.substring(0, thisClassPath.lastIndexOf("WEB-INF/classes/")) + "resources/" + uploadFolderName; 
 			logger.info("tmpPath:: " + tmpPath);
-			
-			FileInputStream inputStream = new FileInputStream(fileSaveDirPath + savedFilename + ext); 
-			FileOutputStream outputStream = new FileOutputStream(tmpPath + savedFilename + ext);
+			logger.info("FileInputStream: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
+			logger.info("FileOutputStream: " + tmpPath + id + File.separator + savedFilename + ext);
+			FileInputStream inputStream = new FileInputStream(fileSaveDirPath +id + File.separator + savedFilename + ext); 
+			FileOutputStream outputStream = new FileOutputStream(tmpPath + id + File.separator + savedFilename + ext);
 			FileChannel fcin = inputStream.getChannel(); 
 			FileChannel fcout = outputStream.getChannel(); 
 			fcin.transferTo(0, fcin.size(), fcout); 
@@ -155,10 +156,10 @@ public class FileService {
 	 * @param CKEditorFuncNum ?? 근데 이거 없으면 안됨
 	 * @return 자바스크립트 콜백 함수 window.parent.CKEDITOR.tools.callFunction(CKEditorFuncNum, 파일 주소, 메세지)
 	 */
-	public static String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum) {
+	public static String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum, String id) {
 		logger.info( "cKEditorFileUpload: "	+ upload.getOriginalFilename() );
-		String fileName = FileService.saveFile(upload, fileSaveDirPath);
-		String url = "/resources/" + uploadFolderName + fileName;
+		String fileName = FileService.saveFile(upload, fileSaveDirPath, id);
+		String url = "/resources/" + id + "/" + uploadFolderName + fileName;
 		return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + url + "','Image Uploaded'" + ")</script>"; //
 	}
 	
@@ -168,7 +169,7 @@ public class FileService {
 	 * @param blob 업로드 할 파일
 	 * @return
 	 */
-	public static HashMap<String, String> cKEditorDragAndDropFileUpload(MultipartFile blob) {
+	public static HashMap<String, String> cKEditorDragAndDropFileUpload(MultipartFile blob, String id) {
 		HashMap<String, String> result = new HashMap<>();
 		if(blob.getOriginalFilename().equals("blob")) { //Base64로 인코딩된 이미지가 업로드 되었음
 			logger.info("이미 base64인 이미지");
@@ -186,10 +187,10 @@ public class FileService {
 			result.put("url", base64);
 			
 		} else if(!blob.getOriginalFilename().equals("blob")) { //이미지 파일일 때
-			String fileName = saveFile(blob, fileSaveDirPath);
+			String fileName = saveFile(blob, fileSaveDirPath, id);
 			result.put("uploaded", "1");
 			result.put("fileName", fileName);
-			result.put("url", "/resources/" + uploadFolderName + fileName);
+			result.put("url", "/resources/" + uploadFolderName + id + "/" + fileName);
 		} else {
 			logger.warn("파일 업로드 실패");
 			result.put("uploaded", "0");

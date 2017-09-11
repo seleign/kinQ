@@ -25,6 +25,9 @@ import us.duia.leejo0531.util.FileService;
 public class FileController {
 	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
 
+	//임시로 유저 id를 id01로 사용한다.
+	public static String id = "id01";
+	
 	//코드 추가 필요
 	@RequestMapping(value="fileupload", method = RequestMethod.GET)
 	@ResponseBody
@@ -41,7 +44,7 @@ public class FileController {
 	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
 	public @ResponseBody void blob_upload(MultipartFile blob) {
 		logger.info("blob_upload: " + blob.getOriginalFilename());
-		FileService.saveFile(blob, FileService.fileSaveDirPath);
+		FileService.saveFile(blob, FileService.fileSaveDirPath, id);
 	}
 	
 	/**
@@ -53,7 +56,7 @@ public class FileController {
 	 */
 	@RequestMapping(value = "cKEditorFileUpload", method = RequestMethod.POST)
 	public @ResponseBody String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum) {
-		return FileService.cKEditorFileUpload(upload, CKEditorFuncNum);
+		return FileService.cKEditorFileUpload(upload, CKEditorFuncNum, id);
 	}
 	
 	/**
@@ -64,7 +67,7 @@ public class FileController {
 	 */
 	@RequestMapping(value = "cKEditorDragAndDropFileUpload", method = RequestMethod.POST)
 	public @ResponseBody HashMap<String, String> cKEditorDragAndDropFileUpload(MultipartFile blob) {
-		return FileService.cKEditorDragAndDropFileUpload(blob);
+		return FileService.cKEditorDragAndDropFileUpload(blob, id);
 	}
 	
 	/**
