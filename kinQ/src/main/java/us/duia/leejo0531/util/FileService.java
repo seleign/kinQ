@@ -31,10 +31,10 @@ public class FileService {
 	public static String uploadFolderName = "uploadedFile" + File.separator;  // 앞에 '/'는 없어야하고, 뒤에는 '/'가 있어야한다.
 	
 	// WAS의 임시폴더의 resources/ + uploadFolderName의 경로를 찾는다.
-	//public static String tmpPath = FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF" + File.separator + "classes" + File.separator)) + "resources" + File.separator + uploadFolderName; 
+	public static String tmpPath = FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF" + File.separator + "classes" + File.separator)) + "resources" + File.separator + uploadFolderName; 
 	
 	// resources 폴더가 존재하는 절대경로
-	public static String fileSaveDirPath = "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName; // OS마다 다르니까 알아서...
+	public static String fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/" + uploadFolderName; // OS마다 다르니까 알아서...
 	
 	/**
 	 * 업로드 된 파일을 지정된 경로에 저장하고, 저장된 파일명을 리턴
@@ -103,18 +103,18 @@ public class FileService {
 			//String thisClassPath = FileService.class.getResource("").getPath(); 
 			// 클래스가 있는 폴더로부터 resources/uploadTest로 업로할 파일 경로를 수정한다.
 			//String tmpPath = thisClassPath.substring(0, thisClassPath.lastIndexOf("WEB-INF/classes/")) + "resources/" + uploadFolderName; 
-//			logger.info("tmpPath:: " + tmpPath);
-//			logger.info("FileInputStream: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
-//			logger.info("FileOutputStream: " + tmpPath + id + File.separator + savedFilename + ext);
-//			FileInputStream inputStream = new FileInputStream(fileSaveDirPath +id + File.separator + savedFilename + ext); 
-//			FileOutputStream outputStream = new FileOutputStream(tmpPath + id + File.separator + savedFilename + ext);
-//			FileChannel fcin = inputStream.getChannel(); 
-//			FileChannel fcout = outputStream.getChannel(); 
-//			fcin.transferTo(0, fcin.size(), fcout); 
-//			fcout.close(); 
-//			fcin.close(); 
-//			outputStream.close(); 
-//			inputStream.close();
+			logger.info("tmpPath:: " + tmpPath);
+			logger.info("FileInputStream: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
+			logger.info("FileOutputStream: " + tmpPath + id + File.separator + savedFilename + ext);
+			FileInputStream inputStream = new FileInputStream(fileSaveDirPath +id + File.separator + savedFilename + ext); 
+			FileOutputStream outputStream = new FileOutputStream(tmpPath + id + File.separator + savedFilename + ext);
+			FileChannel fcin = inputStream.getChannel(); 
+			FileChannel fcout = outputStream.getChannel(); 
+			fcin.transferTo(0, fcin.size(), fcout); 
+			fcout.close(); 
+			fcin.close(); 
+			outputStream.close(); 
+			inputStream.close();
 		} catch (Exception e) {
 			savedFilename = null;
 			ext = null;
