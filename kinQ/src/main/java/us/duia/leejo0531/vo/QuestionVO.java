@@ -13,7 +13,7 @@ public class QuestionVO {
 	private String title;
 	private String [] relatedTag;
 	private String MinorNum;
-	private String blob; //동영상 파일(blob)
+	private String videoSrc; //동영상 파일(blob)
 	private int hit;
 	private String questionContent;
 	
@@ -22,7 +22,7 @@ public class QuestionVO {
 	}
 
 	public QuestionVO(int questionNum, int userNum, Date timeLimit, String urgent, Date regDate, Date modDate,
-			String title, String[] relatedTag, String minorNum, String blob, int hit, String questionContent) {
+			String title, String[] relatedTag, String minorNum, String videoSrc, int hit, String questionContent) {
 		super();
 		this.questionNum = questionNum;
 		this.userNum = userNum;
@@ -33,7 +33,7 @@ public class QuestionVO {
 		this.title = title;
 		this.relatedTag = relatedTag;
 		MinorNum = minorNum;
-		this.blob = blob;
+		this.videoSrc = videoSrc;
 		this.hit = hit;
 		this.questionContent = questionContent;
 	}
@@ -110,12 +110,12 @@ public class QuestionVO {
 		MinorNum = minorNum;
 	}
 
-	public String getBlob() {
-		return blob;
+	public String getVideoSrc() {
+		return videoSrc;
 	}
 
-	public void setBlob(String blob) {
-		this.blob = blob;
+	public void setVideoSrc(String videoSrc) {
+		this.videoSrc = videoSrc;
 	}
 
 	public int getHit() {
@@ -138,9 +138,9 @@ public class QuestionVO {
 	public String toString() {
 		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit
 				+ ", urgent=" + urgent + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title
-				+ ", relatedTag=" + Arrays.toString(relatedTag) + ", MinorNum=" + MinorNum + ", blob=" + blob + ", hit="
-				+ hit + ", questionContent=" + questionContent + "]";
+				+ ", relatedTag=" + Arrays.toString(relatedTag) + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc
+				+ ", hit=" + hit + ", questionContent=" + questionContent + "]";
 	}
-	
+
 	
 }
