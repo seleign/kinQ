@@ -108,13 +108,18 @@ public class QuestionController {
 		//qstnSvc.getQuestion(qstn);
 		//System.out.println(qstn);
 		// code here
-		QuestionVO question = qstnSvc.getQuestion(qstn);
+		QuestionVO test = new QuestionVO(80);
+		QuestionVO question = qstnSvc.getQuestion(test);
+		System.out.println(question);
 		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
 		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
+		System.out.println("questionNum : " + question.getQuestionNum());
+		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		model.addAttribute("question", question);
 		model.addAttribute("minor", minor);
 		model.addAttribute("major", major);
+		model.addAttribute("tagList", tagList);
 		
-		return "redirect:/";
+		return "question/questionView";
 	}
 }

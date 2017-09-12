@@ -29,5 +29,7 @@
 	<!-- code here -->
 	</insert>
 	
-	
+	<insert id="insertReplyTest" parameterType="Reply">
+		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, #{id}, sysdate, sysdate, #{ReplyTitle}, #{ReplyContent})
+	</insert>
 </mapper>

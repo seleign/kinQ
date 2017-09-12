@@ -65,4 +65,8 @@
 	<!-- code here -->
 	
 	</select>
+	
+	<select id="getQuestionTag" parameterType="Question" resultType="Tag">
+		select tag from tag where questionNum = #{questionNum} order by tag asc
+	</select>
 </mapper>

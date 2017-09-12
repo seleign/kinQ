@@ -25,7 +25,6 @@ public class QuestionService {
 	@Autowired
 	private QuestionDAO qstnDao;
 	private TagDAO tagDao;
-	
 	/**
 	 * 질문을 등록한다.
 	 * @param qstn QuestionVO
@@ -99,5 +98,12 @@ public class QuestionService {
 	public ArrayList<QuestionVO> searchByContext(String context){
 		ArrayList<QuestionVO> result = qstnDao.searchByContext(context);
 		return result;
+	}
+	
+	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
+		System.out.println("questionService : " + question);
+		System.out.println("qstnDao : " + qstnDao);
+		ArrayList<TagVO> tagList = qstnDao.getQuestionTag(question);
+		return tagList;
 	}
 }

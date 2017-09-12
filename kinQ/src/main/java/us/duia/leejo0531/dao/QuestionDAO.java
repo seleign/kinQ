@@ -98,4 +98,12 @@ public class QuestionDAO {
 		ArrayList<QuestionVO> result = mapper.searchByContext(context);
 		return result;
 	}
+	
+	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
+		System.out.println("getQuestionTag 진입 : " + sqlSession);
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		System.out.println("TagDAO 진입 : " + question);
+		ArrayList<TagVO> tagList = mapper.getQuestionTag(question);
+		return tagList;
+	}
 }

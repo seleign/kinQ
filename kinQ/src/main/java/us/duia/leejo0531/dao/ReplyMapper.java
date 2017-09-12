@@ -11,4 +11,5 @@ public interface ReplyMapper {
 	public int deleteReply(ReplyVO target);
 	public ReplyVO selectOneReply(ReplyVO target);
 	public ArrayList<ReplyVO> searchByContext(String context);
+	public int insertReplyTest(ReplyVO reply);
 }
