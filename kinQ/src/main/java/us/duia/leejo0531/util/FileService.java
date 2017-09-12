@@ -39,6 +39,7 @@ public class FileService {
 	
 	// 각자의 컴퓨터를 확인해서, tmpPath와  resources 폴더를 지정한
 		public FileService() {
+			
 				if( System.getProperty("user.name").equals("leejunyeon") ) {
 					fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/" + uploadFolderName + File.separator;
 				}else {
