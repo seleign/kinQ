@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.vo.MajorVO;
-import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 
@@ -103,11 +102,12 @@ public class QuestionController {
 	 * @param qstn QuestionVO
 	 * @return 질문보기 페이지(~~.jsp)로 이동
 	 */
-	@RequestMapping(value = "questionView", method = RequestMethod.GET)
-	public String viewQuestion(QuestionVO qstn, Model model) {
+	@RequestMapping(value = "question_view", method = RequestMethod.GET)
+	public String viewQuestion(QuestionVO qstn) {
 		//qstnSvc.getQuestion(qstn);
-		//System.out.println(qstn);
+//		System.out.println(qstn);
 		// code here
+<<<<<<< HEAD
 		QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(test);
 		System.out.println(question);
@@ -121,5 +121,10 @@ public class QuestionController {
 		model.addAttribute("tagList", tagList);
 		
 		return "question/questionView";
+=======
+
+		return "question_view";
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	}
+
 }

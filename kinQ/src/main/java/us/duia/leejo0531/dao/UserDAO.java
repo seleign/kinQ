@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.UserVO;
 
 /**

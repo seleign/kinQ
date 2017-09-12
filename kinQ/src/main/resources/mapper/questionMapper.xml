@@ -37,19 +37,10 @@
 	<select id="getMajorList" resultType="Major">
 		select * from major order by majorNum
 	</select>
-	<!-- 대분류 불러오기 -->
-	<select id="getMajor" parameterType="int" resultType="Major">
-		select * from major where majorNum = #{majorNum}
-	</select>
 	
 	<!-- 소분류 리스트 불러오기 -->
 	<select id="getMinorList" resultType="Minor">
 		select * from minor order by minorNum
-	</select>
-	
-	<!-- 소분류 불러오기 -->
-	<select id="getMinor" parameterType="int" resultType="Minor">
-		select * from minor where minorNum = #{minorNum}
 	</select>
 	
 	<!-- 대상 질문글 정보를 가져온다.(임시) -->

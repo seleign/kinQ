@@ -1,10 +1,10 @@
 package us.duia.leejo0531.vo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class QuestionVO {
+
    private int questionNum;
    private int userNum; //질문자
    private Date timeLimit;
@@ -148,4 +148,3 @@ public String toString() {
 }
 
 }
-

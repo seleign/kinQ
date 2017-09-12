@@ -5,12 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Question View</title>
-<script type="text/javascript">
-	
-</script>
+<title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 	<table>
 		<tbody>
 			<tr>
@@ -47,5 +45,8 @@
 		</tbody>
 	</table>
 	
+=======
+
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 </body>
 </html>

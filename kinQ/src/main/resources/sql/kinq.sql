@@ -595,6 +595,25 @@ ALTER TABLE RNotify
 
 
 
+-- Report Table Create SQL
+CREATE TABLE Report
+(
+    ReportNum       NUMBER          NOT NULL, 
+    reporterNum     NUMBER          NULL, 
+    ReportTitle     VARCHAR2(30)    NULL, 
+    ReportedQNum    NUMBER          NULL, 
+    ReportedRNum    NUMBER          NULL, 
+    ReportReason    VARCHAR2(50)    NULL, 
+    CONSTRAINT REPORT_PK PRIMARY KEY (ReportNum)
+)
+/
+
+CREATE SEQUENCE Report_SEQ
+START WITH 1
+INCREMENT BY 1;
+
+
+
 
 CREATE INDEX q_content_idx
 ON Q_Board( QuestionContent)

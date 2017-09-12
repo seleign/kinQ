@@ -27,9 +27,7 @@
   
 </head>
 <body>
-	
 	<jsp:include page="header.jsp" flush="false" />
-	
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">

@@ -35,10 +35,29 @@ body {
 .icon-chevron-up {
 	margin-top: 25%;
 }
+
+/* 헤더 마이페이지 버튼설정 */
 .header-mypage {
 	float: right;
 	position: relative;
 	margin-top: 10px;
+}
+
+/* askquestion 영상녹화 버튼 설정  */
+#ask-button {
+	font-size : 17px;
+	margin-left: 2%;
+	float: left;
+	width: 25%
+}
+
+/* askquestion 등록,영상녹화 버튼 p태그설정 */
+#p-ask-buttons{
+	overflow: hidden;
+	height: 100%;
+	margin-top: 10px !important;
+	margin-bottom: 0 !important;
+	margin-left: 33%
 }
 /* 占쏙옙 占쏙옙 */
 #warp {
@@ -1785,7 +1804,7 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	margin-bottom: 0 !important;
 }
 .form-submit input[type="submit"] {
-	font-size: 15px;
+	font-size: 17px;
 	font-weight: bold;
 	-webkit-font-smoothing: antialiased;
 }
@@ -2703,6 +2722,7 @@ span.date i,span.comment i {
 .full_width .form-style textarea {
 	height: 200px;
 }
+
 .form-style input.submit {
 	width: 100%;
 	float: right;
@@ -2973,7 +2993,8 @@ input[type="checkbox"]:checked::before {
 	background-color: #333;
 }
 #publish-question {
-	width: 100%;
+	float: left;
+	width: 25%;
 }
 #question-submit .form-inputs p {
 	margin-bottom: 30px;

@@ -24,7 +24,9 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+  	<script>
+	UPLOADCARE_PUBLIC_KEY = 'your_public_key';
+	</script>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
@@ -66,6 +68,13 @@
 									<input type="text" id="question-title">
 									<span class="form-description">Please choose an appropriate title for the question to answer it even easier .</span>
 								</p>
+								<div id="form-textarea">
+									<label class="required">Details<span>*</span></label>
+								<p>
+									<textarea id="question-details" aria-required="true" cols="58" rows="8"></textarea>
+									<span class="form-description">Type the description thoroughly and in detail .</span>
+								</p>
+							</div>
 								<p>
 									<label>Tags</label>
 									<input type="text" class="input" name="question_tags" id="question_tags" data-seperator=",">
@@ -118,15 +127,10 @@
 								</div>
 								
 							</div>
-							<div id="form-textarea">
-								<p>
-									<label class="required">Details<span>*</span></label>
-									<textarea id="question-details" aria-required="true" cols="58" rows="8"></textarea>
-									<span class="form-description">Type the description thoroughly and in detail .</span>
-								</p>
-							</div>
-							<p class="form-submit">
-								<input type="submit" id="publish-question" value="Publish Your Question" class="button color small submit">
+
+							<p id="p-ask-buttons" class="form-submit">
+								<input type="submit" id="publish-question" value="질문하기" class="button color small submit">
+								<input type="button" id="ask-button" value="영상녹화" class="button color small submit">
 							</p>
 						</form>
 					</div>
@@ -356,6 +360,12 @@
 <div class="go-up"><i class="icon-chevron-up"></i></div>
 
 <!-- js -->
+<!-- CKeditor -->
+<script src="./resources/ckeditor/ckeditor.js"></script> 
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
+<script src="./resources/ckeditor/adapters/jquery.js"></script>
 <script src="./resources/js/jquery.min.js"></script>
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
@@ -373,6 +383,13 @@
 <script src="./resources/js/tags.js"></script>
 <script src="./resources/js/jquery.bxslider.min.js"></script>
 <script src="./resources/js/custom.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+	CKEDITOR.replace('question-details',{ 
+		filebrowserUploadUrl: 'cKEditorFileUpload'
+	}); 
+}
+</script>
 <!-- End js -->
 
 </body>

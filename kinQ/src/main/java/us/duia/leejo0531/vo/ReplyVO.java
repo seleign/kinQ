@@ -74,5 +74,5 @@ public class ReplyVO extends QuestionVO{
 				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + "]";
 	}
 
-	
+
 }

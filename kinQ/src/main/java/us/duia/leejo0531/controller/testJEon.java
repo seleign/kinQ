@@ -28,7 +28,11 @@ public class testJEon {
 			int questionNum = random.nextInt(100) + 1;
 			int userNum = random.nextInt(20) + 1;
 			String tag = "tag" + i;
+<<<<<<< HEAD
 			System.out.println(mapper.insertTag(new TagVO(questionNum, userNum, tag)));
+=======
+			//mapper.insertTag(new TagVO(questionNum, userNum, tag));
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 		}
 		return "home";
 	}

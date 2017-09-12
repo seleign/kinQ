@@ -1,6 +1,6 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
-<%@page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+    <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -69,7 +69,7 @@
 						<div class="tab-inner">
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This is my first Question</a>
+									<a href="question_view">This is my first Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -92,7 +92,7 @@
 							</article>
 							<article class="question question-type-poll">
 								<h2>
-									<a href="single_question_poll.html">This Is My Second Poll Question</a>
+									<a href="question_view">This Is My Second Poll Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
@@ -114,7 +114,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Third Question</a>
+									<a href="question_view">This Is My Third Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -137,7 +137,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fourth Question</a>
+									<a href="question_view">This Is My Fourth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -160,7 +160,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fifth Question</a>
+									<a href="question_view">This Is My Fifth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -183,7 +183,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Sixth Question</a>
+									<a href="question_view">This Is My Sixth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -206,7 +206,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My seventh Question</a>
+									<a href="question_view">This Is My seventh Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -229,7 +229,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Eighth Question</a>
+									<a href="question_view">This Is My Eighth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -257,7 +257,7 @@
 						<div class="tab-inner">
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This is my first Question</a>
+									<a href="question_view">This is my first Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -280,7 +280,7 @@
 							</article>
 							<article class="question question-type-poll">
 								<h2>
-									<a href="single_question_poll.html">This Is My Second Poll Question</a>
+									<a href="question_view">This Is My Second Poll Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
@@ -302,7 +302,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Third Question</a>
+									<a href="question_view">This Is My Third Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -325,7 +325,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fourth Question</a>
+									<a href="question_view">This Is My Fourth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -348,7 +348,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fifth Question</a>
+									<a href="question_view">This Is My Fifth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -371,7 +371,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Sixth Question</a>
+									<a href="question_view.html">This Is My Sixth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -394,7 +394,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My seventh Question</a>
+									<a href="question_view">This Is My seventh Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -417,7 +417,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Eighth Question</a>
+									<a href="question_view">This Is My Eighth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -445,7 +445,7 @@
 						<div class="tab-inner">
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This is my first Question</a>
+									<a href="question_view">This is my first Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -468,7 +468,7 @@
 							</article>
 							<article class="question question-type-poll">
 								<h2>
-									<a href="single_question_poll.html">This Is My Second Poll Question</a>
+									<a href="question_view">This Is My Second Poll Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
@@ -490,7 +490,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Third Question</a>
+									<a href="question_view">This Is My Third Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -513,7 +513,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fourth Question</a>
+									<a href="question_view">This Is My Fourth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -536,7 +536,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fifth Question</a>
+									<a href="question_view">This Is My Fifth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -559,7 +559,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Sixth Question</a>
+									<a href="question_view">This Is My Sixth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -582,7 +582,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My seventh Question</a>
+									<a href="question_view">This Is My seventh Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -605,7 +605,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Eighth Question</a>
+									<a href="question_view">This Is My Eighth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -633,7 +633,7 @@
 						<div class="tab-inner">
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This is my first Question</a>
+									<a href="question_view">This is my first Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -656,7 +656,7 @@
 							</article>
 							<article class="question question-type-poll">
 								<h2>
-									<a href="single_question_poll.html">This Is My Second Poll Question</a>
+									<a href="question_view">This Is My Second Poll Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
@@ -678,7 +678,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Third Question</a>
+									<a href="question_view">This Is My Third Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -701,7 +701,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fourth Question</a>
+									<a href="question_view">This Is My Fourth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -724,7 +724,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Fifth Question</a>
+									<a href="question_view">This Is My Fifth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -747,7 +747,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Sixth Question</a>
+									<a href="question_view">This Is My Sixth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -770,7 +770,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My seventh Question</a>
+									<a href="question_view">This Is My seventh Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
@@ -793,7 +793,7 @@
 							</article>
 							<article class="question question-type-normal">
 								<h2>
-									<a href="single_question.html">This Is My Eighth Question</a>
+									<a href="question_view">This Is My Eighth Question</a>
 								</h2>
 								<a class="question-report" href="#">Report</a>
 								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
