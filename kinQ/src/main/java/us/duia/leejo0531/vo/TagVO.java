@@ -15,6 +15,12 @@ public class TagVO {
 		this.userNum = userNum;
 		this.tag = tag;
 	}
+	public TagVO(int questionNum, int userNum, String tag) {
+		super();
+		this.questionNum = questionNum;
+		this.userNum = userNum;
+		this.tag = tag;
+	}
 	public int getTagNum() {
 		return tagNum;
 	}

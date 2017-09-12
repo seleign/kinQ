@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.vo.MajorVO;
+import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 
@@ -103,11 +104,17 @@ public class QuestionController {
 	 * @return 질문보기 페이지(~~.jsp)로 이동
 	 */
 	@RequestMapping(value = "questionView", method = RequestMethod.GET)
-	public String viewQuestion(QuestionVO qstn) {
+	public String viewQuestion(QuestionVO qstn, Model model) {
 		//qstnSvc.getQuestion(qstn);
-		System.out.println(qstn);
+		//System.out.println(qstn);
 		// code here
-
+		QuestionVO question = qstnSvc.getQuestion(qstn);
+		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
+		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
+		model.addAttribute("question", question);
+		model.addAttribute("minor", minor);
+		model.addAttribute("major", major);
+		
 		return "redirect:/";
 	}
 }

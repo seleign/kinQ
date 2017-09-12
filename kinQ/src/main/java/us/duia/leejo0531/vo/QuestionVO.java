@@ -11,7 +11,7 @@ public class QuestionVO {
 	private Date modDate;
 	private String title;
 	private String relatedTag;
-	private String MinorNum;
+	private int minorNum;
 	private String blob; //동영상 파일(blob)
 	private int hit;
 	private String questionContent;
@@ -92,11 +92,11 @@ public class QuestionVO {
 	public void setQuestionContent(String questionContent) {
 		this.questionContent = questionContent;
 	}
-	public String getMinorNum() {
-		return MinorNum;
+	public int getMinorNum() {
+		return minorNum;
 	}
-	public void setMinorNum(String minorNum) {
-		MinorNum = minorNum;
+	public void setMinorNum(int minorNum) {
+		minorNum = minorNum;
 	}
 	public String getBlob() {
 		return blob;
@@ -108,7 +108,7 @@ public class QuestionVO {
 	public String toString() {
 		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", id="
 				+ id + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
-				+ relatedTag + ", MinorNum=" + MinorNum + ", blob=" + blob + ", hit=" + hit + ", questionContent="
+				+ relatedTag + ", MinorNum=" + minorNum + ", blob=" + blob + ", hit=" + hit + ", questionContent="
 				+ questionContent + "]";
 	}
 	

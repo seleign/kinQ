@@ -42,7 +42,7 @@ public class QuestionService {
 	 * @return 가져온 결과
 	 */
 	public QuestionVO getQuestion(QuestionVO qstn) {
-		QuestionVO result = qstnDao.selectOneQuestion( qstn);
+		QuestionVO result = qstnDao.selectOneQuestion(qstn);
 		return result;
 	}
 	
@@ -65,12 +65,30 @@ public class QuestionService {
 	}
 	
 	/**
+	 * Major(대분류)를 A가져온다.
+	 * @return MajorVO Major
+	 */
+	public MajorVO getMajor(int majorNum) {
+		MajorVO major = qstnDao.getMajor(majorNum);
+		return major;
+	}
+	
+	/**
 	 * Minor(소분류)를 ArrayList로 가져온다.
 	 * @return MinorVO Minor
 	 */
 	public ArrayList<MinorVO> getMinorList() {
 		ArrayList<MinorVO> minorList = qstnDao.getMinorList();
 		return minorList;
+	}
+	
+	/**
+	 * Minor(소분류)를 A가져온다.
+	 * @return MinorVO Minor
+	 */
+	public MinorVO getMinor(int minorNum) {
+		MinorVO minor = qstnDao.getMinor(minorNum);
+		return minor;
 	}
 	
 	/**

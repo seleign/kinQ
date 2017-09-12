@@ -50,4 +50,10 @@ public class TagDAO{
 		ArrayList<TagVO> result = mapper.getReplyListByTag(tag);
 		return result;
 	}
+	
+	public int insertTag(TagVO tag) {
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		int result = mapper.insertTag(tag);
+		return result;
+	}
 }
