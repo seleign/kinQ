@@ -65,11 +65,8 @@ public class ReplyVO extends QuestionVO{
 	@Override
 	public String toString() {
 		return "ReplyVO [replyNum=" + replyNum + ", R_RegDate=" + R_RegDate + ", R_ModDate=" + R_ModDate
-				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + ", getQuestionNum()="
-				+ getQuestionNum() + ", getUserNum()=" + getUserNum() + ", getTimeLimit()=" + getTimeLimit()
-				+ ", getUrgent()=" + getUrgent() + ", getRegDate()=" + getRegDate() + ", getModDate()=" + getModDate()
-				+ ", getTitle()=" + getTitle() + ", getRelatedTag()=" + getRelatedTag() + ", getHit()=" + getHit()
-				+ ", getQuestionContent()=" + getQuestionContent() + ", getMinorNum()=" + getMinorNum() + ", getBlob()="
-				+ getBlob() + ", toString()=" + super.toString() + "]";
+				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + "]";
 	}
+
+
 }
