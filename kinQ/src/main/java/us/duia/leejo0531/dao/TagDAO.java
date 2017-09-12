@@ -51,9 +51,10 @@ public class TagDAO{
 		return result;
 	}
 	
-	/*//더미용 
-	public void dummytag(TagVO tag){
+	//더미용 
+	public void dummytag(TagVO tagvo){
+		System.out.println("tagDao in"+tagvo.toString());
 		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
-		mapper.dummytag(tag);
-	}*/
+		mapper.dummytag(tagvo);
+	}
 }
