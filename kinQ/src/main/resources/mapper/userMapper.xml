@@ -55,4 +55,9 @@
 		delete from field 
 		where userNum=#{userNum}
 	</delete>
+	
+<!-- 	<insert id="addDummy" parameterType="Question">
+		insert into Q_BOARD values(Q_BOARD_SEQ.nextval, #{userNum}, #{timeLimit}, #{id}, #{regDate}, #{modDate}, #{title}, #{relatedTag}, #{hit}, #{questionContent})
+	</insert> -->
+	
 </mapper>

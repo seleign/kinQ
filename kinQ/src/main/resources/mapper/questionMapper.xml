@@ -13,7 +13,6 @@
 			regDate,
 			modDate,
 			title,
-			RelatedTag,
 			hit,
 			questionContent
 		) values(
@@ -24,7 +23,6 @@
 			#{regDate},
 			#{modDate},
 			#{title},
-			#{relatedTag},
 			0,
 			#{questionContent}
 		)
