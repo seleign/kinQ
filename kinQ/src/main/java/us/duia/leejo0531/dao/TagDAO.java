@@ -51,10 +51,19 @@ public class TagDAO{
 		return result;
 	}
 	
+<<<<<<< HEAD
 	//더미용 
 	public void dummytag(TagVO tagvo){
 		System.out.println("tagDao in"+tagvo.toString());
+=======
+	public int insertTag(TagVO tag) {
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+<<<<<<< HEAD
 		mapper.dummytag(tagvo);
+=======
+		int result = mapper.insertTag(tag);
+		return result;
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	}
 }

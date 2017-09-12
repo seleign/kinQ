@@ -24,7 +24,7 @@ public class FileService {
 	private static final Logger logger = LoggerFactory.getLogger(FileService.class);
 	/* 여기를 각자 작업 환경에 맞게 수정한다.
 	 * 여기 수정안하면 파일 업로드 안되니까 꼭 수정한다. 여기를 각자 작업 환경에 맞게 수정한다.
-	 * 3번째 Static fileSaveDirPath에 스프링 resources의 경로를 자신에게 맞게 변경.
+	 * 3번째 Static fileSaveDirPath에 스프링 resources의 경로(" " 부분)를 자신에게 맞게 변경.
 	 */
 
 	// resources/ 하단에 존재하는 파일이 업로드될 폴더명
@@ -34,17 +34,18 @@ public class FileService {
 	public static String tmpPath = FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF")) + "resources/" + uploadFolderName + "/"; 
 		// 서버 운영시: FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF")) + "resources/" + uploadFolderName + "/";
 	// resources 폴더가 존재하는 절대경로
-	public static String fileSaveDirPath = "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator; // OS마다 다르니까 알아서...
+	public static String fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/" + uploadFolderName + File.separator; // OS마다 다르니까 알아서...
 		// 서버운영시:  "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator;
 	
 	// 각자의 컴퓨터를 확인해서, tmpPath와  resources 폴더를 지정한
 		public FileService() {
-				super();
 				if( System.getProperty("user.name").equals("leejunyeon") ) {
-					fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/";
+					fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/" + uploadFolderName + File.separator;
+				}else {
+					fileSaveDirPath = "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator;
 				}
+				logger.info("파일 업로드를 하기 위해서 FileService의 fileSaveDirPath를 변경해야합니다. 지금의 fileSaveDirPath: " + fileSaveDirPath);
 			}
-		
 	
 	/**
 	 * 업로드 된 파일을 지정된 경로에 저장하고, 저장된 파일명을 리턴
@@ -100,25 +101,21 @@ public class FileService {
 		// 파일 저장
 		try {
 			mfile.transferTo(serverFile);
-			logger.info(  FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF")) + "resources/" + uploadFolderName + "/" );
+			logger.info("serverFile: " + serverFile);
 			///C:/Users/SCITMaster/Documents/workspace-sts-3.9.0.RELEASE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/kinQ/WEB-INF/classes/us/duia/leejo0531/util/
 
 			//FileService.class.getResource("").getPath().substring(0, FileService.class.getResource("").getPath().lastIndexOf("WEB-INF" + File.separator + "classes" + File.separator)) + "resources" + File.separator + uploadFolderName; 
-			/* transferTo로 저장하면, 프로젝트 폴더 resources에 바로 생기는 것이 아니라 톰캣이 임시로 사용중인 폴더에 복사되게 되더라구요.
+			/* transferTo로 저장하면, 프로젝트 resources 폴더에 파일이 바로 생기는데 웹에서 요청하는 resources는 이 폴더가 아니라 WAS가 따로 서비스용으로 임시로 만든 resources 폴더에서 요청하는 파일을 찾는다. 
 			 * 제 경우에는 fullPath: /Users/leejunyeon/GoogleDrive/SCIT/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/kinQ/WEB-INF/classes/us/duia/leejo0531/util/
-			 * 이렇게 tmp폴더에 저장되고, 이클립스에서 F5눌러서 다시 스프링을 소프트 초기화하면, 이 tmp 폴더로부터 resources로 파일을 다시 복사해 오는 것을 확인했습니다.
-			 * 이게 문제가 된는 것이, 이미지 파일을 서버에 업로드하면 tmp 폴더에만 업로드한 파일이 있으므로 정적 폴더인 resources 폴더에는 파일이 없습니다. (문제해결: F5를 이용한 소프트 초기화 필요)
-			 * 그래서 웹페이지에서 resources로 업로드한 파일을 요청하면 404에러가 터집니다. 
-			 * 그래서 tmp로부터 진짜 resources 폴더로 파일을 한번 더 복사해야했습니다.
+			 * 이렇게 tmp폴더에 저장되고, 이클립스에서 F5눌러서 다시 스프링을 소프트 초기화하면, 이 진짜 resources 폴더로부터 temp resources로 파일을 다시 복사해 오는 것을 확인했습니다.
+			 * 이게 문제가 된는 것이, 이미지 파일을 서버에 업로드하면 진짜 resources 폴더에만 업로드한 파일이 있으므로 임시 resources 폴더에는 파일이 없습니다. (문제해결: F5를 이용한 소프트 초기화 필요)
+			 * 그래서 웹페이지에서 resources로 업로드한 파일을 요청하면 임시 resources 폴더에는 찾고자 하는 파일이 없으므로 404에러가 터집니다. 
+			 * 그래서 진짜 resources로부터 서비스 중인 resources 폴더로 파일을 한번 더 복사해야했습니다.
 			 */
 
-			// 이 클래스 파일이 있는 폴더 경로를 알아낸다.
-			//String thisClassPath = FileService.class.getResource("").getPath(); 
-			// 클래스가 있는 폴더로부터 resources/uploadTest로 업로할 파일 경로를 수정한다.
-			//String tmpPath = thisClassPath.substring(0, thisClassPath.lastIndexOf("WEB-INF/classes/")) + "resources/" + uploadFolderName; 
-			logger.info("tmpPath:: " + tmpPath);
-			logger.info("FileInputStream: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
-			logger.info("FileOutputStream: " + tmpPath + id + File.separator + savedFilename + ext);
+			logger.info("진짜 reources 폴더에서 :: " + tmpPath + id + File.separator + savedFilename + ext);
+			logger.info("서비스 중인 resources 폴더로 파일을 복사한다. :: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
+			
 			FileInputStream inputStream = new FileInputStream(fileSaveDirPath +id + File.separator + savedFilename + ext); 
 			FileOutputStream outputStream = new FileOutputStream(tmpPath + id + File.separator + savedFilename + ext);
 			FileChannel fcin = inputStream.getChannel(); 
@@ -173,7 +170,7 @@ public class FileService {
 		logger.info( "cKEditorFileUpload: "	+ upload.getOriginalFilename() );
 		String fileName = FileService.saveFile(upload, fileSaveDirPath, id);
 		String url = "/resources/"  + uploadFolderName+ "/" + id + "/" + fileName;
-		return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + url + "','Image Uploaded'" + ")</script>"; //
+		return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + url + "','File Uploaded'" + ")</script>"; //
 	}
 	
 	/**
