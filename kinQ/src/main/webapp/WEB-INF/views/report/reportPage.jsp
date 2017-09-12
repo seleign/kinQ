@@ -20,8 +20,10 @@
 <label for="reportTitle">タイトル</label><input type="text" name="reportTitle" id="reportTitle"><br>
 <label for="reporterNum">書き手</label>${sessionScope.userId}<input type="hidden" value="${sessionScope.userNum}" name="reporterNum" id="reporterNum">
 <hr>
-<label for="reportedQNum"></label>
-<label for="reportedRNum"></label>
+<!-- 
+질문글인지 답변글인지에 따라 하나만 표시하기로 수정 필요
+<label for="reportedQNum">質問のタイトル</label>
+<label for="reportedRNum">答えのタイトル</label> -->
 <hr>
 <label for="reportReason">申告事由</label><br>
 <input type="radio" name="radioBtn" id="radioBtn" value="不適切な広告">不適切な広告<br>
