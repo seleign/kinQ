@@ -13,6 +13,12 @@ public class ReplyVO extends QuestionVO{
 		super();
 	}
 
+	public ReplyVO(int questionNum,int userNum, String id, String replyTitle, String replyContent) {
+		super();
+		ReplyTitle = replyTitle;
+		ReplyContent = replyContent;
+	}
+
 	public ReplyVO(int replyNum, Date r_RegDate, Date r_ModDate, String replyTitle, String replyContent) {
 		super();
 		this.replyNum = replyNum;

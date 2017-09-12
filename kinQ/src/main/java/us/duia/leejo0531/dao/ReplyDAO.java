@@ -62,4 +62,10 @@ public class ReplyDAO {
 		ArrayList<ReplyVO> result = mapper.searchByContext(context);
 		return result;
 	}
+	
+	public int insertReplyTest(ReplyVO reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.insertReplyTest(reply);
+		return result;
+	}
 }

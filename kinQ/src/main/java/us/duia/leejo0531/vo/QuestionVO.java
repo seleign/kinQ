@@ -21,7 +21,11 @@ public class QuestionVO {
    public QuestionVO() {
       super();
    }
-
+   
+   public QuestionVO(int questionNum) {
+	   super();
+	   this.questionNum = questionNum;
+   }
    public QuestionVO(int questionNum, int userNum, Date timeLimit, String urgent, Date regDate, Date modDate,
          String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent) {
       super();

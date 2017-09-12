@@ -2,6 +2,7 @@ package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
 
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 
 public interface TagMapper {

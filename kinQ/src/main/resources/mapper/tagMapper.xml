@@ -11,7 +11,6 @@
 	
 	<!-- tag가 들어간 질문글을 가져온다. -->
 	<select id="getQuestionListByTag" parameterType="Tag" resultType="Tag">
-	
 	<!-- code here -->
 	
 	</select>
@@ -22,6 +21,9 @@
 	<!-- code here -->
 	
 	</select>
+<<<<<<< HEAD
+	
+=======
 	<insert id="dummytag" parameterType="Tag">
 		insert into tag values(
 		tag_seq.nextval,
@@ -30,6 +32,7 @@
 		#{tag}
 		)
 	</insert>
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	<insert id="insertTag" parameterType="Tag">
 		insert into tag values (tag_seq.nextval, #{questionNum}, #{userNum}, #{tag})
 	</insert>
