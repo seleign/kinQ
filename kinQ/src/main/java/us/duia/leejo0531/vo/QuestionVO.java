@@ -12,7 +12,7 @@ public class QuestionVO {
    private Date modDate;
    private String title;
    private String [] relatedTag;
-   private String MinorNum;
+   private int MinorNum;
    private String videoSrc; //동영상 파일(blob)
    private int hit;
    private String questionContent;
@@ -22,7 +22,7 @@ public class QuestionVO {
    }
 
    public QuestionVO(int questionNum, int userNum, Date timeLimit, String urgent, Date regDate, Date modDate,
-         String title, String[] relatedTag, String minorNum, String videoSrc, int hit, String questionContent) {
+         String title, String[] relatedTag, int minorNum, String videoSrc, int hit, String questionContent) {
       super();
       this.questionNum = questionNum;
       this.userNum = userNum;
@@ -102,11 +102,11 @@ public class QuestionVO {
       this.relatedTag = relatedTag;
    }
 
-   public String getMinorNum() {
+   public int getMinorNum() {
       return MinorNum;
    }
 
-   public void setMinorNum(String minorNum) {
+   public void setMinorNum(int minorNum) {
       MinorNum = minorNum;
    }
 
