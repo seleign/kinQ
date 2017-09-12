@@ -1,5 +1,6 @@
 package us.duia.leejo0531.vo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ public class QuestionVO {
    private Date regDate;
    private Date modDate;
    private String title;
-   private String [] relatedTag;
+   private ArrayList<String> relatedTag;
    private int MinorNum;
    private String videoSrc; //동영상 파일(blob)
    private int hit;
@@ -22,7 +23,7 @@ public class QuestionVO {
    }
 
    public QuestionVO(int questionNum, int userNum, Date timeLimit, String urgent, Date regDate, Date modDate,
-         String title, String[] relatedTag, int minorNum, String videoSrc, int hit, String questionContent) {
+         String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent) {
       super();
       this.questionNum = questionNum;
       this.userNum = userNum;
@@ -94,11 +95,11 @@ public class QuestionVO {
       this.title = title;
    }
 
-   public String[] getRelatedTag() {
+   public ArrayList<String> getRelatedTag() {
       return relatedTag;
    }
 
-   public void setRelatedTag(String[] relatedTag) {
+   public void setRelatedTag(ArrayList<String> relatedTag) {
       this.relatedTag = relatedTag;
    }
 
@@ -134,12 +135,13 @@ public class QuestionVO {
       this.questionContent = questionContent;
    }
 
-   @Override
-   public String toString() {
-      return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit
-            + ", urgent=" + urgent + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title
-            + ", relatedTag=" + Arrays.toString(relatedTag) + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc
-            + ", hit=" + hit + ", questionContent=" + questionContent + "]";
-   }
+@Override
+public String toString() {
+	return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", urgent="
+			+ urgent + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
+			+ relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit + ", questionContent="
+			+ questionContent + "]";
+}
+
 }
 
