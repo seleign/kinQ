@@ -102,12 +102,13 @@ public class QuestionController {
 	 * @param qstn QuestionVO
 	 * @return 질문보기 페이지(~~.jsp)로 이동
 	 */
-	@RequestMapping(value = "questionView", method = RequestMethod.GET)
+	@RequestMapping(value = "question_view", method = RequestMethod.GET)
 	public String viewQuestion(QuestionVO qstn) {
 		//qstnSvc.getQuestion(qstn);
-		System.out.println(qstn);
+//		System.out.println(qstn);
 		// code here
 
-		return "redirect:/";
+		return "question_view";
 	}
+
 }
