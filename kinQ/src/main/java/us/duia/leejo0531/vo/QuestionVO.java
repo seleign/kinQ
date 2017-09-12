@@ -125,6 +125,7 @@ public class QuestionVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+	 
 
 	public String getQuestionContent() {
 		return questionContent;
