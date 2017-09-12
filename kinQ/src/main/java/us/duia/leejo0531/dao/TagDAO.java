@@ -51,9 +51,17 @@ public class TagDAO{
 		return result;
 	}
 	
+<<<<<<< HEAD
 	public int insertTag(TagVO tag) {
 		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
 		int result = mapper.insertTag(tag);
 		return result;
 	}
+=======
+	/*//더미용 
+	public void dummytag(TagVO tag){
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		mapper.dummytag(tag);
+	}*/
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 }

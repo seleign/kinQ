@@ -8,5 +8,10 @@ public interface TagMapper {
 	public ArrayList<TagVO> selectTags(); //모든 태그를 가져온다.
 	public ArrayList<TagVO> getQuestionListByTag(String tag);
 	public ArrayList<TagVO> getReplyListByTag(String tag);
+<<<<<<< HEAD
 	public int insertTag(TagVO tag);
+=======
+	
+//	public void dummytag(TagVO tag); //더미용
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 }

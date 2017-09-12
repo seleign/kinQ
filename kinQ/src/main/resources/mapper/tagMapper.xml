@@ -23,7 +23,18 @@
 	
 	</select>
 	
+<<<<<<< HEAD
 	<insert id="insertTag" parameterType="Tag">
 		insert into tag values (tag_seq.nextval, #{questionNum}, #{userNum}, #{tag})
 	</insert>
+=======
+<!-- 	<insert ID="DUMMYTAG" PARAMETERTYPE="TAG"> -->
+<!-- 		INSERT INTO TAG VALUES( -->
+<!-- 		TAG_SEQ.NEXTVAL, -->
+<!-- 		#{QUESTIONNUM}, -->
+<!-- 		#{USERNUM}, -->
+<!-- 		#{TAG} -->
+<!-- 		) -->
+<!-- 	</insert> -->
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 </mapper>
