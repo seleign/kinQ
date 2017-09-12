@@ -15,12 +15,8 @@ public class TagVO {
 		this.userNum = userNum;
 		this.tag = tag;
 	}
-<<<<<<< HEAD
-	public TagVO(int questionNum, int userNum, String tag){
-=======
 	public TagVO(int questionNum, int userNum, String tag) {
 		super();
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 		this.questionNum = questionNum;
 		this.userNum = userNum;
 		this.tag = tag;
