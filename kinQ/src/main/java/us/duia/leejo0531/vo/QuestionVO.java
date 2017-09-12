@@ -1,147 +1,146 @@
 package us.duia.leejo0531.vo;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class QuestionVO {
-	private int questionNum;
-	private int userNum; //질문자
-	private Date timeLimit;
-	private String urgent;
-	private Date regDate;
-	private Date modDate;
-	private String title;
-	private String [] relatedTag;
-	private String MinorNum;
-	private String videoSrc; //동영상 파일(blob)
-	private int hit;
-	private String questionContent;
-	
-	public QuestionVO() {
-		super();
-	}
 
-	public QuestionVO(int questionNum, int userNum, Date timeLimit, String urgent, Date regDate, Date modDate,
-			String title, String[] relatedTag, String minorNum, String videoSrc, int hit, String questionContent) {
-		super();
-		this.questionNum = questionNum;
-		this.userNum = userNum;
-		this.timeLimit = timeLimit;
-		this.urgent = urgent;
-		this.regDate = regDate;
-		this.modDate = modDate;
-		this.title = title;
-		this.relatedTag = relatedTag;
-		MinorNum = minorNum;
-		this.videoSrc = videoSrc;
-		this.hit = hit;
-		this.questionContent = questionContent;
-	}
+   private int questionNum;
+   private int userNum; //질문자
+   private Date timeLimit;
+   private String urgent;
+   private Date regDate;
+   private Date modDate;
+   private String title;
+   private ArrayList<String> relatedTag;
+   private int MinorNum;
+   private String videoSrc; //동영상 파일(blob)
+   private int hit;
+   private String questionContent;
+   
+   public QuestionVO() {
+      super();
+   }
 
-	public int getQuestionNum() {
-		return questionNum;
-	}
+   public QuestionVO(int questionNum, int userNum, Date timeLimit, String urgent, Date regDate, Date modDate,
+         String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent) {
+      super();
+      this.questionNum = questionNum;
+      this.userNum = userNum;
+      this.timeLimit = timeLimit;
+      this.urgent = urgent;
+      this.regDate = regDate;
+      this.modDate = modDate;
+      this.title = title;
+      this.relatedTag = relatedTag;
+      MinorNum = minorNum;
+      this.videoSrc = videoSrc;
+      this.hit = hit;
+      this.questionContent = questionContent;
+   }
 
-	public void setQuestionNum(int questionNum) {
-		this.questionNum = questionNum;
-	}
+   public int getQuestionNum() {
+      return questionNum;
+   }
 
-	public int getUserNum() {
-		return userNum;
-	}
+   public void setQuestionNum(int questionNum) {
+      this.questionNum = questionNum;
+   }
 
-	public void setUserNum(int userNum) {
-		this.userNum = userNum;
-	}
+   public int getUserNum() {
+      return userNum;
+   }
 
-	public Date getTimeLimit() {
-		return timeLimit;
-	}
+   public void setUserNum(int userNum) {
+      this.userNum = userNum;
+   }
 
-	public void setTimeLimit(Date timeLimit) {
-		this.timeLimit = timeLimit;
-	}
+   public Date getTimeLimit() {
+      return timeLimit;
+   }
 
-	public String getUrgent() {
-		return urgent;
-	}
+   public void setTimeLimit(Date timeLimit) {
+      this.timeLimit = timeLimit;
+   }
 
-	public void setUrgent(String urgent) {
-		this.urgent = urgent;
-	}
+   public String getUrgent() {
+      return urgent;
+   }
 
-	public Date getRegDate() {
-		return regDate;
-	}
+   public void setUrgent(String urgent) {
+      this.urgent = urgent;
+   }
 
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
+   public Date getRegDate() {
+      return regDate;
+   }
 
-	public Date getModDate() {
-		return modDate;
-	}
+   public void setRegDate(Date regDate) {
+      this.regDate = regDate;
+   }
 
-	public void setModDate(Date modDate) {
-		this.modDate = modDate;
-	}
+   public Date getModDate() {
+      return modDate;
+   }
 
-	public String getTitle() {
-		return title;
-	}
+   public void setModDate(Date modDate) {
+      this.modDate = modDate;
+   }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+   public String getTitle() {
+      return title;
+   }
 
-	public String[] getRelatedTag() {
-		return relatedTag;
-	}
+   public void setTitle(String title) {
+      this.title = title;
+   }
 
-	public void setRelatedTag(String[] relatedTag) {
-		this.relatedTag = relatedTag;
-	}
+   public ArrayList<String> getRelatedTag() {
+      return relatedTag;
+   }
 
-	public String getMinorNum() {
-		return MinorNum;
-	}
+   public void setRelatedTag(ArrayList<String> relatedTag) {
+      this.relatedTag = relatedTag;
+   }
 
-	public void setMinorNum(String minorNum) {
-		MinorNum = minorNum;
-	}
+   public int getMinorNum() {
+      return MinorNum;
+   }
 
-	public String getVideoSrc() {
-		return videoSrc;
-	}
+   public void setMinorNum(int minorNum) {
+      MinorNum = minorNum;
+   }
 
-	public void setVideoSrc(String videoSrc) {
-		this.videoSrc = videoSrc;
-	}
+   public String getVideoSrc() {
+      return videoSrc;
+   }
 
-	public int getHit() {
-		return hit;
-	}
+   public void setVideoSrc(String videoSrc) {
+      this.videoSrc = videoSrc;
+   }
 
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
-	 
+   public int getHit() {
+      return hit;
+   }
 
-	public String getQuestionContent() {
-		return questionContent;
-	}
+   public void setHit(int hit) {
+      this.hit = hit;
+   }
 
-	public void setQuestionContent(String questionContent) {
-		this.questionContent = questionContent;
-	}
+   public String getQuestionContent() {
+      return questionContent;
+   }
 
-	@Override
-	public String toString() {
-		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit
-				+ ", urgent=" + urgent + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title
-				+ ", relatedTag=" + Arrays.toString(relatedTag) + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc
-				+ ", hit=" + hit + ", questionContent=" + questionContent + "]";
-	}
+   public void setQuestionContent(String questionContent) {
+      this.questionContent = questionContent;
+   }
 
-	
+@Override
+public String toString() {
+	return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", urgent="
+			+ urgent + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
+			+ relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit + ", questionContent="
+			+ questionContent + "]";
+}
+
 }
