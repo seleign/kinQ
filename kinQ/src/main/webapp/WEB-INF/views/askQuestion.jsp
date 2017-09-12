@@ -125,9 +125,13 @@
 										<span><i class="icon-arrow-up"></i>Browse</span>
 									</div>
 								</div>
-								
 							</div>
-
+							<p>
+							<div class="ask-video">
+								<label class="required">video<span>*</span></label>
+								<h1>비디오 들어갈곳 ㅇㅅㅇ~</h1>
+							</div>
+							</p>
 							<p id="p-ask-buttons" class="form-submit">
 								<input type="submit" id="publish-question" value="질문하기" class="button color small submit">
 								<input type="button" id="ask-button" value="영상녹화" class="button color small submit">

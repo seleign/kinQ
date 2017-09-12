@@ -6,6 +6,21 @@ jQuery(document).ready(function($) {
 			$(".signupIframe").attr('src',url);
 		}	
 	);
+	/*askquestion video*/
+	jQuery("#ask-button").click(function () {
+		if (jQuery(this).hasClass("view-active")) {
+			jQuery(".ask-video").slideUp(500);
+			jQuery(this).removeClass("view-active");
+		}else {
+			jQuery(".ask-video").slideDown(500);
+			jQuery(this).addClass("view-active");
+		}
+		return false;
+	});
+	
+	/* ask video slideup */
+	
+	jQuery(".ask-video").slideUp(500);
 	
 	/* Menu */
 	
