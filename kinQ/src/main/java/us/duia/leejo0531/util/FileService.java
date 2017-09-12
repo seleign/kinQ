@@ -41,6 +41,8 @@ public class FileService {
 		public FileService() {
 				if( System.getProperty("user.name").equals("leejunyeon") ) {
 					fileSaveDirPath = "/Users/leejunyeon/git/kinq/kinQ/src/main/webapp/resources/" + uploadFolderName + File.separator;
+				}else if( System.getProperty("user.name").equals("seleign") ) {
+					fileSaveDirPath = "C:\\Users\\seleign\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator;
 				}else {
 					fileSaveDirPath = "C:\\Users\\SCITMaster\\git\\kinq\\kinQ\\src\\main\\webapp\\resources\\" + uploadFolderName + File.separator;
 				}
