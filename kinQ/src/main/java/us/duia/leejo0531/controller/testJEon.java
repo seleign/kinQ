@@ -25,7 +25,7 @@ public class testJEon {
 			int questionNum = random.nextInt(100) + 1;
 			int userNum = random.nextInt(20) + 1;
 			String tag = "tag" + i;
-			mapper.insertTag(new TagVO(questionNum, userNum, tag));
+			//mapper.insertTag(new TagVO(questionNum, userNum, tag));
 		}
 		
 	}
