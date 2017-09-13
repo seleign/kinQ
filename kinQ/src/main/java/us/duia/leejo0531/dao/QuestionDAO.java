@@ -93,4 +93,14 @@ public class QuestionDAO {
 		ArrayList<TagVO> tagList = mapper.getQuestionTag(question);
 		return tagList;
 	}
+	
+	/**
+	 * DB에서 모든 질문글을 가져온다
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getAllQuestion(){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.getAllQuestion();
+		return result;
+	}
 }

@@ -88,4 +88,13 @@ public class QuestionService {
 		ArrayList<TagVO> tagList = qstnDao.getQuestionTag(question);
 		return tagList;
 	}
+	
+	/**
+	 * 모든 질문글을 가져온다
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getAllQuestion(){
+		ArrayList<QuestionVO> result = qstnDao.getAllQuestion();
+		return result;
+	}
 }

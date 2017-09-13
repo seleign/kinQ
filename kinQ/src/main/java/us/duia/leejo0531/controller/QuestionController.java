@@ -124,5 +124,16 @@ public class QuestionController {
 		return "question/questionView";
 
 	}
+	
+	
+	/**
+	 * Ajax로 질문목록 모두 가져오기, index에서 조회된다 
+	 * @return ArrayList<QuestionVO>
+	 */
+	@RequestMapping(value="getAllQuestion",method=RequestMethod.GET)
+	public @ResponseBody ArrayList<QuestionVO> getAllQuestion(){
+		ArrayList<QuestionVO> result = qstnSvc.getAllQuestion();
+		return result;
+	}
 
 }
