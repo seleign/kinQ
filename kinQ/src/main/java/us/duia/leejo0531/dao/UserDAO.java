@@ -83,6 +83,12 @@ public class UserDAO {
 		return userNum;
 	}
 	
+	public UserVO getUserInfo(int userNum) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		UserVO user = mapper.getUserInfo(userNum);
+		return user;
+	}
+	
 	/**
 	 * Field 테이블에 minorNum로 검색해서 나오는
 	 * FieldNum, UserNum, MajorNum, MinorNum 를 가져옴

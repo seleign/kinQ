@@ -54,6 +54,12 @@ public class QuestionDAO {
 		return majorList;
 	}
 	
+	public MinorVO getMinor(int minorNum) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		MinorVO minor = mapper.getMinor(minorNum);
+		return minor;
+	}
+	
 	/**
 	 * DB로부터 Minor(소분류)를 ArrayList로 가져온다.
 	 * @return MinorVO Minor
@@ -62,6 +68,12 @@ public class QuestionDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		ArrayList<MinorVO> minorList = mapper.getMinorList();
 		return minorList;
+	}
+	
+	public MajorVO getMajor(int majorNum) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		MajorVO major = mapper.getMajor(majorNum);
+		return major;
 	}
 	
 	/**

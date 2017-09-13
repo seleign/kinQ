@@ -8,24 +8,37 @@ public class ReplyVO extends QuestionVO{
 	private Date R_ModDate;
 	private String ReplyTitle;
 	private String ReplyContent;
+	private String id;
 	
 	public ReplyVO() {
 		super();
 	}
 
-	public ReplyVO(int questionNum,int userNum, String id, String replyTitle, String replyContent) {
+	public ReplyVO(int questionNum,int userNum, String replyTitle, String replyContent) {
 		super();
-		ReplyTitle = replyTitle;
-		ReplyContent = replyContent;
+		super.setQuestionNum(questionNum);
+		super.setUserNum(userNum);
+		this.ReplyTitle = replyTitle;
+		this.ReplyContent = replyContent;
 	}
 
 	public ReplyVO(int replyNum, Date r_RegDate, Date r_ModDate, String replyTitle, String replyContent) {
 		super();
 		this.replyNum = replyNum;
-		R_RegDate = r_RegDate;
-		R_ModDate = r_ModDate;
-		ReplyTitle = replyTitle;
-		ReplyContent = replyContent;
+		this.R_RegDate = r_RegDate;
+		this.R_ModDate = r_ModDate;
+		this.ReplyTitle = replyTitle;
+		this.ReplyContent = replyContent;
+	}
+	
+	public ReplyVO(int replyNum, Date r_RegDate, Date r_ModDate, String replyTitle, String replyContent, String id) {
+		super();
+		this.replyNum = replyNum;
+		this.R_RegDate = r_RegDate;
+		this.R_ModDate = r_ModDate;
+		this.ReplyTitle = replyTitle;
+		this.ReplyContent = replyContent;
+		this.id = id;
 	}
 
 	public int getReplyNum() {
@@ -66,6 +79,14 @@ public class ReplyVO extends QuestionVO{
 
 	public void setReplyContent(String replyContent) {
 		ReplyContent = replyContent;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Override

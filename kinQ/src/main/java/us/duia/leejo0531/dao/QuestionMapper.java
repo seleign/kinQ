@@ -17,7 +17,11 @@ public interface QuestionMapper {
 
 	public ArrayList<MajorVO> getMajorList();
 	
+	public MinorVO getMinor(int minorNum);
+	
 	public ArrayList<MinorVO> getMinorList();
+	
+	public MajorVO getMajor(int majorNum);
 	
 	public ArrayList<QuestionVO> searchByContext(String context); //"context"가 포함된 질문을 가져온다.
 	
