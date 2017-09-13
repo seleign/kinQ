@@ -21,6 +21,9 @@
 	
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
+
+	<!-- 마이페이지 css -->
+	<link rel="stylesheet" href="./resources/css/mypageDesign.css">
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
@@ -63,7 +66,7 @@
 										<li><i class="icon-star"></i>ランキング : <span>_______</span></li>
 										<li><i class="icon-heart"></i>ポイント : <span>________</span></li>
 										<li><i class="icon-comment"></i>フォロワー : <span>________</span></li>
-										<li><i class="icon-comment"></i>フォロイング : <span>________</span></li>
+										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
 									</ul>
 									<br>
 									<input type="button" onclick="location.href='updateUserInfo'" value="個人情報修正">
@@ -80,20 +83,32 @@
 										<ul>
 											<li><i class="icon-question-sign"></i><a href="user_questions.html">Questions<span> ( <span>30</span> ) </span></a></li>
 										</ul>
-											<table class="dashboard-activity">
-												<tbody>
+											<table class="dashboard-activity-table">
+												<tbody id="tableBody">
 													<tr>
 														<td colspan="3">&nbsp;</td>
 													</tr>
 													<tr>
-														<th class="text-center">質問数</th>
-														<th class="text-center">進行中の質問数</th>
-														<th class="text-center">回答数</th>
+														<th class="text-center">
+														<span class="icon-list-style">
+														質問数
+														</span>
+														</th>
+														<th class="text-center">
+														<span class="icon-list-style">
+														進行中の質問数
+														</span>
+														</th>
+														<th class="text-center">
+														<span class="icon-list-style">
+														回答数
+														</span>
+														</th>
 													</tr>
 													<tr>
-														<td class="text-center right-border">___</td>
-														<td class="text-center right-border">___</td>
-														<td class="text-center">___</td>
+														<td class="text-center right-border font-green">${qestionsNum }</td>
+														<td class="text-center right-border font-grey">___</td>
+														<td class="text-center font-red">___</td>
 													</tr>
 													<tr>
 														<td colspan="3">&nbsp;</td>
@@ -227,7 +242,7 @@
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
 <script src="./resources/js/html5.js"></script>
-<script src="./resources/js/twitter/jquery.tweet.js"></script> 
+<script src="./resources/js/twitter/jquery.tweet.js"></script>
 <script src="./resources/js/jflickrfeed.min.js"></script>
 <script src="./resources/js/jquery.inview.min.js"></script>
 <script src="./resources/js/jquery.tipsy.js"></script>

@@ -118,4 +118,10 @@ public class UserDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		mapper.deleteOriginalField(userNum);
 	}
+
+	public int countQuestions(int userNum) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int questionsNum = mapper.countQuestions(userNum);
+		return questionsNum;
+	}
 }
