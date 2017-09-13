@@ -219,11 +219,16 @@ public class FileService {
 		return result;
 	}
 	
+	
 	/**
 	 * 글쓰기상태에서 녹화한 동영상을 저장한다.
+	 * -- DB의 ~~테이블에 questionNum와 동영상 경로를 저장하는 기능을 추가해야함.
 	 * @return
 	 */
-	public static String blob_upload(MultipartFile blob, String id) {
+	public static String blob_upload(MultipartFile blob, String id, int questionNum) {
+		// questionNum 에 해당하는 곳에 저장해야함..
+		
+		logger.info("blob_upload: " + blob.getOriginalFilename());
 		String fileName = FileService.saveFile(blob, FileService.fileSaveDirPath, id);
 		String path = "/resources/" + uploadFolderName + "/" + id + "/" + fileName;
 		return path;
