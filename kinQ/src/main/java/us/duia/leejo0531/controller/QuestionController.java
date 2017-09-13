@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.UserVO;
 
 /**
  * 1) 이 컨트롤러는 Question관련 컨트롤러이다.
@@ -104,7 +105,7 @@ public class QuestionController {
 	 * @param qstn QuestionVO
 	 * @return 질문보기 페이지(~~.jsp)로 이동
 	 */
-	@RequestMapping(value = "question_view", method = RequestMethod.GET)
+	@RequestMapping(value = "questionView", method = RequestMethod.GET)
 	public String viewQuestion(QuestionVO qstn, Model model) {
 		//qstnSvc.getQuestion(qstn);
 //		System.out.println(qstn);
@@ -112,17 +113,19 @@ public class QuestionController {
 		QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(test);
 		System.out.println(question);
-/*		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
-		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());*/
+		UserVO user = qstnSvc.getUserInfo(question.getUserNum());
+		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
+		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
 		System.out.println("questionNum : " + question.getQuestionNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		model.addAttribute("question", question);
-/*		model.addAttribute("minor", minor);
-		model.addAttribute("major", major);*/
+		model.addAttribute("id", user.getId());
+		model.addAttribute("minor", minor);
+		model.addAttribute("major", major);
 		model.addAttribute("tagList", tagList);
 		
 		return "question/questionView";
 
+		//return "question_view";
 	}
-
 }
