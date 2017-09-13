@@ -43,7 +43,7 @@
 					<div class="col-md-9">
 						<form class="form-style form-style-2">
 							<p>
-								<textarea rows="4" id="question_title" onfocus="if(this.value=='今あなたが一番知りたいことは何ですか?')this.value='';" onblur="if(this.value=='')this.value='今あなたが一番知りたいことは何ですか?';">今あなたが一番知りたいことは何ですか?</textarea>
+								<textarea rows="4" id="question_title" onfocus="if(this.value=='今,あなたが一番知りたいことは何ですか?')this.value='';" onblur="if(this.value=='')this.value='今,あなたが一番知りたいことは何ですか?';">今あなたが一番知りたいことは何ですか?</textarea>
 								<i class="icon-pencil"></i>
 								<span class="color button small publish-question">質問</span>
 							</p>

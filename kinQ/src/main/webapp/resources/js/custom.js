@@ -702,10 +702,15 @@ jQuery(document).ready(function($) {
 	
 	jQuery(".publish-question").click(function () {
 		var question_title = jQuery("#question_title").val();
-		jQuery.post("ask_question.html",question_title,function () {
-			window.location.href = "ask_question.html?question_title="+question_title;
-			jQuery("#question-title").val(question_title);
-		})
+
+		if(question_title == '今,あなたが一番知りたいことは何ですか?'){
+			return false;
+		}else{
+			jQuery.post("askQuestion",question_title,function () {
+				window.location.href = "askQuestion?question_title="+question_title;
+				jQuery("#question-title").val(question_title);
+			})
+		}
 		return false;
 	});
 	

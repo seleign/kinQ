@@ -220,6 +220,16 @@ public class FileService {
 	}
 	
 	/**
+	 * 글쓰기상태에서 녹화한 동영상을 저장한다.
+	 * @return
+	 */
+	public static String blob_upload(MultipartFile blob, String id) {
+		String fileName = FileService.saveFile(blob, FileService.fileSaveDirPath, id);
+		String path = "/resources/" + uploadFolderName + "/" + id + "/" + fileName;
+		return path;
+	}
+	
+	/**
 	 * 서버에 저장된 파일의 전체 경로를 전달받아, 해당 파일을 삭제
 	 * @param fullpath 삭제할 파일의 경로
 	 * @return 삭제 여부
