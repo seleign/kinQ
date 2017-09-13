@@ -23,9 +23,9 @@ public class ReportController {
 		return "report/reportPage";
 	}
 	
-	@RequestMapping(value="reportTest", method=RequestMethod.POST)
-	public String reportTest(ReportVO report){
-		System.out.println("여기로오나요");
+	@RequestMapping(value="report", method=RequestMethod.POST)
+	public String report(ReportVO report){
+		System.out.println("여기까진 확실");
 		System.out.println(report);
 		reportSvc.reportQna(report);
 		return "redirect:/";

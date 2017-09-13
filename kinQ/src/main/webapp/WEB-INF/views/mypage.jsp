@@ -1,12 +1,12 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
 	<meta charset="utf-8">
-	<title>Ask me – Responsive Questions and Answers Template</title>
+	<title>マイページ</title>
 	<meta name="description" content="Ask me Responsive Questions and Answers Template">
 	<meta name="author" content="vbegy">
 	
@@ -25,6 +25,7 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   
+  
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
@@ -32,7 +33,7 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>*MYPAGE*</h1>
+					<h1>マイページ</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
@@ -40,7 +41,7 @@
 						<span class="crumbs-span">/</span>
 						<a href="#">User</a>
 						<span class="crumbs-span">/</span>
-						<span class="current">Mypage : username</span>
+						<span class="current">Mypage</span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -54,67 +55,51 @@
 					<div class="user-profile">
 						<div class="col-md-12">
 							<div class="page-content">
-								<h2>About admin</h2>
-								<div class="user-profile-img"><img width="60" height="60" src="http://placehold.it/60x60/FFF/444" alt="admin"></div>
+								<h2>活動現況</h2>
+								<!-- <div class="user-profile-img"><img width="60" height="60" src="http://placehold.it/60x60/FFF/444" alt="admin"></div> -->
 								<div class="ul_list ul_list-icon-ok about-user">
 									<ul>
-										<li><i class="icon-plus"></i>Registerd : <span>Jan 10, 2014</span></li>
-										<li><i class="icon-map-marker"></i>Country : <span>Egypt</span></li>
-										<li><i class="icon-globe"></i>Website : <a target="_blank" href="http://themeforest.net/user/vbegy">view</a></li>
+										<li><i class="icon-asterisk"></i>ID : <span>${sessionScope.userId }</span></li>
+										<li><i class="icon-star"></i>ランキング : <span>_______</span></li>
+										<li><i class="icon-heart"></i>ポイント : <span>________</span></li>
+										<li><i class="icon-comment"></i>フォロワー : <span>________</span></li>
+										<li><i class="icon-comment"></i>フォロイング : <span>________</span></li>
 									</ul>
+									<br>
+									<input type="button" onclick="location.href='updateUserInfo'" value="個人情報修正">
 								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada .</p>
 								<div class="clearfix"></div>
-								<span class="user-follow-me">Follow Me</span>
-								<a href="#" original-title="Facebook" class="tooltip-n">
-									<span class="icon_i">
-										<span class="icon_square" icon_size="30" span_bg="#3b5997" span_hover="#2f3239">
-											<i class="social_icon-facebook"></i>
-										</span>
-									</span>
-								</a>
-								<a href="#" original-title="Twitter" class="tooltip-n">
-									<span class="icon_i">
-										<span class="icon_square" icon_size="30" span_bg="#00baf0" span_hover="#2f3239">
-											<i class="social_icon-twitter"></i>
-										</span>
-									</span>
-								</a>
-								<a href="#" original-title="Linkedin" class="tooltip-n">
-									<span class="icon_i">
-										<span class="icon_square" icon_size="30" span_bg="#006599" span_hover="#2f3239">
-											<i class="social_icon-linkedin"></i>
-										</span>
-									</span>
-								</a>
-								<a href="#" original-title="Google plus" class="tooltip-n">
-									<span class="icon_i">
-										<span class="icon_square" icon_size="30" span_bg="#c43c2c" span_hover="#2f3239">
-											<i class="social_icon-gplus"></i>
-										</span>
-									</span>
-								</a>
-								<a href="#" original-title="Email" class="tooltip-n">
-									<span class="icon_i">
-										<span class="icon_square" icon_size="30" span_bg="#000" span_hover="#2f3239">
-											<i class="social_icon-email"></i>
-										</span>
-									</span>
-								</a>
+
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->
 						<div class="col-md-12">
 							<div class="page-content page-content-user-profile">
 								<div class="user-profile-widget">
-									<h2>User Stats</h2>
+									<h2>質問・答え</h2>
 									<div class="ul_list ul_list-icon-ok">
 										<ul>
 											<li><i class="icon-question-sign"></i><a href="user_questions.html">Questions<span> ( <span>30</span> ) </span></a></li>
-											<li><i class="icon-comment"></i><a href="user_answers.html">Answers<span> ( <span>10</span> ) </span></a></li>
-											<li><i class="icon-star"></i><a href="user_favorite_questions.html">Favorite Questions<span> ( <span>3</span> ) </span></a></li>
-											<li><i class="icon-heart"></i><a href="user_points.html">Points<span> ( <span>20</span> ) </span></a></li>
-											<li><i class="icon-asterisk"></i>Best Answers<span> ( <span>2</span> ) </span></li>
 										</ul>
+											<table class="dashboard-activity">
+												<tbody>
+													<tr>
+														<td colspan="3">&nbsp;</td>
+													</tr>
+													<tr>
+														<th class="text-center">質問数</th>
+														<th class="text-center">進行中の質問数</th>
+														<th class="text-center">回答数</th>
+													</tr>
+													<tr>
+														<td class="text-center right-border">___</td>
+														<td class="text-center right-border">___</td>
+														<td class="text-center">___</td>
+													</tr>
+													<tr>
+														<td colspan="3">&nbsp;</td>
+													</tr>
+												</tbody>
+											</table>
 									</div>
 								</div><!-- End user-profile-widget -->
 							</div><!-- End page-content -->

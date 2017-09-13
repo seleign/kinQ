@@ -90,9 +90,9 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	
-	@RequestMapping(value="myPage", method=RequestMethod.GET)
-	public String myPage(){
-		return "user/myPage";
+	@RequestMapping(value="mypage", method=RequestMethod.GET)
+	public String openMyPage(){
+		return "mypage";
 	}
+
 }
