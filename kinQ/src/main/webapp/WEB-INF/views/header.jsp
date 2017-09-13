@@ -30,8 +30,8 @@
 
 <div class="loader"><div class="loader_html"></div></div>
 
-<c:if test="${sessionScope.userName == null }">
 <div id="wrap" class="grid_1200">
+<c:if test="${sessionScope.userName == null }">
 	<div class="login-panel">
 		<section class="container">
 			<div class="row">

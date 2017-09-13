@@ -6,6 +6,21 @@ jQuery(document).ready(function($) {
 			$(".signupIframe").attr('src',url);
 		}	
 	);
+	/*askquestion video*/
+	jQuery("#ask-button").click(function () {
+		if (jQuery(this).hasClass("view-active")) {
+			jQuery(".ask-video").slideUp(500);
+			jQuery(this).removeClass("view-active");
+		}else {
+			jQuery(".ask-video").slideDown(500);
+			jQuery(this).addClass("view-active");
+		}
+		return false;
+	});
+	
+	/* ask video slideup */
+	
+	jQuery(".ask-video").slideUp(500);
 	
 	/* Menu */
 	
@@ -687,10 +702,15 @@ jQuery(document).ready(function($) {
 	
 	jQuery(".publish-question").click(function () {
 		var question_title = jQuery("#question_title").val();
-		jQuery.post("ask_question.html",question_title,function () {
-			window.location.href = "ask_question.html?question_title="+question_title;
-			jQuery("#question-title").val(question_title);
-		})
+
+		if(question_title == '今,あなたが一番知りたいことは何ですか?'){
+			return false;
+		}else{
+			jQuery.post("askQuestion",question_title,function () {
+				window.location.href = "askQuestion?question_title="+question_title;
+				jQuery("#question-title").val(question_title);
+			})
+		}
 		return false;
 	});
 	

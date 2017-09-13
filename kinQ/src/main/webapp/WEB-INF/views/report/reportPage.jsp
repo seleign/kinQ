@@ -4,9 +4,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Report</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	$(function(){
+		$("input[value=報告]").on("click", submission);
+	});
 	function submission(){
+		
+		var reportTitle = $('#reportTitle').val();
+		
+		if(reportTitle==''){
+			alert('タイトルを’入力してください。');
+			return false;
+		}
 		$('#reportForm').submit();
 	}
 	
@@ -16,23 +26,22 @@
 
 <h3>違反報告</h3>
 
-<form action="report" id="reportForm">
-<label for="reportTitle">タイトル</label><input type="text" name="reportTitle" id="reportTitle"><br>
-<label for="reporterNum">書き手</label>${sessionScope.userId}<input type="hidden" value="${sessionScope.userNum}" name="reporterNum" id="reporterNum">
-<hr>
-<!-- 
-질문글인지 답변글인지에 따라 하나만 표시하기로 수정 필요
-<label for="reportedQNum">質問のタイトル</label>
-<label for="reportedRNum">答えのタイトル</label> -->
-<hr>
-<label for="reportReason">申告事由</label><br>
-<input type="radio" name="radioBtn" id="radioBtn" value="不適切な広告">不適切な広告<br>
-<input type="radio" name="radioBtn" id="radioBtn" value="青少年に不適切な掲示物">青少年に不適切な掲示物<br>
-<input type="radio" name="radioBtn" id="radioBtn" value="無意味な掲示物">無意味な掲示物<br>
-<input type="radio" name="radioBtn" id="radioBtn" value="その他">その他<br>
-<hr>
-<input type="button" value="報告" onclick="javascript:submission()">
-<input type="button" value="キャンセル" onclick="history.go(-1)">
+<!-- <form action="report" id="reportForm" method="POST"> -->
+<form action="reportTest" method="POST"  id="reportForm">
+	<label for="reportTitle">タイトル</label><input type="text" name="reportTitle" id="reportTitle"><br>
+	<!-- 세션 있을 때만 주석 풀기 - 안 그러면 오류남 -->
+<%-- 	<label for="reporterNum">書き手</label>${sessionScope.userId}<input type="hidden" value="${sessionScope.userNum}" name="reporterNum" id="reporterNum">
+ --%>	<hr>
+
+	<hr>
+	<label for="reportReason">申告事由</label><br>
+		<input type="radio" name="reportReason" value="不適切な広告" checked="checked">不適切な広告<br>
+		<input type="radio" name="reportReason" value="青少年に不適切な掲示物">青少年に不適切な掲示物<br>
+		<input type="radio" name="reportReason" value="無意味な掲示物">無意味な掲示物<br>
+		<input type="radio" name="reportReason" value="その他">その他<br>
+	<hr>
+	<input type="button" value="報告" >
+	<input type="button" value="キャンセル" onclick="history.go(-1)">
 </form>
 </body>
 </html>

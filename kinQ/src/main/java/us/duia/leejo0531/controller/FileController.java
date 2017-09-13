@@ -39,12 +39,13 @@ public class FileController {
 	/**
 	 * Ajax로 업로드 된다. 질문/답변에서 녹화한 화면을 업로드할 때 사용한다.
 	 * @param blob 형식의 녹화된 webm 파일
+	 * @return 
 	 * @return --작성 필요???
 	 */
 	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
-	public @ResponseBody void blob_upload(MultipartFile blob) {
+	public @ResponseBody String blob_upload(MultipartFile blob) {
 		logger.info("blob_upload: " + blob.getOriginalFilename());
-		FileService.saveFile(blob, FileService.fileSaveDirPath, id);
+		return FileService.blob_upload(blob, id);
 	}
 	
 	/**

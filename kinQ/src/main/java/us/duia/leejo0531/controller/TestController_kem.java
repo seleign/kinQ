@@ -1,5 +1,6 @@
 package us.duia.leejo0531.controller;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -36,6 +38,14 @@ public class TestController_kem {
 	
 	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
 	public String ask_question(){
+		return "askQuestion";
+	}
+	
+	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
+	public String ask_question(HashMap<String, String> map, Model model){
+		String question_title = map.get("question_title");
+		logger.info("**********question_title : "+question_title);
+		model.addAttribute("question_title", question_title);
 		return "askQuestion";
 	}
 	
