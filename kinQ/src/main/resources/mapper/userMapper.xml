@@ -64,5 +64,8 @@
 	<select id="countQuestions" parameterType="int" resultType="int">
 		select count(*) from q_board where usernum = #{userNum}
 	</select>
+	<select id="getUserInfo" parameterType="int" resultType="User">
+		select * from userInfo where userNum = #{userNum}
+	</select>
 	
 </mapper>
