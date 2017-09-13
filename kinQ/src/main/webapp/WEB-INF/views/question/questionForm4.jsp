@@ -19,11 +19,11 @@
 <!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
 <script src="/resources/ckeditor/adapters/jquery.js"></script>
 <!-- 음성 녹음을 위한 RTC -->
-<script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+<script src="/resources/js/RecordRTC.js"></script>
 <!-- 화면 녹화를 위한 RTC -->
-<script src="https://cdn.webrtc-experiment.com/screenshot.js"></script>
+<script src="/resources/js/screenshot.js"></script>
 <!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
-<script src="https://rtcmulticonnection.herokuapp.com/dev/getHTMLMediaElement.js"></script>
+<script src="/resources/js/getHTMLMediaElement.js"></script>
 <!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- 드래그/리사이즈를 위해 사용한 css // 아직 여기서 어느 코드가 역할을 하는지 모름... 알아봐야함 -->
@@ -95,16 +95,16 @@ window.onload = function() {
 					recorder.stopRecording(function() {
 						blob = recorder.getBlob(); //<이게 동영상 데이터
 						$('#video_container').html('<video controls src="'
-								+ URL.createObjectURL(blob)
+								+ window.webkitURL.createObjectURL(blob)
 								+ '" autoplay loop></video>');
 						
 						$("#canvas").remove(); //재생중이던 화면 정지
-						var URL_BLOB = String(URL.createObjectURL(blob));
+						var URL_BLOB = String(window.webkitURL.createObjectURL(blob));
 						var fileName = URL_BLOB.substring(URL_BLOB.lastIndexOf("/")+1 , URL_BLOB.length);
 						var fileExt = blob.type.substring(blob.type.lastIndexOf("/")+1, blob.type.length);
 						
 						//ajax로 서버에 녹화된 영상 파일 전송
-						var filename = String(URL.createObjectURL(blob));
+						var filename = String(window.webkitURL.createObjectURL(blob));
 						var formElement = document.querySelector("form");
 						var formData = new FormData(formElement);
 						
@@ -117,7 +117,9 @@ window.onload = function() {
 		                    data: formData,
 		                    type: 'POST',
 		                    success: function(result){
-		                    //성공시
+		                    	$('#video_container').html('<video controls src="'
+										+ result
+										+ '" autoplay loop></video>');
 		                            }
 		                    });
 						audioStream.stop();
