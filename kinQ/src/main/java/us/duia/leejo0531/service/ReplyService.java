@@ -59,4 +59,9 @@ public class ReplyService {
 		ArrayList<ReplyVO> result = replyDao.searchByContext(context);
 		return result;
 	}
+	
+	public ArrayList<ReplyVO> questionReplyList(int questionNum) {
+		ArrayList<ReplyVO> replyList = replyDao.questionReplyList(questionNum);
+		return replyList;
+	}
 }

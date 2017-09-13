@@ -6,9 +6,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="./resources/js/jquery.min.js"></script>
+<script type="text/javascript">
+	var replyHtml = '';
+	var userId = <%=(String)session.getAttribute("userId")%>
+	$.ajax({
+		url: "questionReplyList",
+		type: "get",
+		data: { questionNum: ${ question.questionNum }},
+		success: function (replyList) {
+			alert(replyList);
+			replyHtml += "<table >";
+			for (var i = 0; i < replyList.length; i++) {
+				replyHtml += "<tr><td>";
+				replyHtml += "제목 : " + replyList[i].replyTitle;
+				replyHtml += "</td></tr>";
+				replyHtml += "<tr><td>";
+				replyHtml += "내용 : " + replyList[i].replyContent;
+				replyHtml += "</td></tr>";
+				replyHtml += "<tr><td align=\"right\">";
+				replyHtml += "작성자 : " + replyList[i].id;
+				replyHtml += "</td></tr>";
+				if (userId == replyList[i].id) {
+					replyHtml += "<tr><td>"
+					replyHtml += "<button onclick = \"deleteReply(" + replyList[i].replyNum + ")\">삭제</button>"
+					replyHtml += "</td></tr><br>"
+				}else {
+					replyHtml += "<br>"
+				}
+			}
+			replyHtml += "</table>";
+			$("#replyTable").html(replyHtml);
+		}
+	})
+</script>
 </head>
 <body>
-<<<<<<< HEAD
 	<table>
 		<tbody>
 			<tr>
@@ -19,7 +52,7 @@
 							<td class="board_title" colspan="2" align="center" ><h1>${ question.title }</h1></td>
 						</tr>
 						<tr>
-							<td style="width:50%; height:32px"><h1>이름 : ${ question.urgent }</h1></td>
+							<td style="width:50%; height:32px"><h1>ID : ${ user.id }</h1></td>
 							<td style="width:50%; height:32px" align="right"><h1>작성일자 : ${ question.regDate }&nbsp; &nbsp; HIT : ${ question.hit }</h1></td>
 						</tr>
 						<tr>
@@ -44,9 +77,8 @@
 			</tr>
 		</tbody>
 	</table>
-	
-=======
-
->>>>>>> branch 'master' of https://github.com/seleign/kinq
+	<br>
+	<br>
+	<div id = "replyTable"></div>
 </body>
 </html>
