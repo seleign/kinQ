@@ -49,11 +49,6 @@ public class ReplyController {
 	public @ResponseBody ArrayList<ReplyVO> questionReplyList(QuestionVO qstn) {
 		int questionNum = qstn.getQuestionNum();
 		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(questionNum);
-<<<<<<< HEAD
-		System.out.println(replyList);
-=======
-		System.out.println( replyList);
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 		return replyList;
 	}
 }
