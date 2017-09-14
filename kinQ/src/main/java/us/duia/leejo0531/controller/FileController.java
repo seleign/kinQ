@@ -43,9 +43,10 @@ public class FileController {
 	 * @return --작성 필요???
 	 */
 	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
-	public @ResponseBody String blob_upload(MultipartFile blob) {
+	public @ResponseBody String blob_upload(MultipartFile blob, String questionNum) {
 		logger.info("blob_upload: " + blob.getOriginalFilename());
-		return FileService.blob_upload(blob, id);
+		questionNum = "10";
+		return FileService.blob_upload(blob, id, Integer.parseInt(questionNum));
 	}
 	
 	/**
