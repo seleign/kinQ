@@ -1,37 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <title>실시간 공유 페이지</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<link rel="shortcut icon" href="https://rtcmulticonnection.herokuapp.com/demos/logo.png">
-<link rel="stylesheet" href="https://rtcmulticonnection.herokuapp.com/demos/stylesheet.css">
-<link rel="stylesheet" href="https://rtcmulticonnection.herokuapp.com/dev/getHTMLMediaElement.css">
 
-<script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
-<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-<script src="https://cdn.webrtc-experiment.com/screenshot.js"></script>
-<script src="https://cdn.WebRTC-Experiment.com/gumadapter.js"></script>
-<!-- <script src="https://cdn.webrtc-experiment.com/RTCMultiConnection.js"></script> 
-<script src="https://cdn.webrtc-experiment.com/socket.io.js"></script> -->
-<script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
-<script src="https://rtcmulticonnection.herokuapp.com/dev/adapter.js"></script>
-<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
-<script src="https://rtcmulticonnection.herokuapp.com/dev/getHTMLMediaElement.js"></script>
-<script src="https://rtcmulticonnection.herokuapp.com/dev/FileBufferReader.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
+<!-- CKeditor -->
+<script src="/resources/ckeditor/ckeditor.js"></script> 
+
+<!-- JQuery -->
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
+
+<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
+<script src="/resources/ckeditor/adapters/jquery.js"></script>
+
+
+<script src="/resources/js/RecordRTC.js"></script>
+<script src="/resources/js/adapter-latest.js"></script>
+<script src="/resources/js/screenshot.js"></script>
+<script src="/resources/js/gumadapter.js"></script>
+<script src="/resources/js/RTCMultiConnection.min.js"></script>
+<script src="/resources/js/adapter.js"></script>
+<script src="/resources/js/socket.io.js"></script>
+<script src="/resources/js/getHTMLMediaElement.js"></script>
+<script src="/resources/js/FileBufferReader.js"></script>
+
 	
 <script>
-	var recorder;
-	var audioStream;
-	var canvasStream;
-	window.onload = function() { //onload start
+window.onload = function() {
 
+	//녹화 -- 현재 맥에서만 작동 함
+	//동영상 녹화 코드
 		document.getElementById('btn-record-webm').onclick = function() {
+		//비디오 컨테이너에 있는걸 날려버려야 함.
+		$("#btn-record-webm-stop").attr("disabled", false);
+		$('#video_container').empty();
+		
 			this.disabled = true;
 			navigator.mediaDevices.getUserMedia({
 				audio : true
@@ -54,9 +59,8 @@
 			}); //then end
 
 			//공유하는 DIV 쪽 기능
-			var stop = false;
-			var elementToShare = document
-					.getElementById('part-of-screen-to-be-shared');
+			stop = false;
+			var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
 			var canvas2d = document.createElement('canvas');
 			var context = canvas2d.getContext('2d');
 			canvas2d.width = elementToShare.clientWidth;
@@ -65,18 +69,40 @@
 			canvas2d.style.top = 0;
 			canvas2d.style.left = 0;
 			canvas2d.style.zIndex = -1;
-			(document.body || document.documentElement).appendChild(canvas2d);
+			$('#video_container').append(canvas2d);
+			//(document.body).appendChild(canvas2d);
 			(function looper() {
 				if (stop) {
 					recorder.stopRecording(function() {
-						var blob = recorder.getBlob(); //<이게 동영상 데이터
-						var HTMLTAG = document.body.innerHTML;
-						document.body.innerHTML = HTMLTAG
-								+ '<video controls src="'
-								+ URL.createObjectURL(blob)
-								+ '" autoplay loop></video>';
-						$("#canvas").remove();
-
+						blob = recorder.getBlob(); //<이게 동영상 데이터
+						
+						$("#canvas").remove(); //재생중이던 화면 정지
+						var URL_BLOB = String(window.webkitURL.createObjectURL(blob));
+						var fileName = URL_BLOB.substring(URL_BLOB.lastIndexOf("/")+1 , URL_BLOB.length);
+						var fileExt = blob.type.substring(blob.type.lastIndexOf("/")+1, blob.type.length);
+						
+						//ajax로 서버에 녹화된 영상 파일 전송
+						var filename = String(window.webkitURL.createObjectURL(blob));
+						var formElement = document.querySelector("form");
+						var formData = new FormData(formElement);
+						
+						formData.append("blob", blob, fileName+ "." +fileExt);
+						formData.append("questionNum", '${questionNum}');
+						
+						$.ajax({
+		                    url: 'blob_upload',
+		                    processData: false,
+		                    contentType: false,
+		                    data: formData, 
+		                    type: 'POST',
+		                    success: function(result){
+		                    			$('#video_container').html('<video controls src="'
+		 								+ window.webkitURL.createObjectURL(blob)
+		 								+ '" autoplay loop></video>');
+		                    			$('#videoSrc').val(result);
+		                    	
+			                            }
+		                    });
 						audioStream.stop();
 						canvasStream.stop();
 					});
@@ -85,7 +111,7 @@
 
 				(function looper() {
 					html2canvas(elementToShare, {
-						grabMouse : true,
+						grabMouse : false,
 						onrendered : function(canvas) {
 							context.clearRect(0, 0, canvas2d.width,
 									canvas2d.height);
@@ -95,38 +121,37 @@
 					});
 					canvas2d.id = 'canvas';
 				})();
-
-				setTimeout(looper, 300); //이게 화면 프레임수
+				setTimeout(looper, 10); //이게 화면 프레임수
 			})();
-
-			var seconds = 10;
-			var interval = setInterval(function() {
-				seconds--;
-				if (document.querySelector('h1')) {
-					document.querySelector('h1').innerHTML = seconds
-							+ ' seconds remaining.';
-				}
-			}, 1000);
-
-			setTimeout(function() {
-				clearTimeout(interval);
-				stop = true;
-			}, seconds * 1000);
 		};
-
-	} //onload End
+		
+		// 녹화 정지 버튼
+		document.getElementById('btn-record-webm-stop').onclick = function() {
+			stop = true;
+			this.disabled = true
+			$("#btn-record-webm").attr("disabled", false);
+			return false;
+		}
+		
+		// 실수로 인풋 창에서 "엔터"를 눌러서 전송되는 것을 막는다.
+		$(document).on("keypress", 'form', function (e) {
+		    var code = e.keyCode || e.which;
+		    if (code == 13) {
+		        e.preventDefault();
+		        return false;
+		    }
+		});
+}; //onload 종료
 </script>
 </head>
 <body>
 	<h1>
 		Audio+Video+TextChat+FileSharing using RTCMultiConnection
-		<p class="no-mobile">Multi-user (many-to-many) video streaming +
-			text chat + file sharing using mesh networking model.</p>
+		<p class="no-mobile"> Multi-user (many-to-many) video streaming + text chat + file sharing using mesh networking model.</p>
 	</h1>
 
 	<section class="make-center">
-		<input type="text" id="room-id" value="abcdef" autocorrect=off
-			autocapitalize=off size=20>
+		<input type="text" id="room-id" value="abcdef" autocorrect=off autocapitalize=off size=20>
 		<button id="open-room">Open Room</button>
 		<button id="join-room">Join Room</button>
 		<button id="open-or-join-room">Auto Open Or Join Room</button>
@@ -136,38 +161,39 @@
 			placeholder="Enter Text Chat" disabled>
 		<button id="share-file" disabled>Share File</button>
 		<br>
-		<br>
 		<button id="btn-leave-room" disabled>Leave /or close the room</button>
-		<button id="btn-share-part-of-sreen" disabled>Share below
-			entire DIV</button>
-		<div id="room-urls"
-			style="text-align: center; display: none; background: #F1EDED; margin: 15px -10px; border: 1px solid rgb(189, 189, 189); border-left: 0; border-right: 0;"></div>
+		<button id="btn-share-part-of-sreen" disabled>Share below entire DIV</button>
+		<div id="room-urls" style="text-align: center; display: none; background: #F1EDED; margin: 15px -10px; border: 1px solid rgb(189, 189, 189); border-left: 0; border-right: 0;"></div>
 
 		<div id="chat-container">
 			<div id="file-container"></div>
 			<div class="chat-output"></div>
 		</div>
-		<button id="btn-record-webm" style="font-size: inherit;">Record
-			as WebM</button>
+		
+		<button id="btn-record-webm" style="font-size: inherit;">화면 녹화</button>
+		<button id="btn-record-webm-stop" style="font-size: inherit;" disabled="disabled">화면 중지</button>
+		
 		<div id="videos-container"></div>
-		<!-- 이게 공유된다. -->
-		<!-- DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
-		<div id="part-of-screen-to-be-shared" contenteditable="true"
-			style="text-align: center; border-top: 5px solid gray; background-color: #FBFBEE;">
-			<h2 style="color: red;">Content of this DIV is editable and
-				resize-able!</h2>
-			<p>
-				Open a room and click "<strong>Shre below entire DIV</strong>" blue
-				button. Now your div changes will be auto shared with any user who
-				joined your room.
-			</p>
-			
-			<!-- <canvas id="circlecanvas"></canvas> -->
-			<textarea
-				style="width: 30%; resize: both; height: 150px; margin-top: 10px; font-size: 20px; border: 1px solid blue;">Simple Text area</textarea>
-
+		
+		<div id="video_and_cavas_container" >
+	<div id="canvas_container" style="float: left;">
+		<div id="HtmlTagFromTheCKEDITOR" contenteditable="true"
+			style="text-align: center; border-top: 5px solid gray; width: 500px; background-color: #FBFBEE; height: 500px">
+			<!-- 이 안에 있는 요소만 녹화가 되기 때문에, 드래그앤 드랍으로 여기로 div를 옴겨와야 한다. -->
+			<h1>여기에 에디터에 쓴 내용이 여기로 옴겨진다. </h1>
 		</div>
-		<img id="shared-part-of-screen-preview" style="max-width: 100%;">
+	</div>
+	<div id="video_container" style="float: left; text-align: center; width: 500px; background-color: #FBFBEE; height: 500px">
+		<!-- 수정하기 일 땐 기존에 녹화된 파일이 여기에 보인다. -->
+		<c:if test="${video_src == null}">
+			<h1>처음 글을 쓰거나, 수정모드일 때는 녹화한 동영상이 없다.</h1>
+		</c:if>
+		<c:if test="${video_src != null}">
+			<video src="${video_src}"></video>
+		</c:if>
+	</div>
+</div>
+
 	</section>
 
 
@@ -203,11 +229,8 @@
 		document.getElementById('btn-leave-room').onclick = function() {
 			this.disabled = true;
 			if (connection.isInitiator) {
-				// use this method if you did NOT set "autoCloseEntireSession===true"
-				// for more info: https://github.com/muaz-khan/RTCMultiConnection#closeentiresession
-				connection
-						.closeEntireSession(function() {
-							document.querySelector('h1').innerHTML = 'Entire session has been closed.';
+				connection.closeEntireSession(function() {
+							alert("접속 종료");
 						});
 			} else {
 				connection.leave();
@@ -417,11 +440,14 @@
 			html += 'Hash URL: <a href="' + roomHashURL + '" target="_blank">'
 					+ roomHashURL + '</a>';
 			html += '<br>';
-			html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">'
+			html += 'QueryString URL: <a id="test" href="' + roomQueryStringURL + '" target="_blank">'
 					+ roomQueryStringURL + '</a>';
 
 			var roomURLsDiv = document.getElementById('room-urls');
 			roomURLsDiv.innerHTML = html;
+			
+			console.log(document.location.href + roomHashURL);
+			console.log(document.location.href + roomQueryStringURL);
 
 			roomURLsDiv.style.display = 'block';
 		}
