@@ -94,7 +94,7 @@ url: www.2code.info
 	.grid_1200 .block-stats-1 {
 		width: 30%;
 	}
-	.grid_1200 #question-title,.grid_1200 #question-details,.grid_1200 .taglist .input input,.grid_1200 .form-style-5.form-style input[type="text"],.grid_1200 .form-style-5.form-style input[type="email"],.grid_1200 .form-style-5.form-style input[type="password"],.grid_1200 .form-style-5.form-style textarea {
+	.grid_1200 #question-title,.grid_1200 #question_details,.grid_1200 .taglist .input input,.grid_1200 .form-style-5.form-style input[type="text"],.grid_1200 .form-style-5.form-style input[type="email"],.grid_1200 .form-style-5.form-style input[type="password"],.grid_1200 .form-style-5.form-style textarea {
 		width: 82%;
 	}
 	.grid_1200 .ask-question .form-style label,.grid_1200 .form-style-5.form-style label {
@@ -581,7 +581,7 @@ url: www.2code.info
 	.form-style-4 .form-inputs p {
 		width: 100% !important;
 	}
-	#question-title, #question-details, .taglist .input input,.ask-question .form-description,#question_poll_item,.taglist,.form-style-5.form-style input[type="text"], .form-style-5.form-style input[type="email"], .form-style-5.form-style input[type="password"], .form-style-5.form-style textarea,.styled-select,.fileinputs {
+	#question-title, #question_details, .taglist .input input,.ask-question .form-description,#question_poll_item,.taglist,.form-style-5.form-style input[type="text"], .form-style-5.form-style input[type="email"], .form-style-5.form-style input[type="password"], .form-style-5.form-style textarea,.styled-select,.fileinputs {
 		width: 100%;
 	}
 	.ask-question .form-style label {
@@ -1031,7 +1031,7 @@ url: www.2code.info
 	.form-inputs p {
 		width: 100% !important;
 	}
-	#question-title, #question-details, .taglist .input input,.ask-question .form-description,#question_poll_item,.taglist,.form-style-5.form-style input[type="text"], .form-style-5.form-style input[type="email"], .form-style-5.form-style input[type="password"], .form-style-5.form-style textarea,.styled-select,.fileinputs {
+	#question-title, #question_details, .taglist .input input,.ask-question .form-description,#question_poll_item,.taglist,.form-style-5.form-style input[type="text"], .form-style-5.form-style input[type="email"], .form-style-5.form-style input[type="password"], .form-style-5.form-style textarea,.styled-select,.fileinputs {
 		width: 100%;
 	}
 	.form-description,#question_poll_item {
