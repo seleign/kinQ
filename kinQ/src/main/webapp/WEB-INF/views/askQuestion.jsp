@@ -149,12 +149,13 @@
 								<div id="form-textarea">
 									<label class="required">Details<span>*</span></label>
 								<p>
-									<textarea id="question-details" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
+									<textarea id="question_details" name="questionContent" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
 									<span class="form-description">Type the description thoroughly and in detail .</span>
 								</p>
 								</div>
 								
 								<label>Attachment</label>
+									<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
 								<div class="fileinputs">
 									<input type="file" class="file">
 									<div class="fakefile">
@@ -343,9 +344,12 @@
 
 <script src="./resources/js/chosen.proto.min.js"></script>
 <!-- 수정된 chosen 플러그인입니다. 교체 불가. -->
-<script src="./resources/js/chosen.jquery.js"></script>
 
-<script src="./resources/js/jquery.min.js"></script>
+
+<script src="./resources/js/jquery-3.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+
+<script src="./resources/js/chosen.jquery.js"></script>
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
 <script src="./resources/js/html5.js"></script>
@@ -365,12 +369,12 @@
 <script type="text/javascript">
 window.onload = function() {
 	// 1. Ckeditor 초기화, 파일 업로드 주소 설정
-	CKEDITOR.replace('question-details',{ 
+	CKEDITOR.replace('question_details',{ 
 		filebrowserUploadUrl: 'cKEditorFileUpload'
 	}); 
 	
 	// 3. 태그 입력 chosen 초기화
-	$(".chosen-select").chosen({
+	jQuery(".chosen-select").chosen({
 			max_select_options: 5,
 			no_result_text: "No result found. Press enter to add"
 		});
@@ -512,7 +516,7 @@ function setTo_id_HtmlTagFromTheCKEDITOR(id) {
 
 //CKEDITOR에 작성된 글(html tag)를 가져온다.
 function getHtmlTagFromTheCKEDITOR() {
-	return CKEDITOR.instances.questionContent.getData();
+	return CKEDITOR.instances.question_details.getData();
 };
 
 //id로 받은 태그 내의 모든 태그들을 드래그, 리사이즈 가능하게 만든다.

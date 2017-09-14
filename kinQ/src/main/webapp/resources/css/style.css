@@ -2854,7 +2854,7 @@ input[type="checkbox"]:checked::before {
 	width: 80%;
 	display: inline-block;
 }
-#question-title,#question-details,.taglist .input input {
+#question-title,#question_details,.taglist .input input {
 	float: left;
 	width: 82%;
 }

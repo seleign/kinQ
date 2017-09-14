@@ -8,21 +8,12 @@
 <script src="/resources/ckeditor/ckeditor.js"></script> <!-- 에디터용 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<<<<<<< HEAD
-<!-- CKeditor -->
-<script src="./resources/ckeditor/ckeditor.js"></script> 
-=======
 <link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
 <script src="./resources/js/chosen.proto.min.js"></script>
 <!-- 수정된 플러그인입니다. 교체 불가. -->
 <script src="./resources/js/chosen.jquery.js"></script>
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 
 
-<<<<<<< HEAD
-<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
-<script src="./resources/ckeditor/adapters/jquery.js"></script>
-=======
 <!-- Bootstrap styles -->
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <!-- blueimp Gallery styles -->
@@ -30,16 +21,7 @@
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="./resources/blueImp_jQuery_file_upload/css/jquery.fileupload.css">
 <link rel="stylesheet" href="./resources/blueImp_jQuery_file_upload/css/jquery.fileupload-ui.css">
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 
-<<<<<<< HEAD
-<!-- 음성 녹음을 위한 RTC -->
-<script src="./resources/js/RecordRTC.js"></script>
-<!-- 화면 녹화를 위한 RTC -->
-<script src="./resources/js/screenshot.js"></script>
-<!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
-<script src="./resources/js/getHTMLMediaElement.js"></script>
-=======
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -109,28 +91,8 @@
     </tr>
 {% } %}
 </script>
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 
-<<<<<<< HEAD
-<!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- 드래그/리사이즈를 위해 사용한 css // 아직 여기서 어느 코드가 역할을 하는지 모름... 알아봐야함 -->
-<link rel="stylesheet" type="text/css"
- href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
- 
-<!-- chosen 설정 파일-->
-<link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
-<script src="./resources/js/chosen.proto.min.js"></script>
-<!-- 수정된 chosen 플러그인입니다. 교체 불가. -->
-<script src="./resources/js/chosen.jquery.js"></script>
-=======
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 
-<<<<<<< HEAD
-<!-- datetimepicker 설정 파일 -->
-<script src="./resources/js/jquery.datetimepicker.full.min.js"></script>
-<link rel="stylesheet" type="text/css" href="./resources/css/jquery.datetimepicker.min.css" />
-=======
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="./resources/blueImp_jQuery_file_upload/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->
@@ -161,7 +123,6 @@
 <script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-ui.js"></script>
 <!-- The main application script -->
 <script src="./resources/blueImp_jQuery_file_upload/js/main.js"></script>
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 
 <script type="text/javascript">
 	function formCheck() {
@@ -212,7 +173,7 @@
 	});
     $(function () {
 		// Change this to the location of your server-side upload handler:
-		var url = '/fileupload';  // 사용
+		var url = '/fileupload';  // 사용
 		$('#fileupload').fileupload({
 			url: url,
 			dataType: 'json',

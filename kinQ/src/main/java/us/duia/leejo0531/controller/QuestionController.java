@@ -53,7 +53,7 @@ public class QuestionController {
 	public String showQuestionForm(Model model) {
 		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
 		model.addAttribute("majorList", majorList);
-		return "question/questionForm";
+		return "question/questionForm4";
 	}
 
 	/**
