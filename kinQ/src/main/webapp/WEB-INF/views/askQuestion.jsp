@@ -24,8 +24,86 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+	
+	<!-- 드래그/리사이즈를 위해 사용한 css // 아직 여기서 어느 코드가 역할을 하는지 모름... 알아봐야함 -->
+<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
+ 
+<!-- chosen 설정 파일-->
+<link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
   	<script>
 	UPLOADCARE_PUBLIC_KEY = 'your_public_key';
+	</script>
+	<script type="text/javascript">
+	//DB에서 대분류 소분류 목록 가져오기 
+	function loadMinorList(major){
+		$.ajax({
+			url: 'minorList',
+			method: 'get',
+			data: {major : major},
+			success: function(minorList){
+				var html = '';
+				$.each(minorList, function(index, element){
+					if(element.majorNum == major){
+						var isPrinted = false;
+						for( var i in chkNum) {
+							if( element.minorNum == chkNum[i]) {
+								html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" checked="checked" disabled="true" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
+								isPrinted = true;
+								break;
+							}
+						}
+						if( !isPrinted) {
+							html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
+						}
+					}//outer if
+				});
+				$('#minorSection').html(html);		
+				html ='';
+			}
+		});
+	}
+	
+
+	var chk = new Array(); // 소분류 일본명
+	var chkNum = new Array(); // 소분류 고유 번호
+	
+	function addCheckboxList(minorName, minorNum){
+			
+		 	$('#chk'+minorNum).prop('disabled', true);
+
+			checkboxHtml = '';
+
+				$('#allInterests').empty();
+
+
+				chk.push(minorName);
+				chkNum.push(minorNum);
+					
+			for(var i in chk){	
+				checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+chkNum[i]+')"><a></li>'
+			}
+			$('#allInterests').html(checkboxHtml);
+		}
+	
+	function unchecking(deleteNum){
+		checkboxHtml = '';
+		for(var i=0;i<chkNum.length;i++){
+			if(chkNum[i]==deleteNum){
+				var index = chkNum.indexOf(chkNum[i]);
+				chk.splice(index, 1);
+				chkNum.splice(index, 1);
+				
+				$('#chk'+deleteNum).prop('checked', false);
+				$('#chk'+deleteNum).prop('disabled', false);
+				
+				
+				for(var i in chk){	
+					checkboxHtml+='<li id="del'+chkNum[i]+'">'+chk[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+chkNum[i]+')"><a></li>'
+				}
+				$('#allInterests').html(checkboxHtml);
+			}
+		}
+	}
 	</script>
 </head>
 <body>
@@ -71,50 +149,9 @@
 								<div id="form-textarea">
 									<label class="required">Details<span>*</span></label>
 								<p>
-									<textarea id="question-details" aria-required="true" cols="58" rows="8"></textarea>
+									<textarea id="question-details" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
 									<span class="form-description">Type the description thoroughly and in detail .</span>
 								</p>
-							</div>
-								<p>
-									<label>Tags</label>
-									<input type="text" class="input" name="question_tags" id="question_tags" data-seperator=",">
-									<span class="form-description">Please choose  suitable Keywords Ex : <span class="color">question , poll</span> .</span>
-								</p>
-								<p>
-									<label class="required">Category<span>*</span></label>
-									<span class="styled-select">
-										<select>
-											<option value="">Select a Category</option>
-											<option value="1">Category 1</option>
-											<option value="2">Category 2</option>
-										</select>
-									</span>
-									<span class="form-description">Please choose the appropriate section so easily search for your question .</span>
-								</p>
-<!-- 								<p class="question_poll_p"> -->
-<!-- 									<label for="question_poll">Poll</label> -->
-<!-- 									<input type="checkbox" id="question_poll" value="1" name="question_poll"> -->
-<!-- 									<span class="question_poll">This question is a poll ?</span> -->
-<!-- 									<span class="poll-description">If you want to be doing a poll click here .</span> -->
-<!-- 								</p> -->
-								<div class="clearfix"></div>
-								<div class="poll_options">
-									<p class="form-submit add_poll">
-										<button id="add_poll" type="button" class="button color small submit"><i class="icon-plus"></i>Add Field</button>
-									</p>
-									<ul id="question_poll_item">
-										<li id="poll_li_1">
-											<div class="poll-li">
-												<p><input id="ask[1][title]" class="ask" name="ask[1][title]" value="" type="text"></p>
-												<input id="ask[1][value]" name="ask[1][value]" value="" type="hidden">
-												<input id="ask[1][id]" name="ask[1][id]" value="1" type="hidden">
-												<div class="del-poll-li"><i class="icon-remove"></i></div>
-												<div class="move-poll-li"><i class="icon-fullscreen"></i></div>
-											</div>
-										</li>
-									</ul>
-									<script> var nextli = 2;</script>
-									<div class="clearfix"></div>
 								</div>
 								
 								<label>Attachment</label>
@@ -125,16 +162,76 @@
 										<span><i class="icon-arrow-up"></i>Browse</span>
 									</div>
 								</div>
+								
+								<p>
+									<label>Tags</label>
+									<input type="text" class="input" name="question_tags" id="question_tags" data-seperator=",">
+									<span class="form-description">Please choose  suitable Keywords Ex : <span class="color">question , poll</span> .</span>
+								</p>
+								<p>
+									<label class="required">Category<span>*</span></label>
+									<span class="styled-select">
+										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
+										<option value="0" selected="selected">選択</option>
+										<c:forEach var="major" items="${majorList }">
+											<option value="${major.majorNum}">${major.majorName}</option>
+										</c:forEach>
+										</select>
+									<span class="form-description"><div id="minorSection"></div></span>
+									<span class="form-description"><ul id="allInterests"></ul></span>
+									</span>
+								</p>
+								<p>
+									<label for="urgent" class="required">緊急質問</label>
+									<span id="urgent-span">
+									<c:if test="${timeLimit == null? true : false }">
+										<input type="checkbox" id="urgent">大至急です。
+									</c:if>
+									<c:if test="${timeLimit != null? true : false }">
+										<input type="checkbox" id="urgent" checked="checked">大至急です。
+									</c:if>
+									</span>
+								</p>
+								<p>
+								<div class="ask-video">
+									<label class="required">video<span>*</span></label>
+									<div id="step2">
+									<h1>step2. WEBRTC를 이용한 녹화...</h1>
+									<button id="btn-record-webm" style="font-size: inherit;">화면 녹화</button>
+									<button id="btn-record-webm-stop" style="font-size: inherit;" disabled="disabled">화면 중지</button>
+									
+									<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
+									<input type="text" name="videoSrc" value="" id="videoSrc" placeholder="녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다.">
+									
+									<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
+									<input type="text" value="${questionNum}" name="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다.">
+									
+									<!-- 기존에 녹화된 영상과 녹화 할 영역(canvas)을 가진 DIV -->
+									<div id="video_and_cavas_container" >
+										<div id="canvas_container" style="float: left;">
+											<div id="HtmlTagFromTheCKEDITOR" contenteditable="true"
+												style="text-align: center; border-top: 5px solid gray; width: 500px; background-color: #FBFBEE; height: 500px">
+												<!-- 이 안에 있는 요소만 녹화가 되기 때문에, 드래그앤 드랍으로 여기로 div를 옴겨와야 한다. -->
+												<h1>여기에 에디터에 쓴 내용이 여기로 옴겨진다. </h1>
+											</div>
+										</div>
+										<div id="video_container" style="float: left; text-align: center; width: 500px; background-color: #FBFBEE; height: 500px">
+											<!-- 수정하기 일 땐 기존에 녹화된 파일이 여기에 보인다. -->
+											<c:if test="${video_src == null}">
+												<h1>처음 글을 쓰거나, 수정모드일 때는 녹화한 동영상이 없다.</h1>
+											</c:if>
+											<c:if test="${video_src != null}">
+												<video src="${video_src}"></video>
+											</c:if>
+										</div>
+									</div>
+									</div>
+								</div>
+								</p>
 							</div>
-							<p>
-							<div class="ask-video">
-								<label class="required">video<span>*</span></label>
-								<h1>비디오 들어갈곳 ㅇㅅㅇ~</h1>
-							</div>
-							</p>
 							<p id="p-ask-buttons" class="form-submit">
 								<input type="submit" id="publish-question" value="질문하기" class="button color small submit">
-								<input type="button" id="ask-button" value="영상녹화" class="button color small submit">
+								<input type="button" id="ask-button" value="영상녹화" class="button color small submit" onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
 							</p>
 						</form>
 					</div>
@@ -233,6 +330,21 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
 <script src="./resources/ckeditor/adapters/jquery.js"></script>
+
+<!-- 음성 녹음을 위한 RTC -->
+<script src="./resources/js/RecordRTC.js"></script>
+<!-- 화면 녹화를 위한 RTC -->
+<script src="./resources/js/screenshot.js"></script>
+<!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
+<script src="./resources/js/getHTMLMediaElement.js"></script>
+
+<!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="./resources/js/chosen.proto.min.js"></script>
+<!-- 수정된 chosen 플러그인입니다. 교체 불가. -->
+<script src="./resources/js/chosen.jquery.js"></script>
+
 <script src="./resources/js/jquery.min.js"></script>
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
@@ -252,10 +364,184 @@
 <script src="./resources/js/custom.js"></script>
 <script type="text/javascript">
 window.onload = function() {
+	// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 	CKEDITOR.replace('question-details',{ 
 		filebrowserUploadUrl: 'cKEditorFileUpload'
 	}); 
+	
+	// 3. 태그 입력 chosen 초기화
+	$(".chosen-select").chosen({
+			max_select_options: 5,
+			no_result_text: "No result found. Press enter to add"
+		});
+	//녹화 -- 현재 맥에서만 작동 함
+	//동영상 녹화 코드
+		document.getElementById('btn-record-webm').onclick = function() {
+		//비디오 컨테이너에 있는걸 날려버려야 함.
+		$("#btn-record-webm-stop").attr("disabled", false);
+		$('#video_container').empty();
+		
+			this.disabled = true;
+			navigator.mediaDevices.getUserMedia({
+				audio : true
+			}).then(function(audioStream) {
+				this.audioStream = audioStream;
+				var canvas = document.getElementById('canvas');
+				var finalStream = new MediaStream();
+				this.canvasStream = canvas.captureStream();
+				audioStream.getAudioTracks().forEach(function(track) {
+					finalStream.addTrack(track);
+				});
+				canvasStream.getVideoTracks().forEach(function(track) {
+					finalStream.addTrack(track);
+				});
+
+				recorder = RecordRTC(finalStream, {
+					type : 'video'
+				});
+				recorder.startRecording();
+			}); //then end
+
+			//공유하는 DIV 쪽 기능
+			stop = false;
+			var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
+			var canvas2d = document.createElement('canvas');
+			var context = canvas2d.getContext('2d');
+			canvas2d.width = elementToShare.clientWidth;
+			canvas2d.height = elementToShare.clientHeight;
+
+			canvas2d.style.top = 0;
+			canvas2d.style.left = 0;
+			canvas2d.style.zIndex = -1;
+			$('#video_container').append(canvas2d);
+			//(document.body).appendChild(canvas2d);
+			(function looper() {
+				if (stop) {
+					recorder.stopRecording(function() {
+						blob = recorder.getBlob(); //<이게 동영상 데이터
+						
+						$("#canvas").remove(); //재생중이던 화면 정지
+						var URL_BLOB = String(window.webkitURL.createObjectURL(blob));
+						var fileName = URL_BLOB.substring(URL_BLOB.lastIndexOf("/")+1 , URL_BLOB.length);
+						var fileExt = blob.type.substring(blob.type.lastIndexOf("/")+1, blob.type.length);
+						
+						//ajax로 서버에 녹화된 영상 파일 전송
+						var filename = String(window.webkitURL.createObjectURL(blob));
+						var formElement = document.querySelector("form");
+						var formData = new FormData(formElement);
+						
+						formData.append("blob", blob, fileName+ "." +fileExt);
+						formData.append("questionNum", '${questionNum}');
+						
+						$.ajax({
+		                    url: 'blob_upload',
+		                    processData: false,
+		                    contentType: false,
+		                    data: formData, 
+		                    type: 'POST',
+		                    success: function(result){
+		                    			$('#video_container').html('<video controls src="'
+		 								+ window.webkitURL.createObjectURL(blob)
+		 								+ '" autoplay loop></video>');
+		                    			$('#videoSrc').val(result);
+		                    	
+			                            }
+		                    });
+						audioStream.stop();
+						canvasStream.stop();
+					});
+					return;
+				}
+
+				(function looper() {
+					html2canvas(elementToShare, {
+						grabMouse : false,
+						onrendered : function(canvas) {
+							context.clearRect(0, 0, canvas2d.width,
+									canvas2d.height);
+							context.drawImage(canvas, 0, 0, canvas2d.width,
+									canvas2d.height);
+						}
+					});
+					canvas2d.id = 'canvas';
+				})();
+				setTimeout(looper, 10); //이게 화면 프레임수
+			})();
+		};
+		
+		// 녹화 정지 버튼
+		document.getElementById('btn-record-webm-stop').onclick = function() {
+			stop = true;
+			this.disabled = true
+			$("#btn-record-webm").attr("disabled", false);
+			return false;
+		}
+		
+		// 실수로 인풋 창에서 "엔터"를 눌러서 전송되는 것을 막는다.
+		$(document).on("keypress", 'form', function (e) {
+		    var code = e.keyCode || e.which;
+		    if (code == 13) {
+		        e.preventDefault();
+		        return false;
+		    }
+		});
+} //onload 종료
+
+//글쓰기 페이지의 유효성 검사
+function formCheck() {
+	var title = $('#title').val();
+	if(title==''){
+		alert('おタイトルを入力して下さい。');
+		return false;
+	}
+	
+	var minor = $('#minor').val();
+	if( minor=='') {
+		alert( '分類を選んでください。');
+		return false;
+	}
+	return true;
 }
+
+//id에 해당하는 객체에 CKEDITOR에 작성된 글(html tag)를 넣는다.
+function setTo_id_HtmlTagFromTheCKEDITOR(id) {
+	$(id).empty(); //기존에 작성된 것을 삭제한다.
+	$(id).append(getHtmlTagFromTheCKEDITOR());
+	imgSrcToBase64Src_In_id(id);
+};
+
+//CKEDITOR에 작성된 글(html tag)를 가져온다.
+function getHtmlTagFromTheCKEDITOR() {
+	return CKEDITOR.instances.questionContent.getData();
+};
+
+//id로 받은 태그 내의 모든 태그들을 드래그, 리사이즈 가능하게 만든다.
+function moveableAndDragable(id) {
+	//code Here
+}
+
+//id로 받은 태그 내의 모든 img의 src를 base64로 변환한다.
+function imgSrcToBase64Src_In_id(id) {
+	$(id).find('img').each(function(){
+		var imgObject = this;
+		
+		if( $(imgObject).attr('src').substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.
+			
+			return;
+		} else { // Base64가 아니면 ajax로 Base64로 변환한다.
+			$.ajax({
+	            url: 'imgToBase64',
+	            data: {
+	            		imgSrc: 	$(imgObject).attr('src')
+	           		},
+	            type: 'GET',
+	            success: function(result){
+					$(imgObject).attr('src', result.base64)
+	                    }
+	            });
+		}
+	}) // each 종료
+};
 </script>
 <!-- End js -->
 

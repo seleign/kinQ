@@ -14,18 +14,18 @@
 <title>質問する</title>
 
 <!-- CKeditor -->
-<script src="/resources/ckeditor/ckeditor.js"></script> 
+<script src="./resources/ckeditor/ckeditor.js"></script> 
 
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
-<script src="/resources/ckeditor/adapters/jquery.js"></script>
+<script src="./resources/ckeditor/adapters/jquery.js"></script>
 
 <!-- 음성 녹음을 위한 RTC -->
-<script src="/resources/js/RecordRTC.js"></script>
+<script src="./resources/js/RecordRTC.js"></script>
 <!-- 화면 녹화를 위한 RTC -->
-<script src="/resources/js/screenshot.js"></script>
+<script src="./resources/js/screenshot.js"></script>
 <!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
 <script src="/resources/js/getHTMLMediaElement.js"></script>
 
@@ -36,14 +36,14 @@
  href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
  
 <!-- chosen 설정 파일-->
-<link type="text/css" href="/resources/css/chosen.min.css" rel="stylesheet">
-<script src="/resources/js/chosen.proto.min.js"></script>
+<link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
+<script src="./resources/js/chosen.proto.min.js"></script>
 <!-- 수정된 chosen 플러그인입니다. 교체 불가. -->
-<script src="/resources/js/chosen.jquery.js"></script>
+<script src="./resources/js/chosen.jquery.js"></script>
 
 <!-- datetimepicker 설정 파일 -->
-<script src="/resources/js/jquery.datetimepicker.full.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/jquery.datetimepicker.min.css" />
+<script src="./resources/js/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/css/jquery.datetimepicker.min.css" />
 
 <script type="text/javascript">
 window.onload = function() {

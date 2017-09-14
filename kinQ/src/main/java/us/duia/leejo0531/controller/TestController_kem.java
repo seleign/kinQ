@@ -36,18 +36,18 @@ public class TestController_kem {
 		return "mypage";
 	}*/
 	
-	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
+/*	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
 	public String ask_question(){
 		return "askQuestion";
-	}
+	}*/
 	
-	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
+/*	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
 	public String ask_question(HashMap<String, String> map, Model model){
 		String question_title = map.get("question_title");
 		logger.info("**********question_title : "+question_title);
 		model.addAttribute("question_title", question_title);
 		return "askQuestion";
-	}
+	}*/
 	
 	@RequestMapping(value="dummy", method=RequestMethod.GET)
 	public String dummy(){

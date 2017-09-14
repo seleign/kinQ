@@ -135,7 +135,7 @@
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a></li>
 					<li class="ask_question"><a href="askQuestion">질문하기(폼이동)</a></li>
-					<li><a href="cat_question.html">질문(하위메뉴 有)</a>
+					<li><a href="addQuestion">질문(하위메뉴 有)</a>
 						<ul>
 							<li><a href="cat_question.html">하위 1</a></li>
 							<li><a href="single_question.html">하위 2</a></li>

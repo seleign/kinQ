@@ -1,6 +1,7 @@
 package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.QuestionService;
+import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
@@ -31,6 +33,9 @@ public class QuestionController {
 	
 	@Autowired
 	private QuestionService qstnSvc; //QuestionService 비즈니스 로직
+	
+	@Autowired
+	private UserService userSvc; //UserService 비즈니스 로직
 
 	/***
 	 * GET 방식으로 질문 페이지에 접근하는데 사용된다.
@@ -135,6 +140,30 @@ public class QuestionController {
 	public @ResponseBody ArrayList<QuestionVO> getAllQuestion(){
 		ArrayList<QuestionVO> result = qstnSvc.getAllQuestion();
 		return result;
+	}
+	
+	
+	/**
+	 * AskQuestion 으로 이동하며 대분류 목록도 같이 전송
+	 * @return 질문하기 페이지로 이동
+	 */
+	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
+	public String ask_question(Model model){
+		ArrayList<MajorVO> majorList = userSvc.getMajorList(); 
+		model.addAttribute("majorList", majorList);
+		return "askQuestion";
+	}
+	
+	
+	/**
+	 * main에서 AskQuestion 으로 이동하며 제목도 같이 전송
+	 * @return 질문하기 페이지로 이동
+	 */
+	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
+	public String ask_question(HashMap<String, String> map, Model model){
+		String question_title = map.get("question_title");
+		model.addAttribute("question_title", question_title);
+		return "askQuestion";
 	}
 
 }

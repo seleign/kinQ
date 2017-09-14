@@ -59,6 +59,11 @@ body {
 	margin-bottom: 0 !important;
 	margin-left: 33%
 }
+
+#urgent-span {
+	margin-top: 3px;
+}
+
 /* 占쏙옙 占쏙옙 */
 #warp {
 	background-color: #f3f3f3;
@@ -3103,9 +3108,9 @@ select {
 	top: 2px;
 }
 #question-submit input[type="checkbox"] {
-	height: 29px;
-	width: 29px !important;
-	border: 1px solid #dedede;
+	height: 18px;
+	width: 19px !important;
+	border: 1px solid #424242;
 	background-color: #f3f3f3;
 	margin-top: 0;
 }
