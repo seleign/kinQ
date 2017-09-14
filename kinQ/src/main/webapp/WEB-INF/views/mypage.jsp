@@ -28,6 +28,37 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["項目", "数", { role: "style" } ],
+        ["質問数", ${qestionsNum}, "skyblue"],
+        ["答えのある質問", ${completedQuestions }, "gold"],
+        ["回答数", ${answersNum }, "silver"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        width: 500,
+        height: 300,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+  
   
 </head>
 <body>
@@ -62,9 +93,9 @@
 								<!-- <div class="user-profile-img"><img width="60" height="60" src="http://placehold.it/60x60/FFF/444" alt="admin"></div> -->
 								<div class="ul_list ul_list-icon-ok about-user">
 									<ul>
-										<li><i class="icon-asterisk"></i>ID : <span>${sessionScope.userId }</span></li>
+										<li><i class="icon-user"></i>ID : <span>${sessionScope.userId }</span></li>
 										<li><i class="icon-star"></i>ランキング : <span>_______</span></li>
-										<li><i class="icon-heart"></i>ポイント : <span>________</span></li>
+										<li><i class="icon-asterisk"></i>ポイント : <span>________</span></li>
 										<li><i class="icon-comment"></i>フォロワー : <span>________</span></li>
 										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
 									</ul>
@@ -79,10 +110,8 @@
 							<div class="page-content page-content-user-profile">
 								<div class="user-profile-widget">
 									<h2>質問・答え</h2>
-									<div class="ul_list ul_list-icon-ok">
-										<ul>
-											<li><i class="icon-question-sign"></i><a href="user_questions.html">Questions<span> ( <span>30</span> ) </span></a></li>
-										</ul>
+									
+									<div class="ul_list ul_list-icon-ok" style="float: right;">
 											<table class="dashboard-activity-table">
 												<tbody id="tableBody">
 													<tr>
@@ -91,24 +120,24 @@
 													<tr>
 														<th class="text-center">
 														<span class="icon-list-style">
-														質問数
+														&nbsp;&nbsp;<i class="icon-question-sign"></i>&nbsp;&nbsp;質問数&nbsp;&nbsp;&nbsp;&nbsp;
 														</span>
 														</th>
 														<th class="text-center">
 														<span class="icon-list-style">
-														進行中の質問数
+														&nbsp;&nbsp;<i class="icon-spinner"></i>&nbsp;&nbsp;答えのある質問&nbsp;&nbsp;&nbsp;&nbsp;
 														</span>
 														</th>
 														<th class="text-center">
 														<span class="icon-list-style">
-														回答数
+														&nbsp;&nbsp;<i class="icon-lightbulb"></i>&nbsp;&nbsp;回答数&nbsp;&nbsp;&nbsp;&nbsp;
 														</span>
 														</th>
 													</tr>
 													<tr>
-														<td class="text-center right-border font-green">${qestionsNum }</td>
-														<td class="text-center right-border font-grey">___</td>
-														<td class="text-center font-red">___</td>
+														<td class="text-center right-border font-skyblue">${qestionsNum }</td>
+														<td class="text-center right-border font-gold">${completedQuestions }</td>
+														<td class="text-center font-silver">${answersNum }</td>
 													</tr>
 													<tr>
 														<td colspan="3">&nbsp;</td>
@@ -116,6 +145,7 @@
 												</tbody>
 											</table>
 									</div>
+									<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
 								</div><!-- End user-profile-widget -->
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->

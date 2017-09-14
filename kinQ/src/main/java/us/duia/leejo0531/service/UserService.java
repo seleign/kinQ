@@ -104,4 +104,14 @@ public class UserService {
 		return questionsNum;
 	}
 
+	public int countAnswers(int userNum) {
+		int answersNum = userDao.countAnswers(userNum);
+		return answersNum;
+	}
+
+	public int countCompletedQuestions(int userNum) {
+		int completedQuestions = userDao.countCompletedQuestions(userNum);
+		return completedQuestions;
+	}
+
 }
