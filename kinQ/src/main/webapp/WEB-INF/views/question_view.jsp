@@ -216,34 +216,7 @@
 				<div id="commentlist" class="page-content">
 				</div><!-- End page-content -->
 				
-				<div id="respond" class="comment-respond page-content clearfix">
-				    <div class="boxedtitle page-title"><h2>답변</h2></div>
-				    <form action="" method="post" id="commentform" class="comment-form">
-				        <div id="respond-inputs" class="clearfix">
-				            <p>
-				                <label class="required" for="comment_name">이름<span>*</span></label>
-				                <input name="author" type="text" value="" id="comment_name" aria-required="true">
-				            </p>
-				            <p>
-				                <label class="required" for="comment_email">E-Mail<span>*</span></label>
-				                <input name="email" type="text" value="" id="comment_email" aria-required="true">
-				            </p>
-				            <p class="last">
-				                <label class="required" for="comment_url">Website<span>*</span></label>
-				                <input name="url" type="text" value="" id="comment_url">
-				            </p>
-				        </div>
-				        <div id="respond-textarea">
-				            <p>
-				                <label class="required" for="comment">Comment<span>*</span></label>
-				                <textarea id="comment" name="comment" aria-required="true" cols="58" rows="8"></textarea>
-				            </p>
-				        </div>
-				        <p class="form-submit">
-				        	<input name="submit" type="submit" id="submit" value="Post your answer" class="button small color">
-				        </p>
-				    </form>
-				</div>
+				<!-- <div id="respond" class="comment-respond page-content clearfix"></div> -->
 				
 				<div class="post-next-prev clearfix">
 				    <p class="prev-post">
