@@ -99,6 +99,17 @@ public class QuestionDAO {
 		return result;
 	}
 	
+	/**
+	 * DB로부터 context가 제목에 포함된 모든 질문글을 가져온다.
+	 * @param context 질문글 제목에 포함된 단어
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> searchTitleByContext(ArrayList<String> context){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchTitleByContext(context);
+		return result;
+	}
+	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
 		System.out.println("getQuestionTag 진입 : " + sqlSession);
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);

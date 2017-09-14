@@ -60,6 +60,11 @@ public class ReplyService {
 		return result;
 	}
 	
+	public ArrayList<ReplyVO> searchReplyTitleByContext(ArrayList<String> context){
+		ArrayList<ReplyVO> result = replyDao.searchReplyTitleByContext(context);
+		return result;
+	}
+	
 	public ArrayList<ReplyVO> questionReplyList(int questionNum) {
 		ArrayList<ReplyVO> replyList = replyDao.questionReplyList(questionNum);
 		return replyList;

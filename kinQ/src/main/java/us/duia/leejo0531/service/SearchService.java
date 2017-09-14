@@ -42,15 +42,21 @@ public class SearchService {
 			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
 		}
 		
+		ArrayList<QuestionVO> QuestionListByTitle = qstnDao.searchTitleByContext(words);
+		
 		ArrayList<QuestionVO> QuestionListByTag = tagDao.getQuestionListByTag(words);
 
 		ArrayList<QuestionVO> QuestionListBycontext = qstnDao.searchByContext(words);
 
+		ArrayList<ReplyVO> ReplyListByTitle = replyDao.searchReplyTitleByContext(words);
+
 		ArrayList<ReplyVO> ReplyListBycontext = replyDao.searchByContext(words);
 		
 		HashMap<String, Object> result = new HashMap<>();
+		result.put("QuestionListByTitle", QuestionListByTitle);
 		result.put("QuestionListByTag", QuestionListByTag);
 		result.put("QuestionListBycontext", QuestionListBycontext);
+		result.put("ReplyListByTitle", ReplyListByTitle);
 		result.put("ReplyListBycontext", ReplyListBycontext);
 		
 		return result;
