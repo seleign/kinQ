@@ -10,7 +10,7 @@ public interface ReplyMapper {
 	public int insertReply(ReplyVO replyVO);
 	public int deleteReply(ReplyVO target);
 	public ReplyVO selectOneReply(ReplyVO target);
-	public ArrayList<ReplyVO> searchByContext(String context);
+	public ArrayList<ReplyVO> searchByContext(ArrayList<String> context);
 	public int insertReplyTest(ReplyVO reply);
 	public ArrayList<ReplyVO> questionReplyList(int questionNum);
 }
