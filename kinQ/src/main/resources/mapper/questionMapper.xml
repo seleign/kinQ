@@ -114,6 +114,7 @@
 	select
 	    *
 	from
+		tag,
 	    (select
 	        q_board.*
 	    from
@@ -135,6 +136,7 @@
 	        q_board.questionnum = no_dupl.questionnum(+)
 	        and no_dupl.questionnum is null
 	    ) no_answer
-	order by questionnum
+	where no_answer.questionnum = tag.questionnum(+)
+	order by no_answer.questionnum
 	</select>
 </mapper>
