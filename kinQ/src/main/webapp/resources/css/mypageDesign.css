@@ -18,21 +18,32 @@
     height: 19px;
 }
 
-.font-green{
-	color: #4caf50!important;
+.font-skyblue{
+	color: skyblue;
 	font-size: 30px;
 }
 
-.font-grey{
-	color: #424242!important;
+.font-gold{
+	color: gold;
 	font-size: 30px;
 }
 
-.font-red{
-	color: #f44336!important;
+.font-silver{
+	color: silver;
 	font-size: 30px;
 }
 
 .right-border {
     border-right: 1px solid #9e9e9e;
+}
+
+.ul_list ul_list-icon-ok{
+	position: relative;
+	float: right;
+}
+
+.columnchart_values{
+	position: relative;
+	margin: 0 auto;
+	width: "500px";
 }

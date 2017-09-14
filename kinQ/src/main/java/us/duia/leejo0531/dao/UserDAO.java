@@ -130,4 +130,16 @@ public class UserDAO {
 		int questionsNum = mapper.countQuestions(userNum);
 		return questionsNum;
 	}
+
+	public int countAnswers(int userNum) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int answersNum = mapper.countAnswers(userNum);
+		return answersNum;
+	}
+
+	public int countCompletedQuestions(int userNum) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int completedQuestions = mapper.countCompletedQuestions(userNum);
+		return completedQuestions;
+	}
 }

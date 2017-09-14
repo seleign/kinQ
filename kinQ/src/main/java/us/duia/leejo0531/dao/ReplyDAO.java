@@ -57,9 +57,21 @@ public class ReplyDAO {
 	 * @param context 답변에 포함된 단어
 	 * @return ArrayList<ReplyVO>
 	 */
-	public ArrayList<ReplyVO> searchByContext(String context){
+	public ArrayList<ReplyVO> searchByContext(ArrayList<String> context){
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		ArrayList<ReplyVO> result = mapper.searchByContext(context);
+		return result;
+	}
+
+
+	/**
+	 * DB로부터 context가 포함된 모든 답변을 가져온다.
+	 * @param context 답변에 포함된 단어
+	 * @return ArrayList<ReplyVO>
+	 */
+	public ArrayList<ReplyVO> searchReplyTitleByContext(ArrayList<String> context){
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ArrayList<ReplyVO> result = mapper.searchReplyTitleByContext(context);
 		return result;
 	}
 	
@@ -67,5 +79,11 @@ public class ReplyDAO {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		int result = mapper.insertReplyTest(reply);
 		return result;
+	}
+	
+	public ArrayList<ReplyVO> questionReplyList(int questionNum) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ArrayList<ReplyVO> replyList = mapper.questionReplyList(questionNum);
+		return replyList;
 	}
 }

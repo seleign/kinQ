@@ -19,9 +19,11 @@ import us.duia.leejo0531.vo.TagVO;
 @Repository
 public class SearchService {
 	
-	@Autowired
+	@Autowired(required=false)
 	private QuestionDAO qstnDao;
+	@Autowired(required=false)
 	private ReplyDAO replyDao;
+	@Autowired(required=false)
 	private TagDAO tagDao;
 	
 	/**
@@ -40,28 +42,29 @@ public class SearchService {
 			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
 		}
 		
-		//TAG와 일치하는 질문을 가져온다.
-		ArrayList<TagVO> QuestionListByTag = new ArrayList<>();
-		words.parallelStream().forEach(tag -> QuestionListByTag.addAll( tagDao.getQuestionListByTag(tag) ));
-
-		//TAG와 일치하는 답변을 가져온다.
-		ArrayList<TagVO> ReplyListByTag = new ArrayList<>();
-		words.parallelStream().forEach(tag -> ReplyListByTag.addAll( tagDao.getReplyListByTag(tag) ));
+		ArrayList<QuestionVO> QuestionListByTitle = qstnDao.searchTitleByContext(words);
 		
-		//단어(context)가 포함된 질문을 가져온다.
-		ArrayList<QuestionVO> QuestionListBycontext = new ArrayList<>();
-		words.parallelStream().forEach(context -> QuestionListBycontext.addAll( qstnDao.searchByContext(context) ));
+		ArrayList<QuestionVO> QuestionListByTag = tagDao.getQuestionListByTag(words);
 
-		//단어(context)가 포함된 답변을 가져온다.
-		ArrayList<ReplyVO> ReplyListBycontext = new ArrayList<>();
-		words.parallelStream().forEach(context -> ReplyListBycontext.addAll( replyDao.searchByContext(context) ));
+		ArrayList<QuestionVO> QuestionListBycontext = qstnDao.searchByContext(words);
+
+		ArrayList<ReplyVO> ReplyListByTitle = replyDao.searchReplyTitleByContext(words);
+
+		ArrayList<ReplyVO> ReplyListBycontext = replyDao.searchByContext(words);
 		
 		HashMap<String, Object> result = new HashMap<>();
+		result.put("QuestionListByTitle", QuestionListByTitle);
 		result.put("QuestionListByTag", QuestionListByTag);
-		result.put("ReplyListByTag", ReplyListByTag);
 		result.put("QuestionListBycontext", QuestionListBycontext);
+		result.put("ReplyListByTitle", ReplyListByTitle);
 		result.put("ReplyListBycontext", ReplyListBycontext);
 		
 		return result;
 	}
+
+	public ArrayList<QuestionVO> search_no_answered() {
+		ArrayList<QuestionVO> result = qstnDao.search_no_answered();
+		return result;
+	}
+	
 }

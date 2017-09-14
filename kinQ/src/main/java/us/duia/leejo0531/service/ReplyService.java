@@ -55,8 +55,18 @@ public class ReplyService {
 	 * @param context 검색할 텍스트
 	 * @return ArrayList<ReplyVO>
 	 */
-	public ArrayList<ReplyVO> searchByContext(String context){
+	public ArrayList<ReplyVO> searchByContext(ArrayList<String> context){
 		ArrayList<ReplyVO> result = replyDao.searchByContext(context);
 		return result;
+	}
+	
+	public ArrayList<ReplyVO> searchReplyTitleByContext(ArrayList<String> context){
+		ArrayList<ReplyVO> result = replyDao.searchReplyTitleByContext(context);
+		return result;
+	}
+	
+	public ArrayList<ReplyVO> questionReplyList(int questionNum) {
+		ArrayList<ReplyVO> replyList = replyDao.questionReplyList(questionNum);
+		return replyList;
 	}
 }

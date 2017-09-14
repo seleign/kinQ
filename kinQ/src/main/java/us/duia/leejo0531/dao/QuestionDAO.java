@@ -10,6 +10,7 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.checkTimeVO;
 
 /**
  * 1) 이 DAO는 DB에 질의하는데 사용된다.
@@ -54,6 +55,12 @@ public class QuestionDAO {
 		return majorList;
 	}
 	
+	public MinorVO getMinor(int minorNum) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		MinorVO minor = mapper.getMinor(minorNum);
+		return minor;
+	}
+	
 	/**
 	 * DB로부터 Minor(소분류)를 ArrayList로 가져온다.
 	 * @return MinorVO Minor
@@ -62,6 +69,12 @@ public class QuestionDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		ArrayList<MinorVO> minorList = mapper.getMinorList();
 		return minorList;
+	}
+	
+	public MajorVO getMajor(int majorNum) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		MajorVO major = mapper.getMajor(majorNum);
+		return major;
 	}
 	
 	/**
@@ -80,9 +93,20 @@ public class QuestionDAO {
 	 * @param context 질문글에 포함된 단어
 	 * @return ArrayList<QuestionVO>
 	 */
-	public ArrayList<QuestionVO> searchByContext(String context){
+	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.searchByContext(context);
+		return result;
+	}
+	
+	/**
+	 * DB로부터 context가 제목에 포함된 모든 질문글을 가져온다.
+	 * @param context 질문글 제목에 포함된 단어
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> searchTitleByContext(ArrayList<String> context){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchTitleByContext(context);
 		return result;
 	}
 	
@@ -94,6 +118,11 @@ public class QuestionDAO {
 		return tagList;
 	}
 	
+	public checkTimeVO getQuestionTime(int questionNum) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		checkTimeVO checkTime = mapper.getQuestionTime(questionNum);
+		return checkTime;
+	}
 	/**
 	 * DB에서 모든 질문글을 가져온다
 	 * @return ArrayList<QuestionVO>
@@ -101,6 +130,12 @@ public class QuestionDAO {
 	public ArrayList<QuestionVO> getAllQuestion(){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.getAllQuestion();
+		return result;
+	}
+
+	public ArrayList<QuestionVO> search_no_answered() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.search_no_answered();
 		return result;
 	}
 }

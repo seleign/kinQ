@@ -150,38 +150,6 @@ window.onload = function() {
 			return false;
 		}
 	
-<<<<<<< HEAD
-	$(function(){
-		$('#tags').chosen();
-	});
-	
-	$(".chosen-select").chosen({
-		max_select_options: 5,
-		no_result_text: "No result found. Press enter to add"
-	});
-    $(function () {
-		// Change this to the location of your server-side upload handler:
-		var url = '/fileupload';  // 사용
-		$('#fileupload').fileupload({
-			url: url,
-			dataType: 'json',
-	       	singleFileUploads: false,
-//			autoUpload : true,
-			done: function (e, data) {
-				$.each(data.result.files, function (index, file) {
-					$('<p/>').text(file.name).appendTo('#files');
-				});
-			},
-			progressall: function (e, data) {
-				var progress = parseInt(data.loaded / data.total * 100, 10);
-				$('#progress .progress-bar').css(
-					'width',
-					progress + '%'
-				);
-			}
-		}).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
-	});
-=======
 }; //onload 종료
 
 // id에 해당하는 객체에 CKEDITOR에 작성된 글(html tag)를 넣는다.
@@ -223,7 +191,6 @@ function imgSrcToBase64Src_In_id(id) {
 		}
 	}) // each 종료
 };
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 </script>
 </head>
 <body>
