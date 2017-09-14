@@ -21,4 +21,6 @@ public interface UserMapper {
 	public void deleteOriginalField(int userNum);
 	public int countQuestions(int userNum);
 	public UserVO getUserInfo(int userNum);
+	public int countAnswers(int userNum);
+	public int countCompletedQuestions(int userNum);
 }

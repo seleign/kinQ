@@ -17,6 +17,16 @@
 	
 	</delete>
 	
+	<select id="searchReplyTitleByContext" parameterType="java.util.ArrayList" resultMap="Reply">
+	    select
+            *
+        from
+            q_reply
+        <trim prefix="where" prefixOverrides="and|or">
+        	<foreach collection="list" item="item">and replytitle like '%${item}%'</foreach>
+        </trim>
+	</select>
+	
 	<!-- context가 포함된 모든 답변을 가져온다. -->
 	<select id="searchByContext" parameterType="java.util.ArrayList" resultType="Reply">
 		select

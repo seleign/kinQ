@@ -62,6 +62,18 @@ public class ReplyDAO {
 		ArrayList<ReplyVO> result = mapper.searchByContext(context);
 		return result;
 	}
+
+
+	/**
+	 * DB로부터 context가 포함된 모든 답변을 가져온다.
+	 * @param context 답변에 포함된 단어
+	 * @return ArrayList<ReplyVO>
+	 */
+	public ArrayList<ReplyVO> searchReplyTitleByContext(ArrayList<String> context){
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ArrayList<ReplyVO> result = mapper.searchReplyTitleByContext(context);
+		return result;
+	}
 	
 	public int insertReplyTest(ReplyVO reply) {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);

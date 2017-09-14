@@ -99,4 +99,20 @@ public class UserService {
 		return loginUser;
 	}
 
+
+	public int countQuestions(int userNum) {
+		int questionsNum = userDao.countQuestions(userNum);
+		return questionsNum;
+	}
+
+	public int countAnswers(int userNum) {
+		int answersNum = userDao.countAnswers(userNum);
+		return answersNum;
+	}
+
+	public int countCompletedQuestions(int userNum) {
+		int completedQuestions = userDao.countCompletedQuestions(userNum);
+		return completedQuestions;
+	}
+
 }

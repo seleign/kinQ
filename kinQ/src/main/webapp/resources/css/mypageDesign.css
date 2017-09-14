@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+@import url("base.css");
+@import url("lists.css");
+@import url("bootstrap.min.css");
+@import url("prettyPhoto.css");
+@import url("font-awesome/css/font-awesome.min.css");
+@import url("fontello/css/fontello.css");
+
+/* 마이페이지 질문 대답 현황 부분 css*/
+.text-center {
+    text-align: center!important;
+}
+
+
+
+.icon-list-style i {
+    height: 19px;
+}
+
+.font-skyblue{
+	color: skyblue;
+	font-size: 30px;
+}
+
+.font-gold{
+	color: gold;
+	font-size: 30px;
+}
+
+.font-silver{
+	color: silver;
+	font-size: 30px;
+}
+
+.right-border {
+    border-right: 1px solid #9e9e9e;
+}
+
+.ul_list ul_list-icon-ok{
+	position: relative;
+	float: right;
+}
+
+.columnchart_values{
+	position: relative;
+	margin: 0 auto;
+	width: "500px";
+}
