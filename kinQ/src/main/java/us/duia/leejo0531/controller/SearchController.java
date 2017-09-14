@@ -44,7 +44,7 @@ public class SearchController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "search_no_answerd", method = RequestMethod.GET)
+	@RequestMapping(value = "search_no_answered", method = RequestMethod.GET)
 	public ArrayList<QuestionVO> search_no_answerd(String str, Model model) {
 		ArrayList<QuestionVO> result = sechSvc.search_no_answered();
 		model.addAttribute("QuestionListBycontext", result);
