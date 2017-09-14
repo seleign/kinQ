@@ -1,6 +1,12 @@
 package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +24,7 @@ import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.UserVO;
+import us.duia.leejo0531.vo.checkTimeVO;
 
 /**
  * 1) 이 컨트롤러는 Question관련 컨트롤러이다.
@@ -106,9 +113,7 @@ public class QuestionController {
 	 * @return 질문보기 페이지(~~.jsp)로 이동
 	 */
 	@RequestMapping(value = "questionView", method = RequestMethod.GET)
-	public String viewQuestion(QuestionVO qstn, Model model) {
-		//qstnSvc.getQuestion(qstn);
-//		System.out.println(qstn);
+	public String viewQuestion(HttpServletResponse response, HttpServletRequest request, QuestionVO qstn, Model model) {
 		// code here
 		QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(test);
@@ -118,14 +123,17 @@ public class QuestionController {
 		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
 		System.out.println("questionNum : " + question.getQuestionNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
+		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
+		System.out.println("checkTime : " + checkTimeResult);
 		model.addAttribute("question", question);
+		model.addAttribute("checkTimeResult", checkTimeResult);
 		model.addAttribute("id", user.getId());
 		model.addAttribute("minor", minor);
 		model.addAttribute("major", major);
 		model.addAttribute("tagList", tagList);
 		
-		return "question/questionView";
+		//return "question/questionView";
 
-		//return "question_view";
+		return "question_view";
 	}
 }

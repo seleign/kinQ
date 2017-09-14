@@ -68,4 +68,13 @@
 	<select id="getQuestionTag" parameterType="Question" resultType="Tag">
 		select tag from tag where questionNum = #{questionNum} order by tag asc
 	</select>
+	
+	<select id="getQuestionTime" parameterType="int" resultType="checkTime">
+		SELECT questionNum, trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'))/(30*12), 0) year
+	  ,	trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'))/30, 0) month
+      , trunc (TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'), 0) day
+      , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24 hour
+      , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24*60 minute
+  		FROM q_board where questionNum = #{questionNum}
+	</select>
 </mapper>

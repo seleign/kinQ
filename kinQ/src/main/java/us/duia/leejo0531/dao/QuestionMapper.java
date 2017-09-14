@@ -6,6 +6,7 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.checkTimeVO;
 
 public interface QuestionMapper {
 
@@ -26,4 +27,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> searchByContext(String context); //"context"가 포함된 질문을 가져온다.
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question);
+	
+	public checkTimeVO getQuestionTime(int questionNum);
 }

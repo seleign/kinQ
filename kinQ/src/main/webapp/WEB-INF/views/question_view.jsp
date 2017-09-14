@@ -3,7 +3,7 @@
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
+<head>
 	<!-- Basic Page Needs -->
 	<meta charset="utf-8">
 	<title>Ask me – Responsive Questions and Answers Template</title>
@@ -24,6 +24,41 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+	
+	<script src="./resources/js/jquery.min.js"></script>
+<script type="text/javascript">
+		var replyHtml = '';
+		var userId = <%=(String)session.getAttribute("userId")%>
+		$.ajax({
+			url: "questionReplyList",
+			type: "get",
+			data: { questionNum: ${ question.questionNum }},
+			success: function (replyList) {
+				alert(replyList);
+				replyHtml += "<table >";
+				for (var i = 0; i < replyList.length; i++) {
+					replyHtml += "<tr><td>";
+					replyHtml += "제목 : " + replyList[i].replyTitle;
+					replyHtml += "</td></tr>";
+					replyHtml += "<tr><td>";
+					replyHtml += "내용 : " + replyList[i].replyContent;
+					replyHtml += "</td></tr>";
+					replyHtml += "<tr><td align=\"right\">";
+					replyHtml += "작성자 : " + replyList[i].id;
+					replyHtml += "</td></tr>";
+					if (userId == replyList[i].id) {
+						replyHtml += "<tr><td>"
+						replyHtml += "<button onclick = \"deleteReply(" + replyList[i].replyNum + ")\">삭제</button>"
+						replyHtml += "</td></tr><br>"
+					}else {
+						replyHtml += "<br>"
+					}
+				}
+				replyHtml += "</table>";
+				$("#replyTable").html(replyHtml);
+			}
+		})
+	</script>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
@@ -32,7 +67,7 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>This is my first Question</h1>
+					<h1>여기 뭐가 들어가나요?</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
@@ -40,7 +75,7 @@
 						<span class="crumbs-span">/</span>
 						<a href="#">Questions</a>
 						<span class="crumbs-span">/</span>
-						<span class="current">This is my first Question</span>
+						<span class="current">${ question.title }</span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -52,22 +87,21 @@
 			<div class="col-md-9">
 				<article class="question single-question question-type-normal">
 					<h2>
-						<a href="single_question.html">This Is My first Question</a>
+						<a href="single_question.html">${ question.title }</a>
 					</h2>
 					<a class="question-report" href="#">Report</a>
 					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
 					<div class="question-inner">
 						<div class="clearfix"></div>
 						<div class="question-desc">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu .</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu .</p>
+							<p>${ question.questionContent }</p>
 						</div>
 						<div class="question-details">
 							<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
 							<span class="question-favorite"><i class="icon-star"></i>5</span>
 						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
+						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ minor.minorName }</a></span>
+						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>
 						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
 						<span class="question-view"><i class="icon-user"></i>70 views</span>
 						<span class="single-question-vote-result">+22</span>

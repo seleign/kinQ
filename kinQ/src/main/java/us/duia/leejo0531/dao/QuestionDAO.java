@@ -10,6 +10,7 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.checkTimeVO;
 
 /**
  * 1) 이 DAO는 DB에 질의하는데 사용된다.
@@ -104,5 +105,11 @@ public class QuestionDAO {
 		System.out.println("TagDAO 진입 : " + question);
 		ArrayList<TagVO> tagList = mapper.getQuestionTag(question);
 		return tagList;
+	}
+	
+	public checkTimeVO getQuestionTime(int questionNum) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		checkTimeVO checkTime = mapper.getQuestionTime(questionNum);
+		return checkTime;
 	}
 }
