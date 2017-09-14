@@ -34,7 +34,6 @@
 			type: "get",
 			data: { questionNum: ${ question.questionNum }},
 			success: function (replyList) {
-				alert(replyList[0].R_RegDate)
 				replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>"
 				for (var i = 0; i < replyList.length; i++) {
 					replyHtml += "<ol class=\"commentlist clearfix\">"
@@ -52,13 +51,14 @@
 					replyHtml += "</div>"
 					replyHtml += "<span class=\"question-vote-result\">+1</span>"//추천을 어떻게 받아서 계산할지 정해야됨
 					replyHtml += "<div class=\"comment-meta\">"
-					replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].R_RegDate + "</div>" 
+					replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" 
 					replyHtml += "</div>"
 					if (userId == replyList[i].id) {
 						replyHtml += "<a class=\"comment-reply\" href=\"#\"><i class=\"icon-reply\"></i>삭제</a>" 
 					}
 					replyHtml += "</div>"
-					replyHtml += "<div class=\"text\"><p>" + replyList[i].ReplyContent + "</p>"
+					replyHtml += "<div class=\"text\">"
+					replyHtml += "<p>" + replyList[i].replyContent + "</p>"
 					replyHtml += "</div>"
 					replyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>"
 					replyHtml += "</div>"
