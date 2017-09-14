@@ -413,7 +413,7 @@
 			if (connection.getAllParticipants().length) {
 				document.querySelector('h1').innerHTML = 'You are still connected with: '
 						+ connection.getAllParticipants().join(', ');
-			} else {
+			} else {  // 상대방이 연결을 끊었을 때
 				document.querySelector('h1').innerHTML = 'Seems session has been closed or all participants left.';
 			}
 		};
@@ -435,8 +435,9 @@
 			// don't display alert for moderator
 			if (connection.userid === event.userid)
 				return;
-			document.querySelector('h1').innerHTML = 'Entire session has been closed by the moderator: '
-					+ event.userid;
+			// 내가 연결을 끊었을 때
+			console.log('내가 연결을 끊었다.Entire session has been closed by the moderator: '
+					+ event.userid)
 		};
 
 		connection.onUserIdAlreadyTaken = function(useridAlreadyTaken,
