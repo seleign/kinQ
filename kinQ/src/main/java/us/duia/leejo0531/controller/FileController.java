@@ -42,11 +42,11 @@ public class FileController {
 	 * @return 
 	 * @return --작성 필요???
 	 */
-	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
-	public @ResponseBody String blob_upload(MultipartFile blob) {
-		logger.info("blob_upload: " + blob.getOriginalFilename());
-		return FileService.blob_upload(blob, id);
-	}
+//	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
+//	public @ResponseBody String blob_upload(MultipartFile blob) {
+//		logger.info("blob_upload: " + blob.getOriginalFilename());
+//		return FileService.blob_upload(blob, id);
+//	}
 	
 	/**
 	 * CKEditor에서 파일 업로드에 사용된다.

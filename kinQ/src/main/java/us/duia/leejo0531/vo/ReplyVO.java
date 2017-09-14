@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class ReplyVO extends QuestionVO{
 	private int replyNum;
-	private Date R_RegDate;
-	private Date R_ModDate;
+	private String R_RegDate;
+	private String R_ModDate;
 	private String ReplyTitle;
 	private String ReplyContent;
 	private String id;
@@ -14,15 +14,18 @@ public class ReplyVO extends QuestionVO{
 		super();
 	}
 
-	public ReplyVO(int questionNum,int userNum, String replyTitle, String replyContent) {
+	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent) {
 		super();
 		super.setQuestionNum(questionNum);
 		super.setUserNum(userNum);
+		this.replyNum = replyNum;
+		this.R_RegDate = r_RegDate;
+		this.R_ModDate = r_ModDate;
 		this.ReplyTitle = replyTitle;
 		this.ReplyContent = replyContent;
 	}
 
-	public ReplyVO(int replyNum, Date r_RegDate, Date r_ModDate, String replyTitle, String replyContent) {
+	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent) {
 		super();
 		this.replyNum = replyNum;
 		this.R_RegDate = r_RegDate;
@@ -31,7 +34,7 @@ public class ReplyVO extends QuestionVO{
 		this.ReplyContent = replyContent;
 	}
 	
-	public ReplyVO(int replyNum, Date r_RegDate, Date r_ModDate, String replyTitle, String replyContent, String id) {
+	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id) {
 		super();
 		this.replyNum = replyNum;
 		this.R_RegDate = r_RegDate;
@@ -49,19 +52,19 @@ public class ReplyVO extends QuestionVO{
 		this.replyNum = replyNum;
 	}
 
-	public Date getR_RegDate() {
+	public String getR_RegDate() {
 		return R_RegDate;
 	}
 
-	public void setR_RegDate(Date r_RegDate) {
+	public void setR_RegDate(String r_RegDate) {
 		R_RegDate = r_RegDate;
 	}
 
-	public Date getR_ModDate() {
+	public String getR_ModDate() {
 		return R_ModDate;
 	}
 
-	public void setR_ModDate(Date r_ModDate) {
+	public void setR_ModDate(String r_ModDate) {
 		R_ModDate = r_ModDate;
 	}
 

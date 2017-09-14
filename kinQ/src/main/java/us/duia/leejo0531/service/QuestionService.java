@@ -126,6 +126,7 @@ public class QuestionService {
 			checkTimeResult = checkTime.getYear() + " Year";
 		}
 		return checkTimeResult;
+	}
 	/**
 	 * 모든 질문글을 가져온다
 	 * @return ArrayList<QuestionVO>

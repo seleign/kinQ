@@ -76,7 +76,8 @@
       , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24 hour
       , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24*60 minute
   		FROM q_board where questionNum = #{questionNum}
-
+	</select>
+	
 	<!-- 전체 질문글 가져오기 -->
 	<select id="getAllQuestion" resultType="Question">
 		select * from q_board order by questionNum desc
