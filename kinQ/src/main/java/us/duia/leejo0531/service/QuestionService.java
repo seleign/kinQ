@@ -84,7 +84,7 @@ public class QuestionService {
 	 * @param context 검색할 텍스트
 	 * @return ArrayList
 	 */
-	public ArrayList<QuestionVO> searchByContext(String context){
+	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
 		ArrayList<QuestionVO> result = qstnDao.searchByContext(context);
 		return result;
 	}
@@ -126,6 +126,7 @@ public class QuestionService {
 			checkTimeResult = checkTime.getYear() + " Year";
 		}
 		return checkTimeResult;
+	}
 	/**
 	 * 모든 질문글을 가져온다
 	 * @return ArrayList<QuestionVO>

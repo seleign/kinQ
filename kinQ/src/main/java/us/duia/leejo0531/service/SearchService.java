@@ -48,7 +48,7 @@ public class SearchService {
 //		ArrayList<TagVO> QuestionListByTag = new ArrayList<>();
 //		words.parallelStream().forEach(tag -> QuestionListByTag.addAll( tagDao.getQuestionListByTag(tag) ));
 
-//		ArrayList<QuestionVO> QuestionListByTag = tagDao.getQuestionListByTag(words);
+		ArrayList<QuestionVO> QuestionListByTag = tagDao.getQuestionListByTag(words);
 
 		//단어(context)가 포함된 질문을 가져온다.
 //		ArrayList<QuestionVO> QuestionListBycontext = new ArrayList<>();
@@ -64,7 +64,7 @@ public class SearchService {
 		ArrayList<ReplyVO> ReplyListBycontext = replyDao.searchByContext(words);
 		
 		HashMap<String, Object> result = new HashMap<>();
-//		result.put("QuestionListByTag", QuestionListByTag);
+		result.put("QuestionListByTag", QuestionListByTag);
 		result.put("QuestionListBycontext", QuestionListBycontext);
 		result.put("ReplyListBycontext", ReplyListBycontext);
 		

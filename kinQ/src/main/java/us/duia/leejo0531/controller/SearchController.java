@@ -40,7 +40,7 @@ public class SearchController {
 	public HashMap<String, Object> search_by_words(String str, Model model) {
 		System.out.println( str);
 		HashMap<String, Object> map = sechSvc.search_by_words(str);
-//		model.addAttribute("QuestionListByTag", (ArrayList<TagVO>)map.get("QuestionListByTag"));
+		model.addAttribute("QuestionListByTag", (ArrayList<TagVO>)map.get("QuestionListByTag"));
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
 		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
 		return map; //어느 페이지로 이동시킬 것인가?
