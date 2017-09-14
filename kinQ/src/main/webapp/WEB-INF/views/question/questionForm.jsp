@@ -27,7 +27,7 @@
 <!-- 화면 녹화를 위한 RTC -->
 <script src="./resources/js/screenshot.js"></script>
 <!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
-<script src="/resources/js/getHTMLMediaElement.js"></script>
+<script src="./resources/js/getHTMLMediaElement.js"></script>
 
 <!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
