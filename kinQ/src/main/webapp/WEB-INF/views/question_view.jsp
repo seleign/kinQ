@@ -35,8 +35,8 @@
 			data: { questionNum: ${ question.questionNum }},
 			success: function (replyList) {
 				replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>"
+				replyHtml += "<ol class=\"commentlist clearfix\">"
 				for (var i = 0; i < replyList.length; i++) {
-					replyHtml += "<ol class=\"commentlist clearfix\">"
 					replyHtml += "<li class=\"comment\">"
 					replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">"
 					replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>"
@@ -64,15 +64,8 @@
 					replyHtml += "</div>"
 					replyHtml += "</div>"
 					replyHtml += "</li>"
-					replyHtml += "</ol>"
-					/* if (userId == replyList[i].id) {
-						replyHtml += "<tr><td>"
-						replyHtml += "<button onclick = \"deleteReply(" + replyList[i].replyNum + ")\">삭제</button>"
-						replyHtml += "</td></tr><br>"
-					}else {
-						replyHtml += "<br>"
-					} */
 				}
+				replyHtml += "</ol>"
 				console.log(replyHtml);
 				$("#commentlist").html(replyHtml);
 				$("#answerCount").html(replyList.length);
@@ -122,8 +115,8 @@
 						</div>
 						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ minor.minorName }</a></span>
 						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i><span id="answerCount">5 </span>Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
+						<span class="question-comment"><a href="#"><i class="icon-comment"></i><span id="answerCount"></span> Answer</a></span>
+						<span class="question-view"><i class="icon-user"></i>${ question.hit } views</span>
 						<span class="single-question-vote-result">+22</span>
 						<ul class="single-question-vote">
 							<li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
@@ -135,7 +128,9 @@
 				
 				<div class="share-tags page-content">
 					<div class="question-tags"><i class="icon-tags"></i>
-						<a href="#">wordpress</a>, <a href="#">question</a>, <a href="#">developer</a>
+						<c:forEach var="tag" items="${ tagList }">
+							<a href="#">${ tag.tag }</a>&nbsp;&nbsp;
+						</c:forEach>
 					</div>
 					<div class="share-inside-warp">
 						<ul>
