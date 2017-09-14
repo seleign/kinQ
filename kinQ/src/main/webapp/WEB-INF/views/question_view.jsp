@@ -75,6 +75,7 @@
 				}
 				console.log(replyHtml);
 				$("#commentlist").html(replyHtml);
+				$("#answerCount").html(replyList.length);
 			}
 		})
 </script>
@@ -121,7 +122,7 @@
 						</div>
 						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ minor.minorName }</a></span>
 						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
+						<span class="question-comment"><a href="#"><i class="icon-comment"></i><span id="answerCount">5 </span>Answer</a></span>
 						<span class="question-view"><i class="icon-user"></i>70 views</span>
 						<span class="single-question-vote-result">+22</span>
 						<ul class="single-question-vote">
