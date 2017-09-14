@@ -75,15 +75,14 @@ CREATE TABLE Q_Board
 (
     QuestionNum        NUMBER            NOT NULL, 
     UserNum            NUMBER            NOT NULL, 
-    timeLimit          TIMESTAMP             NULL, 
-    questionNum        VARCHAR2(30)      NOT NULL, 
+    timeLimit          DATE              NULL, 
+    urgent             VARCHAR2(30)      NOT NULL, 
     RegDate            DATE              NOT NULL, 
     ModDate            DATE              NOT NULL, 
     Title              VARCHAR2(90)      NOT NULL, 
     RelatedTag         VARCHAR2(30)      NOT NULL, 
     Hit                NUMBER            NOT NULL, 
     QuestionContent    VARCHAR2(3000)    NOT NULL, 
-    SCORE			   NUMBER(10)		 NOT NULL,	
     CONSTRAINT Q_BOARD_PK PRIMARY KEY (QuestionNum)
 )
 /

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
@@ -15,6 +16,7 @@ import us.duia.leejo0531.vo.TagVO;
  * @author leejunyeon
  *
  */
+@Repository
 public class TagDAO{
 	
 	@Autowired
@@ -35,20 +37,9 @@ public class TagDAO{
 	 * @param tag 검색할 태그명
 	 * @return ArrayList<TagVO>
 	 */
-	public ArrayList<TagVO> getQuestionListByTag(String tag) {
+	public ArrayList<QuestionVO> getQuestionListByTag(ArrayList<String> tag) {
 		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
-		ArrayList<TagVO> result = mapper.getQuestionListByTag(tag);
-		return result;
-	}
-	
-	/**
-	 * tag가 들어간 답변을 가져온다.
-	 * @param tag 검색할 태그명
-	 * @return ArrayList<TagVO>
-	 */
-	public ArrayList<TagVO> getReplyListByTag(String tag) {
-		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
-		ArrayList<TagVO> result = mapper.getReplyListByTag(tag);
+		ArrayList<QuestionVO> result = mapper.getQuestionListByTag(tag);
 		return result;
 	}
 }

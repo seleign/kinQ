@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.ReplyService;
 import us.duia.leejo0531.service.SearchService;
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
 
@@ -39,4 +40,16 @@ public class ReplyController {
 		return "/";
 	}
 	
+	/**
+	 * 해당글의 답변을 가져온다. 
+	 * @param Reply
+	 * @return ArrayList<ReplyVO>
+	 */
+	@RequestMapping(value = "questionReplyList", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<ReplyVO> questionReplyList(QuestionVO qstn) {
+		int questionNum = qstn.getQuestionNum();
+		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(questionNum);
+		System.out.println( replyList);
+		return replyList;
+	}
 }

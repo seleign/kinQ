@@ -90,6 +90,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value="mypage", method=RequestMethod.GET)
 	public String openMyPage(Model model, HttpSession session){
 		int questionsNum = userSvc.countQuestions((int)session.getAttribute("userNum"));
@@ -100,6 +101,11 @@ public class UserController {
 		model.addAttribute("answersNum", answersNum);
 		return "mypage";
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	
-
+	@RequestMapping(value="myPage", method=RequestMethod.GET)
+	public String myPage(){
+		return "user/myPage";
+	}
 }

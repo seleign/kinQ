@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import us.duia.leejo0531.service.SearchService;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
@@ -33,12 +35,20 @@ public class SearchController {
 	 */
 	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	public String search_by_words(String str, Model model) {
+		System.out.println( str);
 		HashMap<String, Object> map = sechSvc.search_by_words(str);
 		model.addAttribute("QuestionListByTag", (ArrayList<TagVO>)map.get("QuestionListByTag"));
-		model.addAttribute("ReplyListByTag", (ArrayList<TagVO>)map.get("ReplyListByTag"));
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
 		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
 		return "/"; //어느 페이지로 이동시킬 것인가?
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "search_no_answerd", method = RequestMethod.GET)
+	public ArrayList<QuestionVO> search_no_answerd(String str, Model model) {
+		ArrayList<QuestionVO> result = sechSvc.search_no_answered();
+		model.addAttribute("QuestionListBycontext", result);
+		return result; //어느 페이지로 이동시킬 것인가?
 	}
 	
 	//핫 태그?

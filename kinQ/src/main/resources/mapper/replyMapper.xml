@@ -18,10 +18,14 @@
 	</delete>
 	
 	<!-- context가 포함된 모든 답변을 가져온다. -->
-	<select id="searchByContext" parameterType="Reply">
-	
-	<!-- code here -->
-	
+	<select id="searchByContext" parameterType="java.util.ArrayList" resultType="Reply">
+		select
+	        *
+	    from
+	        q_reply
+	    <trim prefix="where" prefixOverrides="and|or">
+	    	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
+	    </trim>
 	</select>
 	
 	<!-- 답변을 1개(?)가져온다. -->
@@ -30,6 +34,18 @@
 	</insert>
 	
 	<insert id="insertReplyTest" parameterType="Reply">
-		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, #{id}, sysdate, sysdate, #{ReplyTitle}, #{ReplyContent})
+		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, sysdate, sysdate, #{ReplyTitle}, #{ReplyContent})
 	</insert>
+	
+	<select id="questionReplyList" parameterType="int" resultType="Reply">
+		select reply.REPLYNUM, 
+		reply.QUESTIONNUM, 
+		reply.USERNUM, 
+		to_char(reply.R_REGDATE, 'YYYY-MM-DD') as R_REGDATE, 
+		to_char(reply.R_MODDATE, 'YYYY-MM-DD') as R_MODDATE, 
+		reply.REPLYTITLE, 
+		reply.REPLYCONTENT, 
+		userinfo.id from q_reply reply, userinfo userinfo 
+		where reply.questionnum = 80 and reply.usernum = userinfo.usernum order by replyNum 
+	</select>
 </mapper>
