@@ -8,7 +8,7 @@ public class QuestionVO {
    private int questionNum;
    private int userNum; //질문자
    private Date timeLimit;
-   private String urgent;
+   private String qstatus;
    private Date regDate;
    private Date modDate;
    private String title;
@@ -17,6 +17,7 @@ public class QuestionVO {
    private String videoSrc; //동영상 파일(blob)
    private int hit;
    private String questionContent;
+   private int score;
    
    public QuestionVO() {
       super();
@@ -26,13 +27,13 @@ public class QuestionVO {
 	   super();
 	   this.questionNum = questionNum;
    }
-   public QuestionVO(int questionNum, int userNum, Date timeLimit, String urgent, Date regDate, Date modDate,
-         String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent) {
+   public QuestionVO(int questionNum, int userNum, Date timeLimit, String qstatus, Date regDate, Date modDate,
+         String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent, int score) {
       super();
       this.questionNum = questionNum;
       this.userNum = userNum;
       this.timeLimit = timeLimit;
-      this.urgent = urgent;
+      this.qstatus = qstatus;
       this.regDate = regDate;
       this.modDate = modDate;
       this.title = title;
@@ -41,6 +42,7 @@ public class QuestionVO {
       this.videoSrc = videoSrc;
       this.hit = hit;
       this.questionContent = questionContent;
+      this.score = score;
    }
 
    public int getQuestionNum() {
@@ -67,19 +69,27 @@ public class QuestionVO {
       this.timeLimit = timeLimit;
    }
 
-   public String getUrgent() {
-      return urgent;
+   public String getQstatus() {
+      return qstatus;
    }
 
-   public void setUrgent(String urgent) {
-      this.urgent = urgent;
+   public void setQstatus(String qstatus) {
+      this.qstatus = qstatus;
    }
 
    public Date getRegDate() {
       return regDate;
    }
 
-   public void setRegDate(Date regDate) {
+   public int getScore() {
+	return score;
+}
+
+public void setScore(int score) {
+	this.score = score;
+}
+
+public void setRegDate(Date regDate) {
       this.regDate = regDate;
    }
 
@@ -141,10 +151,10 @@ public class QuestionVO {
 
 @Override
 public String toString() {
-	return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", urgent="
-			+ urgent + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
+	return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", qstatus="
+			+ qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
 			+ relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit + ", questionContent="
-			+ questionContent + "]";
+			+ questionContent +", score="+score+"]";
 }
 
 }

@@ -219,11 +219,18 @@ public class FileService {
 		return result;
 	}
 	
+	
 	/**
-	 * 글쓰기상태에서 녹화한 동영상을 저장한다.
-	 * @return
+	 * 질문하기 페이지에서 녹화한 동영상을 저장한다.
+	 * @param blob 저장할 동영상
+	 * @param id 파일을 업로드(전송)한 유저의 id
+	 * @param questionNum 동영상이 작성된 글(questionNum)의 번호
+	 * @return 저장된 동영상의 src 주소
 	 */
-	public static String blob_upload(MultipartFile blob, String id) {
+	public static String blob_upload(MultipartFile blob, String id, int questionNum) {
+		// questionNum 에 해당하는 곳에 저장해야함..
+		
+		logger.info("blob_upload: " + blob.getOriginalFilename());
 		String fileName = FileService.saveFile(blob, FileService.fileSaveDirPath, id);
 		String path = "/resources/" + uploadFolderName + "/" + id + "/" + fileName;
 		return path;

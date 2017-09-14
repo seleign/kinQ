@@ -90,8 +90,8 @@ public class QuestionService {
 	}
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
-		//System.out.println("questionService : " + question);
-		//System.out.println("qstnDao : " + qstnDao);
+		System.out.println("questionService : " + question);
+		System.out.println("qstnDao : " + qstnDao);
 		ArrayList<TagVO> tagList = qstnDao.getQuestionTag(question);
 		return tagList;
 	}
@@ -126,5 +126,12 @@ public class QuestionService {
 			checkTimeResult = checkTime.getYear() + " Year";
 		}
 		return checkTimeResult;
+	/**
+	 * 모든 질문글을 가져온다
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getAllQuestion(){
+		ArrayList<QuestionVO> result = qstnDao.getAllQuestion();
+		return result;
 	}
 }

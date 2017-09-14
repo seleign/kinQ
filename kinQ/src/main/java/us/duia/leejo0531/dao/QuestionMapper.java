@@ -29,4 +29,5 @@ public interface QuestionMapper {
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question);
 	
 	public checkTimeVO getQuestionTime(int questionNum);
+	public ArrayList<QuestionVO> getAllQuestion();
 }

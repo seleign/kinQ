@@ -111,5 +111,14 @@ public class QuestionDAO {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		checkTimeVO checkTime = mapper.getQuestionTime(questionNum);
 		return checkTime;
+=======
+	/**
+	 * DB에서 모든 질문글을 가져온다
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getAllQuestion(){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.getAllQuestion();
+		return result;
 	}
 }

@@ -6,7 +6,7 @@
 
 
 CKEDITOR.editorConfig = function( config ) {
-	config.extraPlugins = 'uploadimage,uploadwidget,widget,widgetselection,notificationaggregator,uploadfile,dragresize,tableresize,codesnippet,eqneditor,templates,dialog,dialogui,html5video,widget,widgetselection,clipboard,lineutils';
+	config.extraPlugins = 'uploadimage,uploadwidget,widget,widgetselection,notificationaggregator,uploadfile,dragresize,tableresize,codesnippet,eqneditor,templates,dialog,dialogui,html5video,widget,widgetselection,clipboard,lineutils,oembed';
 	//config.imageUploadUrl = 'cKEditorDragAndDropFileUpload';
 	config.uploadUrl = 'cKEditorDragAndDropFileUpload';
 	config.enterMode = CKEDITOR.ENTER_BR;
