@@ -173,7 +173,7 @@
 	});
     $(function () {
 		// Change this to the location of your server-side upload handler:
-		var url = '/fileupload';  // 사용
+		var url = '/fileupload';  // 사용
 		$('#fileupload').fileupload({
 			url: url,
 			dataType: 'json',

@@ -51,11 +51,11 @@ public class QuestionController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "addQuestion2", method = RequestMethod.GET)
+	@RequestMapping(value = "addQuestion5", method = RequestMethod.GET)
 	public String showQuestionForm2(Model model) {
 		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();;
 		model.addAttribute("majorList", majorList);
-		return "question/questionForm2";
+		return "question/questionForm5";
 	}
 	
 	/**
@@ -94,6 +94,7 @@ public class QuestionController {
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn) {
 		//qstnSvc.writeQuestion(qstn);
+		
 		logger.info(qstn.toString());
 		// code here
 
