@@ -86,7 +86,7 @@
 				<div class="widget widget_login">
 					<h3 class="widget_title">Login</h3>
 					<div class="form-style form-style-2">
-						<form action="login" id="loginform" method="get">
+						<form action="login" id="loginform" method="post">
 							<div class="form-inputs clearfix">
 								<p class="login-text">
 									<input type="text" name="id" value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Username';}">
