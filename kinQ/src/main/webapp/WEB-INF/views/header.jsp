@@ -39,7 +39,7 @@
 					<div class="page-content">
 						<h2>Login</h2>
 						<div class="form-style form-style-3">
-							<form action="login" id="loginform" method="get">
+							<form action="login" id="loginform" method="post">
 								<div class="form-inputs clearfix">
 									<p class="login-text">
 										<input type="text"  name="id" value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Username';}">

@@ -60,8 +60,8 @@ public class UserController {
 		return "redirect:/"; 
 	}
 	
-	@RequestMapping(value="login", method=RequestMethod.GET)
-	public String requestLogin(UserVO user,HttpSession session){
+	@RequestMapping(value="login", method=RequestMethod.POST)
+	public String requestLogin(UserVO user,HttpSession session){	
 		UserVO loginUser = userSvc.requestLogin(user);
 		session.setAttribute("userName", loginUser.getUserName());
 		session.setAttribute("userId", loginUser.getId());
