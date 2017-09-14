@@ -18,10 +18,14 @@
 	</delete>
 	
 	<!-- context가 포함된 모든 답변을 가져온다. -->
-	<select id="searchByContext" parameterType="Reply">
-	
-	<!-- code here -->
-	
+	<select id="searchByContext" parameterType="java.util.ArrayList" resultType="Reply">
+		select
+	        *
+	    from
+	        q_reply
+	    <trim prefix="where" prefixOverrides="and|or">
+	    	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
+	    </trim>
 	</select>
 	
 	<!-- 답변을 1개(?)가져온다. -->

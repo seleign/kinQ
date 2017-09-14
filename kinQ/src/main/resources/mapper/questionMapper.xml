@@ -3,6 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="us.duia.leejo0531.dao.QuestionMapper">
+	<resultMap type="Question" id="QuestionResult">
+		<id property="questionNum" column="questionNum"/>
+		<result property="userNum" column="userNum"/>
+		<result property="timeLimit" column="timeLimit"/>
+		<result property="qstatus" column="qstatus"/>
+		<result property="regDate" column="regDate"/>
+		<result property="modDate" column="modDate"/>
+		<result property="title" column="title"/>
+		<result property="MinorNum" column="MinorNum"/>
+		<result property="videoSrc" column="videoSrc"/>
+		<result property="questionContent" column="questionContent"/>
+		<result property="score" column="score"/>
+		<collection property="relatedTag" javaType="ArrayList" ofType="string">
+			<result property="tag" column="tag"/>
+		</collection>
+	</resultMap>
+
+
 	<!-- 질문글을 게시한다. -->
 	<insert id="insertQuestion" parameterType="Question">
 		insert into Q_Board(
@@ -59,10 +77,21 @@
 	</select>
 	
 	<!-- context가 포함된 모든 질문글을 가져온다. -->
-	<select id="searchByContext">
-	
-	<!-- code here -->
-	
+	<select id="searchByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
+	select
+	    *
+	from
+		tag,
+	    (select
+            *
+        from
+            q_board
+        <trim prefix="where" prefixOverrides="and|or">
+        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
+        </trim>
+        ) searched
+	where searched.questionnum = tag.questionnum(+)
+	order by searched.questionnum, tag.tagnum
 	</select>
 	
 	<select id="getQuestionTag" parameterType="Question" resultType="Tag">
@@ -77,7 +106,6 @@
       , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24*60 minute
   		FROM q_board where questionNum = #{questionNum}
 	</select>
-	
 	<!-- 전체 질문글 가져오기 -->
 	<select id="getAllQuestion" resultType="Question">
 		select * from q_board order by questionNum desc

@@ -57,7 +57,7 @@ public class ReplyDAO {
 	 * @param context 답변에 포함된 단어
 	 * @return ArrayList<ReplyVO>
 	 */
-	public ArrayList<ReplyVO> searchByContext(String context){
+	public ArrayList<ReplyVO> searchByContext(ArrayList<String> context){
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		ArrayList<ReplyVO> result = mapper.searchByContext(context);
 		return result;

@@ -93,7 +93,7 @@ public class QuestionDAO {
 	 * @param context 질문글에 포함된 단어
 	 * @return ArrayList<QuestionVO>
 	 */
-	public ArrayList<QuestionVO> searchByContext(String context){
+	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.searchByContext(context);
 		return result;

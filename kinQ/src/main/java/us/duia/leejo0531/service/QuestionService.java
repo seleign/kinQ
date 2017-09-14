@@ -84,7 +84,7 @@ public class QuestionService {
 	 * @param context 검색할 텍스트
 	 * @return ArrayList
 	 */
-	public ArrayList<QuestionVO> searchByContext(String context){
+	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
 		ArrayList<QuestionVO> result = qstnDao.searchByContext(context);
 		return result;
 	}
