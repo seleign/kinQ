@@ -68,4 +68,9 @@
 	<select id="getQuestionTag" parameterType="Question" resultType="Tag">
 		select tag from tag where questionNum = #{questionNum} order by tag asc
 	</select>
+	
+	<!-- 전체 질문글 가져오기 -->
+	<select id="getAllQuestion" resultType="Question">
+		select * from q_board order by questionNum desc
+	</select>
 </mapper>

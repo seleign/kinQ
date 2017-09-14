@@ -21,6 +21,14 @@
 	<!-- code here -->
 	
 	</select>
+	<insert id="dummytag" parameterType="Tag">
+		insert into tag values(
+		tag_seq.nextval,
+		#{questionNum},
+		#{userNum},
+		#{tag}
+		)
+	</insert>
 	<insert id="insertTag" parameterType="Tag">
 		insert into tag values (tag_seq.nextval, #{questionNum}, #{userNum}, #{tag})
 	</insert>

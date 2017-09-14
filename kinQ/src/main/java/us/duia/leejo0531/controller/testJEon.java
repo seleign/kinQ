@@ -48,7 +48,7 @@ public class testJEon {
 			}
 			String replyTitle = "ReplyTitle" + i;
 			String replyContent = "ReplyContent" + i;
-			System.out.println(mapper.insertReplyTest(new ReplyVO(questionNum, userNum, replyTitle, replyContent)));
+			System.out.println(mapper.insertReplyTest(new ReplyVO(questionNum, userNum, id, replyTitle, replyContent)));
 		}
 		return "home";
 	}

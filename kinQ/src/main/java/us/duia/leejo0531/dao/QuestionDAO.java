@@ -54,12 +54,6 @@ public class QuestionDAO {
 		return majorList;
 	}
 	
-	public MinorVO getMinor(int minorNum) {
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		MinorVO minor = mapper.getMinor(minorNum);
-		return minor;
-	}
-	
 	/**
 	 * DB로부터 Minor(소분류)를 ArrayList로 가져온다.
 	 * @return MinorVO Minor
@@ -68,12 +62,6 @@ public class QuestionDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		ArrayList<MinorVO> minorList = mapper.getMinorList();
 		return minorList;
-	}
-	
-	public MajorVO getMajor(int majorNum) {
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		MajorVO major = mapper.getMajor(majorNum);
-		return major;
 	}
 	
 	/**
@@ -104,5 +92,15 @@ public class QuestionDAO {
 		System.out.println("TagDAO 진입 : " + question);
 		ArrayList<TagVO> tagList = mapper.getQuestionTag(question);
 		return tagList;
+	}
+	
+	/**
+	 * DB에서 모든 질문글을 가져온다
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getAllQuestion(){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.getAllQuestion();
+		return result;
 	}
 }

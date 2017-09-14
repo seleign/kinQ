@@ -19,5 +19,6 @@ public interface UserMapper {
 	public UserVO requestLogin(UserVO user);
 	public void updateUserInfo(UserVO user);
 	public void deleteOriginalField(int userNum);
+	public int countQuestions(int userNum);
 	public UserVO getUserInfo(int userNum);
 }

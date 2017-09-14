@@ -1,51 +1,131 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 
-* 본 페이지는 질문하기와 질문 수정하기가 하나인 페이지 입니다.
-* 
-*
- -->
-<%-- CKeditor에 특정 옵션을 주거나 뭔가 바꿔야한다면, 저(준연)에게 말해주세요. 물론 기능 추가도 됩니다.--%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+    <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>質問する</title>
+<script src="/resources/ckeditor/ckeditor.js"></script> <!-- 에디터용 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<!-- CKeditor -->
-<script src="/resources/ckeditor/ckeditor.js"></script> 
+<link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
+<script src="./resources/js/chosen.proto.min.js"></script>
+<!-- 수정된 플러그인입니다. 교체 불가. -->
+<script src="./resources/js/chosen.jquery.js"></script>
 
-<!-- JQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
-<script src="/resources/ckeditor/adapters/jquery.js"></script>
+<!-- Bootstrap styles -->
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- blueimp Gallery styles -->
+<link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="./resources/blueImp_jQuery_file_upload/css/jquery.fileupload.css">
+<link rel="stylesheet" href="./resources/blueImp_jQuery_file_upload/css/jquery.fileupload-ui.css">
 
-<!-- 음성 녹음을 위한 RTC -->
-<script src="/resources/js/RecordRTC.js"></script>
-<!-- 화면 녹화를 위한 RTC -->
-<script src="/resources/js/screenshot.js"></script>
-<!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
-<script src="/resources/js/getHTMLMediaElement.js"></script>
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
 
-<!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- 드래그/리사이즈를 위해 사용한 css // 아직 여기서 어느 코드가 역할을 하는지 모름... 알아봐야함 -->
-<link rel="stylesheet" type="text/css"
- href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
- 
-<!-- chosen 설정 파일-->
-<link type="text/css" href="/resources/css/chosen.min.css" rel="stylesheet">
-<script src="/resources/js/chosen.proto.min.js"></script>
-<!-- 수정된 chosen 플러그인입니다. 교체 불가. -->
-<script src="/resources/js/chosen.jquery.js"></script>
 
-<!-- datetimepicker 설정 파일 -->
-<script src="/resources/js/jquery.datetimepicker.full.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/jquery.datetimepicker.min.css" />
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="./resources/blueImp_jQuery_file_upload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- blueimp Gallery script -->
+<script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="./resources/blueImp_jQuery_file_upload/js/jquery.fileupload-ui.js"></script>
+<!-- The main application script -->
+<script src="./resources/blueImp_jQuery_file_upload/js/main.js"></script>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 window.onload = function() {
 	// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 		CKEDITOR.replace('questionContent',{ 
@@ -175,9 +255,16 @@ window.onload = function() {
 			stop = true;
 			this.disabled = true
 			$("#btn-record-webm").attr("disabled", false);
+=======
+	function formCheck() {
+		var title = $('#title').val();
+		if(title==''){
+			alert('おタイトルを入力して下さい。');
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 			return false;
 		}
 		
+<<<<<<< HEAD
 		// 실수로 인풋 창에서 "엔터"를 눌러서 전송되는 것을 막는다.
 		$(document).on("keypress", 'form', function (e) {
 		    var code = e.keyCode || e.which;
@@ -187,7 +274,23 @@ window.onload = function() {
 		    }
 		});
 }; //onload 종료
+=======
+		var minor = $('#minor').val();
+		if( minor=='') {
+			alert( '分類を選んでください。');
+			return false;
+		}
+		
+		if (!$('.answerType').is(":checked"))
+		{
+			alert( '望む答え方を選んでください。');
+			return false;
+		}
+		return true;
+	}
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 
+<<<<<<< HEAD
 
 
 // 글쓰기 페이지의 유효성 검사
@@ -196,60 +299,60 @@ function formCheck() {
 	if(title==''){
 		alert('おタイトルを入力して下さい。');
 		return false;
+=======
+	function loadMinorList(major){
+		$.ajax({
+			url: 'minorList',
+			method: 'get',
+			data: {major : major},
+			success: function(minorList){
+				var html = '';
+				$.each(minorList, function(index, element){
+					if(element.majorNum == major){
+						html +=	'<option value="' +element.minorNum +'">' +element.minorName +'</option>';
+					}
+				});
+				$('#minor').html(html);	
+			}
+		});
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	}
 	
-	var minor = $('#minor').val();
-	if( minor=='') {
-		alert( '分類を選んでください。');
-		return false;
-	}
-	return true;
-}
-
-
-// id에 해당하는 객체에 CKEDITOR에 작성된 글(html tag)를 넣는다.
-function setTo_id_HtmlTagFromTheCKEDITOR(id) {
-	$(id).empty(); //기존에 작성된 것을 삭제한다.
-	$(id).append(getHtmlTagFromTheCKEDITOR());
-	imgSrcToBase64Src_In_id(id);
-};
-
-// CKEDITOR에 작성된 글(html tag)를 가져온다.
-function getHtmlTagFromTheCKEDITOR() {
-	return CKEDITOR.instances.questionContent.getData();
-};
-
-//  id로 받은 태그 내의 모든 태그들을 드래그, 리사이즈 가능하게 만든다.
-function moveableAndDragable(id) {
-	//code Here
-}
-
-// id로 받은 태그 내의 모든 img의 src를 base64로 변환한다.
-function imgSrcToBase64Src_In_id(id) {
-	$(id).find('img').each(function(){
-		var imgObject = this;
-		
-		if( $(imgObject).attr('src').substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.
-			
-			return;
-		} else { // Base64가 아니면 ajax로 Base64로 변환한다.
-			$.ajax({
-	            url: 'imgToBase64',
-	            data: {
-	            		imgSrc: 	$(imgObject).attr('src')
-	           		},
-	            type: 'GET',
-	            success: function(result){
-					$(imgObject).attr('src', result.base64)
-	                    }
-	            });
-		}
-	}) // each 종료
-};
+	$(function(){
+		$('#tags').chosen();
+	});
+	
+	$(".chosen-select").chosen({
+		max_select_options: 5,
+		no_result_text: "No result found. Press enter to add"
+	});
+    $(function () {
+		// Change this to the location of your server-side upload handler:
+		var url = '/fileupload';  // 사용
+		$('#fileupload').fileupload({
+			url: url,
+			dataType: 'json',
+	       	singleFileUploads: false,
+//			autoUpload : true,
+			done: function (e, data) {
+				$.each(data.result.files, function (index, file) {
+					$('<p/>').text(file.name).appendTo('#files');
+				});
+			},
+			progressall: function (e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				$('#progress .progress-bar').css(
+					'width',
+					progress + '%'
+				);
+			}
+		}).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
+	});
 </script>
 </head>
 <body>
 
+<<<<<<< HEAD
 <form action="addQuestion" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
 <!-- 대분류(Major) 선택 -->
 <label for="major">分類</label>
@@ -264,7 +367,26 @@ function imgSrcToBase64Src_In_id(id) {
 <!-- 타이틀 -->
 <label for="title">タイトル</label>
 <input type="text" id="title" name="title" value="${title}"> <br>
+=======
+<h1>質問する</h1>
+	<div>
+		<form action="addQuestion" id="fileupload" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
+			<label for="title">タイトル</label><input type="text" id="title" name="title"><br>
+			<!-- 질문글 내용 시작. 수정 필요. -->
+			<label for="questionContent">内容</label>
+			
+			<textarea name="editor"></textarea>
+			<script src="/resources/ckeditor/adapters/jquery.js"></script>
+			<script type="text/javascript">
+				window.onload = function() {
+					CKEDITOR.replace('editor',{
+      				 filebrowserUploadUrl: 'cKEditorFileUpload'
+    					});
+				}
+			</script>
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 
+<<<<<<< HEAD
 <!-- 긴급질문 -->
 <label for="urgent">緊急質問
 <c:if test="${timeLimit == null? true : false }">
@@ -332,5 +454,82 @@ function imgSrcToBase64Src_In_id(id) {
 </div>
 <!-- step 2 = 동영상 게시글 종료 -->
 </form>
+=======
+			<!-- 질문글 내용 끝. 수정 필요. -->
+			<!-- 파일 첨부 -->
+			<label for="fileupload">添付</label>
+ 			<!-- Redirect browsers with JavaScript disabled to the origin page -->
+	        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+	        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+	        <div class="row fileupload-buttonbar">
+	            <div class="col-lg-7">
+	                <!-- The fileinput-button span is used to style the file input field as button -->
+	                <span class="btn btn-success fileinput-button">
+	                    <i class="glyphicon glyphicon-plus"></i>
+	                    <span>添付…</span>
+	                    <input type="file" name="files[]" multiple>
+	                </span>
+<!-- 	                <button type="submit" class="btn btn-primary start">
+	                    <i class="glyphicon glyphicon-upload"></i>
+	                    <span>Start upload</span>
+	                </button>
+ -->	                <button type="reset" class="btn btn-warning cancel">
+	                    <i class="glyphicon glyphicon-ban-circle"></i>
+	                    <span>キャンセル</span>
+	                </button>
+<!-- 	                <button type="button" class="btn btn-danger delete">
+	                    <i class="glyphicon glyphicon-trash"></i>
+	                    <span>Delete</span>
+	                </button>
+	                <input type="checkbox" class="toggle">
+	                The global file processing state
+	                <span class="fileupload-process"></span>
+ -->	            </div>
+	            <!-- The global progress state -->
+	            <div class="col-lg-5 fileupload-progress fade">
+	                <!-- The global progress bar -->
+	                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+	                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+	                </div>
+	                <!-- The extended global progress state -->
+	                <div class="progress-extended">&nbsp;</div>
+	            </div>
+	        </div>
+	        <!-- The table listing the files available for upload/download -->
+	        <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+ 			
+ 			
+			<!-- 분류 선택 -->
+			<label for="field">分類</label>
+			<select id="major" name="major"  onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
+				<option value="0" selected="selected">選択</option>
+<c:forEach var="major" items="${majorList}">
+				<option value="${major.majorNum}">${major.majorName}</option>
+</c:forEach>
+			</select>
+			<select id="minor" name="minor"></select><br>
+			<!-- 태그 입력 및 삭제-->
+			<label for="tags">タッグ</label>
+			<select id="tags" multiple class="chosen-select" style="width:300px;"></select><br>
+			<!-- 답변방식 선택(체크박스) -->
+			<label for="answerType">答え方</label><br>
+			<input type="checkbox" id="textAnswer" name="answerType" class="answerType" value="text">テキスト<br>
+			<input type="checkbox" id="voiceAnswer" name="answerType" class="answerType" value="voice">音声<br>
+			<input type="checkbox" id="drawingAnswer" name="answerType" class="answerType" value="drawing">ドローイング<br>
+			<input type="checkbox" id="videoAnswer" name="answerType" class="answerType" value="video">動画<br>
+			<input type="checkbox" id="textAnswerRealTime" name="answerType" class="answerType" value="text-realtime">テキスト（リアルタイム）<br>
+			<input type="checkbox" id="voiceAnswerRealTime" name="answerType" class="answerType" value="voice-realtime">音声（リアルタイム）<br>
+			<input type="checkbox" id="drawingAnswerRealTime" name="answerType" class="answerType" value="drawing-realtime">ドローイング（リアルタイム）<br>
+			<input type="checkbox" id="videoAnswerRealTime" name="answerType" class="answerType" value="video-realtime">動画（リアルタイム）<br>
+			<!-- 실시간 답변 선택(체크박스) -->
+			<hr>
+			<label for="urgent">緊急質問</label><br>
+			<input type="checkbox" id="urgent" name="urgent" value="urgent">大至急です。<br>
+			
+			<button onclick="javascript:history.go(-1);">戻る</button>
+			<input type="submit" value="質問登録">
+		</form>
+	</div>
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 </body>
 </html>

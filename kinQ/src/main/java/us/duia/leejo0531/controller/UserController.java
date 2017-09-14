@@ -90,9 +90,12 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	
-	@RequestMapping(value="myPage", method=RequestMethod.GET)
-	public String myPage(){
-		return "user/myPage";
+	@RequestMapping(value="mypage", method=RequestMethod.GET)
+	public String openMyPage(Model model, HttpSession session){
+		int questionsNum = userSvc.countQuestions((int)session.getAttribute("userNum"));
+		model.addAttribute("qestionsNum", questionsNum);
+		return "mypage";
 	}
+	
+
 }

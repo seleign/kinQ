@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.TagDAO;
-import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
-import us.duia.leejo0531.vo.UserVO;
 
 /**
  * 1) 이 서비스는 Question관련 서비스이다.
@@ -26,11 +24,7 @@ public class QuestionService {
 	
 	@Autowired
 	private QuestionDAO qstnDao;
-	@Autowired(required = false)
 	private TagDAO tagDao;
-	@Autowired(required = false)
-	private UserDAO userDao;
-	
 	/**
 	 * 질문을 등록한다.
 	 * @param qstn QuestionVO
@@ -89,25 +83,18 @@ public class QuestionService {
 	}
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
-		//System.out.println("questionService : " + question);
-		//System.out.println("qstnDao : " + qstnDao);
+		System.out.println("questionService : " + question);
+		System.out.println("qstnDao : " + qstnDao);
 		ArrayList<TagVO> tagList = qstnDao.getQuestionTag(question);
 		return tagList;
 	}
-
-	public MinorVO getMinor(int minorNum) {
-		MinorVO minor = qstnDao.getMinor(minorNum);
-		return minor;
-	}
-
-	public MajorVO getMajor(int majorNum) {
-		MajorVO major = qstnDao.getMajor(majorNum);
-		return major;
-	}
 	
-	public UserVO getUserInfo(int userNum) {
-		UserVO user = userDao.getUserInfo(userNum);
-		return user;
-		
+	/**
+	 * 모든 질문글을 가져온다
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getAllQuestion(){
+		ArrayList<QuestionVO> result = qstnDao.getAllQuestion();
+		return result;
 	}
 }
