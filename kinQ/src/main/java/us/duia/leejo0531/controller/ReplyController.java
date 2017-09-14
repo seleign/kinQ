@@ -49,7 +49,7 @@ public class ReplyController {
 	public @ResponseBody ArrayList<ReplyVO> questionReplyList(QuestionVO qstn) {
 		int questionNum = qstn.getQuestionNum();
 		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(questionNum);
-		
+		System.out.println(replyList);
 		return replyList;
 	}
 }

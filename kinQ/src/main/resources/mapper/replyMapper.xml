@@ -46,6 +46,6 @@
 		reply.REPLYTITLE, 
 		reply.REPLYCONTENT, 
 		userinfo.id from q_reply reply, userinfo userinfo 
-		where reply.questionnum = 80 and reply.usernum = userinfo.usernum order by replyNum 
+		where reply.questionnum = #{questionNum} and reply.usernum = userinfo.usernum order by replyNum 
 	</select>
 </mapper>
