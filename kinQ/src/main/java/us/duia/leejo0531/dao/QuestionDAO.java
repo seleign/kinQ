@@ -121,4 +121,10 @@ public class QuestionDAO {
 		ArrayList<QuestionVO> result = mapper.getAllQuestion();
 		return result;
 	}
+
+	public ArrayList<QuestionVO> search_no_answered() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.search_no_answered();
+		return result;
+	}
 }

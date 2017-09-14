@@ -34,16 +34,21 @@ public class SearchController {
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
 	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
-	//아래 @ResponseBody는 테스트를 위한 임시 어노테이션. 삭제 필요.
-	@ResponseBody
-	//리턴값 String으로
-	public HashMap<String, Object> search_by_words(String str, Model model) {
+	public String search_by_words(String str, Model model) {
 		System.out.println( str);
 		HashMap<String, Object> map = sechSvc.search_by_words(str);
 		model.addAttribute("QuestionListByTag", (ArrayList<TagVO>)map.get("QuestionListByTag"));
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
 		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
-		return map; //어느 페이지로 이동시킬 것인가?
+		return "/"; //어느 페이지로 이동시킬 것인가?
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "search_no_answerd", method = RequestMethod.GET)
+	public ArrayList<QuestionVO> search_no_answerd(String str, Model model) {
+		ArrayList<QuestionVO> result = sechSvc.search_no_answered();
+		model.addAttribute("QuestionListBycontext", result);
+		return result; //어느 페이지로 이동시킬 것인가?
 	}
 	
 	//핫 태그?

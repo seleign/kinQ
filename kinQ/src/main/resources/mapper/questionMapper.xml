@@ -110,4 +110,31 @@
 	<select id="getAllQuestion" resultType="Question">
 		select * from q_board order by questionNum desc
 	</select>
+	<select id="search_no_answered" resultMap="QuestionResult">
+	select
+	    *
+	from
+	    (select
+	        q_board.*
+	    from
+	        q_board,
+	        (select
+	            q_reply.*
+	        from
+	            q_reply,
+	            (select
+	                max(replynum) as answered
+	            from
+	                q_reply
+	            group by
+	                questionnum
+	            ) reply
+	        where q_reply.replynum = reply.answered
+	        ) no_dupl
+	    where
+	        q_board.questionnum = no_dupl.questionnum(+)
+	        and no_dupl.questionnum is null
+	    ) no_answer
+	order by questionnum
+	</select>
 </mapper>
