@@ -25,7 +25,7 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
-	<script src="./resources/js/jquery.min.js"></script>
+<script src="./resources/js/jquery.min.js"></script>
 <script type="text/javascript">
 		var replyHtml = '';
 		var userId = <%=(String)session.getAttribute("userId")%>
@@ -34,31 +34,50 @@
 			type: "get",
 			data: { questionNum: ${ question.questionNum }},
 			success: function (replyList) {
-				alert(replyList);
-				replyHtml += "<table >";
+				alert(replyList[0].R_RegDate)
+				replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>"
 				for (var i = 0; i < replyList.length; i++) {
-					replyHtml += "<tr><td>";
-					replyHtml += "제목 : " + replyList[i].replyTitle;
-					replyHtml += "</td></tr>";
-					replyHtml += "<tr><td>";
-					replyHtml += "내용 : " + replyList[i].replyContent;
-					replyHtml += "</td></tr>";
-					replyHtml += "<tr><td align=\"right\">";
-					replyHtml += "작성자 : " + replyList[i].id;
-					replyHtml += "</td></tr>";
+					replyHtml += "<ol class=\"commentlist clearfix\">"
+					replyHtml += "<li class=\"comment\">"
+					replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">"
+					replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>"
+					replyHtml += "<div class=\"comment-text\">"
+					replyHtml += "<div class=\"author clearfix\">"
+					replyHtml += "<div class=\"comment-author\"><a href=\"#\">" + replyList[i].id + "</a></div>"
+					replyHtml += "<div class=\"comment-vote\">"
+					replyHtml += "<ul class=\"question-vote\">"
+					replyHtml += "<li><a href=\"#\" class=\"question-vote-up\" title=\"Like\"></a></li>"
+					replyHtml += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>"
+					replyHtml += "</ul>"
+					replyHtml += "</div>"
+					replyHtml += "<span class=\"question-vote-result\">+1</span>"//추천을 어떻게 받아서 계산할지 정해야됨
+					replyHtml += "<div class=\"comment-meta\">"
+					replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].R_RegDate + "</div>" 
+					replyHtml += "</div>"
 					if (userId == replyList[i].id) {
+						replyHtml += "<a class=\"comment-reply\" href=\"#\"><i class=\"icon-reply\"></i>삭제</a>" 
+					}
+					replyHtml += "</div>"
+					replyHtml += "<div class=\"text\"><p>" + replyList[i].ReplyContent + "</p>"
+					replyHtml += "</div>"
+					replyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>"
+					replyHtml += "</div>"
+					replyHtml += "</div>"
+					replyHtml += "</li>"
+					replyHtml += "</ol>"
+					/* if (userId == replyList[i].id) {
 						replyHtml += "<tr><td>"
 						replyHtml += "<button onclick = \"deleteReply(" + replyList[i].replyNum + ")\">삭제</button>"
 						replyHtml += "</td></tr><br>"
 					}else {
 						replyHtml += "<br>"
-					}
+					} */
 				}
-				replyHtml += "</table>";
-				$("#replyTable").html(replyHtml);
+				console.log(replyHtml);
+				$("#commentlist").html(replyHtml);
 			}
 		})
-	</script>
+</script>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
@@ -197,130 +216,8 @@
 					</ul>
 				</div><!-- End related-posts -->
 				
+				<!-- 답글부분 -->
 				<div id="commentlist" class="page-content">
-					<div class="boxedtitle page-title"><h2>Answers ( <span class="color">5</span> )</h2></div>
-					<ol class="commentlist clearfix">
-					    <li class="comment">
-					        <div class="comment-body comment-body-answered clearfix"> 
-					            <div class="avatar"><img alt="" src="http://placehold.it/60x60/FFF/444"></div>
-					            <div class="comment-text">
-					                <div class="author clearfix">
-					                	<div class="comment-author"><a href="#">admin</a></div>
-					                	<div class="comment-vote">
-						                	<ul class="question-vote">
-						                		<li><a href="#" class="question-vote-up" title="Like"></a></li>
-						                		<li><a href="#" class="question-vote-down" title="Dislike"></a></li>
-						                	</ul>
-					                	</div>
-					                	<span class="question-vote-result">+1</span>
-					                	<div class="comment-meta">
-					                        <div class="date"><i class="icon-time"></i>January 15 , 2014 at 10:00 pm</div> 
-					                    </div>
-					                    <a class="comment-reply" href="#"><i class="icon-reply"></i>Reply</a> 
-					                </div>
-					                <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat.</p>
-					                </div>
-									<div class="question-answered question-answered-done"><i class="icon-ok"></i>Best Answer</div>
-					            </div>
-					        </div>
-					        <ul class="children">
-					            <li class="comment">
-					                <div class="comment-body clearfix"> 
-					                	<div class="avatar"><img alt="" src="http://placehold.it/60x60/FFF/444"></div>
-					                    <div class="comment-text">
-					                        <div class="author clearfix">
-					                        	<div class="comment-author"><a href="#">vbegy</a></div>
-					                        	<div class="comment-vote">
-					                            	<ul class="question-vote">
-					                            		<li><a href="#" class="question-vote-up" title="Like"></a></li>
-					                            		<li><a href="#" class="question-vote-down" title="Dislike"></a></li>
-					                            	</ul>
-					                        	</div>
-					                        	<span class="question-vote-result">+1</span>
-					                        	<div class="comment-meta">
-					                                <div class="date"><i class="icon-time"></i>January 15 , 2014 at 10:00 pm</div> 
-					                            </div>
-					                            <a class="comment-reply" href="#"><i class="icon-reply"></i>Reply</a> 
-					                        </div>
-					                        <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat.</p>
-					                        </div>
-					                    </div>
-					                </div>
-					                <ul class="children">
-					                    <li class="comment">
-					                        <div class="comment-body clearfix"> 
-					                            <div class="avatar"><img alt="" src="http://placehold.it/60x60/FFF/444"></div>
-					                            <div class="comment-text">
-					                                <div class="author clearfix">
-					                                	<div class="comment-author"><a href="#">admin</a></div>
-					                                	<div class="comment-vote">
-					                                    	<ul class="question-vote">
-					                                    		<li><a href="#" class="question-vote-up" title="Like"></a></li>
-					                                    		<li><a href="#" class="question-vote-down" title="Dislike"></a></li>
-					                                    	</ul>
-					                                	</div>
-					                                	<span class="question-vote-result">+9</span>
-					                                	<div class="comment-meta">
-					                                        <div class="date"><i class="icon-time"></i>January 15 , 2014 at 10:00 pm</div> 
-					                                    </div>
-					                                    <a class="comment-reply" href="#"><i class="icon-reply"></i>Reply</a> 
-					                                </div>
-					                                <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat.</p>
-					                                </div>
-					                            </div>
-					                        </div>
-					                    </li>
-					                 </ul><!-- End children -->
-					            </li>
-					            <li class="comment">
-					            	<div class="comment-body clearfix"> 
-				                        <div class="avatar"><img alt="" src="http://placehold.it/60x60/FFF/444"></div>
-				                        <div class="comment-text">
-				                            <div class="author clearfix">
-				                            	<div class="comment-author"><a href="#">ahmed</a></div>
-				                            	<div class="comment-vote">
-				                                	<ul class="question-vote">
-				                                		<li><a href="#" class="question-vote-up" title="Like"></a></li>
-				                                		<li><a href="#" class="question-vote-down" title="Dislike"></a></li>
-				                                	</ul>
-				                            	</div>
-				                            	<span class="question-vote-result">-3</span>
-				                            	<div class="comment-meta">
-				                                    <div class="date"><i class="icon-time"></i>January 15 , 2014 at 10:00 pm</div> 
-				                                </div>
-				                                <a class="comment-reply" href="#"><i class="icon-reply"></i>Reply</a> 
-				                            </div>
-				                            <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat.</p>
-				                            </div>
-				                        </div>
-				                    </div>
-					            </li>
-					        </ul><!-- End children -->
-					    </li>
-					    <li class="comment">
-					        <div class="comment-body clearfix"> 
-					            <div class="avatar"><img alt="" src="http://placehold.it/60x60/FFF/444"></div>
-					            <div class="comment-text">
-					                <div class="author clearfix">
-					                	<div class="comment-author"><a href="#">2code</a></div>
-					                	<div class="comment-vote">
-					                    	<ul class="question-vote">
-					                    		<li><a href="#" class="question-vote-up" title="Like"></a></li>
-					                    		<li><a href="#" class="question-vote-down" title="Dislike"></a></li>
-					                    	</ul>
-					                	</div>
-					                	<span class="question-vote-result">+1</span>
-					                	<div class="comment-meta">
-					                        <div class="date"><i class="icon-time"></i>January 15 , 2014 at 10:00 pm</div> 
-					                    </div>
-					                    <a class="comment-reply" href="#"><i class="icon-reply"></i>Reply</a> 
-					                </div>
-					                <div class="text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat.</p>
-					                </div>
-					            </div>
-					        </div>
-					    </li>
-					</ol><!-- End commentlist -->
 				</div><!-- End page-content -->
 				
 				<div id="respond" class="comment-respond page-content clearfix">
