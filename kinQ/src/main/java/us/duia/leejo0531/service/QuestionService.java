@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.TagDAO;
+import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.UserVO;
+import us.duia.leejo0531.vo.checkTimeVO;
 
 /**
  * 1) 이 서비스는 Question관련 서비스이다.
@@ -24,7 +27,11 @@ public class QuestionService {
 	
 	@Autowired
 	private QuestionDAO qstnDao;
+	@Autowired(required = false)
 	private TagDAO tagDao;
+	@Autowired(required = false)
+	private UserDAO userDao;
+	
 	/**
 	 * 질문을 등록한다.
 	 * @param qstn QuestionVO
@@ -88,7 +95,37 @@ public class QuestionService {
 		ArrayList<TagVO> tagList = qstnDao.getQuestionTag(question);
 		return tagList;
 	}
+
+	public MinorVO getMinor(int minorNum) {
+		MinorVO minor = qstnDao.getMinor(minorNum);
+		return minor;
+	}
+
+	public MajorVO getMajor(int majorNum) {
+		MajorVO major = qstnDao.getMajor(majorNum);
+		return major;
+	}
 	
+	public UserVO getUserInfo(int userNum) {
+		UserVO user = userDao.getUserInfo(userNum);
+		return user;
+	}
+	
+	public String getQuestionTime(int questionNum) {
+		checkTimeVO checkTime = qstnDao.getQuestionTime(questionNum);
+		String checkTimeResult = null;
+		if (checkTime.getHour() == 0) {
+			checkTimeResult = checkTime.getMinute() + " Minute";
+		} else if (checkTime.getDay() == 0) {
+			checkTimeResult = checkTime.getHour() + " Hour";
+		} else if (checkTime.getMonth() == 0) {
+			checkTimeResult = checkTime.getDay() + " day";
+		} else if (checkTime.getYear() == 0) {
+			checkTimeResult = checkTime.getMonth() + " Month";
+		} else {
+			checkTimeResult = checkTime.getYear() + " Year";
+		}
+		return checkTimeResult;
 	/**
 	 * 모든 질문글을 가져온다
 	 * @return ArrayList<QuestionVO>

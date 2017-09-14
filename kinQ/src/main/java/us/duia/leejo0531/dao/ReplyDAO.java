@@ -68,4 +68,10 @@ public class ReplyDAO {
 		int result = mapper.insertReplyTest(reply);
 		return result;
 	}
+	
+	public ArrayList<ReplyVO> questionReplyList(int questionNum) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ArrayList<ReplyVO> replyList = mapper.questionReplyList(questionNum);
+		return replyList;
+	}
 }

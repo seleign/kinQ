@@ -34,6 +34,10 @@
 	</insert>
 	
 	<insert id="insertReplyTest" parameterType="Reply">
-		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, #{id}, sysdate, sysdate, #{ReplyTitle}, #{ReplyContent})
+		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, sysdate, sysdate, #{ReplyTitle}, #{ReplyContent})
 	</insert>
+	
+	<select id="questionReplyList" parameterType="int" resultType="Reply">
+		select reply.*, userinfo.id from q_reply reply, userinfo userinfo where reply.questionnum = 80 and reply.usernum = userinfo.usernum order by replyNum 
+	</select>
 </mapper>

@@ -3,22 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="us.duia.leejo0531.dao.TagMapper">
-	<resultMap type="Question" id="QuestionResult">
-		<id property="questionNum" column="questionNum"/>
-		<result property="userNum" column="userNum"/>
-		<result property="timeLimit" column="timeLimit"/>
-		<result property="qstatus" column="qstatus"/>
-		<result property="regDate" column="regDate"/>
-		<result property="modDate" column="modDate"/>
-		<result property="title" column="title"/>
-		<result property="MinorNum" column="MinorNum"/>
-		<result property="videoSrc" column="videoSrc"/>
-		<result property="questionContent" column="questionContent"/>
-		<result property="score" column="score"/>
-		<collection property="relatedTag" javaType="ArrayList" ofType="string">
-			<result property="tag" column="tag"/>
-		</collection>
-	</resultMap>
 	<!-- 모든 태그를 가져온다. -->
 	<select id="selectTags" resultType="Tag">
 		select *
@@ -26,25 +10,17 @@
 	</select>
 	
 	<!-- tag가 들어간 질문글을 가져온다. -->
-	<select id="getQuestionListByTag" parameterType="Question" resultMap="QuestionResult">
-		select
-	        *
-	    from
-	        q_reply,
-	        tag
-	    <trim prefix="where" prefixOverrides="and|or">
-	    	<foreach collection="list" item="item">or tag = '%${item}%'</foreach>
-	    </trim>
+	<select id="getQuestionListByTag" parameterType="Tag" resultType="Tag">
+	<!-- code here -->
+	
 	</select>
 	
-	<insert id="dummytag" parameterType="Tag">
-		insert into tag values(
-		tag_seq.nextval,
-		#{questionNum},
-		#{userNum},
-		#{tag}
-		)
-	</insert>
+	<!-- tag가 들어간 답변을 가져온다. -->
+	<select id="getReplyListByTag" parameterType="Tag" resultType="Tag">
+	
+	<!-- code here -->
+	
+	</select>
 	<insert id="insertTag" parameterType="Tag">
 		insert into tag values (tag_seq.nextval, #{questionNum}, #{userNum}, #{tag})
 	</insert>

@@ -6,6 +6,7 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.checkTimeVO;
 
 public interface QuestionMapper {
 
@@ -27,5 +28,6 @@ public interface QuestionMapper {
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question);
 	
+	public checkTimeVO getQuestionTime(int questionNum);
 	public ArrayList<QuestionVO> getAllQuestion();
 }
