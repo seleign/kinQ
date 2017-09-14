@@ -100,9 +100,5 @@ public class UserController {
 		model.addAttribute("answersNum", answersNum);
 		return "mypage";
 	}
-	
-	@RequestMapping(value="myPage", method=RequestMethod.GET)
-	public String myPage(){
-		return "user/myPage";
-	}
+
 }
