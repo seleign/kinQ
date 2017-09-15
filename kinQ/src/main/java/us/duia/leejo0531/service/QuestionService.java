@@ -135,4 +135,13 @@ public class QuestionService {
 		ArrayList<QuestionVO> result = qstnDao.getAllQuestion();
 		return result;
 	}
+	
+	/**
+	 * 매개변수로 받은 번호사이의 글을 조회한다 
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		ArrayList<QuestionVO> result = qstnDao.getQuestionPage(startpage, endpage);
+		return result;
+	}
 }

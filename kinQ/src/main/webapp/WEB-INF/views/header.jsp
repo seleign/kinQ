@@ -142,7 +142,7 @@
 							<li><a href="single_question_poll.html">하위 3</a></li>
 						</ul>
 					</li>
-					<li><a href="blog_1.html">포인트샵 중분류-소분류</a>
+					<li><a href="search">포인트샵 중분류-소분류</a>
 						<ul>
 							<li><a href="blog_1.html">중 1</a>
 								<ul>

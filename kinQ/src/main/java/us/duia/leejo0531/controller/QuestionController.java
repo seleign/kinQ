@@ -171,5 +171,15 @@ public class QuestionController {
 		model.addAttribute("question_title", question_title);
 		return "askQuestion";
 	}
+	
+	/**
+	 * Ajax로 질문목록 모두 가져오기, index에서 조회된다 
+	 * @return ArrayList<QuestionVO>
+	 */
+	@RequestMapping(value="getQuestionPage",method=RequestMethod.GET)
+	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
+		return result;
+	}
 
 }

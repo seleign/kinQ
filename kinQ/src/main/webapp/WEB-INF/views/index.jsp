@@ -24,6 +24,37 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	function userlist(){
+		$.ajax({
+			url: 'getQuestionPage',
+			method: 'get',
+			success: function(result){
+				var html ='<article class="question question-type-normal">';
+				$.each(result, function(index, element){
+					html += '<h2><a href=""question_view>'+element.title+'</a></h2>';
+					html += '<a class="question-report" href="#">Report</a>';
+					html += '<div class="question-inner"><div class="clearfix"></div>';
+					html += '<p class="question-desc">'+element.questionContent+'</p>';
+					html += '<div class="question-details">';
+					html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>'+element.qstatus+'</span>';
+					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
+					if(element.authority == "0"){
+						html += '<td class="authority"><input type="image" onclick="javascript:authority(\''+element.userid+'\')" src="./resources/no.png"></td>';
+					}else{
+						html += '<td class="authority"><input type="image" src="./resources/yes.png"></td>';
+					}
+					html += '</td></tr>';
+				});
+				
+				html +='<tr><th colspan="7"><input type="button" onclick="javascript:adminpage()" value="첫 화면으로"></th></tr>';
+				$('div.tab-inner').html(html);
+			}
+		});
+	}
+	</script>
   
 </head>
 <body>
