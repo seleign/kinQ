@@ -111,31 +111,8 @@
 		            </ul>
 		            <div class="tab-inner-warp">
 						<div class="tab-inner" id="QuestionList_tap">
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This is my first Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
 					    </div>
-							<a href="#" class="load-questions" onclick="javascript:userlist()"><i class="icon-refresh"></i>Load More Questions</a>
+							<button class="button large gray-button" id="QuestionList_button" onclick="javascript:userlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
 						<div class="tab-inner">

@@ -64,6 +64,9 @@ body {
 	margin-top: 3px;
 }
 
+#QuestionList_button {
+	width:100%;
+}
 /* 占쏙옙 占쏙옙 */
 #warp {
 	background-color: #f3f3f3;
