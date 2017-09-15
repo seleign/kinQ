@@ -174,7 +174,7 @@
 						</li>
 					</ul>
 				</div>
-				
+				<!-- 핫 태그 hot tag -->
 				<div class="widget widget_tag_cloud">
 					<h3 class="widget_title">Tags</h3>
 					<a href="#">projects</a>

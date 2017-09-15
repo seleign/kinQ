@@ -6,7 +6,7 @@
 
 	<!-- Basic Page Needs -->
 	<meta charset="utf-8">
-	<title>マイページ</title>
+	<title>検索結果</title>
 	<meta name="description" content="Ask me Responsive Questions and Answers Template">
 	<meta name="author" content="vbegy">
 	
@@ -100,121 +100,6 @@
 				<article class="question question-type-normal">
 					<h2>
 						<a href="single_question.html">This Is My Third Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
-						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-				<article class="question question-type-normal">
-					<h2>
-						<a href="single_question.html">This Is My Fourth Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
-						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-				<article class="question question-type-normal">
-					<h2>
-						<a href="single_question.html">This Is My Fifth Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
-						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-				<article class="question question-type-normal">
-					<h2>
-						<a href="single_question.html">This Is My Sixth Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
-						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-				<article class="question question-type-normal">
-					<h2>
-						<a href="single_question.html">This Is My seventh Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
-						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-				<article class="question question-type-normal">
-					<h2>
-						<a href="single_question.html">This Is My Eighth Question</a>
 					</h2>
 					<a class="question-report" href="#">Report</a>
 					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>

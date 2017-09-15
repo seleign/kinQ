@@ -31,6 +31,8 @@ public interface QuestionMapper {
 	
 	public ArrayList<QuestionVO> searchTitleByContext(ArrayList<String> context); //"context"가 포함된 질문을 가져온다.
 	
+	public ArrayList<QuestionVO> searchTagByContext(ArrayList<String> tag);
+	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question);
 	
 	public checkTimeVO getQuestionTime(int questionNum);

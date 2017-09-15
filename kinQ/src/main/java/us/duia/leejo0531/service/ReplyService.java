@@ -50,21 +50,6 @@ public class ReplyService {
 		return result;
 	}
 	
-	/**
-	 * context가 포함된 모든 답변을 가져온다.
-	 * @param context 검색할 텍스트
-	 * @return ArrayList<ReplyVO>
-	 */
-	public ArrayList<ReplyVO> searchByContext(ArrayList<String> context){
-		ArrayList<ReplyVO> result = replyDao.searchByContext(context);
-		return result;
-	}
-	
-	public ArrayList<ReplyVO> searchReplyTitleByContext(ArrayList<String> context){
-		ArrayList<ReplyVO> result = replyDao.searchReplyTitleByContext(context);
-		return result;
-	}
-	
 	public ArrayList<ReplyVO> questionReplyList(int questionNum) {
 		ArrayList<ReplyVO> replyList = replyDao.questionReplyList(questionNum);
 		return replyList;
