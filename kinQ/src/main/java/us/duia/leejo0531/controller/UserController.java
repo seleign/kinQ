@@ -1,8 +1,11 @@
 package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +24,23 @@ import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.UserVO;
 
 @Controller
-public class UserController {
+public class UserController implements HttpSessionListener{
 	private static final Logger logger=LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	UserService userSvc;
+	
+	public static Hashtable<String, String> loginSessionMonitor;
+
+	// 현재 접속자 수
+	public static int getActiveLoginSessionCount(){
+		if(loginSessionMonitor == null){
+			return 0;
+		}else{
+			return loginSessionMonitor.size();
+		}
+	}
+	
 	
 	// 회원가입 양식 보기
 	@RequestMapping(value="join", method=RequestMethod.GET)
@@ -63,14 +78,25 @@ public class UserController {
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String requestLogin(UserVO user,HttpSession session){	
 		UserVO loginUser = userSvc.requestLogin(user);
+		
+		if(loginSessionMonitor == null) loginSessionMonitor = new Hashtable<String, String>();
+		
+		synchronized(loginSessionMonitor){
+			loginSessionMonitor.put(session.getId(), loginUser.getId());
+		}
+
 		session.setAttribute("userName", loginUser.getUserName());
 		session.setAttribute("userId", loginUser.getId());
 		session.setAttribute("userNum", loginUser.getUserNum());
+		
 		return "redirect:/";
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
+		synchronized (loginSessionMonitor) {
+			loginSessionMonitor.remove(session.getId());
+		}
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -99,6 +125,14 @@ public class UserController {
 		model.addAttribute("completedQuestions", completedQuestions);		
 		model.addAttribute("answersNum", answersNum);
 		return "mypage";
+	}
+
+	@Override
+	public void sessionCreated(HttpSessionEvent se) {
+	}
+
+	@Override
+	public void sessionDestroyed(HttpSessionEvent se) {
 	}
 
 }

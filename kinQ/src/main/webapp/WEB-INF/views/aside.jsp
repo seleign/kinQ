@@ -1,7 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
@@ -32,11 +32,14 @@
 
 <aside class="col-md-3 sidebar">
 				<div class="widget widget_stats">
-					<h3 class="widget_title">Stats</h3>
+					<h3 class="widget_title">サイトの利用現状</h3>
+					
 					<div class="ul_list ul_list-icon-ok">
 						<ul>
-							<li><i class="icon-question-sign"></i>Questions ( <span>20</span> )</li>
-							<li><i class="icon-comment"></i>Answers ( <span>50</span> )</li>
+							<li><i class="icon-star"></i>全体会員数：　人</li>
+							<li><i class="icon-group"></i>接続会員数：${countSession}　人</li>
+							<li><i class="icon-comments"></i>全体質問数：</li>
+							<li><i class="icon-comments-alt"></i>全体回答数：人</li>
 						</ul>
 					</div>
 				</div>
