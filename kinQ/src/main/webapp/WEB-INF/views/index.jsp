@@ -27,14 +27,18 @@
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	var startpage = 0;
+	var endpage = 10;
+	
 	function userlist(){
 		$.ajax({
 			url: 'getQuestionPage',
 			method: 'get',
-			data: {startpage:0, endpage:10},
+			data: {startpage:startpage, endpage:endpage},
 			success: function(result){
-				var html ='<article class="question question-type-normal">';
+				var html = '';
 				$.each(result, function(index, element){
+					html +='<article class="question question-type-normal">';
 					html += '<h2><a href=""question_view>'+element.title+'</a></h2>';
 					html += '<a class="question-report" href="#">Report</a>';
 					html += '<div class="question-inner"><div class="clearfix"></div>';
@@ -50,13 +54,13 @@
 					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>답변개수 들어갈곳</a></span>';
 					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
 					html += '<div class="clearfix"></div>';
-					
+					html += '</div></article>';
 				});
-				
-				html += '</div></article>';
-				$('div.tab-inner').html(html);
+					$('#QuestionList_tap').append(html);
 			}
 		});
+		startpage = startpage+10;
+		endpage = endpage+10;
 	}
 	
 	$(function(){
@@ -106,7 +110,7 @@
 		                <li class="tab"><a href="#">No answers</a></li>
 		            </ul>
 		            <div class="tab-inner-warp">
-						<div class="tab-inner">
+						<div class="tab-inner" id="QuestionList_tap">
 							<article class="question question-type-normal">
 								<h2>
 									<a href="question_view">This is my first Question</a>
@@ -130,8 +134,8 @@
 									<div class="clearfix"></div>
 								</div>
 							</article>
-							<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
 					    </div>
+							<a href="#" class="load-questions" onclick="javascript:userlist()"><i class="icon-refresh"></i>Load More Questions</a>
 					</div>
 					<div class="tab-inner-warp">
 						<div class="tab-inner">
