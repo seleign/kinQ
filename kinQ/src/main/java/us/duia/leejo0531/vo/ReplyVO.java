@@ -1,7 +1,5 @@
 package us.duia.leejo0531.vo;
 
-import java.util.Date;
-
 public class ReplyVO extends QuestionVO{
 	private int replyNum;
 	private String R_RegDate;
@@ -9,6 +7,7 @@ public class ReplyVO extends QuestionVO{
 	private String ReplyTitle;
 	private String ReplyContent;
 	private String id;
+	private String videoSrc; // 일반 답변, 실시간 답변에서 녹화된 동영상이, 서버의 어느 주소에 저장되어 있나 담고 있다.
 	
 	public ReplyVO() {
 		super();
@@ -42,6 +41,18 @@ public class ReplyVO extends QuestionVO{
 		this.ReplyTitle = replyTitle;
 		this.ReplyContent = replyContent;
 		this.id = id;
+	}
+	
+	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id,
+			String videoSrc) {
+		super();
+		this.replyNum = replyNum;
+		R_RegDate = r_RegDate;
+		R_ModDate = r_ModDate;
+		ReplyTitle = replyTitle;
+		ReplyContent = replyContent;
+		this.id = id;
+		this.videoSrc = videoSrc;
 	}
 
 	public int getReplyNum() {
@@ -92,11 +103,20 @@ public class ReplyVO extends QuestionVO{
 		this.id = id;
 	}
 
+	
+	public String getVideoSrc() {
+		return videoSrc;
+	}
+
+	public void setVideoSrc(String videoSrc) {
+		this.videoSrc = videoSrc;
+	}
+
 	@Override
 	public String toString() {
 		return "ReplyVO [replyNum=" + replyNum + ", R_RegDate=" + R_RegDate + ", R_ModDate=" + R_ModDate
-				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + "]";
+				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + ", id=" + id + ", videoSrc="
+				+ videoSrc + "]";
 	}
-
 
 }

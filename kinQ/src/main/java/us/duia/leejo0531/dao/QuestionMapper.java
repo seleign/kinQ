@@ -10,7 +10,8 @@ import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.checkTimeVO;
 
 public interface QuestionMapper {
-
+	public int Q_BOARD_SEQ_NEXTVAL();
+	
 	public int insertQuestion(QuestionVO qstn);
 	
 	public QuestionVO selectOneQuestion( QuestionVO target);

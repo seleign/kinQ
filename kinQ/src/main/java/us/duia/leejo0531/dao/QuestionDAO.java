@@ -26,6 +26,16 @@ public class QuestionDAO {
 	private SqlSession sqlSession;
 	
 	/**
+	 * DB에서 질문글의 시퀀스를 가져온다.
+	 * @return
+	 */
+	public int Q_BOARD_SEQ_NEXTVAL() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		int result = mapper.Q_BOARD_SEQ_NEXTVAL();
+		return result;
+	}
+	
+	/**
 	 * DB에 질문을 등록한다.
 	 * @param qstn QuestionVO
 	 * @return 등록 결과

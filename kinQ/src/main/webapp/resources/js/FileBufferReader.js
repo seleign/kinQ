@@ -170,7 +170,7 @@
         var fbrHelper = this;
 
         function processInWebWorker(_function) {
-            var blob = URL.createObjectURL(new Blob([_function.toString(),
+            var blob = window.webkitURL.createObjectURL(new Blob([_function.toString(),
                 'this.onmessage =  function (e) {' + _function.name + '(e.data);}'
             ], {
                 type: 'application/javascript'
@@ -277,7 +277,7 @@
                             blob = file.slice(sliceId * sliceSize, file.size);
                             reader.readAsArrayBuffer(blob);
                         } else {
-                            file.url = URL.createObjectURL(file);
+                            file.url = window.webkitURL.createObjectURL(file);
                             callback({
                                 currentPosition: currentPosition,
                                 uuid: file.uuid,
@@ -285,7 +285,7 @@
                                 size: file.size,
                                 name: file.name,
                                 lastModifiedDate: (file.lastModifiedDate || new Date()).toString(),
-                                url: URL.createObjectURL(file),
+                                url: window.webkitURL.createObjectURL(file),
                                 type: file.type,
                                 end: true
                             });
@@ -497,7 +497,7 @@
                     type: chunk.type
                 });
                 blob = merge(blob, chunk);
-                blob.url = URL.createObjectURL(blob);
+                blob.url = window.webkitURL.createObjectURL(blob);
                 blob.uuid = chunk.uuid;
 
                 if (!blob.size) console.error('Something went wrong. Blob Size is 0.');

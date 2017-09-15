@@ -53,7 +53,7 @@ public class QuestionController {
 	public String showQuestionForm(Model model) {
 		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
 		model.addAttribute("majorList", majorList);
-		return "question/questionForm4";
+		return "askQuestion";
 	}
 
 	/**
@@ -102,12 +102,14 @@ public class QuestionController {
 	 * @return 자신이 작성한 페이지로 이동? 마이페이지의 질문 내역페이지로 이동?
 	 */
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
-	public String addQuestion(QuestionVO qstn) {
-		//qstnSvc.writeQuestion(qstn);
-		
+	public String addQuestion(QuestionVO qstn, ArrayList<String> relatedTag) {
+		// 임시로 userNum을 1로 함..
+		qstn.setUserNum(1);
 		logger.info(qstn.toString());
-		// code here
-
+		logger.info(relatedTag.toString());
+		
+		
+		qstnSvc.writeQuestion(qstn);
 		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
 	}
 
@@ -155,8 +157,10 @@ public class QuestionController {
 	 */
 	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
 	public String ask_question(Model model){
-		ArrayList<MajorVO> majorList = userSvc.getMajorList(); 
+		ArrayList<MajorVO> majorList = userSvc.getMajorList();
+		int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
 		model.addAttribute("majorList", majorList);
+		model.addAttribute("questionNum", questionNum);
 		return "askQuestion";
 	}
 	
@@ -166,10 +170,16 @@ public class QuestionController {
 	 * @return 질문하기 페이지로 이동
 	 */
 	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
-	public String ask_question(HashMap<String, String> map, Model model){
-		String question_title = map.get("question_title");
-		model.addAttribute("question_title", question_title);
-		return "askQuestion";
+	public String ask_question(QuestionVO qstn, ArrayList<String> relatedTag){
+		// 임시로 userNum, setMinorNum을 1로 함..
+		qstn.setUserNum(1); // 세션에서 꺼내오면 됨
+		qstn.setMinorNum(1); // 이게 왜 not null?
+		logger.info(qstn.toString());
+		logger.info(relatedTag.toString());
+		
+		
+		qstnSvc.writeQuestion(qstn);
+		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
 	}
 	
 	/**

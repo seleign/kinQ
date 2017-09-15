@@ -36,6 +36,15 @@ public class QuestionService {
 	private UserDAO userDao;
 	
 	/**
+	 * 질문글의 시퀀스를 가져온다.
+	 * @return
+	 */
+	public int Q_BOARD_SEQ_NEXTVAL() {
+		int result = qstnDao.Q_BOARD_SEQ_NEXTVAL();
+		return result;
+	}
+	
+	/**
 	 * 질문을 등록한다.
 	 * @param qstn QuestionVO
 	 * @return 등록 결과

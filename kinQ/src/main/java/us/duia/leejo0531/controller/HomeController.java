@@ -42,6 +42,10 @@ public class HomeController {
 		return "index";
 	}
 	
+	/**
+	 * aside에 サイトの利用現状을 나타낸다.
+	 * @return
+	 */
 	@RequestMapping(value="asideData", method=RequestMethod.GET)
 	public @ResponseBody int[] getAsideData(){
 		int allQuestionsNum = homeSvc.countAllQuestions();
@@ -54,6 +58,10 @@ public class HomeController {
 		return result;
 	}
 	
+	/**
+	 * 테스트용 컨트롤러인것 같은데???
+	 * @return
+	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(){
 		return "index";

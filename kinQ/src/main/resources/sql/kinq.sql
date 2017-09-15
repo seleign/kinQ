@@ -109,6 +109,7 @@ CREATE TABLE Q_Reply
     R_ModDate       DATE              NOT NULL, 
     ReplyTitle      VARCHAR2(90)      NOT NULL, 
     ReplyContent    VARCHAR2(1500)    NOT NULL, 
+    videoSrc        VARCHAR2(100)     NULL, 
     CONSTRAINT Q_REPLY_PK PRIMARY KEY (ReplyNum)
 )
 /

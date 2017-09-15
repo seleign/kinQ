@@ -20,29 +20,39 @@
 		</collection>
 	</resultMap>
 
-
+	<!-- 질문글의 시퀀스를 가져온다. -->
+	<select id="Q_BOARD_SEQ_NEXTVAL" resultType="int">
+		SELECT Q_BOARD_SEQ.NEXTVAL as questionNum FROM dual
+	</select>
+	
 	<!-- 질문글을 게시한다. -->
 	<insert id="insertQuestion" parameterType="Question">
 		insert into Q_Board(
 			questionNum,
 			userNum,
 			timeLimit,
-			id,
+			qstatus,
 			regDate,
 			modDate,
 			title,
 			hit,
-			questionContent
+			questionContent,
+			MinorNum,
+			videoSrc,
+			score
 		) values(
-			Q_Board_SEQ.nextval,
+			#{questionNum},
 			#{userNum},
 			#{timeLimit},
-			#{id},
-			#{regDate},
-			#{modDate},
+			#{qstatus},
+			sysdate,
+			sysdate,
 			#{title},
 			0,
-			#{questionContent}
+			#{questionContent},
+			#{MinorNum},
+			#{videoSrc},
+			0
 		)
 	</insert>
 	
