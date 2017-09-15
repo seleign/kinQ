@@ -191,5 +191,4 @@
                )
 		WHERE RNUM > #{startpage} ]]> 
     </select>
-    </select>
 </mapper>
