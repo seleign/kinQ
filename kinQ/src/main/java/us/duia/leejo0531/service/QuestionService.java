@@ -1,6 +1,8 @@
 package us.duia.leejo0531.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,7 @@ import us.duia.leejo0531.vo.checkTimeVO;
 @Repository
 public class QuestionService {
 	
+	private static final HashMap String = null;
 	@Autowired
 	private QuestionDAO qstnDao;
 	@Autowired(required = false)
@@ -141,7 +144,11 @@ public class QuestionService {
 	 * @return ArrayList<QuestionVO>
 	 */
 	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
-		ArrayList<QuestionVO> result = qstnDao.getQuestionPage(startpage, endpage);
+		System.out.println("*******qsvs in startpage: "+startpage+"endpage :"+endpage);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		ArrayList<QuestionVO> result = qstnDao.getQuestionPage(map);
 		return result;
 	}
 }

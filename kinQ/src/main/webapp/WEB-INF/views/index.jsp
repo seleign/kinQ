@@ -31,6 +31,7 @@
 		$.ajax({
 			url: 'getQuestionPage',
 			method: 'get',
+			data: {startpage:0, endpage:10},
 			success: function(result){
 				var html ='<article class="question question-type-normal">';
 				$.each(result, function(index, element){
@@ -39,21 +40,29 @@
 					html += '<div class="question-inner"><div class="clearfix"></div>';
 					html += '<p class="question-desc">'+element.questionContent+'</p>';
 					html += '<div class="question-details">';
-					html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>'+element.qstatus+'</span>';
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-					if(element.authority == "0"){
-						html += '<td class="authority"><input type="image" onclick="javascript:authority(\''+element.userid+'\')" src="./resources/no.png"></td>';
+					if(element.qstatus == "solved"){
+						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
 					}else{
-						html += '<td class="authority"><input type="image" src="./resources/yes.png"></td>';
+						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
 					}
-					html += '</td></tr>';
+					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
+					html += '<span class="question-date"><i class="icon-time"></i>시간코드 들어갈곳</span>';
+					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>답변개수 들어갈곳</a></span>';
+					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
+					html += '<div class="clearfix"></div>';
+					
 				});
 				
-				html +='<tr><th colspan="7"><input type="button" onclick="javascript:adminpage()" value="첫 화면으로"></th></tr>';
+				html += '</div></article>';
 				$('div.tab-inner').html(html);
 			}
 		});
 	}
+	
+	$(function(){
+
+		userlist();
+	});
 	</script>
   
 </head>
