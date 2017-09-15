@@ -27,33 +27,46 @@
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	var startpage = 0;
+	var endpage = 10;
+	
 	function userlist(){
 		$.ajax({
 			url: 'getQuestionPage',
 			method: 'get',
+			data: {startpage:startpage, endpage:endpage},
 			success: function(result){
-				var html ='<article class="question question-type-normal">';
+				var html = '';
 				$.each(result, function(index, element){
+					html +='<article class="question question-type-normal">';
 					html += '<h2><a href=""question_view>'+element.title+'</a></h2>';
 					html += '<a class="question-report" href="#">Report</a>';
 					html += '<div class="question-inner"><div class="clearfix"></div>';
 					html += '<p class="question-desc">'+element.questionContent+'</p>';
 					html += '<div class="question-details">';
-					html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>'+element.qstatus+'</span>';
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-					if(element.authority == "0"){
-						html += '<td class="authority"><input type="image" onclick="javascript:authority(\''+element.userid+'\')" src="./resources/no.png"></td>';
+					if(element.qstatus == "solved"){
+						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
 					}else{
-						html += '<td class="authority"><input type="image" src="./resources/yes.png"></td>';
+						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
 					}
-					html += '</td></tr>';
+					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
+					html += '<span class="question-date"><i class="icon-time"></i>시간코드 들어갈곳</span>';
+					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>답변개수 들어갈곳</a></span>';
+					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
+					html += '<div class="clearfix"></div>';
+					html += '</div></article>';
 				});
-				
-				html +='<tr><th colspan="7"><input type="button" onclick="javascript:adminpage()" value="첫 화면으로"></th></tr>';
-				$('div.tab-inner').html(html);
+					$('#QuestionList_tap').append(html);
 			}
 		});
+		startpage = startpage+10;
+		endpage = endpage+10;
 	}
+	
+	$(function(){
+
+		userlist();
+	});
 	</script>
   
 </head>
@@ -97,32 +110,9 @@
 		                <li class="tab"><a href="#">No answers</a></li>
 		            </ul>
 		            <div class="tab-inner-warp">
-						<div class="tab-inner">
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This is my first Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
+						<div class="tab-inner" id="QuestionList_tap">
 					    </div>
+							<button class="button large gray-button" id="QuestionList_button" onclick="javascript:userlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
 						<div class="tab-inner">

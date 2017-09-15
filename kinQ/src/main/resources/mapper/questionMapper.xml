@@ -255,7 +255,7 @@
 	</select>
 	
 		<!-- 범위지정 질문글 가져오기  -->
-	<select id="getQuestionPage" parameterType="Integer" resultType="Question">
+	<select id="getQuestionPage" parameterType="map" resultType="Question">
 		<![CDATA[SELECT * FROM ( SELECT A.*,ROWNUM AS RNUM FROM 
               ( SELECT * FROM q_board
                 ORDER BY questionnum desc

@@ -1,6 +1,7 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
@@ -167,9 +168,9 @@ public class QuestionDAO {
 	 * @param startpage 가져올 게시글의 최근 page번호 , endpage 마지막 page번호 
 	 * @return ArrayList<QuestionVO>
 	 */
-	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+	public ArrayList<QuestionVO> getQuestionPage(Map<String, Object> map){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<QuestionVO> result = mapper.getQuestionPage(startpage, endpage);
+		ArrayList<QuestionVO> result = mapper.getQuestionPage(map);
 		return result;
 	}
 }
