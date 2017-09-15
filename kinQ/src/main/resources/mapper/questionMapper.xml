@@ -77,40 +77,59 @@
 		and Q_Board.questionNum = tag.questionNum(+)
 	</select>
 	
+	<!-- context가 작성자 이름에 포함된 모든 질문글을 가져온다. -->
+	<select id="searchWriterByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
+		select
+			*
+		from
+			tag,
+		    (select
+	            q_board.*
+	        from
+	        	userinfo,
+	            q_board
+	        where
+	        	q_board.usernum = userinfo.USERNUM(+)
+	        	<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+	        ) searched
+		where searched.questionnum = tag.questionnum(+)
+		order by searched.questionnum, tag.tagnum
+	</select>
+	
 	<!-- context가 제목에 포함된 모든 질문글을 가져온다. -->
 	<select id="searchTitleByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-	select
-	    *
-	from
-		tag,
-	    (select
-            *
-        from
-            q_board
-        <trim prefix="where" prefixOverrides="and|or">
-        	<foreach collection="list" item="item">and title like '%${item}%'</foreach>
-        </trim>
-        ) searched
-	where searched.questionnum = tag.questionnum(+)
-	order by searched.questionnum, tag.tagnum
+		select
+		    *
+		from
+			tag,
+		    (select
+	            *
+	        from
+	            q_board
+	        <trim prefix="where" prefixOverrides="and|or">
+	        	<foreach collection="list" item="item">and title like '%${item}%'</foreach>
+	        </trim>
+	        ) searched
+		where searched.questionnum = tag.questionnum(+)
+		order by searched.questionnum, tag.tagnum
 	</select>
 	
 	<!-- context가 포함된 모든 질문글을 가져온다. -->
 	<select id="searchByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-	select
-	    *
-	from
-		tag,
-	    (select
-            *
-        from
-            q_board
-        <trim prefix="where" prefixOverrides="and|or">
-        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
-        </trim>
-        ) searched
-	where searched.questionnum = tag.questionnum(+)
-	order by searched.questionnum, tag.tagnum
+		select
+		    *
+		from
+			tag,
+		    (select
+	            *
+	        from
+	            q_board
+	        <trim prefix="where" prefixOverrides="and|or">
+	        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
+	        </trim>
+	        ) searched
+		where searched.questionnum = tag.questionnum(+)
+		order by searched.questionnum, tag.tagnum
 	</select>
 	
 	<select id="getQuestionTag" parameterType="Question" resultType="Tag">
@@ -163,13 +182,13 @@
 	</select>
 	
 		<!-- 범위지정 질문글 가져오기  -->
-	<select id="getQuestionPage" parameterType="Integer" resultType="Question">
+	<select id="getQuestionPage" parameterType="Integer" resultMap="QuestionResult">
 		<![CDATA[SELECT * FROM ( SELECT A.*,ROWNUM AS RNUM FROM 
               ( SELECT * FROM q_board
                 ORDER BY questionnum desc
                ) A
-        WHERE ROWNUM <= #{endpage}
+        WHERE ROWNUM <= 30
                )
-		WHERE RNUM > #{startpage} ]]> 
+		WHERE RNUM > 20 ]]> 
     </select>
 </mapper>

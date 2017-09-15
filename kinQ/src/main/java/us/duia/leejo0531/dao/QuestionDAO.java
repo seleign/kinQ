@@ -101,6 +101,17 @@ public class QuestionDAO {
 	}
 	
 	/**
+	 * DB로부터 context가 작성자 이름에 포함된 모든 질문글을 가져온다.
+	 * @param context 작성자 이름에 포함된 단어
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> searchWriterByContext(ArrayList<String> context){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchWriterByContext(context);
+		return result;
+	}
+	
+	/**
 	 * DB로부터 context가 제목에 포함된 모든 질문글을 가져온다.
 	 * @param context 질문글 제목에 포함된 단어
 	 * @return ArrayList<QuestionVO>
