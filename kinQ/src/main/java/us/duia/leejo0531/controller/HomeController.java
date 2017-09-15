@@ -6,17 +6,22 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import us.duia.leejo0531.service.HomeService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	
+	@Autowired
+	HomeService homeSvc;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -31,9 +36,16 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		
 		model.addAttribute("serverTime", formattedDate );
 		
+		int allQuestionsNum = homeSvc.countAllQuestions();
+		int allAnswersNum = homeSvc.countAllAnswers();
+		int allUsersNum = homeSvc.countAllUsers();
+		
+		model.addAttribute("allQuestionsNum", allQuestionsNum);
+		model.addAttribute("allAnswersNum", allAnswersNum);
+		model.addAttribute("allUsersNum", allUsersNum);
+		model.addAttribute("countSession", UserController.getActiveLoginSessionCount());
 		return "index";
 	}
 	
@@ -41,5 +53,5 @@ public class HomeController {
 	public String index(){
 		return "index";
 	}
-	
+
 }
