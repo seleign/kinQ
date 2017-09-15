@@ -1,6 +1,7 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
@@ -38,5 +39,5 @@ public interface QuestionMapper {
 
 	public ArrayList<QuestionVO> search_no_answered();
 	
-	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage);
+	public ArrayList<QuestionVO> getQuestionPage(Map<String, Object> map);
 }

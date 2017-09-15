@@ -178,6 +178,7 @@ public class QuestionController {
 	 */
 	@RequestMapping(value="getQuestionPage",method=RequestMethod.GET)
 	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		logger.info("*****************QPage in startpage : "+startpage+" endpage :"+endpage);
 		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
 		return result;
 	}
