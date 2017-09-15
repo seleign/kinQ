@@ -133,43 +133,44 @@
 	</select>
 	<!-- 답변 없는 질문글 가져오기 -->
 	<select id="search_no_answered" resultMap="QuestionResult">
-	select
-	    *
-	from
-		tag,
-	    (select
-	        q_board.*
-	    from
-	        q_board,
-	        (select
-	            q_reply.*
-	        from
-	            q_reply,
-	            (select
-	                max(replynum) as answered
-	            from
-	                q_reply
-	            group by
-	                questionnum
-	            ) reply
-	        where q_reply.replynum = reply.answered
-	        ) no_dupl
-	    where
-	        q_board.questionnum = no_dupl.questionnum(+)
-	        and no_dupl.questionnum is null
-	    ) no_answer
-	where no_answer.questionnum = tag.questionnum(+)
-	order by no_answer.questionnum
+		select
+		    *
+		from
+			tag,
+		    (select
+		        q_board.*
+		    from
+		        q_board,
+		        (select
+		            q_reply.*
+		        from
+		            q_reply,
+		            (select
+		                max(replynum) as answered
+		            from
+		                q_reply
+		            group by
+		                questionnum
+		            ) reply
+		        where q_reply.replynum = reply.answered
+		        ) no_dupl
+		    where
+		        q_board.questionnum = no_dupl.questionnum(+)
+		        and no_dupl.questionnum is null
+		    ) no_answer
+		where no_answer.questionnum = tag.questionnum(+)
+		order by no_answer.questionnum
 	</select>
 	
 		<!-- 범위지정 질문글 가져오기  -->
 	<select id="getQuestionPage" parameterType="Integer" resultType="Question">
+	<select id="getQuestionPage" parameterType="int" resultMap="QuestionResult">
 		<![CDATA[SELECT * FROM ( SELECT A.*,ROWNUM AS RNUM FROM 
               ( SELECT * FROM q_board
                 ORDER BY questionnum desc
                ) A
-        WHERE ROWNUM <= #{endpage}
+        WHERE ROWNUM <= 30
                )
-		WHERE RNUM > #{startpage} ]]> 
+		WHERE RNUM > 20 ]]> 
     </select>
 </mapper>

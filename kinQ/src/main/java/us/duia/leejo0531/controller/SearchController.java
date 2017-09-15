@@ -33,25 +33,29 @@ public class SearchController {
 	 * view에서 jstl로 결과를 출력한다.
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
-/*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
+	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	public String search_by_words(String str, Model model) {
 		HashMap<String, Object> map = sechSvc.search_by_words(str);
+		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
 		model.addAttribute("QuestionListByTag", (ArrayList<QuestionVO>)map.get("QuestionListByTag"));
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
+		model.addAttribute("ReplyListByTitle", (ArrayList<ReplyVO>)map.get("ReplyListByTitle"));
 		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
 		return "/"; //어느 페이지로 이동시킬 것인가?
-	}*/
+	}
 
-	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
+/*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> search_by_words(String str, Model model) {
 		HashMap<String, Object> map = sechSvc.search_by_words(str);
+		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
 		model.addAttribute("QuestionListByTag", (ArrayList<QuestionVO>)map.get("QuestionListByTag"));
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
+		model.addAttribute("ReplyListByTitle", (ArrayList<ReplyVO>)map.get("ReplyListByTitle"));
 		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
 		return map; //어느 페이지로 이동시킬 것인가?
 	}
-	
+	*/
 	/**
 	 * 답변글이 없는 질문글을 검색한다.
 	 * */
