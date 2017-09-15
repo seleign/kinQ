@@ -2,6 +2,7 @@ package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -136,6 +137,17 @@ public class QuestionDAO {
 	public ArrayList<QuestionVO> search_no_answered() {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.search_no_answered();
+		return result;
+	}
+	
+	/**
+	 * DB에서 매개변수로 받은 번호사이의 글을 조회한다 
+	 * @param startpage 가져올 게시글의 최근 page번호 , endpage 마지막 page번호 
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.getQuestionPage(startpage, endpage);
 		return result;
 	}
 }
