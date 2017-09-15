@@ -24,6 +24,37 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	function userlist(){
+		$.ajax({
+			url: 'getQuestionPage',
+			method: 'get',
+			success: function(result){
+				var html ='<article class="question question-type-normal">';
+				$.each(result, function(index, element){
+					html += '<h2><a href=""question_view>'+element.title+'</a></h2>';
+					html += '<a class="question-report" href="#">Report</a>';
+					html += '<div class="question-inner"><div class="clearfix"></div>';
+					html += '<p class="question-desc">'+element.questionContent+'</p>';
+					html += '<div class="question-details">';
+					html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>'+element.qstatus+'</span>';
+					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
+					if(element.authority == "0"){
+						html += '<td class="authority"><input type="image" onclick="javascript:authority(\''+element.userid+'\')" src="./resources/no.png"></td>';
+					}else{
+						html += '<td class="authority"><input type="image" src="./resources/yes.png"></td>';
+					}
+					html += '</td></tr>';
+				});
+				
+				html +='<tr><th colspan="7"><input type="button" onclick="javascript:adminpage()" value="첫 화면으로"></th></tr>';
+				$('div.tab-inner').html(html);
+			}
+		});
+	}
+	</script>
   
 </head>
 <body>
@@ -81,354 +112,6 @@
 									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
 									<div class="question-details">
 										<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-poll">
-								<h2>
-									<a href="question_view">This Is My Second Poll Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Third Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Fourth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Fifth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Sixth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My seventh Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Eighth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
-					    </div>
-					</div>
-					<div class="tab-inner-warp">
-						<div class="tab-inner">
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This is my first Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-poll">
-								<h2>
-									<a href="question_view">This Is My Second Poll Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Third Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Fourth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Fifth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view.html">This Is My Sixth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My seventh Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-										<span class="question-favorite"><i class="icon-star"></i>5</span>
-									</div>
-									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-									<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-									<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-									<span class="question-view"><i class="icon-user"></i>70 views</span>
-									<div class="clearfix"></div>
-								</div>
-							</article>
-							<article class="question question-type-normal">
-								<h2>
-									<a href="question_view">This Is My Eighth Question</a>
-								</h2>
-								<a class="question-report" href="#">Report</a>
-								<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-								<div class="question-author">
-									<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="https://placehold.it/60x60/FFF/444"></a>
-								</div>
-								<div class="question-inner">
-									<div class="clearfix"></div>
-									<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-									<div class="question-details">
-										<span class="question-answered"><i class="icon-ok"></i>in progress</span>
 										<span class="question-favorite"><i class="icon-star"></i>5</span>
 									</div>
 									<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>

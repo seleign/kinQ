@@ -41,6 +41,8 @@ public class SearchService {
 		for(String s : str.split(",")) { // , 로 구분한 후 
 			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
 		}
+
+		ArrayList<QuestionVO> QuestionListByWriter = qstnDao.searchWriterByContext(words);
 		
 		ArrayList<QuestionVO> QuestionListByTitle = qstnDao.searchTitleByContext(words);
 		
@@ -53,6 +55,7 @@ public class SearchService {
 		ArrayList<ReplyVO> ReplyListBycontext = replyDao.searchByContext(words);
 		
 		HashMap<String, Object> result = new HashMap<>();
+		result.put("QuestionListByWriter", QuestionListByWriter);
 		result.put("QuestionListByTitle", QuestionListByTitle);
 		result.put("QuestionListByTag", QuestionListByTag);
 		result.put("QuestionListBycontext", QuestionListBycontext);

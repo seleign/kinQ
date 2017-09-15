@@ -26,6 +26,8 @@ public interface QuestionMapper {
 	
 	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context); //"context"가 포함된 질문을 가져온다.
 
+	public ArrayList<QuestionVO> searchWriterByContext(ArrayList<String> context); //"context"가 포함된 질문을 가져온다.
+	
 	public ArrayList<QuestionVO> searchTitleByContext(ArrayList<String> context); //"context"가 포함된 질문을 가져온다.
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question);
@@ -35,4 +37,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> getAllQuestion();
 
 	public ArrayList<QuestionVO> search_no_answered();
+	
+	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage);
 }

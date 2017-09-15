@@ -119,23 +119,22 @@ public class QuestionController {
 	@RequestMapping(value = "question_view", method = RequestMethod.GET)
 	public String viewQuestion(QuestionVO qstn, Model model) {
 		//qstnSvc.getQuestion(qstn);
-		//	System.out.println(qstn);
+//		System.out.println(qstn);
 		// code here
 		QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(test);
 		System.out.println(question);
-		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
-		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
+/*		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
+		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());*/
 		System.out.println("questionNum : " + question.getQuestionNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		model.addAttribute("question", question);
-		model.addAttribute("minor", minor);
-		model.addAttribute("major", major);
+/*		model.addAttribute("minor", minor);
+		model.addAttribute("major", major);*/
 		model.addAttribute("tagList", tagList);
 		
-		//return "question/questionView";
-		
-		return "question_view";
+		return "question/questionView";
+
 	}
 	
 	
@@ -171,6 +170,16 @@ public class QuestionController {
 		String question_title = map.get("question_title");
 		model.addAttribute("question_title", question_title);
 		return "askQuestion";
+	}
+	
+	/**
+	 * Ajax로 질문목록 모두 가져오기, index에서 조회된다 
+	 * @return ArrayList<QuestionVO>
+	 */
+	@RequestMapping(value="getQuestionPage",method=RequestMethod.GET)
+	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
+		return result;
 	}
 
 }

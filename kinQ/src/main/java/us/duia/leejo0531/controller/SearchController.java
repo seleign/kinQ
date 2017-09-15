@@ -35,20 +35,35 @@ public class SearchController {
 	 */
 	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	public String search_by_words(String str, Model model) {
-		System.out.println( str);
 		HashMap<String, Object> map = sechSvc.search_by_words(str);
-		model.addAttribute("QuestionListByTag", (ArrayList<TagVO>)map.get("QuestionListByTag"));
+		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
+		model.addAttribute("QuestionListByTag", (ArrayList<QuestionVO>)map.get("QuestionListByTag"));
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
+		model.addAttribute("ReplyListByTitle", (ArrayList<ReplyVO>)map.get("ReplyListByTitle"));
 		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
 		return "/"; //어느 페이지로 이동시킬 것인가?
 	}
-	
+
+/*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	@ResponseBody
+	public HashMap<String, Object> search_by_words(String str, Model model) {
+		HashMap<String, Object> map = sechSvc.search_by_words(str);
+		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
+		model.addAttribute("QuestionListByTag", (ArrayList<QuestionVO>)map.get("QuestionListByTag"));
+		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
+		model.addAttribute("ReplyListByTitle", (ArrayList<ReplyVO>)map.get("ReplyListByTitle"));
+		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
+		return map; //어느 페이지로 이동시킬 것인가?
+	}
+	*/
+	/**
+	 * 답변글이 없는 질문글을 검색한다.
+	 * */
 	@RequestMapping(value = "search_no_answered", method = RequestMethod.GET)
-	public ArrayList<QuestionVO> search_no_answerd(String str, Model model) {
+	public String search_no_answerd(Model model) {
 		ArrayList<QuestionVO> result = sechSvc.search_no_answered();
 		model.addAttribute("QuestionListBycontext", result);
-		return result; //어느 페이지로 이동시킬 것인가?
+		return "/somewhere"; //어느 페이지로 이동시킬 것인가?
 	}
 	
 	//핫 태그?

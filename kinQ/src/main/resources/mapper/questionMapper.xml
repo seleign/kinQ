@@ -70,46 +70,66 @@
 	</select>
 	
 	<!-- 대상 질문글 정보를 가져온다.(임시) -->
-	<select id="selectOneQuestion" parameterType="Question" resultType="Question">
+	<select id="selectOneQuestion" parameterType="Question" resultMap="QuestionResult">
 		select *
-		from Q_Board
-		where questionNum = #{questionNum}
+		from Q_Board, tag
+		where Q_Board.questionNum = #{questionNum}
+		and Q_Board.questionNum = tag.questionNum(+)
+	</select>
+	
+	<!-- context가 작성자 이름에 포함된 모든 질문글을 가져온다. -->
+	<select id="searchWriterByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
+		select
+			*
+		from
+			tag,
+		    (select
+	            q_board.*
+	        from
+	        	userinfo,
+	            q_board
+	        where
+	        	q_board.usernum = userinfo.USERNUM(+)
+	        	<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+	        ) searched
+		where searched.questionnum = tag.questionnum(+)
+		order by searched.questionnum, tag.tagnum
 	</select>
 	
 	<!-- context가 제목에 포함된 모든 질문글을 가져온다. -->
 	<select id="searchTitleByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-	select
-	    *
-	from
-		tag,
-	    (select
-            *
-        from
-            q_board
-        <trim prefix="where" prefixOverrides="and|or">
-        	<foreach collection="list" item="item">and title like '%${item}%'</foreach>
-        </trim>
-        ) searched
-	where searched.questionnum = tag.questionnum(+)
-	order by searched.questionnum, tag.tagnum
+		select
+		    *
+		from
+			tag,
+		    (select
+	            *
+	        from
+	            q_board
+	        <trim prefix="where" prefixOverrides="and|or">
+	        	<foreach collection="list" item="item">and title like '%${item}%'</foreach>
+	        </trim>
+	        ) searched
+		where searched.questionnum = tag.questionnum(+)
+		order by searched.questionnum, tag.tagnum
 	</select>
 	
 	<!-- context가 포함된 모든 질문글을 가져온다. -->
 	<select id="searchByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-	select
-	    *
-	from
-		tag,
-	    (select
-            *
-        from
-            q_board
-        <trim prefix="where" prefixOverrides="and|or">
-        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
-        </trim>
-        ) searched
-	where searched.questionnum = tag.questionnum(+)
-	order by searched.questionnum, tag.tagnum
+		select
+		    *
+		from
+			tag,
+		    (select
+	            *
+	        from
+	            q_board
+	        <trim prefix="where" prefixOverrides="and|or">
+	        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
+	        </trim>
+	        ) searched
+		where searched.questionnum = tag.questionnum(+)
+		order by searched.questionnum, tag.tagnum
 	</select>
 	
 	<select id="getQuestionTag" parameterType="Question" resultType="Tag">
@@ -125,37 +145,51 @@
   		FROM q_board where questionNum = #{questionNum}
 	</select>
 	<!-- 전체 질문글 가져오기 -->
-	<select id="getAllQuestion" resultType="Question">
-		select * from q_board order by questionNum desc
+	<select id="getAllQuestion" resultMap="QuestionResult">
+		select *
+		from Q_Board, tag
+		where Q_Board.questionNum = tag.questionNum(+)
 	</select>
 	<!-- 답변 없는 질문글 가져오기 -->
 	<select id="search_no_answered" resultMap="QuestionResult">
-	select
-	    *
-	from
-		tag,
-	    (select
-	        q_board.*
-	    from
-	        q_board,
-	        (select
-	            q_reply.*
-	        from
-	            q_reply,
-	            (select
-	                max(replynum) as answered
-	            from
-	                q_reply
-	            group by
-	                questionnum
-	            ) reply
-	        where q_reply.replynum = reply.answered
-	        ) no_dupl
-	    where
-	        q_board.questionnum = no_dupl.questionnum(+)
-	        and no_dupl.questionnum is null
-	    ) no_answer
-	where no_answer.questionnum = tag.questionnum(+)
-	order by no_answer.questionnum
+		select
+		    *
+		from
+			tag,
+		    (select
+		        q_board.*
+		    from
+		        q_board,
+		        (select
+		            q_reply.*
+		        from
+		            q_reply,
+		            (select
+		                max(replynum) as answered
+		            from
+		                q_reply
+		            group by
+		                questionnum
+		            ) reply
+		        where q_reply.replynum = reply.answered
+		        ) no_dupl
+		    where
+		        q_board.questionnum = no_dupl.questionnum(+)
+		        and no_dupl.questionnum is null
+		    ) no_answer
+		where no_answer.questionnum = tag.questionnum(+)
+		order by no_answer.questionnum
 	</select>
+	
+		<!-- 범위지정 질문글 가져오기  -->
+	<select id="getQuestionPage" parameterType="Integer" resultType="Question">
+		<![CDATA[SELECT * FROM ( SELECT A.*,ROWNUM AS RNUM FROM 
+              ( SELECT * FROM q_board
+                ORDER BY questionnum desc
+               ) A
+        WHERE ROWNUM <= #{endpage}
+               )
+		WHERE RNUM > #{startpage} ]]> 
+    </select>
+    </select>
 </mapper>
