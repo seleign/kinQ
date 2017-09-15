@@ -36,10 +36,10 @@
 					
 					<div class="ul_list ul_list-icon-ok">
 						<ul>
-							<li><i class="icon-star"></i>全体会員数：　人</li>
-							<li><i class="icon-group"></i>接続会員数：${countSession}　人</li>
-							<li><i class="icon-comments"></i>全体質問数：</li>
-							<li><i class="icon-comments-alt"></i>全体回答数：人</li>
+							<li><i class="icon-star"></i>全体会員数：  ${allUsersNum}　人</li>
+							<li><i class="icon-group"></i>接続会員数：  ${countSession}　人</li>
+							<li><i class="icon-comments-alt"></i>全体質問数：  ${allQuestionsNum }　個</li>
+							<li><i class="icon-comments"></i>全体回答数：  ${allAnswersNum }　個</li>
 						</ul>
 					</div>
 				</div>

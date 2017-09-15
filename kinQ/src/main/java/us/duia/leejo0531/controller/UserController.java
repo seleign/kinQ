@@ -84,6 +84,8 @@ public class UserController implements HttpSessionListener{
 		synchronized(loginSessionMonitor){
 			loginSessionMonitor.put(session.getId(), loginUser.getId());
 		}
+		
+		System.out.println(loginSessionMonitor+"확인용");
 
 		session.setAttribute("userName", loginUser.getUserName());
 		session.setAttribute("userId", loginUser.getId());
@@ -94,10 +96,10 @@ public class UserController implements HttpSessionListener{
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
+		session.invalidate();
 		synchronized (loginSessionMonitor) {
 			loginSessionMonitor.remove(session.getId());
 		}
-		session.invalidate();
 		return "redirect:/";
 	}
 	
