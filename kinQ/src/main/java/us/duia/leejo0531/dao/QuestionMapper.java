@@ -35,4 +35,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> getAllQuestion();
 
 	public ArrayList<QuestionVO> search_no_answered();
+	
+	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage);
 }
