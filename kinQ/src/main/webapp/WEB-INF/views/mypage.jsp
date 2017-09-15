@@ -88,7 +88,7 @@
 					<div class="user-profile">
 						<div class="col-md-12">
 							<div class="page-content">
-								<h2>About admin</h2>
+								<h2>活動現況</h2>
 								<div class="ul_list ul_list-icon-ok about-user">
 									<ul>
 										<li><i class="icon-user"></i>ID : <span>${sessionScope.userId }</span></li>
