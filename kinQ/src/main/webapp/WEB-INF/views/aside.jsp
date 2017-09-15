@@ -24,7 +24,40 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+  	
+  	<script type="text/javascript">
+
+  	$(function(){
+  			$.ajax({
+  				url: 'asideData',
+  				method: 'get',
+  				data: {},
+  				success: function(result){
+  			  			$('#uNum').html(result[0]);
+  			   			$('#cntSession').html(result[1]);
+  			  			$('#qNum').html(result[2]);
+  			  			$('#aNum').html(result[3]); 
+  				}
+  			});
+  			
+/*   			
+  			
+  		
+  			var allUsersNum = ${allUsersNum};
+  			var countSession = ${countSession};
+  			var allQuestionsNum = ${allQuestionsNum };
+  			var allAnswersNum = ${allAnswersNum };
+  			
+  			sessionStorage.setItem("allUsersNum", allUsersNum);
+  			sessionStorage.setItem("countSession", countSession);
+  			sessionStorage.setItem("allQuestionsNum", allQuestionsNum);
+  			sessionStorage.setItem("allAnswersNum", allAnswersNum);
+  			
+  			
+ */
+  		});
+  	
+  	</script>
 </head>
 <body>
 
@@ -36,10 +69,10 @@
 					
 					<div class="ul_list ul_list-icon-ok">
 						<ul>
-							<li><i class="icon-star"></i>全体会員数：  ${allUsersNum}　人</li>
-							<li><i class="icon-group"></i>接続会員数：  ${countSession}　人</li>
-							<li><i class="icon-comments-alt"></i>全体質問数：  ${allQuestionsNum }　個</li>
-							<li><i class="icon-comments"></i>全体回答数：  ${allAnswersNum }　個</li>
+							<li><i class="icon-star"></i>全体会員数：  <span id="uNum"></span>　人</li>
+							<li><i class="icon-group"></i>接続会員数：  <span id="cntSession"></span>　人</li>
+							<li><i class="icon-comments-alt"></i>全体質問数：  <span id="qNum"></span>　個</li>
+							<li><i class="icon-comments"></i>全体回答数：  <span id="aNum"></span>　個</li>
 						</ul>
 					</div>
 				</div>

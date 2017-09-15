@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.HomeService;
 
@@ -37,16 +38,20 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
-		
+	
+		return "index";
+	}
+	
+	@RequestMapping(value="asideData", method=RequestMethod.GET)
+	public @ResponseBody int[] getAsideData(){
 		int allQuestionsNum = homeSvc.countAllQuestions();
 		int allAnswersNum = homeSvc.countAllAnswers();
 		int allUsersNum = homeSvc.countAllUsers();
+		int sessionCount = UserController.getActiveLoginSessionCount();
 		
-		model.addAttribute("allQuestionsNum", allQuestionsNum);
-		model.addAttribute("allAnswersNum", allAnswersNum);
-		model.addAttribute("allUsersNum", allUsersNum);
-		model.addAttribute("countSession", UserController.getActiveLoginSessionCount());
-		return "index";
+		int [] result = {allUsersNum, sessionCount, allQuestionsNum, allAnswersNum};
+		
+		return result;
 	}
 	
 	@RequestMapping(value = "index", method = RequestMethod.GET)
