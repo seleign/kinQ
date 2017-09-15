@@ -104,8 +104,8 @@
 							<div class="page-content page-content-user-profile">
 								<div class="user-profile-widget">
 									<h2>質問・答え</h2>
-									
-									<div class="ul_list ul_list-icon-ok">
+	
+											<div class="ul_list ul_list-icon-ok" id="leftsideContent" style="float: left; width: 40%; padding-top: 12%; padding-left: 6%;">
 											<table class="dashboard-activity-table">
 												<tbody id="tableBody">
 													<tr>
@@ -139,7 +139,7 @@
 												</tbody>
 											</table>
 									</div>
-									<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+									<div id="columnchart_values" style="width: 900px; height: 300px; float: left; width: 40%;" id="rightsideContent"></div>
 								</div><!-- End user-profile-widget -->
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->
@@ -147,32 +147,20 @@
 				</div><!-- End row -->
 				<div class="clearfix"></div>
 				<div class="page-content">
-					<div class="user-stats">
-						<div class="user-stats-head">
-							<div class="block-stats-1 stats-head">#</div>
-							<div class="block-stats-2 stats-head">Today</div>
-							<div class="block-stats-3 stats-head">Month</div>
-							<div class="block-stats-4 stats-head">Total</div>
+
+					<div class="tabs-warp question-tab">
+						<ul class="tabs">
+							<li class="tab"><a href="#" class="current">私の質問</a></li>
+							<li class="tab"><a href="#">私の答え</a></li>
+						</ul>
+						<div class="tab-inner-warp">
+							<div class="tab-inner">탭 1 내용</div>
 						</div>
-						<div class="user-stats-item">
-							<div class="block-stats-1">Questions</div>
-							<div class="block-stats-2">5</div>
-							<div class="block-stats-3">20</div>
-							<div class="block-stats-4">100</div>
+						<div class="tab-inner-warp">
+							<div class="tab-inner">탭 2 내용</div>
 						</div>
-						<div class="user-stats-item">
-							<div class="block-stats-1">Answers</div>
-							<div class="block-stats-2">30</div>
-							<div class="block-stats-3">150</div>
-							<div class="block-stats-4">1000</div>
-						</div>
-						<div class="user-stats-item user-stats-item-last">
-							<div class="block-stats-1">Visitors</div>
-							<div class="block-stats-2">100</div>
-							<div class="block-stats-3">3000</div>
-							<div class="block-stats-4">5000</div>
-						</div>
-					</div><!-- End user-stats -->
+						. .
+					</div>
 				</div><!-- End page-content -->
 			</div><!-- End main -->
 			<jsp:include page="aside.jsp" flush="false" />
