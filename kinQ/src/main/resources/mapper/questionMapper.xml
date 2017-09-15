@@ -182,13 +182,14 @@
 	</select>
 	
 		<!-- 범위지정 질문글 가져오기  -->
-	<select id="getQuestionPage" parameterType="Integer" resultMap="QuestionResult">
+	<select id="getQuestionPage" parameterType="Integer" resultType="Question">
 		<![CDATA[SELECT * FROM ( SELECT A.*,ROWNUM AS RNUM FROM 
               ( SELECT * FROM q_board
                 ORDER BY questionnum desc
                ) A
-        WHERE ROWNUM <= 30
+        WHERE ROWNUM <= #{endpage}
                )
-		WHERE RNUM > 20 ]]> 
+		WHERE RNUM > #{startpage} ]]> 
+    </select>
     </select>
 </mapper>
