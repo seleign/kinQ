@@ -77,7 +77,42 @@
 		and Q_Board.questionNum = tag.questionNum(+)
 	</select>
 	
+	<!-- context가 tag에 들어간 질문글을 가져온다. -->
+	<select id="searchTagByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
+		select
+		    *
+		from
+		    tag,
+		    (select
+		        q_board.*
+		    from
+		        q_board,
+		        (select
+		            *
+		        from
+		            tag,
+		            (select
+				        max(tagnum) as tags
+				    from
+				        tag
+				    <trim prefix="where" prefixOverrides="and|or">
+				    	<foreach collection="list" item="item">or tag like '%${item}%'</foreach>
+				    </trim>
+				    group by 
+				    	questionnum
+		            ) searchedtag   
+		        where
+		            tag.tagnum = searchedtag.tags
+		         ) targetQstn
+		    where
+		        q_board.questionnum = targetQstn.questionnum
+		    ) searchedQstn
+		where searchedQstn.questionnum = tag.questionnum(+)
+		order by searchedQstn.questionnum, tag.tagnum
+	</select>
+	
 	<!-- context가 작성자 이름에 포함된 모든 질문글을 가져온다. -->
+	<!-- 유니온 사용 필요 -->
 	<select id="searchWriterByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
 		select
 			*
@@ -109,27 +144,65 @@
 	        <trim prefix="where" prefixOverrides="and|or">
 	        	<foreach collection="list" item="item">and title like '%${item}%'</foreach>
 	        </trim>
-	        ) searched
-		where searched.questionnum = tag.questionnum(+)
-		order by searched.questionnum, tag.tagnum
+                
+            union
+            
+            select
+                q_board.*
+            from
+                q_board,
+                (select
+                    questionnum
+                from
+                    q_reply
+		        <trim prefix="where" prefixOverrides="and|or">
+		        	<foreach collection="list" item="item">and replytitle like '%${item}%'</foreach>
+		        </trim>
+                group by
+                    questionnum
+                )targetQstn
+            where
+                q_board.questionnum = targetQstn.questionnum
+	        ) merged
+		where merged.questionnum = tag.questionnum(+)
+		order by merged.questionnum, tag.tagnum
 	</select>
 	
 	<!-- context가 포함된 모든 질문글을 가져온다. -->
 	<select id="searchByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-		select
+        select
 		    *
 		from
 			tag,
-		    (select
-	            *
-	        from
-	            q_board
-	        <trim prefix="where" prefixOverrides="and|or">
-	        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
-	        </trim>
-	        ) searched
-		where searched.questionnum = tag.questionnum(+)
-		order by searched.questionnum, tag.tagnum
+            (
+                select
+                    *
+                from
+                    q_board
+		        <trim prefix="where" prefixOverrides="and|or">
+		        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
+		        </trim>
+	        
+                union
+                
+                select
+                    q_board.*
+                from
+                    q_board,
+                    (select
+                        questionnum
+                    from
+                        q_reply
+					<trim prefix="where" prefixOverrides="and|or">
+			        	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
+			        </trim>
+                    group by questionnum
+                    ) targetQstn
+                where
+                    q_board.questionnum = targetQstn.questionnum
+            ) merged
+        where merged.questionnum = tag.questionnum(+)
+		order by merged.questionnum, tag.tagnum
 	</select>
 	
 	<select id="getQuestionTag" parameterType="Question" resultType="Tag">

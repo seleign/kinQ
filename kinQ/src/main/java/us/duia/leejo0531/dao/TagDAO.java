@@ -31,15 +31,4 @@ public class TagDAO{
 		ArrayList<TagVO> result = mapper.selectTags();
 		return result;
 	}
-	
-	/**
-	 * tag가 들어간 질문글을 가져온다.
-	 * @param tag 검색할 태그명
-	 * @return ArrayList<TagVO>
-	 */
-	public ArrayList<QuestionVO> getQuestionListByTag(ArrayList<String> tag) {
-		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
-		ArrayList<QuestionVO> result = mapper.getQuestionListByTag(tag);
-		return result;
-	}
 }

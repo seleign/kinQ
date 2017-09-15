@@ -122,6 +122,17 @@ public class QuestionDAO {
 		return result;
 	}
 	
+	/**
+	 * DB로부터 context가 태그에 들어간 질문글을 가져온다.
+	 * @param tag 검색할 태그명
+	 * @return ArrayList<TagVO>
+	 */
+	public ArrayList<QuestionVO> searchTagByContext(ArrayList<String> tag) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchTagByContext(tag);
+		return result;
+	}
+	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
 		System.out.println("getQuestionTag 진입 : " + sqlSession);
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
