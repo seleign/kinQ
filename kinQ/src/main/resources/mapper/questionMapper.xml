@@ -87,152 +87,163 @@
 		and Q_Board.questionNum = tag.questionNum(+)
 	</select>
 	
-	<!-- context가 tag에 들어간 질문글을 가져온다. -->
-	<select id="searchTagByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-		select
-		    *
-		from
-		    tag,
-		    (select
-		        q_board.*
-		    from
-		        q_board,
-		        (select
-		            *
-		        from
-		            tag,
-		            (select
-				        max(tagnum) as tags
-				    from
-				        tag
-				    <trim prefix="where" prefixOverrides="and|or">
-				    	<foreach collection="list" item="item">or tag like '%${item}%'</foreach>
-				    </trim>
-				    group by 
-				    	questionnum
-		            ) searchedtag   
-		        where
-		            tag.tagnum = searchedtag.tags
-		         ) targetQstn
-		    where
-		        q_board.questionnum = targetQstn.questionnum
-		    ) searchedQstn
-		where searchedQstn.questionnum = tag.questionnum(+)
-		order by searchedQstn.questionnum, tag.tagnum
-	</select>
-	
-	<!-- context가 작성자 이름에 포함된 모든 질문글을 가져온다. -->
-	<!-- 유니온 사용 필요 -->
-	<select id="searchWriterByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-		select
+	<!-- context가 들어간 질문글을 가져온다. -->
+	<select id="searchByContext" parameterType="Page" resultMap="QuestionResult">
+        select
 			*
 		from
-			tag,
-		    (select
-	            q_board.*
-	        from
-	        	userinfo,
-	            q_board
-	        where
-	        	q_board.usernum = userinfo.USERNUM(+)
-	        	<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
-            
-            union
-            
-            select
-                q_board.*
-            from
-                q_board,
+            tag,
+			(select
+				rownum as r,
+				results.*
+			from
                 (select
-                    questionnum
+                    merged.*
                 from
-                    q_reply,
-                    userinfo
-                where
-                    q_reply.usernum = userinfo.usernum(+)
-	        		<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
-                group by
-                    questionnum
-                )targetQstn
-            where
-                q_board.questionnum = targetQstn.questionnum
-	        ) merged
-		where merged.questionnum = tag.questionnum(+)
-		order by merged.questionnum, tag.tagnum
-	</select>
-	
-	<!-- context가 제목에 포함된 모든 질문글을 가져온다. -->
-	<select id="searchTitleByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-		select
-		    *
-		from
-			tag,
-		    (select
-	            *
-	        from
-	            q_board
-	        <trim prefix="where" prefixOverrides="and|or">
-	        	<foreach collection="list" item="item">and title like '%${item}%'</foreach>
-	        </trim>
-                
-            union
-            
-            select
-                q_board.*
-            from
-                q_board,
-                (select
-                    questionnum
-                from
-                    q_reply
-		        <trim prefix="where" prefixOverrides="and|or">
-		        	<foreach collection="list" item="item">and replytitle like '%${item}%'</foreach>
-		        </trim>
-                group by
-                    questionnum
-                )targetQstn
-            where
-                q_board.questionnum = targetQstn.questionnum
-	        ) merged
-		where merged.questionnum = tag.questionnum(+)
-		order by merged.questionnum, tag.tagnum
-	</select>
-	
-	<!-- context가 포함된 모든 질문글을 가져온다. -->
-	<select id="searchByContext" parameterType="java.util.ArrayList" resultMap="QuestionResult">
-        select
-		    *
-		from
-			tag,
-            (
-                select
-                    *
-                from
-                    q_board
-		        <trim prefix="where" prefixOverrides="and|or">
-		        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
-		        </trim>
-	        
-                union
-                
-                select
-                    q_board.*
-                from
-                    q_board,
                     (select
-                        questionnum
+                        selected.*
                     from
-                        q_reply
-					<trim prefix="where" prefixOverrides="and|or">
-			        	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
-			        </trim>
-                    group by questionnum
-                    ) targetQstn
-                where
-                    q_board.questionnum = targetQstn.questionnum
-            ) merged
-        where merged.questionnum = tag.questionnum(+)
-		order by merged.questionnum, tag.tagnum
+                        (select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                *
+                            from
+                                tag,
+                                (select
+                                    max(tagnum) as tags
+                                from
+                                    tag
+                                <trim prefix="where" prefixOverrides="and|or">
+                                    <foreach collection="list" item="item">or tag like '%${item}%'</foreach>
+                                </trim>
+                                group by 
+                                    questionnum
+                                ) searchedtag   
+                            where
+                                tag.tagnum = searchedtag.tags
+                             ) targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'tag' 
+                    
+                    union all
+                    
+                    select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            userinfo,
+                            q_board
+                        where
+                            q_board.usernum = userinfo.USERNUM(+)
+                            <foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+                        
+                        union
+                        
+                        select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                questionnum
+                            from
+                                q_reply,
+                                userinfo
+                            where
+                                q_reply.usernum = userinfo.usernum(+)
+                            	<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+                            group by
+                                questionnum
+                            )targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'author' 
+                    
+                    union all
+                    
+                    select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            q_board
+                        <trim prefix="where" prefixOverrides="and|or">
+                            <foreach collection="list" item="item">and title like '%${item}%'</foreach>
+                        </trim>
+                            
+                        union
+                        
+                        select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                questionnum
+                            from
+                                q_reply
+                            <trim prefix="where" prefixOverrides="and|or">
+                                <foreach collection="list" item="item">and replytitle like '%${item}%'</foreach>
+                            </trim>
+                            group by
+                                questionnum
+                            )targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'title' 
+                    
+                    union all
+                    
+                    select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            q_board
+				        <trim prefix="where" prefixOverrides="and|or">
+				        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
+				        </trim>
+                    
+                        union
+                        
+                        select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                questionnum
+                            from
+                                q_reply
+							<trim prefix="where" prefixOverrides="and|or">
+					        	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
+					        </trim>
+                            group by questionnum
+                            ) targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'content'
+                    )merged
+                order by merged.questionnum desc
+				) results
+			)numbered
+		where
+            <![CDATA[ r >= #{from} and r <= #{to} ]]>
+            and numbered.questionnum = tag.questionnum(+)
+        order by
+            numbered.questionnum desc, tag.tagnum
 	</select>
 	
 	<select id="getQuestionTag" parameterType="Question" resultType="Tag">

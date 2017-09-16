@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.ReplyDAO;
 import us.duia.leejo0531.dao.TagDAO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
@@ -21,10 +22,6 @@ public class SearchService {
 	
 	@Autowired(required=false)
 	private QuestionDAO qstnDao;
-	@Autowired(required=false)
-	private ReplyDAO replyDao;
-	@Autowired(required=false)
-	private TagDAO tagDao;
 	
 	/**
 	 * 검색어로 받은 일렬의 스트링을 단어로 분리하여 태그, 단어 검색으로 결과를 가져온다.
@@ -36,26 +33,17 @@ public class SearchService {
 	 * @param str
 	 * @return QuestionListByTag, ReplyListByTag, QuestionListBycontext, ReplyListBycontext
 	 */
-	public HashMap<String, Object> search_by_words(int start, int end, String type, String str) {
+	public ArrayList<QuestionVO> search_by_words( PageVO page) {
+		String str = page.getSearch();
+		
 		ArrayList<String> words = new ArrayList<>();
-		for(String s : str.split(",")) { // , 로 구분한 후 
+		for(String s : str.split(",")) // , 로 구분한 후 
 			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
-		}
+		
+		page.setTokens( words);
 
-		ArrayList<QuestionVO> QuestionListByWriter = qstnDao.searchWriterByContext(words);
-		
-		ArrayList<QuestionVO> QuestionListByTitle = qstnDao.searchTitleByContext(words);
-		
-		ArrayList<QuestionVO> QuestionListByTag = qstnDao.searchTagByContext(words);
+		ArrayList<QuestionVO> result = qstnDao.searchByContext(page);
 
-		ArrayList<QuestionVO> QuestionListBycontext = qstnDao.searchByContext(words);
-		
-		HashMap<String, Object> result = new HashMap<>();
-		result.put("QuestionListByWriter", QuestionListByWriter);
-		result.put("QuestionListByTitle", QuestionListByTitle);
-		result.put("QuestionListByTag", QuestionListByTag);
-		result.put("QuestionListBycontext", QuestionListBycontext);
-		
 		return result;
 	}
 

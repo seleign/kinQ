@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.checkTimeVO;
@@ -105,42 +106,9 @@ public class QuestionDAO {
 	 * @param context 질문글에 포함된 단어
 	 * @return ArrayList<QuestionVO>
 	 */
-	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
+	public ArrayList<QuestionVO> searchByContext(PageVO page){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<QuestionVO> result = mapper.searchByContext(context);
-		return result;
-	}
-	
-	/**
-	 * DB로부터 context가 작성자 이름에 포함된 모든 질문글을 가져온다.
-	 * @param context 작성자 이름에 포함된 단어
-	 * @return ArrayList<QuestionVO>
-	 */
-	public ArrayList<QuestionVO> searchWriterByContext(ArrayList<String> context){
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<QuestionVO> result = mapper.searchWriterByContext(context);
-		return result;
-	}
-	
-	/**
-	 * DB로부터 context가 제목에 포함된 모든 질문글을 가져온다.
-	 * @param context 질문글 제목에 포함된 단어
-	 * @return ArrayList<QuestionVO>
-	 */
-	public ArrayList<QuestionVO> searchTitleByContext(ArrayList<String> context){
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<QuestionVO> result = mapper.searchTitleByContext(context);
-		return result;
-	}
-	
-	/**
-	 * DB로부터 context가 태그에 들어간 질문글을 가져온다.
-	 * @param tag 검색할 태그명
-	 * @return ArrayList<TagVO>
-	 */
-	public ArrayList<QuestionVO> searchTagByContext(ArrayList<String> tag) {
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<QuestionVO> result = mapper.searchTagByContext(tag);
+		ArrayList<QuestionVO> result = mapper.searchByContext(page);
 		return result;
 	}
 	

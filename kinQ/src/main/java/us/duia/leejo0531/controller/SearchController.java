@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.SearchService;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
@@ -44,28 +45,22 @@ public class SearchController {
 	 * view에서 jstl로 결과를 출력한다.
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
-	@RequestMapping(value = "search", method = RequestMethod.POST)
-	public String searchByWords(int start, int end, String type, String str, Model model) {
-		HashMap<String, Object> map = sechSvc.search_by_words(start, end, type, str);
-		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
-		model.addAttribute("QuestionListByTag", (ArrayList<QuestionVO>)map.get("QuestionListByTag"));
+/*	@RequestMapping(value = "search", method = RequestMethod.POST)
+	public String searchByWords( PageVO page, Model model) {
+		HashMap<String, Object> map = sechSvc.search_by_words(page);
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
 		return "/search";
-	}
+	}*/
 	
 
-/*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
+	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> search_by_words(String str, Model model) {
-		HashMap<String, Object> map = sechSvc.search_by_words(str);
-		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
-		model.addAttribute("QuestionListByTag", (ArrayList<QuestionVO>)map.get("QuestionListByTag"));
-		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
-		model.addAttribute("ReplyListByTitle", (ArrayList<ReplyVO>)map.get("ReplyListByTitle"));
-		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
-		return map; //어느 페이지로 이동시킬 것인가?
+	public ArrayList<QuestionVO> searchByWords( PageVO page, Model model) {
+		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
+		model.addAttribute("ReplyListBycontext", sechSvc.search_by_words(page));
+		return result; //어느 페이지로 이동시킬 것인가?
 	}
-	*/
+	
 	/**
 	 * 답변글이 없는 질문글을 검색한다.
 	 * */

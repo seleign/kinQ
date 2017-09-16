@@ -14,6 +14,7 @@
 		<typeAlias type="us.duia.leejo0531.vo.ReplyVO" alias="Reply"/>
 		<typeAlias type="us.duia.leejo0531.vo.ReportVO" alias="Report"/>
 		<typeAlias type="us.duia.leejo0531.vo.checkTimeVO" alias="CheckTime"/>
+		<typeAlias type="us.duia.leejo0531.vo.PageVO" alias="Page"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 
