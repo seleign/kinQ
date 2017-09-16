@@ -1,6 +1,6 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-    <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -100,7 +100,16 @@
 			}
 		}
 	}
-	</script>
+
+// 태그를 입력하면 ol, li에 태그가 생긴다. 이를 서버에 전송하기 위해 hidden input 태그(name = "")으로 만든다.
+// 유효성 검사를 할 때 또는 서버로 전송하기 전에 이 함수를 호툴한다.
+function liTohiddenRelatedTag() {
+	$("#hiddenRelatedTag").empty();
+	$("li.tag > span").each(function() {
+		$("#hiddenRelatedTag").append('<input type="hidden" name="relatedTag" value="'+ $(this).text() +'">');
+	})
+}
+</script>
 	
 </head>
 <body>
@@ -136,12 +145,12 @@
 					<p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque.</p>
 					
 					<div class="form-style form-style-3" id="question-submit">
-						<form action="askQuestion" method="post" enctype="multipart/form-data">
+						<form action="addQuestion" method="post" enctype="multipart/form-data">
 						<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
-						<input type="text" value="${questionNum}" name="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다." required="required">
+						<input type="hidden" value="${questionNum}" name="questionNum" id="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다." required="required">
 						
-						<!-- 이걸 왜 nullable로 하지 않은이유가 있습니까? -->
-						<select name="qstatus">
+						<!-- 이걸 왜 nullable로 하지 않은이유가 있습니까? 누가 설계한것인가? -->
+						<select name="qstatus" style="display: none;">
 							<option value="in progress">in progress</option>
 							<option value="solved">solved</option>
 						</select>
@@ -149,16 +158,17 @@
 							<div class="form-inputs clearfix">
 								<p>
 									<label class="required">Question Title<span>*</span></label>
-									<input type="text" id="question-title" name="title">
+									<input type="text" id="question-title" name="title" required="required">
 									<span class="form-description">Please choose an appropriate title for the question to answer it even easier .</span>
 								</p>
 								<div id="form-textarea">
 									<label class="required">Details<span>*</span></label>
 								<p>
-									<textarea id="question_details" name="questionContent" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
+									<textarea id="question_details" name="questionContent" required="required" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
 									<span class="form-description">Type the description thoroughly and in detail .</span>
 								</p>
 								</div>
+								
 								
 								<!-- 아직 파일 업로드를 고려하여 컨트롤러를 만들지 않음. -->
 <!-- 								<label>Attachment</label> -->
@@ -173,13 +183,19 @@
 								
 								<p>
 									<label>Tags</label>
-									<input type="text" class="input" name="relatedTag" id="question_tags" data-seperator=",">
+									<input type="text" class="input" id="question_tags" data-seperator=",">
 									<span class="form-description">Please choose  suitable Keywords Ex : <span class="color">question , poll</span> .</span>
 								</p>
+								
+								<!-- 위에 tag입력으로 받은 것이 이 div에 hidden으로 생성된다. -->
+								<div id="hiddenRelatedTag">
+									<input type="button" onclick="liTohiddenRelatedTag()" value="태그입력으로 생성된 li가 div(hiddenRelatedTag)에 히든으로 입력된다. 물론 이 버튼은 설명을 위해 있는 것..">
+								</div>
+								
 								<p>
 									<label class="required">Category<span>*</span></label>
 									<span class="styled-select">
-										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
+										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)" required="required">
 										<option value="0" selected="selected">選択</option>
 										<c:forEach var="major" items="${majorList }">
 											<option value="${major.majorNum}">${major.majorName}</option>
@@ -207,6 +223,7 @@
 									<label class="required">video<span>*</span></label>
 									<div id="step2">
 									<h1>step2. WEBRTC를 이용한 녹화...</h1>
+									
 									<button id="btn-record-webm" style="font-size: inherit;">화면 녹화</button>
 									<button id="btn-record-webm-stop" style="font-size: inherit;" disabled="disabled">화면 중지</button>
 									
@@ -374,6 +391,7 @@
 <script src="./resources/js/custom.js"></script>
 <script type="text/javascript">
 window.onload = function() {
+	
 	// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 	CKEDITOR.replace('question_details',{ 
 		filebrowserUploadUrl: 'cKEditorFileUpload'
@@ -384,6 +402,18 @@ window.onload = function() {
 			max_select_options: 5,
 			no_result_text: "No result found. Press enter to add"
 		});
+	
+	// 4. 녹화 영역의 크기를 가로 == 세로 로 맞춤
+	var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
+	$(elementToShare).height($(elementToShare).width());
+	$(elementToShare).css('max-height', $(elementToShare).width());
+	$(elementToShare).css('overflow-y', "auto");
+	
+	// 5. questionNum이 null이면 다시 페이지를 불러온다.
+	if( isEmpty($("#questionNum").val() ) ) {
+		location.href="addQuestion"; 
+	}
+	
 	//녹화 -- 현재 맥에서만 작동 함
 	//동영상 녹화 코드
 		document.getElementById('btn-record-webm').onclick = function() {
@@ -415,9 +445,9 @@ window.onload = function() {
 			//공유하는 DIV 쪽 기능
 			stop = false;
 			var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
-			$(elementToShare).height($(elementToShare).width());
-			$(elementToShare).css('max-height', $(elementToShare).width());
-			$(elementToShare).css('overflow-y', "auto");
+			//$(elementToShare).height($(elementToShare).width());
+			//$(elementToShare).css('max-height', $(elementToShare).width());
+			//$(elementToShare).css('overflow-y', "auto");
 			//$(elementToShare).height($(elementToShare).width());
 			
 			var canvas2d = document.createElement('canvas');
@@ -500,6 +530,7 @@ window.onload = function() {
 		        return false;
 		    }
 		});
+
 } //onload 종료
 
 //글쓰기 페이지의 유효성 검사
@@ -556,6 +587,15 @@ function imgSrcToBase64Src_In_id(id) {
 	            });
 		}
 	}) // each 종료
+};
+
+//데이터가 널 또는 공백인지 확인하는 함수
+var isEmpty = function(value){
+	if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+		return true
+	}else{
+		return false
+	}
 };
 </script>
 <!-- End js -->

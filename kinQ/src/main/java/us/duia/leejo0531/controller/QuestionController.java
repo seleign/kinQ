@@ -102,12 +102,11 @@ public class QuestionController {
 	 * @return 자신이 작성한 페이지로 이동? 마이페이지의 질문 내역페이지로 이동?
 	 */
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
-	public String addQuestion(QuestionVO qstn, ArrayList<String> relatedTag) {
-		// 임시로 userNum을 1로 함..
+	public String addQuestion(QuestionVO qstn) {
+		// 임시로 userNum, setMinorNum을 1로 함..
 		qstn.setUserNum(1);
+		qstn.setMinorNum(1); // 이게 왜 not null?
 		logger.info(qstn.toString());
-		logger.info(relatedTag.toString());
-		
 		
 		qstnSvc.writeQuestion(qstn);
 		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
@@ -135,7 +134,8 @@ public class QuestionController {
 		model.addAttribute("major", major);*/
 		model.addAttribute("tagList", tagList);
 		
-		return "question/questionView";
+		return "question_view";
+		//return "question/questionView";
 
 	}
 	
@@ -170,16 +170,10 @@ public class QuestionController {
 	 * @return 질문하기 페이지로 이동
 	 */
 	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
-	public String ask_question(QuestionVO qstn, ArrayList<String> relatedTag){
-		// 임시로 userNum, setMinorNum을 1로 함..
-		qstn.setUserNum(1); // 세션에서 꺼내오면 됨
-		qstn.setMinorNum(1); // 이게 왜 not null?
-		logger.info(qstn.toString());
-		logger.info(relatedTag.toString());
-		
-		
-		qstnSvc.writeQuestion(qstn);
-		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
+	public String ask_question(HashMap<String, String> map){ // TODO
+		System.out.println("이거 무슨용도인가?");
+		logger.info(map.toString());
+		return "askQuestion";  
 	}
 	
 	/**
@@ -191,5 +185,7 @@ public class QuestionController {
 		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
 		return result;
 	}
-
+	
+	
+	//@RequestMapping(value = "")
 }
