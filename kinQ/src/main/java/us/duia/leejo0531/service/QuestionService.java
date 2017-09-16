@@ -154,7 +154,6 @@ public class QuestionService {
 	 * @return ArrayList<QuestionVO>
 	 */
 	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
-		System.out.println("*******qsvs in startpage: "+startpage+"endpage :"+endpage);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startpage", startpage);
 		map.put("endpage", endpage);
