@@ -136,9 +136,29 @@
 	        where
 	        	q_board.usernum = userinfo.USERNUM(+)
 	        	<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
-	        ) searched
-		where searched.questionnum = tag.questionnum(+)
-		order by searched.questionnum, tag.tagnum
+            
+            union
+            
+            select
+                q_board.*
+            from
+                q_board,
+                (select
+                    questionnum
+                from
+                    q_reply,
+                    userinfo
+                where
+                    q_reply.usernum = userinfo.usernum(+)
+	        		<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+                group by
+                    questionnum
+                )targetQstn
+            where
+                q_board.questionnum = targetQstn.questionnum
+	        ) merged
+		where merged.questionnum = tag.questionnum(+)
+		order by merged.questionnum, tag.tagnum
 	</select>
 	
 	<!-- context가 제목에 포함된 모든 질문글을 가져온다. -->

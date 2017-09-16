@@ -36,14 +36,15 @@ public class SearchController {
 /*	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public String showSearchPage() {
 		return "/search";
-	}*/
+	}
+*/
 	
 	/**
 	 * 검색창에서 입력 받은 단어를 tag와 단어(질문, 답변 내 텍스트)에서 결과를 찾는다.
 	 * view에서 jstl로 결과를 출력한다.
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
-/*	@RequestMapping(value = "search", method = RequestMethod.POST)
+	@RequestMapping(value = "search", method = RequestMethod.POST)
 	public String searchByWords(int start, int end, String type, String str, Model model) {
 		HashMap<String, Object> map = sechSvc.search_by_words(start, end, type, str);
 		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
@@ -51,21 +52,7 @@ public class SearchController {
 		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
 		return "/search";
 	}
-*/	
-	/**
-	 * 검색창에서 입력 받은 단어를 tag와 단어(질문, 답변 내 텍스트)에서 결과를 찾는다.
-	 * view에서 jstl로 결과를 출력한다.
-	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
-	 */
-	@RequestMapping(value = "searchContext", method = RequestMethod.GET)
-	@ResponseBody
-	public HashMap<String, Object> searchByWords(int start, int end, String type, String str, Model model) {
-		HashMap<String, Object> map = sechSvc.search_by_words(start, end, type, str);
-		model.addAttribute("QuestionListByTitle", (ArrayList<QuestionVO>)map.get("QuestionListByTitle"));
-		model.addAttribute("QuestionListByTag", (ArrayList<QuestionVO>)map.get("QuestionListByTag"));
-		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
-		return map;
-	}
+	
 
 /*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	@ResponseBody
