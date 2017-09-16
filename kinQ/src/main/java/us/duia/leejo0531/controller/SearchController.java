@@ -45,22 +45,22 @@ public class SearchController {
 	 * view에서 jstl로 결과를 출력한다.
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
-/*	@RequestMapping(value = "search", method = RequestMethod.POST)
+	@RequestMapping(value = "search", method = RequestMethod.POST)
 	public String searchByWords( PageVO page, Model model) {
-		HashMap<String, Object> map = sechSvc.search_by_words(page);
-		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
+		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
+		model.addAttribute("ReplyListBycontext", sechSvc.search_by_words(page));
 		return "/search";
-	}*/
+	}
 	
 
-	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
+/*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<QuestionVO> searchByWords( PageVO page, Model model) {
 		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
 		model.addAttribute("ReplyListBycontext", sechSvc.search_by_words(page));
 		return result; //어느 페이지로 이동시킬 것인가?
 	}
-	
+*/	
 	/**
 	 * 답변글이 없는 질문글을 검색한다.
 	 * */

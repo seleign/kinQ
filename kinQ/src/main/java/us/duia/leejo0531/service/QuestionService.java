@@ -13,6 +13,7 @@ import us.duia.leejo0531.dao.TagDAO;
 import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.UserVO;
@@ -96,8 +97,8 @@ public class QuestionService {
 	 * @param context 검색할 텍스트
 	 * @return ArrayList
 	 */
-	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
-		ArrayList<QuestionVO> result = qstnDao.searchByContext(context);
+	public ArrayList<QuestionVO> searchByContext(PageVO	page){
+		ArrayList<QuestionVO> result = qstnDao.searchByContext(page);
 		return result;
 	}
 	
