@@ -152,6 +152,7 @@
 							</li>
 						</ul>
 					</li>
+					<li><a href="javascript:void(0)" onclick="location.href='pointShop'">ポイントショップ</a></li>
 					<li><a href="shortcodes">Shortcodes</a></li>
 					<li><a href="contact_us.html">고객센터</a></li>
 				</ul>

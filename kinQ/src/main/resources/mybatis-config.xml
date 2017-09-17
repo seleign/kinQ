@@ -23,5 +23,6 @@
 		<mapper resource="mapper/replyMapper.xml"/>
 		<mapper resource="mapper/tagMapper.xml"/>
 		<mapper resource="mapper/reportMapper.xml"/>
+		<mapper resource="mapper/pointMapper.xml"/>
 	</mappers>
 </configuration>
