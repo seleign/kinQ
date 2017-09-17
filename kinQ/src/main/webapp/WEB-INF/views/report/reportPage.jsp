@@ -27,12 +27,11 @@
 <h3>違反報告</h3>
 
 <!-- <form action="report" id="reportForm" method="POST"> -->
-<form action="reportTest" method="POST"  id="reportForm">
-	<label for="reportTitle">タイトル</label><input type="text" name="reportTitle" id="reportTitle"><br>
-	<!-- 세션 있을 때만 주석 풀기 - 안 그러면 오류남 -->
-<%-- 	<label for="reporterNum">書き手</label>${sessionScope.userId}<input type="hidden" value="${sessionScope.userNum}" name="reporterNum" id="reporterNum">
- --%>	<hr>
-
+<form action="reportQnA" method="POST"  id="reportForm">
+	<label for="reportTitle">タイトル：　</label><input type="text" name="reportTitle" id="reportTitle"><br>
+ 	<label for="reporterNum">書き手：　</label>${sessionScope.userId}<input type="hidden" value="${sessionScope.userNum}" name="reporterNum" id="reporterNum">
+ 	<hr>
+	<lable for="reportedQNum">申告対象：　</lable>${reportedQNum }<input type="hidden" value="${reportedQNum }" name="reportedQNum">
 	<hr>
 	<label for="reportReason">申告事由</label><br>
 		<input type="radio" name="reportReason" value="不適切な広告" checked="checked">不適切な広告<br>

@@ -22,5 +22,6 @@
 		<mapper resource="mapper/questionMapper.xml"/>
 		<mapper resource="mapper/replyMapper.xml"/>
 		<mapper resource="mapper/tagMapper.xml"/>
+		<mapper resource="mapper/reportMapper.xml"/>
 	</mappers>
 </configuration>
