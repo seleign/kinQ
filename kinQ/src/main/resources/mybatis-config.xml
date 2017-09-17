@@ -16,6 +16,7 @@
 		<typeAlias type="us.duia.leejo0531.vo.checkTimeVO" alias="CheckTime"/>
 		<typeAlias type="us.duia.leejo0531.vo.GoodsVO" alias="Goods"/>
 		<typeAlias type="us.duia.leejo0531.vo.PageVO" alias="Page"/>
+		<typeAlias type="us.duia.leejo0531.vo.AlarmVO" alias="Alarm"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 

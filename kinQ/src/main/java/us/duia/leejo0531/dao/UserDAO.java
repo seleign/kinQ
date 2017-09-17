@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
@@ -141,5 +142,11 @@ public class UserDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		int completedQuestions = mapper.countCompletedQuestions(userNum);
 		return completedQuestions;
+	}
+	
+	public ArrayList<AlarmVO> getUserAlarm(int userNum){
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		ArrayList<AlarmVO> alarmList = mapper.getUserAlarm(userNum);
+		return alarmList;
 	}
 }

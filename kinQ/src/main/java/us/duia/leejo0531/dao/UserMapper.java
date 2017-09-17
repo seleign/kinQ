@@ -2,6 +2,7 @@ package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
 
+import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
@@ -23,4 +24,5 @@ public interface UserMapper {
 	public UserVO getUserInfo(int userNum);
 	public int countAnswers(int userNum);
 	public int countCompletedQuestions(int userNum);
+	public ArrayList<AlarmVO> getUserAlarm(int userNum);
 }

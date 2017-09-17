@@ -24,15 +24,35 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+
+
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
   <script type="text/javascript">
-	var sock = new WebSocket("ws://" + window.location.host +"/websocket/echo");
-	sock.onmessage = function(evt) {
-		console.log(evt);
-		console.log(evt.data);
+	var webUri = "ws://" + window.location.host +"/leejo0531/count";
+	function send_message(){
+		websocket = new WebSocket(webUri);
+		websocket.onopen = function(evt){
+			onOpen(evt);
+		};
+		websocket.onmessage = function(evt){
+			onMessage(evt);
+		};
+		websocket.onerror = function(evt){
+			onError(evt);
+		};
 	}
-	sock.onopen = function(evt) {
-		sock.send('test1');
+	
+	function onOpen(evt){
+		websocket.send("${sessionScope.userNum}");
 	}
+	function onMessage(evt){
+		//메세지가 도착했을때 처리해줄 코드작성 arraylist가 반환될 것임 
+		$('.useralarm').append(evt.data);
+	}
+	
+	$(function(){
+		send_message();
+	});
 </script>
 </head>
 <body>
@@ -148,6 +168,9 @@
 				<c:if test="${sessionScope.userName != null }">
 				<div class="header-mypage">
 					<a href="mypage"><i class="icon-user"></i>Mypage</a>
+				</div>
+				<div class="header-alarm">
+					<a href="useralarm">알람 a태그</a>
 				</div>
 				</c:if>
 		</section><!-- End container -->

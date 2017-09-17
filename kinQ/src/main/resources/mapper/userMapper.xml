@@ -83,6 +83,9 @@
 		select * from userInfo where userNum = #{userNum}
 	</select>
 	
-	
+	<!-- 유저별 알람기록 가져오기 -->
+	<select id="getUserAlarm" parameterType="int" resultType="Alarm">
+		select * from useralarm where usernum = #{usesrNum}
+	</select>
 	
 </mapper>
