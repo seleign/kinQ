@@ -153,158 +153,21 @@
 				
 				
 				<div class="divider"><span></span></div>
-	
-				
-
 			</div><!-- End main -->
+
 			<aside class="col-md-3 sidebar">
 				<div class="widget widget_menu widget_menu_jquery">
-					<ul>
-						<li class="current_page_item"><a href="#accordions"><i class="icon-reorder"></i>Accordions & Toggle & Taps</a></li>
-						<div class="accordion">
-						<li class="accordion-title"><a href="#alert"><i class="icon-bullhorn"></i>教育・学習</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">乳幼児教育</a></li>
-								<li><a href="">小学校</a></li>
-								<li><a href="">中学校</a></li>
-								<li><a href="">高等学校</a></li>
-								<li><a href="">大学</a></li>
-								<li><a href="">留学</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#buttons"><i class="icon-link"></i>IT</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">コンピューター</a></li>
-								<li><a href="">ハードウェア</a></li>
-								<li><a href="">ソフトウェア</a></li>
-								<li><a href="">OS</a></li>
-								<li><a href="">プログラミング</a></li>
-								<li><a href="">ウェブサイト</a></li>
-								<li><a href="">インターネット</a></li>
-								<li><a href="">通信ネットワーク</a></li>
-								<li><a href="">放送通信</a></li>
-								<li><a href="">保安</a></li>
-								<li><a href="">IT資格試験</a></li>
-								<li><a href="">アプリケーション</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#testimonial"><i class="icon-thumbs-up"></i>ゲーム</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">RPGゲーム</a></li>
-								<li><a href="">シミュレーションゲーム</a></li>
-								<li><a href="">シューティングゲーム</a></li>
-								<li><a href="">アクションゲーム</a></li>
-								<li><a href="">レーシングゲーム</a></li>
-								<li><a href="">スポーツゲーム</a></li>
-								<li><a href="">ボード・パズルゲーム</a></li>
-								<li><a href="">モバゲー</a></li>
-								<li><a href="">ビデオゲーム</a></li>
-								<li><a href="">ゲーマー</a></li>
-								<li><a href="">インディーズゲーム</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#audio"><i class="icon-music"></i>エンタテインメント</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">TV・ラジオ</a></li>
-								<li><a href="">音楽</a></li>
-								<li><a href="">映画</a></li>
-								<li><a href="">アニメ</a></li>
-								<li><a href="">漫画</a></li>
-								<li><a href="">ビデオ・DVD</a></li>
-								<li><a href="">演劇</a></li>
-								<li><a href="">ミュージカル</a></li>
-								<li><a href="">オペラ</a></li>
-								<li><a href="">ダンス</a></li>
-								<li><a href="">美術</a></li>
-								<li><a href="">デザイン</a></li>
-								<li><a href="">写真</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#dropcaps"><i class="icon-bold"></i>生活</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">飲食</a></li>
-								<li><a href="">美容</a></li>
-								<li><a href="">ファッション</a></li>
-								<li><a href="">ペット</a></li>
-								<li><a href="">インテリア</a></li>
-								<li><a href="">車</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#blockquote"><i class="icon-quote-left"></i>健康</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">歯学</a></li>
-								<li><a href="">薬学</a></li>
-								<li><a href="">栄養学</a></li>
-								<li><a href="">運動</a></li>
-								<li><a href="">医療</a></li>
-								<li><a href="">保険</a></li>
-								<li><a href="">健康常識</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#icons"><i class="icon-star-empty"></i>社会・政治</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">行政</a></li>
-								<li><a href="">法律</a></li>
-								<li><a href="">国防</a></li>
-								<li><a href="">外交</a></li>
-								<li><a href="">選挙</a></li>
-								<li><a href="">雇用・労働</a></li>
-								<li><a href="">宗教</a></li>
-								<li><a href="">福祉</a></li>
-								<li><a href="">環境</a></li>
-								<li><a href="">災害</a></li>
-								<li><a href="">社会文化</a></li>
-								<li><a href="">機関・団体・人物</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#contact"><i class="icon-envelope"></i>経済</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">金融</a></li>
-								<li><a href="">不動産</a></li>
-								<li><a href="">税務</a></li>
-								<li><a href="">経営</a></li>
-								<li><a href="">貿易</a></li>
-								<li><a href="">就職</a></li>
-								<li><a href="">創業</a></li>
-								<li><a href="">経済制度</a></li>
-								<li><a href="">経済動向</a></li>
-								<li><a href="">経済団体</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#bullet"><i class="icon-list"></i>旅行</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">国内旅行</a></li>
-								<li><a href="">海外旅行</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#progess"><i class="icon-tasks"></i>スポーツ</a></li>
-							<div class="accordion-inner">
-							<ul>
-								<li><a href="">球技スポーツ</a></li>
-								<li><a href="">陸上・水上スポーツ</a></li>
-								<li><a href="">ウインタースポーツ</a></li>
-								<li><a href="">武芸</a></li>
-								<li><a href="">レジャー</a></li>
-							</ul>
-							</div>
-						<li class="accordion-title"><a href="#slideShow"><i class="icon-picture"></i>SlideShow</a></li>
-						<li><a href="#video"><i class="icon-film"></i>video</a></li>
-						<li><a href="#columns"><i class="icon-table"></i>Columns</a></li>
-						</div>
-					</ul>
+					<h2>マイカート</h2>
+					<a href="#" class="button small dark-blue-button custom-button">購入する</a>
 				</div><!-- End widget_menu -->
 			</aside><!-- End sidebar -->
+
 		</div><!-- End row -->
 	</section><!-- End container -->
+	
+	
+	
+	
 	
 	<footer id="footer">
 		<section class="container">
