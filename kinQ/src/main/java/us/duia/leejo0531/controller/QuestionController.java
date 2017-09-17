@@ -25,6 +25,7 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
+import us.duia.leejo0531.vo.UserVO;
 
 /**
  * 1) 이 컨트롤러는 Question관련 컨트롤러이다.
@@ -40,7 +41,7 @@ public class QuestionController {
 	@Autowired
 	private QuestionService qstnSvc; //QuestionService 비즈니스 로직
 	
-	@Autowired
+	@Autowired(required = false)
 	private UserService userSvc; //UserService 비즈니스 로직
 
 	/***
@@ -128,10 +129,14 @@ public class QuestionController {
 		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
 		System.out.println("questionNum : " + question.getQuestionNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
+		UserVO user = qstnSvc.getUserInfo(question.getUserNum());
+		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
 		model.addAttribute("question", question);
 		model.addAttribute("minor", minor);
 		model.addAttribute("major", major);
 		model.addAttribute("tagList", tagList);
+		model.addAttribute("user", user);
+		model.addAttribute("checkTimeResult", checkTimeResult);
 		
 		//return "question/questionView";
 		

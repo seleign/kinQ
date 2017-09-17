@@ -39,7 +39,7 @@
 				for (var i = 0; i < replyList.length; i++) {
 					replyHtml += "<li class=\"comment\">"
 					replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">"
-					replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>"
+					/* replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
 					replyHtml += "<div class=\"comment-text\">"
 					replyHtml += "<div class=\"author clearfix\">"
 					replyHtml += "<div class=\"comment-author\"><a href=\"#\">" + replyList[i].id + "</a></div>"
@@ -49,7 +49,13 @@
 					replyHtml += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>"
 					replyHtml += "</ul>"
 					replyHtml += "</div>"
-					replyHtml += "<span class=\"question-vote-result\">+1</span>"//추천을 어떻게 받아서 계산할지 정해야됨
+					if (replyList[i].score > 0) {
+						replyHtml += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + replyList[i].score + "</span>"//추천을 어떻게 받아서 계산할지 정해야됨
+					} else if (replyList[i].score < 0){
+						replyHtml += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + replyList[i].score*(-1) + "</span>"//추천을 어떻게 받아서 계산할지 정해야됨
+					} else {
+						replyHtml += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">" + replyList[i].score + "</span>"//추천을 어떻게 받아서 계산할지 정해야됨
+					}
 					replyHtml += "<div class=\"comment-meta\">"
 					replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" 
 					replyHtml += "</div>"
@@ -102,8 +108,8 @@
 					<h2>
 						<a href="single_question.html">${ question.title }</a>
 					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
+					<!-- <a class="question-report" href="#">Report</a>
+					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div> -->
 					<div class="question-inner">
 						<div class="clearfix"></div>
 						<div class="question-desc">
@@ -117,7 +123,7 @@
 						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>
 						<span class="question-comment"><a href="#"><i class="icon-comment"></i><span id="answerCount"></span> Answer</a></span>
 						<span class="question-view"><i class="icon-user"></i>${ question.hit } views</span>
-						<span class="single-question-vote-result">+22</span>
+						<span class="single-question-vote-result">${ question.score }</span>
 						<ul class="single-question-vote">
 							<li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li>

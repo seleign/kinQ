@@ -86,4 +86,10 @@ public class ReplyDAO {
 		ArrayList<ReplyVO> replyList = mapper.questionReplyList(questionNum);
 		return replyList;
 	}
+	
+	public ReplyVO getMaxScoreReply(int questionNum) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		
+		return null;
+	}
 }

@@ -9,12 +9,13 @@ public class ReplyVO extends QuestionVO{
 	private String ReplyTitle;
 	private String ReplyContent;
 	private String id;
+	private int score;
 	
 	public ReplyVO() {
 		super();
 	}
 
-	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent) {
+	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, int score) {
 		super();
 		super.setQuestionNum(questionNum);
 		super.setUserNum(userNum);
@@ -23,6 +24,7 @@ public class ReplyVO extends QuestionVO{
 		this.R_ModDate = r_ModDate;
 		this.ReplyTitle = replyTitle;
 		this.ReplyContent = replyContent;
+		this.score = score;
 	}
 
 	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent) {
@@ -42,6 +44,18 @@ public class ReplyVO extends QuestionVO{
 		this.ReplyTitle = replyTitle;
 		this.ReplyContent = replyContent;
 		this.id = id;
+	}
+	
+	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id,
+			int score) {
+		super();
+		this.replyNum = replyNum;
+		R_RegDate = r_RegDate;
+		R_ModDate = r_ModDate;
+		ReplyTitle = replyTitle;
+		ReplyContent = replyContent;
+		this.id = id;
+		this.score = score;
 	}
 
 	public int getReplyNum() {
@@ -91,12 +105,22 @@ public class ReplyVO extends QuestionVO{
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
 
 	@Override
 	public String toString() {
 		return "ReplyVO [replyNum=" + replyNum + ", R_RegDate=" + R_RegDate + ", R_ModDate=" + R_ModDate
-				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + "]";
+				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + ", id=" + id + ", score=" + score
+				+ "]";
 	}
 
+	
 
 }

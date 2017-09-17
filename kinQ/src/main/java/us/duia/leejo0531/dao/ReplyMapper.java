@@ -14,4 +14,5 @@ public interface ReplyMapper {
 	public ArrayList<ReplyVO> searchReplyTitleByContext(ArrayList<String> context);
 	public int insertReplyTest(ReplyVO reply);
 	public ArrayList<ReplyVO> questionReplyList(int questionNum);
+	public ReplyVO getMaxScoreReply(int questionNum);
 }
