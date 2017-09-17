@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.ReplyDAO;
+import us.duia.leejo0531.dao.ReplyMapper;
 import us.duia.leejo0531.vo.ReplyVO;
 
 /**
@@ -53,5 +54,10 @@ public class ReplyService {
 	public ArrayList<ReplyVO> questionReplyList(int questionNum) {
 		ArrayList<ReplyVO> replyList = replyDao.questionReplyList(questionNum);
 		return replyList;
+	}
+	
+	public ReplyVO getMaxScoreReply(int questionNum) {
+		ReplyVO reply = replyDao.getMaxScoreReply(questionNum);
+		return reply;
 	}
 }

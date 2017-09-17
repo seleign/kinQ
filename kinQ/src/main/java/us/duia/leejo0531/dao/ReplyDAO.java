@@ -90,8 +90,8 @@ public class ReplyDAO {
 	
 	public ReplyVO getMaxScoreReply(int questionNum) {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		
-		return null;
+		ReplyVO reply = mapper.getMaxScoreReply(questionNum);
+		return reply;
 	}
 	
 		public ArrayList<ReplyVO> selectReplyList(int questionNum) {
