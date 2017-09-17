@@ -26,8 +26,10 @@
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 
 
-<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
   <script type="text/javascript">
+  	//웹소켓 터지면 uri문제입니다 확인해주세요 
+  	// 실제 서버 인증서 있을때는 wss 뒤에 /leejo0531/ 없게 수정할 것 
 	var webUri = "ws://" + window.location.host +"/leejo0531/count";
 	function send_message(){
 		websocket = new WebSocket(webUri);
