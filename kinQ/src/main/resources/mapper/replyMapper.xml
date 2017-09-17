@@ -41,11 +41,12 @@
 	</select>
 	
 	<select id="getMaxScoreReply" parameterType="int" resultType="Reply">
-		select reply.* 
-		from 
-		q_reply reply,
-		(select  max(testScore.replyNum) KEEP(DENSE_RANK FIRST ORDER BY testScore.score DESC) replyNum from (select replyNum, sum(score) as score from RECOMMENDATION where questionNum = #{questionNum} group by replyNum) testScore) maxreplyNum 
-		where reply.replyNum = maxreplyNum.replyNum
+		select maxRecomendReply.*, userinfo.id as id
+		from userinfo userinfo, 
+		(select reply.* from 
+			q_reply reply,
+			(select  max(testScore.replyNum) KEEP(DENSE_RANK FIRST ORDER BY testScore.score DESC) replyNum from (select replyNum, sum(score) as score from RECOMMENDATION where questionNum = #{questionNum} group by replyNum) testScore) maxreplyNum 
+		where reply.replyNum = maxreplyNum.replyNum) maxRecomendReply where maxRecomendReply.userNum = userinfo.userNum
 	</select>
 	
 	<select id="selectReplyList" parameterType="int" resultType="Reply">
@@ -61,4 +62,8 @@
 		order by
 		    questionnum, replynum
 	</select>
+	
+	<insert id="registReply" parameterType="Reply">
+		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, sysdate, sysdate, #{ReplyTitle}, #{ReplyContent})
+	</insert>
 </mapper>

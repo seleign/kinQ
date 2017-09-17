@@ -43,6 +43,16 @@ body {
 	margin-top: 10px;
 }
 
+.search_select {
+	float: right;
+	position: relative;
+}
+
+.search_text {
+	float: right;
+	position: relative;
+}
+
 
 /* askquestion 영상녹화 버튼 설정  */
 #ask-button {
