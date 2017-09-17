@@ -100,6 +100,7 @@
 										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
 								</ul>
 								</div>
+								<br><input type="button" value="個人情報修正" onclick="location.href='updateUserInfo'">
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->
 						<div class="col-md-12">
