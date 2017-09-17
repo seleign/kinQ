@@ -1,6 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib	prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +29,8 @@
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  </script>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
@@ -36,13 +39,13 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Questions Category</h1>
+					<h1>検索結果</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
 						<a href="#">Home</a>
 						<span class="crumbs-span">/</span>
-						<span class="current">Questions Category</span>
+						<span class="current">検索結果</span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -52,74 +55,34 @@
 	<section class="container main-content">
 		<div class="row">
 			<div class="col-md-9">
-				<article class="question question-type-normal">
-					<h2>
-						<a href="single_question.html">This is my first Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
+				<c:forEach var="qstn" items="${qstnList}" >
+					<article class="question question-type-normal">
+						<h2>
+							<a href="single_question.html">${qstn.title}</a>
+						</h2>
+						<a class="question-report" href="#">Report</a>
+						<div class="question-author">
+							<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
 						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-				<article class="question question-type-poll">
-					<h2>
-						<a href="single_question_poll.html">This Is My Second Poll Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-signal"></i>Poll</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
+						<div class="question-inner">
+							<div class="clearfix"></div>
+							<p class="question-desc">${qstn.questionContent}</p>
+							<div class="question-details">
+								<c:if test="${qstn.qstatus==\"solved\"}">
+									<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
+								</c:if>
+								<c:if test="${qstn.qstatus==\"in progress\"}">
+									<span class="question-answered"><i class="icon-ok"></i>in progress</span>
+								</c:if>
+								<span class="question-favorite"><i class="icon-star"></i>${qstn.score}</span>
+							</div>
+							<span class="question-date"><i class="icon-time"></i><fmt:formatDate type="both" value="${qstn.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></span>
+							<span class="question-comment"><a href="#"><i class="icon-comment"></i>${replyList[qstn.questionNum].size()} Answer</a></span>
+							<span class="question-view"><i class="icon-user"></i>${qstn.hit} views</span>
+							<div class="clearfix"></div>
 						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-				<article class="question question-type-normal">
-					<h2>
-						<a href="single_question.html">This Is My Third Question</a>
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
-					<div class="question-author">
-						<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc">Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
-						<div class="question-details">
-							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
-						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>wordpress</a></span>
-						<span class="question-date"><i class="icon-time"></i>4 mins ago</span>
-						<span class="question-comment"><a href="#"><i class="icon-comment"></i>5 Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>70 views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
+					</article>
+				</c:forEach>
 				<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
 			</div><!-- End main -->
 						<jsp:include page="aside.jsp" flush="false" />
@@ -213,7 +176,6 @@
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
 <script src="./resources/js/html5.js"></script>
-<script src="./resources/js/twitter/jquery.tweet.js"></script> 
 <script src="./resources/js/jflickrfeed.min.js"></script>
 <script src="./resources/js/jquery.inview.min.js"></script>
 <script src="./resources/js/jquery.tipsy.js"></script>

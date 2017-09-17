@@ -45,11 +45,20 @@ public class SearchController {
 	 * view에서 jstl로 결과를 출력한다.
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
-	@RequestMapping(value = "search", method = RequestMethod.POST)
+	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public String searchByWords( PageVO page, Model model) {
 		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
-		model.addAttribute("ReplyListBycontext", sechSvc.search_by_words(page));
-		return "/search";
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, sechSvc.selectReplyList( target));
+		}
+		
+		model.addAttribute("qstnList", result);
+		model.addAttribute("replyList", replyList);
+		
+		return "search";
 	}
 	
 
@@ -57,10 +66,16 @@ public class SearchController {
 	@ResponseBody
 	public ArrayList<QuestionVO> searchByWords( PageVO page, Model model) {
 		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
-		model.addAttribute("ReplyListBycontext", sechSvc.search_by_words(page));
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, sechSvc.selectReplyList( target));
+		}
+		model.addAttribute("ReplyListBycontext", result);
+		model.addAttribute("replyList", replyList);
 		return result; //어느 페이지로 이동시킬 것인가?
-	}
-*/	
+	}*/
+	
 	/**
 	 * 답변글이 없는 질문글을 검색한다.
 	 * */

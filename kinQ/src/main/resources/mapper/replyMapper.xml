@@ -37,4 +37,18 @@
 		userinfo.id from q_reply reply, userinfo userinfo 
 		where reply.questionnum = #{questionNum} and reply.usernum = userinfo.usernum order by replyNum 
 	</select>
+	
+	<select id="selectReplyList" parameterType="int" resultType="Reply">
+		select
+		    q_reply.*,
+		    userinfo.id as id
+		from
+		    q_reply,
+		    userinfo
+		where
+ 		   q_reply.usernum = userinfo.usernum(+)
+ 		   and q_reply.questionnum = #{questionNum}
+		order by
+		    questionnum, replynum
+	</select>
 </mapper>

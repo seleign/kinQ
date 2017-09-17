@@ -22,6 +22,9 @@ public class SearchService {
 	
 	@Autowired(required=false)
 	private QuestionDAO qstnDao;
+	@Autowired(required=false)
+	private ReplyDAO replyDao;
+	
 	
 	/**
 	 * 검색어로 받은 일렬의 스트링을 단어로 분리하여 태그, 단어 검색으로 결과를 가져온다.
@@ -49,6 +52,11 @@ public class SearchService {
 
 	public ArrayList<QuestionVO> search_no_answered() {
 		ArrayList<QuestionVO> result = qstnDao.search_no_answered();
+		return result;
+	}
+	
+	public ArrayList<ReplyVO> selectReplyList( int questionNum) {
+		ArrayList<ReplyVO> result = replyDao.selectReplyList(questionNum);
 		return result;
 	}
 	

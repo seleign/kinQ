@@ -1,8 +1,7 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
-
-import us.duia.leejo0531.vo.QuestionVO;
+import java.util.HashMap;
 import us.duia.leejo0531.vo.ReplyVO;
 
 public interface ReplyMapper {
@@ -12,4 +11,5 @@ public interface ReplyMapper {
 	public ReplyVO selectOneReply(ReplyVO target);
 	public int insertReplyTest(ReplyVO reply);
 	public ArrayList<ReplyVO> questionReplyList(int questionNum);
+	public ArrayList<ReplyVO> selectReplyList( int questionNum);
 }
