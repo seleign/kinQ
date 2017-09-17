@@ -117,15 +117,17 @@
 					</c:choose>
 				</ul>
 			</nav>
-			<div class="header-mypage">
-				<a href="mypage" id="login-panel"><i class="icon-user"></i>Mypage</a>
-			</div>
-<!-- 			<div class="header-search"> -->
-<!-- 				<form> -->
-<!-- 				    <input type="text" value="Search here ..." onfocus="if(this.value=='Search here ...')this.value='';" onblur="if(this.value=='')this.value='Search here ...';"> -->
-<!-- 				    <button type="submit" class="search-submit"></button> -->
-<!-- 				</form> -->
-<!-- 			</div> -->
+				<div class="header-search">
+					<form>
+					    <input type="text" value="Search here ..." onfocus="if(this.value=='Search here ...')this.value='';" onblur="if(this.value=='')this.value='Search here ...';">
+					    <button type="submit" class="search-submit"></button>
+					</form>
+				</div>
+				<c:if test="${sessionScope.userName != null }">
+				<div class="header-mypage">
+					<a href="mypage"><i class="icon-user"></i>Mypage</a>
+				</div>
+				</c:if>
 		</section><!-- End container -->
 	</div><!-- End header-top -->
 	<header id="header">

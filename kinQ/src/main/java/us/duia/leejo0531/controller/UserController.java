@@ -120,6 +120,7 @@ public class UserController implements HttpSessionListener{
 	
 	@RequestMapping(value="mypage", method=RequestMethod.GET)
 	public String openMyPage(Model model, HttpSession session){
+		logger.info("mypage in");
 		int questionsNum = userSvc.countQuestions((int)session.getAttribute("userNum"));
 		int completedQuestions = userSvc.countCompletedQuestions((int)session.getAttribute("userNum"));
 		int answersNum = userSvc.countAnswers((int)session.getAttribute("userNum"));
