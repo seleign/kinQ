@@ -115,7 +115,12 @@
 				<div id="buttons" class="row t_center">
 					
 					<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">ショッピングモール</h2></div></div>
+					<div class="page-content page-shortcode">
+						<ul>
+							<li></li>
+						</ul>
 					
+					</div>
 					
 					
 					<div class="clearfix"></div>
@@ -123,7 +128,6 @@
 					
 				</div><!-- End #Buttons -->
 				
-				<div class="divider"><span></span></div>
 				
 				<div id="testimonial" class="row">
 					<div class="col-md-12"><div class="boxedtitle page-title"><h2>Testimonial</h2></div></div>

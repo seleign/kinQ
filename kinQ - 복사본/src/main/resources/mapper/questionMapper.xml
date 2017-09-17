@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.duia.leejo0531.dao.QuestionMapper">
+	<resultMap type="Question" id="QuestionResult">
+		<id property="questionNum" column="questionNum"/>
+		<result property="userNum" column="userNum"/>
+		<result property="timeLimit" column="timeLimit"/>
+		<result property="qstatus" column="qstatus"/>
+		<result property="regDate" column="regDate"/>
+		<result property="modDate" column="modDate"/>
+		<result property="title" column="title"/>
+		<result property="MinorNum" column="MinorNum"/>
+		<result property="videoSrc" column="videoSrc"/>
+		<result property="questionContent" column="questionContent"/>
+		<result property="score" column="score"/>
+		<collection property="relatedTag" javaType="ArrayList" ofType="string">
+			<result property="tag" column="tag"/>
+		</collection>
+	</resultMap>
+
+	<!-- 질문글의 시퀀스를 가져온다. -->
+	<select id="Q_BOARD_SEQ_NEXTVAL" resultType="int">
+		SELECT Q_BOARD_SEQ.NEXTVAL as questionNum FROM dual
+	</select>
+	
+	<!-- 질문글을 게시한다. -->
+	<insert id="insertQuestion" parameterType="Question">
+		insert into Q_Board(
+			questionNum,
+			userNum,
+			timeLimit,
+			qstatus,
+			regDate,
+			modDate,
+			title,
+			hit,
+			questionContent,
+			MinorNum,
+			videoSrc,
+			score
+		) values(
+			#{questionNum},
+			#{userNum},
+			#{timeLimit},
+			#{qstatus},
+			sysdate,
+			sysdate,
+			#{title},
+			0,
+			#{questionContent},
+			#{MinorNum},
+			#{videoSrc},
+			0
+		)
+	</insert>
+	
+	<!-- 질문글을 삭제한다. (임시) 테스트 되지않음.-->
+	<delete id="deleteQuestion" parameterType="Question">
+	delete Q_BOARD where usernum = #{usernum} and QuestionNum = #{QuestionNum}
+	</delete>
+	
+	<!-- 대분류 리스트 불러오기 -->	
+	<select id="getMajorList" resultType="Major">
+		select * from major order by majorNum
+	</select>
+	
+	<select id="getMajor" parameterType="int" resultType="Major">
+		select * from major where majorNum = #{majorNum}
+	</select>
+	
+	<!-- 소분류 리스트 불러오기 -->
+	<select id="getMinorList" resultType="Minor">
+		select * from minor order by minorNum
+	</select>
+	
+	<select id="getMinor" parameterType="int" resultType="Minor">
+		select * from minor where minorNum = #{minorNum}
+	</select>
+	
+	<!-- 대상 질문글 정보를 가져온다.(임시) -->
+	<select id="selectOneQuestion" parameterType="Question" resultMap="QuestionResult">
+		select *
+		from Q_Board, tag
+		where Q_Board.questionNum = #{questionNum}
+		and Q_Board.questionNum = tag.questionNum(+)
+	</select>
+	
+	<!-- context가 들어간 질문글을 가져온다. -->
+	<select id="searchByContext" parameterType="Page" resultMap="QuestionResult">
+        select
+			*
+		from
+            tag,
+			(select
+				rownum as r,
+				results.*
+			from
+                (select
+                    merged.*
+                from
+                    (select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                *
+                            from
+                                tag,
+                                (select
+                                    max(tagnum) as tags
+                                from
+                                    tag
+                                <trim prefix="where" prefixOverrides="and|or">
+                                    <foreach collection="list" item="item">or tag like '%${item}%'</foreach>
+                                </trim>
+                                group by 
+                                    questionnum
+                                ) searchedtag   
+                            where
+                                tag.tagnum = searchedtag.tags
+                             ) targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'tag' 
+                    
+                    union all
+                    
+                    select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            userinfo,
+                            q_board
+                        where
+                            q_board.usernum = userinfo.USERNUM(+)
+                            <foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+                        
+                        union
+                        
+                        select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                questionnum
+                            from
+                                q_reply,
+                                userinfo
+                            where
+                                q_reply.usernum = userinfo.usernum(+)
+                            	<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+                            group by
+                                questionnum
+                            )targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'author' 
+                    
+                    union all
+                    
+                    select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            q_board
+                        <trim prefix="where" prefixOverrides="and|or">
+                            <foreach collection="list" item="item">and title like '%${item}%'</foreach>
+                        </trim>
+                            
+                        union
+                        
+                        select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                questionnum
+                            from
+                                q_reply
+                            <trim prefix="where" prefixOverrides="and|or">
+                                <foreach collection="list" item="item">and replytitle like '%${item}%'</foreach>
+                            </trim>
+                            group by
+                                questionnum
+                            )targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'title' 
+                    
+                    union all
+                    
+                    select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            q_board
+				        <trim prefix="where" prefixOverrides="and|or">
+				        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
+				        </trim>
+                    
+                        union
+                        
+                        select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                questionnum
+                            from
+                                q_reply
+							<trim prefix="where" prefixOverrides="and|or">
+					        	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
+					        </trim>
+                            group by questionnum
+                            ) targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'content'
+                    )merged
+                order by merged.questionnum desc
+				) results
+			)numbered
+		where
+            <![CDATA[ r >= #{from} and r <= #{to} ]]>
+            and numbered.questionnum = tag.questionnum(+)
+        order by
+            numbered.questionnum desc, tag.tagnum
+	</select>
+	
+	<select id="getQuestionTag" parameterType="Question" resultType="Tag">
+		select tag from tag where questionNum = #{questionNum} order by tag asc
+	</select>
+	
+	<select id="getQuestionTime" parameterType="int" resultType="checkTime">
+		SELECT questionNum, trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'))/(30*12), 0) year
+	  ,	trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'))/30, 0) month
+      , trunc (TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'), 0) day
+      , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24 hour
+      , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24*60 minute
+  		FROM q_board where questionNum = #{questionNum}
+	</select>
+	<!-- 전체 질문글 가져오기 -->
+	<select id="getAllQuestion" resultMap="QuestionResult">
+		select *
+		from Q_Board, tag
+		where Q_Board.questionNum = tag.questionNum(+)
+	</select>
+	<!-- 답변 없는 질문글 가져오기 -->
+	<select id="search_no_answered" resultMap="QuestionResult">
+		select
+		    *
+		from
+			tag,
+		    (select
+		        q_board.*
+		    from
+		        q_board,
+		        (select
+		            q_reply.*
+		        from
+		            q_reply,
+		            (select
+		                max(replynum) as answered
+		            from
+		                q_reply
+		            group by
+		                questionnum
+		            ) reply
+		        where q_reply.replynum = reply.answered
+		        ) no_dupl
+		    where
+		        q_board.questionnum = no_dupl.questionnum(+)
+		        and no_dupl.questionnum is null
+		    ) no_answer
+		where no_answer.questionnum = tag.questionnum(+)
+		order by no_answer.questionnum
+	</select>
+	
+		<!-- 범위지정 질문글 가져오기  -->
+	<select id="getQuestionPage" parameterType="map" resultType="Question">
+		<![CDATA[SELECT * FROM ( SELECT A.*,ROWNUM AS RNUM FROM 
+              ( SELECT * FROM q_board
+                ORDER BY questionnum desc
+               ) A
+        WHERE ROWNUM <= #{endpage}
+               )
+		WHERE RNUM > #{startpage} ]]> 
+    </select>
+</mapper>

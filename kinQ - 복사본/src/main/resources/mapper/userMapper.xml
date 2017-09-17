@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.duia.leejo0531.dao.UserMapper">
+
+<!-- UserInfo_SEQ -->
+	<select id="selectUserInfoSeq" resultType="int">
+		select UserInfo_SEQ.nextval from dual
+	</select>
+	
+<!-- 회원 가입 시 회원 정보 저장  -->
+	<insert id="insertUserInfo" parameterType="User">
+		insert into userInfo values(#{userNum}, #{id}, #{pw}, #{userName}, #{age}, #{birth}, #{phone}, #{email})
+	</insert>
+
+<!-- 회원 가입 시 회원 관심사 저장 -->
+	<insert id="insertUserField" parameterType="Field">
+		insert into field values(Field_SEQ.nextval, #{userNum}, #{majorNum}, #{minorNum})
+	</insert>
+	
+<!-- 대분류 리스트 불러오기 -->	
+	<select id="getMajorList" resultType="Major">
+		select * from major order by majorNum
+	</select>
+	
+<!-- 소분류 리스트 불러오기 -->
+	<select id="getMinorList" resultType="Minor">
+		select * from minor order by minorNum
+	</select>
+	
+<!-- 아이디 중복 검사 -->	
+	<select id="getUser" parameterType="string" resultType="User">
+		select * from userInfo where id=#{searchId}
+	</select>
+	
+<!-- 소분류 정보 검색-->
+	<select id="selectFieldInfo" parameterType="string" resultType="Minor">
+		select * from minor where minorNum=#{minorNum}
+	</select>
+<!-- 로그인확인 -->
+	<select id="requestLogin" parameterType="User" resultType="User">
+		select * from userInfo where id=#{id} and pw=#{pw}
+	</select>
+	
+<!-- 회원 정보 수정 -->
+	<update id="updateUserInfo" parameterType="User">
+		update userInfo
+		set pw = #{pw}, age=#{age}, birth=#{birth}, phone=#{phone}, email=#{email} 
+		where userNum = #{userNum}
+	</update>
+	
+<!-- 회원 정보 수정 시 우선 Field 전체 삭제 -->	
+	<delete id="deleteOriginalField" parameterType="int">
+		delete from field 
+		where userNum=#{userNum}
+	</delete>
+	
+<!-- 	<insert id="addDummy" parameterType="Question">
+		insert into Q_BOARD values(Q_BOARD_SEQ.nextval, #{userNum}, #{timeLimit}, #{id}, #{regDate}, #{modDate}, #{title}, #{relatedTag}, #{hit}, #{questionContent})
+	</insert> -->
+	
+	<!-- 개인 질문 수 가져오기 -->
+	<select id="countQuestions" parameterType="int" resultType="int">
+		select count(*) from q_board where usernum = #{userNum}
+	</select>
+	
+	<!-- 개인 답변 수 가져오기 -->
+	<select id="countAnswers" parameterType="int" resultType="int">
+		select count(*) from q_reply where usernum = #{userNum}
+	</select>
+	
+	<!-- 답변이 달린 질문 수 가져오기 -->
+	<select id="countCompletedQuestions" parameterType="int" resultType="int">
+		select count(*) from (select qb.questionNum, count(qr.questionNum) 
+		from q_reply qr, (select questionNum from q_board where userNum=#{userNum}) qb where qr.questionNum = qb.questionNum 
+		group by qb.questionNum)
+	</select>
+	
+	
+	
+	<select id="getUserInfo" parameterType="int" resultType="User">
+		select * from userInfo where userNum = #{userNum}
+	</select>
+	
+	
+	
+</mapper>
