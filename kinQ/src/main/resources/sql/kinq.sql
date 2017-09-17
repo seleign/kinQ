@@ -766,5 +766,73 @@ INSERT INTO Minor values(Minor_SEQ.nextval, 10, 'ウインタースポーツ');
 INSERT INTO Minor values(Minor_SEQ.nextval, 10, '武芸');
 INSERT INTO Minor values(Minor_SEQ.nextval, 10, 'レジャー');
 
+
+create table goods(
+    goodsNum number primary key,
+    goodsName varchar2(50) not null,
+    price number not null,
+    imageurl varchar2(1000)
+);
+
+create sequence goods_seq start with 1 increment by 1;
+
+
+insert into goods values(goods_seq.nextval, '商品１', 100, 'hot1504160555644.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 200, 'hot1504165732399.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 130, 'hot1504162515721.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 140, 'hot1504162729561.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 120, 'hot1504496920566.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 200, 'hot1504159515166.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 150, 'hot1504158816917.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 100, 'hot1505111841917.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 130, 'hot1505012804410.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 200, 'S1488275758937.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 220, 'S1456102185997.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 110, 'S1501056565894.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 140, 'hot1471997081256.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 300, 'S1503969739507.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 140, 'S1504493272268.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 120, 'S1503969743459.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 330, 'S1504493278076.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 300, 'S1504586600356.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 200, 'hot1504159708059.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 400, 'S1505354307751.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 540, 'A201602031834496082.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 120, 'S1504857360866.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 140, 'hot1504673618357.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 160, 'S1505294453319.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 250, 'S1504753601389.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 100, 'hot1504163510196.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 300, 'hot1504086638139.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 150, 'hot1504168474775.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 230, 'hot1504251818753.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 420, 'hot1504505586093.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 130, 'hot1503219217957.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 500, 'S1504515892336.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 230, 'S1504758015507.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 100, 'hot1505201207510.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 140, 'S1504145083463.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 110, 'hot1505201061051.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 230, 'S1504145073593.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 310, 'S1505453812784.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 340, 'hot1503567622551.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 200, 'hot1504493092211.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 330, 'hot1504758974432.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 130, 'S1504090154752.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 140, 'hot1504759129062.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 100, 'S1504090130888.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 150, 'hot1505191617473.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 170, 'hot1504863083068.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 190, 'hot1505179206668.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 200, 'hot1505191799450.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 120, 'hot1505283627394.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 200, 'A201311031708231252.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 450, 'hot1504686198774.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 150, 'A201311031717404682.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 510, 'hot1504687063374.jpg');
+insert into goods values(goods_seq.nextval, '商品１', 130, 'hot1504835840632.jpg');
+
 commit;
+
+
 

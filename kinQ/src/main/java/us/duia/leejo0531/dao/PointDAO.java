@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import us.duia.leejo0531.vo.FieldVO;
+import us.duia.leejo0531.vo.GoodsVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
@@ -22,6 +23,12 @@ public class PointDAO {
 
 	@Autowired
 	SqlSession sqlSession;
+
+	public ArrayList<GoodsVO> getGoodsList() {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		ArrayList<GoodsVO> result = mapper.getGoodsList();
+		return result;
+	}
 	
 
 }

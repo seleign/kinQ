@@ -52,4 +52,17 @@ public class ReplyController {
 		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(questionNum);
 		return replyList;
 	}
+	
+	@RequestMapping(value = "getMaxScoreReply", method = RequestMethod.GET)
+	public @ResponseBody ReplyVO getMaxScoreReply(QuestionVO qstn) {
+		int questionNum = qstn.getQuestionNum();
+		System.out.println(questionNum);
+		ReplyVO reply = reSvc.getMaxScoreReply(questionNum);
+		return reply;
+	}
+	
+	@RequestMapping(value = "registReply", method = RequestMethod.GET)
+	public @ResponseBody String registReply(ReplyVO reply) {
+		return "success";
+	}
 }

@@ -3,33 +3,32 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<!-- Basic Page Needs -->
+<meta charset="utf-8">
+<title>Ask me – Responsive Questions and Answers Template</title>
+<meta name="description" content="Ask me Responsive Questions and Answers Template">
+<meta name="author" content="vbegy">
+	
+<!-- Mobile Specific Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+<!-- Main Style -->
+<link rel="stylesheet" href="./resources/css/style.css">
+	
+<!-- Skins -->
+<link rel="stylesheet" href="./resources/css/gray.css">
+	
+<!-- Responsive Style -->
+<link rel="stylesheet" href="./resources/css/responsive.css">
 
-	<!-- Basic Page Needs -->
-	<meta charset="utf-8">
-	<title>Ask me – Responsive Questions and Answers Template</title>
-	<meta name="description" content="Ask me Responsive Questions and Answers Template">
-	<meta name="author" content="vbegy">
-	
-	<!-- Mobile Specific Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	
-	<!-- Main Style -->
-	<link rel="stylesheet" href="./resources/css/style.css">
-	
-	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/gray.css">
-	
-	<!-- Responsive Style -->
-	<link rel="stylesheet" href="./resources/css/responsive.css">
-	
-	<!-- Favicons -->
-	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+<!-- Favicons -->
+<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
 <script src="./resources/js/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
 <!-- chosen 설정 파일-->
 <link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
-	<script type="text/javascript">
+<script type="text/javascript">
 	//DB에서 대분류 소분류 목록 가져오기 
 	function loadMinorList(major){
 		$.ajax({
@@ -37,85 +36,20 @@
 			method: 'get',
 			data: {major : major},
 			success: function(minorList){
-				var html = '';
-				$.each(minorList, function(index, element){
-					if(element.majorNum == major){
-						var isPrinted = false;
-						for( var i in chkNum) {
-							if( element.minorNum == chkNum[i]) {
-								html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" checked="checked" disabled="true" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
-								isPrinted = true;
-								break;
-							}
-						}
-						if( !isPrinted) {
-							html +=	'<input type="checkbox" id="chk'+element.minorNum+'" name="minor" onchange="javascript:addCheckboxList(\''+element.minorName+'\', \''+element.minorNum+'\')" value="'+element.minorNum+'">'+element.minorName+'<br>';
-						}
-					}//outer if
-				});
-				$('#minorSection').html(html);		
-				html ='';
+				for(var i = 0; i < minorList.length; i++) {
+					if(minorList[i].majorNum == major) {
+						console.log(minorList[i].minorNum + " // " + minorList[i].minorName);
+					}
+				}
 			}
 		});
 	}
-	
-
-	var chk = new Array(); // 소분류 일본명
-	var chkNum = new Array(); // 소분류 고유 번호
-	
-	function addCheckboxList(minorName, minorNum){
-			
-		 	$('#chk'+minorNum).prop('disabled', true);
-
-			checkboxHtml = '';
-
-				$('#allInterests').empty();
-
-
-				chk.push(minorName);
-				chkNum.push(minorNum);
-					
-			for(var i in chk){	
-				checkboxHtml+='<li value="'+chkNum[i]+'">'+chk[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+chkNum[i]+')"><a></li>'
-			}
-			$('#allInterests').html(checkboxHtml);
-		}
-	
-	function unchecking(deleteNum){
-		checkboxHtml = '';
-		for(var i=0;i<chkNum.length;i++){
-			if(chkNum[i]==deleteNum){
-				var index = chkNum.indexOf(chkNum[i]);
-				chk.splice(index, 1);
-				chkNum.splice(index, 1);
-				
-				$('#chk'+deleteNum).prop('checked', false);
-				$('#chk'+deleteNum).prop('disabled', false);
-				
-				
-				for(var i in chk){	
-					checkboxHtml+='<li id="del'+chkNum[i]+'">'+chk[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+chkNum[i]+')"><a></li>'
-				}
-				$('#allInterests').html(checkboxHtml);
-			}
-		}
-	}
-
-// 태그를 입력하면 ol, li에 태그가 생긴다. 이를 서버에 전송하기 위해 hidden input 태그(name = "")으로 만든다.
-// 유효성 검사를 할 때 또는 서버로 전송하기 전에 이 함수를 호툴한다.
-function liTohiddenRelatedTag() {
-	$("#hiddenRelatedTag").empty();
-	$("li.tag > span").each(function() {
-		$("#hiddenRelatedTag").append('<input type="hidden" name="relatedTag" value="'+ $(this).text() +'">');
-	})
-}
 </script>
-	
+
 </head>
 <body>
-	<jsp:include page="header.jsp" flush="false" />
-	
-		
+<input type="radio" name="MinorNum" value="">
+<jsp:include page="header.jsp" flush="false" />	
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
@@ -145,7 +79,7 @@ function liTohiddenRelatedTag() {
 					<p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque.</p>
 					
 					<div class="form-style form-style-3" id="question-submit">
-						<form action="addQuestion" method="post" enctype="multipart/form-data">
+						<form action="addQuestion" method="post" enctype="multipart/form-data" onsubmit="return validationCheck();">  
 						<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
 						<input type="hidden" value="${questionNum}" name="questionNum" id="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다." required="required">
 						
@@ -189,20 +123,22 @@ function liTohiddenRelatedTag() {
 								
 								<!-- 위에 tag입력으로 받은 것이 이 div에 hidden으로 생성된다. -->
 								<div id="hiddenRelatedTag">
-									<input type="button" onclick="liTohiddenRelatedTag()" value="태그입력으로 생성된 li가 div(hiddenRelatedTag)에 히든으로 입력된다. 물론 이 버튼은 설명을 위해 있는 것..">
 								</div>
 								
 								<p>
 									<label class="required">Category<span>*</span></label>
 									<span class="styled-select">
 										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)" required="required">
-										<option value="0" selected="selected">選択</option>
-										<c:forEach var="major" items="${majorList }">
-											<option value="${major.majorNum}">${major.majorName}</option>
-										</c:forEach>
+											<option value="0" selected="selected">選択</option>
+											<c:forEach var="major" items="${majorList }">
+												<option value="${major.majorNum}">${major.majorName}</option>
+											</c:forEach>
 										</select>
-									<span class="form-description"><div id="minorSection"></div></span>
-									<span class="form-description"><ul id="allInterests"></ul></span>
+										<span class="form-description">
+											<div id="minorSection">
+											</div>
+										</span>
+										
 									</span>
 								</p>
 								<p>
@@ -597,6 +533,31 @@ var isEmpty = function(value){
 		return false
 	}
 };
+
+//태그를 입력하면 ol, li에 태그가 생긴다. 이를 서버에 전송하기 위해 hidden input 태그(name = "")으로 만든다.
+//유효성 검사를 할 때 또는 서버로 전송하기 전에 이 함수를 호툴한다.
+function liToHiddenRelatedTag() {
+	$("#hiddenRelatedTag").empty();
+	$("li.tag > span").each(function() {
+		$("#hiddenRelatedTag").append('<input type="hidden" name="relatedTag" value="'+ $(this).text() +'">');
+	})
+}
+
+//유효성 검사 isEmpty()
+var videoIsRecorded = false;
+function validationCheck() {
+	liToHiddenRelatedTag();
+	
+	var title = $("#question-title").val();
+	var questionNum = $("#questionNum").val();
+	var questionContent = $("#question_details").val();
+	var major = $("#major").val();	
+	
+	if( !isEmpty(title) && !isEmpty(questionNum) && !isEmpty(questionContent) && !isEmpty(major) ) {
+		return true;
+	} 	
+	return false;
+}
 </script>
 <!-- End js -->
 
