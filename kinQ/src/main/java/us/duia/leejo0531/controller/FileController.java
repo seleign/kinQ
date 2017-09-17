@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,9 +26,6 @@ import us.duia.leejo0531.util.FileService;
 @Controller
 public class FileController {
 	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
-
-	//임시로 유저 id를 id01로 사용한다.
-	public static String id = "id01";
 	
 	//코드 추가 필요
 	@RequestMapping(value="fileupload", method = RequestMethod.GET)
@@ -43,10 +42,10 @@ public class FileController {
 	 * @return --작성 필요???
 	 */
 	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
-	public @ResponseBody String blob_upload(MultipartFile blob, String questionNum) {
+	public @ResponseBody String blob_upload(MultipartFile blob, String questionNum, HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
 		logger.info("blob_upload: " + blob.getOriginalFilename());
-		questionNum = "10";
-		return FileService.blob_upload(blob, id, Integer.parseInt(questionNum));
+		return FileService.blob_upload(blob, userId, Integer.parseInt(questionNum));
 	}
 	
 	/**
@@ -57,8 +56,9 @@ public class FileController {
 	 * @return 자바스크립트 콜백 함수 window.parent.CKEDITOR.tools.callFunction(CKEditorFuncNum, 파일 주소, 메세지)
 	 */
 	@RequestMapping(value = "cKEditorFileUpload", method = RequestMethod.POST)
-	public @ResponseBody String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum) {
-		return FileService.cKEditorFileUpload(upload, CKEditorFuncNum, id);
+	public @ResponseBody String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum, HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		return FileService.cKEditorFileUpload(upload, CKEditorFuncNum, userId);
 	}
 	
 	/**
@@ -68,8 +68,9 @@ public class FileController {
 	 * @return 업로드 결과
 	 */
 	@RequestMapping(value = "cKEditorDragAndDropFileUpload", method = RequestMethod.POST)
-	public @ResponseBody HashMap<String, String> cKEditorDragAndDropFileUpload(MultipartFile blob) {
-		return FileService.cKEditorDragAndDropFileUpload(blob, id);
+	public @ResponseBody HashMap<String, String> cKEditorDragAndDropFileUpload(MultipartFile blob, HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		return FileService.cKEditorDragAndDropFileUpload(blob, userId);
 	}
 	
 	/**

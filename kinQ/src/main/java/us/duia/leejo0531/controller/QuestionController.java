@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,12 +104,10 @@ public class QuestionController {
 	 * @return 자신이 작성한 페이지로 이동? 마이페이지의 질문 내역페이지로 이동?
 	 */
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
-	public String addQuestion(QuestionVO qstn) {
-		// 임시로 userNum, setMinorNum을 1로 함..
-		qstn.setUserNum(1);
-		qstn.setMinorNum(1); // 이게 왜 not null?
+	public String addQuestion(QuestionVO qstn, HttpSession session) {
+		int userNum = (Integer)session.getAttribute("userNum");
+		qstn.setUserNum(userNum);
 		logger.info(qstn.toString());
-		
 		qstnSvc.writeQuestion(qstn);
 		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
 	}
@@ -158,27 +157,23 @@ public class QuestionController {
 	
 	/**
 	 * AskQuestion 으로 이동하며 대분류 목록도 같이 전송
+	 * main에서 AskQuestion 으로 이동하며 제목도 같이 전송
 	 * @return 질문하기 페이지로 이동
 	 */
-	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
-	public String ask_question(Model model){
+	@RequestMapping(value="askQuestion",method= {RequestMethod.GET, RequestMethod.POST})
+	public String ask_question(Model model, HttpSession session){
+		
+		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
+		String userId = (String)session.getAttribute("userId");
+		if(userId == null) {
+			return "redirect:/";
+		}
+		
 		ArrayList<MajorVO> majorList = userSvc.getMajorList();
 		int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
 		model.addAttribute("majorList", majorList);
 		model.addAttribute("questionNum", questionNum);
 		return "askQuestion";
-	}
-	
-	
-	/**
-	 * main에서 AskQuestion 으로 이동하며 제목도 같이 전송
-	 * @return 질문하기 페이지로 이동
-	 */
-	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
-	public String ask_question(HashMap<String, String> map){ // TODO
-		System.out.println("이거 무슨용도인가?");
-		logger.info(map.toString());
-		return "askQuestion";  
 	}
 	
 	/**
