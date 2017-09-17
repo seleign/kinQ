@@ -789,7 +789,6 @@ insert into goods values(goods_seq.nextval, '商品１', 130, 'hot1505012804410.
 insert into goods values(goods_seq.nextval, '商品１', 200, 'S1488275758937.jpg');
 insert into goods values(goods_seq.nextval, '商品１', 220, 'S1456102185997.jpg');
 insert into goods values(goods_seq.nextval, '商品１', 110, 'S1501056565894.jpg');
-insert into goods values(goods_seq.nextval, '商品１', 130, '1505284778003_1.jpg');
 insert into goods values(goods_seq.nextval, '商品１', 140, 'hot1471997081256.jpg');
 insert into goods values(goods_seq.nextval, '商品１', 300, 'S1503969739507.jpg');
 insert into goods values(goods_seq.nextval, '商品１', 140, 'S1504493272268.jpg');
