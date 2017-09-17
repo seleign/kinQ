@@ -24,8 +24,6 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		logger.info("*******웹소켓 연결");
-		session.sendMessage(new TextMessage("3"));
 	}
 	
 	@Override

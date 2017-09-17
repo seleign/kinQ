@@ -47,7 +47,8 @@
 	}
 	function onMessage(evt){
 		//메세지가 도착했을때 처리해줄 코드작성 arraylist가 반환될 것임 
-		$('.useralarm').append(evt.data);
+		var html = "<a>"+evt.data+"</a>";
+		$('#header_alarm').append(html);
 	}
 	
 	$(function(){
@@ -169,8 +170,8 @@
 				<div class="header-mypage">
 					<a href="mypage"><i class="icon-user"></i>Mypage</a>
 				</div>
-				<div class="header-alarm">
-					<a href="useralarm">알람 a태그</a>
+				<div id="header_alarm">
+					
 				</div>
 				</c:if>
 		</section><!-- End container -->
