@@ -34,7 +34,7 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Shortcodes</h1>
+					<h1>Point Shop</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
@@ -48,244 +48,75 @@
 	</div><!-- End breadcrumbs -->
 	
 	<section class="container main-content page-left-sidebar">
+					
 		<div class="row">
+		
+		
 			<div class="col-md-9">
 				
 				<div id="accordions" class="row">
-					<div class="col-md-6">
-						<div class="page-content page-shortcode">
-							<div class="boxedtitle page-title"><h2>Accordions</h2></div>
-							<div class="accordion">
-							    <h4 class="accordion-title"><a href="#">Unlimited Colors</a></h4>
-							    <div class="accordion-inner">
-							        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.
-							    </div>
-							    <h4 class="accordion-title"><a href="#">Responsive</a></h4>
-							    <div class="accordion-inner">
-							        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.
-							    </div>
-							    <h4 class="accordion-title"><a href="#">Easy To Use</a></h4>
-							    <div class="accordion-inner">
-							        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.
-							    </div>
-							</div>
-						</div><!-- End page-content -->
-					</div><!-- End Accordions -->
-					<div class="col-md-6">
-						<div class="page-content page-shortcode">
-							<div class="boxedtitle page-title"><h2>Toggle</h2></div>
-							<div class="accordion toggle-accordion">
-							    <h4 class="accordion-title"><a href="#">Unlimited Colors</a></h4>
-							    <div class="accordion-inner">
-							        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.
-							    </div>
-							    <h4 class="accordion-title"><a href="#">Responsive</a></h4>
-							    <div class="accordion-inner">
-							        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.
-							    </div>
-							    <h4 class="accordion-title"><a href="#">Easy To Use</a></h4>
-							    <div class="accordion-inner">
-							        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.
-							    </div>
-							</div>
-						</div><!-- End page-content -->
-					</div><!-- End Toggle -->
 					
+					
+						<div id="alert" class="row">
+						<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">ポイント管理</h2></div></div>
 					<div class="col-md-12">
-						<div class="gap"></div>
-						<div class="divider"><span></span></div>
-					</div>
-					
-					<div class="col-md-6">
 						<div class="page-content page-shortcode">
-							<div class="boxedtitle page-title"><h2>Tabs horizontal</h2></div>
+							<div class="alert-message success">
+							    <i class="icon-ok"></i>
+							    <p><span>マイポイント</span><br>
+							    <strong>${sessionScope.userName }</strong> 様のポイントは<strong>_____ポイント</strong>です。</p>
+							</div>
+							
+						    <div class="alert-message info">
+						        <i class="icon-bullhorn"></i>
+						        <p><span>ポイント交換</span><br>ポイントの交換政策は緊Ｑの約款をご参考ください。<br><br>
+						        
+							<div class="page-content page-shortcode">
 							<div class="tabs-warp">
 							    <ul class="tabs">
-							        <li class="tab"><a href="#">Tab one</a></li>
-							        <li class="tab"><a href="#">Tab two</a></li>
-							        <li class="tab"><a href="#">Tab three</a></li>
+							        <li class="tab"><a href="#">ポイント両替</a></li>
+							        <li class="tab"><a href="#">払い戻し</a></li>
 							    </ul>
 							    <div class="tab-inner-warp">
 							    	<div class="tab-inner">
-							            <p>1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.</p>
+							            <p>※ <strong>1ポイント</strong>は<strong>1円</strong>に相当します。手数料は<strong>5パーセント</strong>です。
+							       		<input type="button" value="両替"></p>
 							        </div>
 							    </div>
 							    <div class="tab-inner-warp">
 							    	<div class="tab-inner">
-							            <p>2 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.</p>
+							    		<p>※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。
+							       		<input type="button" value="払い戻し"></p>
 							        </div>
 							    </div>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							            <p>3 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.</p>
-							        </div>
-							    </div>
+
 							</div>
 						</div><!-- End page-content -->
-					</div><!-- Tabs horizontal -->
-					<div class="col-md-6">
-						<div class="page-content page-shortcode">
-							<div class="boxedtitle page-title"><h2>Tabs Vertical</h2></div>
-							<div class="tabs-warp tabs-vertical">
-							    <ul class="tabs">
-							        <li class="tab"><a href="#">Tab one</a></li>
-							        <li class="tab"><a href="#">Tab two</a></li>
-							        <li class="tab"><a href="#">Tab three</a></li>
-							    </ul>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							            <p>1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.</p>
-							        </div>
-							    </div>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							            <p>2 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.</p>
-							        </div>
-							    </div>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							            <p>3 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat.</p>
-							        </div>
-							    </div>
-							</div>
-						</div><!-- End Tabs Vertical -->
-					</div><!-- End page-content -->
+						</p>
+						    </div>
+						    <div class="alert-message warning">
+						        <i class="icon-exclamation-sign"></i>
+						        <p><span>ポイントチャージ</span><br>
+						        ポイントで質問やショッピングが出来ます。
+						        <input type="button" value="ポイントチャージ"></p>
+						    </div>
+						</div><!-- End page-content -->
+					</div>
+				</div><!-- End #alert -->
+
+
 				</div><!-- End #accordions -->
 				
 				<div class="gap"></div>
 				<div class="divider"><span></span></div>
 				
-				<div id="alert" class="row">
-					<div class="col-md-12">
-						<div class="page-content page-shortcode">
-							<div class="boxedtitle page-title"><h2>Alert Boxes</h2></div>
-							<div class="alert-message success">
-							    <i class="icon-ok"></i>
-							    <p><span>success message</span><br>
-							    You successfully read this important message.</p>
-							</div>
-							
-						    <div class="alert-message info">
-						        <i class="icon-bullhorn"></i>
-						        <p><span>success message</span><br>
-						        This alert needs your attention.</p>
-						    </div>
-						    <div class="alert-message warning">
-						        <i class="icon-exclamation-sign"></i>
-						        <p><span>success message</span><br>
-						        Warning! Best check yo self.</p>
-						    </div>
-						    
-						    <div class="alert-message error">
-						        <i class="icon-flag"></i>
-						        <p><span>success message</span><br>
-						        Oh snap! Change a few things up.</p>
-						    </div>
-						</div><!-- End page-content -->
-					</div>
-				</div><!-- End #alert -->
-				
-				<div class="gap"></div>
-				<div class="divider"><span></span></div>
+
 				
 				<div id="buttons" class="row t_center">
 					
-					<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">Buttons</h2></div></div>
+					<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">ショッピングモール</h2></div></div>
 					
-					<div class="col-md-3">
-						<a href="#" class="button large green-button">Large button</a>
-						<a href="#" class="button medium green-button">Medium button</a>
-						<a href="#" class="button small green-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large lime-green-button">Large button</a>
-						<a href="#" class="button medium lime-green-button">Medium button</a>
-						<a href="#" class="button small lime-green-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large orange-button">Large button</a>
-						<a href="#" class="button medium orange-button">Medium button</a>
-						<a href="#" class="button small orange-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large dark-blue-button">Large button</a>
-						<a href="#" class="button medium dark-blue-button">Medium button</a>
-						<a href="#" class="button small dark-blue-button">Small button</a>
-					</div>
 					
-					<div class="clearfix"></div>
-					<div class="gap"></div>
-					
-					<div class="col-md-3">
-						<a href="#" class="button large blue-button">Large button</a>
-						<a href="#" class="button medium blue-button">Medium button</a>
-						<a href="#" class="button small blue-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large red-button">Large button</a>
-						<a href="#" class="button medium red-button">Medium button</a>
-						<a href="#" class="button small red-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large yellow-button">Large button</a>
-						<a href="#" class="button medium yellow-button">Medium button</a>
-						<a href="#" class="button small yellow-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large gray-button">Large button</a>
-						<a href="#" class="button medium gray-button">Medium button</a>
-						<a href="#" class="button small gray-button">Small button</a>
-					</div>
-					
-					<div class="clearfix"></div>
-					<div class="gap"></div>
-					
-					<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">Buttons ( Custom Color )</h2></div></div>
-					
-					<div class="col-md-3">
-						<a href="#" class="button large green-button custom-button">Large button</a>
-						<a href="#" class="button medium green-button custom-button">Medium button</a>
-						<a href="#" class="button small green-button custom-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large lime-green-button custom-button">Large button</a>
-						<a href="#" class="button medium lime-green-button custom-button">Medium button</a>
-						<a href="#" class="button small lime-green-button custom-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large orange-button custom-button">Large button</a>
-						<a href="#" class="button medium orange-button custom-button">Medium button</a>
-						<a href="#" class="button small orange-button custom-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large dark-blue-button custom-button">Large button</a>
-						<a href="#" class="button medium dark-blue-button custom-button">Medium button</a>
-						<a href="#" class="button small dark-blue-button custom-button">Small button</a>
-					</div>
-					
-					<div class="clearfix"></div>
-					<div class="gap"></div>
-					
-					<div class="col-md-3">
-						<a href="#" class="button large blue-button custom-button">Large button</a>
-						<a href="#" class="button medium blue-button custom-button">Medium button</a>
-						<a href="#" class="button small blue-button custom-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large red-button custom-button">Large button</a>
-						<a href="#" class="button medium red-button custom-button">Medium button</a>
-						<a href="#" class="button small red-button custom-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large yellow-button custom-button">Large button</a>
-						<a href="#" class="button medium yellow-button custom-button">Medium button</a>
-						<a href="#" class="button small yellow-button custom-button">Small button</a>
-					</div>
-					<div class="col-md-3">
-						<a href="#" class="button large gray-button custom-button">Large button</a>
-						<a href="#" class="button medium gray-button custom-button">Medium button</a>
-						<a href="#" class="button small gray-button custom-button">Small button</a>
-					</div>
 					
 					<div class="clearfix"></div>
 					<div class="gap"></div>
