@@ -262,17 +262,15 @@
 				    </div>
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
-				<c:if test="${ sessionScope.userId != null }">
-					<div id="related-posts">
-						<h>답변 하기</h2>
-						<textarea rows="" cols="" id="replyContent"></textarea>
-						<button onclick="registReply()">등록</button>
-						<form method="post" action="realTimeAnswer">
-							<input type="submit" value="실시간 답변">
-							<input type="hidden" name="questionNum" value="${ question.questionNum }">
-						</form>
-					</div><!-- End related-posts -->
-				</c:if>
+				<div id="related-posts">
+					<h>답변 하기</h2>
+					<textarea rows="" cols="" id="replyContent"></textarea>
+					<button onclick="registReply()">등록</button>
+					<form method="post" action="realTimeAnswer">
+						<input type="submit" value="실시간 답변">
+						<input type="hidden" name="questionNum" value="${ question.questionNum }">
+					</form>
+				</div><!-- End related-posts -->
 				
 				<!-- 답글부분 -->
 				<div id="commentlist" class="page-content">
