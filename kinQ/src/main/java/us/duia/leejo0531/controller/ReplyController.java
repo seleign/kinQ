@@ -63,6 +63,12 @@ public class ReplyController {
 	
 	@RequestMapping(value = "registReply", method = RequestMethod.GET)
 	public @ResponseBody String registReply(ReplyVO reply) {
-		return "success";
+		System.out.println("reply : " + reply);
+		int result = reSvc.registReply(reply);
+		if (result == 1) {
+			return "success";
+		} else {
+			return "false";
+		}
 	}
 }

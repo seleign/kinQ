@@ -99,4 +99,10 @@ public class ReplyDAO {
 		ArrayList<ReplyVO> result = mapper.selectReplyList(questionNum);
 		return result;
 	}
+		
+		public int registReply(ReplyVO reply) {
+			ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+			int result = mapper.registReply(reply);
+			return result;
+		}
 }

@@ -60,4 +60,9 @@ public class ReplyService {
 		ReplyVO reply = replyDao.getMaxScoreReply(questionNum);
 		return reply;
 	}
+	
+	public int registReply(ReplyVO reply) {
+		int result = replyDao.registReply(reply);
+		return result;
+	}
 }
