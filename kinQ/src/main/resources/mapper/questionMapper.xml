@@ -305,4 +305,10 @@
                )
 		WHERE RNUM > #{startpage} ]]> 
     </select>
+    
+    <!-- 질문글에서 작성한 동영상을 q_attach 테이블에 넣는다. -->
+    <insert id="insertVideoFromAskQuestion" parameterType="map">
+    		insert into q_attach values(Q_ATTACH_SEQ.nextVal, #{QUESTIONNUM}, #{USERNUM}, #{QFILENAME}, #{QFILEPATH})
+    </insert>
+    
 </mapper>

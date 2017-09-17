@@ -1,6 +1,7 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -149,6 +150,17 @@ public class QuestionDAO {
 	public ArrayList<QuestionVO> getQuestionPage(Map<String, Object> map){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.getQuestionPage(map);
+		return result;
+	}
+	
+	/**
+	 * 질문글 작성에서 녹화된 동영상을 DB에 넣는다.
+	 * @param map 동영상 파일의 이름과 저장된 주소
+	 * @return
+	 */
+	public int insertVideoFromAskQuestion(HashMap<String, String> map) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		int result = mapper.insertVideoFromAskQuestion(map);
 		return result;
 	}
 }

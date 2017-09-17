@@ -1,7 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<!-- Basic Page Needs -->
@@ -37,15 +37,17 @@
 <script type="text/javascript">
 		var replyHtml = "";
 		var bestReplyHtml = "";
-		var userId = <%=(String)session.getAttribute("userId")%>;
+		var userId = "${ sessionScope.userId }";
 		getMAxScoreReply();
 		questionReplyList();
 		
 		window.onload = function() {
-			// 1. Ckeditor 초기화, 파일 업로드 주소 설정
+			if (userId != "") {
+				// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 				CKEDITOR.replace('replyContent',{ 
 		    	    		filebrowserUploadUrl: 'cKEditorFileUpload'
 		   		 }); // Ckeditor 초기화 종료
+			}
 		};
 		
 		function getMAxScoreReply() {
@@ -59,6 +61,7 @@
 					bestReplyHtml += reply.replyContent +"<br>";
 					bestReplyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>";
 					$("#bestReply").html(bestReplyHtml);
+					bestReplyHtml = "";
 				}
 			})
 		}
@@ -109,21 +112,23 @@
 					console.log(replyHtml);
 					$("#commentlist").html(replyHtml);
 					$("#answerCount").html(replyList.length);
+					replyHtml = "";
 				}
 			})
 		}
 		
 		
 		function registReply() {
-			var replyCtx = ducoment.getElementById("replyContent");
+			var replyCtx = CKEDITOR.instances.replyContent.getData();
 			$.ajax({
 				url: "registReply",
 				type: "get",
 				data: { questionNum: ${ question.questionNum },
-						id: user.id/* userId (변경필요)*/,
-						replyContent: replyCtx
+						id: "${ user.id }",
+						userNum: ${ question.userNum },
+						replyContent: replyCtx,
 				},
-				success: function (replyList) {
+				success: function (success) {
 					getMAxScoreReply();
 					questionReplyList();
 				}
@@ -257,12 +262,17 @@
 				    </div>
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
-				
-				<div id="related-posts">
-					<h2>Related questions</h2>
-					<textarea rows="" cols="" id="replyContent"></textarea>
-					<button onclick="registReply()">등록</button>
-				</div><!-- End related-posts -->
+				<%-- <c:if test="${ sessionScope.userId != user.id }"> --%>
+					<div id="related-posts">
+						<h>답변 하기</h2>
+						<textarea rows="" cols="" id="replyContent"></textarea>
+						<button onclick="registReply()">등록</button>
+						<form method="post" action="realTimeAnswer">
+							<input type="submit" value="실시간 답변">
+							<input type="hidden" name="questionNum" value="${ question.questionNum }">
+						</form>
+					</div><!-- End related-posts -->
+				<%-- </c:if> --%>
 				
 				<!-- 답글부분 -->
 				<div id="commentlist" class="page-content">

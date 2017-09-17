@@ -15,5 +15,6 @@ public interface ReplyMapper {
 	public int insertReplyTest(ReplyVO reply);
 	public ArrayList<ReplyVO> questionReplyList(int questionNum);
 	public ReplyVO getMaxScoreReply(int questionNum);
-	public ArrayList<ReplyVO> selectReplyList( int questionNum);
+	public ArrayList<ReplyVO> selectReplyList(int questionNum);
+	public int registReply(ReplyVO reply);
 }

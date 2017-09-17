@@ -1,6 +1,7 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import us.duia.leejo0531.vo.MajorVO;
@@ -44,4 +45,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> search_no_answered();
 	
 	public ArrayList<QuestionVO> getQuestionPage(Map<String, Object> map);
+	
+	public int insertVideoFromAskQuestion(HashMap<String, String> map);
 }

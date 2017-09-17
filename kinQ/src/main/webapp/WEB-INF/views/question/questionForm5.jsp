@@ -406,7 +406,7 @@
 			window.params = params;
 		})();
 
-		var roomid = '${questionNum}';
+		var roomid = '${question.questionNum}';
 		//if (localStorage.getItem(connection.socketMessageEvent)) {
 		//	roomid = localStorage.getItem(connection.socketMessageEvent);
 		//} else {
@@ -500,7 +500,7 @@ function lastFileChat() {
 <legend>개발용 버튼(삭제하지 말것)</legend>
 <h5>JQuery로 버튼을 자동 click하는 방식으로 실시간 연결 진행. 실제 서비스에서는 이 필드셋을 hidden으로 해둔다.</h5>
 <label>방 번호</label>
-<input type="text" id="room-id" value="${questionNum}" size=20> <br>
+<input type="text" id="room-id" value="${question.questionNum}" size=20> <br>
 <button id="open-room">1-1. 방 Open</button>
 <button id="join-room">1-2. 방 Join</button>
 <button id="btn-share-part-of-sreen" disabled>2. 공유화면 + 음성 전송</button>

@@ -30,15 +30,17 @@
 <link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
 <script type="text/javascript">
 	//DB에서 대분류 소분류 목록 가져오기 
-	function loadMinorList(major){
+	function loadMinorList(major){	
 		$.ajax({
 			url: 'minorList',
 			method: 'get',
 			data: {major : major},
 			success: function(minorList){
+				$("#minorSection").empty();
 				for(var i = 0; i < minorList.length; i++) {
 					if(minorList[i].majorNum == major) {
-						console.log(minorList[i].minorNum + " // " + minorList[i].minorName);
+						$("#minorSection").append('<label for="minorNum'+ minorList[i].minorNum +'"><input type="radio" required="required" value="'+ minorList[i].minorNum +'" name="MinorNum" id="minorNum'+ minorList[i].minorNum +'">'+ minorList[i].minorName + '</label>');
+						//console.log(minorList[i].minorNum + " // " + minorList[i].minorName);
 					}
 				}
 			}
@@ -48,13 +50,13 @@
 
 </head>
 <body>
-<input type="radio" name="MinorNum" value="">
 <jsp:include page="header.jsp" flush="false" />	
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h1>Ask Question</h1>
+					
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
@@ -544,10 +546,9 @@ function liToHiddenRelatedTag() {
 }
 
 //유효성 검사 isEmpty()
-var videoIsRecorded = false;
+var videoIsRecorded = false;  // 이거 사용하도록 수정해야함..
 function validationCheck() {
 	liToHiddenRelatedTag();
-	
 	var title = $("#question-title").val();
 	var questionNum = $("#questionNum").val();
 	var questionContent = $("#question_details").val();
@@ -556,6 +557,7 @@ function validationCheck() {
 	if( !isEmpty(title) && !isEmpty(questionNum) && !isEmpty(questionContent) && !isEmpty(major) ) {
 		return true;
 	} 	
+	
 	return false;
 }
 </script>

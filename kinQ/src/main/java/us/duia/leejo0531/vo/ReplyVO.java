@@ -1,6 +1,8 @@
 package us.duia.leejo0531.vo;
 
 public class ReplyVO extends QuestionVO{
+	private int questionNum;
+	private int userNum;
 	private int replyNum;
 	private String R_RegDate;
 	private String R_ModDate;
@@ -13,48 +15,17 @@ public class ReplyVO extends QuestionVO{
 	public ReplyVO() {
 		super();
 	}
-
-	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id, int score) {
-		super();
-		super.setQuestionNum(questionNum);
-		super.setUserNum(userNum);
-		this.replyNum = replyNum;
-		this.R_RegDate = r_RegDate;
-		this.R_ModDate = r_ModDate;
-		this.ReplyTitle = replyTitle;
-		this.ReplyContent = replyContent;
-		this.id = id;
-		this.score = score;
-	}
-
-	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent) {
-		super();
-		this.replyNum = replyNum;
-		this.R_RegDate = r_RegDate;
-		this.R_ModDate = r_ModDate;
-		this.ReplyTitle = replyTitle;
-		this.ReplyContent = replyContent;
-	}
 	
-	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id, int score) {
-		super();
-		this.replyNum = replyNum;
-		this.R_RegDate = r_RegDate;
-		this.R_ModDate = r_ModDate;
-		this.ReplyTitle = replyTitle;
-		this.ReplyContent = replyContent;
-		this.id = id;
-		this.score = score;
-	}
-	
-	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id, String videoSrc,
+	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id, String videoSrc,
 			int score) {
 		super();
+		this.questionNum = questionNum;
+		this.userNum = userNum;
 		this.replyNum = replyNum;
-		R_RegDate = r_RegDate;
-		R_ModDate = r_ModDate;
-		ReplyTitle = replyTitle;
-		ReplyContent = replyContent;
+		this.R_RegDate = r_RegDate;
+		this.R_ModDate = r_ModDate;
+		this.ReplyTitle = replyTitle;
+		this.ReplyContent = replyContent;
 		this.id = id;
 		this.score = score;
 		this.videoSrc = videoSrc;
@@ -125,10 +96,28 @@ public class ReplyVO extends QuestionVO{
 		this.videoSrc = videoSrc;
 	}
 
+	public int getQuestionNum() {
+		return questionNum;
+	}
+
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+
+	public int getUserNum() {
+		return userNum;
+	}
+
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
+	}
+
 	@Override
 	public String toString() {
-		return "ReplyVO [replyNum=" + replyNum + ", R_RegDate=" + R_RegDate + ", R_ModDate=" + R_ModDate
-				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + ", id=" + id + ", score=" + score
-				+ ", videoSrc=" + videoSrc + "]";
+		return "ReplyVO [questionNum=" + questionNum + ", userNum=" + userNum + ", replyNum=" + replyNum
+				+ ", R_RegDate=" + R_RegDate + ", R_ModDate=" + R_ModDate + ", ReplyTitle=" + ReplyTitle
+				+ ", ReplyContent=" + ReplyContent + ", id=" + id + ", score=" + score + ", videoSrc=" + videoSrc + "]";
 	}
+
+
 }
