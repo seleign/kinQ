@@ -120,20 +120,20 @@ public class QuestionController {
 	@RequestMapping(value = "question_view", method = RequestMethod.GET)
 	public String viewQuestion(QuestionVO qstn, Model model) {
 		//qstnSvc.getQuestion(qstn);
-//		System.out.println(qstn);
+		//System.out.println(qstn);
 		// code here
 		QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(test);
 		System.out.println(question);
-/*		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
-		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());*/
+		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
+		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
 		System.out.println("questionNum : " + question.getQuestionNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		UserVO user = qstnSvc.getUserInfo(question.getUserNum());
 		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
 		model.addAttribute("question", question);
-/*		model.addAttribute("minor", minor);
-		model.addAttribute("major", major);*/
+		model.addAttribute("minor", minor);
+		model.addAttribute("major", major);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("user", user);
 		model.addAttribute("checkTimeResult", checkTimeResult);

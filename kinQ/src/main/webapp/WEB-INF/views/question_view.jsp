@@ -25,58 +25,110 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
 <script src="./resources/js/jquery.min.js"></script>
+
+<!-- CKeditor -->
+<script src="./resources/ckeditor/ckeditor.js"></script> 
+<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
+<script src="./resources/ckeditor/adapters/jquery.js"></script>
 <script type="text/javascript">
-		var replyHtml = '';
-		var userId = <%=(String)session.getAttribute("userId")%>
-		$.ajax({
-			url: "questionReplyList",
-			type: "get",
-			data: { questionNum: ${ question.questionNum }},
-			success: function (replyList) {
-				replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>"
-				replyHtml += "<ol class=\"commentlist clearfix\">"
-				for (var i = 0; i < replyList.length; i++) {
-					replyHtml += "<li class=\"comment\">"
-					replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">"
-					/* replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
-					replyHtml += "<div class=\"comment-text\">"
-					replyHtml += "<div class=\"author clearfix\">"
-					replyHtml += "<div class=\"comment-author\"><a href=\"#\">" + replyList[i].id + "</a></div>"
-					replyHtml += "<div class=\"comment-vote\">"
-					replyHtml += "<ul class=\"question-vote\">"
-					replyHtml += "<li><a href=\"#\" class=\"question-vote-up\" title=\"Like\"></a></li>"
-					replyHtml += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>"
-					replyHtml += "</ul>"
-					replyHtml += "</div>"
-					if (replyList[i].score > 0) {
-						replyHtml += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + replyList[i].score + "</span>"//추천을 어떻게 받아서 계산할지 정해야됨
-					} else if (replyList[i].score < 0){
-						replyHtml += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + replyList[i].score*(-1) + "</span>"//추천을 어떻게 받아서 계산할지 정해야됨
-					} else {
-						replyHtml += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">" + replyList[i].score + "</span>"//추천을 어떻게 받아서 계산할지 정해야됨
-					}
-					replyHtml += "<div class=\"comment-meta\">"
-					replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" 
-					replyHtml += "</div>"
-					if (userId == replyList[i].id) {
-						replyHtml += "<a class=\"comment-reply\" href=\"#\"><i class=\"icon-reply\"></i>삭제</a>" 
-					}
-					replyHtml += "</div>"
-					replyHtml += "<div class=\"text\">"
-					replyHtml += "<p>" + replyList[i].replyContent + "</p>"
-					replyHtml += "</div>"
-					replyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>"
-					replyHtml += "</div>"
-					replyHtml += "</div>"
-					replyHtml += "</li>"
+		var replyHtml = "";
+		var bestReplyHtml = "";
+		var userId = <%=(String)session.getAttribute("userId")%>;
+		getMAxScoreReply();
+		questionReplyList();
+		
+		window.onload = function() {
+			// 1. Ckeditor 초기화, 파일 업로드 주소 설정
+				CKEDITOR.replace('replyContent',{ 
+		    	    		filebrowserUploadUrl: 'cKEditorFileUpload'
+		   		 }); // Ckeditor 초기화 종료
+		};
+		
+		function getMAxScoreReply() {
+			$.ajax({
+				url: "getMaxScoreReply",
+				type: "get",
+				data: { questionNum: ${ question.questionNum }},
+				success: function (reply) {
+					bestReplyHtml += "<h4>"+ reply.id + "</h4>";
+					bestReplyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
+					bestReplyHtml += reply.replyContent +"<br>";
+					bestReplyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>";
+					$("#bestReply").html(bestReplyHtml);
 				}
-				replyHtml += "</ol>"
-				console.log(replyHtml);
-				$("#commentlist").html(replyHtml);
-				$("#answerCount").html(replyList.length);
-			}
-		})
+			})
+		}
+		
+		function questionReplyList() {
+			$.ajax({
+				url: "questionReplyList",
+				type: "get",
+				data: { questionNum: ${ question.questionNum }},
+				success: function (replyList) {
+					replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>";
+					replyHtml += "<ol class=\"commentlist clearfix\">";
+					for (var i = 0; i < replyList.length; i++) {
+						replyHtml += "<li class=\"comment\">";
+						replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">";
+						/* replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
+						replyHtml += "<div class=\"comment-text\">";
+						replyHtml += "<div class=\"author clearfix\">";
+						replyHtml += "<div class=\"comment-author\"><a href=\"#\">" + replyList[i].id + "</a></div>";
+						replyHtml += "<div class=\"comment-vote\">";
+						replyHtml += "<ul class=\"question-vote\">";
+						replyHtml += "<li><a href=\"#\" class=\"question-vote-up\" title=\"Like\"></a></li>";
+						replyHtml += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
+						replyHtml += "</ul>";
+						replyHtml += "</div>";
+						if (replyList[i].score > 0) {
+							replyHtml += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + replyList[i].score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+						} else if (replyList[i].score < 0){
+							replyHtml += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + replyList[i].score*(-1) + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+						} else {
+							replyHtml += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">" + replyList[i].score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+						}
+						replyHtml += "<div class=\"comment-meta\">";
+						replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" ;
+						replyHtml += "</div>";
+						if (userId == replyList[i].id) {
+							replyHtml += "<a class=\"comment-reply\" href=\"#\"><i class=\"icon-reply\"></i>삭제</a>" ;
+						}
+						replyHtml += "</div>";
+						replyHtml += "<div class=\"text\">";
+						replyHtml += "<p>" + replyList[i].replyContent + "</p>";
+						replyHtml += "</div>";
+						replyHtml += "</div>";
+						replyHtml += "</div>";
+						replyHtml += "</li>";
+					}
+					replyHtml += "</ol>";
+					console.log(replyHtml);
+					$("#commentlist").html(replyHtml);
+					$("#answerCount").html(replyList.length);
+				}
+			})
+		}
+		
+		
+		function registReply() {
+			var replyCtx = ducoment.getElementById("replyContent");
+			$.ajax({
+				url: "registReply",
+				type: "get",
+				data: { questionNum: ${ question.questionNum },
+						id: user.id/* userId (변경필요)*/,
+						replyContent: replyCtx
+				},
+				success: function (replyList) {
+					getMAxScoreReply();
+					questionReplyList();
+				}
+			})
+		}
 </script>
 </head>
 <body>
@@ -105,6 +157,7 @@
 		<div class="row">
 			<div class="col-md-9">
 				<article class="question single-question question-type-normal">
+					<h2>${ user.id }</h2>
 					<h2>
 						<a href="single_question.html">${ question.title }</a>
 					</h2>
@@ -202,20 +255,13 @@
 				    <div class="author-image">
 				    	<a href="#" original-title="admin" class="tooltip-n"><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
 				    </div>
-				    <div class="author-bio">
-				        <h4>About the Author</h4>
-				        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra auctor neque. Nullam lobortis, sapien vitae lobortis tristique.
-				    </div>
+				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
 				
 				<div id="related-posts">
 					<h2>Related questions</h2>
-					<ul class="related-posts">
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This Is My Second Poll Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This is my third Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This is my fourth Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This is my fifth Question</a></h3></li>
-					</ul>
+					<textarea rows="" cols="" id="replyContent"></textarea>
+					<button onclick="registReply()">등록</button>
 				</div><!-- End related-posts -->
 				
 				<!-- 답글부분 -->
