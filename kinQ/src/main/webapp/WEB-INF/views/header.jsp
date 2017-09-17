@@ -24,7 +24,16 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+  <script type="text/javascript">
+	var sock = new WebSocket("ws://" + window.location.host +"/websocket/echo");
+	sock.onmessage = function(evt) {
+		console.log(evt);
+		console.log(evt.data);
+	}
+	sock.onopen = function(evt) {
+		sock.send('test1');
+	}
+</script>
 </head>
 <body>
 
