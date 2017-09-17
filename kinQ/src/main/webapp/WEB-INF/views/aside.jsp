@@ -1,7 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
@@ -24,7 +24,40 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+  	
+  	<script type="text/javascript">
+
+  	$(function(){
+  			$.ajax({
+  				url: 'asideData',
+  				method: 'get',
+  				data: {},
+  				success: function(result){
+  			  			$('#uNum').html(result[0]);
+  			   			$('#cntSession').html(result[1]);
+  			  			$('#qNum').html(result[2]);
+  			  			$('#aNum').html(result[3]); 
+  				}
+  			});
+  			
+/*   			
+  			
+  		
+  			var allUsersNum = ${allUsersNum};
+  			var countSession = ${countSession};
+  			var allQuestionsNum = ${allQuestionsNum };
+  			var allAnswersNum = ${allAnswersNum };
+  			
+  			sessionStorage.setItem("allUsersNum", allUsersNum);
+  			sessionStorage.setItem("countSession", countSession);
+  			sessionStorage.setItem("allQuestionsNum", allQuestionsNum);
+  			sessionStorage.setItem("allAnswersNum", allAnswersNum);
+  			
+  			
+ */
+  		});
+  	
+  	</script>
 </head>
 <body>
 
@@ -32,11 +65,14 @@
 
 <aside class="col-md-3 sidebar">
 				<div class="widget widget_stats">
-					<h3 class="widget_title">Stats</h3>
+					<h3 class="widget_title">サイトの利用現状</h3>
+					
 					<div class="ul_list ul_list-icon-ok">
 						<ul>
-							<li><i class="icon-question-sign"></i>Questions ( <span>20</span> )</li>
-							<li><i class="icon-comment"></i>Answers ( <span>50</span> )</li>
+							<li><i class="icon-star"></i>全体会員数：  <span id="uNum"></span>　人</li>
+							<li><i class="icon-group"></i>接続会員数：  <span id="cntSession"></span>　人</li>
+							<li><i class="icon-comments-alt"></i>全体質問数：  <span id="qNum"></span>　個</li>
+							<li><i class="icon-comments"></i>全体回答数：  <span id="aNum"></span>　個</li>
 						</ul>
 					</div>
 				</div>
@@ -138,7 +174,7 @@
 						</li>
 					</ul>
 				</div>
-				
+				<!-- 핫 태그 hot tag -->
 				<div class="widget widget_tag_cloud">
 					<h3 class="widget_title">Tags</h3>
 					<a href="#">projects</a>

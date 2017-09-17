@@ -6,7 +6,7 @@
 
 <!-- 회원 가입 시 회원 관심사 저장 -->
 	<insert id="reportQna" parameterType="Report">
-		insert into report values(Report_SEQ.nextval, #{reporterNum}, #{reportTitle}, #{reportedQNum}, #{reportedRNum}, #{reportReason)
+		insert into report values(Report_SEQ.nextval, #{reporterNum}, #{reportTitle}, #{reportedQNum}, #{reportedRNum}, #{reportReason})
 	</insert>
 	
 </mapper>

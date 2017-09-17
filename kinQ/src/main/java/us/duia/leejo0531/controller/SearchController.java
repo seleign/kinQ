@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.SearchService;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
@@ -33,22 +34,56 @@ public class SearchController {
 	 * view에서 jstl로 결과를 출력한다.
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
-	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
-	public String search_by_words(String str, Model model) {
-		System.out.println( str);
-		HashMap<String, Object> map = sechSvc.search_by_words(str);
-		model.addAttribute("QuestionListByTag", (ArrayList<TagVO>)map.get("QuestionListByTag"));
-		model.addAttribute("QuestionListBycontext", (ArrayList<QuestionVO>)map.get("QuestionListBycontext"));
-		model.addAttribute("ReplyListBycontext", (ArrayList<ReplyVO>)map.get("ReplyListBycontext"));
-		return "/"; //어느 페이지로 이동시킬 것인가?
+/*	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String showSearchPage() {
+		return "/search";
+	}
+*/
+	
+	/**
+	 * 검색창에서 입력 받은 단어를 tag와 단어(질문, 답변 내 텍스트)에서 결과를 찾는다.
+	 * view에서 jstl로 결과를 출력한다.
+	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
+	 */
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String searchByWords( PageVO page, Model model) {
+		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, sechSvc.selectReplyList( target));
+		}
+		
+		model.addAttribute("qstnList", result);
+		model.addAttribute("replyList", replyList);
+		
+		return "search";
 	}
 	
+
+/*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
 	@ResponseBody
-	@RequestMapping(value = "search_no_answered", method = RequestMethod.GET)
-	public ArrayList<QuestionVO> search_no_answerd(String str, Model model) {
+	public ArrayList<QuestionVO> searchByWords( PageVO page, Model model) {
+		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, sechSvc.selectReplyList( target));
+		}
+		model.addAttribute("ReplyListBycontext", result);
+		model.addAttribute("replyList", replyList);
+		return result; //어느 페이지로 이동시킬 것인가?
+	}*/
+	
+	/**
+	 * 답변글이 없는 질문글을 검색한다.
+	 * */
+	@RequestMapping(value = "no_answered", method = RequestMethod.GET)
+	public String search_no_answerd(Model model) {
 		ArrayList<QuestionVO> result = sechSvc.search_no_answered();
 		model.addAttribute("QuestionListBycontext", result);
-		return result; //어느 페이지로 이동시킬 것인가?
+		return "/somewhere"; //어느 페이지로 이동시킬 것인가?
 	}
 	
 	//핫 태그?

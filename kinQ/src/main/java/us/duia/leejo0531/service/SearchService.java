@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.ReplyDAO;
 import us.duia.leejo0531.dao.TagDAO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
@@ -23,8 +24,7 @@ public class SearchService {
 	private QuestionDAO qstnDao;
 	@Autowired(required=false)
 	private ReplyDAO replyDao;
-	@Autowired(required=false)
-	private TagDAO tagDao;
+	
 	
 	/**
 	 * 검색어로 받은 일렬의 스트링을 단어로 분리하여 태그, 단어 검색으로 결과를 가져온다.
@@ -36,34 +36,27 @@ public class SearchService {
 	 * @param str
 	 * @return QuestionListByTag, ReplyListByTag, QuestionListBycontext, ReplyListBycontext
 	 */
-	public HashMap<String, Object> search_by_words(String str) {
+	public ArrayList<QuestionVO> search_by_words( PageVO page) {
+		String str = page.getSearch();
+		
 		ArrayList<String> words = new ArrayList<>();
-		for(String s : str.split(",")) { // , 로 구분한 후 
+		for(String s : str.split(",")) // , 로 구분한 후 
 			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
-		}
 		
-		ArrayList<QuestionVO> QuestionListByTitle = qstnDao.searchTitleByContext(words);
-		
-		ArrayList<QuestionVO> QuestionListByTag = tagDao.getQuestionListByTag(words);
+		page.setTokens( words);
 
-		ArrayList<QuestionVO> QuestionListBycontext = qstnDao.searchByContext(words);
+		ArrayList<QuestionVO> result = qstnDao.searchByContext(page);
 
-		ArrayList<ReplyVO> ReplyListByTitle = replyDao.searchReplyTitleByContext(words);
-
-		ArrayList<ReplyVO> ReplyListBycontext = replyDao.searchByContext(words);
-		
-		HashMap<String, Object> result = new HashMap<>();
-		result.put("QuestionListByTitle", QuestionListByTitle);
-		result.put("QuestionListByTag", QuestionListByTag);
-		result.put("QuestionListBycontext", QuestionListBycontext);
-		result.put("ReplyListByTitle", ReplyListByTitle);
-		result.put("ReplyListBycontext", ReplyListBycontext);
-		
 		return result;
 	}
 
 	public ArrayList<QuestionVO> search_no_answered() {
 		ArrayList<QuestionVO> result = qstnDao.search_no_answered();
+		return result;
+	}
+	
+	public ArrayList<ReplyVO> selectReplyList( int questionNum) {
+		ArrayList<ReplyVO> result = replyDao.selectReplyList(questionNum);
 		return result;
 	}
 	

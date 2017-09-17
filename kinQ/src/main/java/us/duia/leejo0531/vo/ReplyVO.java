@@ -1,7 +1,5 @@
 package us.duia.leejo0531.vo;
 
-import java.util.Date;
-
 public class ReplyVO extends QuestionVO{
 	private int replyNum;
 	private String R_RegDate;
@@ -9,7 +7,11 @@ public class ReplyVO extends QuestionVO{
 	private String ReplyTitle;
 	private String ReplyContent;
 	private String id;
+<<<<<<< HEAD
 	private int score;
+=======
+	private String videoSrc; // 일반 답변, 실시간 답변에서 녹화된 동영상이, 서버의 어느 주소에 저장되어 있나 담고 있다.
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	
 	public ReplyVO() {
 		super();
@@ -47,6 +49,7 @@ public class ReplyVO extends QuestionVO{
 	}
 	
 	public ReplyVO(int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id,
+<<<<<<< HEAD
 			int score) {
 		super();
 		this.replyNum = replyNum;
@@ -56,6 +59,17 @@ public class ReplyVO extends QuestionVO{
 		ReplyContent = replyContent;
 		this.id = id;
 		this.score = score;
+=======
+			String videoSrc) {
+		super();
+		this.replyNum = replyNum;
+		R_RegDate = r_RegDate;
+		R_ModDate = r_ModDate;
+		ReplyTitle = replyTitle;
+		ReplyContent = replyContent;
+		this.id = id;
+		this.videoSrc = videoSrc;
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	}
 
 	public int getReplyNum() {
@@ -114,13 +128,30 @@ public class ReplyVO extends QuestionVO{
 		this.score = score;
 	}
 
+	
+	public String getVideoSrc() {
+		return videoSrc;
+	}
+
+	public void setVideoSrc(String videoSrc) {
+		this.videoSrc = videoSrc;
+	}
+
 	@Override
 	public String toString() {
 		return "ReplyVO [replyNum=" + replyNum + ", R_RegDate=" + R_RegDate + ", R_ModDate=" + R_ModDate
+<<<<<<< HEAD
 				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + ", id=" + id + ", score=" + score
 				+ "]";
+=======
+				+ ", ReplyTitle=" + ReplyTitle + ", ReplyContent=" + ReplyContent + ", id=" + id + ", videoSrc="
+				+ videoSrc + "]";
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	}
 
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 }

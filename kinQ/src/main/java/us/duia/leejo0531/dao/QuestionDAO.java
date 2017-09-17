@@ -1,13 +1,16 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.checkTimeVO;
@@ -22,6 +25,16 @@ public class QuestionDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	/**
+	 * DB에서 질문글의 시퀀스를 가져온다.
+	 * @return
+	 */
+	public int Q_BOARD_SEQ_NEXTVAL() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		int result = mapper.Q_BOARD_SEQ_NEXTVAL();
+		return result;
+	}
 	
 	/**
 	 * DB에 질문을 등록한다.
@@ -93,20 +106,9 @@ public class QuestionDAO {
 	 * @param context 질문글에 포함된 단어
 	 * @return ArrayList<QuestionVO>
 	 */
-	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
+	public ArrayList<QuestionVO> searchByContext(PageVO page){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<QuestionVO> result = mapper.searchByContext(context);
-		return result;
-	}
-	
-	/**
-	 * DB로부터 context가 제목에 포함된 모든 질문글을 가져온다.
-	 * @param context 질문글 제목에 포함된 단어
-	 * @return ArrayList<QuestionVO>
-	 */
-	public ArrayList<QuestionVO> searchTitleByContext(ArrayList<String> context){
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<QuestionVO> result = mapper.searchTitleByContext(context);
+		ArrayList<QuestionVO> result = mapper.searchByContext(page);
 		return result;
 	}
 	
@@ -136,6 +138,17 @@ public class QuestionDAO {
 	public ArrayList<QuestionVO> search_no_answered() {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.search_no_answered();
+		return result;
+	}
+	
+	/**
+	 * DB에서 매개변수로 받은 번호사이의 글을 조회한다 
+	 * @param startpage 가져올 게시글의 최근 page번호 , endpage 마지막 page번호 
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getQuestionPage(Map<String, Object> map){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.getQuestionPage(map);
 		return result;
 	}
 }

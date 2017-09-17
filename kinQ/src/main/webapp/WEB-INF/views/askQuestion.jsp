@@ -1,7 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-    <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
@@ -25,14 +25,10 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
-	<!-- 드래그/리사이즈를 위해 사용한 css // 아직 여기서 어느 코드가 역할을 하는지 모름... 알아봐야함 -->
-<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css" />
- 
+<script src="./resources/js/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
 <!-- chosen 설정 파일-->
 <link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
-  	<script>
-	UPLOADCARE_PUBLIC_KEY = 'your_public_key';
-	</script>
 	<script type="text/javascript">
 	//DB에서 대분류 소분류 목록 가져오기 
 	function loadMinorList(major){
@@ -104,7 +100,17 @@
 			}
 		}
 	}
-	</script>
+
+// 태그를 입력하면 ol, li에 태그가 생긴다. 이를 서버에 전송하기 위해 hidden input 태그(name = "")으로 만든다.
+// 유효성 검사를 할 때 또는 서버로 전송하기 전에 이 함수를 호툴한다.
+function liTohiddenRelatedTag() {
+	$("#hiddenRelatedTag").empty();
+	$("li.tag > span").each(function() {
+		$("#hiddenRelatedTag").append('<input type="hidden" name="relatedTag" value="'+ $(this).text() +'">');
+	})
+}
+</script>
+	
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
@@ -139,40 +145,57 @@
 					<p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque.</p>
 					
 					<div class="form-style form-style-3" id="question-submit">
-						<form>
+						<form action="addQuestion" method="post" enctype="multipart/form-data">
+						<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
+						<input type="hidden" value="${questionNum}" name="questionNum" id="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다." required="required">
+						
+						<!-- 이걸 왜 nullable로 하지 않은이유가 있습니까? 누가 설계한것인가? -->
+						<select name="qstatus" style="display: none;">
+							<option value="in progress">in progress</option>
+							<option value="solved">solved</option>
+						</select>
+						
 							<div class="form-inputs clearfix">
 								<p>
 									<label class="required">Question Title<span>*</span></label>
-									<input type="text" id="question-title">
+									<input type="text" id="question-title" name="title" required="required">
 									<span class="form-description">Please choose an appropriate title for the question to answer it even easier .</span>
 								</p>
 								<div id="form-textarea">
 									<label class="required">Details<span>*</span></label>
 								<p>
-									<textarea id="question_details" name="questionContent" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
+									<textarea id="question_details" name="questionContent" required="required" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
 									<span class="form-description">Type the description thoroughly and in detail .</span>
 								</p>
 								</div>
 								
-								<label>Attachment</label>
-									<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-								<div class="fileinputs">
-									<input type="file" class="file">
-									<div class="fakefile">
-										<button type="button" class="button small margin_0">Select file</button>
-										<span><i class="icon-arrow-up"></i>Browse</span>
-									</div>
-								</div>
+								
+								<!-- 아직 파일 업로드를 고려하여 컨트롤러를 만들지 않음. -->
+<!-- 								<label>Attachment</label> -->
+<!-- 									<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript> -->
+<!-- 								<div class="fileinputs"> -->
+<!-- 									<input type="file" class="file"> -->
+<!-- 									<div class="fakefile"> -->
+<!-- 										<button type="button" class="button small margin_0">Select file</button> -->
+<!-- 										<span><i class="icon-arrow-up"></i>Browse</span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 								
 								<p>
 									<label>Tags</label>
-									<input type="text" class="input" name="question_tags" id="question_tags" data-seperator=",">
+									<input type="text" class="input" id="question_tags" data-seperator=",">
 									<span class="form-description">Please choose  suitable Keywords Ex : <span class="color">question , poll</span> .</span>
 								</p>
+								
+								<!-- 위에 tag입력으로 받은 것이 이 div에 hidden으로 생성된다. -->
+								<div id="hiddenRelatedTag">
+									<input type="button" onclick="liTohiddenRelatedTag()" value="태그입력으로 생성된 li가 div(hiddenRelatedTag)에 히든으로 입력된다. 물론 이 버튼은 설명을 위해 있는 것..">
+								</div>
+								
 								<p>
 									<label class="required">Category<span>*</span></label>
 									<span class="styled-select">
-										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)">
+										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)" required="required">
 										<option value="0" selected="selected">選択</option>
 										<c:forEach var="major" items="${majorList }">
 											<option value="${major.majorNum}">${major.majorName}</option>
@@ -187,9 +210,11 @@
 									<span id="urgent-span">
 									<c:if test="${timeLimit == null? true : false }">
 										<input type="checkbox" id="urgent">大至急です。
+										<input type="text" name="timeLimit" value="1991/05/31">
 									</c:if>
 									<c:if test="${timeLimit != null? true : false }">
 										<input type="checkbox" id="urgent" checked="checked">大至急です。
+										<input type="text" name="timeLimit" value="${timeLimit}">
 									</c:if>
 									</span>
 								</p>
@@ -198,31 +223,29 @@
 									<label class="required">video<span>*</span></label>
 									<div id="step2">
 									<h1>step2. WEBRTC를 이용한 녹화...</h1>
+									
 									<button id="btn-record-webm" style="font-size: inherit;">화면 녹화</button>
 									<button id="btn-record-webm-stop" style="font-size: inherit;" disabled="disabled">화면 중지</button>
 									
 									<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
-									<input type="text" name="videoSrc" value="" id="videoSrc" placeholder="녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다.">
+									<input type="text" name="videoSrc" value="${videoSrc}" id="videoSrc" placeholder="녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다.">
 									
-									<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
-									<input type="text" value="${questionNum}" name="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다.">
 									
 									<!-- 기존에 녹화된 영상과 녹화 할 영역(canvas)을 가진 DIV -->
 									<div id="video_and_cavas_container" >
-										<div id="canvas_container" style="float: left;">
-											<div id="HtmlTagFromTheCKEDITOR" contenteditable="true"
-												style="text-align: center; border-top: 5px solid gray; width: 500px; background-color: #FBFBEE; height: 500px">
+										<div id="canvas_container">
+											<div id="HtmlTagFromTheCKEDITOR" contenteditable="true" style="background-color: #FBFBEE; width: 100%;">
 												<!-- 이 안에 있는 요소만 녹화가 되기 때문에, 드래그앤 드랍으로 여기로 div를 옴겨와야 한다. -->
-												<h1>여기에 에디터에 쓴 내용이 여기로 옴겨진다. </h1>
+												<!-- 여기에 에디터에 쓴 내용이 여기로 옴겨진다.  -->
 											</div>
 										</div>
-										<div id="video_container" style="float: left; text-align: center; width: 500px; background-color: #FBFBEE; height: 500px">
+										<div id="video_container" style="width: 100%;">
 											<!-- 수정하기 일 땐 기존에 녹화된 파일이 여기에 보인다. -->
 											<c:if test="${video_src == null}">
-												<h1>처음 글을 쓰거나, 수정모드일 때는 녹화한 동영상이 없다.</h1>
+												<!-- 처음 글을 쓰거나, 기존에 영상을 녹화하지 않은 상태로 수정할 경우 녹화한 동영상이 없다. -->
 											</c:if>
 											<c:if test="${video_src != null}">
-												<video src="${video_src}"></video>
+												<video src="${video_src}" controls="controls" preload="auto"></video>
 											</c:if>
 										</div>
 									</div>
@@ -324,11 +347,12 @@
 
 <div class="go-up"><i class="icon-chevron-up"></i></div>
 
+
+
 <!-- js -->
+
 <!-- CKeditor -->
 <script src="./resources/ckeditor/ckeditor.js"></script> 
-<!-- JQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
 <script src="./resources/ckeditor/adapters/jquery.js"></script>
 
@@ -346,8 +370,7 @@
 <!-- 수정된 chosen 플러그인입니다. 교체 불가. -->
 
 
-<script src="./resources/js/jquery-3.2.1.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+
 
 <script src="./resources/js/chosen.jquery.js"></script>
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -368,6 +391,7 @@
 <script src="./resources/js/custom.js"></script>
 <script type="text/javascript">
 window.onload = function() {
+	
 	// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 	CKEDITOR.replace('question_details',{ 
 		filebrowserUploadUrl: 'cKEditorFileUpload'
@@ -378,6 +402,18 @@ window.onload = function() {
 			max_select_options: 5,
 			no_result_text: "No result found. Press enter to add"
 		});
+	
+	// 4. 녹화 영역의 크기를 가로 == 세로 로 맞춤
+	var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
+	$(elementToShare).height($(elementToShare).width());
+	$(elementToShare).css('max-height', $(elementToShare).width());
+	$(elementToShare).css('overflow-y', "auto");
+	
+	// 5. questionNum이 null이면 다시 페이지를 불러온다.
+	if( isEmpty($("#questionNum").val() ) ) {
+		location.href="addQuestion"; 
+	}
+	
 	//녹화 -- 현재 맥에서만 작동 함
 	//동영상 녹화 코드
 		document.getElementById('btn-record-webm').onclick = function() {
@@ -409,6 +445,11 @@ window.onload = function() {
 			//공유하는 DIV 쪽 기능
 			stop = false;
 			var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
+			//$(elementToShare).height($(elementToShare).width());
+			//$(elementToShare).css('max-height', $(elementToShare).width());
+			//$(elementToShare).css('overflow-y', "auto");
+			//$(elementToShare).height($(elementToShare).width());
+			
 			var canvas2d = document.createElement('canvas');
 			var context = canvas2d.getContext('2d');
 			canvas2d.width = elementToShare.clientWidth;
@@ -469,7 +510,7 @@ window.onload = function() {
 					});
 					canvas2d.id = 'canvas';
 				})();
-				setTimeout(looper, 10); //이게 화면 프레임수
+				setTimeout(looper, 300); //이게 화면 프레임수
 			})();
 		};
 		
@@ -489,6 +530,7 @@ window.onload = function() {
 		        return false;
 		    }
 		});
+
 } //onload 종료
 
 //글쓰기 페이지의 유효성 검사
@@ -545,6 +587,15 @@ function imgSrcToBase64Src_In_id(id) {
 	            });
 		}
 	}) // each 종료
+};
+
+//데이터가 널 또는 공백인지 확인하는 함수
+var isEmpty = function(value){
+	if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+		return true
+	}else{
+		return false
+	}
 };
 </script>
 <!-- End js -->

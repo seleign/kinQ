@@ -77,4 +77,9 @@ public class TestController_kem {
 		}
 		return "home";
 	}
+	
+/*	@RequestMapping(value="search",method=RequestMethod.GET)
+	public String search(){
+		return "search";
+	}*/
 }

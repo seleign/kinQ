@@ -17,27 +17,6 @@
 	
 	</delete>
 	
-	<select id="searchReplyTitleByContext" parameterType="java.util.ArrayList" resultType="Reply">
-	    select
-            *
-        from
-            q_reply
-        <trim prefix="where" prefixOverrides="and|or">
-        	<foreach collection="list" item="item">and replytitle like '%${item}%'</foreach>
-        </trim>
-	</select>
-	
-	<!-- context가 포함된 모든 답변을 가져온다. -->
-	<select id="searchByContext" parameterType="java.util.ArrayList" resultType="Reply">
-		select
-	        *
-	    from
-	        q_reply
-	    <trim prefix="where" prefixOverrides="and|or">
-	    	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
-	    </trim>
-	</select>
-	
 	<!-- 답변을 1개(?)가져온다. -->
 	<insert id="selectOneReply" parameterType="Reply">
 	<!-- code here -->
@@ -67,5 +46,19 @@
 		q_reply reply,
 		(select  max(testScore.replyNum) KEEP(DENSE_RANK FIRST ORDER BY testScore.score DESC) replyNum from (select replyNum, sum(score) as score from RECOMMENDATION where questionNum = #{questionNum} group by replyNum) testScore) maxreplyNum 
 		where reply.replyNum = maxreplyNum.replyNum
+	</select>
+	
+	<select id="selectReplyList" parameterType="int" resultType="Reply">
+		select
+		    q_reply.*,
+		    userinfo.id as id
+		from
+		    q_reply,
+		    userinfo
+		where
+ 		   q_reply.usernum = userinfo.usernum(+)
+ 		   and q_reply.questionnum = #{questionNum}
+		order by
+		    questionnum, replynum
 	</select>
 </mapper>

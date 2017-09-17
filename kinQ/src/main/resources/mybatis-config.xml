@@ -14,11 +14,15 @@
 		<typeAlias type="us.duia.leejo0531.vo.ReplyVO" alias="Reply"/>
 		<typeAlias type="us.duia.leejo0531.vo.ReportVO" alias="Report"/>
 		<typeAlias type="us.duia.leejo0531.vo.checkTimeVO" alias="CheckTime"/>
+		<typeAlias type="us.duia.leejo0531.vo.PageVO" alias="Page"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 
+		<mapper resource="mapper/homeMapper.xml" /> 
 		<mapper resource="mapper/questionMapper.xml"/>
 		<mapper resource="mapper/replyMapper.xml"/>
 		<mapper resource="mapper/tagMapper.xml"/>
+		<mapper resource="mapper/reportMapper.xml"/>
+		<mapper resource="mapper/pointMapper.xml"/>
 	</mappers>
 </configuration>

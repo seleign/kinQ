@@ -54,7 +54,7 @@ public class QuestionController {
 	public String showQuestionForm(Model model) {
 		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
 		model.addAttribute("majorList", majorList);
-		return "question/questionForm4";
+		return "askQuestion";
 	}
 
 	/**
@@ -104,11 +104,12 @@ public class QuestionController {
 	 */
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn) {
-		//qstnSvc.writeQuestion(qstn);
-		
+		// 임시로 userNum, setMinorNum을 1로 함..
+		qstn.setUserNum(1);
+		qstn.setMinorNum(1); // 이게 왜 not null?
 		logger.info(qstn.toString());
-		// code here
-
+		
+		qstnSvc.writeQuestion(qstn);
 		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
 	}
 
@@ -120,27 +121,27 @@ public class QuestionController {
 	@RequestMapping(value = "question_view", method = RequestMethod.GET)
 	public String viewQuestion(QuestionVO qstn, Model model) {
 		//qstnSvc.getQuestion(qstn);
-		//	System.out.println(qstn);
+//		System.out.println(qstn);
 		// code here
 		QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(test);
 		System.out.println(question);
-		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
-		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
+/*		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
+		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());*/
 		System.out.println("questionNum : " + question.getQuestionNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		UserVO user = qstnSvc.getUserInfo(question.getUserNum());
 		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
 		model.addAttribute("question", question);
-		model.addAttribute("minor", minor);
-		model.addAttribute("major", major);
+/*		model.addAttribute("minor", minor);
+		model.addAttribute("major", major);*/
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("user", user);
 		model.addAttribute("checkTimeResult", checkTimeResult);
 		
-		//return "question/questionView";
-		
 		return "question_view";
+		//return "question/questionView";
+
 	}
 	
 	
@@ -161,8 +162,10 @@ public class QuestionController {
 	 */
 	@RequestMapping(value="askQuestion",method=RequestMethod.GET)
 	public String ask_question(Model model){
-		ArrayList<MajorVO> majorList = userSvc.getMajorList(); 
+		ArrayList<MajorVO> majorList = userSvc.getMajorList();
+		int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
 		model.addAttribute("majorList", majorList);
+		model.addAttribute("questionNum", questionNum);
 		return "askQuestion";
 	}
 	
@@ -172,10 +175,22 @@ public class QuestionController {
 	 * @return 질문하기 페이지로 이동
 	 */
 	@RequestMapping(value="askQuestion",method=RequestMethod.POST)
-	public String ask_question(HashMap<String, String> map, Model model){
-		String question_title = map.get("question_title");
-		model.addAttribute("question_title", question_title);
-		return "askQuestion";
+	public String ask_question(HashMap<String, String> map){ // TODO
+		System.out.println("이거 무슨용도인가?");
+		logger.info(map.toString());
+		return "askQuestion";  
 	}
-
+	
+	/**
+	 * Ajax로 질문목록 모두 가져오기, index에서 조회된다 
+	 * @return ArrayList<QuestionVO>
+	 */
+	@RequestMapping(value="getQuestionPage",method=RequestMethod.GET)
+	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
+		return result;
+	}
+	
+	
+	//@RequestMapping(value = "")
 }

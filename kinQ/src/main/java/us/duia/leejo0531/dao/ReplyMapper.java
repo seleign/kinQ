@@ -1,7 +1,7 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 
@@ -15,4 +15,5 @@ public interface ReplyMapper {
 	public int insertReplyTest(ReplyVO reply);
 	public ArrayList<ReplyVO> questionReplyList(int questionNum);
 	public ReplyVO getMaxScoreReply(int questionNum);
+	public ArrayList<ReplyVO> selectReplyList( int questionNum);
 }

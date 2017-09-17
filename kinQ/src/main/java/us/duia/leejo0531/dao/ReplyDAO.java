@@ -1,6 +1,7 @@
 package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,11 @@ public class ReplyDAO {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		
 		return null;
+	}
+	
+		public ArrayList<ReplyVO> selectReplyList(int questionNum) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ArrayList<ReplyVO> result = mapper.selectReplyList(questionNum);
+		return result;
 	}
 }

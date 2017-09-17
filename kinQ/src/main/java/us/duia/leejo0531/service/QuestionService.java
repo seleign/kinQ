@@ -1,6 +1,8 @@
 package us.duia.leejo0531.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,7 @@ import us.duia.leejo0531.dao.TagDAO;
 import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.UserVO;
@@ -25,12 +28,22 @@ import us.duia.leejo0531.vo.checkTimeVO;
 @Repository
 public class QuestionService {
 	
+	private static final HashMap String = null;
 	@Autowired
 	private QuestionDAO qstnDao;
 	@Autowired(required = false)
 	private TagDAO tagDao;
 	@Autowired(required = false)
 	private UserDAO userDao;
+	
+	/**
+	 * 질문글의 시퀀스를 가져온다.
+	 * @return
+	 */
+	public int Q_BOARD_SEQ_NEXTVAL() {
+		int result = qstnDao.Q_BOARD_SEQ_NEXTVAL();
+		return result;
+	}
 	
 	/**
 	 * 질문을 등록한다.
@@ -84,8 +97,8 @@ public class QuestionService {
 	 * @param context 검색할 텍스트
 	 * @return ArrayList
 	 */
-	public ArrayList<QuestionVO> searchByContext(ArrayList<String> context){
-		ArrayList<QuestionVO> result = qstnDao.searchByContext(context);
+	public ArrayList<QuestionVO> searchByContext(PageVO	page){
+		ArrayList<QuestionVO> result = qstnDao.searchByContext(page);
 		return result;
 	}
 	
@@ -133,6 +146,18 @@ public class QuestionService {
 	 */
 	public ArrayList<QuestionVO> getAllQuestion(){
 		ArrayList<QuestionVO> result = qstnDao.getAllQuestion();
+		return result;
+	}
+	
+	/**
+	 * 매개변수로 받은 번호사이의 글을 조회한다 
+	 * @return ArrayList<QuestionVO>
+	 */
+	public ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		ArrayList<QuestionVO> result = qstnDao.getQuestionPage(map);
 		return result;
 	}
 }

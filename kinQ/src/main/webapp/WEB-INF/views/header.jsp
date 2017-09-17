@@ -117,15 +117,17 @@
 					</c:choose>
 				</ul>
 			</nav>
-			<div class="header-mypage">
-				<a href="mypage" id="login-panel"><i class="icon-user"></i>Mypage</a>
-			</div>
-<!-- 			<div class="header-search"> -->
-<!-- 				<form> -->
-<!-- 				    <input type="text" value="Search here ..." onfocus="if(this.value=='Search here ...')this.value='';" onblur="if(this.value=='')this.value='Search here ...';"> -->
-<!-- 				    <button type="submit" class="search-submit"></button> -->
-<!-- 				</form> -->
-<!-- 			</div> -->
+				<div class="header-search">
+					<form>
+					    <input type="text" value="Search here ..." onfocus="if(this.value=='Search here ...')this.value='';" onblur="if(this.value=='')this.value='Search here ...';">
+					    <button type="submit" class="search-submit"></button>
+					</form>
+				</div>
+				<c:if test="${sessionScope.userName != null }">
+				<div class="header-mypage">
+					<a href="mypage"><i class="icon-user"></i>Mypage</a>
+				</div>
+				</c:if>
 		</section><!-- End container -->
 	</div><!-- End header-top -->
 	<header id="header">
@@ -135,14 +137,14 @@
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a></li>
 					<li class="ask_question"><a href="askQuestion">질문하기(폼이동)</a></li>
-					<li><a href="">질문(하위메뉴 有)</a>
+					<li><a href="addQuestion">질문(하위메뉴 有)</a>
 						<ul>
 							<li><a href="cat_question.html">하위 1</a></li>
 							<li><a href="single_question.html">하위 2</a></li>
 							<li><a href="single_question_poll.html">하위 3</a></li>
 						</ul>
 					</li>
-					<li><a href="blog_1.html">포인트샵 중분류-소분류</a>
+					<li><a href="search">포인트샵 중분류-소분류</a>
 						<ul>
 							<li><a href="blog_1.html">중 1</a>
 								<ul>
@@ -152,6 +154,7 @@
 							</li>
 						</ul>
 					</li>
+					<li><a href="javascript:void(0)" onclick="location.href='pointShop'">ポイントショップ</a></li>
 					<li><a href="shortcodes">Shortcodes</a></li>
 					<li><a href="contact_us.html">고객센터</a></li>
 				</ul>
