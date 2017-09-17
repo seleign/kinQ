@@ -1,7 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<!-- Basic Page Needs -->
@@ -267,7 +267,10 @@
 						<h>답변 하기</h2>
 						<textarea rows="" cols="" id="replyContent"></textarea>
 						<button onclick="registReply()">등록</button>
-						<a href="realTimeAnswer?questionNum=${ question.questionNum }">실시간 test</a>
+						<form method="post" action="realTimeAnswer">
+							<input type="submit" value="실시간 답변">
+							<input type="hidden" name="questionNum" value="${ question.questionNum }">
+						</form>
 					</div><!-- End related-posts -->
 				</c:if>
 				
