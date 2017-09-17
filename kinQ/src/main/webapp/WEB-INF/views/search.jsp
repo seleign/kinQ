@@ -29,7 +29,56 @@
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="./resources/js/jquery-dateFormat.min.js"></script>
+  <script src="./resources/js/dateFormat.min.js"></script>
   <script type="text/javascript">
+	
+	function resultList(){
+		$.ajax({
+			url: 'search',
+			method: 'post',
+			data: {
+				search: $('#search').val(),
+				searchType: $('#searchType').val(),
+				from: parseInt($('#from').val()),
+				to: parseInt($('#to').val())
+				
+			},
+			success: function(result){
+				var html = '';
+				var page = result['page'];
+				var qList = result['qList'];
+				var rList = result['rList'];
+				
+				$.each(qList, function(index, element){
+					html +='<article class="question question-type-normal">';
+					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
+					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
+					html += '<div class="question-inner"><div class="clearfix"></div>';
+					html += '<p class="question-desc">'+element.questionContent+'</p>';
+					html += '<div class="question-details">';
+					if(element.qstatus == "solved"){
+						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
+					}else{
+						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
+					}
+					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
+/* 					html += '<span class="question-date"><i class="icon-time"></i>'+ $.format.prettyDate( element.regDate)+'</span>'; */
+					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( new Date())+'</span>';
+					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
+					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
+					html += '<div class="clearfix"></div>';
+					html += '</div></article>';
+				});
+				$('#resultArea').append(html);
+				$('#from').val( page.from +10);
+				$('#to').val( page.to +10);
+			}
+		});
+	}
+	$(function(){
+		resultList();
+	});
   </script>
 </head>
 <body>
@@ -55,35 +104,12 @@
 	<section class="container main-content">
 		<div class="row">
 			<div class="col-md-9">
-				<c:forEach var="qstn" items="${qstnList}" >
-					<article class="question question-type-normal">
-						<h2>
-							<a href="single_question.html">${qstn.title}</a>
-						</h2>
-						<a class="question-report" href="#">Report</a>
-						<div class="question-author">
-							<a href="#" original-title="ahmed" class="question-author-img tooltip-n"><span></span><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-						</div>
-						<div class="question-inner">
-							<div class="clearfix"></div>
-							<p class="question-desc">${qstn.questionContent}</p>
-							<div class="question-details">
-								<c:if test="${qstn.qstatus==\"solved\"}">
-									<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-								</c:if>
-								<c:if test="${qstn.qstatus==\"in progress\"}">
-									<span class="question-answered"><i class="icon-ok"></i>in progress</span>
-								</c:if>
-								<span class="question-favorite"><i class="icon-star"></i>${qstn.score}</span>
-							</div>
-							<span class="question-date"><i class="icon-time"></i><fmt:formatDate type="both" value="${qstn.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></span>
-							<span class="question-comment"><a href="#"><i class="icon-comment"></i>${replyList[qstn.questionNum].size()} Answer</a></span>
-							<span class="question-view"><i class="icon-user"></i>${qstn.hit} views</span>
-							<div class="clearfix"></div>
-						</div>
-					</article>
-				</c:forEach>
-				<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
+				<input type="hidden" id="search" value="${page.search}">
+				<input type="hidden" id="searchType" value="${page.searchType}">
+				<input type="hidden" id="from" value="${page.from}">
+				<input type="hidden" id="to" value="${page.to}">
+				<div id="resultArea"></div>
+				<a href="javascript:resultList()" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
 			</div><!-- End main -->
 						<jsp:include page="aside.jsp" flush="false" />
 		</div><!-- End row -->

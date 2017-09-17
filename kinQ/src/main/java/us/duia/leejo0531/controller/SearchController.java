@@ -45,8 +45,8 @@ public class SearchController {
 	 * view에서 jstl로 결과를 출력한다.
 	 * @return ${QuestionListByTag}, ${ReplyListByTag}, ${QuestionListBycontext}, ${ReplyListBycontext}
 	 */
-	@RequestMapping(value = "search", method = RequestMethod.GET)
-	public String searchByWords( PageVO page, Model model) {
+/*	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String search( PageVO page, Model model) {
 		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
 		
 		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
@@ -55,26 +55,33 @@ public class SearchController {
 			replyList.put(target, sechSvc.selectReplyList( target));
 		}
 		
+		model.addAttribute("page", page);
 		model.addAttribute("qstnList", result);
 		model.addAttribute("replyList", replyList);
 		
 		return "search";
 	}
-	
+*/	
 
-/*	@RequestMapping(value = "search_by_words", method = RequestMethod.GET)
+	@RequestMapping(value = "search", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<QuestionVO> searchByWords( PageVO page, Model model) {
+	public HashMap<String, Object> searchByWords( PageVO page, Model model) {
+		
 		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
+		
 		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
 		for (QuestionVO qstn : result) {
 			int target = qstn.getQuestionNum();
 			replyList.put(target, sechSvc.selectReplyList( target));
 		}
-		model.addAttribute("ReplyListBycontext", result);
-		model.addAttribute("replyList", replyList);
-		return result; //어느 페이지로 이동시킬 것인가?
-	}*/
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("qList", result);
+		pack.put("rList", replyList);
+		
+		return pack; //어느 페이지로 이동시킬 것인가?
+	}
 	
 	/**
 	 * 답변글이 없는 질문글을 검색한다.

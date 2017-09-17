@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import us.duia.leejo0531.dao.TagDAO;
 import us.duia.leejo0531.dao.TagMapper;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.TagVO;
 
 //�׽�Ʈ�Ұ� �־ ���Ƿ� �������� �پ��� �����ϰڽ��ϴ�(��)
@@ -78,8 +79,9 @@ public class TestController_kem {
 		return "home";
 	}
 	
-/*	@RequestMapping(value="search",method=RequestMethod.GET)
-	public String search(){
+	@RequestMapping(value="search",method=RequestMethod.GET)
+	public String search(PageVO page, Model model){
+		model.addAttribute("page", page);
 		return "search";
-	}*/
+	}
 }
