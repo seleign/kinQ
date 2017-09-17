@@ -267,7 +267,7 @@
 						<h>답변 하기</h2>
 						<textarea rows="" cols="" id="replyContent"></textarea>
 						<button onclick="registReply()">등록</button>
-						<a href="realTimeAnswer?questionNum=${ question.questionNum }"></a>
+						<a href="realTimeAnswer?questionNum=${ question.questionNum }">실시간 test</a>
 					</div><!-- End related-posts -->
 				</c:if>
 				
