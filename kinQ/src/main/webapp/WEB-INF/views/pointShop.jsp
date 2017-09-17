@@ -1,7 +1,8 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
@@ -25,7 +26,20 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
+  	<style type="text/css">
+ 	 	ul {
+   			list-style:none;
+    		margin:5px;
+    		padding:5px;
+		}
+
+		li {
+    		margin: 0 0 0 0;
+    		padding: 0 0 0 0;
+    		border : 0;
+    		float: left;
+		}
+  	</style>
 </head>
 <body>
 <jsp:include page="header.jsp" flush="false" />
@@ -116,9 +130,16 @@
 					
 					<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">ショッピングモール</h2></div></div>
 					<div class="page-content page-shortcode">
-						<ul>
-							<li></li>
-						</ul>
+						<c:forEach var="good" items="${goodsList }">
+							<ul>
+								<li>
+									<img src="./resources/images/pointShopImg/${good.imageurl }"><br>
+									商品名：　${good.goodsName}<br>
+									値段：　${good.price}<br><br>
+							</ul>
+						
+						</c:forEach>
+
 					
 					</div>
 					

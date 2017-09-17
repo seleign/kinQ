@@ -4,5 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="us.duia.leejo0531.dao.PointMapper">
 
-	
+	<select id="getGoodsList"  resultType="Goods">
+		select * from goods
+	</select>
 </mapper>
