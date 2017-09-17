@@ -105,7 +105,7 @@ public class QuestionController {
 	 */
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
 	public String addQuestion(QuestionVO qstn, HttpSession session) {
-		int userNum = (Integer)session.getAttribute("userNum");
+		int userNum = (int)session.getAttribute("userNum");
 		qstn.setUserNum(userNum);
 		logger.info(qstn.toString());
 		qstnSvc.writeQuestion(qstn);
@@ -154,7 +154,6 @@ public class QuestionController {
 		return result;
 	}
 	
-	
 	/**
 	 * AskQuestion 으로 이동하며 대분류 목록도 같이 전송
 	 * main에서 AskQuestion 으로 이동하며 제목도 같이 전송
@@ -187,5 +186,20 @@ public class QuestionController {
 	}
 	
 	
-	//@RequestMapping(value = "")
+	/**
+	 * 실시간 답변 또는 동영상 녹화 답변에 사용된다.
+	 * 이 페이지의 form action"addReply"으로 해둬야 답변이 DB에 올라갈듯?
+	 * @param questionNum 답변할 페이지에 출력시킬 질문의 내용
+	 * @return 실시간 답변페이지
+	 */
+	@RequestMapping(value = "realTimeAnswer", method = RequestMethod.GET)
+	public String realTimeAnswerGET(String questionNum, Model model, HttpSession session) {
+		int userNum = (int)session.getAttribute("userNum");
+		QuestionVO question= new QuestionVO(Integer.parseInt(questionNum));
+		question = qstnSvc.getQuestion(question);
+		model.addAttribute("question", question);
+		model.addAttribute("userNum", userNum);
+		
+		return "question/questionForm5";  // 실시간 답변페이지
+	}
 }
