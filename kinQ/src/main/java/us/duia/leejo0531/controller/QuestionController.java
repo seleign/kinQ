@@ -193,9 +193,9 @@ public class QuestionController {
 	 * @return 실시간 답변페이지
 	 */
 	@RequestMapping(value = "realTimeAnswer", method = RequestMethod.GET)
-	public String realTimeAnswerGET(String questionNum, Model model, HttpSession session) {
+	public String realTimeAnswerGET(int questionNum, Model model, HttpSession session) {
 		int userNum = (int)session.getAttribute("userNum");
-		QuestionVO question= new QuestionVO(Integer.parseInt(questionNum));
+		QuestionVO question= new QuestionVO( questionNum );
 		question = qstnSvc.getQuestion(question);
 		model.addAttribute("question", question);
 		model.addAttribute("userNum", userNum);
