@@ -10,13 +10,6 @@
 	
 	</insert>
 	
-	<!-- 답변을 삭제한다. (임시) 테스트 되지않음.-->
-	<delete id="deleteReply" parameterType="Reply">
-		delete Q_Reply where usernum = #{UserNum} and ReplyNum = #{ReplyNum}
-	<!-- code here -->
-	
-	</delete>
-	
 	<!-- 답변을 1개(?)가져온다. -->
 	<insert id="selectOneReply" parameterType="Reply">
 	<!-- code here -->
@@ -79,4 +72,8 @@
 			null)
 		</if>
 	</insert>
+	
+	<delete id="deleteReply" parameterType="int">
+		delete from q_reply where replyNum = #{ replyNum }
+	</delete>
 </mapper>

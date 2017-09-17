@@ -71,4 +71,15 @@ public class ReplyController {
 			return "false";
 		}
 	}
+	
+	@RequestMapping(value = "deleteReply", method = RequestMethod.GET)
+	public @ResponseBody String deleteReply(ReplyVO reply) {
+		System.out.println("reply : " + reply);
+		int result = reSvc.deleteReply(reply.getReplyNum());
+		if (result == 1) {
+			return "success";
+		} else {
+			return "false";
+		}
+	}
 }

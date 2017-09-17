@@ -42,12 +42,12 @@
 		questionReplyList();
 		
 		window.onload = function() {
-			if (userId != "") {
+			/* if (userId != "") { */
 				// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 				CKEDITOR.replace('replyContent',{ 
 		    	    		filebrowserUploadUrl: 'cKEditorFileUpload'
 		   		 }); // Ckeditor 초기화 종료
-			}
+			/* } */
 		};
 		
 		function getMAxScoreReply() {
@@ -98,7 +98,7 @@
 						replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" ;
 						replyHtml += "</div>";
 						if (userId == replyList[i].id) {
-							replyHtml += "<a class=\"comment-reply\" href=\"#\"><i class=\"icon-reply\"></i>삭제</a>" ;
+							replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
 						}
 						replyHtml += "</div>";
 						replyHtml += "<div class=\"text\">";
@@ -128,6 +128,18 @@
 						userNum: ${ question.userNum },
 						replyContent: replyCtx,
 				},
+				success: function (success) {
+					getMAxScoreReply();
+					questionReplyList();
+				}
+			})
+		}
+		
+		function deleteReply(replyNum) {
+			$.ajax({
+				url: "deleteReply",
+				type: "get",
+				data: { replyNum: replyNum },
 				success: function (success) {
 					getMAxScoreReply();
 					questionReplyList();
@@ -257,9 +269,9 @@
 				</div><!-- End share-tags -->
 				
 				<div class="about-author clearfix">
-				    <div class="author-image">
+				   <!--  <div class="author-image">
 				    	<a href="#" original-title="admin" class="tooltip-n"><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
-				    </div>
+				    </div> -->
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
 				<%-- <c:if test="${ sessionScope.userId != user.id }"> --%>

@@ -65,4 +65,9 @@ public class ReplyService {
 		int result = replyDao.registReply(reply);
 		return result;
 	}
+	
+	public int deleteReply(int replyNum) {
+		int result = replyDao.deleteReply(replyNum);
+		return result;
+	}
 }

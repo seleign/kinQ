@@ -100,9 +100,15 @@ public class ReplyDAO {
 		return result;
 	}
 		
-		public int registReply(ReplyVO reply) {
-			ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-			int result = mapper.registReply(reply);
-			return result;
-		}
+	public int registReply(ReplyVO reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.registReply(reply);
+		return result;
+	}
+	
+	public int deleteReply(int replyNum) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.deleteReply(replyNum);
+		return result;
+	}
 }
