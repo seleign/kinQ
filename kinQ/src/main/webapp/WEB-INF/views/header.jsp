@@ -118,8 +118,18 @@
 				</ul>
 			</nav>
 				<div class="header-search">
-					<form>
-					    <input type="text" value="Search here ..." onfocus="if(this.value=='Search here ...')this.value='';" onblur="if(this.value=='')this.value='Search here ...';">
+					<form action="search" method="get">
+ 						<select name="searchType">
+							<option value="title">題名</option>
+							<option selected="selected" value="content">内容</option>
+							<option value="tag">タッグ</option>
+							<option value="author">ユーザー</option>
+						</select>
+						
+<!--  						<input type="hidden" name="searchType" value="content">
+ --> 						<input type="hidden" name="from" value="1">
+						<input type="hidden" name="to" value="10">
+					    <input type="text" name="search"　>
 					    <button type="submit" class="search-submit"></button>
 					</form>
 				</div>
