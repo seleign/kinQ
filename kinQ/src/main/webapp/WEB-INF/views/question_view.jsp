@@ -262,7 +262,7 @@
 				    </div>
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
-				<c:if test="${ sessionScope.userId != user.id }">
+				<%-- <c:if test="${ sessionScope.userId != user.id }"> --%>
 					<div id="related-posts">
 						<h>답변 하기</h2>
 						<textarea rows="" cols="" id="replyContent"></textarea>
@@ -272,7 +272,7 @@
 							<input type="hidden" name="questionNum" value="${ question.questionNum }">
 						</form>
 					</div><!-- End related-posts -->
-				</c:if>
+				<%-- </c:if> --%>
 				
 				<!-- 답글부분 -->
 				<div id="commentlist" class="page-content">
