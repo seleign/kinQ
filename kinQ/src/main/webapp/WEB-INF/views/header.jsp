@@ -49,8 +49,8 @@
 	}
 	function onMessage(evt){
 		//메세지가 도착했을때 처리해줄 코드작성 arraylist가 반환될 것임 
-		var html = "<a>"+evt.data+"</a>";
-		$('#header_alarm').append(html);
+		var html = "<p>"+evt.data+"</p>";
+		$('#alarm_circle').append(html);
 	}
 	
 	//빨간줄 뜨는거 무시하셔도 됩니다 
@@ -175,8 +175,11 @@
 				<div class="header-mypage">
 					<a href="mypage"><i class="icon-user"></i>Mypage</a>
 				</div>
-				<div id="header_alarm">
-					
+				<div class="header_alarm">
+					<div id="alarm_img">
+					<a href="#"><img src="./resources/images/bell.png"></a>
+					<div id="alarm_circle"></div>
+					</div>
 				</div>
 				</c:if>
 		</section><!-- End container -->

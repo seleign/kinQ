@@ -81,6 +81,27 @@ body {
 #QuestionList_button {
 	width:100%;
 }
+
+#alarm_img {
+	margin-top: 37%;
+	position: relative;
+}
+
+#alarm_circle {
+	position: absolute;
+	left: 56%;
+	top: -17%;
+	background: white;
+    border-radius: 50%;
+    width: 70%;
+    height: 70%;
+}
+
+#alarm_circle p {
+	margin-left: 28%;
+    margin-top: -10%;
+}
+
 /* 占쏙옙 占쏙옙 */
 #warp {
 	background-color: #f3f3f3;
@@ -266,6 +287,12 @@ body {
 }
 .header-top-nav li i {
 	margin-right: 5px;
+}
+
+.header_alarm {
+	float: right;
+	position: relative;
+	margin-right: 2%;
 }
 .header-mypage {
 	float: right;
