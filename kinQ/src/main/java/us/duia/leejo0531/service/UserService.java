@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.ReplyDAO;
 import us.duia.leejo0531.dao.UserDAO;
+import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
@@ -154,6 +155,11 @@ public class UserService {
 
 		ArrayList<ReplyVO> result = replyDao.myAnswerList(page);
 
+		return result;
+	}
+	
+	public ArrayList<AlarmVO> getUserAlarm(int userNum){
+		ArrayList<AlarmVO> result = userDao.getUserAlarm(userNum);
 		return result;
 	}
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.IdCheckVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
@@ -169,5 +170,12 @@ public class UserController implements HttpSessionListener{
 		System.out.println(result);
 		return result; //어느 페이지로 이동시킬 것인가?
 	}
-
+	
+	
+	//header ajax에서 호출됨
+	@RequestMapping(value="getAlarm", method=RequestMethod.GET)
+	public @ResponseBody ArrayList<AlarmVO> getUserAlarm(int userNum){
+		ArrayList<AlarmVO> result = userSvc.getUserAlarm(userNum);
+		return result;
+	}
 }

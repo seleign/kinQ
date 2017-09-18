@@ -51,6 +51,7 @@
 		//메세지가 도착했을때 처리해줄 코드작성 arraylist가 반환될 것임 
 		var html = "<p>"+evt.data+"</p>";
 		$('#alarm_circle').append(html);
+		alarmList(${sessionScope.userNum});
 	}
 	
 	//빨간줄 뜨는거 무시하셔도 됩니다 
@@ -59,6 +60,33 @@
 		send_message();
 		}
 	});
+	
+	function alarmList(userNum){
+		$.ajax({
+			url: 'getAlarm',
+			method: 'get',
+			data: {userNum:userNum},
+			success: function(result){
+				var html = '';
+					html += '<ul>';
+				$.each(result, function(index, element){
+					html += '<li>';
+					if(element.alarmType =='reply'){
+						html += '<a href="question_view?questionNum='+element.alarmAdress+'">질문에 답변이 달렸습니다.';
+					}
+					if(element.alarmType =='realtime'){
+						html += '<li><a href="question_view?questionNum='+element.alarmAdress+'">실시간 답변 요청이 왔습니다.';
+					}
+					if(element.alarmType =='interest'){
+						html += '<li><a href="question_view?questionNum='+element.alarmAdress+'">관심 항목에 대한 질문이 있습니다.';
+					}
+					html +='</li>';
+				});
+				html +='</ul>';
+					$('#alarm_panel').append(html);
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -107,10 +135,18 @@
 		</section>
 	</div><!-- End login-panel -->
 	</c:if>
+	
+	<!-- panel pop -->
 	<div class="panel-pop" id="signup">
 	<h2>新規取得<i class="icon-remove"></i></h2>
 		<iframe src="join" class="signupIframe"></iframe>
 	</div><!-- End signup -->
+	
+	<div class="panel-pop alarm" id="alarm_pop">
+	<h2>Alarm</h2>
+	<div class="form-style form-style-3" id="alarm_panel">
+	</div>
+	</div>
 	
 	<div class="panel-pop" id="lost-password">
 		<h2>Lost Password<i class="icon-remove"></i></h2>
@@ -177,7 +213,7 @@
 				</div>
 				<div class="header_alarm">
 					<div id="alarm_img">
-					<a href="#"><img src="./resources/images/bell.png"></a>
+					<a href="#" class="alarm_button"><img src="./resources/images/bell.png"></a>
 					<div id="alarm_circle"></div>
 					</div>
 				</div>

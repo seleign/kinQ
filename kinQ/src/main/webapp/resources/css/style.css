@@ -222,6 +222,12 @@ body {
 	background-color: #373b43;
 }
 /* Panel pop */
+#alarm_pop {
+    height: 47%;
+    width: 30%;
+    text-align: center;
+}
+
 .panel-pop {
 	background-color: #FFF;
 	border: 1px solid #e5e5e5;
