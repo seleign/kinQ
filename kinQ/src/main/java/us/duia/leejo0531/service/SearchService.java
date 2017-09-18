@@ -49,20 +49,6 @@ public class SearchService {
 
 		return result;
 	}
-	
-	public ArrayList<QuestionVO> myQuestionList( PageVO page) {
-		String str = page.getSearch();
-		
-		ArrayList<String> words = new ArrayList<>();
-		for(String s : str.split(",")) // , 로 구분한 후 
-			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
-		
-		page.setTokens( words);
-
-		ArrayList<QuestionVO> result = qstnDao.myQuestionList(page);
-
-		return result;
-	}
 
 	public ArrayList<QuestionVO> search_no_answered() {
 		ArrayList<QuestionVO> result = qstnDao.search_no_answered();
