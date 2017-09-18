@@ -7,7 +7,7 @@ public class QuestionVO {
 
    private int questionNum;
    private int userNum; //질문자
-   private Date timeLimit;
+   private String timeLimit;
    private String qstatus;
    private Date regDate;
    private Date modDate;
@@ -27,7 +27,7 @@ public class QuestionVO {
 	   super();
 	   this.questionNum = questionNum;
    }
-   public QuestionVO(int questionNum, int userNum, Date timeLimit, String qstatus, Date regDate, Date modDate,
+   public QuestionVO(int questionNum, int userNum, String timeLimit, String qstatus, Date regDate, Date modDate,
          String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent, int score) {
       super();
       this.questionNum = questionNum;
@@ -61,11 +61,11 @@ public class QuestionVO {
       this.userNum = userNum;
    }
 
-   public Date getTimeLimit() {
+   public String getTimeLimit() {
       return timeLimit;
    }
 
-   public void setTimeLimit(Date timeLimit) {
+   public void setTimeLimit(String timeLimit) {
       this.timeLimit = timeLimit;
    }
 

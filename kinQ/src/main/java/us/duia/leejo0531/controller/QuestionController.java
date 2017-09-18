@@ -64,28 +64,21 @@ public class QuestionController {
 	 * @return
 	 */
 	@RequestMapping(value = "addQuestion5", method = RequestMethod.GET)
-	public String showQuestionForm2(Model model) {
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();;
-		model.addAttribute("majorList", majorList);
+	public String showQuestionForm5(Model model, HttpSession session) {
+		QuestionVO test = new QuestionVO(80);
+		QuestionVO question = qstnSvc.getQuestion(test);
+		logger.info(question.toString());
+		int userNum = 1;
+		model.addAttribute("question", question);
+		model.addAttribute("userNum", userNum);
 		return "question/questionForm5";
 	}
 	
-	/**
-	 * ckeditor 테스트 페이지로 이동 --테스트용입니다.
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "addQuestion3", method = RequestMethod.GET)
-	public String showQuestionForm3(Model model) {
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
-		model.addAttribute("majorList", majorList);
-		return "question/questionForm3";
-	}
-	@RequestMapping(value = "addQuestion4", method = RequestMethod.GET)
-	public String showQuestionForm4(Model model) {
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
-		model.addAttribute("majorList", majorList);
-		return "question/questionForm4";
+	@RequestMapping(value = "addQuestion6", method = RequestMethod.GET)
+	public String showQuestionForm6(Model model, HttpSession session) {
+		int userNum = 1;
+		model.addAttribute("userNum", userNum);
+		return "question/questionForm6";
 	}
 
 	/**
@@ -104,7 +97,7 @@ public class QuestionController {
 	 * @return 자신이 작성한 페이지로 이동? 마이페이지의 질문 내역페이지로 이동?
 	 */
 	@RequestMapping(value = "addQuestion", method = RequestMethod.POST)
-	public String addQuestion(QuestionVO qstn, HttpSession session) {
+	public String addQuestion(QuestionVO qstn, HttpSession session, String timeLimit) {
 		int userNum = (int)session.getAttribute("userNum");
 		qstn.setUserNum(userNum);
 		logger.info(qstn.toString());

@@ -5,31 +5,12 @@
 <head>
 <meta charset="utf-8">
 <title>실시간 공유 페이지</title>
-<meta name="description" content="Ask me Responsive Questions and Answers Template">
-<meta name="author" content="vbegy">
-	
-<!-- Mobile Specific Metas -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	
-<!-- Main Style -->
-<link rel="stylesheet" href="./resources/css/style.css">
-	
-<!-- Skins -->
-<link rel="stylesheet" href="./resources/css/gray.css">
-	
-<!-- Responsive Style -->
-<link rel="stylesheet" href="./resources/css/responsive.css">
-
-<!-- Favicons -->
-<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-<!-- JQuery -->
-<script src="./resources/js/jquery-3.2.1.min.js"></script>
-<script src="./resources/js/jquery-migrate-1.4.1.js"></script>
-<script src="./resources/js/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <!-- CKeditor -->
 <script src="/resources/ckeditor/ckeditor.js"></script> 
+
+<!-- JQuery -->
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
 
 <!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
 <script src="/resources/ckeditor/adapters/jquery.js"></script>
@@ -53,8 +34,6 @@
 	var stop;
 	var canvasSetTime;
 	window.onload = function() { //onload 시작
-		$( "#tabs" ).tabs();
-		
 		// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 		CKEDITOR.replace('questionContent',{ 
     	    		filebrowserUploadUrl: 'cKEditorFileUpload'
@@ -98,7 +77,7 @@
 			canvas2d.style.zIndex = -1;
 			
 			// 여기에 appendChild(canvas2d)가 녹화되는 화면(프리뷰)가 보이게 할 곳이다.
-			$('#OpponentScreen').append(canvas2d); // 이게 내가 녹화중인 화면
+			$('#OpponentScreen').append(canvas2d); // 이게 녹화중인 화면
 			
 			// DIV를 canvas2d로 보내고, canvas2d를 녹화(+음성)하는 코드
 			(function looper() {
@@ -115,7 +94,7 @@
 						var formData = new FormData(formElement);
 								
 						formData.append("blob", blob, fileName+ "." +fileExt);
-						formData.append("questionNum", '${question.questionNum}');
+						formData.append("questionNum", '${questionNum == null? 80: 0}');
 								
 						$.ajax({
 							url: 'blob_upload',
@@ -252,9 +231,6 @@
 			} else if (event.data.substring(0, 21) == 'data:image/png;base64') {
 				sharedPartOfScreenPreview.src = event.data; //이게 전송되는 화면 값..
 			} else {
-				if(event.data.substring(0,6) == 'data:,') {
-					return;
-				}
 				div.innerHTML = event.data || event;
 				chatContainer.insertBefore(div, chatContainer.firstChild);
 				div.tabIndex = 0;
@@ -482,13 +458,13 @@
 		
 		if(!isEmpty(questionuserNum) && !isEmpty(userNum) ) {
 			if(questionuserNum == userNum)	{ // 질문자이다.
-// 				$("#open-room").click();
-// 				$("#btn-share-part-of-sreen").click();
-// 				$("#btn-record-webm").click();
+				$("#open-room").click();
+				$("#btn-share-part-of-sreen").click();
+				$("#btn-record-webm").click();
 			} else { // 답변자이다.
-// 				$("#join-room").click();
-// 				$("#btn-share-part-of-sreen").click();
-// 				$("#btn-record-webm").click();
+				$("#join-room").click();
+				$("#btn-share-part-of-sreen").click();
+				$("#btn-record-webm").click();
 			}
 			
 		} else {
@@ -520,18 +496,7 @@ function lastFileChat() {
 </script>
 </head>
 <body>
-	<!-- 질문글의 타이틀을 나타낸다. -->
-	<h1>
-		<c:if test="${title != null? true:false }">
-		${title}
-		</c:if>
-		<c:if test="${title == null? true:false }">
-		<p>여기에는 질문글의 title이 온다. </p>
-		</c:if>
-	</h1>
-	
-	
-		<fieldset>
+<fieldset>
 <legend>개발용 버튼(삭제하지 말것)</legend>
 <h5>JQuery로 버튼을 자동 click하는 방식으로 실시간 연결 진행. 실제 서비스에서는 이 필드셋을 hidden으로 해둔다.</h5>
 <label>방 번호</label>
@@ -549,49 +514,19 @@ function lastFileChat() {
 <input type="text" >
 <input type="text" name="videoSrc" value="" placeholder="답변이 완료된 후에는 답변이 녹화된 동영상의 주소가 여기에 담겨서, 답변 테이블의 videoSrc에 들어간다.">
 </fieldset>
-<div id="tabs" style="width:60%;">
-  <ul>
-    <li><a href="#tabs-1">나의 공유화면</a></li>
-    <li><a href="#tabs-2">내 공유화면 프리뷰 </a></li>
-    <li><a href="#tabs-3">질문자가 업로드한 동영상 / 내가 녹화한 영상 보기</a></li>
-    <li><a href="#tabs-4">상대방의 화면</a></li>
-  </ul>
-  <div id="tabs-1">
-		<!-- 이게 공유된다. DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
-	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray; background-color: #FBFBEE; height:500px;">
-		<c:if test="${question.questionContent != null? true:false }">
-			${question.questionContent}
+
+	<!-- 질문글의 타이틀을 나타낸다. -->
+	<h1>
+		<c:if test="${title != null? true:false }">
+		${title}
 		</c:if>
-		<c:if test="${question.questionContent == null? true:false }">
-			<h1>여기에는 질문글의 questionContent 가 불러와진다. (이 DIV는 가로 세로가 크기가 같다.)</h1>
+		<c:if test="${title == null? true:false }">
+		<p>여기에는 질문글의 title이 온다. </p>
 		</c:if>
-	</div>
-  </div>
-  <div id="tabs-2">
-	<!-- 상대방 화면이 여기에 보임 -->
-	<div id="OpponentScreen"></div>
-  </div>
-  <div id="tabs-3">
-		<!-- 실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다. -->
-	<div id="videos-container" style="border:3px solid blue">
-		<h6>실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다.</h6>
-		<!-- ㄹㄹ -->
-		<c:if test="${question.videoSrc != null? true:false }">
-			<video src="${question.videoSrc}" controls="controls" preload="auto"></video>
-		</c:if>
-		<c:if test="${question.videoSrc == null? true:false }">
-			<h6>여기에는 질문글에서 녹화된 동영상이 여기에 보입니다.</h6>
-		</c:if>
-	</div> 
-   </div>
-   <div id="tabs-4">
-		<!-- 상대방의 화면이 여기에 보임 -->
-		<img id="shared-part-of-screen-preview" src="https://www.gifpng.com/500x500" style="max-width: 100%; height:500px;">
-	</div>
-</div>
+	</h1>
 
 	<!-- 채팅 및 파일이 전송된 것이 여기에 나타난다. -->
-	<div id="chat-container" style="border:3px solid red; width:35%;">
+	<div id="chat-container" style="border:3px solid red">
 	<button onclick="lastFileDelete()"> 오래된 파일 삭제</button>
 	<button onclick="lastFileChat()"> 오래된 채팅 삭제</button>
 	<h6>채팅 내용 + 송수신된 파일 DIV</h6>
@@ -599,18 +534,33 @@ function lastFileChat() {
 		<div class="chat-output"></div>
 	</div>
 	
-
-	
+	<!-- 실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다. -->
+	<div id="videos-container" style="border:3px solid blue">
+		<h6>실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다.</h6>
+		<!-- ㄹㄹ -->
+		<c:if test="${videoSrc != null? true:false }">
+			<video src="${videoSrc}" controls="controls" preload="auto"></video>
+		</c:if>
+		<c:if test="${videoSrc == null? true:false }">
+			<video src="/resources/uploadedFile/id01/20170914.webm" controls="controls" preload="auto"></video>
+		</c:if>
+		
+	</div>
+		
+	<!-- 이게 공유된다. DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
+	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray; background-color: #FBFBEE;">
+		<h1>여기에는 질문글의 questionContent 가 불러와진다. (이 DIV는 가로 세로가 크기가 같다.)</h1>
+	</div>
+		
+	<!-- 상대방 화면이 여기에 보임 -->
+	<div id="OpponentScreen"></div>
+	<!-- 내 화면이 여기에 보임 -->
+	<img id="shared-part-of-screen-preview" src="https://www.gifpng.com/500x500" style="max-width: 100%;">
 	
 	
 	<!-- 질문글 내용이 여기에 보인다. -->
 	<textarea id="questionContent">
-		<c:if test="${question.questionContent != null? true:false }">
-			${question.questionContent}
-		</c:if>
-		<c:if test="${question.questionContent == null? true:false }">
-			<h1>여기에는 질문글의 questionContent 가 불러와진다. (이 DIV는 가로 세로가 크기가 같다.)</h1>
-		</c:if>
+		질문글의 questionContent 가 불러와진다.
 	</textarea>
 </body>
 </html>

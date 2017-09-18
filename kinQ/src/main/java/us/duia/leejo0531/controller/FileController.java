@@ -49,15 +49,23 @@ public class FileController {
 	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
 	public @ResponseBody String blob_upload(MultipartFile blob, int questionNum, HttpSession session) {
 		logger.info("blob_upload: " + blob.getOriginalFilename());
+		logger.info("blob_size: " + blob.getSize());
 		logger.info("questionNum: " + questionNum);
 		String userId = (String)session.getAttribute("userId");
 		
+		int userNum;
+		if(session.getAttribute("userNum") == null) {
+			userNum = 1;
+		} else {
+			userNum = (int)session.getAttribute("userNum");
+		}
+
 		String QFILEPATH = FileService.blob_upload(blob, userId, questionNum);
 		
 		// 근데 어차피 QuestionVO에 녹화된 파일 주소를 가지고 있을 텐데, 여기에서 다시 Q_attach테이블에 넣어줘야하나?
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("QUESTIONNUM", String.valueOf(questionNum));
-		map.put("USERNUM", String.valueOf((int)session.getAttribute("userNum")));
+		map.put("USERNUM", String.valueOf(userNum));
 		map.put("QFILEPATH", QFILEPATH);
 		map.put("QFILENAME", blob.getOriginalFilename());
 		qstnDao.insertVideoFromAskQuestion(map);
