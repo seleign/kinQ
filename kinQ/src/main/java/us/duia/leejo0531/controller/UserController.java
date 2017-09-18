@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import us.duia.leejo0531.service.SearchService;
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.IdCheckVO;
 import us.duia.leejo0531.vo.MajorVO;
@@ -34,8 +33,6 @@ public class UserController implements HttpSessionListener{
 	
 	@Autowired( required=false)
 	UserService userSvc;
-	@Autowired( required=false)
-	SearchService sechSvc;
 	
 	public static Hashtable<String, String> loginSessionMonitor;
 
@@ -149,12 +146,12 @@ public class UserController implements HttpSessionListener{
 	@ResponseBody
 	public HashMap<String, Object> myQuestionList( PageVO page, Model model) {
 		
-		ArrayList<QuestionVO> result = sechSvc.myQuestionList(page);
+		ArrayList<QuestionVO> result = userSvc.myQuestionList(page);
 		
 		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
 		for (QuestionVO qstn : result) {
 			int target = qstn.getQuestionNum();
-			replyList.put(target, sechSvc.selectReplyList( target));
+			replyList.put(target, userSvc.selectReplyList( target));
 		}
 		
 		HashMap<String, Object> pack = new HashMap<>();
@@ -165,24 +162,12 @@ public class UserController implements HttpSessionListener{
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
 	
-/*	@RequestMapping(value = "myAnswerList", method = RequestMethod.POST)
+	@RequestMapping(value = "myAnswerList", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> myAnswerList( PageVO page, Model model) {
-		
-		ArrayList<QuestionVO> result = sechSvc.myAnswerList(page);
-		
-		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
-		for (QuestionVO qstn : result) {
-			int target = qstn.getQuestionNum();
-			replyList.put(target, sechSvc.selectReplyList( target));
-		}
-		
-		HashMap<String, Object> pack = new HashMap<>();
-		pack.put("page", page);
-		pack.put("qList", result);
-		pack.put("rList", replyList);
-		
-		return pack; //어느 페이지로 이동시킬 것인가?
+	public ArrayList<ReplyVO> myAnswerList( PageVO page, Model model) {
+		ArrayList<ReplyVO> result = userSvc.myAnswerList(page);
+		System.out.println(result);
+		return result; //어느 페이지로 이동시킬 것인가?
 	}
-*/
+
 }

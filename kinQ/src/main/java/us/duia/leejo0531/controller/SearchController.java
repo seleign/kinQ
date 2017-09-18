@@ -94,6 +94,14 @@ public class SearchController {
 	}
 	
 	//핫 태그?
+	@RequestMapping(value = "hotTag", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<String> selectHotTag() {
+		
+		ArrayList<String> result = sechSvc.selectHotTag();
+		
+		return result; //어느 페이지로 이동시킬 것인가?
+	}
 	
 	//유저 랭킹?
 }
