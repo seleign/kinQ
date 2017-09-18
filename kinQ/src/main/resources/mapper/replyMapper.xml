@@ -76,4 +76,29 @@
 	<delete id="deleteReply" parameterType="int">
 		delete from q_reply where replyNum = #{ replyNum }
 	</delete>
+	
+	<select id="myAnswerList" parameterType="Page" resultType="Reply">
+		    select
+		        *
+		    from        
+		        (select
+		            rownum as r,
+		            selected.*
+		        from
+		            (select
+		                q_reply.*,
+		                id
+		            from
+		                q_reply,
+		                userinfo
+		            where
+		                q_reply.usernum = userinfo.usernum
+		                <foreach collection="list" item="item">and lower( userinfo.username) = lower( #{search})</foreach>
+		            order by
+		                replynum desc
+		             ) selected
+		         )numbered
+		    where
+           		<![CDATA[ r >= #{from} and r <= #{to} ]]>
+	</select>
 </mapper>

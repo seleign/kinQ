@@ -3,6 +3,7 @@ package us.duia.leejo0531.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,18 +11,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import us.duia.leejo0531.dao.QuestionDAO;
+import us.duia.leejo0531.dao.ReplyDAO;
 import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.UserVO;
 
 @Service
 @Repository
 public class UserService {
-	@Autowired
+	@Autowired(required=false)
 	private UserDAO userDao;
+	@Autowired(required=false)
+	private QuestionDAO qstnDao;
+	@Autowired(required=false)
+	private ReplyDAO replyDao;
 
 	public void insertUserInfo(UserVO user, ArrayList<String> field) {
 
@@ -115,4 +124,36 @@ public class UserService {
 		return completedQuestions;
 	}
 
+	public ArrayList<ReplyVO> selectReplyList( int questionNum) {
+		ArrayList<ReplyVO> result = replyDao.selectReplyList(questionNum);
+		return result;
+	}
+	
+	public ArrayList<QuestionVO> myQuestionList( PageVO page) {
+		String str = page.getSearch();
+		
+		ArrayList<String> words = new ArrayList<>();
+		for(String s : str.split(",")) // , 로 구분한 후 
+			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
+		
+		page.setTokens( words);
+
+		ArrayList<QuestionVO> result = qstnDao.myQuestionList(page);
+
+		return result;
+	}
+	
+	public ArrayList<ReplyVO> myAnswerList( PageVO page) {
+		String str = page.getSearch();
+		
+		ArrayList<String> words = new ArrayList<>();
+		for(String s : str.split(",")) // , 로 구분한 후 
+			words.addAll(Arrays.asList(s.trim().split(" "))); // 양쪽 공백 제거 후, 띄어쓰기로 분리
+		
+		page.setTokens( words);
+
+		ArrayList<ReplyVO> result = replyDao.myAnswerList(page);
+
+		return result;
+	}
 }

@@ -11,4 +11,41 @@
 	<insert id="insertTag" parameterType="Tag">
 		insert into tag values (tag_seq.nextval, #{questionNum}, #{userNum}, #{tag})
 	</insert>
+	
+	<select id="selectHotTag" resultType="string">
+		select
+		    tag
+		from
+		    (select
+		        rownum as r,
+		        ranked.*
+		    from
+		        (select
+		            count(*),
+		            tag,
+		            rank() over( order by count(*) desc) as rk
+		        from
+		            (select
+		                *
+		            from
+		                tag
+		            where
+		                <![CDATA[
+		                tagnum > (
+		                    select
+		                        count(*)
+		                    from
+		                        tag
+		                ) -150
+		                ]]>
+		            ) recentTag
+		        group by
+		            tag
+		        order by
+		            count(*) desc
+		        ) ranked
+		    )numbered
+		where
+		    <![CDATA[numbered.r <= 10]]>
+	</select>
 </mapper>

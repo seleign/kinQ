@@ -57,6 +57,21 @@
  */
   		});
   	
+  	$(function(){
+			$.ajax({
+				url: 'hotTag',
+				method: 'get',
+				data: {},
+				success: function(result){
+					var html = "";
+					$.each( result, function(index, element) {
+						html += '<a href="search?search='+element+'&searchType=tag&from=1&to=10">'+element+'</a>';
+					})
+					$('#tags').html(html);
+				}
+			});
+			
+		});
   	</script>
 </head>
 <body>
@@ -177,14 +192,7 @@
 				<!-- 핫 태그 hot tag -->
 				<div class="widget widget_tag_cloud">
 					<h3 class="widget_title">Tags</h3>
-					<a href="#">projects</a>
-					<a href="#">Portfolio</a>
-					<a href="#">Wordpress</a>
-					<a href="#">Html</a>
-					<a href="#">Css</a>
-					<a href="#">jQuery</a>
-					<a href="#">2code</a>
-					<a href="#">vbegy</a>
+					<div id="tags"></div>
 				</div>
 				
 				<div class="widget">
