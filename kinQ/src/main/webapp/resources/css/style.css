@@ -3123,6 +3123,11 @@ select {
 	background-color: #f3f3f3;
 	width: 100%;
 }
+
+select#chargeAmount.combo{
+	width: 20%;
+}
+
 .styled-select {
 	position: relative;
 	float: none;

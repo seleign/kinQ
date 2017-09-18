@@ -47,15 +47,12 @@
     			html+= '<li value="num'+goodsNum[i]+'">'+goodsName[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+goodsNum[i]+', '+goodsPrice[i]+')"></a></li><br>';
     		}
     		$('#goodsList').html(html);
-    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'￥');
+    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
     	}
     	
     	
      	function unchecking(deleteNum, price){
     		html = '';
-    		alert('deleteNum: '+deleteNum);
-    		alert('price: '+price);
-    		
     		for(var i=0;i<goodsNum.length;i++){
     			if(goodsNum[i]==deleteNum){
     				var index = goodsNum.indexOf(goodsNum[i]);
@@ -73,7 +70,7 @@
     	    		totalPrice -= price;
     			}
     		}
-    			$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'￥');
+    			$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
     	} 
     	
     	
@@ -93,9 +90,19 @@
     		$('#goodsList').html(html);
     		
     		totalPrice = 0;
-    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'￥');
+    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
     	}
     	
+    	function charge(){
+    		var selectVal = $('#chargeAmount').val();
+    		
+    		if(selectVal == 0){
+    			alert('チャージする金額をご選び下さい。');
+    			return false;
+    		}
+    		
+    		$('form').submit();
+    	}
     	 
     </script>
     
@@ -181,12 +188,22 @@
 						</div><!-- End page-content -->
 						</p>
 						    </div>
+						    <form action="charge" method="post" name="form">
 						    <div class="alert-message warning">
 						        <i class="icon-exclamation-sign"></i>
-						        <p><span>ポイントチャージ</span><br>
-						        ポイントで質問やショッピングが出来ます。
-						        <input type="button" value="ポイントチャージ"></p>
+						        <span>ポイントチャージ</span><br>
+						        ポイントで質問やショッピングが出来ます。<br><br><hr><br>
+						        <select class="combo" id="chargeAmount" name="chargeAmount" style="float: left;">
+						        	<option value="0">金額選択</option>
+						        	<option value="1000">1000 Points</option>
+						        	<option value="2000">2000 Points</option>
+						        	<option value="3000">3000 Points</option>
+						        	<option value="4000">4000 Points</option>
+						        	<option value="5000">5000 Points</option>
+						        </select>
+						  		&nbsp;&nbsp;&nbsp;<input type="button" value="ポイントチャージ" onclick="javascript:charge()">
 						    </div>
+						       </form>
 						</div><!-- End page-content -->
 					</div>
 				</div><!-- End #alert -->
@@ -210,7 +227,7 @@
 									商品名：　${good.goodsName}<br>
 									値段：　${good.price}<br>
 									<input type="button" value="マイカート" id="good${good.goodsNum }" onclick="javascript:myCart('${good.goodsName}', ${good.price}, ${good.goodsNum})">
-									&nbsp;<input type="button" value="購入" onclick="">
+									&nbsp;<input type="button" value="購入">
 									<br><br><br>
 							</ul>
 						
@@ -230,10 +247,10 @@
 			<aside class="col-md-3 sidebar">
 				<div class="widget_q widget_menu_q widget_menu_jquery">
 					<div style="background-color: white; padding: 5%">
-						<h2>マイカート</h2>
+						<h2>マイカート</h2><hr><br>
 							<strong>ショッピングリスト</strong><br><br><div><ul id="goodsList"></ul></div>
 							<br><hr><br>
-							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0￥</div><br>
+							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0ポイント</div><br>
 							<hr><br>
 						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%">キャンセル</a>
 						<a href="#" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%;">購入する</a>
