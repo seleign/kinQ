@@ -53,8 +53,11 @@
 		$('#header_alarm').append(html);
 	}
 	
+	//빨간줄 뜨는거 무시하셔도 됩니다 
 	$(function(){
+		if(${sessionScope.userNum}){
 		send_message();
+		}
 	});
 </script>
 </head>

@@ -163,4 +163,10 @@ public class QuestionDAO {
 		int result = mapper.insertVideoFromAskQuestion(map);
 		return result;
 	}
+
+	public ArrayList<QuestionVO> myQuestionList(PageVO page) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.myQuestionList(page);
+		return result;
+	}
 }
