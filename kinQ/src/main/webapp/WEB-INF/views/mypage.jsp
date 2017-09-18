@@ -28,7 +28,7 @@
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
+  <script src="./resources/js/jquery-dateFormat.min.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
@@ -207,22 +207,22 @@
 													<tr>
 														<th class="text-center">
 														<span class="icon-list-style">
-														&nbsp;&nbsp;<i class="icon-question-sign"></i>&nbsp;&nbsp;質問数&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;<i class="icon-question-sign"></i>質問数
 														</span>
 														</th>
 														<th class="text-center">
 														<span class="icon-list-style">
-														&nbsp;&nbsp;<i class="icon-spinner"></i>&nbsp;&nbsp;答えのある質問&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;<i class="icon-spinner"></i>答えのある質問
 														</span>
 														</th>
 														<th class="text-center">
 														<span class="icon-list-style">
-														&nbsp;&nbsp;<i class="icon-lightbulb"></i>&nbsp;&nbsp;回答数&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;<i class="icon-lightbulb"></i>回答数
 														</span>
 														</th>
 													</tr>
 													<tr>
-														<td class="text-center right-border font-skyblue">${qestionsNum }</td>
+														<td class="text-center right-border font-skyblue">${questionsNum }</td>
 														<td class="text-center right-border font-gold">${completedQuestions }</td>
 														<td class="text-center font-silver">${answersNum }</td>
 													</tr>
@@ -239,50 +239,32 @@
 					</div><!-- End user-profile -->
 				</div><!-- End row -->
 				<div class="clearfix"></div>
-				<div class="page-content">
-
-					<div class="tabs-warp question-tab">
-						<ul class="tabs">
-							<li class="tab"><a href="#" class="current">私の質問</a></li>
-							<li class="tab"><a href="#">私の答え</a></li>
-						</ul>
-						<div class="tab-inner-warp">
-							<div id="myQuestion" class="tab-inner">
-								<section class="container main-content">
-									<div class="row">
-										<div class="col-md-9">
-											<input type="hidden" id="qsearch" value="${userName}">
-											<input type="hidden" id="qsearchType" value="author">
-											<input type="hidden" id="qfrom" value="1">
-											<input type="hidden" id="qto" value="5">
-											<div id="myQuestionArea"></div>
-											<a href="javascript:myQuestionList()" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
-										</div><!-- End main -->
-													<jsp:include page="aside.jsp" flush="false" />
-									</div><!-- End row -->
-								</section><!-- End container -->
-							</div>
+				<div class="tabs-warp question-tab">
+					<ul class="tabs">
+						<li class="tab"><a href="#" class="current">私の質問</a></li>
+						<li class="tab"><a href="#">私の答え</a></li>
+					</ul>
+					<div class="tab-inner-warp">
+						<div id="myQuestion" class="tab-inner">
+							<input type="hidden" id="qsearch" value="${userName}">
+							<input type="hidden" id="qsearchType" value="author">
+							<input type="hidden" id="qfrom" value="1">
+							<input type="hidden" id="qto" value="5">
+							<div id="myQuestionArea" class="mypage-tab-inner"></div>
+							<a href="javascript:myQuestionList()" class="load-questions mypage-tab-inner"><i class="icon-refresh"></i>Load More Questions</a>
 						</div>
-						<div class="tab-inner-warp">
-							<div id="myAnswer" class="tab-inner">
-								<section class="container main-content">
-									<div class="row">
-										<div class="col-md-9">
-											<input type="hidden" id="rsearch" value="${userName}">
-											<input type="hidden" id="rsearchType" value="author">
-											<input type="hidden" id="rfrom" value="1">
-											<input type="hidden" id="rto" value="5">
-											<div id="myAnswerArea"></div>
-											<a href="javascript:myAnswerList()" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
-										</div><!-- End main -->
-													<jsp:include page="aside.jsp" flush="false" />
-									</div><!-- End row -->
-								</section><!-- End container -->
-							</div>
-						</div>
-						. .
 					</div>
-				</div><!-- End page-content -->
+					<div class="tab-inner-warp">
+						<div id="myAnswer" class="tab-inner">
+							<input type="hidden" id="rsearch" value="${userName}">
+							<input type="hidden" id="rsearchType" value="author">
+							<input type="hidden" id="rfrom" value="1">
+							<input type="hidden" id="rto" value="5">
+							<div id="myAnswerArea" class="mypage-tab-inner"></div>
+							<a href="javascript:myAnswerList()" class="load-questions mypage-tab-inner"><i class="icon-refresh"></i>Load More Questions</a>
+						</div>
+					</div>
+				</div>
 			</div><!-- End main -->
 			<jsp:include page="aside.jsp" flush="false" />
 		</div><!-- End row -->

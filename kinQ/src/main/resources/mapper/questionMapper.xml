@@ -268,7 +268,7 @@
                             q_board
                         where
                             q_board.usernum = userinfo.USERNUM(+)
-                            <foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item})%'</foreach>
+                            <foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item}%')</foreach>
                         
                         union
                         
@@ -283,7 +283,7 @@
                                 userinfo
                             where
                                 q_reply.usernum = userinfo.usernum(+)
-                            	<foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item})%'</foreach>
+                            	<foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item}%')</foreach>
                             group by
                                 questionnum
                             )targetQstn
