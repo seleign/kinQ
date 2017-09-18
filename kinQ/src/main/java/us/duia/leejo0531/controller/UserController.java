@@ -1,6 +1,7 @@
 package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import javax.servlet.http.HttpSession;
@@ -17,18 +18,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import us.duia.leejo0531.service.SearchService;
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.IdCheckVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
+import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.UserVO;
 
 @Controller
 public class UserController implements HttpSessionListener{
 	private static final Logger logger=LoggerFactory.getLogger(UserController.class);
 	
-	@Autowired
+	@Autowired( required=false)
 	UserService userSvc;
+	@Autowired( required=false)
+	SearchService sechSvc;
 	
 	public static Hashtable<String, String> loginSessionMonitor;
 
@@ -124,7 +131,7 @@ public class UserController implements HttpSessionListener{
 		int questionsNum = userSvc.countQuestions((int)session.getAttribute("userNum"));
 		int completedQuestions = userSvc.countCompletedQuestions((int)session.getAttribute("userNum"));
 		int answersNum = userSvc.countAnswers((int)session.getAttribute("userNum"));
-		model.addAttribute("qestionsNum", questionsNum);
+		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		
 		model.addAttribute("answersNum", answersNum);
 		return "mypage";
@@ -137,5 +144,45 @@ public class UserController implements HttpSessionListener{
 	@Override
 	public void sessionDestroyed(HttpSessionEvent se) {
 	}
-
+	
+	@RequestMapping(value = "myQuestionList", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> myQuestionList( PageVO page, Model model) {
+		
+		ArrayList<QuestionVO> result = sechSvc.myQuestionList(page);
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, sechSvc.selectReplyList( target));
+		}
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("qList", result);
+		pack.put("rList", replyList);
+		
+		return pack; //어느 페이지로 이동시킬 것인가?
+	}	
+	
+/*	@RequestMapping(value = "myAnswerList", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> myAnswerList( PageVO page, Model model) {
+		
+		ArrayList<QuestionVO> result = sechSvc.myAnswerList(page);
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, sechSvc.selectReplyList( target));
+		}
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("qList", result);
+		pack.put("rList", replyList);
+		
+		return pack; //어느 페이지로 이동시킬 것인가?
+	}
+*/
 }
