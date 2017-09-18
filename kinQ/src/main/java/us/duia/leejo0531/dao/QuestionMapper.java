@@ -47,4 +47,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> getQuestionPage(Map<String, Object> map);
 	
 	public int insertVideoFromAskQuestion(HashMap<String, String> map);
+
+	public ArrayList<QuestionVO> myQuestionList(PageVO page);
 }
