@@ -26,6 +26,79 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    	
+    	var totalPrice = 0;
+    	var goodsName = new Array();
+    	var goodsNum = new Array();
+    	var goodsPrice = new Array();
+    	
+    	function myCart(goods, price, num){
+    		$('#good'+num).prop('disabled', true);
+    		goodsName.push(goods);
+    		goodsNum.push(num);
+    		goodsPrice.push(price);
+    		
+    		totalPrice += price;
+    		
+			var html = '';
+			
+    		for(var i in goodsName){
+    			html+= '<li value="num'+goodsNum[i]+'">'+goodsName[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+goodsNum[i]+', '+goodsPrice[i]+')"></a></li><br>';
+    		}
+    		$('#goodsList').html(html);
+    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'￥');
+    	}
+    	
+    	
+     	function unchecking(deleteNum, price){
+    		html = '';
+    		alert('deleteNum: '+deleteNum);
+    		alert('price: '+price);
+    		
+    		for(var i=0;i<goodsNum.length;i++){
+    			if(goodsNum[i]==deleteNum){
+    				var index = goodsNum.indexOf(goodsNum[i]);
+    				goodsName.splice(index, 1);
+    				goodsNum.splice(index, 1);
+    				goodsPrice.splice(index, 1);
+    				
+    				$('#good'+deleteNum).prop('disabled', false);
+    				
+    	    		for(var j in goodsName){
+    	    			html+= '<li value="num'+goodsNum[j]+'">'+goodsName[j]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+goodsNum[j]+', '+goodsPrice[j]+')"></a></li><br>';
+    	    		}
+    	    		$('#goodsList').html(html);
+    	    		
+    	    		totalPrice -= price;
+    			}
+    		}
+    			$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'￥');
+    	} 
+    	
+    	
+    	
+    	
+    	
+    	
+    	function cancel(){
+    		$('input[type=button]').prop('disabled', false);
+    		goodsName = [];
+    		goodsNum = [];
+			var html = '';
+			
+    		for(var i in goodsName){
+				html+= '<li>'+goodsName[i]+'</li><br>';
+    		}
+    		$('#goodsList').html(html);
+    		
+    		totalPrice = 0;
+    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'￥');
+    	}
+    	
+    	 
+    </script>
+    
   	<style type="text/css">
  	 	ul {
    			list-style:none;
@@ -136,13 +209,12 @@
 									<img src="./resources/images/pointShopImg/${good.imageurl }">&nbsp;&nbsp;<br><br>
 									商品名：　${good.goodsName}<br>
 									値段：　${good.price}<br>
-									<input type="button" value="マイカート">&nbsp;<input type="button" value="購入">
+									<input type="button" value="マイカート" id="good${good.goodsNum }" onclick="javascript:myCart('${good.goodsName}', ${good.price}, ${good.goodsNum})">
+									&nbsp;<input type="button" value="購入" onclick="">
 									<br><br><br>
 							</ul>
 						
 						</c:forEach>
-
-					
 					</div>
 					
 					
@@ -156,9 +228,16 @@
 			</div><!-- End main -->
 
 			<aside class="col-md-3 sidebar">
-				<div class="widget widget_menu widget_menu_jquery">
-					<h2>マイカート</h2>
-					<a href="#" class="button small dark-blue-button custom-button">購入する</a>
+				<div class="widget_q widget_menu_q widget_menu_jquery">
+					<div style="background-color: white; padding: 5%">
+						<h2>マイカート</h2>
+							<strong>ショッピングリスト</strong><br><br><div><ul id="goodsList"></ul></div>
+							<br><hr><br>
+							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0￥</div><br>
+							<hr><br>
+						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%">キャンセル</a>
+						<a href="#" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%;">購入する</a>
+					</div>
 				</div><!-- End widget_menu -->
 			</aside><!-- End sidebar -->
 

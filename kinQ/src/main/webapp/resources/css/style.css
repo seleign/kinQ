@@ -1901,6 +1901,8 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	-webkit-box-shadow: 0 0 5px #dedede;
 	box-shadow: 0 0 5px #dedede;
 }
+
+
 .widget:last-child {
 	margin-bottom: 0;
 }
@@ -1936,6 +1938,14 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	font-size: 14px;
 	padding-bottom: 10px;
 }
+
+/* 장바구니 부분 */
+.widget_q ul li {
+	position: relative;
+	overflow: hidden;
+	font-size: 14px;
+}
+
 #footer .widget ul li {
 	padding-bottom: 5px;
 }
@@ -2025,13 +2035,30 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 .widget_menu li a {
 	display: block;
 	padding: 10px 15px;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5; 
 	color: #2f3239;
-	border-left: 2px solid rgba(0,0,0,0);
+	border-left: 10px solid rgba(0,0,0,0);
 }
 .widget_menu li:last-child a {
 	border-bottom: none;
 }
+
+.widget_menu_q li a {
+/* 	display: block;
+	padding: 10px 15px;*/
+	border-bottom: 1px solid #e5e5e5; 
+	color: #2f3239;
+	border-left: 2px solid rgba(0,0,0,0);
+}
+.widget_menu_q li:last-child a {
+	/* border-bottom: none; */
+}
+
+.widget_menu_q li.current_page_item a {
+	border-left-color: #2f3239;
+	position: relative;
+}
+
 .widget_menu li.current_page_item a {
 	border-left-color: #2f3239;
 	position: relative;
@@ -2048,6 +2075,21 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	border-top: 4px solid rgba(0,0,0,0);
 	border-bottom: 4px solid rgba(0,0,0,0);
 }
+
+.widget_menu_q li.current_page_item a:before {
+	content: '';
+	position: absolute;
+	height: 4px;
+	width: 4px;
+	top: 50%;
+	margin-top: -4px;
+	left: 0;
+	border-left: 4px solid #2f3239;
+	border-top: 4px solid rgba(0,0,0,0);
+	border-bottom: 4px solid rgba(0,0,0,0);
+}
+
+
 .widget_menu li a i {
 	font-size: 12px;
 	margin-right: 10px;
