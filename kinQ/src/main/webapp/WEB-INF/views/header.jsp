@@ -54,7 +54,9 @@
 	}
 	
 	$(function(){
+		if(${sessionScope.userNum} =! null){
 		send_message();
+		}
 	});
 </script>
 </head>
