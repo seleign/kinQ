@@ -3,7 +3,7 @@ package us.duia.leejo0531.vo;
 public class AlarmVO {
 	private int alarmNum;
 	private int userNum;
-	private String alarmType; //reply,realtime,interest
+	private String alarmType;
 	private int alarmAdress;
 
 	public AlarmVO() {

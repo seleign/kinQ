@@ -30,7 +30,7 @@
   <script type="text/javascript">
   	//웹소켓 터지면 uri문제입니다 확인해주세요 
   	// 실제 서버 인증서 있을때는 wss 뒤에 /leejo0531/ 없게 수정할 것 
-	var webUri = "wss://" + window.location.host +"/count";
+	var webUri = "ws://" + window.location.host +"/leejo0531/count";
 	function send_message(){
 		websocket = new WebSocket(webUri);
 		websocket.onopen = function(evt){
