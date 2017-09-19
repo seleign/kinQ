@@ -3177,6 +3177,13 @@ select {
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
+
+select#chargeAmount.combo{  
+	width: 20%;  
+} 
+
+
+
 .question_poll {
 	margin: 0 10px 0 0 !important;
 	font-size: 13px !important;
