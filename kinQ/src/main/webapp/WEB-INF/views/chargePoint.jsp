@@ -17,7 +17,7 @@ IMP.init('imp52000562'); // 아임포트 관리자 페이지의 "시스템 설�
 	    pg : 'nice',  
 	    pay_method : 'card',  
 	    merchant_uid : 'merchant_' + new Date().getTime(),  
-	    name : 'ポイントチャージ',  
+	    name : 'Point Charge',  
 	    amount : amount  
 	}, function(rsp) {  
 	    if ( rsp.success ) {  
@@ -33,12 +33,18 @@ IMP.init('imp52000562'); // 아임포트 관리자 페이지의 "시스템 설�
  	    		merchant_uid : 'merchant_' + new Date().getTime() //구매고유 ID  
     		//기타 필요한 데이터가 있으면 추가 전달  
     		//pg_test 컨트롤러를 보면 data값을 어떻게 받는지 알 수 있음.  
-     		}
+     			},
  	    /* ajax로 충전한 포인트 추가하기 */
+ 	    		success:  
+ 	    			$.ajax({
+ 	    				url: "addPoint",
+ 	    				type: "POST",
+ 	    				data: {amount: amount},
+ 	    				success: location.href='pointShop'
+ 	    			})
      	});  
  	    /* 	alert("여기서 사기쳐서 페이지 이동 걸면 될듯함."); */  
- 	    
-     	location.href='pointShop';  
+     	
  	    } else {  
          var msg = '결제에 실패하였습니다.';  
          msg += '에러내용 : ' + rsp.error_msg;  

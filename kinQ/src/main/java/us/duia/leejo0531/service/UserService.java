@@ -20,6 +20,7 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.RankVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.UserVO;
 
@@ -160,6 +161,16 @@ public class UserService {
 	
 	public ArrayList<AlarmVO> getUserAlarm(int userNum){
 		ArrayList<AlarmVO> result = userDao.getUserAlarm(userNum);
+		return result;
+	}
+	
+	public ArrayList<RankVO> getUserRank(){
+		ArrayList<RankVO> result = userDao.getUserRank();
+		return result;
+	}	
+	
+	public RankVO getMyRank(int userNum){
+		RankVO result = userDao.getMyRank( userNum);
 		return result;
 	}
 }

@@ -11,6 +11,7 @@ import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.RankVO;
 import us.duia.leejo0531.vo.UserVO;
 
 /**
@@ -148,5 +149,16 @@ public class UserDAO {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		ArrayList<AlarmVO> alarmList = mapper.getUserAlarm(userNum);
 		return alarmList;
+	}
+
+	public ArrayList<RankVO> getUserRank() {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		ArrayList<RankVO> result = mapper.getUserRank();
+		return result;
+	}
+	public RankVO getMyRank( int userNum){
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		RankVO result = mapper.getUserRank( userNum);
+		return result;
 	}
 }

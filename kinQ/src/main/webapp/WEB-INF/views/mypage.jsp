@@ -184,7 +184,7 @@
 								<div class="ul_list ul_list-icon-ok about-user">
 									<ul>
 										<li><i class="icon-user"></i>ID : <span>${sessionScope.userId }</span></li>
-										<li><i class="icon-star"></i>ランキング : <span>_______</span></li>
+										<li><i class="icon-star"></i>ランキング : <span>${myRank.ranking} 位</span></li>
 										<li><i class="icon-asterisk"></i>ポイント : <span>________</span></li>
 										<li><i class="icon-comment"></i>フォロワー : <span>________</span></li>
 										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>

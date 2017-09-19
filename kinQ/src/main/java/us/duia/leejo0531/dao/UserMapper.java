@@ -6,6 +6,7 @@ import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.RankVO;
 import us.duia.leejo0531.vo.UserVO;
 
 public interface UserMapper {
@@ -25,4 +26,6 @@ public interface UserMapper {
 	public int countAnswers(int userNum);
 	public int countCompletedQuestions(int userNum);
 	public ArrayList<AlarmVO> getUserAlarm(int userNum);
+	public ArrayList<RankVO> getUserRank();
+	public RankVO getUserRank( int userNum);
 }
