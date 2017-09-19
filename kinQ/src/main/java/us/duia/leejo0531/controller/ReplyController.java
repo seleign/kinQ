@@ -82,14 +82,4 @@ public class ReplyController {
 			return "false";
 		}
 	}
-	
-	@RequestMapping(value = "selectedReply", method = RequestMethod.GET)
-	public @ResponseBody ReplyVO selectedReply(QuestionVO question) {
-		System.out.println("Question : " + question);
-		int result = reSvc.selectedReply(question);
-		ReplyVO reply = reSvc.getReply(new ReplyVO(question.getQuestionNum(), question.getSelectedReplyNum()));
-		return reply;
-	}
-	
-	
 }

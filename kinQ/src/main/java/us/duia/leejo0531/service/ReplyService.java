@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.ReplyDAO;
 import us.duia.leejo0531.dao.ReplyMapper;
-import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 
 /**
@@ -69,11 +68,6 @@ public class ReplyService {
 	
 	public int deleteReply(int replyNum) {
 		int result = replyDao.deleteReply(replyNum);
-		return result;
-	}
-	
-	public int selectedReply(QuestionVO question) {
-		int result = replyDao.selectedReply(question);
 		return result;
 	}
 }

@@ -2,6 +2,7 @@ package us.duia.leejo0531.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
@@ -19,6 +20,5 @@ public interface ReplyMapper {
 	public ArrayList<ReplyVO> selectReplyList(int questionNum);
 	public int registReply(ReplyVO reply);
 	public int deleteReply(int replyNum);
-	public int selectedReply(QuestionVO question);
 	public ArrayList<ReplyVO> myAnswerList( PageVO page);
 }
