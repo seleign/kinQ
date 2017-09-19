@@ -64,29 +64,26 @@ public class QuestionController {
 	 * @return
 	 */
 	@RequestMapping(value = "addQuestion5", method = RequestMethod.GET)
-	public String showQuestionForm2(Model model) {
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();;
-		model.addAttribute("majorList", majorList);
+	public String showQuestionForm5(Model model, HttpSession session) {
+		QuestionVO test = new QuestionVO(80);
+		QuestionVO question = qstnSvc.getQuestion(test);
+		logger.info(question.toString());
+		int userNum = 1;
+		model.addAttribute("question", question);
+		model.addAttribute("userNum", userNum);
 		return "question/questionForm5";
 	}
 	
-	/**
-	 * ckeditor 테스트 페이지로 이동 --테스트용입니다.
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "addQuestion3", method = RequestMethod.GET)
-	public String showQuestionForm3(Model model) {
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
-		model.addAttribute("majorList", majorList);
-		return "question/questionForm3";
+	@RequestMapping(value = "addQuestion6", method = RequestMethod.GET)
+	public String showQuestionForm6(Model model, HttpSession session) {
+		QuestionVO test = new QuestionVO(80);
+		QuestionVO question = qstnSvc.getQuestion(test);
+		model.addAttribute("question", question);
+		int userNum = 1;
+		model.addAttribute("userNum", userNum);
+		return "question/questionForm6";
 	}
-	@RequestMapping(value = "addQuestion4", method = RequestMethod.GET)
-	public String showQuestionForm4(Model model) {
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
-		model.addAttribute("majorList", majorList);
-		return "question/questionForm4";
-	}
+	
 
 	/**
 	 * Ajax로 질문 작성, 질문 수정에서 사용할 Tag(태그)를 ArrayList로 가져간다.
@@ -137,7 +134,6 @@ public class QuestionController {
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("user", user);
 		model.addAttribute("checkTimeResult", checkTimeResult);
-		
 		return "question_view";
 		//return "question/questionView";
 
@@ -183,6 +179,39 @@ public class QuestionController {
 	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
 		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
 		return result;
+	}
+	
+	@RequestMapping(value = "modifyQuestion", method=RequestMethod.GET)
+	public String modifyQuestion(int questionNum, HttpSession session, Model model) {
+		// 테스트 코드
+		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
+		model.addAttribute("majorList", majorList);
+		
+		QuestionVO test = new QuestionVO(80);
+		QuestionVO question = qstnSvc.getQuestion(test);
+		model.addAttribute("question", question);
+		int userNum = 1; // 로그인한 유저
+		model.addAttribute("userNum", userNum);
+		model.addAttribute("questionNum", question.getQuestionNum());
+		
+		logger.info("modifyQuestion: " + question);
+		
+		/*// 로그인한 유저가 아니면 루트 페이지로 보낸다.
+		String userId = (String)session.getAttribute("userId");
+		if(userId == null) {
+			return "redirect:/";
+		}		
+		int userNum = (int)session.getAttribute("userNum");
+		QuestionVO question= new QuestionVO( questionNum );
+		question = qstnSvc.getQuestion(question);
+		model.addAttribute("question", question);
+		model.addAttribute("userNum", userNum);
+		
+		// 글을 수정할 권한이 없으면 메인으로 리다이렉트
+		if(question.getUserNum() != userNum) {
+			return "redirect:/";
+		}*/
+		return "askQuestion";
 	}
 	
 	
