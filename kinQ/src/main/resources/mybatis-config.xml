@@ -18,6 +18,7 @@
 		<typeAlias type="us.duia.leejo0531.vo.PageVO" alias="Page"/>
 		<typeAlias type="us.duia.leejo0531.vo.AlarmVO" alias="Alarm"/>
 		<typeAlias type="us.duia.leejo0531.vo.PointLogVO" alias="PointLog"/>
+		<typeAlias type="us.duia.leejo0531.vo.CashLogVO" alias="CashLog"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 
