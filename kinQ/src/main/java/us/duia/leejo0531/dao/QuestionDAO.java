@@ -169,15 +169,4 @@ public class QuestionDAO {
 		ArrayList<QuestionVO> result = mapper.myQuestionList(page);
 		return result;
 	}
-	
-	/**
-	 * 글을 수정한다.
-	 * @param question
-	 * @return
-	 */
-	public int modifyQuestion(QuestionVO question) {
-		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		int result = mapper.modifyQuestion(question);
-		return result;
-	}
 }
