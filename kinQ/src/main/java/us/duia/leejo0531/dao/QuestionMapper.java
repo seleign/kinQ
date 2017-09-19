@@ -30,12 +30,6 @@ public interface QuestionMapper {
 	
 	public ArrayList<QuestionVO> searchByContext( PageVO page); //"context"가 포함된 질문을 가져온다.
 
-	public ArrayList<QuestionVO> searchWriterByContext(ArrayList<String> context); //"context"가 포함된 질문을 가져온다.
-	
-	public ArrayList<QuestionVO> searchTitleByContext(ArrayList<String> context); //"context"가 포함된 질문을 가져온다.
-	
-	public ArrayList<QuestionVO> searchTagByContext(ArrayList<String> tag);
-	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question);
 	
 	public checkTimeVO getQuestionTime(int questionNum);
@@ -47,4 +41,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> getQuestionPage(Map<String, Object> map);
 	
 	public int insertVideoFromAskQuestion(HashMap<String, String> map);
+
+	public ArrayList<QuestionVO> myQuestionList(PageVO page);
 }

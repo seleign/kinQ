@@ -812,6 +812,14 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 	
+	/* Alarm */
+	jQuery(".alarm_button").click(function () {
+		jQuery(".panel-pop").animate({"top":"-100%"},10).hide();
+		jQuery("#alarm_pop").show().animate({"top":"50%"},500);
+		jQuery("body").prepend("<div class='wrap-pop'></div>");
+		wrap_pop();
+		return false;
+	});
 	
 	/* Lost password */
 	

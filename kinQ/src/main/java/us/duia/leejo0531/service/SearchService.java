@@ -24,6 +24,8 @@ public class SearchService {
 	private QuestionDAO qstnDao;
 	@Autowired(required=false)
 	private ReplyDAO replyDao;
+	@Autowired(required=false)
+	private TagDAO tagDao;
 	
 	
 	/**
@@ -60,4 +62,8 @@ public class SearchService {
 		return result;
 	}
 	
+	public ArrayList<String> selectHotTag() {
+		ArrayList<String> result = tagDao.selectHotTag();
+		return result;
+	}
 }

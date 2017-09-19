@@ -1,6 +1,7 @@
 package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import javax.servlet.http.HttpSession;
@@ -18,16 +19,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.IdCheckVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
+import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.RankVO;
+import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.UserVO;
 
 @Controller
 public class UserController implements HttpSessionListener{
 	private static final Logger logger=LoggerFactory.getLogger(UserController.class);
 	
-	@Autowired
+	@Autowired( required=false)
 	UserService userSvc;
 	
 	public static Hashtable<String, String> loginSessionMonitor;
@@ -121,12 +127,20 @@ public class UserController implements HttpSessionListener{
 	@RequestMapping(value="mypage", method=RequestMethod.GET)
 	public String openMyPage(Model model, HttpSession session){
 		logger.info("mypage in");
-		int questionsNum = userSvc.countQuestions((int)session.getAttribute("userNum"));
-		int completedQuestions = userSvc.countCompletedQuestions((int)session.getAttribute("userNum"));
-		int answersNum = userSvc.countAnswers((int)session.getAttribute("userNum"));
-		model.addAttribute("qestionsNum", questionsNum);
+		int userNum = (int)session.getAttribute("userNum");
+		
+		int questionsNum = userSvc.countQuestions( userNum);
+		int completedQuestions = userSvc.countCompletedQuestions( userNum);
+		int answersNum = userSvc.countAnswers( userNum);
+		RankVO myRank = userSvc.getMyRank( userNum);
+		
+		System.out.println( myRank);
+		
+		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		
 		model.addAttribute("answersNum", answersNum);
+		model.addAttribute("myRank", myRank);
+		
 		return "mypage";
 	}
 
@@ -137,5 +151,39 @@ public class UserController implements HttpSessionListener{
 	@Override
 	public void sessionDestroyed(HttpSessionEvent se) {
 	}
-
+	
+	@RequestMapping(value = "myQuestionList", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> myQuestionList( PageVO page, Model model) {
+		
+		ArrayList<QuestionVO> result = userSvc.myQuestionList(page);
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, userSvc.selectReplyList( target));
+		}
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("qList", result);
+		pack.put("rList", replyList);
+		
+		return pack; //어느 페이지로 이동시킬 것인가?
+	}	
+	
+	@RequestMapping(value = "myAnswerList", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<ReplyVO> myAnswerList( PageVO page, Model model) {
+		ArrayList<ReplyVO> result = userSvc.myAnswerList(page);
+		return result; //어느 페이지로 이동시킬 것인가?
+	}
+	
+	
+	//header ajax에서 호출됨
+	@RequestMapping(value="getAlarm", method=RequestMethod.GET)
+	public @ResponseBody ArrayList<AlarmVO> getUserAlarm(int userNum){
+		ArrayList<AlarmVO> result = userSvc.getUserAlarm(userNum);
+		return result;
+	}
 }

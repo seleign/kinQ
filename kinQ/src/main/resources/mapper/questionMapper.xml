@@ -116,7 +116,7 @@
                                 from
                                     tag
                                 <trim prefix="where" prefixOverrides="and|or">
-                                    <foreach collection="list" item="item">or tag like '%${item}%'</foreach>
+                                    <foreach collection="list" item="item">or lower(tag) like lower('%${item}%')</foreach>
                                 </trim>
                                 group by 
                                     questionnum
@@ -142,7 +142,7 @@
                             q_board
                         where
                             q_board.usernum = userinfo.USERNUM(+)
-                            <foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+                            <foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item}%')</foreach>
                         
                         union
                         
@@ -157,7 +157,7 @@
                                 userinfo
                             where
                                 q_reply.usernum = userinfo.usernum(+)
-                            	<foreach collection="list" item="item">and userinfo.USERNAME like '%${item}%'</foreach>
+                            	<foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item}%')</foreach>
                             group by
                                 questionnum
                             )targetQstn
@@ -177,7 +177,7 @@
                         from
                             q_board
                         <trim prefix="where" prefixOverrides="and|or">
-                            <foreach collection="list" item="item">and title like '%${item}%'</foreach>
+                            <foreach collection="list" item="item">and lower(title) like lower('%${item}%')</foreach>
                         </trim>
                             
                         union
@@ -191,7 +191,7 @@
                             from
                                 q_reply
                             <trim prefix="where" prefixOverrides="and|or">
-                                <foreach collection="list" item="item">and replytitle like '%${item}%'</foreach>
+                                <foreach collection="list" item="item">and lower(replytitle) like lower('%${item}%')</foreach>
                             </trim>
                             group by
                                 questionnum
@@ -212,7 +212,7 @@
                         from
                             q_board
 				        <trim prefix="where" prefixOverrides="and|or">
-				        	<foreach collection="list" item="item">and contains(questioncontent, '%${item}%') >0</foreach>
+				        	<foreach collection="list" item="item">and contains( lower(questioncontent), lower('%${item}%')) >0</foreach>
 				        </trim>
                     
                         union
@@ -226,7 +226,7 @@
                             from
                                 q_reply
 							<trim prefix="where" prefixOverrides="and|or">
-					        	<foreach collection="list" item="item">and contains(replycontent, '%${item}%') >0</foreach>
+					        	<foreach collection="list" item="item">and contains( lower(replycontent), lower('%${item}%')) >0</foreach>
 					        </trim>
                             group by questionnum
                             ) targetQstn
@@ -235,6 +235,63 @@
                         ) selected
                     where
                         #{searchType} = 'content'
+                    )merged
+                order by merged.questionnum desc
+				) results
+			)numbered
+		where
+            <![CDATA[ r >= #{from} and r <= #{to} ]]>
+            and numbered.questionnum = tag.questionnum(+)
+        order by
+            numbered.questionnum desc, tag.tagnum
+	</select>
+	
+	<select id="myQuestionList"  parameterType="Page" resultMap="QuestionResult">
+		select
+			*
+		from
+            tag,
+			(select
+				rownum as r,
+				results.*
+			from
+                (select
+                    merged.*
+                from
+                    (select
+                        selected.*
+                    from
+                        (select
+                            q_board.*
+                        from
+                            userinfo,
+                            q_board
+                        where
+                            q_board.usernum = userinfo.USERNUM(+)
+                            <foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item}%')</foreach>
+                        
+                        union
+                        
+                        select
+                            q_board.*
+                        from
+                            q_board,
+                            (select
+                                questionnum
+                            from
+                                q_reply,
+                                userinfo
+                            where
+                                q_reply.usernum = userinfo.usernum(+)
+                            	<foreach collection="list" item="item">and lower(userinfo.USERNAME) like lower('%${item}%')</foreach>
+                            group by
+                                questionnum
+                            )targetQstn
+                        where
+                            q_board.questionnum = targetQstn.questionnum
+                        ) selected
+                    where
+                        #{searchType} = 'author' 
                     )merged
                 order by merged.questionnum desc
 				) results

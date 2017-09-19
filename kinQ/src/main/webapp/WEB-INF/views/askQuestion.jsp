@@ -40,7 +40,6 @@
 				for(var i = 0; i < minorList.length; i++) {
 					if(minorList[i].majorNum == major) {
 						$("#minorSection").append('<label for="minorNum'+ minorList[i].minorNum +'"><input type="radio" required="required" value="'+ minorList[i].minorNum +'" name="MinorNum" id="minorNum'+ minorList[i].minorNum +'">'+ minorList[i].minorName + '</label>');
-						//console.log(minorList[i].minorNum + " // " + minorList[i].minorName);
 					}
 				}
 			}
@@ -50,7 +49,7 @@
 
 </head>
 <body>
-<jsp:include page="header.jsp" flush="false" />	
+<jsp:include page="header.jsp" flush="false" />
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
@@ -94,13 +93,13 @@
 							<div class="form-inputs clearfix">
 								<p>
 									<label class="required">Question Title<span>*</span></label>
-									<input type="text" id="question-title" name="title" required="required">
+									<input type="text" id="question-title" value="${question.title}" name="title" required="required">
 									<span class="form-description">Please choose an appropriate title for the question to answer it even easier .</span>
 								</p>
 								<div id="form-textarea">
 									<label class="required">Details<span>*</span></label>
 								<p>
-									<textarea id="question_details" name="questionContent" required="required" aria-required="true" cols="58" rows="8">${questionContent}</textarea>
+									<textarea id="question_details" name="questionContent" required="required" aria-required="true" cols="58" rows="8">${question.questionContent}</textarea>
 									<span class="form-description">Type the description thoroughly and in detail .</span>
 								</p>
 								</div>
@@ -146,14 +145,16 @@
 								<p>
 									<label for="urgent" class="required">緊急質問</label>
 									<span id="urgent-span">
-									<c:if test="${timeLimit == null? true : false }">
-										<input type="checkbox" id="urgent">大至急です。
-										<input type="text" name="timeLimit" value="1991/05/31">
-									</c:if>
-									<c:if test="${timeLimit != null? true : false }">
-										<input type="checkbox" id="urgent" checked="checked">大至急です。
-										<input type="text" name="timeLimit" value="${timeLimit}">
-									</c:if>
+										<label for="selectdTime" style="">大至急です。</label>
+										<select id="selectdTime" onchange="setTimeLimit()" style="width: 200px; display: inline-block;">
+											<option value="0">時間を選択してください</option>
+											<option value="5">5分</option>
+											<option value="10">10分</option>
+											<option value="30">30分</option>
+											<option value="60">60分</option>
+										</select>
+										以内で
+										<input type="text" id="timeLimit" name="timeLimit" value="${question.timeLimit}" style="width: 20%; display: inline-block;">
 									</span>
 								</p>
 								<p>
@@ -166,7 +167,7 @@
 									<button id="btn-record-webm-stop" style="font-size: inherit;" disabled="disabled">화면 중지</button>
 									
 									<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
-									<input type="text" name="videoSrc" value="${videoSrc}" id="videoSrc" placeholder="녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다.">
+									<input type="text" name="videoSrc" value="${question.videoSrc}" id="videoSrc" placeholder="녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다.">
 									
 									
 									<!-- 기존에 녹화된 영상과 녹화 할 영역(canvas)을 가진 DIV -->
@@ -179,11 +180,11 @@
 										</div>
 										<div id="video_container" style="width: 100%;">
 											<!-- 수정하기 일 땐 기존에 녹화된 파일이 여기에 보인다. -->
-											<c:if test="${video_src == null}">
+											<c:if test="${question.videoSrc == null}">
 												<!-- 처음 글을 쓰거나, 기존에 영상을 녹화하지 않은 상태로 수정할 경우 녹화한 동영상이 없다. -->
 											</c:if>
-											<c:if test="${video_src != null}">
-												<video src="${video_src}" controls="controls" preload="auto"></video>
+											<c:if test="${question.videoSrc != null}">
+												<video src="${question.videoSrc}" controls="controls" preload="auto"></video>
 											</c:if>
 										</div>
 									</div>
@@ -548,7 +549,8 @@ function liToHiddenRelatedTag() {
 //유효성 검사 isEmpty()
 var videoIsRecorded = false;  // 이거 사용하도록 수정해야함..
 function validationCheck() {
-	liToHiddenRelatedTag();
+	liToHiddenRelatedTag(); // 태그 창에 있는 li를 히든 input에 넣음.
+	setTimeLimit(); // 긴급 알람 시간을 유효성 검사 할 때 다시 갱신
 	var title = $("#question-title").val();
 	var questionNum = $("#questionNum").val();
 	var questionContent = $("#question_details").val();
@@ -557,9 +559,53 @@ function validationCheck() {
 	if( !isEmpty(title) && !isEmpty(questionNum) && !isEmpty(questionContent) && !isEmpty(major) ) {
 		return true;
 	} 	
-	
 	return false;
 }
+
+function setTimeLimit() {
+	var selectdTime = parseInt($("#selectdTime").val());
+	if(selectdTime == 0) {
+		$("#timeLimit").val("");
+		return;
+	}
+	
+	var date = new Date();
+	var year = parseInt(date.getFullYear());
+	var month = parseInt(date.getMonth() + 1);
+	var day = parseInt(date.getDate());
+	var hour = parseInt(date.getHours());
+	var minute = parseInt(date.getMinutes());
+	var second = parseInt(date.getSeconds());
+	
+	second = parseInt(leadingZeros(second, 2));
+	
+	if((minute + selectdTime) > 60) { //현재 분과 선택된 분이 60분이 넘으면...
+		hour = hour + 1;
+		minute = (minute + selectdTime) - 60;
+		minute = leadingZeros(minute, 2);
+	} else {
+		minute = minute + selectdTime;
+	}
+	
+	if(hour > 24) {
+		day = day + 1;
+		hour = hour - 24;
+	}
+	$("#timeLimit").val( year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second + ".0");
+	
+	function leadingZeros(n, digits) {
+		  var zero = '';
+		  n = n.toString();
+
+		  if (n.length < digits) {
+		    for (var i = 0; i < digits - n.length; i++)
+		      zero += '0';
+		  }
+		  return zero + n;
+		}
+	
+}
+
 </script>
 <!-- End js -->
 
