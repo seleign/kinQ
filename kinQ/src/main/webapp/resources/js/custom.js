@@ -812,6 +812,7 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 	
+	
 	/* Lost password */
 	
 	jQuery(".login-password a").click(function () {
@@ -1097,5 +1098,6 @@ jQuery(document).ready(function($) {
 		},
 		itemTemplate: '<a href="{{link}}" title="{{title}}" target="_blank"><img src="{{image_m}}" alt="{{title}}"></a>'
 	});
+	
 	
 });
