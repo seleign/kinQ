@@ -26,4 +26,13 @@ public class PointController{
 		model.addAttribute("goodsList", goodsList);
 		return "pointShop";
 	}
+	
+	
+	@RequestMapping(value="charge", method=RequestMethod.POST)  
+	 	public String pay(int chargeAmount, Model model){  
+	 		model.addAttribute("chargeAmount", chargeAmount);  
+	 		return "chargePoint";  
+	 }  
+
+	
 }
