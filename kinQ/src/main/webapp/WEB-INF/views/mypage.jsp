@@ -28,7 +28,7 @@
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="./resources/js/jquery-dateFormat.min.js"></script>
+  
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
@@ -36,7 +36,7 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ["項目", "数", { role: "style" } ],
-        ["質問数", ${questionsNum}, "skyblue"],
+        ["質問数", ${qestionsNum}, "skyblue"],
         ["答えのある質問", ${completedQuestions }, "gold"],
         ["回答数", ${answersNum }, "silver"]
       ]);
@@ -57,97 +57,7 @@
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
-  	}
-    
-
-	function myQuestionList(){
-		$.ajax({
-			url: 'myQuestionList',
-			method: 'post',
-			data: {
-				search: $('#qsearch').val(),
-				searchType: $('#qsearchType').val(),
-				from: parseInt($('#qfrom').val()),
-				to: parseInt($('#qto').val())
-				
-			},
-			success: function(result){
-				var html = '';
-				var page = result['page'];
-				var qList = result['qList'];
-				var rList = result['rList'];
-				
-				$.each(qList, function(index, element){
-					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-					html += '<div class="question-inner"><div class="clearfix"></div>';
-					html += '<p class="question-desc">'+element.questionContent+'</p>';
-					html += '<div class="question-details">';
-					if(element.qstatus == "solved"){
-						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-					}else{
-						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
-					}
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
- 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-					html += '<div class="clearfix"></div>';
-					html += '</div></article>';
-				});
-				$('#myQuestionArea').append(html);
-				$('#qfrom').val( page.from +10);
-				$('#qto').val( page.to +10);
-			}
-		});
-	}
-	function myAnswerList(){
-		$.ajax({
-			url: 'myAnswerList',
-			method: 'post',
-			data: {
-				search: $('#rsearch').val(),
-				searchType: $('#rsearchType').val(),
-				from: parseInt($('#rfrom').val()),
-				to: parseInt($('#rto').val())
-				
-			},
-			success: function(result){
-				var html = '';
-				var page = result['page'];
-				var qList = result['qList'];
-				var rList = result['rList'];
-				
-				$.each(qList, function(index, element){
-					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-					html += '<div class="question-inner"><div class="clearfix"></div>';
-					html += '<p class="question-desc">'+element.questionContent+'</p>';
-					html += '<div class="question-details">';
-					if(element.qstatus == "solved"){
-						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-					}else{
-						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
-					}
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
- 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-					html += '<div class="clearfix"></div>';
-					html += '</div></article>';
-				});
-				$('#myAnswerArea').append(html);
-				$('#rfrom').val( page.from +10);
-				$('#rto').val( page.to +10);
-			}
-		});
-	}
-	$(function(){
-		myQuestionList();
-		myAnswerList();
-	});
+  }
   </script>
   
   
@@ -184,7 +94,7 @@
 								<div class="ul_list ul_list-icon-ok about-user">
 									<ul>
 										<li><i class="icon-user"></i>ID : <span>${sessionScope.userId }</span></li>
-										<li><i class="icon-star"></i>ランキング : <span>${myRank.ranking} 位</span></li>
+										<li><i class="icon-star"></i>ランキング : <span>_______</span></li>
 										<li><i class="icon-asterisk"></i>ポイント : <span>________</span></li>
 										<li><i class="icon-comment"></i>フォロワー : <span>________</span></li>
 										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
@@ -207,22 +117,22 @@
 													<tr>
 														<th class="text-center">
 														<span class="icon-list-style">
-														&nbsp;&nbsp;<i class="icon-question-sign"></i>質問数
+														&nbsp;&nbsp;<i class="icon-question-sign"></i>&nbsp;&nbsp;質問数&nbsp;&nbsp;&nbsp;&nbsp;
 														</span>
 														</th>
 														<th class="text-center">
 														<span class="icon-list-style">
-														&nbsp;&nbsp;<i class="icon-spinner"></i>答えのある質問
+														&nbsp;&nbsp;<i class="icon-spinner"></i>&nbsp;&nbsp;答えのある質問&nbsp;&nbsp;&nbsp;&nbsp;
 														</span>
 														</th>
 														<th class="text-center">
 														<span class="icon-list-style">
-														&nbsp;&nbsp;<i class="icon-lightbulb"></i>回答数
+														&nbsp;&nbsp;<i class="icon-lightbulb"></i>&nbsp;&nbsp;回答数&nbsp;&nbsp;&nbsp;&nbsp;
 														</span>
 														</th>
 													</tr>
 													<tr>
-														<td class="text-center right-border font-skyblue">${questionsNum }</td>
+														<td class="text-center right-border font-skyblue">${qestionsNum }</td>
 														<td class="text-center right-border font-gold">${completedQuestions }</td>
 														<td class="text-center font-silver">${answersNum }</td>
 													</tr>
@@ -239,32 +149,22 @@
 					</div><!-- End user-profile -->
 				</div><!-- End row -->
 				<div class="clearfix"></div>
-				<div class="tabs-warp question-tab">
-					<ul class="tabs">
-						<li class="tab"><a href="#" class="current">私の質問</a></li>
-						<li class="tab"><a href="#">私の答え</a></li>
-					</ul>
-					<div class="tab-inner-warp">
-						<div id="myQuestion" class="tab-inner">
-							<input type="hidden" id="qsearch" value="${userName}">
-							<input type="hidden" id="qsearchType" value="author">
-							<input type="hidden" id="qfrom" value="1">
-							<input type="hidden" id="qto" value="5">
-							<div id="myQuestionArea" class="mypage-tab-inner"></div>
-							<a href="javascript:myQuestionList()" class="load-questions mypage-tab-inner"><i class="icon-refresh"></i>Load More Questions</a>
+				<div class="page-content">
+
+					<div class="tabs-warp question-tab">
+						<ul class="tabs">
+							<li class="tab"><a href="#" class="current">私の質問</a></li>
+							<li class="tab"><a href="#">私の答え</a></li>
+						</ul>
+						<div class="tab-inner-warp">
+							<div class="tab-inner">탭 1 내용</div>
 						</div>
-					</div>
-					<div class="tab-inner-warp">
-						<div id="myAnswer" class="tab-inner">
-							<input type="hidden" id="rsearch" value="${userName}">
-							<input type="hidden" id="rsearchType" value="author">
-							<input type="hidden" id="rfrom" value="1">
-							<input type="hidden" id="rto" value="5">
-							<div id="myAnswerArea" class="mypage-tab-inner"></div>
-							<a href="javascript:myAnswerList()" class="load-questions mypage-tab-inner"><i class="icon-refresh"></i>Load More Questions</a>
+						<div class="tab-inner-warp">
+							<div class="tab-inner">탭 2 내용</div>
 						</div>
+						. .
 					</div>
-				</div>
+				</div><!-- End page-content -->
 			</div><!-- End main -->
 			<jsp:include page="aside.jsp" flush="false" />
 		</div><!-- End row -->

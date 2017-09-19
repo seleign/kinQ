@@ -31,10 +31,4 @@ public class TagDAO{
 		ArrayList<TagVO> result = mapper.selectTags();
 		return result;
 	}
-	
-	public ArrayList<String> selectHotTag() {
-		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
-		ArrayList<String> result = mapper.selectHotTag();
-		return result;
-	}
 }

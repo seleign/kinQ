@@ -16,6 +16,17 @@ public class ReplyVO extends QuestionVO{
 		super();
 	}
 	
+	public ReplyVO(int questionNum, int replyNum) {
+		super();
+		this.questionNum = questionNum;
+		this.replyNum = replyNum;
+	}
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id, String videoSrc,
 			int score) {
 		super();

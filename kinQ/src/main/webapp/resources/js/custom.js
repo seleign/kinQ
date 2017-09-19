@@ -1107,4 +1107,5 @@ jQuery(document).ready(function($) {
 		itemTemplate: '<a href="{{link}}" title="{{title}}" target="_blank"><img src="{{image_m}}" alt="{{title}}"></a>'
 	});
 	
+	
 });
