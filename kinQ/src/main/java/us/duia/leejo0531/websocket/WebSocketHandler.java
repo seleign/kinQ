@@ -33,6 +33,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
+		logger.info("*******웹소켓 메시지 :"+message.getPayload());
 		int userNum = Integer.parseInt(message.getPayload());
 		ArrayList<AlarmVO> alarmlist = userdao.getUserAlarm(userNum);
 		int listsize = alarmlist.size();

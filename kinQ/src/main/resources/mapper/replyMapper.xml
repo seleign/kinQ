@@ -20,6 +20,7 @@
 		    questionnum, replynum
 	</select>
 	
+	<!-- 샘플데이터 입력 시 사용 쿼리 -->
 	<insert id="insertReplyTest" parameterType="Reply">
 		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, sysdate, sysdate, #{replyTitle}, #{replyContent})
 	</insert>
