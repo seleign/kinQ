@@ -18,6 +18,7 @@ public class QuestionVO {
    private int hit;
    private String questionContent;
    private int score;
+   private int selectedReplyNum;
    
    public QuestionVO() {
       super();
@@ -28,22 +29,24 @@ public class QuestionVO {
 	   this.questionNum = questionNum;
    }
    public QuestionVO(int questionNum, int userNum, String timeLimit, String qstatus, Date regDate, Date modDate,
-         String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent, int score) {
-      super();
-      this.questionNum = questionNum;
-      this.userNum = userNum;
-      this.timeLimit = timeLimit;
-      this.qstatus = qstatus;
-      this.regDate = regDate;
-      this.modDate = modDate;
-      this.title = title;
-      this.relatedTag = relatedTag;
-      MinorNum = minorNum;
-      this.videoSrc = videoSrc;
-      this.hit = hit;
-      this.questionContent = questionContent;
-      this.score = score;
-   }
+			String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent,
+			int score, int selectedReplyNum) {
+		super();
+		this.questionNum = questionNum;
+		this.userNum = userNum;
+		this.timeLimit = timeLimit;
+		this.qstatus = qstatus;
+		this.regDate = regDate;
+		this.modDate = modDate;
+		this.title = title;
+		this.relatedTag = relatedTag;
+		MinorNum = minorNum;
+		this.videoSrc = videoSrc;
+		this.hit = hit;
+		this.questionContent = questionContent;
+		this.score = score;
+		this.selectedReplyNum = selectedReplyNum;
+	}
 
    public int getQuestionNum() {
       return questionNum;
@@ -149,12 +152,21 @@ public void setRegDate(Date regDate) {
       this.questionContent = questionContent;
    }
 
-@Override
-public String toString() {
-	return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", qstatus="
-			+ qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
-			+ relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit + ", questionContent="
-			+ questionContent +", score="+score+"]";
-}
+   public int getSelectedReplyNum() {
+		return selectedReplyNum;
+	}
+	
+	public void setSelectedReplyNum(int selectedReplyNum) {
+		this.selectedReplyNum = selectedReplyNum;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit
+				+ ", qstatus=" + qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title
+				+ ", relatedTag=" + relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit
+				+ ", questionContent=" + questionContent + ", score=" + score + ", selectedReplyNum=" + selectedReplyNum
+				+ "]";
+	}
 
 }

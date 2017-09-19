@@ -22,13 +22,19 @@
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
 	
+	<!-- 별점주기 -->
+	<link rel="stylesheet" href="./resources/css/star.css">
+	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+	
 	
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
 <script src="./resources/js/jquery.min.js"></script>
+<script src="./resources/js/jquery.blockUI.js"></script>
+<script src="./resources/js/custom.js"></script>
 
 <!-- CKeditor -->
 <script src="./resources/ckeditor/ckeditor.js"></script> 
@@ -37,16 +43,19 @@
 <script type="text/javascript">
 		var replyHtml = "";
 		var bestReplyHtml = "";
+		var selectedReply = "";
 		var userId = "${ sessionScope.userId }";
 		getMAxScoreReply();
 		questionReplyList();
+		
+		
 		
 		window.onload = function() {
 			/* if (userId != "") { */
 				// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 				CKEDITOR.replace('replyContent',{ 
 		    	    		filebrowserUploadUrl: 'cKEditorFileUpload'
-		   		 }); // Ckeditor 초기화 종료
+		   		}); // Ckeditor 초기화 종료
 			/* } */
 		};
 		
@@ -100,6 +109,9 @@
 						if (userId == replyList[i].id) {
 							replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
 						}
+						if ( "${ user.id }" == userId && "${ question.selectedReplyNum }" != "") {
+							replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>답글 선택</a>";
+						}
 						replyHtml += "</div>";
 						replyHtml += "<div class=\"text\">";
 						replyHtml += "<p>" + replyList[i].replyContent + "</p>";
@@ -146,11 +158,89 @@
 				}
 			})
 		}
+		
+		function registReplyScore() {
+			var score = parseInt($("#replyScore").text());
+			alert(score);
+			alert(selectedReply);
+			if (score == 0) {
+				registReplyCancel()
+			} else {
+				$.ajax({
+					url: "selectedReply",
+					type: "get",
+					data: { 
+							questionNum: ${ question.questionNum },
+							selectedReplyNum: selectedReply,
+							score: score
+						  },
+					success: function (reply) {
+						selectedReply += "<h4>"+ reply.id + "</h4>";
+						selectedReply += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
+						selectedReply += reply.replyContent +"<br>";
+						selectedReply += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Selected Answer</div>";
+						$("#selectedReply").html(selectedReply);
+						selectedReply = "";
+						/* getMAxScoreReply();
+						questionReplyList();
+						registReplyCancel(); */
+						window.location.reload(true);
+					}
+				})
+			}
+		}
+		
+		function registReplyCancel() {
+			jQuery(".panel-pop").animate({"top":"-100%"},500).hide(function () {
+				jQuery(this).animate({"top":"-100%"},500);
+			});
+			jQuery(".wrap-pop").remove();
+		}
+		
+		function recommendPop(replyNum) {
+			alert(replyNum);
+			selectedReply = replyNum;
+			jQuery(".panel-pop").animate({"top":"-100%"},10).hide();
+			jQuery("#jeonsw").show().animate({"top":"50%"},500);
+			jQuery("body").prepend("<div class='wrap-pop'></div>");
+			wrap_pop();
+			return false;
+		}
+		
+		function wrap_pop() {
+			jQuery(".wrap-pop").click(function () {
+				jQuery(".panel-pop").animate({"top":"-100%"},500).hide(function () {
+					jQuery(this).animate({"top":"-100%"},500);
+				});
+				jQuery(this).remove();
+			});
+		}
+		
 </script>
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
-	
+	<div class="panel-pop" id="jeonsw">
+		<div class="form-style form-style-3">
+				<span class="star-input">
+				  <span class="input">
+				    <input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
+				    <input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
+				    <input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
+				    <input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
+				    <input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
+				    <input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
+				    <input type="radio" name="star-input" id="p7" value="7"><label for="p7">7</label>
+				    <input type="radio" name="star-input" id="p8" value="8"><label for="p8">8</label>
+				    <input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
+				    <input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
+				  </span>
+				  <output for="star-input"><b id="replyScore">0</b>점</output>
+				</span>
+			<button onclick="registReplyScore()">선택하기</button>
+			<button onclick="registReplyCancel()">취소</button>
+		</div>
+	</div>
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
@@ -201,7 +291,6 @@
 						<div class="clearfix"></div>
 					</div>
 				</article>
-				
 				<div class="share-tags page-content">
 					<div class="question-tags"><i class="icon-tags"></i>
 						<c:forEach var="tag" items="${ tagList }">
@@ -267,11 +356,14 @@
 					<div class="share-inside"><i class="icon-share-alt"></i>Share</div>
 					<div class="clearfix"></div>
 				</div><!-- End share-tags -->
-				
+				<div class="about-author clearfix">
+					<div class="author-bio" id="selectedReply"></div>
+				</div>
 				<div class="about-author clearfix">
 				   <!--  <div class="author-image">
 				    	<a href="#" original-title="admin" class="tooltip-n"><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
 				    </div> -->
+				    <div class="author-bio" id="selectedReply"></div><br>
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
 				<%-- <c:if test="${ sessionScope.userId != user.id }"> --%>
@@ -403,7 +495,8 @@
 <script src="./resources/js/jquery.nav.js"></script>
 <script src="./resources/js/tags.js"></script>
 <script src="./resources/js/jquery.bxslider.min.js"></script>
-<script src="./resources/js/custom.js"></script>
+<script src="./resources/js/star.js"></script>
+<!-- <script src="./resources/js/custom.js"></script> -->
 <!-- End js -->
 	
 	
