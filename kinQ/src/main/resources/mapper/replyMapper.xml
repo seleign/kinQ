@@ -116,4 +116,27 @@
 	<select id="getReplyNum" parameterType="int" resultType="int">
 		select nvl(count(*),0) as questionNum from q_reply where questionNum = #{questionNum}
 	</select>
+	
+	<select id="getSelectedReply" parameterType="int" resultType="Reply">
+		select
+		    getselectedreply.*,
+		    userinfo.id as id
+		from
+		    (select reply.*from q_reply reply, (select selectedReplyNum from q_board where questionNum = #{questionNum}) selectedReply where replyNum = selectedReply.selectedReplyNum) getselectedreply,
+		    userinfo
+		where
+ 		   getselectedreply.usernum = userinfo.usernum(+)
+	</select>
+	
+	<insert id="updateRecommendUp" parameterType="Reply">
+		insert into recommendation values (#{replyNum}, #{questionNum}, #{userNum}, 1)
+	</insert>
+	
+	<insert id="updateRecommendDown" parameterType="Reply">
+		insert into recommendation values (#{replyNum}, #{questionNum}, #{userNum}, -1)
+	</insert>
+	
+	<select id="checkZeroRecommend" parameterType="Reply" resultType="int">
+		select score from recommendation where replyNum = #{replyNum} and questioniNum = #{questionNum}
+	</select>
 </mapper>

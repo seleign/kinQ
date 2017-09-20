@@ -23,4 +23,8 @@ public interface ReplyMapper {
 	public ArrayList<ReplyVO> myAnswerList( PageVO page);
 	public int getReplyNum(int questionNum);
 	public int selectedReply(QuestionVO question);
+	public ReplyVO getSelectedReply(int questionNum);
+	public int updateRecommendUp(ReplyVO reply);
+	public int updateRecommendDown(ReplyVO reply);
+	public int checkZeroRecommend(ReplyVO reply);
 }

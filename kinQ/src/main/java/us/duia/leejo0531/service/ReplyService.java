@@ -80,4 +80,24 @@ public class ReplyService {
 		int result = replyDao.selectedReply(question);
 		return result;
 	}
+	
+	public ReplyVO getSelectedReply(int questionNum) {
+		ReplyVO reply = replyDao.getSelectedReply(questionNum);
+		return reply;
+	}
+	
+	public int updateRecommendUp(ReplyVO reply) {
+		int result = replyDao.updateRecommendUp(reply);
+		return result;
+	}
+	
+	public int updateRecommendDown(ReplyVO reply) {
+		int result = replyDao.updateRecommendDown(reply);
+		return result;
+	}
+	
+	public int checkZeroRecommend(ReplyVO reply) {
+		int result = replyDao.checkZeroRecommend(reply);
+		return result;
+	}
 }

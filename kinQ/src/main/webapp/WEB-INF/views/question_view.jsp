@@ -45,10 +45,11 @@
 		var bestReplyHtml = "";
 		var selectedReply = "";
 		var userId = "${ sessionScope.userId }";
+		
+		
+		selectedReplyView();
 		getMAxScoreReply();
 		questionReplyList();
-		
-		
 		
 		window.onload = function() {
 			/* if (userId != "") { */
@@ -59,18 +60,31 @@
 			/* } */
 		};
 		
+		var isEmpty = function(value){
+			if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+				return true
+			}else{
+				return false
+			}
+		};
+		
 		function getMAxScoreReply() {
 			$.ajax({
 				url: "getMaxScoreReply",
 				type: "get",
 				data: { questionNum: ${ question.questionNum }},
 				success: function (reply) {
-					bestReplyHtml += "<h4>"+ reply.id + "</h4>";
-					bestReplyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
-					bestReplyHtml += reply.replyContent +"<br>";
-					bestReplyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>";
-					$("#bestReply").html(bestReplyHtml);
-					bestReplyHtml = "";
+					if (!isEmpty(reply)) {
+						bestReplyHtml += "<h4>"+ reply.id + "</h4>";
+						bestReplyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
+						bestReplyHtml += reply.replyContent +"<br>";
+						bestReplyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>";
+						$("#bestReply").html(bestReplyHtml);
+						$("#bestReplyDiv").show();
+						bestReplyHtml = "";
+					} else {
+						$("#bestReplyDiv").hide();
+					}
 				}
 			})
 		}
@@ -92,8 +106,9 @@
 						replyHtml += "<div class=\"comment-author\"><a href=\"#\">" + replyList[i].id + "</a></div>";
 						replyHtml += "<div class=\"comment-vote\">";
 						replyHtml += "<ul class=\"question-vote\">";
-						replyHtml += "<li><a href=\"#\" class=\"question-vote-up\" title=\"Like\"></a></li>";
-						replyHtml += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
+						//reply에 대한 다른 유저들의 추천
+						replyHtml += "<li><a href=\"javascript:updateRecommendUp("+ replyList[i].replyNum + "," + replyList[i].userNum +")\" class=\"question-vote-up\" title=\"Like\"></a></li>";
+						replyHtml += "<li><a href=\"javascript:updateRecommendDown("+ replyList[i].replyNum + "," + replyList[i].userNum +")\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
 						replyHtml += "</ul>";
 						replyHtml += "</div>";
 						if (replyList[i].score > 0) {
@@ -109,7 +124,7 @@
 						if (userId == replyList[i].id) {
 							replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
 						}
-						if ( "${ user.id }" == userId && "${ question.selectedReplyNum }" != "") {
+						if ( "${ user.id }" == userId && ${ question.selectedReplyNum } != 0) {
 							replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>답글 선택</a>";
 						}
 						replyHtml += "</div>";
@@ -134,13 +149,14 @@
 			var replyCtx = CKEDITOR.instances.replyContent.getData();
 			$.ajax({
 				url: "registReply",
-				type: "get",
+				type: "post",
 				data: { questionNum: ${ question.questionNum },
 						id: "${ user.id }",
 						userNum: ${ question.userNum },
 						replyContent: replyCtx,
 				},
 				success: function (success) {
+					selectedReplyView();
 					getMAxScoreReply();
 					questionReplyList();
 				}
@@ -174,20 +190,38 @@
 							selectedReplyNum: selectedReply,
 							score: score
 						  },
-					success: function (reply) {
+					success: function (sucess) {
+						selectedReplyView();
+						/* getMAxScoreReply();
+						questionReplyList(); */
+						registReplyCancel();
+						//window.location.reload(true);
+					}
+				})
+			}
+		}
+		
+		function selectedReplyView() {
+			$.ajax({
+				url: "getSelectedReply",
+				type: "get",
+				data: { 
+						questionNum: ${ question.questionNum },
+					  },
+				success: function (reply) {
+					if (!isEmpty(reply)) {
 						selectedReply += "<h4>"+ reply.id + "</h4>";
 						selectedReply += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
 						selectedReply += reply.replyContent +"<br>";
 						selectedReply += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Selected Answer</div>";
 						$("#selectedReply").html(selectedReply);
+						$("#selectedReplyDiv").show();
 						selectedReply = "";
-						/* getMAxScoreReply();
-						questionReplyList(); */
-						registReplyCancel();
-						window.location.reload(true);
+					} else {
+						$("#selectedReplyDiv").hide();
 					}
-				})
-			}
+				}
+			})
 		}
 		
 		function registReplyCancel() {
@@ -214,6 +248,38 @@
 				});
 				jQuery(this).remove();
 			});
+		}
+		
+		function updateRecommendUp(replyNum, userNum) {
+			$.ajax({
+				url: "updateRecommendUp",
+				type: "get",
+				data: { 
+						questionNum: ${ question.questionNum },
+						replyNum: replyNum,
+						userNum: userNum
+					  },
+				success: function (sucess) {
+					getMAxScoreReply();
+					questionReplyList();
+				}
+			})
+		}
+		
+		function updateRecommendDown(replyNum, userNum) {
+			$.ajax({
+				url: "updateRecommendDown",
+				type: "get",
+				data: { 
+						questionNum: ${ question.questionNum },
+						replyNum: replyNum,
+						userNum: userNum
+					  },
+				success: function (sucess) {
+					getMAxScoreReply();
+					questionReplyList();
+				}
+			})
 		}
 		
 </script>
@@ -283,10 +349,14 @@
 						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>
 						<span class="question-comment"><a href="#"><i class="icon-comment"></i><span id="answerCount"></span> Answer</a></span>
 						<span class="question-view"><i class="icon-user"></i>${ question.hit } views</span>
-						<span class="single-question-vote-result">${ question.score }</span>
+						<%-- <span class="single-question-vote-result">${ question.score }</span> --%>
 						<ul class="single-question-vote">
-							<li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
-							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li>
+							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
+							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
+							<form method="get" action=modifyQuestion>
+								<input type="submit" value="수정하기">
+								<input type="hidden" name="questionNum" value="${ question.questionNum }">
+							</form>
 						</ul>
 						<div class="clearfix"></div>
 					</div>
@@ -356,17 +426,16 @@
 					<div class="share-inside"><i class="icon-share-alt"></i>Share</div>
 					<div class="clearfix"></div>
 				</div><!-- End share-tags -->
-				<div class="about-author clearfix">
+				<div class="about-author clearfix" id="selectedReplyDiv">
 					<div class="author-bio" id="selectedReply"></div>
 				</div>
-				<div class="about-author clearfix">
+				<div class="about-author clearfix" id="bestReplyDiv">
 				   <!--  <div class="author-image">
 				    	<a href="#" original-title="admin" class="tooltip-n"><img alt="" src="http://placehold.it/60x60/FFF/444"></a>
 				    </div> -->
-				    <div class="author-bio" id="selectedReply"></div><br>
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
-				<%-- <c:if test="${ sessionScope.userId != user.id }"> --%>
+				<c:if test="${ sessionScope.userId != user.id and sessionScope.userId ne null}">
 					<div id="related-posts">
 						<h>답변 하기</h2>
 						<textarea rows="" cols="" id="replyContent"></textarea>
@@ -376,7 +445,7 @@
 							<input type="hidden" name="questionNum" value="${ question.questionNum }">
 						</form>
 					</div><!-- End related-posts -->
-				<%-- </c:if> --%>
+				</c:if>
 				
 				<!-- 답글부분 -->
 				<div id="commentlist" class="page-content">

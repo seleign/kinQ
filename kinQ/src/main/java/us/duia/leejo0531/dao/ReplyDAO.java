@@ -108,6 +108,7 @@ public class ReplyDAO {
 		return result;
 	}
 	
+	
 	public int deleteReply(int replyNum) {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		int result = mapper.deleteReply(replyNum);
@@ -129,6 +130,30 @@ public class ReplyDAO {
 	public int getReplyNum(int questionNum){
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		int result = mapper.getReplyNum(questionNum);
+		return result;
+	}
+	
+	public ReplyVO getSelectedReply(int questionNum) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		ReplyVO reply = mapper.getSelectedReply(questionNum);
+		return reply;
+	}
+	
+	public int updateRecommendUp(ReplyVO reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.updateRecommendUp(reply);
+		return result;
+	}
+	
+	public int updateRecommendDown(ReplyVO reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.updateRecommendDown(reply);
+		return result;
+	}
+	
+	public int checkZeroRecommend(ReplyVO reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.checkZeroRecommend(reply);
 		return result;
 	}
 }
