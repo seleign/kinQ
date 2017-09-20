@@ -9,14 +9,14 @@ public class PointLogVO {
 	private int pointLogNum;
 	private int pUserNum;
 	private int pCharged;
-	private Date pChargedDate;
+	private String pChargedDate;
 	private int pUsed;
-	private Date pUsedDate;
+	private String pUsedDate;
 	private int pChanged;
 	
 	public PointLogVO(){}
 
-	public PointLogVO(int pointLogNum, int pUserNum, int pCharged, Date pChargedDate, int pUsed, Date pUsedDate,
+	public PointLogVO(int pointLogNum, int pUserNum, int pCharged, String pChargedDate, int pUsed, String pUsedDate,
 			int pChanged) {
 		super();
 		this.pointLogNum = pointLogNum;
@@ -52,11 +52,11 @@ public class PointLogVO {
 		this.pCharged = pCharged;
 	}
 
-	public Date getpChargedDate() {
+	public String getpChargedDate() {
 		return pChargedDate;
 	}
 
-	public void setpChargedDate(Date pChargedDate) {
+	public void setpChargedDate(String pChargedDate) {
 		this.pChargedDate = pChargedDate;
 	}
 
@@ -68,11 +68,11 @@ public class PointLogVO {
 		this.pUsed = pUsed;
 	}
 
-	public Date getpUsedDate() {
+	public String getpUsedDate() {
 		return pUsedDate;
 	}
 
-	public void setpUsedDate(Date pUsedDate) {
+	public void setpUsedDate(String pUsedDate) {
 		this.pUsedDate = pUsedDate;
 	}
 
@@ -90,6 +90,6 @@ public class PointLogVO {
 				+ ", pChargedDate=" + pChargedDate + ", pUsed=" + pUsed + ", pUsedDate=" + pUsedDate + ", pChanged="
 				+ pChanged + "]";
 	}
-	
+
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.PointDAO;
+import us.duia.leejo0531.vo.CashLogVO;
 import us.duia.leejo0531.vo.GoodsVO;
 
 @Service
@@ -19,6 +20,10 @@ public class PointService {
 	public ArrayList<GoodsVO> getGoodsList() {
 		ArrayList<GoodsVO> goodsList = pointDao.getGoodsList();
 		return goodsList;
+	}
+
+	public void addPoint(CashLogVO cash) {
+		pointDao.addPoint(cash);
 	}
 
 }

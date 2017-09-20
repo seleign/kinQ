@@ -7,4 +7,9 @@
 	<select id="getGoodsList"  resultType="Goods">
 		select * from goods
 	</select>
+	
+	<insert id="addPoint" parameterType="CashLog">
+		insert into CashLog(cashLogNum, userNum, cCharged, cChargedDate, cChange) 
+		values(CashLog_SEQ.nextval, #{userNum}, #{cCharged}, TO_DATE(#{cChargedDate}), 0) 
+	</insert>
 </mapper>

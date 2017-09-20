@@ -7,20 +7,20 @@ public class CashLogVO {
 	
 	private int cashLogNum; // 시퀀스
 	private int userNum; // 사용자
-	private int cChanged; // 캐쉬 충전 금액
-	private Date cChargedDate; // 캐쉬 충전일
+	private int cCharged; // 캐쉬 충전 금액
+	private String cChargedDate; // 캐쉬 충전일
 	private int cUsed; // 캐쉬 사용금액
-	private Date cUsedDate; // 캐쉬 사용일
+	private String cUsedDate; // 캐쉬 사용일
 	private int cChange; // 잔액
 	
 	public CashLogVO(){}
 
-	public CashLogVO(int cashLogNum, int userNum, int cChanged, Date cChargedDate, int cUsed, Date cUsedDate,
+	public CashLogVO(int cashLogNum, int userNum, int cCharged, String cChargedDate, int cUsed, String cUsedDate,
 			int cChange) {
 		super();
 		this.cashLogNum = cashLogNum;
 		this.userNum = userNum;
-		this.cChanged = cChanged;
+		this.cCharged = cCharged;
 		this.cChargedDate = cChargedDate;
 		this.cUsed = cUsed;
 		this.cUsedDate = cUsedDate;
@@ -43,19 +43,19 @@ public class CashLogVO {
 		this.userNum = userNum;
 	}
 
-	public int getcChanged() {
-		return cChanged;
+	public int getcCharged() {
+		return cCharged;
 	}
 
-	public void setcChanged(int cChanged) {
-		this.cChanged = cChanged;
+	public void setcCharged(int cCharged) {
+		this.cCharged = cCharged;
 	}
 
-	public Date getcChargedDate() {
+	public String getcChargedDate() {
 		return cChargedDate;
 	}
 
-	public void setcChargedDate(Date cChargedDate) {
+	public void setcChargedDate(String cChargedDate) {
 		this.cChargedDate = cChargedDate;
 	}
 
@@ -67,11 +67,11 @@ public class CashLogVO {
 		this.cUsed = cUsed;
 	}
 
-	public Date getcUsedDate() {
+	public String getcUsedDate() {
 		return cUsedDate;
 	}
 
-	public void setcUsedDate(Date cUsedDate) {
+	public void setcUsedDate(String cUsedDate) {
 		this.cUsedDate = cUsedDate;
 	}
 
@@ -85,9 +85,11 @@ public class CashLogVO {
 
 	@Override
 	public String toString() {
-		return "CashLogVO [cashLogNum=" + cashLogNum + ", userNum=" + userNum + ", cChanged=" + cChanged
+		return "CashLogVO [cashLogNum=" + cashLogNum + ", userNum=" + userNum + ", cCharged=" + cCharged
 				+ ", cChargedDate=" + cChargedDate + ", cUsed=" + cUsed + ", cUsedDate=" + cUsedDate + ", cChange="
 				+ cChange + "]";
 	}
+
+
 	
 }

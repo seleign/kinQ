@@ -832,6 +832,27 @@ insert into goods values(goods_seq.nextval, '商品52', 150, 'A20131103171740468
 insert into goods values(goods_seq.nextval, '商品53', 510, 'hot1504687063374.jpg');
 insert into goods values(goods_seq.nextval, '商品54', 130, 'hot1504835840632.jpg');
 
+insert into cashlog values(CashLog_SEQ.nextval, 1, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 2, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 3, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 4, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 5, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 6, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 7, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 8, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 9, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 10, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 11, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 12, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 13, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 14, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 15, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 16, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 17, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 18, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 19, 0, sysdate, null, null, 0);
+insert into cashlog values(CashLog_SEQ.nextval, 20, 0, sysdate, null, null, 0);
+
 commit;
 
 

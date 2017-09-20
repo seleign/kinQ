@@ -34,16 +34,16 @@ IMP.init('imp52000562'); // 아임포트 관리자 페이지의 "시스템 설�
     		//기타 필요한 데이터가 있으면 추가 전달  
     		//pg_test 컨트롤러를 보면 data값을 어떻게 받는지 알 수 있음.  
      			},
- 	    /* ajax로 충전한 포인트 추가하기 */
- 	    		success:  
- 	    			$.ajax({
- 	    				url: "addPoint",
- 	    				type: "POST",
- 	    				data: {amount: amount},
- 	    				success: location.href='pointShop'
- 	    			})
      	});  
  	    /* 	alert("여기서 사기쳐서 페이지 이동 걸면 될듯함."); */  
+ 	    /* ajax로 충전한 포인트 추가하기 */
+ 	    			jQuery.ajax({
+ 	    				url: "addPoint",
+ 	    				type: "POST",
+ 	    				data: {amount: amount}
+ 	    			})
+ 	    			
+ 	    			location.href='pointShop'
      	
  	    } else {  
          var msg = '결제에 실패하였습니다.';  

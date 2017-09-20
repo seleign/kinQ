@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import us.duia.leejo0531.vo.CashLogVO;
 import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.GoodsVO;
 import us.duia.leejo0531.vo.MajorVO;
@@ -27,7 +28,13 @@ public class PointDAO {
 	public ArrayList<GoodsVO> getGoodsList() {
 		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
 		ArrayList<GoodsVO> result = mapper.getGoodsList();
+		System.out.println(result);
 		return result;
+	}
+
+	public void addPoint(CashLogVO cash) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		mapper.addPoint(cash);
 	}
 	
 
