@@ -21,9 +21,6 @@ public interface ReplyMapper {
 	public int registReply(ReplyVO reply);
 	public int deleteReply(int replyNum);
 	public ArrayList<ReplyVO> myAnswerList( PageVO page);
-<<<<<<< HEAD
 	public int getReplyNum(int questionNum);
-=======
 	public int selectedReply(QuestionVO question);
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 }
