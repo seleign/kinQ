@@ -161,4 +161,10 @@ public class UserDAO {
 		RankVO result = mapper.getMyRank( userNum);
 		return result;
 	}
+
+	public ArrayList<MajorVO> countField(int userNum) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		ArrayList<MajorVO> result = mapper.countField( userNum);
+		return result;
+	}
 }

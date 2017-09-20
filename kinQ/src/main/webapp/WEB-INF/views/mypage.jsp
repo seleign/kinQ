@@ -32,8 +32,8 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
+    google.charts.setOnLoadCallback(drawPostChart);
+    function drawPostChart() {
       var data = google.visualization.arrayToDataTable([
         ["項目", "数", { role: "style" } ],
         ["質問数", ${questionsNum}, "skyblue"],
@@ -58,6 +58,34 @@
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
   	}
+    
+
+    google.charts.setOnLoadCallback(drawAnswerChart);
+    function drawAnswerChart() {
+    	
+        var data = google.visualization.arrayToDataTable([
+          ['Field', 'Answers per Field'],
+          [ '${answeredField[0].majorName}',	${answeredField[0].majorNum}],
+          [ '${answeredField[1].majorName}',	${answeredField[1].majorNum}],
+          [ '${answeredField[2].majorName}',	${answeredField[2].majorNum}],
+          [ '${answeredField[3].majorName}',	${answeredField[3].majorNum}],
+          [ '${answeredField[4].majorName}',	${answeredField[4].majorNum}],
+          [ '${answeredField[5].majorName}',	${answeredField[5].majorNum}],
+          [ '${answeredField[6].majorName}',	${answeredField[6].majorNum}],
+          [ '${answeredField[7].majorName}',	${answeredField[7].majorNum}],
+          [ '${answeredField[8].majorName}',	${answeredField[8].majorNum}],
+          [ '${answeredField[9].majorName}',	${answeredField[9].majorNum}]
+          	
+        ]);
+
+        var options = {
+          title: '活動分野'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
     
 
 	function myQuestionList(){
@@ -204,6 +232,7 @@
 										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
 								</ul>
 								</div>
+							    <div id="piechart"></div>
 								<br><input type="button" value="個人情報修正" onclick="location.href='updateUserInfo'">
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->

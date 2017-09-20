@@ -202,4 +202,64 @@
             ranking
 	</select>
 	
+	<select id="countField" parameterType="int" resultType="Major">
+		select
+		    major.majorname,
+		    myMajor.majorCount as majorNum
+		from
+		    major,
+		    (select
+		        count(*) as myCount
+		    from
+		        q_board,
+		        (select
+		            q_board.questionnum as qnum
+		        from
+		            q_board,
+		            q_reply
+		        where
+		            q_board.questionnum = q_reply.questionnum
+		            and q_reply.usernum = #{userNum}
+		        group by
+		            q_board.questionnum
+		        ) replied
+		    where
+		        q_board.questionnum = replied.qnum
+		    ) myMinor,
+		    (select
+		        minor.majornum as majornum,
+		        sum( nvl(myMinor.minorCount, 0)) as majorCount
+		    from
+		        minor,
+		        (select
+		            minornum,
+		            count(*) as minorCount
+		        from
+		            q_board,
+		            (select
+		                q_board.questionnum as qnum
+		            from
+		                q_board,
+		                q_reply
+		            where
+		                q_board.questionnum = q_reply.questionnum
+		                and q_reply.usernum = #{userNum}
+		            group by
+		                q_board.questionnum
+		            ) replied
+		        where
+		            q_board.questionnum = replied.qnum
+		        group by
+		            minornum
+		        ) myMinor
+		    where
+		        minor.minornum = myMinor.minornum(+)
+		    group by
+		        minor.majornum
+		    ) myMajor
+		where
+		    major.majornum = myMajor.majornum
+		order by
+		    major.majornum
+	</select>
 </mapper>

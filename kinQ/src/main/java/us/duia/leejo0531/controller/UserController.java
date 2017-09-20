@@ -126,12 +126,13 @@ public class UserController implements HttpSessionListener{
 	public String openMyPage(Model model, HttpSession session){
 		logger.info("mypage in");
 		int userNum = (int)session.getAttribute("userNum");
-		
+		ArrayList<MajorVO> answeredField = userSvc.countField(userNum);
 		int questionsNum = userSvc.countQuestions( userNum);
 		int completedQuestions = userSvc.countCompletedQuestions( userNum);
 		int answersNum = userSvc.countAnswers( userNum);
 		RankVO myRank = userSvc.getMyRank( userNum);
 		
+		model.addAttribute("answeredField", answeredField);
 		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		
 		model.addAttribute("answersNum", answersNum);
