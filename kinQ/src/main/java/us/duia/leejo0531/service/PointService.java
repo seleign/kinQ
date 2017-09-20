@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.PointDAO;
 import us.duia.leejo0531.vo.CashLogVO;
 import us.duia.leejo0531.vo.GoodsVO;
+import us.duia.leejo0531.vo.PointLogVO;
 
 @Service
 @Repository
@@ -38,6 +39,14 @@ public class PointService {
 	public int getRecentPoint(int userNum) {
 		int recentPoint = pointDao.getRecentPoint(userNum);
 		return recentPoint;
+	}
+
+	public void pointToCash(PointLogVO pointLog) {
+		pointDao.pointToCash(pointLog);
+	}
+
+	public void addPointLog(PointLogVO point) {
+		pointDao.addPointLog(point);
 	}
 
 

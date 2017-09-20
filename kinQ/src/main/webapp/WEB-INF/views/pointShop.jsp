@@ -111,14 +111,33 @@
     				url: 'cashToPoint',
     				method: 'POST',
     				data: {currentChange : change},
-    				success: function(finalChange){
-    					alert(finalChange);
-    					$('#myCash').empty();
-    					$('#myCash').html(finalChange);				
+    				success: function(result){
+    					$('#myCash').html(result[0]);
+    					$('#myPoint').html(result[1]);	
     				}
     			}); 
     		}
     	}
+     	
+     	function pointToMoney(point){
+     		
+     		var bankAccount = $('#bankAccount').val();
+			if(bankAccount=='' || isNaN(bankAccount)){
+				alert('銀行の口座番号をご入力ください。');
+				return false;
+			}
+			if(confirm('ポイントを現金に両替しますか。') == true){
+				$.ajax({
+    				url: 'pointToCash',
+    				method: 'POST',
+    				data: {currentPoint : point},
+    				success: function(result){
+    					$('#myPoint').html(result);	
+    				}
+    			}); 
+			}
+     	}
+     	
     	 
     </script>
     
@@ -206,30 +225,115 @@
 												<div class="tab-inner">
 													<p>
 														※ <strong>1ポイント</strong>は<strong>1円</strong>に相当します。手数料は<strong>5パーセント</strong>です。
-														<input type="button" value="ポイント　→　現金に両替">
-													</p>
-												</div>
-											</div>
-											<div class="tab-inner-warp">
-												<div class="tab-inner">
-													<p>
-														※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。 <input
-															type="button" value="払い戻し">
-													</p>
-												</div>
-											</div>
-
+										<br><br><hr><br>
+										<div style="float: left;">
+										<select id="chargeAmount" name="bankList" style="float: left;">
+										<optgroup label="銀行選択"></optgroup>
+										<optgroup label="都市銀行"></optgroup>
+											<option>銀行選択</option>
+											<option>みずほ銀行</option>
+											<option>三菱東京UFJ銀行</option>
+											<option>三井住友銀行</option>
+											<option>りそな銀行</option>
+											<option>埼玉りそな銀行</option>
+										<optgroup label="北海道"></optgroup>
+											<option>北海道銀行</option>
+										<optgroup label="東北"></optgroup>
+											<option>青森銀行</option>
+											<option>みちのく銀行</option>
+											<option>秋田銀行</option>
+											<option>北都銀行</option>
+											<option>荘内銀行</option>
+											<option>山形銀行</option>
+											<option>岩手銀行</option>
+											<option>東北銀行</option>
+											<option>七十七銀行</option>
+											<option>東邦銀行</option>
+										<optgroup label="関東甲信越"></optgroup>
+											<option>群馬銀行</option>
+											<option>足利銀行</option>
+											<option>常陽銀行</option>
+											<option>筑波銀行</option>
+											<option>武蔵野銀行</option>
+											<option>千葉銀行</option>
+											<option>千葉興業銀行</option>
+											<option>東京都民銀行</option>
+											<option>横浜銀行</option>
+											<option>第四銀行</option>
+											<option>北越銀行</option>
+											<option>山梨中央銀行</option>
+											<option>八十二銀行</option>
+										<optgroup label="北陸"></optgroup>
+											<option>北陸銀行</option>
+											<option>富山銀行</option>
+											<option>北國銀行</option>
+											<option>福井銀行</option>
+										<optgroup label="東海"></optgroup>
+											<option>静岡銀行</option>
+											<option>スルガ銀行</option>
+											<option>清水銀行</option>
+											<option>大垣共立銀行</option>
+											<option>十六銀行</option>
+											<option>三重銀行</option>
+											<option>百五銀行</option>
+										<optgroup label="近畿"></optgroup>
+											<option>滋賀銀行</option>
+											<option>京都銀行</option>
+											<option>近畿大阪銀行</option>
+											<option>池田泉州銀行</option>
+											<option>南都銀行</option>
+											<option>紀陽銀行</option>
+											<option>但馬銀行</option>
+										<optgroup label="中国"></optgroup>
+											<option>鳥取銀行</option>
+											<option>山陰合同銀行</option>
+											<option>中国銀行</option>
+											<option>広島銀行</option>
+											<option>山口銀行</option>
+										<optgroup label="四国"></optgroup>
+											<option>阿波銀行</option>
+											<option>百十四銀行</option>
+											<option>伊予銀行</option>
+											<option>四国銀行</option>
+										<optgroup label="九州・沖縄"></optgroup>
+											<option>福岡銀行</option>
+											<option>西日本シティ銀行</option>
+											<option>筑邦銀行</option>
+											<option>北九州銀行</option>
+											<option>佐賀銀行</option>
+											<option>十八銀行</option>
+											<option>親和銀行</option>
+											<option>肥後銀行</option>
+											<option>大分銀行</option>
+											<option>宮崎銀行</option>
+											<option>鹿児島銀行</option>
+											<option>琉球銀行</option>
+											<option>沖縄銀行</option>
+										</select> &nbsp;&nbsp;&nbsp;
 										</div>
+										<div style="text-align:right; display:inline-block;"><input type="text" id="bankAccount" placeholder="'-'なしの口座番号"></div>
+										&nbsp;&nbsp;&nbsp;<input type="button" value="ポイント　→　現金に両替" onclick="javascript:pointToMoney(${pChange})"><br>
 									</div>
-									<!-- End page-content -->
 								</div>
-								<form action="charge" method="post" name="form">
+								<div class="tab-inner-warp">
+									<div class="tab-inner">
+										<p>
+											※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。 <input type="button" value="払い戻し">
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+									<!-- End page-content -->
+					</div>
+					<form action="charge" method="post" name="form">
 									<div class="alert-message warning">
 										<i class="icon-exclamation-sign"></i> <span>キャッシュチャージ</span><br>
 										キャッシュはポイントに交換できます。質問やショッピングをする時、ポイントが使えます。<br>
 										<br>
 										<hr>
-										<br> <select class="combo" id="chargeAmount"
+										<br> 
+										<select class="combo" id="chargeAmount"
 											name="chargeAmount" style="float: left;">
 											<option value="0">金額選択</option>
 											<option value="1000">1000 円</option>
@@ -237,8 +341,7 @@
 											<option value="3000">3000 円</option>
 											<option value="4000">4000 円</option>
 											<option value="5000">5000 円</option>
-										</select> &nbsp;&nbsp;&nbsp;<input type="button" value="ポイントチャージ"
-											onclick="javascript:charge()">
+										</select> &nbsp;&nbsp;&nbsp;<input type="button" value="ポイントチャージ" onclick="javascript:charge()">
 									</div>
 								</form>
 							</div>
