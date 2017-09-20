@@ -102,6 +102,9 @@ body {
     margin-top: -10%;
 }
 
+#q_urgent {
+	border: 3px solid red;
+}
 /* 占쏙옙 占쏙옙 */
 #warp {
 	background-color: #f3f3f3;

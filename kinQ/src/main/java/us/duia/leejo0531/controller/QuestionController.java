@@ -1,6 +1,10 @@
 package us.duia.leejo0531.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -181,10 +185,15 @@ public class QuestionController {
 	 */
 	@RequestMapping(value="getQuestionPage",method=RequestMethod.GET)
 	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		Date sysdate = Calendar.getInstance().getTime();
+		String sys = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(sysdate);
 		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
 		for (QuestionVO q : result) {
 			String checkTime = qstnSvc.getQuestionTime(q.getQuestionNum());
 			int reply = rSvc.getReplyNum(q.getQuestionNum());
+				if(q.getTimeLimit() != null){
+					q.setTimeCheck(sys.compareTo(q.getTimeLimit()));
+				}
 			q.setLimit(checkTime);
 			q.setAllReply(reply);
 		}

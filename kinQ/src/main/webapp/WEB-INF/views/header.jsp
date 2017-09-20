@@ -144,7 +144,7 @@
 	</div><!-- End signup -->
 	
 	<div class="panel-pop alarm" id="alarm_pop">
-	<h2>Alarm</h2>
+	<h2>Alarm<i class="icon-remove"></i></h2>
 	<div class="form-style form-style-3" id="alarm_panel">
 	</div>
 	</div>
