@@ -232,7 +232,7 @@ public class QuestionController {
 	 * @param questionNum 답변할 페이지에 출력시킬 질문의 내용
 	 * @return 실시간 답변페이지
 	 */
-	@RequestMapping(value = "realTimeAnswer", method = RequestMethod.POST)
+	@RequestMapping(value = "realTimeAnswer", method = {RequestMethod.POST, RequestMethod.GET})
 	public String realTimeAnswerGET(int questionNum, Model model, HttpSession session) {
 		int userNum = (int)session.getAttribute("userNum");
 		QuestionVO question= new QuestionVO( questionNum );

@@ -29,21 +29,22 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <!-- CKeditor -->
-<script src="/resources/ckeditor/ckeditor.js"></script> 
+<script src="./resources/ckeditor/ckeditor.js"></script> 
 
 <!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
-<script src="/resources/ckeditor/adapters/jquery.js"></script>
+<script src="./resources/ckeditor/adapters/jquery.js"></script>
 
 <!-- WEBRTC 용 자바스크립트 -->
-<script src="/resources/js/RecordRTC.js"></script>
-<script src="/resources/js/adapter-latest.js"></script>
-<script src="/resources/js/screenshot.js"></script>
-<script src="/resources/js/gumadapter.js"></script>
-<script src="/resources/js/RTCMultiConnection.min.js"></script>
-<script src="/resources/js/adapter.js"></script>
-<script src="/resources/js/socket.io.js"></script>
-<script src="/resources/js/getHTMLMediaElement.js"></script>
-<script src="/resources/js/FileBufferReader.js"></script>
+<script src="./resources/js/RecordRTC.js"></script>
+<script src="./resources/js/adapter-latest.js"></script>
+<script src="./resources/js/screenshot.js"></script>
+<script src="./resources/js/gumadapter.js"></script>
+<script src="./resources/js/RTCMultiConnection.min.js"></script>
+<script src="./resources/js/adapter.js"></script>
+<script src="./resources/js/socket.io.js"></script>
+<script src="./resources/js/getHTMLMediaElement.js"></script>
+<script src="./resources/js/FileBufferReader.js"></script>
+
 <script src="./resources/js/chosen.jquery.js"></script>
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
@@ -69,6 +70,9 @@
 	var canvasSetTime;
 	window.onload = function() { //onload 시작
 		$( "#tabs" ).tabs();
+		$("#part-of-screen-to-be-shared").height(  $("#part-of-screen-to-be-shared").width() );
+		$("#part-of-screen-to-be-shared").css('max-width', $("#part-of-screen-to-be-shared").width());
+		$("#part-of-screen-to-be-shared").css('overflow', 'scroll');
 		
 		// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 		CKEDITOR.replace('questionContent',{ 
@@ -85,6 +89,7 @@
 			}).then(function(audioStream) {
 				this.audioStream = audioStream;
 				var canvas = document.getElementById('canvas');
+				alert("test" +canvas)
 				var finalStream = new MediaStream();
 				this.canvasStream = canvas.captureStream();
 				audioStream.getAudioTracks().forEach(function(track) {
@@ -107,7 +112,7 @@
 			var context = canvas2d.getContext('2d');
 			canvas2d.width = elementToShare.clientWidth;
 			canvas2d.height = elementToShare.clientHeight;
-
+			canvas2d.id = 'canvas';
 			canvas2d.style.top = 0;
 			canvas2d.style.left = 0;
 			canvas2d.style.zIndex = -1;
@@ -115,61 +120,20 @@
 			// 여기에 appendChild(canvas2d)가 녹화되는 화면(프리뷰)가 보이게 할 곳이다.
 			$('#OpponentScreen').append(canvas2d); // 이게 내가 녹화중인 화면
 			
-			// DIV를 canvas2d로 보내고, canvas2d를 녹화(+음성)하는 코드
-			(function looper() {
-				if (stop) { // 녹화 중지 버튼이 눌리면 stop = true가 된다.
-					recorder.stopRecording(function() {
-						var blob = recorder.getBlob(); //<이게 동영상 데이터
-						var URL_BLOB = String(window.webkitURL.createObjectURL(blob));
-						var fileName = URL_BLOB.substring(URL_BLOB.lastIndexOf("/")+1 , URL_BLOB.length);
-						var fileExt = blob.type.substring(blob.type.lastIndexOf("/")+1, blob.type.length);
-								
-						//ajax로 서버에 녹화된 영상 파일 전송
-						var filename = String(window.webkitURL.createObjectURL(blob));
-						var formElement = document.querySelector("form");
-						var formData = new FormData(formElement);
-								
-						formData.append("blob", blob, fileName+ "." +fileExt);
-						formData.append("questionNum", '${question.questionNum}');
-								
-						$.ajax({
-							url: 'blob_upload',
-				            processData: false,
-				            contentType: false,
-				            data: formData, 
-				            type: 'POST',
-				            success: function(result){
-				            		$('#videos-container').html('<video controls src="'
-				 				+ window.webkitURL.createObjectURL(blob)
-				 				+ '" autoplay loop controls="controls" preload="auto"></video>');
-				                $('#videoSrc').val(result);
-				                }
-				            });		
-								
-						$("#canvas").remove(); // 자신의 녹화중인 화면(프리뷰)를 삭제한다.
-						$("#shared-part-of-screen-preview").remove(); // 상대방의 화면을 삭제한다.
-						$("#part-of-screen-to-be-shared").remove(); // 자신이 공유중인 화면을 삭제한다
-						
-						audioStream.stop();
-						canvasStream.stop();
-						clearTimeout(canvasSetTime);
-					});
-					return;
-				}
+			// DIV를 canvas2d로 보내고, canvas2d를 녹화(+음성)하는 코드	
+			var looper = function looper() {
+				html2canvas(elementToShare, {
+					grabMouse : false,
+					onrendered : function(canvas) {
+						context.clearRect(0, 0, canvas2d.width, canvas2d.height);
+						context.drawImage(canvas, 0, 0, canvas2d.width, canvas2d.height);
+					}
+				});
+				
+			};
 
-				(function looper() {
-					html2canvas(elementToShare, {
-						grabMouse : false,
-						onrendered : function(canvas) {
-							context.clearRect(0, 0, canvas2d.width, canvas2d.height);
-							context.drawImage(canvas, 0, 0, canvas2d.width, canvas2d.height);
-						}
-					});
-					canvas2d.id = 'canvas';
-				})();
-
-				canvasSetTime = setTimeout(looper, 300); //이게 화면 프레임수
-			})();	
+			canvasSetTime = setInterval(looper, 300); //이게 화면 프레임수
+		
 		};
 	
 		
@@ -178,6 +142,44 @@
 			stop = true;
 			this.disabled = true
 			//$("#btn-record-webm").attr("disabled", false);
+			if (stop) { // 녹화 중지 버튼이 눌리면 stop = true가 된다.
+				recorder.stopRecording(function() {
+					var blob = recorder.getBlob(); //<이게 동영상 데이터
+					var URL_BLOB = String(window.webkitURL.createObjectURL(blob));
+					var fileName = URL_BLOB.substring(URL_BLOB.lastIndexOf("/")+1 , URL_BLOB.length);
+					var fileExt = blob.type.substring(blob.type.lastIndexOf("/")+1, blob.type.length);
+							
+					//ajax로 서버에 녹화된 영상 파일 전송
+					var filename = String(window.webkitURL.createObjectURL(blob));
+					var formElement = document.querySelector("form");
+					var formData = new FormData(formElement);
+							
+					formData.append("blob", blob, fileName+ "." +fileExt);
+					formData.append("questionNum", '${question.questionNum}');
+							
+					$.ajax({
+						url: 'blob_upload',
+			            processData: false,
+			            contentType: false,
+			            data: formData, 
+			            type: 'POST',
+			            success: function(result){
+			            		$('#videos-container').html('<video controls src="'
+			 				+ window.webkitURL.createObjectURL(blob)
+			 				+ '" autoplay loop controls="controls" preload="auto"></video>');
+			                $('#videoSrc').val(result);
+			                }
+			            });		
+							
+					$("#canvas").remove(); // 자신의 녹화중인 화면(프리뷰)를 삭제한다.
+					$("#shared-part-of-screen-preview").remove(); // 상대방의 화면을 삭제한다.
+					$("#part-of-screen-to-be-shared").remove(); // 자신이 공유중인 화면을 삭제한다
+					
+					audioStream.stop();
+					canvasStream.stop();
+					clearTimeout(canvasSetTime);
+				});
+			}
 			return false;
 		}
 		
@@ -345,6 +347,7 @@
 
 		var sharedPartOfScreenPreview = document.getElementById('shared-part-of-screen-preview');
 
+		
 		var lastSharedScreenShot = '';
 		connection.sharePartOfScreen = function(element) {
 			html2canvas(element, {
@@ -536,6 +539,25 @@ function lastFileChat() {
 </head>
 <body>
 <jsp:include page="../header.jsp" flush="false" />
+<div class="breadcrumbs">
+		<section class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Real-time answers</h1>
+				</div>
+				<div class="col-md-12">
+					<div class="crumbs">
+						<a href="#">Home</a>
+						<span class="crumbs-span">/</span>
+						<a href="#">Pages</a>
+						<span class="crumbs-span">/</span>
+						<span class="current">Real-time answers</span>
+					</div>
+				</div>
+			</div><!-- End row -->
+		</section><!-- End container -->
+	</div>
+	
 <section class="container">
 
 	<!-- 질문글의 타이틀을 나타낸다. -->
@@ -568,10 +590,6 @@ function lastFileChat() {
 <input type="text" name="videoSrc" value="" placeholder="답변이 완료된 후에는 답변이 녹화된 동영상의 주소가 여기에 담겨서, 답변 테이블의 videoSrc에 들어간다.">
 </fieldset>
 
-
-
-	
-	
 <table>
 	<tr>
 		<td style="min-width: 70%;">
@@ -584,7 +602,7 @@ function lastFileChat() {
   </ul>
   <div id="tabs-1">
 		<!-- 이게 공유된다. DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
-	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray; background-color: #FBFBEE; height:500px;">
+	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray; background-color: #FBFBEE;">
 		<c:if test="${question.questionContent != null? true:false }">
 			${question.questionContent}
 		</c:if>
@@ -603,7 +621,7 @@ function lastFileChat() {
 		<h6>실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다.</h6>
 		<!-- ㄹㄹ -->
 		<c:if test="${question.videoSrc != null? true:false }">
-			<video src="${question.videoSrc}" controls="controls" preload="auto" width="500px;"></video>
+			<video src="${question.videoSrc}" controls="controls" preload="auto" width="100%"></video>
 		</c:if>
 		<c:if test="${question.videoSrc == null? true:false }">
 			<h6>여기에는 질문글에서 녹화된 동영상이 여기에 보입니다.</h6>
@@ -612,11 +630,11 @@ function lastFileChat() {
    </div>
    <div id="tabs-4">
 		<!-- 상대방의 화면이 여기에 보임 -->
-		<img id="shared-part-of-screen-preview" src="https://www.gifpng.com/500x500" style="max-width: 100%; height:500px;">
+		<img id="shared-part-of-screen-preview" src="https://www.gifpng.com/500x500">
 	</div>
 </div>
 		</td>
-		<td style="min-width: 30%;">
+		<td style="min-width: 300px;">
 			<!-- 채팅 및 파일이 전송된 것이 여기에 나타난다. -->
 	<div id="chat-container" style="border:3px solid red;">
 	<button onclick="lastFileDelete()"> 오래된 파일 삭제</button>

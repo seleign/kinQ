@@ -77,7 +77,7 @@
 				<div class="page-content ask-question">
 					<div class="boxedtitle page-title"><h2>Ask Question</h2></div>
 					
-					<p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque.</p>
+					<p>こんにちは。KinQに一般的な質問とこの質問を録画して質問をすることができます。</p>
 					
 					<div class="form-style form-style-3" id="question-submit">
 						<form action="addQuestion" method="post" enctype="multipart/form-data" onsubmit="return validationCheck();">  
@@ -92,15 +92,15 @@
 						
 							<div class="form-inputs clearfix">
 								<p>
-									<label class="required">Question Title<span>*</span></label>
+									<label class="required">タイトル<span>*</span></label>
 									<input type="text" id="question-title" value="${question.title}" name="title" required="required">
-									<span class="form-description">Please choose an appropriate title for the question to answer it even easier .</span>
+									<span class="form-description">回答者が見やすいタイトルを入力してください。</span>
 								</p>
 								<div id="form-textarea">
-									<label class="required">Details<span>*</span></label>
+									<label class="required">質問の内容<span>*</span></label>
 								<p>
 									<textarea id="question_details" name="questionContent" required="required" aria-required="true" cols="58" rows="8">${question.questionContent}</textarea>
-									<span class="form-description">Type the description thoroughly and in detail .</span>
+									<span class="form-description">質問の内容がアップロードされます。また、映像の録画にも使用されます。</span>
 								</p>
 								</div>
 								
@@ -119,7 +119,7 @@
 								<p>
 									<label>Tags</label>
 									<input type="text" class="input" id="question_tags" data-seperator=",">
-									<span class="form-description">Please choose  suitable Keywords Ex : <span class="color">question , poll</span> .</span>
+									<span class="form-description">質問の内容をタグで入力すると、より多くの回答者からの回答を得ることができます。<span class="color">question , poll</span> .</span>
 								</p>
 								
 								<!-- 위에 tag입력으로 받은 것이 이 div에 hidden으로 생성된다. -->
@@ -148,6 +148,8 @@
 										<label for="selectdTime" style="">大至急です。</label>
 										<select id="selectdTime" onchange="setTimeLimit()" style="width: 200px; display: inline-block;">
 											<option value="0">時間を選択してください</option>
+											<option value="1">1分</option>
+											<option value="3">3分</option>
 											<option value="5">5分</option>
 											<option value="10">10分</option>
 											<option value="30">30分</option>
