@@ -185,10 +185,8 @@ public class QuestionController {
 		for (QuestionVO q : result) {
 			String checkTime = qstnSvc.getQuestionTime(q.getQuestionNum());
 			int reply = rSvc.getReplyNum(q.getQuestionNum());
-			System.out.println("**************** time :"+checkTime+" 리플 :"+reply);
 			q.setLimit(checkTime);
 			q.setAllReply(reply);
-			System.out.println("*********** tostring"+q.toString());
 		}
 		
 		return result;

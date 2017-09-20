@@ -45,7 +45,7 @@
 				var html = '';
 				$.each(result, function(index, element){
 					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
+					html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
 					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 					html += '<div class="question-inner"><div class="clearfix"></div>';
 					html += '<p class="question-desc">'+element.questionContent+'</p>';
@@ -79,7 +79,7 @@
 				$.each(result, function(index, element){
 					if(element.timeLimit){
 					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view" href="question_view?questionNum='+element.questionNum+'>'+element.title+'</a></h2>';
+					html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
 					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 					html += '<div class="question-inner"><div class="clearfix"></div>';
 					html += '<p class="question-desc">'+element.questionContent+'</p>';
@@ -114,8 +114,8 @@
 				$.each(result, function(index, element){
 					if(element.qstatus == "in progress"){
 					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="#">Report</a>';
+					html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
+					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 					html += '<div class="question-inner"><div class="clearfix"></div>';
 					html += '<p class="question-desc">'+element.questionContent+'</p>';
 					html += '<div class="question-details">';
