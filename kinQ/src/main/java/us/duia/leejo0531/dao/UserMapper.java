@@ -27,5 +27,6 @@ public interface UserMapper {
 	public int countCompletedQuestions(int userNum);
 	public ArrayList<AlarmVO> getUserAlarm(int userNum);
 	public ArrayList<RankVO> getUserRank();
-	public RankVO getUserRank( int userNum);
+	public RankVO getMyRank( int userNum);
+	public ArrayList<MajorVO> countField(int userNum);
 }

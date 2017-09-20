@@ -32,8 +32,8 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
+    google.charts.setOnLoadCallback(drawPostChart);
+    function drawPostChart() {
       var data = google.visualization.arrayToDataTable([
         ["項目", "数", { role: "style" } ],
         ["質問数", ${questionsNum}, "skyblue"],
@@ -58,6 +58,34 @@
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
   	}
+    
+
+    google.charts.setOnLoadCallback(drawAnswerChart);
+    function drawAnswerChart() {
+    	
+        var data = google.visualization.arrayToDataTable([
+          ['Field', 'Answers per Field'],
+          [ '${answeredField[0].majorName}',	${answeredField[0].majorNum}],
+          [ '${answeredField[1].majorName}',	${answeredField[1].majorNum}],
+          [ '${answeredField[2].majorName}',	${answeredField[2].majorNum}],
+          [ '${answeredField[3].majorName}',	${answeredField[3].majorNum}],
+          [ '${answeredField[4].majorName}',	${answeredField[4].majorNum}],
+          [ '${answeredField[5].majorName}',	${answeredField[5].majorNum}],
+          [ '${answeredField[6].majorName}',	${answeredField[6].majorNum}],
+          [ '${answeredField[7].majorName}',	${answeredField[7].majorNum}],
+          [ '${answeredField[8].majorName}',	${answeredField[8].majorNum}],
+          [ '${answeredField[9].majorName}',	${answeredField[9].majorNum}]
+          	
+        ]);
+
+        var options = {
+          title: '活動分野'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
     
 
 	function myQuestionList(){
@@ -116,27 +144,41 @@
 			success: function(result){
 				var html = '';
 				var page = result['page'];
-				var qList = result['qList'];
-				var rList = result['rList'];
+					var rList = result['rList'];
 				
-				$.each(qList, function(index, element){
-					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-					html += '<div class="question-inner"><div class="clearfix"></div>';
-					html += '<p class="question-desc">'+element.questionContent+'</p>';
-					html += '<div class="question-details">';
-					if(element.qstatus == "solved"){
-						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-					}else{
-						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
+				$.each(rList, function(index, element){
+					html += "<li class=\"comment\">";
+					html += "<div class=\"comment-body comment-body-answered clearfix\">";
+					/* html += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
+					html += "<div class=\"comment-text\">";
+					html += "<div class=\"author clearfix\">";
+					html += "<div class=\"comment-author\"><a href=\"#\">" + element.id + "</a></div>";
+					html += "<div class=\"comment-vote\">";
+					html += "<ul class=\"question-vote\">";
+					html += "<li><a href=\"#\" class=\"question-vote-up\" title=\"Like\"></a></li>";
+					html += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
+					html += "</ul>";
+					html += "</div>";
+					if (element.score > 0) {
+						html += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + element.score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+					} else if (element.score < 0){
+						html += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + element.score*(-1) + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+					} else {
+						html += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">" + element.score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
 					}
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
- 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-					html += '<div class="clearfix"></div>';
-					html += '</div></article>';
+					html += "<div class=\"comment-meta\">";
+					html += "<div class=\"date\"><i class=\"icon-time\"></i>" + element.r_RegDate + "</div>" ;
+					html += "</div>";
+					if (${userNum} == element.userNum) {
+						html += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + element.replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
+					}
+					html += "</div>";
+					html += "<div class=\"text\">";
+					html += "<p>" + element.replyContent + "</p>";
+					html += "</div>";
+					html += "</div>";
+					html += "</div>";
+					html += "</li>";
 				});
 				$('#myAnswerArea').append(html);
 				$('#rfrom').val( page.from +10);
@@ -190,6 +232,7 @@
 										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
 								</ul>
 								</div>
+							    <div id="piechart"></div>
 								<br><input type="button" value="個人情報修正" onclick="location.href='updateUserInfo'">
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->

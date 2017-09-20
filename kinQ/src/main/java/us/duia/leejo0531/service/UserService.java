@@ -109,7 +109,11 @@ public class UserService {
 		UserVO loginUser = userDao.requestLogin(user);
 		return loginUser;
 	}
-
+	
+	public ArrayList<MajorVO> countField(int userNum) {
+		ArrayList<MajorVO> result = userDao.countField(userNum);
+		return result;
+	}
 
 	public int countQuestions(int userNum) {
 		int questionsNum = userDao.countQuestions(userNum);
@@ -173,4 +177,5 @@ public class UserService {
 		RankVO result = userDao.getMyRank( userNum);
 		return result;
 	}
+	
 }

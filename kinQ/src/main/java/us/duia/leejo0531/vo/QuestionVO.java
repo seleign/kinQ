@@ -18,9 +18,11 @@ public class QuestionVO {
    private int hit;
    private String questionContent;
    private int score;
-   private String limit;
-   private int allReply;
+   private String limit;	//DB에 없어요
+   private int allReply;	//DB에 없어요 
    private int selectedReplyNum;
+   private int timeCheck;	//DB에 없어요
+   
    
    public QuestionVO() {
       super();
@@ -34,7 +36,7 @@ public class QuestionVO {
 
    public QuestionVO(int questionNum, int userNum, String timeLimit, String qstatus, Date regDate, Date modDate,
 		   String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent,
-		   int score, String limit, int allReply, int selectedReplyNum) {
+		   int score, String limit, int allReply, int selectedReplyNum, int timeCheck) {
 	   super();
 	   this.questionNum = questionNum;
 	   this.userNum = userNum;
@@ -52,6 +54,7 @@ public class QuestionVO {
 	   this.limit = limit;
 	   this.allReply = allReply;
 	   this.selectedReplyNum = selectedReplyNum;
+	   this.timeCheck = timeCheck;
    }
 
    public int getQuestionNum() {
@@ -180,6 +183,15 @@ public class QuestionVO {
 
    public void setSelectedReplyNum(int selectedReplyNum) {
 	   this.selectedReplyNum = selectedReplyNum;
+   }
+
+
+   public int getTimeCheck() {
+	   return timeCheck;
+   }
+
+   public void setTimeCheck(int timeCheck) {
+	   this.timeCheck = timeCheck;
    }
 
    @Override

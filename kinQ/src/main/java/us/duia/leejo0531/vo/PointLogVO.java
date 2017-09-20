@@ -12,12 +12,12 @@ public class PointLogVO {
 	private String pChargedDate;
 	private int pUsed;
 	private String pUsedDate;
-	private int pChanged;
+	private int pChange;
 	
 	public PointLogVO(){}
 
 	public PointLogVO(int pointLogNum, int pUserNum, int pCharged, String pChargedDate, int pUsed, String pUsedDate,
-			int pChanged) {
+			int pChange) {
 		super();
 		this.pointLogNum = pointLogNum;
 		this.pUserNum = pUserNum;
@@ -25,7 +25,7 @@ public class PointLogVO {
 		this.pChargedDate = pChargedDate;
 		this.pUsed = pUsed;
 		this.pUsedDate = pUsedDate;
-		this.pChanged = pChanged;
+		this.pChange = pChange;
 	}
 
 	public int getPointLogNum() {
@@ -76,19 +76,19 @@ public class PointLogVO {
 		this.pUsedDate = pUsedDate;
 	}
 
-	public int getpChanged() {
-		return pChanged;
+	public int getpChange() {
+		return pChange;
 	}
 
-	public void setpChanged(int pChanged) {
-		this.pChanged = pChanged;
+	public void setpChange(int pChange) {
+		this.pChange = pChange;
 	}
 
 	@Override
 	public String toString() {
 		return "PointLogVO [pointLogNum=" + pointLogNum + ", pUserNum=" + pUserNum + ", pCharged=" + pCharged
-				+ ", pChargedDate=" + pChargedDate + ", pUsed=" + pUsed + ", pUsedDate=" + pUsedDate + ", pChanged="
-				+ pChanged + "]";
+				+ ", pChargedDate=" + pChargedDate + ", pUsed=" + pUsed + ", pUsedDate=" + pUsedDate + ", pChange="
+				+ pChange + "]";
 	}
 
 	

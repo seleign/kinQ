@@ -3,6 +3,7 @@ package us.duia.leejo0531.vo;
 public class RankVO {
 	private int ranking;
 	private int userNum;
+	private String userId;
 	private int qCount;
 	private int rCount;
 	private int sCount;
@@ -10,10 +11,11 @@ public class RankVO {
 	public RankVO() {
 		super();
 	}
-	public RankVO(int ranking, int userNum, int qCount, int rCount, int sCount, int totalPoint) {
+	public RankVO(int ranking, int userNum, String userId, int qCount, int rCount, int sCount, int totalPoint) {
 		super();
 		this.ranking = ranking;
 		this.userNum = userNum;
+		this.userId = userId;
 		this.qCount = qCount;
 		this.rCount = rCount;
 		this.sCount = sCount;
@@ -31,6 +33,12 @@ public class RankVO {
 	}
 	public void setUserNum(int userNum) {
 		this.userNum = userNum;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public int getqCount() {
 		return qCount;
@@ -58,8 +66,8 @@ public class RankVO {
 	}
 	@Override
 	public String toString() {
-		return "RankVO [rank=" + ranking + ", usernum=" + userNum + ", qCount=" + qCount + ", rCount=" + rCount
-				+ ", sCount=" + sCount + ", totalPoint=" + totalPoint + "]";
+		return "RankVO [ranking=" + ranking + ", userNum=" + userNum + ", userId=" + userId + ", qCount=" + qCount
+				+ ", rCount=" + rCount + ", sCount=" + sCount + ", totalPoint=" + totalPoint + "]";
 	}
 	
 }

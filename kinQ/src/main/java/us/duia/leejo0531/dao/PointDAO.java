@@ -11,6 +11,7 @@ import us.duia.leejo0531.vo.FieldVO;
 import us.duia.leejo0531.vo.GoodsVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PointLogVO;
 import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.UserVO;
 
@@ -28,13 +29,39 @@ public class PointDAO {
 	public ArrayList<GoodsVO> getGoodsList() {
 		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
 		ArrayList<GoodsVO> result = mapper.getGoodsList();
-		System.out.println(result);
 		return result;
 	}
 
 	public void addPoint(CashLogVO cash) {
 		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
 		mapper.addPoint(cash);
+	}
+
+	public int getRecentChange(int userNum) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		int recentChange = mapper.getRecentChange(userNum);
+		return recentChange;
+	}
+
+	public void cashToPoint(CashLogVO cash) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		mapper.cashToPoint(cash);
+	}
+
+	public int getRecentPoint(int userNum) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		int recentPoint = mapper.getRecentPoint(userNum);
+		return recentPoint;
+	}
+
+	public void pointToCash(PointLogVO pointLog) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		mapper.pointToCash(pointLog);
+	}
+
+	public void addPointLog(PointLogVO point) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		mapper.addPointLog(point);
 	}
 	
 
