@@ -1,13 +1,12 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib	prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
 	<meta charset="utf-8">
-	<title>検索結果</title>
+	<title>マイページ</title>
 	<meta name="description" content="Ask me Responsive Questions and Answers Template">
 	<meta name="author" content="vbegy">
 	
@@ -30,76 +29,30 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="./resources/js/jquery-dateFormat.min.js"></script>
-  <script src="./resources/js/dateFormat.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-	
-	function resultList(){
-		$.ajax({
-			url: 'search',
-			method: 'post',
-			data: {
-				search: $('#search').val(),
-				searchType: $('#searchType').val(),
-				from: parseInt($('#from').val()),
-				to: parseInt($('#to').val())
-				
-			},
-			success: function(result){
-				var html = '';
-				var page = result['page'];
-				var qList = result['qList'];
-				var rList = result['rList'];
-				
-				if( qList.length >0) {
-					$.each(qList, function(index, element){
-						html +='<article class="question question-type-normal">';
-						html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-						html += '<div class="question-inner"><div class="clearfix"></div>';
-						html += '<p class="question-desc">'+element.questionContent+'</p>';
-						html += '<div class="question-details">';
-						if(element.qstatus == "solved"){
-							html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-						}else{
-							html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
-						}
-						html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-	 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-						html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-						html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-						html += '<div class="clearfix"></div>';
-						html += '</div></article>';
-					});
-					$('#resultArea').append(html);
-					$('#from').val( page.from +10);
-					$('#to').val( page.to +10);
-				}else {
-					$('#resultArea').append('検索結果がありません。');
-				}
-			}
-		});
-	}
-	$(function(){
-		resultList();
-	});
   </script>
+  
+  
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
-		
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<h1>検索結果</h1>
+<!-- 				<div class="col-md-12">
+					<h1>マイページ</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
 						<a href="#">Home</a>
 						<span class="crumbs-span">/</span>
-						<span class="current">検索結果</span>
+						<a href="#">User</a>
+						<span class="crumbs-span">/</span>
+						<span class="current">Mypage</span>
 					</div>
 				</div>
+-->
 			</div><!-- End row -->
 		</section><!-- End container -->
 	</div><!-- End breadcrumbs -->
@@ -107,17 +60,33 @@
 	<section class="container main-content">
 		<div class="row">
 			<div class="col-md-9">
-				<input type="hidden" id="search" value="${page.search}">
-				<input type="hidden" id="searchType" value="${page.searchType}">
-				<input type="hidden" id="from" value="${page.from}">
-				<input type="hidden" id="to" value="${page.to}">
-				<div id="resultArea"></div>
-				<a href="javascript:resultList()" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="page-content">
+							<h2>ユーザー活動ランキング</h2>
+							<ul>
+								<c:forEach var="rank" items="${rankList}">
+									<li>
+										<div style="display:inline-block; width:20%;">
+											<span class="font-gold">${rank.ranking}</span>位:&nbsp;&nbsp;<span class="font-silver">${rank.userId}</span>
+										</div>
+										<div style="text-align:right; display:inline-block; width:60%;">
+											<span><i class="icon-question-sign"></i>${rank.qCount}個の質問x10点&nbsp;&nbsp;&nbsp;<i class="icon-lightbulb"></i>${rank.rCount}個の答えx20点&nbsp;&nbsp;&nbsp;<i class="icon-ok"></i>${rank.sCount}個の採択x30点&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+										</div>
+										<div style="text-align:right; display:inline-block; width:15%;">
+											<span class="font-skyblue">${rank.totalPoint}点</span>
+										</div>
+									</li>
+									<hr>
+								</c:forEach>
+							</ul>
+						</div><!-- End page-content -->
+					</div><!-- End col-md-12 -->
+				</div><!-- End row -->
 			</div><!-- End main -->
-						<jsp:include page="aside.jsp" flush="false" />
+			<jsp:include page="aside.jsp" flush="false" />
 		</div><!-- End row -->
 	</section><!-- End container -->
-	
 	<jsp:include page="footer.jsp" flush="false" />
 </div><!-- End wrap -->
 
@@ -128,6 +97,7 @@
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
 <script src="./resources/js/html5.js"></script>
+<script src="./resources/js/twitter/jquery.tweet.js"></script> 
 <script src="./resources/js/jflickrfeed.min.js"></script>
 <script src="./resources/js/jquery.inview.min.js"></script>
 <script src="./resources/js/jquery.tipsy.js"></script>
@@ -141,6 +111,6 @@
 <script src="./resources/js/jquery.bxslider.min.js"></script>
 <script src="./resources/js/custom.js"></script>
 <!-- End js -->
-			
+
 </body>
 </html>

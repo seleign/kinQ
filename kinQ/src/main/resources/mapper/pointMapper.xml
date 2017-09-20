@@ -10,6 +10,34 @@
 	
 	<insert id="addPoint" parameterType="CashLog">
 		insert into CashLog(cashLogNum, userNum, cCharged, cChargedDate, cChange) 
-		values(CashLog_SEQ.nextval, #{userNum}, #{cCharged}, TO_DATE(#{cChargedDate}), 0) 
+		values(CashLog_SEQ.nextval, #{userNum}, #{cCharged}, TO_DATE(#{cChargedDate}), #{cChange}) 
 	</insert>
+	
+	<insert id = "addPointLog" parameterType="PointLog">
+		insert into PointLog(pointLogNum, pUserNum, pCharged, pChargedDate, pChange) 
+		values(PointLog_SEQ.nextval, #{pUserNum}, #{pCharged}, TO_DATE(#{pChargedDate}), #{pChange}) 
+	</insert>
+	
+	<select id="getRecentChange" parameterType="int" resultType="int">
+		SELECT a.cchange FROM cashlog a,
+		(SELECT MAX(cashlognum) AS TEMP FROM cashlog GROUP BY usernum) b 
+		WHERE a.cashlognum = b.temp and a.usernum = #{userNum}
+	</select>
+	
+	<insert id="cashToPoint" parameterType="CashLog">
+		insert into CashLog(cashLogNum, userNum, cUsed, cUsedDate, cChange)
+		values(CashLog_SEQ.nextval, #{userNum}, #{cUsed}, TO_DATE(#{cUsedDate}), #{cChange})
+	</insert>
+	
+	<insert id="pointToCash" parameterType="PointLog">
+		insert into PointLog(pointLogNum, pUserNum, pUsed, pUsedDate, pChange)
+		values(PointLog_SEQ.nextval, #{pUserNum}, #{pUsed}, TO_DATE(#{pUsedDate}), #{pChange})
+	</insert>
+	
+	<select id="getRecentPoint" parameterType="int" resultType="int">
+		SELECT a.pchange FROM pointlog a,
+		(SELECT MAX(pointLogNum) AS TEMP FROM pointlog GROUP BY pusernum) b 
+		WHERE a.pointlognum = b.temp and a.pusernum = #{puserNum}
+	</select>
+	
 </mapper>

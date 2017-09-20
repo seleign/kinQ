@@ -18,45 +18,97 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import us.duia.leejo0531.service.PointService;
 import us.duia.leejo0531.vo.CashLogVO;
 import us.duia.leejo0531.vo.GoodsVO;
+import us.duia.leejo0531.vo.PointLogVO;
 
 @Controller
-public class PointController{
-	private static final Logger logger=LoggerFactory.getLogger(PointController.class);
-	
+public class PointController {
+	private static final Logger logger = LoggerFactory.getLogger(PointController.class);
+
 	@Autowired
 	PointService pointSvc;
-	
-	@RequestMapping(value="pointShop", method=RequestMethod.GET)
-	public String pointShop(Model model){
+
+	@RequestMapping(value = "pointShop", method = RequestMethod.GET)
+	public String pointShop(Model model, HttpSession session) {
 		ArrayList<GoodsVO> goodsList = pointSvc.getGoodsList();
+		int userNum = (int) session.getAttribute("userNum");
+		int cChange = pointSvc.getRecentChange(userNum);
+		int pChange = pointSvc.getRecentPoint(userNum);
+		
+		model.addAttribute("cChange", cChange);
+		model.addAttribute("pChange", pChange);
 		model.addAttribute("goodsList", goodsList);
 		return "pointShop";
 	}
-	
-	
-	@RequestMapping(value="charge", method=RequestMethod.POST)  
-	public String pay(int chargeAmount, Model model){  
-	 		model.addAttribute("chargeAmount", chargeAmount);  
-	 		return "chargePoint";  
-	}  
-	
-	@RequestMapping(value="addPoint", method=RequestMethod.POST)
-	public @ResponseBody String addPoint(int amount, HttpSession session){
-		
-		System.out.println(amount+"amount");
-		
+
+	@RequestMapping(value = "charge", method = RequestMethod.POST)
+	public String pay(int chargeAmount, Model model) {
+		model.addAttribute("chargeAmount", chargeAmount);
+		return "chargePoint";
+	}
+
+	@RequestMapping(value = "addPoint", method = RequestMethod.POST)
+	public @ResponseBody String addPoint(int amount, HttpSession session) {
+
 		long time = System.currentTimeMillis();
 		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
 		String cChargedDate = currentTime.format(new Date(time));
-		
-		CashLogVO cash = new CashLogVO(0, (int)session.getAttribute("userNum"), amount, cChargedDate, 0, null, 0);
+
+		int userNum = (int) session.getAttribute("userNum");
+
+		int change = pointSvc.getRecentChange(userNum);
+		int cChange = change + amount;
+
+		CashLogVO cash = new CashLogVO(0, userNum, amount, cChargedDate, 0, null, cChange);
 		pointSvc.addPoint(cash);
-		
-		System.out.println(cash);
-		
+
 		return "success";
 	}
-	
 
+	@RequestMapping(value = "cashToPoint", method = RequestMethod.POST)
+	public @ResponseBody int[] cashToPoint(int currentChange, HttpSession session) {
+		int userNum = (int) session.getAttribute("userNum");
+		int change = pointSvc.getRecentChange(userNum);
+
+		long time = System.currentTimeMillis();
+		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
+		String cUsedDate = currentTime.format(new Date(time));
+		int cChange = change - currentChange;
+
+		CashLogVO cash = new CashLogVO(0, userNum, 0, null, currentChange, cUsedDate, cChange);
+		pointSvc.cashToPoint(cash);
+		
+		int pChange = pointSvc.getRecentPoint(userNum);
+		int finalPChange = pChange+currentChange;
+		
+		PointLogVO point = new PointLogVO(0, userNum, currentChange, cUsedDate, 0, null, pChange);
+		pointSvc.addPointLog(point);
+
+		int finalChange = pointSvc.getRecentChange(userNum);
+		
+		int [] result = {finalChange, finalPChange};
+		
+		return result;
+	}
+
+	@RequestMapping(value = "pointToCash", method = RequestMethod.POST)
+	public @ResponseBody int pointToCash(int currentPoint, HttpSession session) {
+		int userNum = (int) session.getAttribute("userNum");
+		int point = pointSvc.getRecentPoint(userNum);
+
+		long time = System.currentTimeMillis();
+		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
+		String cUsedDate = currentTime.format(new Date(time));
+		int pChange = point - currentPoint;
+
+		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, currentPoint, cUsedDate, pChange);
+		pointSvc.pointToCash(pointLog);
+		
+		int finalPChange = pointSvc.getRecentPoint(userNum);
+		
+		return finalPChange;
+	}
+	
+	
+	
 	
 }

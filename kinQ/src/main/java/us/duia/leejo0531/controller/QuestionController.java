@@ -1,6 +1,10 @@
 package us.duia.leejo0531.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -181,10 +185,15 @@ public class QuestionController {
 	 */
 	@RequestMapping(value="getQuestionPage",method=RequestMethod.GET)
 	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
+		Date sysdate = Calendar.getInstance().getTime();
+		String sys = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(sysdate);
 		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
 		for (QuestionVO q : result) {
 			String checkTime = qstnSvc.getQuestionTime(q.getQuestionNum());
 			int reply = rSvc.getReplyNum(q.getQuestionNum());
+				if(q.getTimeLimit() != null){
+					q.setTimeCheck(sys.compareTo(q.getTimeLimit()));
+				}
 			q.setLimit(checkTime);
 			q.setAllReply(reply);
 		}
@@ -232,7 +241,7 @@ public class QuestionController {
 	 * @param questionNum 답변할 페이지에 출력시킬 질문의 내용
 	 * @return 실시간 답변페이지
 	 */
-	@RequestMapping(value = "realTimeAnswer", method = RequestMethod.POST)
+	@RequestMapping(value = "realTimeAnswer", method = {RequestMethod.POST, RequestMethod.GET})
 	public String realTimeAnswerGET(int questionNum, Model model, HttpSession session) {
 		int userNum = (int)session.getAttribute("userNum");
 		QuestionVO question= new QuestionVO( questionNum );

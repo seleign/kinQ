@@ -1,4 +1,3 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -28,28 +27,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
     	
-    	var totalPrice = 0;
-    	var goodsName = new Array();
-    	var goodsNum = new Array();
-    	var goodsPrice = new Array();
-    	
-    	function myCart(goods, price, num){
-    		$('#good'+num).prop('disabled', true);
-    		goodsName.push(goods);
-    		goodsNum.push(num);
-    		goodsPrice.push(price);
-    		
-    		totalPrice += price;
-    		
-			var html = '';
-			
-    		for(var i in goodsName){
-    			html+= '<li value="num'+goodsNum[i]+'">'+goodsName[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+goodsNum[i]+', '+goodsPrice[i]+')"></a></li><br>';
-    		}
-    		$('#goodsList').html(html);
-    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
-    	}
-    	
+	var totalPrice = 0;
+	var goodsName = new Array();
+	var goodsNum = new Array();
+	var goodsPrice = new Array();
+	
+	function myCart(goods, price, num){
+		$('#good'+num).prop('disabled', true);
+		goodsName.push(goods);
+		goodsNum.push(num);
+		goodsPrice.push(price);
+		
+		totalPrice += price;
+		
+		var html = '';
+		
+		for(var i in goodsName){
+			html+= '<li value="num'+goodsNum[i]+'">'+goodsName[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+goodsNum[i]+', '+goodsPrice[i]+')"></a></li><br>';
+		}
+		$('#goodsList').html(html);
+		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
+	}
+        	
+/*      	$(function() {
+    		$("#exchangeBtn").on('click', cashToPoint);
+    	});
+    	 */
     	
      	function unchecking(deleteNum, price){
     		html = '';
@@ -74,7 +77,7 @@
     		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント'); 
     	} 
     	
-    	function cancel(){
+       	function cancel(){
     		$('input[type=button]').prop('disabled', false);
     		goodsName = [];
     		goodsNum = [];
@@ -89,18 +92,52 @@
     		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント'); 
     	}
     	
-    	
-    		function charge(){  
-    		    		var selectVal = $('#chargeAmount').val();  
-    		    		  
-    		    		if(selectVal == 0){  
-    	    			alert('チャージする金額をご選び下さい。');  
-    	    			return false;  
-    		    		}  
-    	    		  
-    		    		$('form').submit();  
-    	    	}  
+		function charge(){  
+    		var selectVal = $('#chargeAmount').val();  
+    		  
+    		if(selectVal == 0){  
+			alert('チャージする金額をご選び下さい。');  
+			return false;  
+    		}  
+		  
+    		$('form').submit();  
+	}  
 
+
+     	function cashToPoint(change){
+    		
+    		if(confirm('キャッシュをポイントに交換しますか。')==true){
+     			$.ajax({
+    				url: 'cashToPoint',
+    				method: 'POST',
+    				data: {currentChange : change},
+    				success: function(result){
+    					$('#myCash').html(result[0]);
+    					$('#myPoint').html(result[1]);	
+    				}
+    			}); 
+    		}
+    	}
+     	
+     	function pointToMoney(point){
+     		
+     		var bankAccount = $('#bankAccount').val();
+			if(bankAccount=='' || isNaN(bankAccount)){
+				alert('銀行の口座番号をご入力ください。');
+				return false;
+			}
+			if(confirm('ポイントを現金に両替しますか。') == true){
+				$.ajax({
+    				url: 'pointToCash',
+    				method: 'POST',
+    				data: {currentPoint : point},
+    				success: function(result){
+    					$('#myPoint').html(result);	
+    				}
+    			}); 
+			}
+     	}
+     	
     	 
     </script>
     
@@ -147,63 +184,171 @@
 			<div class="col-md-9">
 				
 				<div id="accordions" class="row">
-					
-					
-						<div id="alert" class="row">
-						<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">ポイント管理</h2></div></div>
-					<div class="col-md-12">
-						<div class="page-content page-shortcode">
-							<div class="alert-message success">
-							    <i class="icon-ok"></i>
-							    <p><span>マイポイント</span><br>
-							    <strong>${sessionScope.userName }</strong> 様のポイントは<strong>_____ポイント</strong>です。</p>
-							</div>
-							
-						    <div class="alert-message info">
-						        <i class="icon-bullhorn"></i>
-						        <p><span>ポイント交換</span><br>ポイントの交換政策は緊Ｑの約款をご参考ください。<br><br>
-						        
-							<div class="page-content page-shortcode">
-							<div class="tabs-warp">
-							    <ul class="tabs">
-							        <li class="tab"><a href="#">ポイント両替</a></li>
-							        <li class="tab"><a href="#">払い戻し</a></li>
-							    </ul>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							            <p>※ <strong>1ポイント</strong>は<strong>1円</strong>に相当します。手数料は<strong>5パーセント</strong>です。
-							       		<input type="button" value="両替"></p>
-							        </div>
-							    </div>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							    		<p>※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。
-							       		<input type="button" value="払い戻し"></p>
-							        </div>
-							    </div>
 
+
+					<div id="alert" class="row">
+						<div class="col-md-12">
+							<div class="boxedtitle page-title">
+								<h2 class="t_left">ポイント管理</h2>
 							</div>
-						</div><!-- End page-content -->
 						</div>
-						     <form action="charge" method="post" name="form"> 
-						    <div class="alert-message warning">
-						        <i class="icon-exclamation-sign"></i>
-+						        <span>ポイントチャージ</span><br>  
- 						        ポイントで質問やショッピングが出来ます。<br><br><hr><br>  
- 						        <select class="combo" id="chargeAmount" name="chargeAmount" style="float: left;">  
- 						        	<option value="0">金額選択</option>  
- 						        	<option value="1000">1000 Points</option>  
- 						        	<option value="2000">2000 Points</option>  
- 						        	<option value="3000">3000 Points</option>  
- 						        	<option value="4000">4000 Points</option>  
- 						        	<option value="5000">5000 Points</option>  
- 						        </select>  
- 						  		&nbsp;&nbsp;&nbsp;<input type="button" value="ポイントチャージ" onclick="javascript:charge()">  
-						    </div>
-						    </form> 
-						</div><!-- End page-content -->
+						<div class="col-md-12">
+							<div class="page-content page-shortcode">
+								<div class="alert-message success">
+									<i class="icon-ok"></i>
+									<p>
+										<span>マイキャッシュ</span><br> 
+										<strong>${sessionScope.userName }</strong>
+										様のキャッシュは <strong><span id="myCash">${cChange}</span> 円</strong> です。
+									</p>
+									<br><hr><br>
+									<p>
+										※ <strong>キャッシュ1円</strong>は<strong>1ポイント</strong>に交換できます。&nbsp;
+										<input type="button" onclick="javascript:cashToPoint('${cChange}')" value="キャッシュ　→　ポイントに交換">
+											
+								</div>
+
+								<div class="alert-message info">
+									<i class="icon-bullhorn"></i>
+									<p>
+										<span>ポイント交換</span><br>
+										<strong>${sessionScope.userName }</strong>様のポイントは <strong><span id="myPoint">${pChange}</span> ポイント</strong> です。
+										ポイントの交換政策は緊Ｑの約款をご参考ください。<br>
+										<br>
+									<div class="page-content page-shortcode">
+										<div class="tabs-warp">
+											<ul class="tabs">
+												<li class="tab"><a href="#">ポイント両替</a></li>
+												<li class="tab"><a href="#">払い戻し</a></li>
+											</ul>
+											<div class="tab-inner-warp">
+												<div class="tab-inner">
+													<p>
+														※ <strong>1ポイント</strong>は<strong>1円</strong>に相当します。手数料は<strong>5パーセント</strong>です。
+										<br><br><hr><br>
+										<div style="float: left;">
+										<select id="chargeAmount" name="bankList" style="float: left;">
+										<optgroup label="銀行選択"></optgroup>
+										<optgroup label="都市銀行"></optgroup>
+											<option>銀行選択</option>
+											<option>みずほ銀行</option>
+											<option>三菱東京UFJ銀行</option>
+											<option>三井住友銀行</option>
+											<option>りそな銀行</option>
+											<option>埼玉りそな銀行</option>
+										<optgroup label="北海道"></optgroup>
+											<option>北海道銀行</option>
+										<optgroup label="東北"></optgroup>
+											<option>青森銀行</option>
+											<option>みちのく銀行</option>
+											<option>秋田銀行</option>
+											<option>北都銀行</option>
+											<option>荘内銀行</option>
+											<option>山形銀行</option>
+											<option>岩手銀行</option>
+											<option>東北銀行</option>
+											<option>七十七銀行</option>
+											<option>東邦銀行</option>
+										<optgroup label="関東甲信越"></optgroup>
+											<option>群馬銀行</option>
+											<option>足利銀行</option>
+											<option>常陽銀行</option>
+											<option>筑波銀行</option>
+											<option>武蔵野銀行</option>
+											<option>千葉銀行</option>
+											<option>千葉興業銀行</option>
+											<option>東京都民銀行</option>
+											<option>横浜銀行</option>
+											<option>第四銀行</option>
+											<option>北越銀行</option>
+											<option>山梨中央銀行</option>
+											<option>八十二銀行</option>
+										<optgroup label="北陸"></optgroup>
+											<option>北陸銀行</option>
+											<option>富山銀行</option>
+											<option>北國銀行</option>
+											<option>福井銀行</option>
+										<optgroup label="東海"></optgroup>
+											<option>静岡銀行</option>
+											<option>スルガ銀行</option>
+											<option>清水銀行</option>
+											<option>大垣共立銀行</option>
+											<option>十六銀行</option>
+											<option>三重銀行</option>
+											<option>百五銀行</option>
+										<optgroup label="近畿"></optgroup>
+											<option>滋賀銀行</option>
+											<option>京都銀行</option>
+											<option>近畿大阪銀行</option>
+											<option>池田泉州銀行</option>
+											<option>南都銀行</option>
+											<option>紀陽銀行</option>
+											<option>但馬銀行</option>
+										<optgroup label="中国"></optgroup>
+											<option>鳥取銀行</option>
+											<option>山陰合同銀行</option>
+											<option>中国銀行</option>
+											<option>広島銀行</option>
+											<option>山口銀行</option>
+										<optgroup label="四国"></optgroup>
+											<option>阿波銀行</option>
+											<option>百十四銀行</option>
+											<option>伊予銀行</option>
+											<option>四国銀行</option>
+										<optgroup label="九州・沖縄"></optgroup>
+											<option>福岡銀行</option>
+											<option>西日本シティ銀行</option>
+											<option>筑邦銀行</option>
+											<option>北九州銀行</option>
+											<option>佐賀銀行</option>
+											<option>十八銀行</option>
+											<option>親和銀行</option>
+											<option>肥後銀行</option>
+											<option>大分銀行</option>
+											<option>宮崎銀行</option>
+											<option>鹿児島銀行</option>
+											<option>琉球銀行</option>
+											<option>沖縄銀行</option>
+										</select> &nbsp;&nbsp;&nbsp;
+										</div>
+										<div style="text-align:right; display:inline-block;"><input type="text" id="bankAccount" placeholder="'-'なしの口座番号"></div>
+										&nbsp;&nbsp;&nbsp;<input type="button" value="ポイント　→　現金に両替" onclick="javascript:pointToMoney(${pChange})"><br>
+									</div>
+								</div>
+								<div class="tab-inner-warp">
+									<div class="tab-inner">
+										<p>
+											※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。 <input type="button" value="払い戻し">
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+									<!-- End page-content -->
 					</div>
-				</div><!-- End #alert -->
+					<form action="charge" method="post" name="form">
+									<div class="alert-message warning">
+										<i class="icon-exclamation-sign"></i> <span>キャッシュチャージ</span><br>
+										キャッシュはポイントに交換できます。質問やショッピングをする時、ポイントが使えます。<br>
+										<br>
+										<hr>
+										<br> 
+										<select class="combo" id="chargeAmount"
+											name="chargeAmount" style="float: left;">
+											<option value="0">金額選択</option>
+											<option value="1000">1000 円</option>
+											<option value="2000">2000 円</option>
+											<option value="3000">3000 円</option>
+											<option value="4000">4000 円</option>
+											<option value="5000">5000 円</option>
+										</select> &nbsp;&nbsp;&nbsp;<input type="button" value="ポイントチャージ" onclick="javascript:charge()">
+									</div>
+								</form>
+							</div>
+							<!-- End page-content -->
+						</div>
+					</div>
+					<!-- End #alert -->
 
 
 				</div><!-- End #accordions -->
@@ -247,7 +392,7 @@
 						<h2>マイカート</h2><hr><br> 
 							<strong>ショッピングリスト</strong><br><br><div><ul id="goodsList"></ul></div>
 							<br><hr><br>
-							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0ポイント</div><br> 
+							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 ポイント</div><br> 
 							<hr><br>
 						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%">キャンセル</a>
 						<a href="#" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%;">購入する</a>
@@ -258,88 +403,7 @@
 		</div><!-- End row -->
 	</section><!-- End container -->
 	
-	
-	
-	
-	
-	<footer id="footer">
-		<section class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="widget widget_contact">
-						<h3 class="widget_title">Where We Are ?</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu.</p>
-						<ul>
-							<li>
-								<span>Address :</span>
-								Ask Me Network, 33 Street, syada Zeinab, Cairo, Egypt.
-							</li>
-							<li>
-								<span>Support :</span>Support Telephone No : (+2)01111011110
-							</li>
-							<li>Support Email Account : info@example.com</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="widget">
-						<h3 class="widget_title">Quick Links</h3>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="ask_question.html">Ask Question</a></li>
-							<li><a href="#">About</a></li>
-							<li><a href="cat_question.html">Questions</a></li>
-							<li><a href="user_profile.html">Users</a></li>
-							<li><a href="blog_1.html">Blog</a></li>
-							<li><a href="right_sidebar.html">Pages</a></li>
-							<li><a href="shortcodes.html">Shortcodes</a></li>
-							<li><a href="contact_us.html">Contact Us</a></li>
-							<li><a href="#">FAQs</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="widget">
-						<h3 class="widget_title">Popular Questions</h3>
-						<ul class="related-posts">
-							<li class="related-item">
-								<h3><a href="#">This is my first Question</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam.</p>
-								<div class="clear"></div><span>Feb 22, 2014</span>
-							</li>
-							<li class="related-item">
-								<h3><a href="#">This Is My Second Poll Question</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam.</p>
-								<div class="clear"></div><span>Feb 22, 2014</span>
-							</li>
-						</ul>
-					</div>	
-				</div>
-				<div class="col-md-3">
-					<div class="widget widget_twitter">
-						<h3 class="widget_title">Latest Tweets</h3>
-						<div class="tweet_1"></div>
-					</div>
-				</div>
-			</div><!-- End row -->
-		</section><!-- End container -->
-	</footer><!-- End footer -->
-	<footer id="footer-bottom">
-		<section class="container">
-			<div class="copyrights f_left">Copyright 2014 Ask me | <a href="#">By 2code</a></div>
-			<div class="social_icons f_right">
-				<ul>
-					<li class="twitter"><a original-title="Twitter" class="tooltip-n" href="#"><i class="social_icon-twitter font17"></i></a></li>
-					<li class="facebook"><a original-title="Facebook" class="tooltip-n" href="#"><i class="social_icon-facebook font17"></i></a></li>
-					<li class="gplus"><a original-title="Google plus" class="tooltip-n" href="#"><i class="social_icon-gplus font17"></i></a></li>
-					<li class="youtube"><a original-title="Youtube" class="tooltip-n" href="#"><i class="social_icon-youtube font17"></i></a></li>
-					<li class="skype"><a original-title="Skype" class="tooltip-n" href="skype:#?call"><i class="social_icon-skype font17"></i></a></li>
-					<li class="flickr"><a original-title="Flickr" class="tooltip-n" href="#"><i class="social_icon-flickr font17"></i></a></li>
-					<li class="rss"><a original-title="Rss" class="tooltip-n" href="#"><i class="social_icon-rss font17"></i></a></li>
-				</ul>
-			</div><!-- End social_icons -->
-		</section><!-- End container -->
-	</footer><!-- End footer-bottom -->
+	<jsp:include page="footer.jsp" flush="false" />
 </div><!-- End wrap -->
 
 <div class="go-up"><i class="icon-chevron-up"></i></div>

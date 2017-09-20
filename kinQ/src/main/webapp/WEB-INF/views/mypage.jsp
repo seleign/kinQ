@@ -32,8 +32,8 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
+    google.charts.setOnLoadCallback(drawPostChart);
+    function drawPostChart() {
       var data = google.visualization.arrayToDataTable([
         ["項目", "数", { role: "style" } ],
         ["質問数", ${questionsNum}, "skyblue"],
@@ -58,6 +58,34 @@
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
   	}
+    
+
+    google.charts.setOnLoadCallback(drawAnswerChart);
+    function drawAnswerChart() {
+    	
+        var data = google.visualization.arrayToDataTable([
+          ['Field', 'Answers per Field'],
+          [ '${answeredField[0].majorName}',	${answeredField[0].majorNum}],
+          [ '${answeredField[1].majorName}',	${answeredField[1].majorNum}],
+          [ '${answeredField[2].majorName}',	${answeredField[2].majorNum}],
+          [ '${answeredField[3].majorName}',	${answeredField[3].majorNum}],
+          [ '${answeredField[4].majorName}',	${answeredField[4].majorNum}],
+          [ '${answeredField[5].majorName}',	${answeredField[5].majorNum}],
+          [ '${answeredField[6].majorName}',	${answeredField[6].majorNum}],
+          [ '${answeredField[7].majorName}',	${answeredField[7].majorNum}],
+          [ '${answeredField[8].majorName}',	${answeredField[8].majorNum}],
+          [ '${answeredField[9].majorName}',	${answeredField[9].majorNum}]
+          	
+        ]);
+
+        var options = {
+          title: '活動分野'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
     
 
 	function myQuestionList(){
@@ -116,27 +144,41 @@
 			success: function(result){
 				var html = '';
 				var page = result['page'];
-				var qList = result['qList'];
-				var rList = result['rList'];
+					var rList = result['rList'];
 				
-				$.each(qList, function(index, element){
-					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-					html += '<div class="question-inner"><div class="clearfix"></div>';
-					html += '<p class="question-desc">'+element.questionContent+'</p>';
-					html += '<div class="question-details">';
-					if(element.qstatus == "solved"){
-						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-					}else{
-						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
+				$.each(rList, function(index, element){
+					html += "<li class=\"comment\">";
+					html += "<div class=\"comment-body comment-body-answered clearfix\">";
+					/* html += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
+					html += "<div class=\"comment-text\">";
+					html += "<div class=\"author clearfix\">";
+					html += "<div class=\"comment-author\"><a href=\"#\">" + element.id + "</a></div>";
+					html += "<div class=\"comment-vote\">";
+					html += "<ul class=\"question-vote\">";
+					html += "<li><a href=\"#\" class=\"question-vote-up\" title=\"Like\"></a></li>";
+					html += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
+					html += "</ul>";
+					html += "</div>";
+					if (element.score > 0) {
+						html += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + element.score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+					} else if (element.score < 0){
+						html += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + element.score*(-1) + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+					} else {
+						html += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">" + element.score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
 					}
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
- 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-					html += '<div class="clearfix"></div>';
-					html += '</div></article>';
+					html += "<div class=\"comment-meta\">";
+					html += "<div class=\"date\"><i class=\"icon-time\"></i>" + element.r_RegDate + "</div>" ;
+					html += "</div>";
+					if (${userNum} == element.userNum) {
+						html += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + element.replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
+					}
+					html += "</div>";
+					html += "<div class=\"text\">";
+					html += "<p>" + element.replyContent + "</p>";
+					html += "</div>";
+					html += "</div>";
+					html += "</div>";
+					html += "</li>";
 				});
 				$('#myAnswerArea').append(html);
 				$('#rfrom').val( page.from +10);
@@ -190,6 +232,7 @@
 										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
 								</ul>
 								</div>
+							    <div id="piechart"></div>
 								<br><input type="button" value="個人情報修正" onclick="location.href='updateUserInfo'">
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->
@@ -270,84 +313,7 @@
 		</div><!-- End row -->
 	</section><!-- End container -->
 	
-	<footer id="footer">
-		<section class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="widget widget_contact">
-						<h3 class="widget_title">Where We Are ?</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu.</p>
-						<ul>
-							<li>
-								<span>Address :</span>
-								Ask Me Network, 33 Street, syada Zeinab, Cairo, Egypt.
-							</li>
-							<li>
-								<span>Support :</span>Support Telephone No : (+2)01111011110
-							</li>
-							<li>Support Email Account : info@example.com</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="widget">
-						<h3 class="widget_title">Quick Links</h3>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="ask_question.html">Ask Question</a></li>
-							<li><a href="#">About</a></li>
-							<li><a href="cat_question.html">Questions</a></li>
-							<li><a href="user_profile.html">Users</a></li>
-							<li><a href="blog_1.html">Blog</a></li>
-							<li><a href="right_sidebar.html">Pages</a></li>
-							<li><a href="shortcodes.html">Shortcodes</a></li>
-							<li><a href="contact_us.html">Contact Us</a></li>
-							<li><a href="#">FAQs</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="widget">
-						<h3 class="widget_title">Popular Questions</h3>
-						<ul class="related-posts">
-							<li class="related-item">
-								<h3><a href="#">This is my first Question</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam.</p>
-								<div class="clear"></div><span>Feb 22, 2014</span>
-							</li>
-							<li class="related-item">
-								<h3><a href="#">This Is My Second Poll Question</a></h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem quam.</p>
-								<div class="clear"></div><span>Feb 22, 2014</span>
-							</li>
-						</ul>
-					</div>	
-				</div>
-				<div class="col-md-3">
-					<div class="widget widget_twitter">
-						<h3 class="widget_title">Latest Tweets</h3>
-						<div class="tweet_1"></div>
-					</div>
-				</div>
-			</div><!-- End row -->
-		</section><!-- End container -->
-	</footer><!-- End footer -->
-	<footer id="footer-bottom">
-		<section class="container">
-			<div class="copyrights f_left">Copyright 2014 Ask me | <a href="#">By 2code</a></div>
-			<div class="social_icons f_right">
-				<ul>
-					<li class="twitter"><a original-title="Twitter" class="tooltip-n" href="#"><i class="social_icon-twitter font17"></i></a></li>
-					<li class="facebook"><a original-title="Facebook" class="tooltip-n" href="#"><i class="social_icon-facebook font17"></i></a></li>
-					<li class="gplus"><a original-title="Google plus" class="tooltip-n" href="#"><i class="social_icon-gplus font17"></i></a></li>
-					<li class="youtube"><a original-title="Youtube" class="tooltip-n" href="#"><i class="social_icon-youtube font17"></i></a></li>
-					<li class="skype"><a original-title="Skype" class="tooltip-n" href="skype:#?call"><i class="social_icon-skype font17"></i></a></li>
-					<li class="flickr"><a original-title="Flickr" class="tooltip-n" href="#"><i class="social_icon-flickr font17"></i></a></li>
-					<li class="rss"><a original-title="Rss" class="tooltip-n" href="#"><i class="social_icon-rss font17"></i></a></li>
-				</ul>
-			</div><!-- End social_icons -->
-		</section><!-- End container -->
-	</footer><!-- End footer-bottom -->
+	<jsp:include page="footer.jsp" flush="false" />
 </div><!-- End wrap -->
 
 <div class="go-up"><i class="icon-chevron-up"></i></div>
