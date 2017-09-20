@@ -116,27 +116,41 @@
 			success: function(result){
 				var html = '';
 				var page = result['page'];
-				var qList = result['qList'];
-				var rList = result['rList'];
+					var rList = result['rList'];
 				
-				$.each(qList, function(index, element){
-					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-					html += '<div class="question-inner"><div class="clearfix"></div>';
-					html += '<p class="question-desc">'+element.questionContent+'</p>';
-					html += '<div class="question-details">';
-					if(element.qstatus == "solved"){
-						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-					}else{
-						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
+				$.each(rList, function(index, element){
+					html += "<li class=\"comment\">";
+					html += "<div class=\"comment-body comment-body-answered clearfix\">";
+					/* html += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
+					html += "<div class=\"comment-text\">";
+					html += "<div class=\"author clearfix\">";
+					html += "<div class=\"comment-author\"><a href=\"#\">" + element.id + "</a></div>";
+					html += "<div class=\"comment-vote\">";
+					html += "<ul class=\"question-vote\">";
+					html += "<li><a href=\"#\" class=\"question-vote-up\" title=\"Like\"></a></li>";
+					html += "<li><a href=\"#\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
+					html += "</ul>";
+					html += "</div>";
+					if (element.score > 0) {
+						html += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + element.score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+					} else if (element.score < 0){
+						html += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + element.score*(-1) + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+					} else {
+						html += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">" + element.score + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
 					}
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
- 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-					html += '<div class="clearfix"></div>';
-					html += '</div></article>';
+					html += "<div class=\"comment-meta\">";
+					html += "<div class=\"date\"><i class=\"icon-time\"></i>" + element.r_RegDate + "</div>" ;
+					html += "</div>";
+					if (${userNum} == element.userNum) {
+						html += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + element.replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
+					}
+					html += "</div>";
+					html += "<div class=\"text\">";
+					html += "<p>" + element.replyContent + "</p>";
+					html += "</div>";
+					html += "</div>";
+					html += "</div>";
+					html += "</li>";
 				});
 				$('#myAnswerArea').append(html);
 				$('#rfrom').val( page.from +10);
