@@ -91,8 +91,6 @@ public class UserController implements HttpSessionListener{
 			loginSessionMonitor.put(session.getId(), loginUser.getId());
 		}
 		
-		System.out.println(loginSessionMonitor+"확인용");
-
 		session.setAttribute("userName", loginUser.getUserName());
 		session.setAttribute("userId", loginUser.getId());
 		session.setAttribute("userNum", loginUser.getUserNum());
@@ -134,8 +132,6 @@ public class UserController implements HttpSessionListener{
 		int answersNum = userSvc.countAnswers( userNum);
 		RankVO myRank = userSvc.getMyRank( userNum);
 		
-		System.out.println( myRank);
-		
 		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		
 		model.addAttribute("answersNum", answersNum);
@@ -174,9 +170,13 @@ public class UserController implements HttpSessionListener{
 	
 	@RequestMapping(value = "myAnswerList", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<ReplyVO> myAnswerList( PageVO page, Model model) {
-		ArrayList<ReplyVO> result = userSvc.myAnswerList(page);
-		return result; //어느 페이지로 이동시킬 것인가?
+	public HashMap<String, Object> myAnswerList( PageVO page, Model model) {
+		ArrayList<ReplyVO> rList = userSvc.myAnswerList(page);
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("rList", rList);
+		return pack; //어느 페이지로 이동시킬 것인가?
 	}
 	
 	
