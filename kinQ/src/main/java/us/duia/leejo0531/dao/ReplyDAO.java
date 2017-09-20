@@ -6,8 +6,9 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.PageVO;
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.ReplyVO;
 
 /**
@@ -110,6 +111,12 @@ public class ReplyDAO {
 	public int deleteReply(int replyNum) {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		int result = mapper.deleteReply(replyNum);
+		return result;
+	}
+	
+	public int selectedReply(QuestionVO question) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.selectedReply(question);
 		return result;
 	}
 

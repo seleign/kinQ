@@ -160,4 +160,5 @@ public class QuestionService {
 		ArrayList<QuestionVO> result = qstnDao.getQuestionPage(map);
 		return result;
 	}
+
 }

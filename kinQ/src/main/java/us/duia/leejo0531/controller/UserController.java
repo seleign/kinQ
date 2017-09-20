@@ -25,6 +25,7 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.RankVO;
 import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.UserVO;
 
@@ -126,12 +127,20 @@ public class UserController implements HttpSessionListener{
 	@RequestMapping(value="mypage", method=RequestMethod.GET)
 	public String openMyPage(Model model, HttpSession session){
 		logger.info("mypage in");
-		int questionsNum = userSvc.countQuestions((int)session.getAttribute("userNum"));
-		int completedQuestions = userSvc.countCompletedQuestions((int)session.getAttribute("userNum"));
-		int answersNum = userSvc.countAnswers((int)session.getAttribute("userNum"));
+		int userNum = (int)session.getAttribute("userNum");
+		
+		int questionsNum = userSvc.countQuestions( userNum);
+		int completedQuestions = userSvc.countCompletedQuestions( userNum);
+		int answersNum = userSvc.countAnswers( userNum);
+		RankVO myRank = userSvc.getMyRank( userNum);
+		
+		System.out.println( myRank);
+		
 		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		
 		model.addAttribute("answersNum", answersNum);
+		model.addAttribute("myRank", myRank);
+		
 		return "mypage";
 	}
 
@@ -167,7 +176,6 @@ public class UserController implements HttpSessionListener{
 	@ResponseBody
 	public ArrayList<ReplyVO> myAnswerList( PageVO page, Model model) {
 		ArrayList<ReplyVO> result = userSvc.myAnswerList(page);
-		System.out.println(result);
 		return result; //어느 페이지로 이동시킬 것인가?
 	}
 	
