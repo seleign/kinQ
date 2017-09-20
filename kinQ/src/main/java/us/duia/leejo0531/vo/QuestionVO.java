@@ -18,6 +18,8 @@ public class QuestionVO {
    private int hit;
    private String questionContent;
    private int score;
+   private String limit;
+   private int allReply;
    
    public QuestionVO() {
       super();
@@ -27,26 +29,31 @@ public class QuestionVO {
 	   super();
 	   this.questionNum = questionNum;
    }
+
+
+
    public QuestionVO(int questionNum, int userNum, String timeLimit, String qstatus, Date regDate, Date modDate,
-         String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent, int score) {
-      super();
-      this.questionNum = questionNum;
-      this.userNum = userNum;
-      this.timeLimit = timeLimit;
-      this.qstatus = qstatus;
-      this.regDate = regDate;
-      this.modDate = modDate;
-      this.title = title;
-      this.relatedTag = relatedTag;
-      MinorNum = minorNum;
-      this.videoSrc = videoSrc;
-      this.hit = hit;
-      this.questionContent = questionContent;
-      this.score = score;
+		   String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent,
+		   int score, String limit, int allReply) {
+	   this.questionNum = questionNum;
+	   this.userNum = userNum;
+	   this.timeLimit = timeLimit;
+	   this.qstatus = qstatus;
+	   this.regDate = regDate;
+	   this.modDate = modDate;
+	   this.title = title;
+	   this.relatedTag = relatedTag;
+	   MinorNum = minorNum;
+	   this.videoSrc = videoSrc;
+	   this.hit = hit;
+	   this.questionContent = questionContent;
+	   this.score = score;
+	   this.limit = limit;
+	   this.allReply = allReply;
    }
 
    public int getQuestionNum() {
-      return questionNum;
+	   return questionNum;
    }
 
    public void setQuestionNum(int questionNum) {
@@ -142,19 +149,37 @@ public void setRegDate(Date regDate) {
    }
 
    public String getQuestionContent() {
-      return questionContent;
+	   return questionContent;
    }
 
    public void setQuestionContent(String questionContent) {
-      this.questionContent = questionContent;
+	   this.questionContent = questionContent;
    }
 
-@Override
-public String toString() {
-	return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", qstatus="
-			+ qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
-			+ relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit + ", questionContent="
-			+ questionContent +", score="+score+"]";
-}
+   public String getLimit() {
+	   return limit;
+   }
+
+   public void setLimit(String limit) {
+	   this.limit = limit;
+   }
+
+   public int getAllReply() {
+	   return allReply;
+   }
+
+   public void setAllReply(int allReply) {
+	   this.allReply = allReply;
+   }
+
+   @Override
+   public String toString() {
+	   return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", qstatus="
+			   + qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
+			   + relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit + ", questionContent="
+			   + questionContent + ", score=" + score + ", limit=" + limit + ", allReply=" + allReply + "]";
+   }
+
+
 
 }

@@ -70,4 +70,9 @@ public class ReplyService {
 		int result = replyDao.deleteReply(replyNum);
 		return result;
 	}
+	
+	public int getReplyNum(int questionNum){
+		int result = replyDao.getReplyNum(questionNum);
+		return result;
+	}
 }

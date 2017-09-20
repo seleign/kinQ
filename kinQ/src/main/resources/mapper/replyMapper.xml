@@ -101,4 +101,8 @@
 		    where
            		<![CDATA[ r >= #{from} and r <= #{to} ]]>
 	</select>
+	
+	<select id="getReplyNum" parameterType="int" resultType="int">
+		select nvl(count(*),0) as questionNum from q_reply where questionNum = #{questionNum}
+	</select>
 </mapper>

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.QuestionService;
+import us.duia.leejo0531.service.ReplyService;
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
@@ -44,6 +45,9 @@ public class QuestionController {
 	
 	@Autowired(required = false)
 	private UserService userSvc; //UserService 비즈니스 로직
+	
+	@Autowired
+	ReplyService rSvc;
 
 	/***
 	 * GET 방식으로 질문 페이지에 접근하는데 사용된다.
@@ -182,6 +186,15 @@ public class QuestionController {
 	@RequestMapping(value="getQuestionPage",method=RequestMethod.GET)
 	public @ResponseBody ArrayList<QuestionVO> getQuestionPage(int startpage,int endpage){
 		ArrayList<QuestionVO> result = qstnSvc.getQuestionPage(startpage, endpage);
+		for (QuestionVO q : result) {
+			String checkTime = qstnSvc.getQuestionTime(q.getQuestionNum());
+			int reply = rSvc.getReplyNum(q.getQuestionNum());
+			System.out.println("**************** time :"+checkTime+" 리플 :"+reply);
+			q.setLimit(checkTime);
+			q.setAllReply(reply);
+			System.out.println("*********** tostring"+q.toString());
+		}
+		
 		return result;
 	}
 	
@@ -201,5 +214,12 @@ public class QuestionController {
 		model.addAttribute("userNum", userNum);
 		
 		return "question/questionForm5";  // 실시간 답변페이지
+	}
+	
+	//질문글 시간체크 
+	@RequestMapping(value="checkTime", method=RequestMethod.GET)
+	public @ResponseBody String checkTime(int questionNum){
+		String checkTime = qstnSvc.getQuestionTime(questionNum);
+		return checkTime;
 	}
 }

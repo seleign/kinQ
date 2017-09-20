@@ -56,8 +56,8 @@
 						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
 					}
 					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-					html += '<span class="question-date"><i class="icon-time"></i>시간코드 들어갈곳</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>답변개수 들어갈곳</a></span>';
+					html += '<span class="question-date"><i class="icon-time"></i>'+element.limit+'</span>';
+					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+element.allReply+'</a></span>';
 					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
 					html += '<div class="clearfix"></div>';
 					html += '</div></article>';
@@ -77,9 +77,9 @@
 			success: function(result){
 				var html = '';
 				$.each(result, function(index, element){
-					if(element.timeLimit =! null){
+					if(element.timeLimit){
 					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
+					html += '<h2><a href="question_view" href="question_view?questionNum='+element.questionNum+'>'+element.title+'</a></h2>';
 					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 					html += '<div class="question-inner"><div class="clearfix"></div>';
 					html += '<p class="question-desc">'+element.questionContent+'</p>';
@@ -90,8 +90,8 @@
 						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
 					}
 					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-					html += '<span class="question-date"><i class="icon-time"></i>'+element.timeLimit+'</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>답변개수 들어갈곳</a></span>';
+					html += '<span class="question-date"><i class="icon-time"></i>'+element.Limit+'</span>';
+					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+element.AllReply+'</a></span>';
 					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
 					html += '<div class="clearfix"></div>';
 					html += '</div></article>';
@@ -121,8 +121,8 @@
 					html += '<div class="question-details">';
 					html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
 					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-					html += '<span class="question-date"><i class="icon-time"></i>시간코드 들어갈곳</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>답변개수 들어갈곳</a></span>';
+					html += '<span class="question-date"><i class="icon-time"></i>'+element.Limit+'</span>';
+					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+element.AllReply+'</a></span>';
 					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
 					html += '<div class="clearfix"></div>';
 					html += '</div></article>';

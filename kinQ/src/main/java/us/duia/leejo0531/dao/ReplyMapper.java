@@ -21,4 +21,5 @@ public interface ReplyMapper {
 	public int registReply(ReplyVO reply);
 	public int deleteReply(int replyNum);
 	public ArrayList<ReplyVO> myAnswerList( PageVO page);
+	public int getReplyNum(int questionNum);
 }

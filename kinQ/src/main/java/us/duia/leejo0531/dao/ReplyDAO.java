@@ -118,4 +118,10 @@ public class ReplyDAO {
 		ArrayList<ReplyVO> result = mapper.myAnswerList(page);
 		return result;
 	}
+	
+	public int getReplyNum(int questionNum){
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.getReplyNum(questionNum);
+		return result;
+	}
 }
