@@ -36,6 +36,18 @@ public class PointDAO {
 		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
 		mapper.addPoint(cash);
 	}
+
+	public int getChange(int userNum) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		int cChange = mapper.getChange(userNum);
+		return cChange;
+	}
+
+	public int getRecentChange(int userNum) {
+		PointMapper mapper = sqlSession.getMapper(PointMapper.class);
+		int recentChange = mapper.getRecentChange(userNum);
+		return recentChange;
+	}
 	
 
 }

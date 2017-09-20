@@ -27,8 +27,12 @@ public class PointController{
 	PointService pointSvc;
 	
 	@RequestMapping(value="pointShop", method=RequestMethod.GET)
-	public String pointShop(Model model){
+	public String pointShop(Model model, HttpSession session){
 		ArrayList<GoodsVO> goodsList = pointSvc.getGoodsList();
+		int userNum = (int)session.getAttribute("userNum");
+		int cChange = pointSvc.getRecentChange(userNum);
+		
+		model.addAttribute("cChange", cChange);
 		model.addAttribute("goodsList", goodsList);
 		return "pointShop";
 	}
@@ -49,10 +53,13 @@ public class PointController{
 		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
 		String cChargedDate = currentTime.format(new Date(time));
 		
-		CashLogVO cash = new CashLogVO(0, (int)session.getAttribute("userNum"), amount, cChargedDate, 0, null, 0);
-		pointSvc.addPoint(cash);
+		int userNum = (int)session.getAttribute("userNum");
 		
-		System.out.println(cash);
+		int change = pointSvc.getChange(userNum);
+		int cChange = change+amount;
+		
+		CashLogVO cash = new CashLogVO(0, userNum, amount, cChargedDate, 0, null, cChange);
+		pointSvc.addPoint(cash);
 		
 		return "success";
 	}

@@ -156,7 +156,9 @@
 							<div class="alert-message success">
 							    <i class="icon-ok"></i>
 							    <p><span>マイポイント</span><br>
-							    <strong>${sessionScope.userName }</strong> 様のポイントは<strong>_____ポイント</strong>です。</p>
+							    <strong>${sessionScope.userName }</strong> 様のキャッシュは　<strong>${cChange}　円</strong>　です。</p><br><hr><br>
+							    <p>※ <strong>キャッシュ1円</strong>は<strong>1ポイント</strong>に交換できます。&nbsp;
+							    <input type="button" value="キャッシュ　→　ポイントに交換">
 							</div>
 							
 						    <div class="alert-message info">
@@ -172,7 +174,7 @@
 							    <div class="tab-inner-warp">
 							    	<div class="tab-inner">
 							            <p>※ <strong>1ポイント</strong>は<strong>1円</strong>に相当します。手数料は<strong>5パーセント</strong>です。
-							       		<input type="button" value="両替"></p>
+							       		<input type="button" value="ポイント　→　現金に両替"></p>
 							        </div>
 							    </div>
 							    <div class="tab-inner-warp">
@@ -188,7 +190,7 @@
 						     <form action="charge" method="post" name="form"> 
 						    <div class="alert-message warning">
 						        <i class="icon-exclamation-sign"></i>
-+						        <span>ポイントチャージ</span><br>  
+						        <span>ポイントチャージ</span><br>  
  						        ポイントで質問やショッピングが出来ます。<br><br><hr><br>  
  						        <select class="combo" id="chargeAmount" name="chargeAmount" style="float: left;">  
  						        	<option value="0">金額選択</option>  
@@ -247,7 +249,7 @@
 						<h2>マイカート</h2><hr><br> 
 							<strong>ショッピングリスト</strong><br><br><div><ul id="goodsList"></ul></div>
 							<br><hr><br>
-							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0ポイント</div><br> 
+							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 ポイント</div><br> 
 							<hr><br>
 						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%">キャンセル</a>
 						<a href="#" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%;">購入する</a>

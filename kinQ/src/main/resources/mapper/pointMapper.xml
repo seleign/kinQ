@@ -10,6 +10,14 @@
 	
 	<insert id="addPoint" parameterType="CashLog">
 		insert into CashLog(cashLogNum, userNum, cCharged, cChargedDate, cChange) 
-		values(CashLog_SEQ.nextval, #{userNum}, #{cCharged}, TO_DATE(#{cChargedDate}), 0) 
+		values(CashLog_SEQ.nextval, #{userNum}, #{cCharged}, TO_DATE(#{cChargedDate}), #{cChange}) 
 	</insert>
+	
+	<select id="getChange" parameterType="int" resultType="int">
+		select cChange from cashLog where userNum = #{userNum}
+	</select>
+	
+	<select id="getRecentChange" parameterType="int" resultType="int">
+		select max(cChange) from cashLog where userNum = #{userNum} group by USERNUM
+	</select>
 </mapper>
