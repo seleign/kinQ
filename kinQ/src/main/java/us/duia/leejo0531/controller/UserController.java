@@ -179,6 +179,12 @@ public class UserController implements HttpSessionListener{
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}
 	
+	@RequestMapping( value="rankingList", method = RequestMethod.GET)
+	public String showRankingList( Model model) {
+		ArrayList<RankVO>rkList = userSvc.getUserRank();
+		model.addAttribute("rankList", rkList);
+		return "ranking";
+	}
 	
 	//header ajax에서 호출됨
 	@RequestMapping(value="getAlarm", method=RequestMethod.GET)

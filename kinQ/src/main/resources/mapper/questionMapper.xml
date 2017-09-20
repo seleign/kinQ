@@ -212,7 +212,7 @@
                         from
                             q_board
 				        <trim prefix="where" prefixOverrides="and|or">
-				        	<foreach collection="list" item="item">and contains( lower(questioncontent), lower('%${item}%')) >0</foreach>
+				        	<foreach collection="list" item="item">and contains( questioncontent, '%${item}%') >0</foreach>
 				        </trim>
                     
                         union
@@ -226,7 +226,7 @@
                             from
                                 q_reply
 							<trim prefix="where" prefixOverrides="and|or">
-					        	<foreach collection="list" item="item">and contains( lower(replycontent), lower('%${item}%')) >0</foreach>
+					        	<foreach collection="list" item="item">and contains( replycontent, '%${item}%') >0</foreach>
 					        </trim>
                             group by questionnum
                             ) targetQstn
@@ -240,7 +240,7 @@
 				) results
 			)numbered
 		where
-            <![CDATA[ r >= #{from} and r <= #{to} ]]>
+            <![CDATA[ r >= ${from} and r <= ${to} ]]>
             and numbered.questionnum = tag.questionnum(+)
         order by
             numbered.questionnum desc, tag.tagnum
@@ -297,7 +297,7 @@
 				) results
 			)numbered
 		where
-            <![CDATA[ r >= #{from} and r <= #{to} ]]>
+            <![CDATA[ r >= ${from} and r <= ${to} ]]>
             and numbered.questionnum = tag.questionnum(+)
         order by
             numbered.questionnum desc, tag.tagnum

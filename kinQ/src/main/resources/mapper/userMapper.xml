@@ -88,7 +88,7 @@
 		select * from useralarm where usernum = #{userNum}
 	</select>
 	
-	<select id="getUserRank" parameterType="int" resultType="Rank">
+	<select id="getMyRank" parameterType="int" resultType="Rank">
 	    select
 	    	ranked.*
 	    from
@@ -140,8 +140,66 @@
 		        )added
 			)ranked
 		where
-			#{userNum} is null      
-			or usernum = #{userNum} 	
+			usernum = #{userNum} 	
+	</select>
+	
+	<select id="getUserRank" resultType="Rank">
+	    select
+	    	ranked.*,
+	    	userinfo.id as userId
+	    from
+	    	userinfo,
+	    	(select
+		        rank() over( order by totalPoint desc) as ranking,
+		        added.*
+		    from
+		        (select
+		            myPost.*,
+		            nvl(sCount,0) as sCount,
+		            ( qCount*10 + rCount*20 + nvl(sCount,0)*30)as totalPoint    
+		        from
+		            (select
+		                myQ.*,
+		                myR.rCount
+		            from
+		                (select
+		                    usernum,
+		                    count(*) as qCount
+		                from
+		                    q_board
+		                group by usernum
+		                )myQ,
+		                (select
+		                    usernum,
+		                    count(*) as rCount
+		                from
+		                    q_reply
+		                group by usernum
+		                )myR
+		            where
+		                myQ.usernum = myR.usernum
+		            ) myPost,
+		            ( select
+		                q_reply.usernum as usernum,
+		                nvl(count( replynum),0) as sCount
+		            from
+		                q_board,
+		                q_reply
+		            where 
+		                q_board.selectedreplynum = q_reply.replynum(+)
+		            group by
+		                q_reply.usernum
+		            ) selected
+		        where 
+		            myPost.usernum = selected.usernum(+)
+		        order by 
+		            totalPoint desc
+		        )added
+			)ranked
+		where
+			ranked.usernum = userinfo.usernum
+        order by 
+            ranking
 	</select>
 	
 </mapper>
