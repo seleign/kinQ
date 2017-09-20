@@ -67,8 +67,17 @@
 							<ul>
 								<c:forEach var="rank" items="${rankList}">
 									<li>
-										${rank.ranking}位:&nbsp;${rank.userId}&nbsp;${rank.totalPoint}点&nbsp;|&nbsp;&nbsp;${rank.qCount}の質問&nbsp;${rank.rCount}の答え&nbsp;${rank.sCount}の採択
+										<div style="display:inline-block; width:20%;">
+											<span class="font-gold">${rank.ranking}</span>位:&nbsp;&nbsp;<span class="font-silver">${rank.userId}</span>
+										</div>
+										<div style="text-align:right; display:inline-block; width:60%;">
+											<span><i class="icon-question-sign"></i>${rank.qCount}個の質問x10点&nbsp;&nbsp;&nbsp;<i class="icon-lightbulb"></i>${rank.rCount}個の答えx20点&nbsp;&nbsp;&nbsp;<i class="icon-ok"></i>${rank.sCount}個の採択x30点&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+										</div>
+										<div style="text-align:right; display:inline-block; width:15%;">
+											<span class="font-skyblue">${rank.totalPoint}点</span>
+										</div>
 									</li>
+									<hr>
 								</c:forEach>
 							</ul>
 						</div><!-- End page-content -->
