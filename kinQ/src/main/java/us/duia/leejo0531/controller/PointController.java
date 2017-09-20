@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import us.duia.leejo0531.service.PointService;
 import us.duia.leejo0531.vo.CashLogVO;
 import us.duia.leejo0531.vo.GoodsVO;
+import us.duia.leejo0531.vo.PointLogVO;
 
 @Controller
 public class PointController {
@@ -65,7 +65,7 @@ public class PointController {
 	}
 
 	@RequestMapping(value = "cashToPoint", method = RequestMethod.POST)
-	public @ResponseBody int cashToPoint(int currentChange, HttpSession session) {
+	public @ResponseBody int[] cashToPoint(int currentChange, HttpSession session) {
 		int userNum = (int) session.getAttribute("userNum");
 		int change = pointSvc.getRecentChange(userNum);
 
@@ -76,10 +76,39 @@ public class PointController {
 
 		CashLogVO cash = new CashLogVO(0, userNum, 0, null, currentChange, cUsedDate, cChange);
 		pointSvc.cashToPoint(cash);
+		
+		int pChange = pointSvc.getRecentPoint(userNum);
+		int finalPChange = pChange+currentChange;
+		
+		PointLogVO point = new PointLogVO(0, userNum, currentChange, cUsedDate, 0, null, pChange);
+		pointSvc.addPointLog(point);
 
 		int finalChange = pointSvc.getRecentChange(userNum);
-
-		return finalChange;
+		
+		int [] result = {finalChange, finalPChange};
+		
+		return result;
 	}
 
+	@RequestMapping(value = "pointToCash", method = RequestMethod.POST)
+	public @ResponseBody int pointToCash(int currentPoint, HttpSession session) {
+		int userNum = (int) session.getAttribute("userNum");
+		int point = pointSvc.getRecentPoint(userNum);
+
+		long time = System.currentTimeMillis();
+		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
+		String cUsedDate = currentTime.format(new Date(time));
+		int pChange = point - currentPoint;
+
+		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, currentPoint, cUsedDate, pChange);
+		pointSvc.pointToCash(pointLog);
+		
+		int finalPChange = pointSvc.getRecentPoint(userNum);
+		
+		return finalPChange;
+	}
+	
+	
+	
+	
 }
