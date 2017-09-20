@@ -11,9 +11,10 @@ public interface PointMapper {
 
 	void addPoint(CashLogVO cash);
 
-	int getChange(int userNum);
-
 	int getRecentChange(int userNum);
 
+	void cashToPoint(CashLogVO cash);
+
+	int getRecentPoint(int userNum);
 
 }

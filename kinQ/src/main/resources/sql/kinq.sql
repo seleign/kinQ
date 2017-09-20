@@ -853,6 +853,28 @@ insert into cashlog values(CashLog_SEQ.nextval, 18, 0, sysdate, null, null, 0);
 insert into cashlog values(CashLog_SEQ.nextval, 19, 0, sysdate, null, null, 0);
 insert into cashlog values(CashLog_SEQ.nextval, 20, 0, sysdate, null, null, 0);
 
+insert into pointlog values(pointlog_seq.nextval, 1, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 2, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 3, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 4, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 5, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 6, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 7, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 8, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 9, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 10, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 11, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 12, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 13, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 14, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 15, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 16, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 17, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 18, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 19, 0, sysdate, null, null, 0);
+insert into pointlog values(pointlog_seq.nextval, 20, 0, sysdate, null, null, 0);
+
+
 commit;
 
 

@@ -26,14 +26,18 @@ public class PointService {
 		pointDao.addPoint(cash);
 	}
 
-	public int getChange(int userNum) {
-		int cChange = pointDao.getChange(userNum);
-		return cChange;
-	}
-
 	public int getRecentChange(int userNum) {
 		int recentChange = pointDao.getRecentChange(userNum);
 		return recentChange;
+	}
+
+	public void cashToPoint(CashLogVO cash) {
+		pointDao.cashToPoint(cash);
+	}
+
+	public int getRecentPoint(int userNum) {
+		int recentPoint = pointDao.getRecentPoint(userNum);
+		return recentPoint;
 	}
 
 

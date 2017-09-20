@@ -28,28 +28,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
     	
-    	var totalPrice = 0;
-    	var goodsName = new Array();
-    	var goodsNum = new Array();
-    	var goodsPrice = new Array();
-    	
-    	function myCart(goods, price, num){
-    		$('#good'+num).prop('disabled', true);
-    		goodsName.push(goods);
-    		goodsNum.push(num);
-    		goodsPrice.push(price);
-    		
-    		totalPrice += price;
-    		
-			var html = '';
-			
-    		for(var i in goodsName){
-    			html+= '<li value="num'+goodsNum[i]+'">'+goodsName[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+goodsNum[i]+', '+goodsPrice[i]+')"></a></li><br>';
-    		}
-    		$('#goodsList').html(html);
-    		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
-    	}
-    	
+	var totalPrice = 0;
+	var goodsName = new Array();
+	var goodsNum = new Array();
+	var goodsPrice = new Array();
+	
+	function myCart(goods, price, num){
+		$('#good'+num).prop('disabled', true);
+		goodsName.push(goods);
+		goodsNum.push(num);
+		goodsPrice.push(price);
+		
+		totalPrice += price;
+		
+		var html = '';
+		
+		for(var i in goodsName){
+			html+= '<li value="num'+goodsNum[i]+'">'+goodsName[i]+'&nbsp;<a class="icon-remove" onclick="javascript:unchecking('+goodsNum[i]+', '+goodsPrice[i]+')"></a></li><br>';
+		}
+		$('#goodsList').html(html);
+		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
+	}
+        	
+/*      	$(function() {
+    		$("#exchangeBtn").on('click', cashToPoint);
+    	});
+    	 */
     	
      	function unchecking(deleteNum, price){
     		html = '';
@@ -74,7 +78,7 @@
     		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント'); 
     	} 
     	
-    	function cancel(){
+       	function cancel(){
     		$('input[type=button]').prop('disabled', false);
     		goodsName = [];
     		goodsNum = [];
@@ -89,18 +93,33 @@
     		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント'); 
     	}
     	
-    	
-    		function charge(){  
-    		    		var selectVal = $('#chargeAmount').val();  
-    		    		  
-    		    		if(selectVal == 0){  
-    	    			alert('チャージする金額をご選び下さい。');  
-    	    			return false;  
-    		    		}  
-    	    		  
-    		    		$('form').submit();  
-    	    	}  
+		function charge(){  
+    		var selectVal = $('#chargeAmount').val();  
+    		  
+    		if(selectVal == 0){  
+			alert('チャージする金額をご選び下さい。');  
+			return false;  
+    		}  
+		  
+    		$('form').submit();  
+	}  
 
+
+     	function cashToPoint(change){
+    		
+    		if(confirm('キャッシュをポイントに交換しますか。')==true){
+     			$.ajax({
+    				url: 'cashToPoint',
+    				method: 'POST',
+    				data: {currentChange : change},
+    				success: function(finalChange){
+    					alert(finalChange);
+    					$('#myCash').empty();
+    					$('#myCash').html(finalChange);				
+    				}
+    			}); 
+    		}
+    	}
     	 
     </script>
     
@@ -147,65 +166,87 @@
 			<div class="col-md-9">
 				
 				<div id="accordions" class="row">
-					
-					
-						<div id="alert" class="row">
-						<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">ポイント管理</h2></div></div>
-					<div class="col-md-12">
-						<div class="page-content page-shortcode">
-							<div class="alert-message success">
-							    <i class="icon-ok"></i>
-							    <p><span>マイポイント</span><br>
-							    <strong>${sessionScope.userName }</strong> 様のキャッシュは　<strong>${cChange}　円</strong>　です。</p><br><hr><br>
-							    <p>※ <strong>キャッシュ1円</strong>は<strong>1ポイント</strong>に交換できます。&nbsp;
-							    <input type="button" value="キャッシュ　→　ポイントに交換">
-							</div>
-							
-						    <div class="alert-message info">
-						        <i class="icon-bullhorn"></i>
-						        <p><span>ポイント交換</span><br>ポイントの交換政策は緊Ｑの約款をご参考ください。<br><br>
-						        
-							<div class="page-content page-shortcode">
-							<div class="tabs-warp">
-							    <ul class="tabs">
-							        <li class="tab"><a href="#">ポイント両替</a></li>
-							        <li class="tab"><a href="#">払い戻し</a></li>
-							    </ul>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							            <p>※ <strong>1ポイント</strong>は<strong>1円</strong>に相当します。手数料は<strong>5パーセント</strong>です。
-							       		<input type="button" value="ポイント　→　現金に両替"></p>
-							        </div>
-							    </div>
-							    <div class="tab-inner-warp">
-							    	<div class="tab-inner">
-							    		<p>※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。
-							       		<input type="button" value="払い戻し"></p>
-							        </div>
-							    </div>
 
+
+					<div id="alert" class="row">
+						<div class="col-md-12">
+							<div class="boxedtitle page-title">
+								<h2 class="t_left">ポイント管理</h2>
 							</div>
-						</div><!-- End page-content -->
 						</div>
-						     <form action="charge" method="post" name="form"> 
-						    <div class="alert-message warning">
-						        <i class="icon-exclamation-sign"></i>
-						        <span>ポイントチャージ</span><br>  
- 						        ポイントで質問やショッピングが出来ます。<br><br><hr><br>  
- 						        <select class="combo" id="chargeAmount" name="chargeAmount" style="float: left;">  
- 						        	<option value="0">金額選択</option>  
- 						        	<option value="1000">1000 Points</option>  
- 						        	<option value="2000">2000 Points</option>  
- 						        	<option value="3000">3000 Points</option>  
- 						        	<option value="4000">4000 Points</option>  
- 						        	<option value="5000">5000 Points</option>  
- 						        </select>  
- 						  		&nbsp;&nbsp;&nbsp;<input type="button" value="ポイントチャージ" onclick="javascript:charge()">  
-						    </div>
-						    </form> 
-						</div><!-- End page-content -->
+						<div class="col-md-12">
+							<div class="page-content page-shortcode">
+								<div class="alert-message success">
+									<i class="icon-ok"></i>
+									<p>
+										<span>マイキャッシュ</span><br> 
+										<strong>${sessionScope.userName }</strong>
+										様のキャッシュは <strong><span id="myCash">${cChange}</span> 円</strong> です。
+									</p>
+									<br><hr><br>
+									<p>
+										※ <strong>キャッシュ1円</strong>は<strong>1ポイント</strong>に交換できます。&nbsp;
+										<input type="button" onclick="javascript:cashToPoint('${cChange}')" value="キャッシュ　→　ポイントに交換">
+											
+								</div>
+
+								<div class="alert-message info">
+									<i class="icon-bullhorn"></i>
+									<p>
+										<span>ポイント交換</span><br>
+										<strong>${sessionScope.userName }</strong>様のポイントは <strong><span id="myPoint">${pChange}</span> ポイント</strong> です。
+										ポイントの交換政策は緊Ｑの約款をご参考ください。<br>
+										<br>
+									<div class="page-content page-shortcode">
+										<div class="tabs-warp">
+											<ul class="tabs">
+												<li class="tab"><a href="#">ポイント両替</a></li>
+												<li class="tab"><a href="#">払い戻し</a></li>
+											</ul>
+											<div class="tab-inner-warp">
+												<div class="tab-inner">
+													<p>
+														※ <strong>1ポイント</strong>は<strong>1円</strong>に相当します。手数料は<strong>5パーセント</strong>です。
+														<input type="button" value="ポイント　→　現金に両替">
+													</p>
+												</div>
+											</div>
+											<div class="tab-inner-warp">
+												<div class="tab-inner">
+													<p>
+														※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。 <input
+															type="button" value="払い戻し">
+													</p>
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<!-- End page-content -->
+								</div>
+								<form action="charge" method="post" name="form">
+									<div class="alert-message warning">
+										<i class="icon-exclamation-sign"></i> <span>キャッシュチャージ</span><br>
+										キャッシュはポイントに交換できます。質問やショッピングをする時、ポイントが使えます。<br>
+										<br>
+										<hr>
+										<br> <select class="combo" id="chargeAmount"
+											name="chargeAmount" style="float: left;">
+											<option value="0">金額選択</option>
+											<option value="1000">1000 円</option>
+											<option value="2000">2000 円</option>
+											<option value="3000">3000 円</option>
+											<option value="4000">4000 円</option>
+											<option value="5000">5000 円</option>
+										</select> &nbsp;&nbsp;&nbsp;<input type="button" value="ポイントチャージ"
+											onclick="javascript:charge()">
+									</div>
+								</form>
+							</div>
+							<!-- End page-content -->
+						</div>
 					</div>
-				</div><!-- End #alert -->
+					<!-- End #alert -->
 
 
 				</div><!-- End #accordions -->
