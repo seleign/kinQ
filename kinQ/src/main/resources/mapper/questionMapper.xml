@@ -17,6 +17,7 @@
 		<result property="score" column="score"/>
 		<result property="selectedReplyNum" column="selectedReplyNum"/>
 		<result property="timeCheck" column="timeCheck"/>
+		<result property="replyCount" column="replyCount"/>
 		<collection property="relatedTag" javaType="ArrayList" ofType="string">
 			<result property="tag" column="tag"/>
 		</collection>
@@ -106,7 +107,8 @@
 				results.*
 			from
                 (select
-                    merged.*
+                    merged.*,
+                    replyCount
                 from
                     (select
                         selected.*
@@ -243,7 +245,17 @@
                         ) selected
                     where
                         #{searchType} = 'content'
-                    )merged
+                    )merged,
+                    (select
+                        questionnum,
+                        count(*) as replyCount
+                    from
+                        q_reply
+                    group by
+                        questionnum
+                    )rCount
+                where
+                    merged.questionnum = rCount.questionnum
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -270,7 +282,8 @@
 				results.*
 			from
                 (select
-                    merged.*
+                    merged.*,
+                    replyCount
                 from
                     (select
                         selected.*
@@ -306,7 +319,17 @@
                         ) selected
                     where
                         #{searchType} = 'author' 
-                    )merged
+                    )merged,
+                    (select
+                        questionnum,
+                        count(*) as replyCount
+                    from
+                        q_reply
+                    group by
+                        questionnum
+                    )rCount
+                where
+                    merged.questionnum = rCount.questionnum
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -336,7 +359,7 @@
 		where Q_Board.questionNum = tag.questionNum(+)
 	</select>
 	<!-- 답변 없는 질문글 가져오기 -->
-	<select id="search_no_answered" resultMap="QuestionResult">
+<!-- 	<select id="search_no_answered" resultMap="QuestionResult">
 		select
             tag,
 			numbered.*,
@@ -370,7 +393,7 @@
 		    ) no_answer
 		where no_answer.questionnum = tag.questionnum(+)
 		order by no_answer.questionnum
-	</select>
+	</select> -->
 	
 		<!-- 범위지정 질문글 가져오기  -->
 	<select id="getQuestionPage" parameterType="map" resultType="Question">
@@ -404,13 +427,24 @@
 				results.*
 			from
                 (select
-                    merged.*
+                    merged.*,
+                    replyCount
                 from
                     (select
                     	*
                     from
                     	q_board
-                    )merged
+                    )merged,
+                    (select
+                        questionnum,
+                        count(*) as replyCount
+                    from
+                        q_reply
+                    group by
+                        questionnum
+                    )rCount
+                where
+                    merged.questionnum = rCount.questionnum
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -437,7 +471,8 @@
 				results.*
 			from
                 (select
-                    merged.*
+                    merged.*,
+                    replyCount
                 from
                     (select
                     	*
@@ -445,7 +480,17 @@
                     	q_board
                     where
                     	timelimit > sysdate
-                    )merged
+                    )merged,
+                    (select
+                        questionnum,
+                        count(*) as replyCount
+                    from
+                        q_reply
+                    group by
+                        questionnum
+                    )rCount
+                where
+                    merged.questionnum = rCount.questionnum
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -472,7 +517,8 @@
 				results.*
 			from
                 (select
-                    merged.*
+                    merged.*,
+                    replyCount
                 from
                     (select
                     	*
@@ -480,7 +526,17 @@
                     	q_board
                     where
                     	qstatus = 'in progress'
-                    )merged
+                    )merged,
+                    (select
+                        questionnum,
+                        count(*) as replyCount
+                    from
+                        q_reply
+                    group by
+                        questionnum
+                    )rCount
+                where
+                    merged.questionnum = rCount.questionnum
                 order by merged.questionnum desc
 				) results
 			)numbered

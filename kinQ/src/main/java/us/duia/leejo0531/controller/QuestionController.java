@@ -267,16 +267,9 @@ public class QuestionController {
 		
 		ArrayList<QuestionVO> result = qstnSvc.searchRecentPost(page);
 		
-		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
-		for (QuestionVO qstn : result) {
-			int target = qstn.getQuestionNum();
-			replyList.put(target, userSvc.selectReplyList( target));
-		}
-		
 		HashMap<String, Object> pack = new HashMap<>();
 		pack.put("page", page);
 		pack.put("qList", result);
-		pack.put("rList", replyList);
 		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
@@ -286,17 +279,10 @@ public class QuestionController {
 	public HashMap<String, Object> searchUrgentPost( PageVO page, Model model) {
 		
 		ArrayList<QuestionVO> result = qstnSvc.searchUrgentPost(page);
-		
-		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
-		for (QuestionVO qstn : result) {
-			int target = qstn.getQuestionNum();
-			replyList.put(target, userSvc.selectReplyList( target));
-		}
-		
+
 		HashMap<String, Object> pack = new HashMap<>();
 		pack.put("page", page);
 		pack.put("qList", result);
-		pack.put("rList", replyList);
 		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
@@ -307,16 +293,9 @@ public class QuestionController {
 		
 		ArrayList<QuestionVO> result = qstnSvc.searchInProgressPost(page);
 		
-		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
-		for (QuestionVO qstn : result) {
-			int target = qstn.getQuestionNum();
-			replyList.put(target, userSvc.selectReplyList( target));
-		}
-		
 		HashMap<String, Object> pack = new HashMap<>();
 		pack.put("page", page);
 		pack.put("qList", result);
-		pack.put("rList", replyList);
 		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	

@@ -69,16 +69,9 @@ public class SearchController {
 		
 		ArrayList<QuestionVO> result = sechSvc.search_by_words(page);
 		
-		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
-		for (QuestionVO qstn : result) {
-			int target = qstn.getQuestionNum();
-			replyList.put(target, sechSvc.selectReplyList( target));
-		}
-		
 		HashMap<String, Object> pack = new HashMap<>();
 		pack.put("page", page);
 		pack.put("qList", result);
-		pack.put("rList", replyList);
 		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}

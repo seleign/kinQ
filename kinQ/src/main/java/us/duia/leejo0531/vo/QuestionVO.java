@@ -22,6 +22,7 @@ public class QuestionVO {
    private int allReply;	//DB에 없어요 
    private int selectedReplyNum;
    private int timeCheck;	//DB에 없어요
+   private int replyCount;	//DB에 없어요
    
    
    public QuestionVO() {
@@ -34,30 +35,32 @@ public class QuestionVO {
    }
 
 
-   public QuestionVO(int questionNum, int userNum, String timeLimit, String qstatus, Date regDate, Date modDate,
-		   String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent,
-		   int score, String limit, int allReply, int selectedReplyNum, int timeCheck) {
-	   super();
-	   this.questionNum = questionNum;
-	   this.userNum = userNum;
-	   this.timeLimit = timeLimit;
-	   this.qstatus = qstatus;
-	   this.regDate = regDate;
-	   this.modDate = modDate;
-	   this.title = title;
-	   this.relatedTag = relatedTag;
-	   MinorNum = minorNum;
-	   this.videoSrc = videoSrc;
-	   this.hit = hit;
-	   this.questionContent = questionContent;
-	   this.score = score;
-	   this.limit = limit;
-	   this.allReply = allReply;
-	   this.selectedReplyNum = selectedReplyNum;
-	   this.timeCheck = timeCheck;
-   }
 
-   public int getQuestionNum() {
+   public QuestionVO(int questionNum, int userNum, String timeLimit, String qstatus, Date regDate, Date modDate,
+		String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent,
+		int score, String limit, int allReply, int selectedReplyNum, int timeCheck, int replyCount) {
+	super();
+	this.questionNum = questionNum;
+	this.userNum = userNum;
+	this.timeLimit = timeLimit;
+	this.qstatus = qstatus;
+	this.regDate = regDate;
+	this.modDate = modDate;
+	this.title = title;
+	this.relatedTag = relatedTag;
+	MinorNum = minorNum;
+	this.videoSrc = videoSrc;
+	this.hit = hit;
+	this.questionContent = questionContent;
+	this.score = score;
+	this.limit = limit;
+	this.allReply = allReply;
+	this.selectedReplyNum = selectedReplyNum;
+	this.timeCheck = timeCheck;
+	this.replyCount = replyCount;
+}
+
+public int getQuestionNum() {
 	   return questionNum;
    }
 
@@ -194,14 +197,23 @@ public class QuestionVO {
 	   this.timeCheck = timeCheck;
    }
 
-   @Override
-   public String toString() {
-	   return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit + ", qstatus="
-			   + qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title + ", relatedTag="
-			   + relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit + ", questionContent="
-			   + questionContent + ", score=" + score + ", limit=" + limit + ", allReply=" + allReply
-			   + ", selectedReplyNum=" + selectedReplyNum + "]";
-   }
+   public int getReplyCount() {
+		return replyCount;
+	}
+	
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit
+				+ ", qstatus=" + qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title
+				+ ", relatedTag=" + relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit
+				+ ", questionContent=" + questionContent + ", score=" + score + ", limit=" + limit + ", allReply="
+				+ allReply + ", selectedReplyNum=" + selectedReplyNum + ", timeCheck=" + timeCheck + ", replyCount="
+				+ replyCount + "]";
+	}
 
 
 }

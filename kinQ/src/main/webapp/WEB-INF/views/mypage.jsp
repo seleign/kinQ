@@ -103,30 +103,37 @@
 				var html = '';
 				var page = result['page'];
 				var qList = result['qList'];
-				var rList = result['rList'];
-				
-				$.each(qList, function(index, element){
-					html +='<article class="question question-type-normal">';
-					html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-					html += '<div class="question-inner"><div class="clearfix"></div>';
-					html += '<p class="question-desc">'+element.questionContent+'</p>';
-					html += '<div class="question-details">';
-					if(element.qstatus == "solved"){
-						html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-					}else{
-						html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
-					}
-					html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
- 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-					html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-					html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-					html += '<div class="clearfix"></div>';
-					html += '</div></article>';
-				});
-				$('#myQuestionArea').append(html);
-				$('#qfrom').val( page.from +10);
-				$('#qto').val( page.to +10);
+
+				if( qList.length >0) {
+					$.each(qList, function(index, element){
+						if(element.timeCheck == -1){
+							html +='<article class="question question-type-normal" id="q_urgent">';
+						}else{
+							html +='<article class="question question-type-normal">';
+						}
+						html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
+						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
+						html += '<div class="question-inner"><div class="clearfix"></div>';
+						html += '<p class="question-desc">'+element.questionContent+'</p>';
+						html += '<div class="question-details">';
+						if(element.qstatus == "solved"){
+							html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
+						}else{
+							html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
+						}
+						html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
+	 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
+						html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+element.replyCount+'</a></span>';
+						html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
+						html += '<div class="clearfix"></div>';
+						html += '</div></article>';
+					});
+					$('#QuestionList_tap').append(html);
+					$('#rFrom').val( page.from +10);
+					$('#rTo').val( page.to +10);
+				}else {
+					$('#QuestionList_tap').html('検索結果がありません。');
+				}
 			}
 		});
 	}
