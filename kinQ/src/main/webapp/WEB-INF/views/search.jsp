@@ -73,11 +73,11 @@
 						html += '<div class="clearfix"></div>';
 						html += '</div></article>';
 					});
-					$('#QuestionList_tap').append(html);
+					$('#resultArea').append(html);
 					$('#rFrom').val( page.from +10);
 					$('#rTo').val( page.to +10);
 				}else {
-					$('#QuestionList_tap').html('検索結果がありません。');
+					$('#resultArea').html('検索結果がありません。');
 				}
 			}
 		});
