@@ -231,6 +231,17 @@ body {
     text-align: center;
 }
 
+#report_panel {
+	height: 60%;
+    width: 35%;
+    text-align: center;
+}
+
+#report_input {
+	margin-bottom: 3%;
+	margin-top: 5%;
+}
+
 .panel-pop {
 	background-color: #FFF;
 	border: 1px solid #e5e5e5;

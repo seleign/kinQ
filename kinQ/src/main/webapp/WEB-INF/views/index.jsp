@@ -50,7 +50,7 @@
 						html +='<article class="question question-type-normal">';
 					}
 					html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
-					html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
+					html += '<a class="button question-report">Report</a>';
 					html += '<div class="question-inner"><div class="clearfix"></div>';
 					html += '<p class="question-desc">'+element.questionContent+'</p>';
 					html += '<div class="question-details">';
@@ -158,7 +158,39 @@
 </head>
 <body>
 <jsp:include page="header.jsp" flush="false" />
-
+	<div class="panel-pop" id="report_panel">
+	<h2>Report<i class="icon-remove"></i></h2>
+	<div class="form-style form-style-3">
+	<div class="form-inputs clearfix">
+		<p>
+		<label for="reportTitle">タイトル：　</label>
+		<input type="text" name="reportTitle" id="reportTitle">
+		</p>
+		<p>
+ 		<label for="reporterNum">書き手：　</label>${sessionScope.userId}
+ 		<input type="hidden" value="${sessionScope.userNum}" name="reporterNum" id="reporterNum">
+ 		</p>
+ 	<hr>
+ 		<p>
+		<lable for="reportedQNum">申告対象：　</lable>
+		${reportedQNum }<input type="hidden" value="${reportedQNum }" name="reportedQNum">
+		</p>
+	<hr>
+		<p>
+		<label for="reportReason">申告事由</label><br>
+		<input type="radio" name="reportReason" value="不適切な広告" checked="checked">不適切な広告
+		<input type="radio" name="reportReason" value="青少年に不適切な掲示物">青少年に不適切な掲示物
+		<input type="radio" name="reportReason" value="無意味な掲示物">無意味な掲示物
+		<input type="radio" name="reportReason" value="その他">その他
+		</p>
+	<hr>
+	</div>
+		<p>	
+		<input type="button" id="report_input" class="button color small submit" value="報告" >
+		<input type="button" class="button color small submit" value="キャンセル" onclick="history.go(-1)">
+		</p>
+	</div>
+	</div><!-- End signup -->
 	<div class="section-warp ask-me">
 		<div class="container clearfix">
 			<div class="box_icon box_warp box_no_border box_no_background" box_border="transparent" box_background="transparent" box_color="#FFF">
@@ -215,7 +247,7 @@
 		</div><!-- End row -->
 	</section><!-- End container -->
 	<jsp:include page="footer.jsp" flush="false" />
-
+	
 </div><!-- End wrap -->
 
 <div class="go-up"><i class="icon-chevron-up"></i></div>
