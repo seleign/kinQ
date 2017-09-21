@@ -29,7 +29,9 @@ import us.duia.leejo0531.service.ReplyService;
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
+import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.UserVO;
 
@@ -258,4 +260,79 @@ public class QuestionController {
 		String checkTime = qstnSvc.getQuestionTime(questionNum);
 		return checkTime;
 	}
+	
+
+	
+	@RequestMapping(value = "searchRecentPost", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> searchRecentPost( PageVO page, Model model) {
+		
+		System.out.println( page);
+		
+		ArrayList<QuestionVO> result = qstnSvc.searchRecentPost(page);
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, userSvc.selectReplyList( target));
+		}
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("qList", result);
+		pack.put("rList", replyList);
+		
+		System.out.println( pack);
+		
+		return pack; //어느 페이지로 이동시킬 것인가?
+	}	
+
+	@RequestMapping(value = "searchUrgentPost", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> searchUrgentPost( PageVO page, Model model) {
+		
+		System.out.println( page);
+		
+		ArrayList<QuestionVO> result = qstnSvc.searchUrgentPost(page);
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, userSvc.selectReplyList( target));
+		}
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("qList", result);
+		pack.put("rList", replyList);
+		
+		System.out.println( pack);
+
+		return pack; //어느 페이지로 이동시킬 것인가?
+	}	
+
+	@RequestMapping(value = "searchInProgressPost", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> searchInProgressPost( PageVO page, Model model) {
+		
+		System.out.println( page);
+		
+		ArrayList<QuestionVO> result = qstnSvc.searchInProgressPost(page);
+		
+		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
+		for (QuestionVO qstn : result) {
+			int target = qstn.getQuestionNum();
+			replyList.put(target, userSvc.selectReplyList( target));
+		}
+		
+		HashMap<String, Object> pack = new HashMap<>();
+		pack.put("page", page);
+		pack.put("qList", result);
+		pack.put("rList", replyList);
+		
+		System.out.println( pack);
+		
+		return pack; //어느 페이지로 이동시킬 것인가?
+	}	
+
 }

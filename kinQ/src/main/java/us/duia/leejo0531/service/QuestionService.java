@@ -161,4 +161,19 @@ public class QuestionService {
 		return result;
 	}
 
+	public ArrayList<QuestionVO> searchRecentPost( PageVO page){
+		ArrayList<QuestionVO> result = qstnDao.searchRecentPost(page);
+		return result;
+	}
+	
+	public ArrayList<QuestionVO> searchUrgentPost(PageVO page){
+		ArrayList<QuestionVO> result = qstnDao.searchUrgentPost(page);
+		return result;
+	}
+	
+	public ArrayList<QuestionVO> searchInProgressPost(PageVO page){
+		ArrayList<QuestionVO> result = qstnDao.searchInProgressPost(page);
+		return result;
+	}
+	
 }

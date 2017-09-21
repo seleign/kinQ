@@ -8,11 +8,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
+import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.checkTimeVO;
 
@@ -167,6 +172,24 @@ public class QuestionDAO {
 	public ArrayList<QuestionVO> myQuestionList(PageVO page) {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.myQuestionList(page);
+		return result;
+	}
+
+	public ArrayList<QuestionVO> searchRecentPost(PageVO page) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchRecentPost(page);
+		return result;
+	}
+	
+	public ArrayList<QuestionVO> searchUrgentPost(PageVO page){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchUrgentPost(page);
+		return result;
+	}
+	
+	public ArrayList<QuestionVO> searchInProgressPost(PageVO page){
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<QuestionVO> result = mapper.searchInProgressPost(page);
 		return result;
 	}
 }

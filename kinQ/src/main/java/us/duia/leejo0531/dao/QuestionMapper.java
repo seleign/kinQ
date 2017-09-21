@@ -43,4 +43,10 @@ public interface QuestionMapper {
 	public int insertVideoFromAskQuestion(HashMap<String, String> map);
 
 	public ArrayList<QuestionVO> myQuestionList(PageVO page);
+
+	public ArrayList<QuestionVO> searchRecentPost(PageVO page);
+	
+	public ArrayList<QuestionVO> searchUrgentPost(PageVO page);
+	
+	public ArrayList<QuestionVO> searchInProgressPost(PageVO page);
 }

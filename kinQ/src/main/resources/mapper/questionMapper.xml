@@ -15,6 +15,8 @@
 		<result property="videoSrc" column="videoSrc"/>
 		<result property="questionContent" column="questionContent"/>
 		<result property="score" column="score"/>
+		<result property="selectedReplyNum" column="selectedReplyNum"/>
+		<result property="timeCheck" column="timeCheck"/>
 		<collection property="relatedTag" javaType="ArrayList" ofType="string">
 			<result property="tag" column="tag"/>
 		</collection>
@@ -90,7 +92,13 @@
 	<!-- context가 들어간 질문글을 가져온다. -->
 	<select id="searchByContext" parameterType="Page" resultMap="QuestionResult">
         select
-			*
+            tag,
+			numbered.*,
+			case 
+		        when timeLimit is null
+		            <![CDATA[or timeLimit < sysdate then 0]]> 
+		        else -1 
+		    end as timeCheck
 		from
             tag,
 			(select
@@ -248,7 +256,13 @@
 	
 	<select id="myQuestionList"  parameterType="Page" resultMap="QuestionResult">
 		select
-			*
+            tag,
+			numbered.*,
+			case 
+		        when timeLimit is null 
+		            <![CDATA[or timeLimit < sysdate then 0]]> 
+		        else -1 
+		    end as timeCheck
 		from
             tag,
 			(select
@@ -324,7 +338,13 @@
 	<!-- 답변 없는 질문글 가져오기 -->
 	<select id="search_no_answered" resultMap="QuestionResult">
 		select
-		    *
+            tag,
+			numbered.*,
+			case 
+		        when timeLimit is null 
+		            <![CDATA[or timeLimit < sysdate then 0]]> 
+		        else -1 
+		    end as timeCheck
 		from
 			tag,
 		    (select
@@ -368,4 +388,106 @@
     		insert into q_attach values(Q_ATTACH_SEQ.nextVal, #{QUESTIONNUM}, #{USERNUM}, #{QFILENAME}, #{QFILEPATH})
     </insert>
     
+    <select id="searchRecentPost" parameterType="Page"  resultMap="QuestionResult">
+		select
+            tag,
+			numbered.*,
+			case 
+		        when timeLimit is null 
+		            <![CDATA[or timeLimit < sysdate then 0]]> 
+		        else -1 
+		    end as timeCheck
+		from
+            tag,
+			(select
+				rownum as r,
+				results.*
+			from
+                (select
+                    merged.*
+                from
+                    (select
+                    	*
+                    from
+                    	q_board
+                    )merged
+                order by merged.questionnum desc
+				) results
+			)numbered
+		where
+            <![CDATA[ r >= ${from} and r <= ${to} ]]>
+            and numbered.questionnum = tag.questionnum(+)
+        order by
+            numbered.questionnum desc, tag.tagnum
+	</select>
+	
+	<select id="searchUrgentPost" parameterType="Page"  resultMap="QuestionResult">
+		select
+            tag,
+			numbered.*,
+			case 
+		        when timeLimit is null 
+		            <![CDATA[or timeLimit < sysdate then 0]]> 
+		        else -1 
+		    end as timeCheck
+		from
+            tag,
+			(select
+				rownum as r,
+				results.*
+			from
+                (select
+                    merged.*
+                from
+                    (select
+                    	*
+                    from
+                    	q_board
+                    where
+                    	timelimit > sysdate
+                    )merged
+                order by merged.questionnum desc
+				) results
+			)numbered
+		where
+            <![CDATA[ r >= ${from} and r <= ${to} ]]>
+            and numbered.questionnum = tag.questionnum(+)
+        order by
+            numbered.questionnum desc, tag.tagnum
+	</select>
+	
+	<select id="searchInProgressPost" parameterType="Page"  resultMap="QuestionResult">
+		select
+            tag,
+			numbered.*,
+			case 
+		        when timeLimit is null 
+		            <![CDATA[or timeLimit < sysdate then 0]]> 
+		        else -1 
+		    end as timeCheck
+		from
+            tag,
+			(select
+				rownum as r,
+				results.*
+			from
+                (select
+                    merged.*
+                from
+                    (select
+                    	*
+                    from
+                    	q_board
+                    where
+                    	qstatus = 'in progress'
+                    )merged
+                order by merged.questionnum desc
+				) results
+			)numbered
+		where
+            <![CDATA[ r >= ${from} and r <= ${to} ]]>
+            and numbered.questionnum = tag.questionnum(+)
+        order by
+            numbered.questionnum desc, tag.tagnum
+	</select>
 </mapper>

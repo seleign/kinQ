@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.HomeService;
+import us.duia.leejo0531.vo.PageVO;
 
 /**
  * Handles requests for the application home page.
@@ -35,8 +36,12 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		PageVO page = new PageVO();
+		page.setFrom( 1);
+		page.setTo( 10);
 		
 		String formattedDate = dateFormat.format(date);
+		model.addAttribute("page", page);
 		model.addAttribute("serverTime", formattedDate );
 	
 		return "index";
