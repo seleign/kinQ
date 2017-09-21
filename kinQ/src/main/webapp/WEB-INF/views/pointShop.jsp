@@ -384,10 +384,9 @@
 								<li>
 									<img src="./resources/images/pointShopImg/${good.imageurl }">&nbsp;&nbsp;<br><br>
 									商品名：　${good.goodsName}<br>
-									値段：　${good.price}<br>
+									値段：　${good.price}&nbsp;ポイント<br><br>
 									<input type="button" value="マイカート" id="good${good.goodsNum }" onclick="javascript:myCart('${good.goodsName}', ${good.price}, ${good.goodsNum})">
-									&nbsp;<input type="button" value="購入" >
-									<br><br><br>
+									<br><br><br><br>
 							</ul>
 						
 						</c:forEach>

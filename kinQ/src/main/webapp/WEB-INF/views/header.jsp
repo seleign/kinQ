@@ -227,27 +227,27 @@
 			<nav class="navigation">
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a></li>
-					<li class="ask_question"><a href="askQuestion">질문하기(폼이동)</a></li>
-					<li><a href="addQuestion">질문(하위메뉴 有)</a>
-						<ul>
+					<li class="ask_question"><a href="askQuestion">質問ボード</a></li>
+					<li><a href="addQuestion">質問</a>
+<!-- 						<ul>
 							<li><a href="cat_question.html">하위 1</a></li>
 							<li><a href="single_question.html">하위 2</a></li>
 							<li><a href="single_question_poll.html">하위 3</a></li>
-						</ul>
+						</ul> -->
 					</li>
-					<li><a href="search">포인트샵 중분류-소분류</a>
-						<ul>
+					<li><a href="search">質問リスト</a>
+<!-- 						<ul>
 							<li><a href="blog_1.html">중 1</a>
 								<ul>
 									<li><a href="blog_1.html">소 1-1</a></li>
 									<li><a href="blog_1_l_sidebar.html">소 1-2</a></li>
 								</ul>
 							</li>
-						</ul>
+						</ul> -->
 					</li>
 					<li><a href="javascript:void(0)" onclick="location.href='pointShop'">ポイントショップ</a></li>
 					<li><a href="shortcodes">Shortcodes</a></li>
-					<li><a href="contact_us.html">고객센터</a></li>
+					<li><a href="javascript:void(0)" onclick="location.href='helpPage'">ヘルプ</a></li>
 				</ul>
 			</nav>
 		</section><!-- End container -->
