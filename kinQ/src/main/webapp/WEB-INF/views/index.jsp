@@ -26,162 +26,9 @@
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="./resources/js/dateFormat.min.js"></script>
-  	<script type="text/javascript">	
-		function recentQlist(){
-			$.ajax({
-				url: 'searchRecentPost',
-				method: 'post',
-				data: {
-					from: parseInt($('#rFrom').val()),
-					to: parseInt($('#rTo').val())
-					
-				},
-				success: function(result){
-					var html = '';
-					var page = result['page'];
-					var qList = result['qList'];
-					var rList = result['rList'];
-					
-					if( qList.length >0) {
-						$.each(qList, function(index, element){
-							if(element.timeCheck == -1){
-								html +='<article class="question question-type-normal" id="q_urgent">';
-							}else{
-								html +='<article class="question question-type-normal">';
-							}
-							html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-							html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-							html += '<div class="question-inner"><div class="clearfix"></div>';
-							html += '<p class="question-desc">'+element.questionContent+'</p>';
-							html += '<div class="question-details">';
-							if(element.qstatus == "solved"){
-								html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-							}else{
-								html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
-							}
-							html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-		 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-							html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-							html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-							html += '<div class="clearfix"></div>';
-							html += '</div></article>';
-						});
-						$('#QuestionList_tap').append(html);
-						$('#rFrom').val( page.from +10);
-						$('#rTo').val( page.to +10);
-					}else {
-						$('#QuestionList_tap').html('検索結果がありません。');
-					}
-				}
-			});
-		}
-		
-		function urgentQlist(){
-			$.ajax({
-				url: 'searchUrgentPost',
-				method: 'post',
-				data: {
-					from: parseInt($('#uFrom').val()),
-					to: parseInt($('#uTo').val())
-					
-				},
-				success: function(result){
-					var html = '';
-					var page = result['page'];
-					var qList = result['qList'];
-					var rList = result['rList'];
-					
-					if( qList.length >0) {
-						$.each(qList, function(index, element){
-							if(element.timeCheck == -1){
-								html +='<article class="question question-type-normal" id="q_urgent">';
-							}else{
-								html +='<article class="question question-type-normal">';
-							}
-							html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-							html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-							html += '<div class="question-inner"><div class="clearfix"></div>';
-							html += '<p class="question-desc">'+element.questionContent+'</p>';
-							html += '<div class="question-details">';
-							if(element.qstatus == "solved"){
-								html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-							}else{
-								html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
-							}
-							html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-		 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-							html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-							html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-							html += '<div class="clearfix"></div>';
-							html += '</div></article>';
-						});
-						$('#QuestionList_tap_urgent').append(html);
-						$('#uFrom').val( page.from +10);
-						$('#uTo').val( page.to +10);
-					}else {
-						$('#QuestionList_tap_urgent').html('検索結果がありません。');
-					}
-				}
-			});
-		}
-		
-		function progressQlist(){
-			$.ajax({
-				url: 'searchInProgressPost',
-				method: 'post',
-				data: {
-					from: parseInt($('#pFrom').val()),
-					to: parseInt($('#pTo').val())
-					
-				},
-				success: function(result){
-					var html = '';
-					var page = result['page'];
-					var qList = result['qList'];
-					var rList = result['rList'];
-					
-					if( qList.length >0) {
-						$.each(qList, function(index, element){
-							if(element.timeCheck == -1){
-								html +='<article class="question question-type-normal" id="q_urgent">';
-							}else{
-								html +='<article class="question question-type-normal">';
-							}
-							html += '<h2><a href="question_view">'+element.title+'</a></h2>';
-							html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
-							html += '<div class="question-inner"><div class="clearfix"></div>';
-							html += '<p class="question-desc">'+element.questionContent+'</p>';
-							html += '<div class="question-details">';
-							if(element.qstatus == "solved"){
-								html += '<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>';
-							}else{
-								html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
-							}
-							html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
-		 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
-							html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+rList[ element.questionNum].length+'</a></span>';
-							html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';
-							html += '<div class="clearfix"></div>';
-							html += '</div></article>';
-						});
-						$('#QuestionList_tap_progress').append(html);
-						$('#pFrom').val( page.from +10);
-						$('#pTo').val( page.to +10);
-					}else {
-						$('#QuestionList_tap_progress').html('検索結果がありません。');
-					}
-				}
-			});
-		}
-		
-		$(function(){
-			recentQlist();
-			urgentQlist();
-			progressQlist();
-		});
+	<script type="text/javascript">
 	
-/* 
+
 	var startpage = 0;
 	var endpage = 10;
 	var urgentStartpage = 0;
@@ -306,7 +153,6 @@
 		urgentUserlist();
 		progressUserlist();
 	});
-*/
 	</script>
   
 </head>
@@ -349,25 +195,19 @@
 		                <li class="tab"><a href="#">in progress</a></li>
 		            </ul>
 		            <div class="tab-inner-warp">
-						<input type="hidden" id="rFrom" value="${page.from}">
-						<input type="hidden" id="rTo" value="${page.to}">
 						<div class="tab-inner" id="QuestionList_tap">
 					    </div>
-							<button class="button large gray-button" id="QuestionList_button" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+							<button class="button large gray-button" id="QuestionList_button" onclick="javascript:userlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
-						<input type="hidden" id="uFrom" value="${page.from}">
-						<input type="hidden" id="uTo" value="${page.to}">
 						<div class="tab-inner" id="QuestionList_tap_urgent">
 					    </div>
-					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:urgentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:urgentUserlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
-						<input type="hidden" id="pFrom" value="${page.from}">
-						<input type="hidden" id="pTo" value="${page.to}">
 						<div class="tab-inner" id="QuestionList_tap_progress">
 					    </div>
-					    <button class="button large gray-button" id="QuestionList_Urgent" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:progressUserlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 		        </div><!-- End page-content -->
 			</div><!-- End main -->
