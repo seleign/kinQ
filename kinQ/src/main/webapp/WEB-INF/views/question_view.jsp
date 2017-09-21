@@ -129,6 +129,9 @@
 						}
 						replyHtml += "</div>";
 						replyHtml += "<div class=\"text\">";
+						if (!isEmpty(replyList[i].videoSrc)) {
+							replyHtml += "<video src=\"" + replyList[i].videoSrc +"\" controls width=\"100%\"/>"
+						}
 						replyHtml += "<p>" + replyList[i].replyContent + "</p>";
 						replyHtml += "</div>";
 						replyHtml += "</div>";

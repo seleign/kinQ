@@ -32,7 +32,8 @@
 		to_char(reply.R_REGDATE, 'YYYY-MM-DD') as R_REGDATE, 
 		to_char(reply.R_MODDATE, 'YYYY-MM-DD') as R_MODDATE, 
 		reply.REPLYTITLE, 
-		reply.REPLYCONTENT, 
+		reply.REPLYCONTENT,
+		reply.videoSrc, 
 		userinfo.id from q_reply reply, userinfo userinfo 
 		where reply.questionNum = #{questionNum} and reply.usernum = userinfo.usernum order by replyNum) reply, 
 		(select replyNum, sum(score) as score from RECOMMENDATION where questionNum = #{questionNum} group by replyNum) rec 
