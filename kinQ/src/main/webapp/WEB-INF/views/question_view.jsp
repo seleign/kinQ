@@ -25,6 +25,8 @@
 	<!-- 별점주기 -->
 	<link rel="stylesheet" href="./resources/css/star.css">
 	
+	<link rel="stylesheet" href="./resources/js/video-js-6/video-js.css">
+	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
@@ -35,6 +37,7 @@
 <script src="./resources/js/jquery.min.js"></script>
 <script src="./resources/js/jquery.blockUI.js"></script>
 <script src="./resources/js/custom.js"></script>
+<script src="./resources/js/video-js-6/video.min.js"></script>
 
 <!-- CKeditor -->
 <script src="./resources/ckeditor/ckeditor.js"></script> 
@@ -131,7 +134,9 @@
 						replyHtml += "</div>";
 						replyHtml += "<div class=\"text\">";
 						if (!isEmpty(replyList[i].videoSrc)) {
-							replyHtml += "<video src=\"" + replyList[i].videoSrc +"\" controls/>"
+							replyHtml += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
+							replyHtml += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
+							replyHtml += "</video>"
 						}
 						replyHtml += "<p>" + replyList[i].replyContent + "</p>";
 						replyHtml += "</div>";

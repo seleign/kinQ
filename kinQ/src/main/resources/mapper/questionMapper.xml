@@ -322,11 +322,11 @@
 	</select>
 	
 	<select id="getQuestionTime" parameterType="int" resultType="checkTime">
-		SELECT questionNum, trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'))/(30*12), 0) year
-	  ,	trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'))/30, 0) month
-      , trunc (TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD'), 0) day
-      , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24 hour
-      , trunc ((TO_char (sysdate, 'YYYYMMDD') - TO_char (REGDATE, 'YYYYMMDD')), 0)*24*60 minute
+		SELECT questionNum, ROUND((sysdate - REGDATE)/(30*12)) as year
+	  ,	ROUND((sysdate - REGDATE)/30) as month
+      , ROUND(sysdate - REGDATE) as day
+      , ROUND((sysdate - REGDATE)*24) as hour
+      , ROUND((sysdate - REGDATE)*24*60) as minute
   		FROM q_board where questionNum = #{questionNum}
 	</select>
 	<!-- 전체 질문글 가져오기 -->

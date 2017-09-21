@@ -127,13 +127,13 @@ public class QuestionService {
 	public String getQuestionTime(int questionNum) {
 		checkTimeVO checkTime = qstnDao.getQuestionTime(questionNum);
 		String checkTimeResult = null;
-		if (checkTime.getHour() == 0) {
+		if (checkTime.getMinute() < 60) {
 			checkTimeResult = checkTime.getMinute() + " Minute";
-		} else if (checkTime.getDay() == 0) {
+		} else if (checkTime.getHour() < 24) {
 			checkTimeResult = checkTime.getHour() + " Hour";
-		} else if (checkTime.getMonth() == 0) {
+		} else if (checkTime.getDay() < 30 || checkTime.getDay() < 31) {
 			checkTimeResult = checkTime.getDay() + " day";
-		} else if (checkTime.getYear() == 0) {
+		} else if (checkTime.getMonth() < 12) {
 			checkTimeResult = checkTime.getMonth() + " Month";
 		} else {
 			checkTimeResult = checkTime.getYear() + " Year";
