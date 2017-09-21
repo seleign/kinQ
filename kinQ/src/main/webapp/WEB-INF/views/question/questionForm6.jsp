@@ -557,21 +557,15 @@ function lastFileChat() {
 			</div><!-- End row -->
 		</section><!-- End container -->
 	</div>
-	
-<section class="container">
-
-	<!-- 질문글의 타이틀을 나타낸다. -->
-	<h1>
-		<c:if test="${question.title != null? true:false }">
-		${question.title}
-		</c:if>
-		<c:if test="${question.title == null? true:false }">
-		<p>여기에는 질문글의 title이 온다. </p>
-		</c:if>
-	</h1>
-	
-	
-		<fieldset>
+<section class="container main-content">
+		<div class="row">
+			<div class="col-md-9">
+				
+				<div class="page-content ask-question">
+					<div class="boxedtitle page-title"><h2>Ask Question</h2></div>
+					
+					<!-- here -->
+					<fieldset>
 <legend>개발용 버튼(삭제하지 말것)</legend>
 <h5>JQuery로 버튼을 자동 click하는 방식으로 실시간 연결 진행. 실제 서비스에서는 이 필드셋을 hidden으로 해둔다.</h5>
 <label>방 번호</label>
@@ -582,9 +576,6 @@ function lastFileChat() {
 <button id="btn-record-webm">3. 자신의 공유화면 녹화</button>
 <button id="btn-leave-room" disabled>4. 접속 종료</button>
 <button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
-<label>채팅 창 + 파일전송 버튼</label>
-<input type="text" id="input-text-chat" placeholder="채팅 입력" disabled>
-<button id="share-file" disabled>파일 전송</button> 
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
 <input type="text" >
 <input type="text" name="videoSrc" value="" placeholder="답변이 완료된 후에는 답변이 녹화된 동영상의 주소가 여기에 담겨서, 답변 테이블의 videoSrc에 들어간다.">
@@ -592,7 +583,7 @@ function lastFileChat() {
 
 <table>
 	<tr>
-		<td style="min-width: 70%;">
+		<td>
 		<div id="tabs">
   <ul>
     <li><a href="#tabs-1">나의 공유화면</a></li>
@@ -634,16 +625,6 @@ function lastFileChat() {
 	</div>
 </div>
 		</td>
-		<td style="min-width: 300px;">
-			<!-- 채팅 및 파일이 전송된 것이 여기에 나타난다. -->
-	<div id="chat-container" style="border:3px solid red;">
-	<button onclick="lastFileDelete()"> 오래된 파일 삭제</button>
-	<button onclick="lastFileChat()"> 오래된 채팅 삭제</button>
-	<h6>채팅 내용 + 송수신된 파일 DIV</h6>
-		<div id="file-container"></div>
-		<div class="chat-output"></div>
-	</div>
-		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
@@ -659,8 +640,30 @@ function lastFileChat() {
 		</td>
 	</tr>
 </table>
+					
+				</div><!-- End page-content -->
+			</div><!-- End main -->
+			<!-- aside -->
+	<aside class="col-md-3 sidebar">
+	<div class="widget">
+		<h3 class="widget_title">채팅 및 파일 전송</h3>
+		<input type="text" id="input-text-chat" placeholder="채팅 입력" disabled>
+		<button id="share-file" disabled>파일 전송</button> 
+		
+		<!-- 채팅 및 파일이 전송된 것이 여기에 나타난다. -->
+		<div id="chat-container" style="border:3px solid red;">
+		<button onclick="lastFileDelete()" style="width: 45%;"> 오래된 파일 삭제</button>	
+		<button onclick="lastFileChat()" style="width: 45%;"> 오래된 채팅 삭제</button>
+		<h6>채팅 내용 + 송수신된 파일 DIV</h6>
+			<div id="file-container"></div>
+			<div class="chat-output"></div>
+		</div>		
+	</div>
+	</aside>
+		
+		</div><!-- End row -->
+	</section><!-- End container -->
 
-	
-</section>
+<jsp:include page="../footer.jsp" flush="false" />
 </body>
 </html>
