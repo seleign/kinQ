@@ -47,7 +47,7 @@ public class PointController {
 	}
 
 	@RequestMapping(value = "addPoint", method = RequestMethod.POST)
-	public @ResponseBody String addPoint(int amount, HttpSession session) {
+	public @ResponseBody int addPoint(int amount, HttpSession session) {
 
 		long time = System.currentTimeMillis();
 		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
@@ -61,7 +61,9 @@ public class PointController {
 		CashLogVO cash = new CashLogVO(0, userNum, amount, cChargedDate, 0, null, cChange);
 		pointSvc.addPoint(cash);
 
-		return "success";
+		int finalChange = pointSvc.getRecentChange(userNum);
+		
+		return finalChange;
 	}
 
 	@RequestMapping(value = "cashToPoint", method = RequestMethod.POST)
@@ -80,7 +82,7 @@ public class PointController {
 		int pChange = pointSvc.getRecentPoint(userNum);
 		int finalPChange = pChange+currentChange;
 		
-		PointLogVO point = new PointLogVO(0, userNum, currentChange, cUsedDate, 0, null, pChange);
+		PointLogVO point = new PointLogVO(0, userNum, currentChange, cUsedDate, 0, null, finalPChange);
 		pointSvc.addPointLog(point);
 
 		int finalChange = pointSvc.getRecentChange(userNum);
@@ -91,22 +93,40 @@ public class PointController {
 	}
 
 	@RequestMapping(value = "pointToCash", method = RequestMethod.POST)
-	public @ResponseBody int pointToCash(int currentPoint, HttpSession session) {
+	public @ResponseBody int pointToCash(HttpSession session) {
 		int userNum = (int) session.getAttribute("userNum");
 		int point = pointSvc.getRecentPoint(userNum);
 
 		long time = System.currentTimeMillis();
 		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
 		String cUsedDate = currentTime.format(new Date(time));
-		int pChange = point - currentPoint;
+		int pChange = 0;
 
-		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, currentPoint, cUsedDate, pChange);
+		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, point, cUsedDate, pChange);
 		pointSvc.pointToCash(pointLog);
 		
 		int finalPChange = pointSvc.getRecentPoint(userNum);
 		
 		return finalPChange;
 	}
+	
+	@RequestMapping(value="orderGoods", method=RequestMethod.POST)
+	public @ResponseBody int orderGoods(int totalPrice, HttpSession session){
+		int userNum = (int) session.getAttribute("userNum");
+		int point = pointSvc.getRecentPoint(userNum);
+
+		long time = System.currentTimeMillis();
+		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
+		String cUsedDate = currentTime.format(new Date(time));
+		int pChange = point - totalPrice;
+
+		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, totalPrice, cUsedDate, pChange);
+		pointSvc.pointToCash(pointLog);
+		
+		int finalPChange = pointSvc.getRecentPoint(userNum);
+		
+		return finalPChange;
+	} 
 	
 	
 	

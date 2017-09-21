@@ -47,12 +47,9 @@
 		}
 		$('#goodsList').html(html);
 		$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+'ポイント');
+		$('input[name="hiddenTotalPrice"]').val(totalPrice);
 	}
-        	
-/*      	$(function() {
-    		$("#exchangeBtn").on('click', cashToPoint);
-    	});
-    	 */
+
     	
      	function unchecking(deleteNum, price){
     		html = '';
@@ -119,7 +116,7 @@
     		}
     	}
      	
-     	function pointToMoney(point){
+     	function pointToMoney(){
      		
      		var bankAccount = $('#bankAccount').val();
 			if(bankAccount=='' || isNaN(bankAccount)){
@@ -130,7 +127,7 @@
 				$.ajax({
     				url: 'pointToCash',
     				method: 'POST',
-    				data: {currentPoint : point},
+    				data: {},  
     				success: function(result){
     					$('#myPoint').html(result);	
     				}
@@ -138,6 +135,26 @@
 			}
      	}
      	
+     	function orderGoods(){
+     		var total = $('input[name="hiddenTotalPrice"]').val();
+     		if(confirm('ポイントでカートのグッズを購入しますか。')==true){
+     			$.ajax({
+     				url: 'orderGoods',
+     				method: 'POST',
+     				data: {totalPrice : total},
+     				success: function(finalPChange){
+     					$('#myPoint').html(finalPChange);
+     		    		goodsName = [];
+     		    		goodsNum = [];
+     		    		totalPrice = 0;
+     					$('#goodsList').html('');
+     					$('#totalPrice').html('&nbsp;&nbsp;&nbsp;0 ポイント');
+     					$('input[name="hiddenTotalPrice"]').val(totalPrice);
+     					alert('購入完了');
+     				}
+     			});
+     		}
+     	}
     	 
     </script>
     
@@ -312,13 +329,13 @@
 										</select> &nbsp;&nbsp;&nbsp;
 										</div>
 										<div style="text-align:right; display:inline-block;"><input type="text" id="bankAccount" placeholder="'-'なしの口座番号"></div>
-										&nbsp;&nbsp;&nbsp;<input type="button" value="ポイント　→　現金に両替" onclick="javascript:pointToMoney(${pChange})"><br>
+										&nbsp;&nbsp;&nbsp;<input type="button" value="ポイント　→　現金に両替" onclick="javascript:pointToMoney()"><br>
 									</div>
 								</div>
 								<div class="tab-inner-warp">
 									<div class="tab-inner">
 										<p>
-											※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。 <input type="button" value="払い戻し">
+											※ <strong>最近一週間</strong>チャージしたポイントに限って払い戻せます。 <input type="button" value="払い戻し" onclick="">
 										</p>
 									</div>
 								</div>
@@ -395,7 +412,7 @@
 							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 ポイント</div><br> 
 							<hr><br>
 						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%">キャンセル</a>
-						<a href="#" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%;">購入する</a>
+						<a href="javascript:void(0)" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%;" onclick="javascript:orderGoods()"><input type="hidden" name="hiddenTotalPrice" value="">購入する</a>
 					</div>
 				</div><!-- End widget_menu -->
 			</aside><!-- End sidebar -->

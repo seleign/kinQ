@@ -40,7 +40,10 @@ IMP.init('imp52000562'); // 아임포트 관리자 페이지의 "시스템 설�
  	    			jQuery.ajax({
  	    				url: "addPoint",
  	    				type: "POST",
- 	    				data: {amount: amount}
+ 	    				data: {amount: amount},
+ 	    				success: function(finalChange){
+ 	    					$('#myCash').html(finalChange); 	    					
+ 	    				}
  	    			})
  	    			
  	    			location.href='pointShop'
