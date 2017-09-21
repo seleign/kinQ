@@ -75,6 +75,7 @@
 				data: { questionNum: ${ question.questionNum }},
 				success: function (reply) {
 					if (!isEmpty(reply)) {
+						bestReplyHtml += "<div class=\"boxedtitle page-title\"><h2>추천 답변</h2></div>"
 						bestReplyHtml += "<h4>"+ reply.id + "</h4>";
 						bestReplyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
 						bestReplyHtml += reply.replyContent +"<br>";
@@ -130,7 +131,7 @@
 						replyHtml += "</div>";
 						replyHtml += "<div class=\"text\">";
 						if (!isEmpty(replyList[i].videoSrc)) {
-							replyHtml += "<video src=\"" + replyList[i].videoSrc +"\" controls width=\"100%\"/>"
+							replyHtml += "<video src=\"" + replyList[i].videoSrc +"\" controls/>"
 						}
 						replyHtml += "<p>" + replyList[i].replyContent + "</p>";
 						replyHtml += "</div>";
@@ -213,6 +214,7 @@
 					  },
 				success: function (reply) {
 					if (!isEmpty(reply)) {
+						selectedReply += "<div class=\"boxedtitle page-title\"><h2>질문자 선택 답변</h2></div>"
 						selectedReply += "<h4>"+ reply.id + "</h4>";
 						selectedReply += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
 						selectedReply += reply.replyContent +"<br>";
