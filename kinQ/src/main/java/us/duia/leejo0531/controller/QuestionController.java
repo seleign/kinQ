@@ -131,10 +131,8 @@ public class QuestionController {
 		// code here
 		//QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(qstn);
-		System.out.println(question);
 		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
 		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
-		System.out.println("questionNum : " + question.getQuestionNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		UserVO user = qstnSvc.getUserInfo(question.getUserNum());
 		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
@@ -267,8 +265,6 @@ public class QuestionController {
 	@ResponseBody
 	public HashMap<String, Object> searchRecentPost( PageVO page, Model model) {
 		
-		System.out.println( page);
-		
 		ArrayList<QuestionVO> result = qstnSvc.searchRecentPost(page);
 		
 		HashMap<Integer, ArrayList<ReplyVO>> replyList = new HashMap<>();
@@ -282,16 +278,12 @@ public class QuestionController {
 		pack.put("qList", result);
 		pack.put("rList", replyList);
 		
-		System.out.println( pack);
-		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
 
 	@RequestMapping(value = "searchUrgentPost", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> searchUrgentPost( PageVO page, Model model) {
-		
-		System.out.println( page);
 		
 		ArrayList<QuestionVO> result = qstnSvc.searchUrgentPost(page);
 		
@@ -306,16 +298,12 @@ public class QuestionController {
 		pack.put("qList", result);
 		pack.put("rList", replyList);
 		
-		System.out.println( pack);
-
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
 
 	@RequestMapping(value = "searchInProgressPost", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> searchInProgressPost( PageVO page, Model model) {
-		
-		System.out.println( page);
 		
 		ArrayList<QuestionVO> result = qstnSvc.searchInProgressPost(page);
 		
@@ -329,8 +317,6 @@ public class QuestionController {
 		pack.put("page", page);
 		pack.put("qList", result);
 		pack.put("rList", replyList);
-		
-		System.out.println( pack);
 		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
