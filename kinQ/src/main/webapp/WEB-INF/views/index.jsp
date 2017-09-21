@@ -234,7 +234,7 @@
 			success: function(result){
 				var html = '';
 				$.each(result, function(index, element){
-					if(element.timeCheck){
+					if(element.timeLimit){
 						if(element.timeCheck == -1){
 							html +='<article class="question question-type-normal" id="q_urgent">';
 						}else{

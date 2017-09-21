@@ -129,8 +129,8 @@ public class QuestionController {
 		//qstnSvc.getQuestion(qstn);
 		//System.out.println(qstn);
 		// code here
-		QuestionVO test = new QuestionVO(80);
-		QuestionVO question = qstnSvc.getQuestion(test);
+		//QuestionVO test = new QuestionVO(80);
+		QuestionVO question = qstnSvc.getQuestion(qstn);
 		System.out.println(question);
 		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
 		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());

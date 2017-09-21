@@ -61,7 +61,7 @@ public class ReplyController {
 		return reply;
 	}
 	
-	@RequestMapping(value = "registReply", method = RequestMethod.GET)
+	@RequestMapping(value = "registReply", method = RequestMethod.POST)
 	public @ResponseBody String registReply(ReplyVO reply) {
 		System.out.println("reply : " + reply);
 		int result = reSvc.registReply(reply);
@@ -85,10 +85,43 @@ public class ReplyController {
 
 	
 	@RequestMapping(value = "selectedReply", method = RequestMethod.GET)
-	public @ResponseBody ReplyVO selectedReply(QuestionVO question) {
+	public @ResponseBody int selectedReply(QuestionVO question) {
 		System.out.println("Question : " + question);
 		int result = reSvc.selectedReply(question);
-		ReplyVO reply = reSvc.getReply(new ReplyVO(question.getQuestionNum(), question.getSelectedReplyNum()));
+		return result;
+	}
+	
+	@RequestMapping(value = "getSelectedReply", method = RequestMethod.GET)
+	public @ResponseBody ReplyVO getSelectedReply(int questionNum) {
+		System.out.println("QuestionNum : " + questionNum);
+		ReplyVO reply = reSvc.getSelectedReply(questionNum);
 		return reply;
+	}
+	
+	@RequestMapping(value = "updateRecommendUp", method = RequestMethod.GET)
+	public @ResponseBody String updateRecommendUp(ReplyVO reply) {
+		System.out.println("Reply : " + reply);
+		int result = reSvc.updateRecommendUp(reply);
+		if (result == 1) {
+			return "success";
+		} else {
+			return "false";
+		}
+	}
+	
+	@RequestMapping(value = "updateRecommendDown", method = RequestMethod.GET)
+	public @ResponseBody String updateRecommendDown(ReplyVO reply) {
+		System.out.println("Reply : " + reply);
+		int checkZero = reSvc.checkZeroRecommend(reply);
+		if (checkZero == 0) {
+			return "false";
+		} else {
+			int result = reSvc.updateRecommendDown(reply);
+			if (result == 1) {
+				return "success";
+			} else {
+				return "false";
+			}
+		}
 	}
 }
