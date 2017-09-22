@@ -419,7 +419,7 @@
 		</div><!-- End row -->
 	</section><!-- End container -->
 	
-	<jsp:include page="footer.jsp" flush="false" />
+	<jsp:include page="footerPointShop.jsp" flush="false" />
 </div><!-- End wrap -->
 
 <div class="go-up"><i class="icon-chevron-up"></i></div>
