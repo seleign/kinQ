@@ -81,6 +81,11 @@
 						bestReplyHtml += "<div class=\"boxedtitle page-title\"><h2>추천 답변</h2></div>"
 						bestReplyHtml += "<h4>"+ reply.id + "</h4>";
 						bestReplyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
+						if (!isEmpty(reply.videoSrc)) {
+							bestReplyHtml += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
+							bestReplyHtml += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
+							bestReplyHtml += "</video>"
+						}
 						bestReplyHtml += reply.replyContent +"<br>";
 						bestReplyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>";
 						$("#bestReply").html(bestReplyHtml);
@@ -128,7 +133,7 @@
 						if (userId == replyList[i].id) {
 							replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
 						}
-						if ( "${ user.id }" == userId && ${ question.selectedReplyNum } != 0) {
+						if ( "${ user.id }" == userId && ${ question.selectedReplyNum } == 0) {
 							replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>답글 선택</a>";
 						}
 						replyHtml += "</div>";
@@ -222,6 +227,11 @@
 						selectedReply += "<div class=\"boxedtitle page-title\"><h2>질문자 선택 답변</h2></div>"
 						selectedReply += "<h4>"+ reply.id + "</h4>";
 						selectedReply += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
+						if (!isEmpty(reply.videoSrc)) {
+							selectedReply += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
+							selectedReply += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
+							selectedReply += "</video>"
+						}
 						selectedReply += reply.replyContent +"<br>";
 						selectedReply += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Selected Answer</div>";
 						$("#selectedReply").html(selectedReply);
@@ -242,7 +252,6 @@
 		}
 		
 		function recommendPop(replyNum) {
-			alert(replyNum);
 			selectedReply = replyNum;
 			jQuery(".panel-pop").animate({"top":"-100%"},10).hide();
 			jQuery("#jeonsw").show().animate({"top":"50%"},500);
@@ -291,6 +300,7 @@
 				}
 			})
 		}
+		
 		
 </script>
 </head>
@@ -364,7 +374,7 @@
 							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
 							<form method="get" action=modifyQuestion>
-								<input type="submit" value="수정하기">
+								<input type="submit" class="button color small submit" value="수정하기">
 								<input type="hidden" name="questionNum" value="${ question.questionNum }">
 							</form>
 						</ul>
@@ -449,9 +459,9 @@
 					<div id="related-posts">
 						<h>답변 하기</h2>
 						<textarea rows="" cols="" id="replyContent"></textarea>
-						<button onclick="registReply()">등록</button>
+						<button class="button color small submit" onclick="registReply()">등록</button>
 						<form method="post" action="realTimeAnswer">
-							<input type="submit" value="실시간 답변">
+							<input type="submit" class="button color small submit" value="실시간 답변">
 							<input type="hidden" name="questionNum" value="${ question.questionNum }">
 						</form>
 					</div><!-- End related-posts -->
