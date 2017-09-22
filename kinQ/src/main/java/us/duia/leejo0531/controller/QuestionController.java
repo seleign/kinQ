@@ -249,7 +249,7 @@ public class QuestionController {
 		model.addAttribute("question", question);
 		model.addAttribute("userNum", userNum);
 		
-		return "question/questionForm5";  // 실시간 답변페이지
+		return "realTimeAnswer";  // 실시간 답변페이지
 	}
 	
 	//질문글 시간체크 
@@ -299,5 +299,18 @@ public class QuestionController {
 		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
+	
+	/**
+	 * 질문글 삭제
+	 * @param questionNum
+	 * @return
+	 */
+	@RequestMapping(value = "deleteQuestion", method=RequestMethod.GET)
+	public String deleteQuestion(QuestionVO question, HttpSession session) {
+		int userNum = (int)session.getAttribute("userNum");
+		question.setUserNum(userNum);
+		qstnSvc.deleteQuestion(question);
+		return "/";
+	}
 
 }

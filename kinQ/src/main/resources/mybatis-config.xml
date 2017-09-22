@@ -30,5 +30,6 @@
 		<mapper resource="mapper/reportMapper.xml"/>
 		<mapper resource="mapper/pointMapper.xml"/>
 		<mapper resource="mapper/helpMapper.xml"/>
+		<mapper resource="mapper/alarmMapper.xml"/>
 	</mappers>
 </configuration>

@@ -176,4 +176,9 @@ public class QuestionService {
 		return result;
 	}
 	
+	public int deleteQuestion(QuestionVO question) {
+		int result = qstnDao.deleteQuestion(question);
+		return result;
+	}
+	
 }
