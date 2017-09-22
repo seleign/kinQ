@@ -6,17 +6,19 @@ public class AlarmVO {
 	private String alarmType; //reply,realtime,interest
 	private int alarmAdress;
 	private int readcheck;
+	private int unread;
 
 	public AlarmVO() {
 	}
 
-	public AlarmVO(int alarmNum, int userNum, String alarmType, int alarmAdress, int readcheck) {
+	public AlarmVO(int alarmNum, int userNum, String alarmType, int alarmAdress, int readcheck, int unread) {
 		super();
 		this.alarmNum = alarmNum;
 		this.userNum = userNum;
 		this.alarmType = alarmType;
 		this.alarmAdress = alarmAdress;
 		this.readcheck = readcheck;
+		this.unread = unread;
 	}
 
 	public int getAlarmNum() {
@@ -59,11 +61,18 @@ public class AlarmVO {
 		this.readcheck = readcheck;
 	}
 
+	public int getUnread() {
+		return unread;
+	}
+
+	public void setUnread(int unread) {
+		this.unread = unread;
+	}
+
 	@Override
 	public String toString() {
 		return "AlarmVO [alarmNum=" + alarmNum + ", userNum=" + userNum + ", alarmType=" + alarmType + ", alarmAdress="
-				+ alarmAdress + ", readcheck=" + readcheck + "]";
+				+ alarmAdress + ", readcheck=" + readcheck + ", unread=" + unread + "]";
 	}
-	
 	
 }
