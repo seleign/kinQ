@@ -1,5 +1,6 @@
 package us.duia.leejo0531.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class AlarmService {
 	 * key: int unread; 아직 확인하지 않은 알림 수
 	 * key: ArrayList<AlarmVO> alarmList; 해당 유저의 모든 알람의 vo
 	 * */
-	public HashMap<String, Object> selectMyAlarms( int userNum) {
+	public ArrayList<AlarmVO> selectMyAlarms( int userNum) {
 		return alarmDao.selectMyAlarms(userNum);
 	}
 

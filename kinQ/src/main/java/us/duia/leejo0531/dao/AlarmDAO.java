@@ -1,5 +1,6 @@
 package us.duia.leejo0531.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,9 +15,9 @@ public class AlarmDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	public HashMap<String, Object> selectMyAlarms( int userNum) {
+	public ArrayList<AlarmVO> selectMyAlarms( int userNum) {
 		AlarmMapper mapper = sqlSession.getMapper(AlarmMapper.class);
-		HashMap<String, Object> resultU = mapper.selectMyAlarms(userNum);
+		ArrayList<AlarmVO> resultU = mapper.selectMyAlarms(userNum);
 		return resultU;
 	}
 	

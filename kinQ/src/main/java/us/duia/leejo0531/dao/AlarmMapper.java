@@ -1,12 +1,13 @@
 package us.duia.leejo0531.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import us.duia.leejo0531.vo.AlarmVO;
 
 public interface AlarmMapper {
 
-	public HashMap<String, Object> selectMyAlarms( int userNum);
+	public ArrayList<AlarmVO> selectMyAlarms( int userNum);
 	public int alarmReqReply( int questionNum);
 	public int alarmRspnReply( int questionNum);
 	public int alarmReqRTReply( int questionNum);
