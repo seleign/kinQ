@@ -32,18 +32,22 @@
   	// 실제 서버 인증서 있을때는 wss 뒤에 /leejo0531/ 없게 수정할 것 
 // 	var webUri = "wss://" + window.location.host +"/count";
 	var webUri = "ws://" + window.location.host +"/leejo0531/count";
-	function send_message(){
-		websocket = new WebSocket(webUri);
-		websocket.onopen = function(evt){
-			onOpen(evt);
-		};
-		websocket.onmessage = function(evt){
-			onMessage(evt);
-		};
-		websocket.onerror = function(evt){
-			onError(evt);
-		};
-	}
+
+	websocket = new WebSocket(webUri);
+	websocket.onopen = function(evt){
+		onOpen(evt);
+	};
+	websocket.onmessage = function(evt){
+		onMessage(evt);
+	};
+	websocket.onerror = function(evt){
+		onError(evt);
+	};
+	
+	// 페이지 이동시에, 웹소켓 서버에 소켓 close를 해준다.
+	$(window).on("beforeunload", function(){
+       websocket.close();
+    });
 	
 	function onOpen(evt){
 		websocket.send("${sessionScope.userNum}");
@@ -58,7 +62,7 @@
 	//빨간줄 뜨는거 무시하셔도 됩니다 
 	$(function(){
 		if(${sessionScope.userNum != null? true:false}){
-		send_message();
+			
 		}
 	});
 	
@@ -88,6 +92,7 @@
 			}
 		});
 	}
+
 </script>
 </head>
 <body>
