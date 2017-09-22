@@ -50,9 +50,9 @@ public class AlarmDAO {
 		return resultU;
 	}
 	
-	public int updateReadCheck( int[] list) {
+	public int updateReadCheck( int userNum) {
 		AlarmMapper mapper = sqlSession.getMapper(AlarmMapper.class);
-		int resultU = mapper.updateReadCheck(list);
+		int resultU = mapper.updateReadCheck(userNum);
 		return resultU;
 	}
 	

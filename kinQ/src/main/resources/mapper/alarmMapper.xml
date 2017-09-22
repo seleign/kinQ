@@ -13,20 +13,20 @@
 		</collection>
 	</resultMap>
 
-	<update id="updateReadCheck" parameterType="Alarm">
+	<update id="updateReadCheck">
 		update
 		    useralarm
 		set
 		    readcheck = 1
 		where
 		    readcheck = 0
-		    <foreach collection="list" item="item">or usernum = #{userNum}</foreach>
+		    and usernum = #{userNum}
 	</update>
 	
 	<select id="selectMyAlarms" resultMap="AlarmResult">
 		select 
             useralarm.*,
-            unread as
+            unread
         from 
             useralarm,
             (select

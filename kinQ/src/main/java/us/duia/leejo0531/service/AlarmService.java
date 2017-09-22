@@ -68,10 +68,11 @@ public class AlarmService {
 	}
 
 	/**
-	 * 수정중입니다.
+	 * 확인한 알림 상태를 읽음으로 표시한다.
+	 * @param userNum:대상유저번호 필요
 	 * */
-	public int updateReadCheck( int[] list) {
-		return alarmDao.updateReadCheck(list);
+	public int updateReadCheck( int userNum) {
+		return alarmDao.updateReadCheck(userNum);
 	}
 
 	
