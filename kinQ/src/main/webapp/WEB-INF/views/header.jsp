@@ -241,18 +241,15 @@
 						</ul> -->
 					</li>
 					<li><a href="search">質問リスト</a>
-<!-- 						<ul>
-							<li><a href="blog_1.html">중 1</a>
-								<ul>
-									<li><a href="blog_1.html">소 1-1</a></li>
-									<li><a href="blog_1_l_sidebar.html">소 1-2</a></li>
-								</ul>
-							</li>
-						</ul> -->
 					</li>
 					<li><a href="javascript:void(0)" onclick="location.href='pointShop'">ポイントショップ</a></li>
 					<li><a href="shortcodes">Shortcodes</a></li>
-					<li><a href="javascript:void(0)" onclick="location.href='helpPage'">ヘルプ</a></li>
+					<li><a href="javascript:void(0)">サービス案内</a>
+						<ul>
+							<li><a href="terms">利用約款</a>
+							<li><a href="terms">Q&A</a></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 		</section><!-- End container -->
