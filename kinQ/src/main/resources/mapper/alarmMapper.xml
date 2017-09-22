@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="us.duia.leejo0531.dao.HomeMapper">
+	<resultMap type="hashMap" id="AlarmReuslt">
+		<result property="unread" column="unread" javaType="int"/>
+		<collection property="alarmList" javaType="ArrayList" ofType="Alarm">
+			<result property="alarmNum" column="alarmNum"/>
+			<result property="userNum" column="userNum"/>
+			<result property="alarmType" column="alarmType"/>
+			<result property="alarmAdress" column="alarmAdress"/>
+		</collection>
+	</resultMap>
+
+	<update id="updateReadCheck" parameterType="Alarm">
+		update
+		    useralarm
+		set
+		    readcheck = 1
+		where
+		    readcheck = 0
+		    <foreach collection="list" item="item">or usernum = #{userNum}</foreach>
+	</update>
+	
+	<select id="selectMyAlarms" resultMap="AlarmResult">
+		select 
+            useralarm.*,
+            unread as
+        from 
+            useralarm,
+            (select
+                count(*) as unread
+            from
+                useralarm
+            where
+                usernum = #{userNum}
+                and readcheck = 0
+            ) push
+        where 
+            usernum = #{userNum}	
+	</select>
+	
+	<insert id="alarmReqReply">
+		insert all
+        into
+            useralarm
+        values(
+            alarm_seq.nextval,
+            usernum,
+            'req_reply',
+            questionnum,
+            0
+        )
+        select
+            interest.usernum as usernum,
+            myField.questionnum as questionnum
+        from
+            field interest,
+            (select
+                *
+            from
+                q_board
+            where
+                questionnum = #{questionNum}
+            ) myField
+        where
+            myField.minornum = interest.minorNum
+	</insert>
+	
+	<insert id="alarmRspnReply">
+		insert all
+        into
+            useralarm
+        values(
+            alarm_seq.nextval,
+            usernum,
+            'rspn_reply',
+            questionnum,
+            0
+        )
+        select
+            usernum,
+            questionnum
+        from
+            q_board
+        where
+            questionnum = #{questionNum}
+	</insert>
+	
+	<insert id="alarmReqRTReply">
+		insert all
+        into
+            useralarm
+        values(
+            alarm_seq.nextval,
+            usernum,
+            'req_rt_reply',
+            questionnum,
+            0
+        )
+        select
+            interest.usernum as usernum,
+            myField.questionnum as questionnum
+        from
+            field interest,
+            (select
+                *
+            from
+                q_board
+            where
+                questionnum = #{questionNum}
+            ) myField
+        where
+            myField.minornum = interest.minorNum
+	</insert>
+	
+	<insert id="alarmRspnRTReply">
+		insert all
+        into
+            useralarm
+        values(
+            alarm_seq.nextval,
+            usernum,
+            'rspn_rt_reply',
+            questionnum,
+            0
+        )
+        select
+            usernum,
+            questionnum
+        from
+            q_board
+        where
+            questionnum = #{questionNum}
+	</insert>
+	
+	<delete id="deleteFinishedRTQuestion">
+		delete
+		from
+		    useralarm
+		where
+		    alarmtype = 'req_rt_reply'
+		    and alarmadress = #{questionNum}
+	</delete>
+	
+</mapper>

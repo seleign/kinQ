@@ -29,5 +29,6 @@
 		<mapper resource="mapper/tagMapper.xml"/>
 		<mapper resource="mapper/reportMapper.xml"/>
 		<mapper resource="mapper/pointMapper.xml"/>
+		<mapper resource="mapper/alarmMapper.xml"/>
 	</mappers>
 </configuration>
