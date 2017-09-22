@@ -43,7 +43,7 @@
 							</li>
 							<li>
 								<span>サポート :</span>
-								代表番号 : (+81)123-4567
+								代表番号 : (+82) 2-123-4567
 							</li>
 							<li>Eメール : info@kinq.com</li>
 						</ul>
@@ -54,11 +54,11 @@
 						<h3 class="widget_title">クイックリンク</h3>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li><a href="ask_question.html">質問ボード</a></li>
-							<li><a href="cat_question.html">質問</a></li>
-							<li><a href="user_profile.html">質問リスト</a></li>
-							<li><a href="blog_1.html">ポイントショップ</a></li>
-							<li><a href="right_sidebar.html">ヘルプ</a></li>
+							<li><a href="askQuestion">質問ボード</a></li>
+							<li><a href="addQuestion">質問</a></li>
+							<li><a href="search">質問リスト</a></li>
+							<li><a href="pointShop">ポイントショップ</a></li>
+							<li><a href="helpPage">ヘルプ</a></li>
 						</ul>
 					</div>
 				</div>
