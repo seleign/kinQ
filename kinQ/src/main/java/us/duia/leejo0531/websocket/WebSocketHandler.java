@@ -25,12 +25,12 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		logger.info("웹소켓 연결됨: " + session.getAttributes());
+		//logger.info("웹소켓 연결됨: " + session.getAttributes());
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		logger.info("웹소켓 연결 끊김: " + session.getAttributes());
+		//logger.info("웹소켓 연결 끊김: " + session.getAttributes());
 		// session.close();
 	}
 	
@@ -45,7 +45,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		// 메시지 내용이 없을 경우
 		if(message.getPayloadLength() == 0) {
 			return;
-		}
+		} 
 		
 		// header.jsp로부터 유저 num을 받고 있으므로...
 		int userNum = Integer.parseInt(message.getPayload());
@@ -53,7 +53,6 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		ArrayList<AlarmVO> alarmlist = userdao.getUserAlarm(userNum);
 		int listsize = alarmlist.size();
 		String listnum = Integer.toString(listsize);
-		
 		session.sendMessage(new TextMessage(listnum));
 	}
 }
