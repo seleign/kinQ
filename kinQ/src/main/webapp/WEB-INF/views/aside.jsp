@@ -58,20 +58,39 @@
   		});
   	
   	$(function(){
-			$.ajax({
-				url: 'hotTag',
-				method: 'get',
-				data: {},
-				success: function(result){
-					var html = "";
-					$.each( result, function(index, element) {
-						html += '<a href="search?search='+element+'&searchType=tag&from=1&to=10">'+element+'</a>';
-					})
-					$('#tags').html(html);
-				}
-			});
-			
+		$.ajax({
+			url: 'hotTag',
+			method: 'get',
+			data: {},
+			success: function(result){
+				var html = "";
+				$.each( result, function(index, element) {
+					html += '<a href="search?search='+element+'&searchType=tag&from=1&to=10">'+element+'</a>';
+				})
+				$('#tags').html(html);
+			}
 		});
+		
+	});
+  	
+  	$(function(){
+		$.ajax({
+			url: 'asideRank',
+			method: 'get',
+			data: {},
+			success: function(result){
+				var html = "";
+				$.each( result, function(index, element) {
+					html += '<li><div class="author-img">';
+					html += '<img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt="">';
+					html += '</div><h6>'+element.userId+'</h6>';
+					html += '<span class="comment">'+element.totalPoint+' 点</span></li>';
+				})
+				$('#simpleRankingList').html(html);
+			}
+		});
+		
+	});
   	</script>
 </head>
 <body>
@@ -165,29 +184,10 @@
 				</c:if>
 				<div class="widget widget_highest_points">
 					<h3 class="widget_title">Highest points</h3>
-					<ul>
-						<li>
-							<div class="author-img">
-								<a href="#"><img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt=""></a>
-							</div> 
-							<h6><a href="#">admin</a></h6>
-							<span class="comment">12 Points</span>
-						</li>
-						<li>
-							<div class="author-img">
-								<a href="#"><img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt=""></a>
-							</div> 
-							<h6><a href="#">vbegy</a></h6>
-							<span class="comment">10 Points</span>
-						</li>
-						<li>
-							<div class="author-img">
-								<a href="#"><img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt=""></a>
-							</div> 
-							<h6><a href="#">ahmed</a></h6>
-							<span class="comment">5 Points</span>
-						</li>
-					</ul>
+					<a href="rankingList">
+						<ul id="simpleRankingList">
+						</ul>
+					</a>
 				</div>
 				<!-- 핫 태그 hot tag -->
 				<div class="widget widget_tag_cloud">

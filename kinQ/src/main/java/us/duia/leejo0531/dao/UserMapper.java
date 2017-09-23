@@ -29,4 +29,5 @@ public interface UserMapper {
 	public ArrayList<RankVO> getUserRank();
 	public RankVO getMyRank( int userNum);
 	public ArrayList<MajorVO> countField(int userNum);
+	public ArrayList<RankVO> getSimpleRankingList();
 }

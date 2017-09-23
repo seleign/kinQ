@@ -167,4 +167,10 @@ public class UserDAO {
 		ArrayList<MajorVO> result = mapper.countField( userNum);
 		return result;
 	}
+
+	public ArrayList<RankVO> getSimpleRankingList() {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		ArrayList<RankVO> result = mapper.getSimpleRankingList();
+		return result;
+	}
 }

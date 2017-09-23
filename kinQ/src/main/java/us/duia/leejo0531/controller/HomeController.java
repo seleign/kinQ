@@ -1,6 +1,7 @@
 package us.duia.leejo0531.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -14,15 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.HomeService;
+import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.PageVO;
+import us.duia.leejo0531.vo.RankVO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
-	
-	@Autowired
+
+	@Autowired(required=false)
 	HomeService homeSvc;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -57,6 +60,12 @@ public class HomeController {
 		int [] result = {allUsersNum, sessionCount, allQuestionsNum, allAnswersNum};
 		
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="asideRank", method=RequestMethod.GET)
+	public ArrayList<RankVO> showAside( Model model){
+		return homeSvc.getSimpleRankingList();
 	}
 	
 	/**
