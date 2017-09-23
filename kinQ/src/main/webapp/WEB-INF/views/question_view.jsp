@@ -5,7 +5,7 @@
 <html>
 <head>
 	<!-- Basic Page Needs -->
-	<meta charset="utf-8">m
+	<meta charset="utf-8">
 	<title>Ask me – Responsive Questions and Answers Template</title>
 	<meta name="description" content="Ask me Responsive Questions and Answers Template">
 	<meta name="author" content="vbegy">

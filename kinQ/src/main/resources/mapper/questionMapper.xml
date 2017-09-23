@@ -108,7 +108,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                         selected.*
@@ -255,7 +255,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -283,7 +283,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                         selected.*
@@ -329,7 +329,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -428,7 +428,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                     	*
@@ -444,7 +444,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -472,7 +472,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                     	*
@@ -490,7 +490,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -518,7 +518,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                     	*
@@ -536,7 +536,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
