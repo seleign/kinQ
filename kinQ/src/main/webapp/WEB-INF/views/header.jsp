@@ -92,7 +92,22 @@
 			}
 		});
 	}
-
+	
+	var isEmpty = function(value){
+		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+			return true
+		}else{
+			return false
+		}
+	};
+	
+	function checkNullValue() {
+		var keyWord = $("input[name='search']").val();
+ 		if( isEmpty(keyWord)) {
+ 	 		return false;
+		} 
+ 		return true;
+	};
 </script>
 </head>
 <body>
@@ -195,21 +210,20 @@
 				</ul>
 			</nav>
 				<div class="header-search">
-					<form action="search" method="get">
-						<div class="search_text">
-<!--  					<input type="hidden" name="searchType" value="content"> --> 						
-						<input type="hidden" name="from" value="1">
-						<input type="hidden" name="to" value="10">
-					    <input type="text" name="search">
-					    <button type="submit" class="search-submit"></button>
+					<form action="search" method="get" onsubmit="return checkNullValue();">
+						<div class="search_text">					
+							<input type="hidden" name="from" value="1">
+							<input type="hidden" name="to" value="10">
+						    <input type="text" name="search">
+						    <button type="submit" class="search-submit"></button>
 					    </div>
-					<div class="search_select">
- 						<select name="searchType">
-							<option value="title">題名</option>
-							<option selected="selected" value="content">内容</option>
-							<option value="tag">タッグ</option>
-							<option value="author">ユーザー</option>
-						</select>
+						<div class="search_select">
+	 						<select name="searchType">
+								<option value="title">題名で</option>
+								<option selected="selected" value="content">内容で</option>
+								<option value="tag">タッグで</option>
+								<option value="author">ユーザーで</option>
+							</select>
 						</div>
 					</form>
 				</div>

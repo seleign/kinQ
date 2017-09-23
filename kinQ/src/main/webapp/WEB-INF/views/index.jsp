@@ -380,22 +380,22 @@
 		                <li class="tab"><a href="#">in progress</a></li>
 		            </ul>
 		            <div class="tab-inner-warp">
-						<input type="hidden" id="rFrom" value="${page.from}">
-						<input type="hidden" id="rTo" value="${page.to}">
+						<input type="hidden" id="rFrom" value="1">
+						<input type="hidden" id="rTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap">
 					    </div>
 							<button class="button large gray-button" id="QuestionList_button" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
-						<input type="hidden" id="uFrom" value="${page.from}">
-						<input type="hidden" id="uTo" value="${page.to}">
+						<input type="hidden" id="uFrom" value="1">
+						<input type="hidden" id="uTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap_urgent">
 					    </div>
 					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:urgentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
-						<input type="hidden" id="pFrom" value="${page.from}">
-						<input type="hidden" id="pTo" value="${page.to}">
+						<input type="hidden" id="pFrom" value="1">
+						<input type="hidden" id="pTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap_progress">
 					    </div>
 					    <button class="button large gray-button" id="QuestionList_Urgent" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
