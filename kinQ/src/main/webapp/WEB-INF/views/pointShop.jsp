@@ -306,7 +306,8 @@
 <body>
 <jsp:include page="header.jsp" flush="false" />
 
-	<div class="breadcrumbs">
+	<section class="container main-content page-left-sidebar">
+		<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -323,7 +324,8 @@
 		</section><!-- End container -->
 	</div><!-- End breadcrumbs -->
 	
-	<section class="container main-content page-left-sidebar">
+<c:choose>
+<c:when test="${userId !=null}">
 					
 		<div class="row">
 		
@@ -638,7 +640,31 @@
 	</section><!-- End container -->
 	
 	<jsp:include page="footerPointShop.jsp" flush="false" />
-</div><!-- End wrap -->
+<!-- </div>End wrap -->
+</c:when>
+<c:otherwise>
+
+				<div id="buttons" class="row t_center">
+					
+					<div class="col-md-12"><div class="boxedtitle page-title"><h2 class="t_left">ショッピングモール</h2></div></div>
+					<div class="page-content page-shortcode">
+						<c:forEach var="good" items="${goodsList }">
+							<ul>
+								<li>
+									<img src="./resources/images/pointShopImg/${good.imageurl }">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+									商品名：　${good.goodsName}<br>
+									値段：　${good.price}&nbsp;ポイント<br><br>
+									<br><br><br><br>
+							</ul>
+						
+						</c:forEach>
+					</div>
+					</div>
+</c:otherwise>
+
+
+</c:choose>
+
 
 <div class="go-up"><i class="icon-chevron-up"></i></div>
 

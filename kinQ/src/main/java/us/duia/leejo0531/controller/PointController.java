@@ -30,12 +30,16 @@ public class PointController {
 	@RequestMapping(value = "/pointShop", method = RequestMethod.GET)
 	public String pointShop(Model model, HttpSession session) {
 		ArrayList<GoodsVO> goodsList = pointSvc.getGoodsList();
-		int userNum = (int) session.getAttribute("userNum");
-		int cChange = pointSvc.getRecentChange(userNum);
-		int pChange = pointSvc.getRecentPoint(userNum);
 		
-		model.addAttribute("cChange", cChange);
-		model.addAttribute("pChange", pChange);
+		if(session.getAttribute("userNum") != null){
+			int userNum = (int) session.getAttribute("userNum");
+			
+			int cChange = pointSvc.getRecentChange(userNum);
+			int pChange = pointSvc.getRecentPoint(userNum);
+			
+			model.addAttribute("cChange", cChange);
+			model.addAttribute("pChange", pChange);
+		}		
 		model.addAttribute("goodsList", goodsList);
 		return "pointShop";
 	}
