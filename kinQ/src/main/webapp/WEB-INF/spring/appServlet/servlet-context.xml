@@ -39,4 +39,14 @@
 
 
 	<context:component-scan base-package="us.duia.leejo0531" />
+	<beans:bean id="loginInterceptor" class="us.duia.leejo0531.interceptor.LoginInterceptor"/>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/pointShop"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
+

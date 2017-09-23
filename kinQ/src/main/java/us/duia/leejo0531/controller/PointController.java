@@ -27,7 +27,7 @@ public class PointController {
 	@Autowired
 	PointService pointSvc;
 
-	@RequestMapping(value = "pointShop", method = RequestMethod.GET)
+	@RequestMapping(value = "/pointShop", method = RequestMethod.GET)
 	public String pointShop(Model model, HttpSession session) {
 		ArrayList<GoodsVO> goodsList = pointSvc.getGoodsList();
 		int userNum = (int) session.getAttribute("userNum");
@@ -128,7 +128,28 @@ public class PointController {
 		return finalPChange;
 	} 
 	
+	@RequestMapping(value="cashCheck", method=RequestMethod.POST)
+	public @ResponseBody int cashCheck(HttpSession session){
+		int userNum = (int) session.getAttribute("userNum");
+		int finalChange = pointSvc.getRecentChange(userNum);
+		return finalChange;
+	}
 	
-	
+	@RequestMapping(value="cashToMoney", method=RequestMethod.POST)
+	public @ResponseBody int cashToMoney(HttpSession session){
+		int userNum = (int) session.getAttribute("userNum");
+		int change = pointSvc.getRecentChange(userNum);
+
+		long time = System.currentTimeMillis();
+		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
+		String cUsedDate = currentTime.format(new Date(time));
+		int cChange = 0;
+
+		CashLogVO cash = new CashLogVO(0, userNum, 0, null, change, cUsedDate, cChange);
+		pointSvc.cashToPoint(cash);
+		
+		int finalChange = pointSvc.getRecentChange(userNum);
+		return finalChange;
+	}
 	
 }
