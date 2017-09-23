@@ -14,5 +14,5 @@ public interface AlarmMapper {
 	public int alarmRspnRTReply( int questionNum);
 	public int deleteFinishedRTQuestion( int questionNum);
 	public int updateReadCheck( int userNum);
-	
+	public int alarmInterest( int questionNum);
 }

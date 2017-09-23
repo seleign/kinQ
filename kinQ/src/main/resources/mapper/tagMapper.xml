@@ -8,8 +8,15 @@
 		select *
 		from Tag
 	</select>
+	
+	<!-- 태그를 등록한다. -->
 	<insert id="insertTag" parameterType="Tag">
 		insert into tag values (tag_seq.nextval, #{questionNum}, #{userNum}, #{tag})
+	</insert>
+	
+	<!-- 질문글의 태그를 수정한다. -->
+	<insert id="updateTag"  parameterType="Tag">
+		
 	</insert>
 	
 	<select id="selectHotTag" resultType="string">

@@ -100,10 +100,14 @@ public class UserController implements HttpSessionListener{
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
-		session.invalidate();
-		synchronized (loginSessionMonitor) {
-			loginSessionMonitor.remove(session.getId());
+		if(loginSessionMonitor != null) {
+			synchronized (loginSessionMonitor) {
+				loginSessionMonitor.remove(session.getId());
+			}
+		} else {
+			logger.info("왜 loginSessionMonitor가 null이지?");
 		}
+		session.invalidate();
 		return "redirect:/";
 	}
 	

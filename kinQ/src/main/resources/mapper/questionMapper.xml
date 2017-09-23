@@ -14,7 +14,7 @@
 		<result property="MinorNum" column="MinorNum"/>
 		<result property="videoSrc" column="videoSrc"/>
 		<result property="questionContent" column="questionContent"/>
-		<result property="score" column="score"/>
+		<result property="point" column="point"/>
 		<result property="selectedReplyNum" column="selectedReplyNum"/>
 		<result property="timeCheck" column="timeCheck"/>
 		<result property="replyCount" column="replyCount"/>
@@ -42,7 +42,7 @@
 			questionContent,
 			MinorNum,
 			videoSrc,
-			score
+			point
 		) values(
 			#{questionNum},
 			#{userNum},
@@ -55,7 +55,7 @@
 			#{questionContent},
 			#{MinorNum},
 			#{videoSrc},
-			0
+			#{point}
 		)
 	</insert>
 	

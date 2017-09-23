@@ -75,6 +75,13 @@ public class AlarmService {
 	public int updateReadCheck( int userNum) {
 		return alarmDao.updateReadCheck(userNum);
 	}
-
 	
+	/**
+	 * 질문이 되었을 때, 질문글의 minor와 동일한 minor를 가진 유저를 등록한다.
+	 * @param questionNum
+	 * @return
+	 */
+	public int alarmInterest( int questionNum) {
+		return alarmDao.alarmInterest(questionNum);
+	}
 }

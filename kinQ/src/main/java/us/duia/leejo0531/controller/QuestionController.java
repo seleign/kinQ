@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import us.duia.leejo0531.service.AlarmService;
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.ReplyService;
 import us.duia.leejo0531.service.UserService;
@@ -31,7 +32,6 @@ import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
 import us.duia.leejo0531.vo.QuestionVO;
-import us.duia.leejo0531.vo.ReplyVO;
 import us.duia.leejo0531.vo.TagVO;
 import us.duia.leejo0531.vo.UserVO;
 
@@ -53,7 +53,10 @@ public class QuestionController {
 	private UserService userSvc; //UserService 비즈니스 로직
 	
 	@Autowired
-	ReplyService rSvc;
+	private ReplyService rSvc;
+	
+	@Autowired
+	private AlarmService almSvc;
 
 	/***
 	 * GET 방식으로 질문 페이지에 접근하는데 사용된다.
@@ -116,6 +119,9 @@ public class QuestionController {
 		qstn.setUserNum(userNum);
 		logger.info(qstn.toString());
 		qstnSvc.writeQuestion(qstn);
+		//태그 등록
+		qstn.getRelatedTag().parallelStream().forEach(tag -> qstnSvc.insertTag(new TagVO(qstn.getQuestionNum(), qstn.getUserNum(), tag)) );
+		almSvc.alarmInterest(qstn.getQuestionNum());
 		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
 	}
 
@@ -203,7 +209,7 @@ public class QuestionController {
 	
 	@RequestMapping(value = "modifyQuestion", method=RequestMethod.GET)
 	public String modifyQuestion(int questionNum, HttpSession session, Model model) {
-		// 테스트 코드
+		/*// 테스트 코드
 		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
 		model.addAttribute("majorList", majorList);
 		
@@ -214,9 +220,9 @@ public class QuestionController {
 		model.addAttribute("userNum", userNum);
 		model.addAttribute("questionNum", question.getQuestionNum());
 		
-		logger.info("modifyQuestion: " + question);
+		logger.info("modifyQuestion: " + question);*/
 		
-		/*// 로그인한 유저가 아니면 루트 페이지로 보낸다.
+		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
 		String userId = (String)session.getAttribute("userId");
 		if(userId == null) {
 			return "redirect:/";
@@ -224,13 +230,18 @@ public class QuestionController {
 		int userNum = (int)session.getAttribute("userNum");
 		QuestionVO question= new QuestionVO( questionNum );
 		question = qstnSvc.getQuestion(question);
+		
+		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
+		model.addAttribute("majorList", majorList);
+		
 		model.addAttribute("question", question);
+		model.addAttribute("questionNum", questionNum);
 		model.addAttribute("userNum", userNum);
 		
 		// 글을 수정할 권한이 없으면 메인으로 리다이렉트
 		if(question.getUserNum() != userNum) {
 			return "redirect:/";
-		}*/
+		}
 		return "askQuestion";
 	}
 	

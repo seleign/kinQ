@@ -181,4 +181,13 @@ public class QuestionService {
 		return result;
 	}
 	
+	public int insertTag(TagVO tag) {
+		int result = qstnDao.insertTag(tag);
+		return result;
+	}
+	
+	public int updateTag(TagVO tag) {
+		int result = qstnDao.updateTag(tag);
+		return result;
+	}
 }

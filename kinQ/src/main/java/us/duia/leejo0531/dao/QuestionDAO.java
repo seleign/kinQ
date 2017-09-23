@@ -32,6 +32,9 @@ public class QuestionDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Autowired
+	private TagDAO tagdao;
+	
 	/**
 	 * DB에서 질문글의 시퀀스를 가져온다.
 	 * @return
@@ -190,6 +193,18 @@ public class QuestionDAO {
 	public ArrayList<QuestionVO> searchInProgressPost(PageVO page){
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.searchInProgressPost(page);
+		return result;
+	}
+	
+	public int insertTag(TagVO tag) {
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		int result = mapper.insertTag(tag);
+		return result;
+	}
+	
+	public int updateTag(TagVO tag) {
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		int result = mapper.updateTag(tag);
 		return result;
 	}
 }

@@ -57,4 +57,9 @@ public class AlarmDAO {
 		return resultU;
 	}
 	
+	public int alarmInterest( int questionNum) {
+		AlarmMapper mapper = sqlSession.getMapper(AlarmMapper.class);
+		int result = mapper.alarmInterest(questionNum);
+		return result;
+	}
 }

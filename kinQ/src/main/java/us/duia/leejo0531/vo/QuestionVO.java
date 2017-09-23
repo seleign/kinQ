@@ -17,7 +17,7 @@ public class QuestionVO {
    private String videoSrc; //동영상 파일(blob)
    private int hit;
    private String questionContent;
-   private int score;
+   private int point; // 질문에 걸은 포인트, 기존엔 score 였음
    private String limit;	//DB에 없어요
    private int allReply;	//DB에 없어요 
    private int selectedReplyNum;
@@ -38,7 +38,7 @@ public class QuestionVO {
 
    public QuestionVO(int questionNum, int userNum, String timeLimit, String qstatus, Date regDate, Date modDate,
 		String title, ArrayList<String> relatedTag, int minorNum, String videoSrc, int hit, String questionContent,
-		int score, String limit, int allReply, int selectedReplyNum, int timeCheck, int replyCount) {
+		int point, String limit, int allReply, int selectedReplyNum, int timeCheck, int replyCount) {
 	super();
 	this.questionNum = questionNum;
 	this.userNum = userNum;
@@ -52,7 +52,7 @@ public class QuestionVO {
 	this.videoSrc = videoSrc;
 	this.hit = hit;
 	this.questionContent = questionContent;
-	this.score = score;
+	this.point = point;
 	this.limit = limit;
 	this.allReply = allReply;
 	this.selectedReplyNum = selectedReplyNum;
@@ -156,12 +156,12 @@ public int getQuestionNum() {
 	   this.questionContent = questionContent;
    }
 
-   public int getScore() {
-	   return score;
+   public int getPoint() {
+	   return point;
    }
 
-   public void setScore(int score) {
-	   this.score = score;
+   public void setPoint(int point) {
+	   this.point = point;
    }
 
    public String getLimit() {
@@ -210,7 +210,7 @@ public int getQuestionNum() {
 		return "QuestionVO [questionNum=" + questionNum + ", userNum=" + userNum + ", timeLimit=" + timeLimit
 				+ ", qstatus=" + qstatus + ", regDate=" + regDate + ", modDate=" + modDate + ", title=" + title
 				+ ", relatedTag=" + relatedTag + ", MinorNum=" + MinorNum + ", videoSrc=" + videoSrc + ", hit=" + hit
-				+ ", questionContent=" + questionContent + ", score=" + score + ", limit=" + limit + ", allReply="
+				+ ", questionContent=" + questionContent + ", point=" + point + ", limit=" + limit + ", allReply="
 				+ allReply + ", selectedReplyNum=" + selectedReplyNum + ", timeCheck=" + timeCheck + ", replyCount="
 				+ replyCount + "]";
 	}
