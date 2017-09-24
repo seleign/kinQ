@@ -56,26 +56,25 @@
             ) myField
         where
             myField.minornum = interest.minorNum
+            and myfield.usernum != interest.usernum
 	</insert>
 	
 	<insert id="alarmRspnReply">
-		insert all
+		insert
         into
             useralarm
         values(
             alarm_seq.nextval,
-            usernum,
+            (select
+	            usernum
+	        from
+	            q_board
+	        where
+	            questionnum = #{questionNum}),
             'rspn_reply',
-            questionnum,
+            #{questionNum},
             0
         )
-        select
-            usernum,
-            questionnum
-        from
-            q_board
-        where
-            questionnum = #{questionNum}
 	</insert>
 	
 	<insert id="alarmReqRTReply">
@@ -103,26 +102,25 @@
             ) myField
         where
             myField.minornum = interest.minorNum
+            and myfield.usernum != interest.usernum
 	</insert>
 	
 	<insert id="alarmRspnRTReply">
-		insert all
+		insert
         into
             useralarm
         values(
             alarm_seq.nextval,
-            usernum,
+            (select
+	            usernum
+	        from
+	            q_board
+	        where
+	            questionnum = #{questionNum}),
             'rspn_rt_reply',
-            questionnum,
+            #{questionNum},
             0
         )
-        select
-            usernum,
-            questionnum
-        from
-            q_board
-        where
-            questionnum = #{questionNum}
 	</insert>
 	
 	<delete id="deleteFinishedRTQuestion">
@@ -162,6 +160,7 @@
             ) myField
         where
             myField.minornum = interest.minorNum
+            and myfield.usernum != interest.usernum
 	</insert>
 	
 	<insert id="alarmReply" parameterType="int">
