@@ -117,7 +117,7 @@ public class FileService {
 			 */
 
 			logger.info("진짜 reources 폴더에서 :: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
-			logger.info("서비스 중인 resources 폴더로 파일을 복사한다. :: " + tmpPath + id + File.separator + savedFilename + ext);
+			logger.info("서비스 중인 resources 폴더로 파일을 복사한다. :: " + tmpPath + id + "/" + savedFilename + ext);
 			
 			// 서비스 중인 리소스 폴더가 존재하는가?
 			path = new File(tmpPath + id + File.separator);
@@ -139,7 +139,6 @@ public class FileService {
 			ext = null;
 			e.printStackTrace();
 		}
-		logger.info("테스트용:" + savedFilename + ext);
 		return savedFilename + ext;
 	}
 	
