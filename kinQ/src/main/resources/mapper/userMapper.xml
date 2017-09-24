@@ -99,7 +99,7 @@
 		        (select
 		            myPost.*,
 		            nvl(sCount,0) as sCount,
-		            ( qCount*10 + rCount*20 + nvl(sCount,0)*30)as totalPoint    
+		            ( qCount*10 + rCount*15 + nvl(sCount,0)*2)as totalPoint    
 		        from
 		            (select
 		                myQ.*,
@@ -122,16 +122,13 @@
 		            where
 		                myQ.usernum = myR.usernum
 		            ) myPost,
-		            ( select
-		                q_reply.usernum as usernum,
-		                nvl(count( replynum),0) as sCount
-		            from
-		                q_board,
-		                q_reply
-		            where 
-		                q_board.selectedreplynum = q_reply.replynum(+)
-		            group by
-		                q_reply.usernum
+		            (select
+					    q_reply.usernum as usernum,
+					    sum( nvl(score,0)) as sCount
+					from
+					    q_reply
+					group by
+					    q_reply.usernum
 		            ) selected
 		        where 
 		            myPost.usernum = selected.usernum(+)
@@ -156,7 +153,7 @@
 		        (select
 		            myPost.*,
 		            nvl(sCount,0) as sCount,
-		            ( qCount*10 + rCount*20 + nvl(sCount,0)*30)as totalPoint    
+		            ( qCount*10 + rCount*15 + nvl(sCount,0)*2)as totalPoint    
 		        from
 		            (select
 		                myQ.*,
@@ -179,16 +176,13 @@
 		            where
 		                myQ.usernum = myR.usernum
 		            ) myPost,
-		            ( select
-		                q_reply.usernum as usernum,
-		                nvl(count( replynum),0) as sCount
-		            from
-		                q_board,
-		                q_reply
-		            where 
-		                q_board.selectedreplynum = q_reply.replynum(+)
-		            group by
-		                q_reply.usernum
+		            (select
+					    q_reply.usernum as usernum,
+					    sum( nvl(score,0)) as sCount
+					from
+					    q_reply
+					group by
+					    q_reply.usernum
 		            ) selected
 		        where 
 		            myPost.usernum = selected.usernum(+)
