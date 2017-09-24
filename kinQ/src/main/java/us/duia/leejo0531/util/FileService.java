@@ -64,7 +64,7 @@ public class FileService {
 		}
 
 		// 저장 폴더가 없으면 생성
-		File path = new File(uploadPath + File.separator + id);
+		File path = new File(uploadPath + id + File.separator);
 		if (!path.isDirectory()) {
 			path.mkdirs();
 		}
@@ -116,8 +116,14 @@ public class FileService {
 			 * 그래서 진짜 resources로부터 서비스 중인 resources 폴더로 파일을 한번 더 복사해야했습니다.
 			 */
 
-			logger.info("진짜 reources 폴더에서 :: " + tmpPath + id + File.separator + savedFilename + ext);
-			logger.info("서비스 중인 resources 폴더로 파일을 복사한다. :: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
+			logger.info("진짜 reources 폴더에서 :: " + fileSaveDirPath +id + File.separator + savedFilename + ext);
+			logger.info("서비스 중인 resources 폴더로 파일을 복사한다. :: " + tmpPath + id + "/" + savedFilename + ext);
+			
+			// 서비스 중인 리소스 폴더가 존재하는가?
+			path = new File(tmpPath + id + File.separator);
+			if(!path.isDirectory()) {
+				path.mkdirs();
+			}
 			
 			FileInputStream inputStream = new FileInputStream(fileSaveDirPath +id + File.separator + savedFilename + ext); 
 			FileOutputStream outputStream = new FileOutputStream(tmpPath + id + File.separator + savedFilename + ext);

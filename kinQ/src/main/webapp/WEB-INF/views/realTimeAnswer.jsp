@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<title>실시간 공유 페이지</title>
+<title>RealTime Answer</title>
 <meta name="description" content="Ask me Responsive Questions and Answers Template">
 <meta name="author" content="vbegy">
 	
@@ -70,12 +70,15 @@
 	var canvasSetTime;
 	window.onload = function() { //onload 시작
 		$( "#tabs" ).tabs();
+		$( "#tabs2" ).tabs();
+
 		$("#part-of-screen-to-be-shared").height(  $("#part-of-screen-to-be-shared").width() );
 		$("#part-of-screen-to-be-shared").css('max-width', $("#part-of-screen-to-be-shared").width());
+		$("#part-of-screen-to-be-shared").css('max-height', $("#part-of-screen-to-be-shared").width());
 		$("#part-of-screen-to-be-shared").css('overflow', 'scroll');
 		
 		// 1. Ckeditor 초기화, 파일 업로드 주소 설정
-		CKEDITOR.replace('questionContent',{ 
+		CKEDITOR.replace('ReplyContent',{ 
     	    		filebrowserUploadUrl: 'cKEditorFileUpload'
    		 }); // Ckeditor 초기화 종료
    		 
@@ -89,7 +92,6 @@
 			}).then(function(audioStream) {
 				this.audioStream = audioStream;
 				var canvas = document.getElementById('canvas');
-				alert("test" +canvas)
 				var finalStream = new MediaStream();
 				this.canvasStream = canvas.captureStream();
 				audioStream.getAudioTracks().forEach(function(track) {
@@ -513,6 +515,8 @@
 			console.log("부정 접근이므로 리다이렉트 시킨다.")
 			// 부정 접근이므로 로그인 페이지 리다이렉트
 		}
+
+		
 } //onload End
 	
 // 데이터가 널 또는 공백인지 확인하는 함수
@@ -533,6 +537,26 @@ function lastFileDelete() {
 // 상대에게 받은 채팅 중 오래된 것을 삭제한다.
 function lastFileChat() {
 	$(".chat-output").children().last().remove();
+}
+
+// 유효성 검사
+function formCheck() {
+var questionNum = '${question.questionNum}';
+var userNum = '${userNum}';
+var ReplyContent = CKEDITOR.instances.ReplyContent.getData(); //TODO
+
+	$.ajax({
+        url: 'registReply',
+        data: {
+        		//
+       		},
+        type: 'POST',
+        success: function(result){
+			//
+        		
+                }
+        });
+	
 }
 
 </script>
@@ -577,23 +601,21 @@ function lastFileChat() {
 <button id="btn-leave-room" disabled>4. 접속 종료</button>
 <button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
-<input type="text" >
-<input type="text" name="videoSrc" value="" placeholder="답변이 완료된 후에는 답변이 녹화된 동영상의 주소가 여기에 담겨서, 답변 테이블의 videoSrc에 들어간다.">
 </fieldset>
 
+<input type="text" name="videoSrc" value="" placeholder="답변이 완료된 후에는 답변이 녹화된 동영상의 주소가 여기에 담겨서, 답변 테이블의 videoSrc에 들어간다.">
 <table>
 	<tr>
 		<td>
-		<div id="tabs">
+		<div id="tabs" >
   <ul>
     <li><a href="#tabs-1">나의 공유화면</a></li>
-    <li><a href="#tabs-2">내 공유화면 프리뷰 </a></li>
-    <li><a href="#tabs-3">질문자가 업로드한 동영상 / 내가 녹화한 영상 보기</a></li>
-    <li><a href="#tabs-4">상대방의 화면</a></li>
+    <li><a href="#tabs-2">질문자가 업로드한 동영상 / 내가 녹화한 영상 보기</a></li>
+    <li><a href="#tabs-3">상대방의 화면</a></li>
   </ul>
   <div id="tabs-1">
 		<!-- 이게 공유된다. DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
-	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray; background-color: #FBFBEE;">
+	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray;">
 		<c:if test="${question.questionContent != null? true:false }">
 			${question.questionContent}
 		</c:if>
@@ -602,11 +624,8 @@ function lastFileChat() {
 		</c:if>
 	</div>
   </div>
+
   <div id="tabs-2">
-	<!-- 상대방 화면이 여기에 보임 -->
-	<div id="OpponentScreen"></div>
-  </div>
-  <div id="tabs-3">
 		<!-- 실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다. -->
 	<div id="videos-container" style="border:3px solid blue">
 		<h6>실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다.</h6>
@@ -615,45 +634,54 @@ function lastFileChat() {
 			<video src="${question.videoSrc}" controls="controls" preload="auto" width="100%"></video>
 		</c:if>
 		<c:if test="${question.videoSrc == null? true:false }">
-			<h6>여기에는 질문글에서 녹화된 동영상이 여기에 보입니다.</h6>
+			<h6>質問者がアップロードした動画がないです。</h6>
 		</c:if>
 	</div> 
    </div>
-   <div id="tabs-4">
+   <div id="tabs-3">
 		<!-- 상대방의 화면이 여기에 보임 -->
-		<img id="shared-part-of-screen-preview" src="https://www.gifpng.com/500x500">
+		<img id="shared-part-of-screen-preview" alt="상대방의 화면이 여기에">
 	</div>
 </div>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-		<!-- 질문글 내용이 여기에 보인다. -->
-	<textarea id="questionContent" style="width: 1000px;">
-		<c:if test="${question.questionContent != null? true:false }">
-			${question.questionContent}
-		</c:if>
-		<c:if test="${question.questionContent == null? true:false }">
-			<h1>여기에는 질문글의 questionContent 가 불러와진다. (이 DIV는 가로 세로가 크기가 같다.)</h1>
-		</c:if>
-	</textarea>
+		<div id="tabs2">
+  <ul>
+    <li><a href="#tabs-4">질문 내용</a></li>
+  	<li><a href="#tabs-5">내 에디터</a></li>
+    <li><a href="#tabs-6">내 공유화면 프리뷰 </a></li>
+  </ul>
+    <div id="tabs-4">
+ 	<!-- 상대방의 질문 내용이 여기에 보인다. -->
+ 	${question.questionContent}
+  </div>
+    <div id="tabs-5">
+		 <!-- 내가 답변할 에디터가 여기에 보인다. -->
+		<textarea id="ReplyContent" name="ReplyContent" style="width: 1000px;"></textarea>
+  </div>
+    <div id="tabs-6">
+	<!-- 내가 녹화중인 화면이 여기에 보임 -->
+	<div id="OpponentScreen"></div>
+  </div>
+</div>
 		</td>
 	</tr>
 </table>
-					
 				</div><!-- End page-content -->
 			</div><!-- End main -->
 			<!-- aside -->
 	<aside class="col-md-3 sidebar">
 	<div class="widget">
-		<h3 class="widget_title">채팅 및 파일 전송</h3>
-		<input type="text" id="input-text-chat" placeholder="채팅 입력" disabled>
-		<button id="share-file" disabled>파일 전송</button> 
-		
+		<h3 class="widget_title">チャット及びファイル送り</h3>
+		<input type="text" id="input-text-chat" placeholder="チャット入力" disabled style="display: inline-block;">
+		<button id="share-file" disabled class="button color small submit">ファイルを送る</button> 
+
 		<!-- 채팅 및 파일이 전송된 것이 여기에 나타난다. -->
-		<div id="chat-container" style="border:3px solid red;">
-		<button onclick="lastFileDelete()" style="width: 45%;"> 오래된 파일 삭제</button>	
-		<button onclick="lastFileChat()" style="width: 45%;"> 오래된 채팅 삭제</button>
+		<div id="chat-container" style="border:3px solid gray;">
+		<button onclick="lastFileDelete()" class="button color small submit" >最後のファイルを削除</button>	
+		<button onclick="lastFileChat()" class="button color small submit">最後のチャットを削除</button>
 		<h6>채팅 내용 + 송수신된 파일 DIV</h6>
 			<div id="file-container"></div>
 			<div class="chat-output"></div>

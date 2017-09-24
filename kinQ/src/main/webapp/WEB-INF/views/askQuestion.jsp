@@ -421,14 +421,19 @@ window.onload = function() {
 //글쓰기 페이지의 유효성 검사
 function formCheck() {
 	var title = $('#title').val();
-	var point = $('#point').val();
+	var point = $('#point').val(); 	
+	
 	if(title==''){
 		alert('おタイトルを入力して下さい。');
 		return false;
 	}
 	
-	if(point <= 0 ) {
-		alert('ポイントは０以上かかってください。');
+	if(Number.isInteger(point)) {
+		if(point <= 0 ) {
+			alert('ポイントは０以上かかってください。');
+			return false;
+		}
+	} else {
 		return false;
 	}
 
