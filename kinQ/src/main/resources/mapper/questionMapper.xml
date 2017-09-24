@@ -307,7 +307,8 @@
                         from
                             q_board
 				        <trim prefix="where" prefixOverrides="and|or">
-				        	<foreach collection="list" item="item">and contains( questioncontent, '%${item}%') >0</foreach>
+				        	<!-- <foreach collection="list" item="item">and contains( questioncontent, '%${item}%') >0</foreach> -->
+				        	<foreach collection="list" item="item">and lower(questioncontent) like lower('%${item}%')</foreach>
 				        </trim>
                     
                         union
@@ -321,7 +322,8 @@
                             from
                                 q_reply
 							<trim prefix="where" prefixOverrides="and|or">
-					        	<foreach collection="list" item="item">and contains( replycontent, '%${item}%') >0</foreach>
+					        	<!-- <foreach collection="list" item="item">and contains( replycontent, '%${item}%') >0</foreach> -->
+					        	<foreach collection="list" item="item">and lower(replycontent) like lower('%${item}%')</foreach>
 					        </trim>
                             group by questionnum
                             ) targetQstn
