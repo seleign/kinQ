@@ -230,17 +230,16 @@
 						<div class="col-md-12">
 							<div class="page-content">
 								<h2>活動現況</h2>
-								<div class="ul_list ul_list-icon-ok about-user">
+								<div class="ul_list ul_list-icon-ok about-user" style="float:left; padding-left:7%; padding-top: 4%; width: 30%;">
 									<ul>
-										<li><i class="icon-user"></i>ID : <span>${sessionScope.userId }</span></li>
-										<li><i class="icon-star"></i>ランキング : <span>${myRank.ranking} 位</span></li>
-										<li><i class="icon-asterisk"></i>ポイント : <span>________</span></li>
-										<li><i class="icon-comment"></i>フォロワー : <span>________</span></li>
-										<li><i class="icon-comment-alt"></i>フォロイング : <span>________</span></li>
+										<li><i class="icon-user"></i>ID : <span><strong>${sessionScope.userId }</strong></span></li>
+										<li><i class="icon-star-empty"></i>ランキング : <span><strong>${myRank.ranking}</strong></span>&nbsp;位</li>
+										<li><i class="icon-star"></i>ポイント : <span><strong>${pChange }</strong></span>&nbsp;ポイント</li>
+										<li><i class="icon-credit-card"></i>キャッシュ : <span><strong>${cChange }</strong></span>&nbsp;円</li>
 								</ul>
 								</div>
-							    <div id="piechart"></div>
-								<br><input type="button" value="個人情報修正" onclick="location.href='updateUserInfo'">
+							    <div id="piechart" style="float: left; width: 60%;"></div>
+								<br><hr><br><input type="button" class="button small grey-button custom-button" value="個人情報修正" onclick="location.href='updateUserInfo'">
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->
 						<div class="col-md-12">
