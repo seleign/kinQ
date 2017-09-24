@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import us.duia.leejo0531.vo.DetailVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
@@ -205,6 +206,12 @@ public class QuestionDAO {
 	public int updateTag(TagVO tag) {
 		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
 		int result = mapper.updateTag(tag);
+		return result;
+	}
+	
+	public DetailVO getQuestionDetail( QuestionVO qstn) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		DetailVO result = mapper.getQuestionDetail(qstn);
 		return result;
 	}
 }

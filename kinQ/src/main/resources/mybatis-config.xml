@@ -20,6 +20,7 @@
 		<typeAlias type="us.duia.leejo0531.vo.RankVO" alias="Rank"/>
 		<typeAlias type="us.duia.leejo0531.vo.PointLogVO" alias="PointLog"/>
 		<typeAlias type="us.duia.leejo0531.vo.CashLogVO" alias="CashLog"/>
+		<typeAlias type="us.duia.leejo0531.vo.DetailVO" alias="Detail"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" /> 

@@ -73,8 +73,6 @@ public class SearchController {
 		pack.put("page", page);
 		pack.put("qList", result);
 		
-		System.out.println(pack);
-		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}
 	

@@ -398,7 +398,7 @@
 						<input type="hidden" id="pTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap_progress">
 					    </div>
-					    <button class="button large gray-button" id="QuestionList_Urgent" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 		        </div><!-- End page-content -->
 			</div><!-- End main -->

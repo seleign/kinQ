@@ -28,6 +28,7 @@ import us.duia.leejo0531.service.AlarmService;
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.ReplyService;
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.vo.DetailVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
@@ -151,6 +152,15 @@ public class QuestionController {
 		return "question_view";
 		//return "question/questionView";
 
+	}
+	
+	@RequestMapping(value = "question_view_test", method = RequestMethod.GET)
+	public String viewQuestion_test(QuestionVO qstn, Model model) {
+//	public DetailVO viewQuestion_test(QuestionVO qstn, Model model) {
+		DetailVO detail = qstnSvc.getQuestionDetail( qstn);
+		model.addAttribute("detail", detail);
+
+		return "questionView";
 	}
 	
 	

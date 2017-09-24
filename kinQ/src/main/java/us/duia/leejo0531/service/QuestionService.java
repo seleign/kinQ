@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.TagDAO;
 import us.duia.leejo0531.dao.UserDAO;
+import us.duia.leejo0531.vo.DetailVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
@@ -188,6 +189,11 @@ public class QuestionService {
 	
 	public int updateTag(TagVO tag) {
 		int result = qstnDao.updateTag(tag);
+		return result;
+	}
+
+	public DetailVO getQuestionDetail( QuestionVO qstn){
+		DetailVO result = qstnDao.getQuestionDetail(qstn);
 		return result;
 	}
 }

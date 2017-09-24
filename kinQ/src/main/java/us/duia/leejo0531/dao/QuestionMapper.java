@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import us.duia.leejo0531.vo.DetailVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
@@ -49,4 +50,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> searchUrgentPost(PageVO page);
 	
 	public ArrayList<QuestionVO> searchInProgressPost(PageVO page);
+	
+	public DetailVO getQuestionDetail( QuestionVO qstn);
 }
