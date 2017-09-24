@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import us.duia.leejo0531.dao.PointDAO;
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.ReplyDAO;
 import us.duia.leejo0531.dao.UserDAO;
@@ -33,7 +34,9 @@ public class UserService {
 	private QuestionDAO qstnDao;
 	@Autowired(required=false)
 	private ReplyDAO replyDao;
-
+	@Autowired(required=false)
+	private PointDAO pointDao;
+	
 	public void insertUserInfo(UserVO user, ArrayList<String> field) {
 
 		// userInfo 시퀀스 불러오기
@@ -100,7 +103,7 @@ public class UserService {
 				}
 			}
 		}
-		System.out.println(chk + " 체크");
+//		System.out.println(chk + " 체크");
 
 		return chk;
 	}
@@ -176,6 +179,16 @@ public class UserService {
 	public RankVO getMyRank(int userNum){
 		RankVO result = userDao.getMyRank( userNum);
 		return result;
+	}
+
+	public int getRecentChange(int userNum) {
+		int cChange = pointDao.getRecentChange(userNum);
+		return cChange;
+	}
+
+	public int getRecentPoint(int userNum) {
+		int pChange = pointDao.getRecentPoint(userNum);
+		return pChange;
 	}
 	
 }

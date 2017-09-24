@@ -1,9 +1,9 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+
 	<!-- Basic Page Needs -->
 	<meta charset="utf-8">
 	<title>Ask me – Responsive Questions and Answers Template</title>
@@ -25,6 +25,7 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 
+
 </head>
 <body>
 <div class="loader"><div class="loader_html"></div></div>
@@ -34,31 +35,26 @@
 				<div class="col-md-4">
 					<div class="widget widget_contact">
 						<h3 class="widget_title">会社案内</h3>
-						<ul>
-							<li>
-								<span>住所 :</span>
-								ソウル市　江南区　嶺東大路　513
-								
-							</li>
-							<li>
-								<span>サポート :</span>
-								代表番号 : (+82) 2-123-4567
-							</li>
-							<li>Eメール : info@kinq.com</li>
-						</ul>
+						<span>住所 :</span>
+						<br><br>
+						<span style="color: white; font-size: 13px">ソウル市　江南区　嶺東大路　513</span>
+						<br><br>
+						<span>サポート :</span><br><br>
+						<span style="color: white; font-size: 13px">代表番号 : (+82) 2-123-4567<br><br>
+						Eメール : info@kinq.com</span>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="widget">
 						<h3 class="widget_title">クイックリンク</h3>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="askQuestion">質問ボード</a></li>
-							<li><a href="addQuestion">質問</a></li>
-							<li><a href="search">質問リスト</a></li>
-							<li><a href="pointShop">ポイントショップ</a></li>
-							<li><a href="helpPage">ヘルプ</a></li>
-						</ul>
+						<span style="font-size: 13px; line-height: 2em;">
+							<a href="index.html">- Home</a><br>
+							<a href="askQuestion">- 質問ボード</a><br>
+							<a href="addQuestion">- 質問</a><br>
+							<a href="search">- 質問リスト</a><br>
+							<a href="pointShop">- ポイントショップ</a><br>
+							<a href="helpPage">- ヘルプ</a>
+						</span>
 					</div>
 				</div>
 			<div class="col-md-3">

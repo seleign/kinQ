@@ -202,6 +202,67 @@
             ranking
 	</select>
 	
+	
+	<select id="getSimpleRankingList" resultType="Rank">
+	    select
+	    	ranked.*,
+	    	userinfo.id as userId
+	    from
+	    	userinfo,
+	    	(select
+		        rank() over( order by totalPoint desc) as ranking,
+		        added.*
+		    from
+		        (select
+		            myPost.*,
+		            nvl(sCount,0) as sCount,
+		            ( qCount*10 + rCount*20 + nvl(sCount,0)*30)as totalPoint    
+		        from
+		            (select
+		                myQ.*,
+		                myR.rCount
+		            from
+		                (select
+		                    usernum,
+		                    count(*) as qCount
+		                from
+		                    q_board
+		                group by usernum
+		                )myQ,
+		                (select
+		                    usernum,
+		                    count(*) as rCount
+		                from
+		                    q_reply
+		                group by usernum
+		                )myR
+		            where
+		                myQ.usernum = myR.usernum
+		            ) myPost,
+		            ( select
+		                q_reply.usernum as usernum,
+		                nvl(count( replynum),0) as sCount
+		            from
+		                q_board,
+		                q_reply
+		            where 
+		                q_board.selectedreplynum = q_reply.replynum(+)
+		            group by
+		                q_reply.usernum
+		            ) selected
+		        where 
+		            myPost.usernum = selected.usernum(+)
+		        order by 
+		            totalPoint desc
+		        )added
+			)ranked
+		where
+			ranked.usernum = userinfo.usernum
+			<![CDATA[and ranking <= 5]]> 
+        order by 
+            ranking
+	</select>
+	
 	<select id="countField" parameterType="int" resultType="Major">
 		select
 		    major.majorname,

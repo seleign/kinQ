@@ -21,7 +21,7 @@ public class ReportController {
 	
 	@RequestMapping(value="reportPage", method=RequestMethod.GET)
 	public String reportPage(int reportedQNum, Model model){
-		System.out.println(reportedQNum);
+//		System.out.println(reportedQNum);
 		model.addAttribute("reportedQNum", reportedQNum);
 		return "report/reportPage";
 	}

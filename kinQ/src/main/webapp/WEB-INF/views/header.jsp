@@ -32,18 +32,22 @@
   	// 실제 서버 인증서 있을때는 wss 뒤에 /leejo0531/ 없게 수정할 것 
 // 	var webUri = "wss://" + window.location.host +"/count";
 	var webUri = "ws://" + window.location.host +"/leejo0531/count";
-	function send_message(){
-		websocket = new WebSocket(webUri);
-		websocket.onopen = function(evt){
-			onOpen(evt);
-		};
-		websocket.onmessage = function(evt){
-			onMessage(evt);
-		};
-		websocket.onerror = function(evt){
-			onError(evt);
-		};
-	}
+
+	websocket = new WebSocket(webUri);
+	websocket.onopen = function(evt){
+		onOpen(evt);
+	};
+	websocket.onmessage = function(evt){
+		onMessage(evt);
+	};
+	websocket.onerror = function(evt){
+		onError(evt);
+	};
+	
+	// 페이지 이동시에, 웹소켓 서버에 소켓 close를 해준다.
+	$(window).on("beforeunload", function(){
+       websocket.close();
+    });
 	
 	function onOpen(evt){
 		websocket.send("${sessionScope.userNum}");
@@ -58,7 +62,7 @@
 	//빨간줄 뜨는거 무시하셔도 됩니다 
 	$(function(){
 		if(${sessionScope.userNum != null? true:false}){
-		send_message();
+			
 		}
 	});
 	
@@ -88,6 +92,22 @@
 			}
 		});
 	}
+	
+	var isEmpty = function(value){
+		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+			return true
+		}else{
+			return false
+		}
+	};
+	
+	function checkNullValue() {
+		var keyWord = $("input[name='search']").val();
+ 		if( isEmpty(keyWord)) {
+ 	 		return false;
+		} 
+ 		return true;
+	};
 </script>
 </head>
 <body>
@@ -190,21 +210,20 @@
 				</ul>
 			</nav>
 				<div class="header-search">
-					<form action="search" method="get">
-						<div class="search_text">
-<!--  					<input type="hidden" name="searchType" value="content"> --> 						
-						<input type="hidden" name="from" value="1">
-						<input type="hidden" name="to" value="10">
-					    <input type="text" name="search">
-					    <button type="submit" class="search-submit"></button>
+					<form action="search" method="get" onsubmit="return checkNullValue();">
+						<div class="search_text">					
+							<input type="hidden" name="from" value="1">
+							<input type="hidden" name="to" value="10">
+						    <input type="text" name="search">
+						    <button type="submit" class="search-submit"></button>
 					    </div>
-					<div class="search_select">
- 						<select name="searchType">
-							<option value="title">題名</option>
-							<option selected="selected" value="content">内容</option>
-							<option value="tag">タッグ</option>
-							<option value="author">ユーザー</option>
-						</select>
+						<div class="search_select">
+	 						<select name="searchType">
+								<option value="title">題名で</option>
+								<option selected="selected" value="content">内容で</option>
+								<option value="tag">タッグで</option>
+								<option value="author">ユーザーで</option>
+							</select>
 						</div>
 					</form>
 				</div>
@@ -236,18 +255,15 @@
 						</ul> -->
 					</li>
 					<li><a href="search">質問リスト</a>
-<!-- 						<ul>
-							<li><a href="blog_1.html">중 1</a>
-								<ul>
-									<li><a href="blog_1.html">소 1-1</a></li>
-									<li><a href="blog_1_l_sidebar.html">소 1-2</a></li>
-								</ul>
-							</li>
-						</ul> -->
 					</li>
 					<li><a href="javascript:void(0)" onclick="location.href='pointShop'">ポイントショップ</a></li>
 					<li><a href="shortcodes">Shortcodes</a></li>
-					<li><a href="javascript:void(0)" onclick="location.href='helpPage'">ヘルプ</a></li>
+					<li><a href="javascript:void(0)">サービス案内</a>
+						<ul>
+							<li><a href="terms">利用約款</a>
+							<li><a href="terms">Q&A</a></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 		</section><!-- End container -->

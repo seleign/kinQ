@@ -1,10 +1,11 @@
 package us.duia.leejo0531.vo;
 
 public class TagVO {
-	int tagNum;
-	int questionNum;
-	int userNum;
-	String tag;
+	private int tagNum;
+	private int questionNum;
+	private int userNum;
+	private String tag;
+	
 	public TagVO() {
 		super();
 	}

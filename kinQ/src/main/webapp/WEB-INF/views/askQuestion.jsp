@@ -77,7 +77,7 @@
 				<div class="page-content ask-question">
 					<div class="boxedtitle page-title"><h2>Ask Question</h2></div>
 					
-					<p>こんにちは。KinQに一般的な質問とこの質問を録画して質問をすることができます。</p>
+					<p>こんにちは。KinQに知りたい質問や気になることを気軽くに質問をすることができます。</p>
 					
 					<div class="form-style form-style-3" id="question-submit">
 						<form action="addQuestion" method="post" enctype="multipart/form-data" onsubmit="return validationCheck();">  
@@ -115,6 +115,15 @@
 <!-- 										<span><i class="icon-arrow-up"></i>Browse</span> -->
 <!-- 									</div> -->
 <!-- 								</div> -->
+								
+								<p>
+									<label class="required">Point</label>
+									<input type="number" required="required" class="input" id="point" name="point" value="${question.point}" style="width: 82%; display: inline-block;">
+									<span class="form-description">
+										質問するためにはポイントが必要です。
+									</span>
+								</p>
+								
 								
 								<p>
 									<label>Tags</label>
@@ -155,21 +164,21 @@
 											<option value="30">30分</option>
 											<option value="60">60分</option>
 										</select>
-										以内で
-										<input type="text" id="timeLimit" name="timeLimit" value="${question.timeLimit}" style="width: 20%; display: inline-block;">
+										以内で質問の答えをもらいたいです。
+										<input type="text"  id="timeLimit" name="timeLimit" value="${question.timeLimit}" style="width: 20%; display: none;">
 									</span>
 								</p>
 								<p>
 								<div class="ask-video">
 									<label class="required">video<span>*</span></label>
 									<div id="step2">
-									<h1>step2. WEBRTC를 이용한 녹화...</h1>
+									<h1>質問の内容に音声をつけられます。</h1>
 									
-									<button id="btn-record-webm" style="font-size: inherit;">화면 녹화</button>
-									<button id="btn-record-webm-stop" style="font-size: inherit;" disabled="disabled">화면 중지</button>
+									<input type="button" id="btn-record-webm" class="button color small submit" value="画面の録画を始まる">
+									<input type="button" id="btn-record-webm-stop" class="button color small submit" value="画面の中止する">
 									
 									<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
-									<input type="text" name="videoSrc" value="${question.videoSrc}" id="videoSrc" placeholder="녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다.">
+									<input type="text" name="videoSrc" value="${question.videoSrc}" id="videoSrc" style="display: none;">
 									
 									
 									<!-- 기존에 녹화된 영상과 녹화 할 영역(canvas)을 가진 DIV -->
@@ -195,8 +204,8 @@
 								</p>
 							</div>
 							<p id="p-ask-buttons" class="form-submit">
-								<input type="submit" id="publish-question" value="질문하기" class="button color small submit">
-								<input type="button" id="ask-button" value="영상녹화" class="button color small submit" onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
+								<input type="submit" id="publish-question" value="質問する" class="button color small submit">
+								<input type="button" id="ask-button" value="画面の録画する" class="button color small submit" onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
 							</p>
 						</form>
 					</div>
@@ -207,11 +216,9 @@
 	</section><!-- End container -->
 	
 	<jsp:include page="footer.jsp" flush="false" />
-</div><!-- End wrap -->
+<!-- End wrap -->
 
 <div class="go-up"><i class="icon-chevron-up"></i></div>
-
-
 
 <!-- js -->
 
@@ -276,6 +283,20 @@ window.onload = function() {
 	// 5. questionNum이 null이면 다시 페이지를 불러온다.
 	if( isEmpty($("#questionNum").val() ) ) {
 		location.href="addQuestion"; 
+	}
+	
+	// 6. 수정하기일 때, 태그를 넣어준다.
+	if(${question.relatedTag != null? true:false}) {
+		<c:if test="${question.relatedTag != null? true:false }">
+			<c:forEach var="tags" items="${question.relatedTag}">
+				$('.taglist').prepend('<li class="tag" id="TAG${tags}"><span>'+ '${tags}'  +'</span> <a tabindex="-1" class="delete" onclick="deleteTag(TAG${tags})"><span>[X]</span></a></li>');
+			</c:forEach>
+		</c:if>
+	}
+	
+	// 7. 수정하기일 때, 제목을 넣어준다.
+	if(${question.title != null? true:false}) {
+		$("#question-title").val("${question.title}");
 	}
 	
 	//녹화 -- 현재 맥에서만 작동 함
@@ -400,11 +421,17 @@ window.onload = function() {
 //글쓰기 페이지의 유효성 검사
 function formCheck() {
 	var title = $('#title').val();
+	var point = $('#point').val();
 	if(title==''){
 		alert('おタイトルを入力して下さい。');
 		return false;
 	}
 	
+	if(point <= 0 ) {
+		alert('ポイントは０以上かかってください。');
+		return false;
+	}
+
 	var minor = $('#minor').val();
 	if( minor=='') {
 		alert( '分類を選んでください。');
@@ -487,6 +514,7 @@ function validationCheck() {
 	return false;
 }
 
+// 긴급알람 시간 설정
 function setTimeLimit() {
 	var selectdTime = parseInt($("#selectdTime").val());
 	if(selectdTime == 0) {
@@ -531,6 +559,10 @@ function setTimeLimit() {
 	
 }
 
+// 수정모드일 때, 태그 삭제 가능하도록...
+function deleteTag(tag) {
+	$(tag).remove();
+}
 </script>
 <!-- End js -->
 

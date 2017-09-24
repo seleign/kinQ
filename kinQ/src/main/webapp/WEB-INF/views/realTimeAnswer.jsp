@@ -538,7 +538,7 @@ function lastFileChat() {
 </script>
 </head>
 <body>
-<jsp:include page="../header.jsp" flush="false" />
+<jsp:include page="header.jsp" flush="false" />
 <div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
@@ -629,7 +629,7 @@ function lastFileChat() {
 	<tr>
 		<td colspan="2">
 		<!-- 질문글 내용이 여기에 보인다. -->
-	<textarea id="questionContent">
+	<textarea id="questionContent" style="width: 1000px;">
 		<c:if test="${question.questionContent != null? true:false }">
 			${question.questionContent}
 		</c:if>
@@ -664,6 +664,6 @@ function lastFileChat() {
 		</div><!-- End row -->
 	</section><!-- End container -->
 
-<jsp:include page="../footer.jsp" flush="false" />
+<jsp:include page="footer.jsp" flush="false" />
 </body>
 </html>

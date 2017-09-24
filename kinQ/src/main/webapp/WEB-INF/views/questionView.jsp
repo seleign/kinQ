@@ -30,20 +30,23 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
+		
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+	<script src="./resources/js/jquery.min.js"></script>
+	<script src="./resources/js/jquery.blockUI.js"></script>
+	<script src="./resources/js/custom.js"></script>
+	<script src="./resources/js/video-js-6/video.min.js"></script>
 	
-<!-- JQuery -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
-<script src="./resources/js/jquery.min.js"></script>
-<script src="./resources/js/jquery.blockUI.js"></script>
-<script src="./resources/js/custom.js"></script>
-<script src="./resources/js/video-js-6/video.min.js"></script>
-
-<!-- CKeditor -->
-<script src="./resources/ckeditor/ckeditor.js"></script> 
-<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
-<script src="./resources/ckeditor/adapters/jquery.js"></script>
-<script type="text/javascript">
+	<script src="./resources/js/jquery-dateFormat.min.js"></script>
+	<script src="./resources/js/dateFormat.min.js"></script>
+	
+	<!-- CKeditor -->
+	<script src="./resources/ckeditor/ckeditor.js"></script> 
+	<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
+	<script src="./resources/ckeditor/adapters/jquery.js"></script>
+	<script type="text/javascript">
 		var replyHtml = "";
 		var bestReplyHtml = "";
 		var selectedReply = "";
@@ -75,7 +78,7 @@
 			$.ajax({
 				url: "getMaxScoreReply",
 				type: "get",
-				data: { questionNum: ${ question.questionNum }},
+				data: { questionNum: ${ detail.questionNum }},
 				success: function (reply) {
 					if (!isEmpty(reply)) {
 						bestReplyHtml += "<div class=\"boxedtitle page-title\"><h2>추천 답변</h2></div>"
@@ -83,13 +86,12 @@
 						bestReplyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
 						if (!isEmpty(reply.videoSrc)) {
 							bestReplyHtml += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
-							bestReplyHtml += "<source src=\"" + reply.videoSrc +"\" type=\"video/webm\"></source>"
+							bestReplyHtml += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
 							bestReplyHtml += "</video>"
 						}
 						bestReplyHtml += reply.replyContent +"<br>";
 						bestReplyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>";
 						$("#bestReply").html(bestReplyHtml);
-						$("#" + reply.replyNum + "").hide();
 						$("#bestReplyDiv").show();
 						bestReplyHtml = "";
 					} else {
@@ -103,11 +105,11 @@
 			$.ajax({
 				url: "questionReplyList",
 				type: "get",
-				data: { questionNum: ${ question.questionNum }},
+				data: { questionNum: ${ detail.questionNum }},
 				success: function (replyList) {
 					replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>";
+					replyHtml += "<ol class=\"commentlist clearfix\">";
 					for (var i = 0; i < replyList.length; i++) {
-						replyHtml += "<ol class=\"commentlist clearfix\" id=\"" + replyList[i].replyNum + "\">";
 						replyHtml += "<li class=\"comment\">";
 						replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">";
 						/* replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
@@ -134,7 +136,7 @@
 						if (userId == replyList[i].id) {
 							replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
 						}
-						if ( "${ user.id }" == userId && ${ question.selectedReplyNum } == 0) {
+						if ( "${ user.id }" == userId && ${ detail.selectedReplyNum } == 0) {
 							replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>답글 선택</a>";
 						}
 						replyHtml += "</div>";
@@ -149,8 +151,8 @@
 						replyHtml += "</div>";
 						replyHtml += "</div>";
 						replyHtml += "</li>";
-						replyHtml += "</ol>";
 					}
+					replyHtml += "</ol>";
 					console.log(replyHtml);
 					$("#commentlist").html(replyHtml);
 					$("#answerCount").html(replyList.length);
@@ -165,9 +167,9 @@
 			$.ajax({
 				url: "registReply",
 				type: "post",
-				data: { questionNum: ${ question.questionNum },
+				data: { questionNum: ${ detail.questionNum },
 						id: "${ user.id }",
-						userNum: ${ question.userNum },
+						userNum: ${ detail.userNum },
 						replyContent: replyCtx,
 				},
 				success: function (success) {
@@ -201,7 +203,7 @@
 					url: "selectedReply",
 					type: "get",
 					data: { 
-							questionNum: ${ question.questionNum },
+							questionNum: ${ detail.questionNum },
 							selectedReplyNum: selectedReply,
 							score: score
 						  },
@@ -221,7 +223,7 @@
 				url: "getSelectedReply",
 				type: "get",
 				data: { 
-						questionNum: ${ question.questionNum },
+						questionNum: ${ detail.questionNum },
 					  },
 				success: function (reply) {
 					if (!isEmpty(reply)) {
@@ -230,13 +232,12 @@
 						selectedReply += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
 						if (!isEmpty(reply.videoSrc)) {
 							selectedReply += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
-							selectedReply += "<source src=\"" + reply.videoSrc +"\" type=\"video/webm\"></source>"
+							selectedReply += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
 							selectedReply += "</video>"
 						}
 						selectedReply += reply.replyContent +"<br>";
 						selectedReply += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Selected Answer</div>";
 						$("#selectedReply").html(selectedReply);
-						$("#" + reply.replyNum + "").hide();
 						$("#selectedReplyDiv").show();
 						selectedReply = "";
 					} else {
@@ -276,7 +277,7 @@
 				url: "updateRecommendUp",
 				type: "get",
 				data: { 
-						questionNum: ${ question.questionNum },
+						questionNum: ${ detail.questionNum },
 						replyNum: replyNum,
 						userNum: userNum
 					  },
@@ -292,7 +293,7 @@
 				url: "updateRecommendDown",
 				type: "get",
 				data: { 
-						questionNum: ${ question.questionNum },
+						questionNum: ${ detail.questionNum },
 						replyNum: replyNum,
 						userNum: userNum
 					  },
@@ -302,8 +303,10 @@
 				}
 			})
 		}
-		
-		
+
+		$(function(){
+			$('span[class="question-date"]').append( DateFormat.format.prettyDate( ${(detail.regDate).getTime()}));
+		})
 </script>
 </head>
 <body>
@@ -314,7 +317,7 @@
 				  <span class="input">
 				    <input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
 				    <input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
-				    <input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
+				    <inpuct type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
 				    <input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
 				    <input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
 				    <input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
@@ -341,7 +344,7 @@
 						<span class="crumbs-span">/</span>
 						<a href="#">Questions</a>
 						<span class="crumbs-span">/</span>
-						<span class="current">${ question.title }</span>
+						<span class="current">${ detail.title }</span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -352,32 +355,32 @@
 		<div class="row">
 			<div class="col-md-9">
 				<article class="question single-question question-type-normal">
-					<h2>${ user.id }</h2>
+					<h2>${ detail.id }</h2>
 					<h2>
-						<a href="single_question.html">${ question.title }</a>
+						<a href="single_question.html">${ detail.title }</a>
 					</h2>
 					<!-- <a class="question-report" href="#">Report</a>
 					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div> -->
 					<div class="question-inner">
 						<div class="clearfix"></div>
 						<div class="question-desc">
-							<p>${ question.questionContent }</p>
+							<p>${ detail.questionContent }</p>
 						</div>
 						<div class="question-details">
 							<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
 							<span class="question-favorite"><i class="icon-star"></i>'+element.point+'</span></div>
 						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ minor.minorName }</a></span>
-						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>
+						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ detail.minorName }</a></span>
+						<span class="question-date"><i class="icon-time"></i><script type="text/javascript"></script></span>
 						<span class="question-comment"><a href="#"><i class="icon-comment"></i><span id="answerCount"></span> Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>${ question.hit } views</span>
-						<%-- <span class="single-question-vote-result">${ question.score }</span> --%>
+						<span class="question-view"><i class="icon-user"></i>${ detail.hit } views</span>
+						<%-- <span class="single-question-vote-result">${ detail.score }</span> --%>
 						<ul class="single-question-vote">
 							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
 							<form method="get" action=modifyQuestion>
 								<input type="submit" class="button color small submit" value="수정하기">
-								<input type="hidden" name="questionNum" value="${ question.questionNum }">
+								<input type="hidden" name="questionNum" value="${ detail.questionNum }">
 							</form>
 						</ul>
 						<div class="clearfix"></div>
@@ -464,7 +467,7 @@
 						<button class="button color small submit" onclick="registReply()">등록</button>
 						<form method="post" action="realTimeAnswer">
 							<input type="submit" class="button color small submit" value="실시간 답변">
-							<input type="hidden" name="questionNum" value="${ question.questionNum }">
+							<input type="hidden" name="questionNum" value="${ detail.questionNum }">
 						</form>
 					</div><!-- End related-posts -->
 				</c:if>
@@ -477,14 +480,10 @@
 				
 				<div class="post-next-prev clearfix">
 				    <p class="prev-post">
-				    <c:if test="${ PREQUESTIONNUM != 0 }">
-				        <a href="question_view?questionNum=${ PREQUESTIONNUM }"><i class="icon-double-angle-left"></i>&nbsp;Prev question</a>
-				    </c:if>
+				        <a href="#"><i class="icon-double-angle-left"></i>&nbsp;Prev question</a>
 				    </p>
 				    <p class="next-post">
-				    <c:if test="${ NEXTQUESTIONNUM != 0 }">
-				        <a href="question_view?questionNum=${ NEXTQUESTIONNUM }">Next question&nbsp;<i class="icon-double-angle-right"></i></a>                                
-				    </c:if>
+				        <a href="#">Next question&nbsp;<i class="icon-double-angle-right"></i></a>                                
 				    </p>
 				</div><!-- End post-next-prev -->	
 			</div><!-- End main -->

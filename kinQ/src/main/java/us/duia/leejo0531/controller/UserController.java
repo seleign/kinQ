@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import us.duia.leejo0531.service.PointService;
 import us.duia.leejo0531.service.UserService;
 import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.IdCheckVO;
@@ -100,10 +101,14 @@ public class UserController implements HttpSessionListener{
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){
-		session.invalidate();
-		synchronized (loginSessionMonitor) {
-			loginSessionMonitor.remove(session.getId());
+		if(loginSessionMonitor != null) {
+			synchronized (loginSessionMonitor) {
+				loginSessionMonitor.remove(session.getId());
+			}
+		} else {
+			logger.info("왜 loginSessionMonitor가 null이지?");
 		}
+		session.invalidate();
 		return "redirect:/";
 	}
 	
@@ -132,6 +137,11 @@ public class UserController implements HttpSessionListener{
 		int answersNum = userSvc.countAnswers( userNum);
 		RankVO myRank = userSvc.getMyRank( userNum);
 		
+		int cChange = userSvc.getRecentChange(userNum);
+		int pChange = userSvc.getRecentPoint(userNum);
+		
+		model.addAttribute("cChange", cChange);
+		model.addAttribute("pChange", pChange);
 		model.addAttribute("answeredField", answeredField);
 		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		

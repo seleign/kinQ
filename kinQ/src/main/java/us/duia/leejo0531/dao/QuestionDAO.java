@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import us.duia.leejo0531.vo.DetailVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
@@ -31,6 +32,9 @@ public class QuestionDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	private TagDAO tagdao;
 	
 	/**
 	 * DB에서 질문글의 시퀀스를 가져온다.
@@ -119,9 +123,9 @@ public class QuestionDAO {
 	}
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
-		System.out.println("getQuestionTag 진입 : " + sqlSession);
+//		System.out.println("getQuestionTag 진입 : " + sqlSession);
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		System.out.println("TagDAO 진입 : " + question);
+//		System.out.println("TagDAO 진입 : " + question);
 		ArrayList<TagVO> tagList = mapper.getQuestionTag(question);
 		return tagList;
 	}
@@ -197,5 +201,33 @@ public class QuestionDAO {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		HashMap<String, Integer> checkPreNextQuestionNum = mapper.checkPreNextQuestionNum(questionNum);
 		return checkPreNextQuestionNum;
+	}
+	
+	public int insertTag(TagVO tag) {
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		int result = mapper.insertTag(tag);
+		return result;
+	}
+	
+	public int updateTag(TagVO tag) {
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		int result = mapper.updateTag(tag);
+		return result;
+	}
+	
+	public DetailVO getQuestionDetail( QuestionVO qstn) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		DetailVO result = mapper.getQuestionDetail(qstn);
+		return result;
+	}
+
+	public void rebuildQContentIndex() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		mapper.rebuildQContentIndex();
+	}
+
+	public void rebuildRContentIndex() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		mapper.rebuildRContentIndex();
 	}
 }

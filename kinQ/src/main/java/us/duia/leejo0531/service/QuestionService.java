@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.QuestionDAO;
-import us.duia.leejo0531.dao.QuestionMapper;
 import us.duia.leejo0531.dao.TagDAO;
 import us.duia.leejo0531.dao.UserDAO;
+import us.duia.leejo0531.vo.DetailVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
 import us.duia.leejo0531.vo.PageVO;
@@ -104,8 +105,8 @@ public class QuestionService {
 	}
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
-		System.out.println("questionService : " + question);
-		System.out.println("qstnDao : " + qstnDao);
+//		System.out.println("questionService : " + question);
+//		System.out.println("qstnDao : " + qstnDao);
 		ArrayList<TagVO> tagList = qstnDao.getQuestionTag(question);
 		return tagList;
 	}
@@ -180,5 +181,31 @@ public class QuestionService {
 	public HashMap<String, Integer> checkPreNextQuestionNum (int questionNum) {
 		HashMap<String, Integer> checkPreNextQuestionNum = qstnDao.checkPreNextQuestionNum(questionNum);
 		return checkPreNextQuestionNum;
+	}
+	public int deleteQuestion(QuestionVO question) {
+		int result = qstnDao.deleteQuestion(question);
+		return result;
+	}
+	
+	public int insertTag(TagVO tag) {
+		int result = qstnDao.insertTag(tag);
+		return result;
+	}
+	
+	public int updateTag(TagVO tag) {
+		int result = qstnDao.updateTag(tag);
+		return result;
+	}
+
+	public DetailVO getQuestionDetail( QuestionVO qstn){
+		DetailVO result = qstnDao.getQuestionDetail(qstn);
+		return result;
+	}
+	
+	@Scheduled(fixedDelay=20000)
+	public void rebuildIndex() {
+		qstnDao.rebuildQContentIndex();
+		qstnDao.rebuildRContentIndex();
+//		System.out.println("rebuilded");
 	}
 }

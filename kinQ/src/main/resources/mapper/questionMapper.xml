@@ -14,7 +14,7 @@
 		<result property="MinorNum" column="MinorNum"/>
 		<result property="videoSrc" column="videoSrc"/>
 		<result property="questionContent" column="questionContent"/>
-		<result property="score" column="score"/>
+		<result property="point" column="point"/>
 		<result property="selectedReplyNum" column="selectedReplyNum"/>
 		<result property="timeCheck" column="timeCheck"/>
 		<result property="replyCount" column="replyCount"/>
@@ -22,6 +22,91 @@
 			<result property="tag" column="tag"/>
 		</collection>
 	</resultMap>
+	<resultMap type="Detail" id="QuestionDetail">
+		<id property="questionNum" column="questionNum"/>
+		<result property="userNum" column="userNum"/>
+		<result property="timeLimit" column="timeLimit"/>
+		<result property="qstatus" column="qstatus"/>
+		<result property="regDate" column="regDate"/>
+		<result property="modDate" column="modDate"/>
+		<result property="title" column="title"/>
+		<result property="minorNum" column="minorNum"/>
+		<result property="videoSrc" column="videoSrc"/>
+		<result property="questionContent" column="questionContent"/>
+		<result property="point" column="point"/>
+		<result property="selectedReplyNum" column="selectedReplyNum"/>
+		<result property="timeCheck" column="timeCheck"/>
+		<result property="replyCount" column="replyCount"/>
+		<result property="id" column="id"/>
+		<result property="minorName" column="minorName"/>
+		<collection property="relatedTag" javaType="ArrayList" ofType="string">
+			<result property="tag" column="tag"/>
+		</collection>
+	</resultMap>
+	
+	<update id="rebuildQContentIndex">
+		alter index q_content_idx rebuild
+	</update>
+	
+	<update id="rebuildRContentIndex">
+		alter index r_content_idx rebuild
+	</update>
+	
+	<select id="getQuestionDetail" parameterType="Question" resultMap="QuestionDetail">
+		select
+            tag,
+			numbered.*,
+			case 
+		        when timeLimit is null
+		            <![CDATA[or timeLimit < sysdate then 0]]> 
+		        else -1 
+		    end as timeCheck
+		from
+            tag,
+			(select
+				rownum as r,
+				results.*
+			from
+                (select
+                    merged.*,
+                    nvl(replyCount, 0) as replyCount
+                from
+	                (select
+	                	selected.*,
+	                	minor.minorname
+	                from
+	                	minor,
+		                (select
+		                	q_board.*,
+		                	id
+		                from
+		                	q_board,
+		                	userinfo
+		                where
+		                	q_board.usernum = userinfo.usernum
+		                	and q_board.questionnum = ${questionNum}
+		                )selected
+		            where
+		            	minor.minornum = selected.minornum
+					)merged,
+                    (select
+                        questionnum,
+                        count(*) as replyCount
+                    from
+                        q_reply
+                    group by
+                        questionnum
+                    )rCount
+                where
+                    merged.questionnum = rCount.questionnum(+)
+                order by merged.questionnum desc
+				) results
+			)numbered
+		where
+            numbered.questionnum = tag.questionnum(+)
+        order by
+            numbered.questionnum desc, tag.tagnum
+	</select>
 
 	<!-- 질문글의 시퀀스를 가져온다. -->
 	<select id="Q_BOARD_SEQ_NEXTVAL" resultType="int">
@@ -42,7 +127,7 @@
 			questionContent,
 			MinorNum,
 			videoSrc,
-			score
+			point
 		) values(
 			#{questionNum},
 			#{userNum},
@@ -55,7 +140,7 @@
 			#{questionContent},
 			#{MinorNum},
 			#{videoSrc},
-			0
+			#{point}
 		)
 	</insert>
 	
@@ -108,7 +193,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                         selected.*
@@ -255,7 +340,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -283,7 +368,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                         selected.*
@@ -329,7 +414,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -428,7 +513,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                     	*
@@ -444,7 +529,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -472,7 +557,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                     	*
@@ -490,7 +575,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
@@ -518,7 +603,7 @@
 			from
                 (select
                     merged.*,
-                    replyCount
+                    nvl(replyCount, 0) as replyCount
                 from
                     (select
                     	*
@@ -536,7 +621,7 @@
                         questionnum
                     )rCount
                 where
-                    merged.questionnum = rCount.questionnum
+                    merged.questionnum = rCount.questionnum(+)
                 order by merged.questionnum desc
 				) results
 			)numbered
