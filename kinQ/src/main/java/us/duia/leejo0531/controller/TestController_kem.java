@@ -84,4 +84,9 @@ public class TestController_kem {
 		model.addAttribute("page", page);
 		return "search";
 	}
+	
+	@RequestMapping(value="home",method=RequestMethod.GET)
+	public String home(){
+		return "home";
+	}
 }

@@ -105,6 +105,13 @@ body {
 #q_urgent {
 	border: 3px solid red;
 }
+
+#home_logo {
+	width: 70%;	
+}
+#home_logo:hover {
+	margin-top: 3%;   	
+}
 /* 占쏙옙 占쏙옙 */
 #warp {
 	background-color: #f3f3f3;
