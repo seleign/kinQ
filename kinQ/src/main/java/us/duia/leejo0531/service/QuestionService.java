@@ -178,6 +178,10 @@ public class QuestionService {
 		return result;
 	}
 	
+	public HashMap<String, Integer> checkPreNextQuestionNum (int questionNum) {
+		HashMap<String, Integer> checkPreNextQuestionNum = qstnDao.checkPreNextQuestionNum(questionNum);
+		return checkPreNextQuestionNum;
+	}
 	public int deleteQuestion(QuestionVO question) {
 		int result = qstnDao.deleteQuestion(question);
 		return result;

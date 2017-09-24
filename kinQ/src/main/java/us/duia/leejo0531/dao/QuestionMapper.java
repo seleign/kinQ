@@ -51,6 +51,8 @@ public interface QuestionMapper {
 	
 	public ArrayList<QuestionVO> searchInProgressPost(PageVO page);
 	
+	public HashMap<String, Integer> checkPreNextQuestionNum (int questionNum);
+	
 	public DetailVO getQuestionDetail( QuestionVO qstn);
 
 	public void rebuildQContentIndex();

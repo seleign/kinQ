@@ -185,16 +185,22 @@ public class QuestionDAO {
 		return result;
 	}
 	
-	public ArrayList<QuestionVO> searchUrgentPost(PageVO page){
+	public ArrayList<QuestionVO> searchUrgentPost(PageVO page) {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.searchUrgentPost(page);
 		return result;
 	}
 	
-	public ArrayList<QuestionVO> searchInProgressPost(PageVO page){
+	public ArrayList<QuestionVO> searchInProgressPost(PageVO page) {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		ArrayList<QuestionVO> result = mapper.searchInProgressPost(page);
 		return result;
+	}
+	
+	public HashMap<String, Integer> checkPreNextQuestionNum (int questionNum) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		HashMap<String, Integer> checkPreNextQuestionNum = mapper.checkPreNextQuestionNum(questionNum);
+		return checkPreNextQuestionNum;
 	}
 	
 	public int insertTag(TagVO tag) {
