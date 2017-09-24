@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import us.duia.leejo0531.vo.AlarmVO;
+import us.duia.leejo0531.vo.QuestionVO;
 
 public interface AlarmMapper {
 
@@ -15,4 +16,5 @@ public interface AlarmMapper {
 	public int deleteFinishedRTQuestion( int questionNum);
 	public int updateReadCheck( int userNum);
 	public int alarmInterest( int questionNum);
+	public int alarmReply( int questionNum);
 }

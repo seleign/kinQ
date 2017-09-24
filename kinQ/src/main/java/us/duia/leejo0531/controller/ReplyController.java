@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import us.duia.leejo0531.service.AlarmService;
 import us.duia.leejo0531.service.ReplyService;
 import us.duia.leejo0531.service.SearchService;
 import us.duia.leejo0531.vo.QuestionVO;
@@ -27,7 +28,8 @@ public class ReplyController {
 	
 	@Autowired
 	private ReplyService reSvc;
-	
+	@Autowired
+	private AlarmService alSvc;
 	/**
 	 * 답변을 작성한다. 
 	 * 리퀘스트 메소드를 수정해야한다.
@@ -50,6 +52,7 @@ public class ReplyController {
 		int questionNum = qstn.getQuestionNum();
 //		System.out.println(questionNum);
 		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(questionNum);
+		System.out.println(replyList.get(1));
 		return replyList;
 	}
 	
@@ -65,6 +68,7 @@ public class ReplyController {
 	public @ResponseBody String registReply(ReplyVO reply) {
 		System.out.println("reply : " + reply);
 		int result = reSvc.registReply(reply);
+		int alarm = alSvc.alarmReply(reply.getQuestionNum());
 		if (result == 1) {
 			return "success";
 		} else {

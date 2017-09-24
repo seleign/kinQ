@@ -164,4 +164,7 @@
             myField.minornum = interest.minorNum
 	</insert>
 	
+	<insert id="alarmReply" parameterType="int">
+		insert into useralarm values (alarm_seq.nextval, (select userNum from q_board where questionNum = #{questionNum}), 'reply', #{questionNum}, 0)
+	</insert>
 </mapper>
