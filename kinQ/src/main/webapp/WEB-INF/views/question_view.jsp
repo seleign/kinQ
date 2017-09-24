@@ -166,14 +166,14 @@
 				url: "registReply",
 				type: "post",
 				data: { questionNum: ${ question.questionNum },
-						id: "${ user.id }",
-						userNum: ${ question.userNum },
-						replyContent: replyCtx,
+						id: userId,
+						replyContent: replyCtx
 				},
 				success: function (success) {
 					selectedReplyView();
 					getMAxScoreReply();
 					questionReplyList();
+					$("#replyContent").empty();
 				}
 			})
 		}
@@ -202,7 +202,7 @@
 					type: "get",
 					data: { 
 							questionNum: ${ question.questionNum },
-							selectedReplyNum: selectedReply,
+							replyNum: selectedReply,
 							score: score
 						  },
 					success: function (sucess) {

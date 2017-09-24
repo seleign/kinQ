@@ -76,8 +76,8 @@ public class ReplyService {
 		int result = replyDao.getReplyNum(questionNum);
 		return result;
 	}
-	public int selectedReply(QuestionVO question) {
-		int result = replyDao.selectedReply(question);
+	public int selectedReply(ReplyVO reply) {
+		int result = replyDao.selectedReply(reply);
 		return result;
 	}
 	
@@ -98,6 +98,11 @@ public class ReplyService {
 	
 	public int checkZeroRecommend(ReplyVO reply) {
 		int result = replyDao.checkZeroRecommend(reply);
+		return result;
+	}
+	
+	public int updateReplyScore(ReplyVO reply) {
+		int result = replyDao.updateReplyScore(reply);
 		return result;
 	}
 }

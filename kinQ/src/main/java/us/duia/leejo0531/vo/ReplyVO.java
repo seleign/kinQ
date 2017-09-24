@@ -23,6 +23,14 @@ public class ReplyVO extends QuestionVO{
 		this.replyNum = replyNum;
 	}
 
+	public ReplyVO(int questionNum, int replyNum, int score) {
+		super();
+		this.questionNum = questionNum;
+		this.replyNum = replyNum;
+		this.score = score;
+	}
+
+
 	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id, String videoSrc,
 			int score) {
 		super();

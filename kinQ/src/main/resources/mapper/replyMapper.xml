@@ -64,20 +64,21 @@
 	</select>
 	
 	<insert id="registReply" parameterType="Reply">
-		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, sysdate, sysdate, 
+		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, (select userNum from userinfo where id=#{id}), sysdate, sysdate, 
 		<if test="ReplyTitle != null">
 			#{ReplyTitle}
 		</if>
 		<if test="ReplyTitle == null">
-			null
+			null,
 		</if>
-		,#{replyContent},
+			#{replyContent},
 		<if test="videoSrc != null">
 			#{videoSrc})
 		</if>
 		<if test="videoSrc == null">
-			null)
+			null,
 		</if>
+			#{score})
 	</insert>
 	
 	<delete id="deleteReply" parameterType="int">
@@ -85,8 +86,12 @@
 	</delete>
 	
 
-	<update id="selectedReply" parameterType="Question">
-		update q_board set selectedReplyNum = #{selectedReplyNum} where questionNum = #{questionNum}
+	<update id="selectedReply" parameterType="Reply">
+		update q_board set selectedReplyNum = #{replyNum} where questionNum = #{questionNum}
+	</update>
+	
+	<update id="updateReplyScore" parameterType="Reply">
+		update q_reply set score = #{score} where replyNum = #{replyNum}
 	</update>
 	
 	<select id="myAnswerList" parameterType="Page" resultType="Reply">
