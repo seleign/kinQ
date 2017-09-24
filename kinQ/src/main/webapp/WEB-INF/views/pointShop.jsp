@@ -204,6 +204,13 @@
     		float: left;
 		}
 		
+		#cart{
+			text-align:center;
+			background-color: #ff6600;
+			color: white;
+			padding: 10%;
+			border-radius: 20px;
+		}
 
 .pointShopBtn {
    border: 1px solid #ffffff;
@@ -624,14 +631,14 @@
 
 			<aside class="col-md-3 sidebar">
 				<div class="widget_q widget_menu_q widget_menu_jquery">
-					<div style="background-color: white; padding: 5%">
-						<h2>マイカート</h2><hr><br> 
-							<strong>ショッピングリスト</strong><br><br><div><ul id="goodsList"></ul></div>
+					<div style="background-color: #fff9c4; border-radius: 20px; padding: 5%">
+						<h2 id="cart">マイカート</h2><hr><br> 
+							<h4 style="color: black;">ショッピングリスト</h4><div><ul id="goodsList"></ul></div>
 							<br><hr><br>
-							<strong>総合</strong><br><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 ポイント</div><br> 
+							<h4 style="color: red;">総合</h4><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 ポイント</div><br> 
 							<hr><br>
-						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%">キャンセル</a>
-						<a href="javascript:void(0)" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%;" onclick="javascript:orderGoods()"><input type="hidden" name="hiddenTotalPrice" value="">購入する</a>
+						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%; padding-left: 13%; border-radius: 5px;">キャンセル</a>
+						<a href="javascript:void(0)" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%; padding-left: 12%; border-radius: 5px;" onclick="javascript:orderGoods()"><input type="hidden" name="hiddenTotalPrice" value="">購入する</a>
 					</div>
 				</div><!-- End widget_menu -->
 			</aside><!-- End sidebar -->
