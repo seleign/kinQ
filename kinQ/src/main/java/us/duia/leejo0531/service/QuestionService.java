@@ -202,6 +202,6 @@ public class QuestionService {
 	public void rebuildIndex() {
 		qstnDao.rebuildQContentIndex();
 		qstnDao.rebuildRContentIndex();
-		System.out.println("rebuilded");
+//		System.out.println("rebuilded");
 	}
 }
