@@ -201,11 +201,12 @@ public class QuestionService {
 		DetailVO result = qstnDao.getQuestionDetail(qstn);
 		return result;
 	}
-	
-	@Scheduled(fixedDelay=20000)
+/*	
+	@Scheduled(fixedDelay=2000)
 	public void rebuildIndex() {
 		qstnDao.rebuildQContentIndex();
 		qstnDao.rebuildRContentIndex();
 //		System.out.println("rebuilded");
 	}
+*/	
 }
