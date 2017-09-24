@@ -66,7 +66,7 @@
 						}else{
 							html += '<span class="question-answered"><i class="icon-ok"></i>in progress</span>';
 						}
-						html += '<span class="question-favorite"><i class="icon-star"></i>'+element.score+'</span></div>';
+						html += '<span class="question-favorite"><i class="icon-star"></i>'+element.point+'</span></div>';
 	 					html += '<span class="question-date"><i class="icon-time"></i>'+ DateFormat.format.prettyDate( element.regDate)+'</span>';
 						html += '<span class="question-comment"><a href="#"><i class="icon-comment"></i>'+element.replyCount+'</a></span>';
 						html += '<span class="question-view"><i class="icon-user"></i>'+element.hit+'</span>';

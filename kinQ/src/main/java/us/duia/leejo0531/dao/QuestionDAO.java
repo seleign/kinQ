@@ -123,9 +123,9 @@ public class QuestionDAO {
 	}
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
-		System.out.println("getQuestionTag 진입 : " + sqlSession);
+//		System.out.println("getQuestionTag 진입 : " + sqlSession);
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		System.out.println("TagDAO 진입 : " + question);
+//		System.out.println("TagDAO 진입 : " + question);
 		ArrayList<TagVO> tagList = mapper.getQuestionTag(question);
 		return tagList;
 	}
@@ -213,5 +213,15 @@ public class QuestionDAO {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		DetailVO result = mapper.getQuestionDetail(qstn);
 		return result;
+	}
+
+	public void rebuildQContentIndex() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		mapper.rebuildQContentIndex();
+	}
+
+	public void rebuildRContentIndex() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		mapper.rebuildRContentIndex();
 	}
 }

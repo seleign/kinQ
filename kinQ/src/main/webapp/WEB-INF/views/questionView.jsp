@@ -355,7 +355,7 @@
 		<div class="row">
 			<div class="col-md-9">
 				<article class="question single-question question-type-normal">
-					<h2>${ user.id }</h2>
+					<h2>${ detail.id }</h2>
 					<h2>
 						<a href="single_question.html">${ detail.title }</a>
 					</h2>
@@ -368,7 +368,7 @@
 						</div>
 						<div class="question-details">
 							<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
+							<span class="question-favorite"><i class="icon-star"></i>'+element.point+'</span></div>
 						</div>
 						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ detail.minorName }</a></span>
 						<span class="question-date"><i class="icon-time"></i><script type="text/javascript"></script></span>

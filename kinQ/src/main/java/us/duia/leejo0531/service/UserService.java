@@ -100,7 +100,7 @@ public class UserService {
 				}
 			}
 		}
-		System.out.println(chk + " 체크");
+//		System.out.println(chk + " 체크");
 
 		return chk;
 	}

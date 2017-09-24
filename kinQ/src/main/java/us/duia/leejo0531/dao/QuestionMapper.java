@@ -52,4 +52,8 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> searchInProgressPost(PageVO page);
 	
 	public DetailVO getQuestionDetail( QuestionVO qstn);
+
+	public void rebuildQContentIndex();
+
+	public void rebuildRContentIndex();
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -104,8 +105,8 @@ public class QuestionService {
 	}
 	
 	public ArrayList<TagVO> getQuestionTag(QuestionVO question) {
-		System.out.println("questionService : " + question);
-		System.out.println("qstnDao : " + qstnDao);
+//		System.out.println("questionService : " + question);
+//		System.out.println("qstnDao : " + qstnDao);
 		ArrayList<TagVO> tagList = qstnDao.getQuestionTag(question);
 		return tagList;
 	}
@@ -195,5 +196,12 @@ public class QuestionService {
 	public DetailVO getQuestionDetail( QuestionVO qstn){
 		DetailVO result = qstnDao.getQuestionDetail(qstn);
 		return result;
+	}
+	
+	@Scheduled(fixedDelay=20000)
+	public void rebuildIndex() {
+		qstnDao.rebuildQContentIndex();
+		qstnDao.rebuildRContentIndex();
+		System.out.println("rebuilded");
 	}
 }

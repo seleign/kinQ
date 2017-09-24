@@ -363,7 +363,7 @@
 						</div>
 						<div class="question-details">
 							<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
-							<span class="question-favorite"><i class="icon-star"></i>5</span>
+							<span class="question-favorite"><i class="icon-star"></i>'+element.point+'</span></div>
 						</div>
 						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ minor.minorName }</a></span>
 						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>

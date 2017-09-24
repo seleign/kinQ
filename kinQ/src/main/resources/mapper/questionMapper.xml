@@ -44,6 +44,14 @@
 		</collection>
 	</resultMap>
 	
+	<update id="rebuildQContentIndex">
+		alter index q_content_idx rebuild
+	</update>
+	
+	<update id="rebuildRContentIndex">
+		alter index r_content_idx rebuild
+	</update>
+	
 	<select id="getQuestionDetail" parameterType="Question" resultMap="QuestionDetail">
 		select
             tag,
