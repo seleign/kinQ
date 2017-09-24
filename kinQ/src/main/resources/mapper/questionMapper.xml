@@ -546,4 +546,16 @@
         order by
             numbered.questionnum desc, tag.tagnum
 	</select>
+	
+	<select id="checkPreNextQuestionNum" parameterType="int" resultType="hashMap">
+		SELECT * 
+			FROM (
+			    SELECT 
+			        LAG(questionNum,1,0) OVER (ORDER BY questionNum) AS PreQuestionNum,
+			        questionNum,
+			        LEAD(questionNum,1,0) OVER (ORDER BY questionNum) AS NextQuestionNum
+			    FROM q_board
+			    )
+			WHERE questionNum = #{questionNum}
+	</select>
 </mapper>

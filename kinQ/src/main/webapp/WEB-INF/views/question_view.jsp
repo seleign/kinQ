@@ -83,12 +83,13 @@
 						bestReplyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
 						if (!isEmpty(reply.videoSrc)) {
 							bestReplyHtml += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
-							bestReplyHtml += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
+							bestReplyHtml += "<source src=\"" + reply.videoSrc +"\" type=\"video/webm\"></source>"
 							bestReplyHtml += "</video>"
 						}
 						bestReplyHtml += reply.replyContent +"<br>";
 						bestReplyHtml += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Best Answer</div>";
 						$("#bestReply").html(bestReplyHtml);
+						$("#" + reply.replyNum + "").hide();
 						$("#bestReplyDiv").show();
 						bestReplyHtml = "";
 					} else {
@@ -105,8 +106,8 @@
 				data: { questionNum: ${ question.questionNum }},
 				success: function (replyList) {
 					replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>";
-					replyHtml += "<ol class=\"commentlist clearfix\">";
 					for (var i = 0; i < replyList.length; i++) {
+						replyHtml += "<ol class=\"commentlist clearfix\" id=\"" + replyList[i].replyNum + "\">";
 						replyHtml += "<li class=\"comment\">";
 						replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">";
 						/* replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
@@ -148,8 +149,8 @@
 						replyHtml += "</div>";
 						replyHtml += "</div>";
 						replyHtml += "</li>";
+						replyHtml += "</ol>";
 					}
-					replyHtml += "</ol>";
 					console.log(replyHtml);
 					$("#commentlist").html(replyHtml);
 					$("#answerCount").html(replyList.length);
@@ -229,12 +230,13 @@
 						selectedReply += "<div class=\"date\"><i class=\"icon-time\"></i>" + reply.r_RegDate + "</div>";
 						if (!isEmpty(reply.videoSrc)) {
 							selectedReply += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
-							selectedReply += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
+							selectedReply += "<source src=\"" + reply.videoSrc +"\" type=\"video/webm\"></source>"
 							selectedReply += "</video>"
 						}
 						selectedReply += reply.replyContent +"<br>";
 						selectedReply += "<div class=\"question-answered question-answered-done\"><i class=\"icon-ok\"></i>Selected Answer</div>";
 						$("#selectedReply").html(selectedReply);
+						$("#" + reply.replyNum + "").hide();
 						$("#selectedReplyDiv").show();
 						selectedReply = "";
 					} else {
@@ -475,10 +477,14 @@
 				
 				<div class="post-next-prev clearfix">
 				    <p class="prev-post">
-				        <a href="#"><i class="icon-double-angle-left"></i>&nbsp;Prev question</a>
+				    <c:if test="${ PREQUESTIONNUM != 0 }">
+				        <a href="question_view?questionNum=${ PREQUESTIONNUM }"><i class="icon-double-angle-left"></i>&nbsp;Prev question</a>
+				    </c:if>
 				    </p>
 				    <p class="next-post">
-				        <a href="#">Next question&nbsp;<i class="icon-double-angle-right"></i></a>                                
+				    <c:if test="${ NEXTQUESTIONNUM != 0 }">
+				        <a href="question_view?questionNum=${ NEXTQUESTIONNUM }">Next question&nbsp;<i class="icon-double-angle-right"></i></a>                                
+				    </c:if>
 				    </p>
 				</div><!-- End post-next-prev -->	
 			</div><!-- End main -->

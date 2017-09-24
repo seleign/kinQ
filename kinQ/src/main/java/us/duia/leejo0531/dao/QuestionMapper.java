@@ -49,4 +49,6 @@ public interface QuestionMapper {
 	public ArrayList<QuestionVO> searchUrgentPost(PageVO page);
 	
 	public ArrayList<QuestionVO> searchInProgressPost(PageVO page);
+	
+	public HashMap<String, Integer> checkPreNextQuestionNum (int questionNum);
 }

@@ -136,12 +136,15 @@ public class QuestionController {
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		UserVO user = qstnSvc.getUserInfo(question.getUserNum());
 		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
+		HashMap<String, Integer> checkPreNextQuestionNum = qstnSvc.checkPreNextQuestionNum(question.getQuestionNum());
+		System.out.println("HashMap : " + checkPreNextQuestionNum.toString());
 		model.addAttribute("question", question);
 		model.addAttribute("minor", minor);
 		model.addAttribute("major", major);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("user", user);
 		model.addAttribute("checkTimeResult", checkTimeResult);
+		model.addAllAttributes(checkPreNextQuestionNum);
 		return "question_view";
 		//return "question/questionView";
 
@@ -299,5 +302,5 @@ public class QuestionController {
 		
 		return pack; //어느 페이지로 이동시킬 것인가?
 	}	
-
+	
 }

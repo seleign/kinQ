@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.QuestionDAO;
+import us.duia.leejo0531.dao.QuestionMapper;
 import us.duia.leejo0531.dao.TagDAO;
 import us.duia.leejo0531.dao.UserDAO;
 import us.duia.leejo0531.vo.MajorVO;
@@ -176,4 +177,8 @@ public class QuestionService {
 		return result;
 	}
 	
+	public HashMap<String, Integer> checkPreNextQuestionNum (int questionNum) {
+		HashMap<String, Integer> checkPreNextQuestionNum = qstnDao.checkPreNextQuestionNum(questionNum);
+		return checkPreNextQuestionNum;
+	}
 }
