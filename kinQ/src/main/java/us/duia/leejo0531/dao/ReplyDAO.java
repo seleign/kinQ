@@ -156,4 +156,10 @@ public class ReplyDAO {
 		int result = mapper.checkZeroRecommend(reply);
 		return result;
 	}
+	
+	public int q_reply_seq_nextval() {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.q_reply_seq_nextval();
+		return result;
+	}
 }

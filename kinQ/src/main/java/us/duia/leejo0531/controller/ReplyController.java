@@ -64,6 +64,10 @@ public class ReplyController {
 	@RequestMapping(value = "registReply", method = RequestMethod.POST)
 	public @ResponseBody String registReply(ReplyVO reply) {
 //		System.out.println("reply : " + reply);
+		// nextval로 답변 번호를 가져옴.
+		int replyNum = reSvc.q_reply_seq_nextval();
+		reply.setReplyNum(replyNum);
+		
 		int result = reSvc.registReply(reply);
 		if (result == 1) {
 			return "success";

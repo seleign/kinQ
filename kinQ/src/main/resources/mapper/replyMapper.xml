@@ -64,7 +64,7 @@
 	</select>
 	
 	<insert id="registReply" parameterType="Reply">
-		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, sysdate, sysdate, 
+		insert into q_reply values (#{replyNum}, #{questionNum}, #{userNum}, sysdate, sysdate, 
 		<if test="ReplyTitle != null">
 			#{ReplyTitle}
 		</if>
@@ -141,5 +141,10 @@
 	
 	<select id="checkZeroRecommend" parameterType="Reply" resultType="int">
 		select score from recommendation where replyNum = #{replyNum} and questioniNum = #{questionNum}
+	</select>
+	
+	<!-- 답변글의 시퀀스를 가져온다. -->
+	<select id="q_reply_seq_nextval" resultType="int">
+		SELECT q_reply_seq.nextval as replyNum FROM dual
 	</select>
 </mapper>

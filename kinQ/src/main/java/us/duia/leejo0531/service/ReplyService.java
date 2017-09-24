@@ -100,4 +100,9 @@ public class ReplyService {
 		int result = replyDao.checkZeroRecommend(reply);
 		return result;
 	}
+	
+	public int q_reply_seq_nextval() {
+		int result = replyDao.q_reply_seq_nextval();
+		return result;		
+	}
 }

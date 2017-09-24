@@ -27,4 +27,5 @@ public interface ReplyMapper {
 	public int updateRecommendUp(ReplyVO reply);
 	public int updateRecommendDown(ReplyVO reply);
 	public int checkZeroRecommend(ReplyVO reply);
+	public int q_reply_seq_nextval();
 }
