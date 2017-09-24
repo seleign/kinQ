@@ -112,6 +112,10 @@ body {
 #home_logo:hover {
 	margin-top: 3%;   	
 }
+
+#askme_back {
+	background-image: url("./images/back1.png");
+}
 /* 占쏙옙 占쏙옙 */
 #warp {
 	background-color: #f3f3f3;

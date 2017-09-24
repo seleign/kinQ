@@ -339,4 +339,11 @@ public class QuestionController {
 		return "/";
 	}
 	
+	
+	@RequestMapping(value="updateAlarm", method=RequestMethod.GET)
+	public @ResponseBody String updateAlarmCheck(int userNum){
+		almSvc.updateReadCheck(userNum);
+		return "success";
+	}
+	
 }

@@ -51,7 +51,13 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		int userNum = Integer.parseInt(message.getPayload());
 	
 		ArrayList<AlarmVO> alarmlist = userdao.getUserAlarm(userNum);
-		int listsize = alarmlist.size();
+		int listsize = 0;
+		for (AlarmVO a : alarmlist) {
+			//0이 미확이 1이 확인
+			if(a.getReadcheck() == 0){
+				listsize++;
+			}
+		}
 		String listnum = Integer.toString(listsize);
 		session.sendMessage(new TextMessage(listnum));
 	}

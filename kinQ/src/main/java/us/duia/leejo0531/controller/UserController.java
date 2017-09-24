@@ -96,7 +96,7 @@ public class UserController implements HttpSessionListener{
 		session.setAttribute("userId", loginUser.getId());
 		session.setAttribute("userNum", loginUser.getUserNum());
 		
-		return "redirect:/";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
@@ -109,7 +109,7 @@ public class UserController implements HttpSessionListener{
 			logger.info("왜 loginSessionMonitor가 null이지?");
 		}
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value="updateUserInfo", method=RequestMethod.GET)

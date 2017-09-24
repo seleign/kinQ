@@ -108,6 +108,21 @@
 		} 
  		return true;
 	};
+	
+	function updateAlarm(userNum){
+		
+		$.ajax({
+			url: 'updateAlarm',
+			method: 'get',
+			data: {
+				userNum:userNum
+			},
+			success: function(result){
+				return null;
+			}
+		});
+	}
+	
 </script>
 </head>
 <body>
@@ -233,7 +248,7 @@
 				</div>
 				<div class="header_alarm">
 					<div id="alarm_img">
-					<a href="#" class="alarm_button"><img src="./resources/images/bell.png"></a>
+					<a href="#" class="alarm_button" id="a_button" onclick="javascript:updateAlarm(${sessionScope.userNum})"><img src="./resources/images/bell.png"></a>
 					<div id="alarm_circle"></div>
 					</div>
 				</div>
