@@ -50,8 +50,6 @@
 						<span style="font-size: 13px; line-height: 2em;">
 							<a href="index.html">- Home</a><br>
 							<a href="askQuestion">- 質問ボード</a><br>
-							<a href="addQuestion">- 質問</a><br>
-							<a href="search">- 質問リスト</a><br>
 							<a href="pointShop">- ポイントショップ</a><br>
 							<a href="helpPage">- ヘルプ</a>
 						</span>

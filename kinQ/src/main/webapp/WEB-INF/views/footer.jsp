@@ -54,8 +54,6 @@
 						<ul>
 							<li><a href="index.html">Home</a></li>
 							<li><a href="askQuestion">質問ボード</a></li>
-							<li><a href="addQuestion">質問</a></li>
-							<li><a href="search">質問リスト</a></li>
 							<li><a href="pointShop">ポイントショップ</a></li>
 							<li><a href="helpPage">ヘルプ</a></li>
 						</ul>
