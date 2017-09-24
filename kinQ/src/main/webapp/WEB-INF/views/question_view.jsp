@@ -364,7 +364,12 @@
 							<p>${ question.questionContent }</p>
 						</div>
 						<div class="question-details">
+						<c:if test="${ question.selectedReplyNum != 0 }">
 							<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
+						</c:if>
+						<c:if test="${ question.selectedReplyNum == 0 }">
+							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
+						</c:if>
 							<span class="question-favorite"><i class="icon-star"></i>${ question.point }</span>
 						</div>
 						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ minor.minorName }</a></span>
@@ -375,10 +380,12 @@
 						<ul class="single-question-vote">
 							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
-							<form method="get" action=modifyQuestion>
-								<input type="submit" class="button color small submit" value="수정하기">
-								<input type="hidden" name="questionNum" value="${ question.questionNum }">
-							</form>
+							<c:if test="${ user.id == sessionScope.userId }">
+								<form method="get" action=modifyQuestion>
+									<input type="submit" class="button color small submit" value="수정하기" style="">
+									<input type="hidden" name="questionNum" value="${ question.questionNum }">
+								</form>
+							</c:if>
 						</ul>
 						<div class="clearfix"></div>
 					</div>
