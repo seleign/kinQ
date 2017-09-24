@@ -146,6 +146,7 @@ public class QuestionController {
 		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
 		HashMap<String, Integer> checkPreNextQuestionNum = qstnSvc.checkPreNextQuestionNum(question.getQuestionNum());
 		System.out.println("HashMap : " + checkPreNextQuestionNum.toString());
+		System.out.println("question : " + question.toString());
 		model.addAttribute("question", question);
 		model.addAttribute("minor", minor);
 		model.addAttribute("major", major);
