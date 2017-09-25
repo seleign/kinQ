@@ -257,7 +257,7 @@
 	</div><!-- End header-top -->
 	<header id="header">
 		<section class="container clearfix">
-			<div class="logo"><a href="index"><img alt="" src="images/logo_bs.png"></a></div>
+			<div class="logo"><a href="index"><img alt="" src="images/logo_ws3.png"></a></div>
 			<nav class="navigation">
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a></li>
