@@ -17,6 +17,8 @@ public interface QuestionMapper {
 	
 	public int insertQuestion(QuestionVO qstn);
 	
+	public int modifyQuestion(QuestionVO qstn);
+	
 	public QuestionVO selectOneQuestion( QuestionVO target);
 	
 	public int deleteQuestion(QuestionVO target);

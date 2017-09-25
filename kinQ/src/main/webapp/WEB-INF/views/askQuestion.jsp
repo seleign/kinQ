@@ -45,6 +45,7 @@
 			}
 		});
 	}
+
 </script>
 
 </head>
@@ -80,7 +81,8 @@
 					<p>こんにちは。KinQに知りたい質問や気になることを気軽くに質問をすることができます。</p>
 					
 					<div class="form-style form-style-3" id="question-submit">
-						<form action="addQuestion" method="post" enctype="multipart/form-data" onsubmit="return validationCheck();">  
+						<form action='${question.title == null? "addQuestion":"modifyQuestion"}' method="post" enctype="multipart/form-data" onsubmit="return validationCheck();">
+						
 						<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
 						<input type="hidden" value="${questionNum}" name="questionNum" id="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다." required="required">
 						
@@ -120,7 +122,7 @@
 									<label class="required">Point</label>
 									<input type="number" required="required" class="input" id="point" name="point" value="${question.point}" style="width: 82%; display: inline-block;">
 									<span class="form-description">
-										質問するためにはポイントが必要です。
+										質問するためにはポイントが必要です。 MAXIUM POINT: <output id="RecentPoint"></output>
 									</span>
 								</p>
 								
@@ -298,6 +300,9 @@ window.onload = function() {
 	if(${question.title != null? true:false}) {
 		$("#question-title").val("${question.title}");
 	}
+	
+	// 8. 현재 계정의 포인트를 가져온다.
+	getRecentPoint();
 	
 	//녹화 -- 현재 맥에서만 작동 함
 	//동영상 녹화 코드
@@ -507,13 +512,27 @@ function liToHiddenRelatedTag() {
 var videoIsRecorded = false;  // 이거 사용하도록 수정해야함..
 function validationCheck() {
 	liToHiddenRelatedTag(); // 태그 창에 있는 li를 히든 input에 넣음.
+	getRecentPoint(); // 현재 소유 포인트를 한번 더 가져옴
+	
 	setTimeLimit(); // 긴급 알람 시간을 유효성 검사 할 때 다시 갱신
 	var title = $("#question-title").val();
 	var questionNum = $("#questionNum").val();
-	var questionContent = $("#question_details").val();
+	var questionContent = CKEDITOR.instances.question_details.getData();
 	var major = $("#major").val();	
+	var point = $("#point").val();
+
+	//RecentPoint // 소유하고 있는 포인트
+	if(RecentPoint < point) { // 걸은포인트가 소유한것보다 더 큰경우
+		alert("ポイントが足りないです。")
+		return false;
+	}
 	
 	if( !isEmpty(title) && !isEmpty(questionNum) && !isEmpty(questionContent) && !isEmpty(major) ) {
+		alert(title);
+		alert(questionNum);
+		alert(questionContent);
+		alert(major); 
+		alert(point);
 		return true;
 	} 	
 	return false;
@@ -567,6 +586,20 @@ function setTimeLimit() {
 // 수정모드일 때, 태그 삭제 가능하도록...
 function deleteTag(tag) {
 	$(tag).remove();
+}
+
+// 현재 포인트를 가져옴..
+var RecentPoint = 0;
+function getRecentPoint() {
+	$.ajax({
+		url: 'pointCheck',
+		method: 'post',
+		data: {},
+		success: function(result){
+			$('#RecentPoint').html(result);
+			RecentPoint = result;
+		}
+	});
 }
 </script>
 <!-- End js -->

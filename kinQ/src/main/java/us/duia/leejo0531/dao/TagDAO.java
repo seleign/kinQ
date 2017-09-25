@@ -37,4 +37,10 @@ public class TagDAO{
 		ArrayList<String> result = mapper.selectHotTag();
 		return result;
 	}
+	
+	public int allDeleteTag(TagVO tag) {
+		TagMapper mapper = sqlSession.getMapper(TagMapper.class);
+		int result = mapper.allDeleteTag(tag);
+		return result;
+	}
 }

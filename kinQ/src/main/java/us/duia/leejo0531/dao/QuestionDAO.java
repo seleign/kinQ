@@ -230,4 +230,15 @@ public class QuestionDAO {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
 		mapper.rebuildRContentIndex();
 	}
+	
+	/**
+	 * 질문글을 수정한다.
+	 * @param qstn
+	 * @return
+	 */
+	public int modifyQuestion(QuestionVO qstn) {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		int result = mapper.modifyQuestion(qstn);
+		return result;
+	}
 }
