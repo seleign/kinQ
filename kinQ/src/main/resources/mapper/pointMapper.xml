@@ -10,12 +10,12 @@
 	
 	<insert id="addPoint" parameterType="CashLog">
 		insert into CashLog(cashLogNum, userNum, cCharged, cChargedDate, cChange) 
-		values(CashLog_SEQ.nextval, #{userNum}, #{cCharged}, TO_DATE(#{cChargedDate}), #{cChange}) 
+		values(CashLog_SEQ.nextval, #{userNum}, #{cCharged}, sysdate), #{cChange}) 
 	</insert>
 	
 	<insert id = "addPointLog" parameterType="PointLog">
 		insert into PointLog(pointLogNum, pUserNum, pCharged, pChargedDate, pChange) 
-		values(PointLog_SEQ.nextval, #{pUserNum}, #{pCharged}, TO_DATE(#{pChargedDate}), #{pChange}) 
+		values(PointLog_SEQ.nextval, #{pUserNum}, #{pCharged}, sysdate), #{pChange}) 
 	</insert>
 	
 	<select id="getRecentChange" parameterType="int" resultType="int">
@@ -26,12 +26,12 @@
 	
 	<insert id="cashToPoint" parameterType="CashLog">
 		insert into CashLog(cashLogNum, userNum, cUsed, cUsedDate, cChange)
-		values(CashLog_SEQ.nextval, #{userNum}, #{cUsed}, TO_DATE(#{cUsedDate}), #{cChange})
+		values(CashLog_SEQ.nextval, #{userNum}, #{cUsed}, sysdate, #{cChange})
 	</insert>
 	
 	<insert id="pointToCash" parameterType="PointLog">
 		insert into PointLog(pointLogNum, pUserNum, pUsed, pUsedDate, pChange)
-		values(PointLog_SEQ.nextval, #{pUserNum}, #{pUsed}, TO_DATE(#{pUsedDate}), #{pChange})
+		values(PointLog_SEQ.nextval, #{pUserNum}, #{pUsed}, sysdate, #{pChange})
 	</insert>
 	
 	<select id="getRecentPoint" parameterType="int" resultType="int">
