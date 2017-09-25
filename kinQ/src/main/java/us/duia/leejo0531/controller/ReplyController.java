@@ -65,7 +65,7 @@ public class ReplyController {
 	
 	@RequestMapping(value = "registReply", method = RequestMethod.POST)
 	public @ResponseBody String registReply(ReplyVO reply) {
-		System.out.println("reply : " + reply);
+//		System.out.println("reply : " + reply);
 		int result = reSvc.registReply(reply);
 		int alarm = alSvc.alarmReply(reply.getQuestionNum());
 		if (result == 1) {
@@ -89,9 +89,11 @@ public class ReplyController {
 	
 	@RequestMapping(value = "selectedReply", method = RequestMethod.GET)
 	public @ResponseBody int selectedReply(ReplyVO reply) {
-//		System.out.println("Question : " + question);
+//		System.out.println("Reply : " + reply);
 		int result = reSvc.selectedReply(reply);
 		int score = reSvc.updateReplyScore(reply);
+		int pointPlus = reSvc.replyPointUpdatePlus(reply);
+		int pointMinus = reSvc.replyPointUpdatMinus(reply);
 		return result;
 	}
 	

@@ -333,8 +333,8 @@
 				  </span>
 				  <output for="star-input"><b id="replyScore">0</b>점</output>
 				</span>
-			<button class="button color small submit" style="float: right; onclick="registReplyScore()">선택하기</button>
-			<button class="button color small submit" style="float: right;onclick="registReplyCancel()">취소</button>
+			<button class="button color small submit" style="float: right;" onclick="registReplyScore()">선택하기</button>
+			<button class="button color small submit" style="float: right;" onclick="registReplyCancel()">취소</button>
 		</div>
 	</div>
 	<div class="breadcrumbs">
@@ -369,6 +369,11 @@
 					<div class="question-inner">
 						<div class="clearfix"></div>
 						<div class="question-desc">
+							<c:if test="${ question.videoSrc ne null }">
+								<video id="my-video" class="video-js" controls data-setup='{}'>
+									<source src="${ question.videoSrc }" type="video/webm"></source>
+								</video>
+							</c:if>
 							<p>${ question.questionContent }</p>
 						</div>
 						<div class="question-details">
@@ -383,7 +388,7 @@
 						<span class="question-category"><a href="#"><i class="icon-folder-close"></i>${ minor.minorName }</a></span>
 						<span class="question-date"><i class="icon-time"></i>${ checkTimeResult } ago</span>
 						<span class="question-comment"><a href="#"><i class="icon-comment"></i><span id="answerCount"></span> Answer</a></span>
-						<span class="question-view"><i class="icon-user"></i>${ question.hit } views</span>
+						<%-- <span class="question-view"><i class="icon-user"></i>${ question.hit } views</span> --%>
 						<%-- <span class="single-question-vote-result">${ question.score }</span> --%>
 						<ul class="single-question-vote">
 							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
@@ -472,17 +477,19 @@
 				    </div> -->
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
-				<c:if test="${ sessionScope.userId != user.id and sessionScope.userId ne null}">
-					<div id="related-posts">
-						<h>답변 하기</h2>
-						<textarea rows="" cols="" id="replyContent"></textarea>
-						<button class="button color small submit" onclick="registReply()">등록</button>
-						<form method="post" action="realTimeAnswer">
-							<input type="submit" class="button color small submit" value="실시간 답변">
-							<input type="hidden" name="questionNum" value="${ question.questionNum }">
-						</form>
-					</div><!-- End related-posts -->
-				</c:if>
+						<c:if test="${ question.selectedReplyNum == 0 }">
+							<div id="related-posts">
+							<c:if test="${ sessionScope.userId != user.id and sessionScope.userId ne null}">
+								<h>답변 하기</h2>
+								<textarea rows="" cols="" id="replyContent"></textarea>
+								<button class="button color small submit" onclick="registReply()">등록</button>
+							</c:if>
+							<form method="post" action="realTimeAnswer">
+								<input type="submit" class="button color small submit" value="실시간 답변">
+								<input type="hidden" name="questionNum" value="${ question.questionNum }">
+							</form>
+							</div><!-- End related-posts -->
+						</c:if>
 				
 				<!-- 답글부분 -->
 				<div id="commentlist" class="page-content">

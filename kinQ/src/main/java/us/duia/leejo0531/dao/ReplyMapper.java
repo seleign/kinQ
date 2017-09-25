@@ -28,4 +28,6 @@ public interface ReplyMapper {
 	public int updateRecommendDown(ReplyVO reply);
 	public int checkZeroRecommend(ReplyVO reply);
 	public int updateReplyScore(ReplyVO reply);
+	public int replyPointUpdatePlus(ReplyVO reply);
+	public int replyPointUpdatMinus(ReplyVO reply);
 }
