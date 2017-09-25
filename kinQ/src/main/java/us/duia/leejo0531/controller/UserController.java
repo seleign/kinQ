@@ -83,8 +83,12 @@ public class UserController implements HttpSessionListener{
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String requestLogin(UserVO user,HttpSession session){	
+	public String requestLogin(UserVO user,HttpSession session, Model model){	
 		UserVO loginUser = userSvc.requestLogin(user);
+		// 로그인에 성공하지 못하면 loginUser이 null이다.
+		if(loginUser == null) {
+			return "redirect:index";
+		}
 		
 		if(loginSessionMonitor == null) loginSessionMonitor = new Hashtable<String, String>();
 		
@@ -106,7 +110,7 @@ public class UserController implements HttpSessionListener{
 				loginSessionMonitor.remove(session.getId());
 			}
 		} else {
-			logger.info("왜 loginSessionMonitor가 null이지?");
+			logger.warn("왜 loginSessionMonitor가 null이지?");
 		}
 		session.invalidate();
 		return "redirect:index";

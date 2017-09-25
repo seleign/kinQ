@@ -17,4 +17,5 @@ public interface AlarmMapper {
 	public int updateReadCheck( int userNum);
 	public int alarmInterest( int questionNum);
 	public int alarmReply( int questionNum);
+	public int deletePreInsertedInterest( int alarmAdress );
 }

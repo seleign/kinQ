@@ -154,4 +154,36 @@
 	<select id="q_reply_seq_nextval" resultType="int">
 		SELECT q_reply_seq.nextval as replyNum FROM dual
 	</select>
+	
+	<insert id="replyPointUpdatePlus" parameterType="Reply">
+		insert
+			into pointlog values 
+				(
+					pointlog_seq.nextval, 
+					(select userNum from q_reply where replyNum = #{replyNum}),
+					(select point from q_board where questionNum = #{questionNum}),
+					sysdate,
+					0, 
+					sysdate,
+					(
+						select (pcharged-pused+point) as pchange from (select sum(pcharged) as pcharged , sum(pused) as pused from pointlog where puserNum = (select userNum from q_reply where replyNum = #{replyNum})), (select sum(point) as point from q_board where questionNum = #{questionNum})
+					)
+				)
+	</insert>
+	
+	<insert id="replyPointUpdatMinus" parameterType="Reply">
+		insert
+			into pointlog values 
+				(
+					pointlog_seq.nextval, 
+					(select userNum from q_board where questionNum = #{questionNum}),
+					0,
+					sysdate,
+					(select point from q_board where questionNum = #{questionNum}),
+					sysdate,
+					(
+						select (pcharged-pused-point) as pchange from (select sum(pcharged) as pcharged , sum(pused) as pused from pointlog where puserNum = (select userNum from q_board where questionNum = #{questionNum})), (select sum(point) as point from q_board where questionNum = #{questionNum})
+					)
+				)
+	</insert>
 </mapper>

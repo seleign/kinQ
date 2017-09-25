@@ -178,9 +178,10 @@ public class FileService {
 	public static String cKEditorFileUpload(MultipartFile upload, String CKEditorFuncNum, String id) {
 		logger.info( "cKEditorFileUpload: "	+ upload.getOriginalFilename() );
 		String fileName = FileService.saveFile(upload, fileSaveDirPath, id);
-		String url = "/resources/"  + uploadFolderName+ "/" + id + "/" + fileName;
+		String url = "./resources/"  + uploadFolderName+ "/" + id + "/" + fileName;
 		return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + url + "','File Uploaded'" + ")</script>"; //
 	}
+	
 	
 	/**
 	 * CKEditor에 드래그 앤 드랍으로 이미지 파일을 넣을 때 사용한다.
@@ -209,7 +210,7 @@ public class FileService {
 			String fileName = saveFile(blob, fileSaveDirPath, id);
 			result.put("uploaded", "1");
 			result.put("fileName", fileName);
-			result.put("url", "/resources/" + uploadFolderName + "/" + id + "/" + fileName);
+			result.put("url", "./resources/" + uploadFolderName + "/" + id + "/" + fileName);
 		} else {
 			logger.warn("파일 업로드 실패");
 			result.put("uploaded", "0");
@@ -238,7 +239,7 @@ public class FileService {
 		
 		logger.info("blob_upload: " + blob.getOriginalFilename());
 		String fileName = FileService.saveFile(blob, FileService.fileSaveDirPath, id);
-		String path = "/resources/" + uploadFolderName + "/" + id + "/" + fileName;
+		String path = "./resources/" + uploadFolderName + "/" + id + "/" + fileName;
 		return path;
 	}
 	

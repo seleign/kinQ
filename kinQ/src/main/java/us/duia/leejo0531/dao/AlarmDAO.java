@@ -69,4 +69,10 @@ public class AlarmDAO {
 		int result = mapper.alarmReply(questionNum);
 		return result;
 	}
+	
+	public int deletePreInsertedInterest( int alarmAdress ) {
+		AlarmMapper mapper = sqlSession.getMapper(AlarmMapper.class);
+		int result = mapper.deletePreInsertedInterest(alarmAdress);
+		return result;
+	}
 }

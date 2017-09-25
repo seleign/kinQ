@@ -105,4 +105,14 @@ public class ReplyService {
 		int result = replyDao.updateReplyScore(reply);
 		return result;
 	}
+	
+	public int replyPointUpdatePlus(ReplyVO reply) {
+		int result = replyDao.replyPointUpdatePlus(reply);
+		return result;
+	}
+	
+	public int replyPointUpdatMinus(ReplyVO reply) {
+		int result = replyDao.replyPointUpdatMinus(reply);
+		return result;
+	}
 }

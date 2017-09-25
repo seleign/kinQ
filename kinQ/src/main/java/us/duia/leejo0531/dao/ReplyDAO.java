@@ -162,4 +162,16 @@ public class ReplyDAO {
 		int result = mapper.updateReplyScore(reply);
 		return result;
 	}
+	
+	public int replyPointUpdatePlus(ReplyVO reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.replyPointUpdatePlus(reply);
+		return result;
+	}
+	
+	public int replyPointUpdatMinus(ReplyVO reply) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.replyPointUpdatMinus(reply);
+		return result;
+	}
 }
