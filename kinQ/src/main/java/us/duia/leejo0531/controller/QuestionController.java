@@ -1,23 +1,16 @@
 package us.duia.leejo0531.controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -60,46 +53,6 @@ public class QuestionController {
 	@Autowired
 	private AlarmService almSvc;
 
-	/***
-	 * GET 방식으로 질문 페이지에 접근하는데 사용된다.
-	 * DB에서 major리스트를 가져와서, questionForm.jsp에 ${majorList}으로 전달한다.
-	 * @param model major리스트를 ${majorList}로 사용
-	 * @return question/questionForm.jsp로 이동
-	 */
-	@RequestMapping(value = "addQuestion", method = RequestMethod.GET)
-	public String showQuestionForm(Model model) {
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
-		model.addAttribute("majorList", majorList);
-		return "askQuestion";
-	}
-
-	/**
-	 * 화면 녹화 등 RTC 프로토 타입 페이지 이동용 --테스트용입니다.
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "addQuestion5", method = RequestMethod.GET)
-	public String showQuestionForm5(Model model, HttpSession session) {
-		QuestionVO test = new QuestionVO(80);
-		QuestionVO question = qstnSvc.getQuestion(test);
-		logger.info(question.toString());
-		int userNum = 1;
-		model.addAttribute("question", question);
-		model.addAttribute("userNum", userNum);
-		return "question/questionForm5";
-	}
-	
-	@RequestMapping(value = "addQuestion6", method = RequestMethod.GET)
-	public String showQuestionForm6(Model model, HttpSession session) {
-		QuestionVO test = new QuestionVO(80);
-		QuestionVO question = qstnSvc.getQuestion(test);
-		model.addAttribute("question", question);
-		int userNum = 1;
-		model.addAttribute("userNum", userNum);
-		return "question/questionForm6";
-	}
-	
-
 	/**
 	 * Ajax로 질문 작성, 질문 수정에서 사용할 Tag(태그)를 ArrayList로 가져간다.
 	 * @return ArrayList<TagVO>를 json배열로 리턴
@@ -124,7 +77,7 @@ public class QuestionController {
 		//태그 등록
 		qstn.getRelatedTag().parallelStream().forEach(tag -> qstnSvc.insertTag(new TagVO(qstn.getQuestionNum(), qstn.getUserNum(), tag)) );
 		almSvc.alarmInterest(qstn.getQuestionNum());
-		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
+		return "redirect:index";  // 루트가 아닌 다른 페이지로 이동해야 함
 	}
 
 	/**
@@ -179,18 +132,19 @@ public class QuestionController {
 		return result;
 	}
 	
-	/**
-	 * AskQuestion 으로 이동하며 대분류 목록도 같이 전송
-	 * main에서 AskQuestion 으로 이동하며 제목도 같이 전송
-	 * @return 질문하기 페이지로 이동
+	/***
+	 * GET 방식으로 질문 페이지에 접근하는데 사용된다.
+	 * DB에서 major리스트를 가져와서, questionForm.jsp에 ${majorList}으로 전달한다.
+	 * @param model major리스트를 ${majorList}로 사용
+	 * @return question/questionForm.jsp로 이동
 	 */
-	@RequestMapping(value="askQuestion",method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="askQuestion",method= RequestMethod.GET)
 	public String ask_question(Model model, HttpSession session){
 		
 		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
 		String userId = (String)session.getAttribute("userId");
 		if(userId == null) {
-			return "redirect:/";
+			return "redirect:index";
 		}
 		
 		ArrayList<MajorVO> majorList = userSvc.getMajorList();
@@ -223,21 +177,7 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value = "modifyQuestion", method=RequestMethod.GET)
-	public String modifyQuestion(int questionNum, HttpSession session, Model model) {
-		/*// 테스트 코드
-		ArrayList<MajorVO> majorList = qstnSvc.getMajorList();
-		model.addAttribute("majorList", majorList);
-		
-		QuestionVO test = new QuestionVO(80);
-		QuestionVO question = qstnSvc.getQuestion(test);
-		model.addAttribute("question", question);
-		int userNum = 1; // 로그인한 유저
-		model.addAttribute("userNum", userNum);
-		model.addAttribute("questionNum", question.getQuestionNum());
-		
-		logger.info("modifyQuestion: " + question);*/
-		
-		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
+	public String modifyQuestion_GET(int questionNum, HttpSession session, Model model) {
 		String userId = (String)session.getAttribute("userId");
 		if(userId == null) {
 			return "redirect:/";
@@ -260,6 +200,25 @@ public class QuestionController {
 		return "askQuestion";
 	}
 	
+	
+	@RequestMapping(value = "modifyQuestion", method=RequestMethod.POST)
+	public String modifyQuestion_POST(QuestionVO qstn, HttpSession session, Model model) { 
+		logger.info("modifyQuestion: " + qstn);
+		qstnSvc.modifyQuestion(qstn); // 질문 내용 수정
+		TagVO tag = new TagVO();
+		tag.setQuestionNum(qstn.getQuestionNum());
+		int userNum = (int)session.getAttribute("userNum");
+		qstn.setUserNum(userNum);
+		qstnSvc.allDeleteTag(tag); // 모든 태그를 삭제 후
+		// 다시 등록
+		
+		qstn.getRelatedTag().parallelStream().forEach(tags -> qstnSvc.insertTag(new TagVO(qstn.getQuestionNum(), qstn.getUserNum(), tags)) );
+		// 기존 알람 삭제 후
+		
+		// 다시 알람 등록
+		
+		return "redirect:/";
+	}
 	
 	/**
 	 * 실시간 답변 또는 동영상 녹화 답변에 사용된다.

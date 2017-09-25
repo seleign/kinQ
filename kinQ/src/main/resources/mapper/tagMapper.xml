@@ -19,6 +19,10 @@
 		
 	</insert>
 	
+	<delete id="allDeleteTag" parameterType="Tag">
+		delete tag where questionNum = #{questionNum}
+	</delete>
+	
 	<select id="selectHotTag" resultType="string">
 		select
 		    tag

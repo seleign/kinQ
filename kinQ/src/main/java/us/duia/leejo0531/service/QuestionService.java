@@ -196,10 +196,20 @@ public class QuestionService {
 		int result = qstnDao.updateTag(tag);
 		return result;
 	}
+	
+	public int allDeleteTag(TagVO tag) {
+		int result = tagDao.allDeleteTag(tag);
+		return result;
+	}
 
 	public DetailVO getQuestionDetail( QuestionVO qstn){
 		DetailVO result = qstnDao.getQuestionDetail(qstn);
 		return result;
+	}
+	
+	public int modifyQuestion(QuestionVO qstn) {
+		int result = qstnDao.modifyQuestion(qstn);
+		return result;		
 	}
 /*	
 	@Scheduled(fixedDelay=2000)

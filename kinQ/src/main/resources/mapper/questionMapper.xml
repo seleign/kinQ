@@ -645,4 +645,9 @@
 			    )
 			WHERE questionNum = #{questionNum}
 	</select>
+	
+	<!-- 질문글의 내용을 수정한다. -->
+	<update id="modifyQuestion" parameterType="Question">
+		update q_board set timeLimit = #{timeLimit}, moddate = sysdate, title = #{title}, questionContent = #{questionContent}, MinorNum = #{MinorNum}, videoSrc = #{videoSrc} where questionNum = #{questionNum}
+	</update>
 </mapper>

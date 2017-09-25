@@ -406,7 +406,7 @@
 				<div class="share-tags page-content">
 					<div class="question-tags"><i class="icon-tags"></i>
 						<c:forEach var="tag" items="${ tagList }">
-							<a href="#">${ tag.tag }</a>&nbsp;&nbsp;
+							<a href="search?from=1&to=10&searchType=tag&search=${tag.tag}">${ tag.tag }</a>&nbsp;&nbsp;
 						</c:forEach>
 					</div>
 					<div class="share-inside-warp">

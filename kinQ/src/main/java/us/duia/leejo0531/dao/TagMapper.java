@@ -10,5 +10,6 @@ public interface TagMapper {
 	public void dummytag(TagVO tag); //더미용
 	public int insertTag(TagVO tag);
 	public int updateTag(TagVO tag);
+	public int allDeleteTag(TagVO tag);
 	public ArrayList<String> selectHotTag();
 }

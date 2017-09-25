@@ -222,6 +222,11 @@
 		</section><!-- End container -->
 	</div><!-- End breadcrumbs -->
 	
+	<div class="panel-pop" id="updateUser">
+	<h2>個人情報修正<i class="icon-remove"></i></h2>
+		<iframe src="updateUserInfo" class=signupIframe></iframe>
+	</div>
+	
 	<section class="container main-content">
 		<div class="row">
 			<div class="col-md-9">
@@ -239,7 +244,7 @@
 								</ul>
 								</div>
 							    <div id="piechart" style="float: left; width: 60%;"></div>
-								<br><hr><br><input type="button" class="button small grey-button custom-button" value="個人情報修正" onclick="location.href='updateUserInfo'">
+								<br><hr><br><input type="button" id="update_button" class="button small grey-button custom-button" value="個人情報修正">
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->
 						<div class="col-md-12">

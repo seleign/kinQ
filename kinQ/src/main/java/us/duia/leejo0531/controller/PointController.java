@@ -53,16 +53,16 @@ public class PointController {
 	@RequestMapping(value = "addPoint", method = RequestMethod.POST)
 	public @ResponseBody int addPoint(int amount, HttpSession session) {
 
-		long time = System.currentTimeMillis();
+/*		long time = System.currentTimeMillis();
 		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
-		String cChargedDate = currentTime.format(new Date(time));
+		String cChargedDate = currentTime.format(new Date(time));*/
 
 		int userNum = (int) session.getAttribute("userNum");
 
 		int change = pointSvc.getRecentChange(userNum);
 		int cChange = change + amount;
 
-		CashLogVO cash = new CashLogVO(0, userNum, amount, cChargedDate, 0, null, cChange);
+		CashLogVO cash = new CashLogVO(0, userNum, amount, null, 0, null, cChange);
 		pointSvc.addPoint(cash);
 
 		int finalChange = pointSvc.getRecentChange(userNum);
@@ -75,18 +75,15 @@ public class PointController {
 		int userNum = (int) session.getAttribute("userNum");
 		int change = pointSvc.getRecentChange(userNum);
 
-		long time = System.currentTimeMillis();
-		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
-		String cUsedDate = currentTime.format(new Date(time));
 		int cChange = change - currentChange;
 
-		CashLogVO cash = new CashLogVO(0, userNum, 0, null, currentChange, cUsedDate, cChange);
+		CashLogVO cash = new CashLogVO(0, userNum, 0, null, currentChange, null, cChange);
 		pointSvc.cashToPoint(cash);
 		
 		int pChange = pointSvc.getRecentPoint(userNum);
 		int finalPChange = pChange+currentChange;
 		
-		PointLogVO point = new PointLogVO(0, userNum, currentChange, cUsedDate, 0, null, finalPChange);
+		PointLogVO point = new PointLogVO(0, userNum, currentChange, null, 0, null, finalPChange);
 		pointSvc.addPointLog(point);
 
 		int finalChange = pointSvc.getRecentChange(userNum);
@@ -101,12 +98,9 @@ public class PointController {
 		int userNum = (int) session.getAttribute("userNum");
 		int point = pointSvc.getRecentPoint(userNum);
 
-		long time = System.currentTimeMillis();
-		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
-		String cUsedDate = currentTime.format(new Date(time));
 		int pChange = 0;
 
-		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, point, cUsedDate, pChange);
+		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, point, null, pChange);
 		pointSvc.pointToCash(pointLog);
 		
 		int finalPChange = pointSvc.getRecentPoint(userNum);
@@ -119,12 +113,9 @@ public class PointController {
 		int userNum = (int) session.getAttribute("userNum");
 		int point = pointSvc.getRecentPoint(userNum);
 
-		long time = System.currentTimeMillis();
-		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
-		String cUsedDate = currentTime.format(new Date(time));
 		int pChange = point - totalPrice;
 
-		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, totalPrice, cUsedDate, pChange);
+		PointLogVO pointLog = new PointLogVO(0, userNum, 0, null, totalPrice, null, pChange);
 		pointSvc.pointToCash(pointLog);
 		
 		int finalPChange = pointSvc.getRecentPoint(userNum);
@@ -144,12 +135,9 @@ public class PointController {
 		int userNum = (int) session.getAttribute("userNum");
 		int change = pointSvc.getRecentChange(userNum);
 
-		long time = System.currentTimeMillis();
-		SimpleDateFormat currentTime = new SimpleDateFormat("yyyyMMdd");
-		String cUsedDate = currentTime.format(new Date(time));
 		int cChange = 0;
 
-		CashLogVO cash = new CashLogVO(0, userNum, 0, null, change, cUsedDate, cChange);
+		CashLogVO cash = new CashLogVO(0, userNum, 0, null, change, null, cChange);
 		pointSvc.cashToPoint(cash);
 		
 		int finalChange = pointSvc.getRecentChange(userNum);
@@ -159,9 +147,9 @@ public class PointController {
 	@RequestMapping(value="pointCheck", method=RequestMethod.POST)
 	public @ResponseBody int pointCheck(HttpSession session){
 		int userNum = (int) session.getAttribute("userNum");
-		int finalPChange = pointSvc.getRecentPoint(userNum);
+		int finalP = pointSvc.getRecentPoint(userNum);
 		
-		return finalPChange;
+		return finalP;
 	}
 	
 }

@@ -544,18 +544,26 @@ function formCheck() {
 var questionNum = '${question.questionNum}';
 var userNum = '${userNum}';
 var ReplyContent = CKEDITOR.instances.ReplyContent.getData(); //TODO
+var videoSrc = $('#videoSrc').val();
 
-	$.ajax({
-        url: 'registReply',
-        data: {
-        		//
-       		},
-        type: 'POST',
-        success: function(result){
-			//
-        		
-                }
-        });
+alert(videoSrc);
+if(isEmpty(videoSrc)) {
+	return false;
+}
+
+$.ajax({
+	url: "registReply",
+	type: "post",
+	data: { questionNum: ${ question.questionNum },
+			id: "${ userId }",
+			videoSrc: videoSrc,
+			userNum: ${userNum},
+			replyContent: ReplyContent
+	},
+	success: function (success) {
+		alert("댓글 등록 완료")
+	}
+})
 	
 }
 
@@ -601,9 +609,9 @@ var ReplyContent = CKEDITOR.instances.ReplyContent.getData(); //TODO
 <button id="btn-leave-room" disabled>4. 접속 종료</button>
 <button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
+<button onclick="formCheck()">댓글 등록 </button>
+<input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
 </fieldset>
-
-<input type="text" name="videoSrc" value="" placeholder="답변이 완료된 후에는 답변이 녹화된 동영상의 주소가 여기에 담겨서, 답변 테이블의 videoSrc에 들어간다.">
 <table>
 	<tr>
 		<td>
@@ -615,7 +623,7 @@ var ReplyContent = CKEDITOR.instances.ReplyContent.getData(); //TODO
   </ul>
   <div id="tabs-1">
 		<!-- 이게 공유된다. DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
-	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray;">
+	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray; background: white;">
 		<c:if test="${question.questionContent != null? true:false }">
 			${question.questionContent}
 		</c:if>
@@ -627,7 +635,7 @@ var ReplyContent = CKEDITOR.instances.ReplyContent.getData(); //TODO
 
   <div id="tabs-2">
 		<!-- 실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다. -->
-	<div id="videos-container" style="border:3px solid blue">
+	<div id="videos-container">
 		<h6>실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다.</h6>
 		<!-- ㄹㄹ -->
 		<c:if test="${question.videoSrc != null? true:false }">

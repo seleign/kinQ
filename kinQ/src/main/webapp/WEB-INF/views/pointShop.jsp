@@ -78,6 +78,7 @@
     		$('input[type=button]').prop('disabled', false);
     		goodsName = [];
     		goodsNum = [];
+    		goodsPrice = [];
 			var html = '';
 			
     		for(var i in goodsName){
@@ -175,8 +176,8 @@
      				url: 'pointCheck',
      				method: 'POST',
      				data: {},
-     				success: function(finalPChange){
-     					if(finalPChange>=total){
+     				success: function(finalP){
+     					if(finalP>=total){
      						$.ajax({
 			     				url: 'orderGoods',
 			     				method: 'POST',
@@ -185,11 +186,12 @@
 			     					$('#myPoint').html(finalPChange);
 			     		    		goodsName = [];
 			     		    		goodsNum = [];
+			     		    		goodsPrice = [];
 			     		    		totalPrice = 0;
+			     		    		$('input[type=button]').prop('disabled', false);
 			     					$('#goodsList').html('');
 			     					$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+' ポイント');
 			     					$('input[name="hiddenTotalPrice"]').val(totalPrice);
-			     					alert(totalPrice);
 			     					alert('購入完了');
 			     				}
 			     			});
@@ -197,8 +199,10 @@
      						alert('ポイントが不足します。');
 	     		    		goodsName = [];
 	     		    		goodsNum = [];
+	     		    		goodsPrice = [];
 	     		    		totalPrice = 0;
 	     		    		$('input[name="hiddenTotalPrice"]').val(0);
+	     		    		$('input[type=button]').prop('disabled', false);
      						return false;
      					}
      				}
