@@ -25,6 +25,8 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   	
+	<script src="./resources/js/jquery-dateFormat.min.js"></script>
+  <script src="./resources/js/dateFormat.min.js"></script>
   	<script type="text/javascript">
 
   	$(function(){
@@ -93,6 +95,26 @@
 		});
 		
 	});
+  	
+  	$(function(){
+		$.ajax({
+			url: 'asideRecent',
+			method: 'get',
+			data: {},
+			success: function(result){
+				console.log("succeed")
+				var html = "";
+				$.each( result, function(index, element) {
+					html += '<li class="related-item"><h3><a href="#">'+element.title+'</a></h3>';
+					html += '<p>'+element.questionContent+'</p>';
+					html += '<div class="clear"></div><span>'+DateFormat.format.prettyDate( element.regDate)+'</span></li>';
+				})
+				console.log("htmled")
+				$('.related-posts').html(html);
+			}
+		});
+		
+	});
   	</script>
 </head>
 <body>
@@ -157,18 +179,8 @@
 				</div>
 				
 				<div class="widget">
-					<h3 class="widget_title">Recent Questions</h3>
+					<h3 class="widget_title">最新質問</h3>
 					<ul class="related-posts">
-						<li class="related-item">
-							<h3><a href="#">This is my first Question</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<div class="clear"></div><span>Feb 22, 2014</span>
-						</li>
-						<li class="related-item">
-							<h3><a href="#">This Is My Second Poll Question</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<div class="clear"></div><span>Feb 22, 2014</span>
-						</li>
 					</ul>
 				</div>
 				

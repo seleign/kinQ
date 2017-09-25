@@ -346,4 +346,15 @@ public class QuestionController {
 		return "success";
 	}
 	
+	@RequestMapping(value = "asideRecent", method = RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<QuestionVO> asideRecent() {
+		PageVO page = new PageVO();
+		page.setFrom(1);
+		page.setTo(3);
+		
+		ArrayList<QuestionVO> result = qstnSvc.searchRecentPost(page);
+		
+		return result; //어느 페이지로 이동시킬 것인가?
+	}
 }
