@@ -52,7 +52,6 @@ public class ReplyController {
 		int questionNum = qstn.getQuestionNum();
 //		System.out.println(questionNum);
 		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(questionNum);
-		System.out.println(replyList.get(1));
 		return replyList;
 	}
 	
