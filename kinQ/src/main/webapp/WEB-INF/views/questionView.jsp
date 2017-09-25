@@ -39,7 +39,6 @@
 	<script src="./resources/js/custom.js"></script>
 	<script src="./resources/js/video-js-6/video.min.js"></script>
 	
-	<script src="./resources/js/jquery-dateFormat.min.js"></script>
 	<script src="./resources/js/dateFormat.min.js"></script>
 	
 	<!-- CKeditor -->

@@ -25,7 +25,6 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
   	
-	<script src="./resources/js/jquery-dateFormat.min.js"></script>
   <script src="./resources/js/dateFormat.min.js"></script>
   	<script type="text/javascript">
 
@@ -102,14 +101,12 @@
 			method: 'get',
 			data: {},
 			success: function(result){
-				console.log("succeed")
 				var html = "";
 				$.each( result, function(index, element) {
 					html += '<li class="related-item"><h3><a href="#">'+element.title+'</a></h3>';
 					html += '<p>'+element.questionContent+'</p>';
 					html += '<div class="clear"></div><span>'+DateFormat.format.prettyDate( element.regDate)+'</span></li>';
 				})
-				console.log("htmled")
 				$('.related-posts').html(html);
 			}
 		});

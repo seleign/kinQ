@@ -114,7 +114,7 @@ body {
 }
 
 #askme_back {
-	background-image: url("./images/back1.png");
+	background-image: url("../images/back1.png");
 }
 /* 占쏙옙 占쏙옙 */
 #warp {
@@ -165,7 +165,7 @@ body {
 	animation: spin 1s linear infinite;
 }
 .boxed_body {
-	background: url(./images/patterns/bg13.png) repeat;
+	background: url(../images/patterns/bg13.png) repeat;
 }
 .boxed_body_2 {
 	background: url(http://placehold.it/2000x1100/222/FFF) no-repeat center center fixed;
@@ -3500,7 +3500,7 @@ span.small_arrow_dowm {
 [class^="icons-"],
 [class*=" icons-"] {
 	display: inline-block;
-	background-image: url(./images/icons.png);
+	background-image: url(../images/icons.png);
 	background-position: top left;
 	background-repeat: no-repeat;
 	line-height: 1;
@@ -4509,7 +4509,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 }
 .divider-3:after {
 	height: 7px;
-	background: url(./images/shadow_1.png) repeat-x;
+	background: url(../images/shadow_1.png) repeat-x;
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -4521,7 +4521,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 }
 .divider-4:after {
 	height: 10px;
-	background: url(./images/splitter.png) bottom repeat-x;
+	background: url(../images/splitter.png) bottom repeat-x;
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -4529,7 +4529,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 	left: 0;
 }
 .divider-4-dark:after {
-	background: url(./images/splitter_dark.png) bottom repeat-x;
+	background: url(../images/splitter_dark.png) bottom repeat-x;
 }
 /* Quote */
 .quote-left {
