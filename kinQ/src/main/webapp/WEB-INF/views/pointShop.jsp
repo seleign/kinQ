@@ -192,7 +192,6 @@
 			     					$('#goodsList').html('');
 			     					$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+' ポイント');
 			     					$('input[name="hiddenTotalPrice"]').val(totalPrice);
-			     					alert(totalPrice);
 			     					alert('購入完了');
 			     				}
 			     			});
