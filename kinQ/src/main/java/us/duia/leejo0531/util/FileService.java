@@ -182,6 +182,7 @@ public class FileService {
 		return "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ",'" + url + "','File Uploaded'" + ")</script>"; //
 	}
 	
+	
 	/**
 	 * CKEditor에 드래그 앤 드랍으로 이미지 파일을 넣을 때 사용한다.
 	 * filetools 의 설정을 변경했음.....-- 기록사항
