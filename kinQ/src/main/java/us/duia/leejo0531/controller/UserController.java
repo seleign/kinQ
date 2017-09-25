@@ -79,7 +79,7 @@ public class UserController implements HttpSessionListener{
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String join(UserVO user, @RequestParam("checkboxArray[]") ArrayList<String> field){
 		userSvc.insertUserInfo(user, field);
-		return "redirect:/"; 
+		return "redirect:index"; 
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
@@ -96,7 +96,7 @@ public class UserController implements HttpSessionListener{
 		session.setAttribute("userId", loginUser.getId());
 		session.setAttribute("userNum", loginUser.getUserNum());
 		
-		return "redirect:/";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
@@ -109,7 +109,7 @@ public class UserController implements HttpSessionListener{
 			logger.info("왜 loginSessionMonitor가 null이지?");
 		}
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value="updateUserInfo", method=RequestMethod.GET)
@@ -124,7 +124,7 @@ public class UserController implements HttpSessionListener{
 	public String updateUserInfo(UserVO user, @RequestParam("updatedCheckboxArray[]") ArrayList<String> field, HttpSession session){
 		user.setUserNum((int)session.getAttribute("userNum"));
 		userSvc.updateUserInfo(user, field);
-		return "redirect:/";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value="mypage", method=RequestMethod.GET)
