@@ -107,7 +107,8 @@
 					html += '<p>'+element.questionContent+'</p>';
 					html += '<div class="clear"></div><span>'+DateFormat.format.prettyDate( element.regDate)+'</span></li>';
 				})
-				$('.related-posts').html(html);
+				$('#recentPost').html(html);
+				$(".related-item p img").attr("style","height:150px;width:auto;");
 			}
 		});
 		
@@ -177,7 +178,7 @@
 				
 				<div class="widget">
 					<h3 class="widget_title">最新質問</h3>
-					<ul class="related-posts">
+					<ul id="recentPost" class="related-posts">
 					</ul>
 				</div>
 				
