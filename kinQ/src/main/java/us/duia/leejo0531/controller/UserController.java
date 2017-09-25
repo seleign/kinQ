@@ -79,7 +79,7 @@ public class UserController implements HttpSessionListener{
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String join(UserVO user, @RequestParam("checkboxArray[]") ArrayList<String> field){
 		userSvc.insertUserInfo(user, field);
-		return "redirect:/"; 
+		return "redirect:index"; 
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
@@ -124,7 +124,7 @@ public class UserController implements HttpSessionListener{
 	public String updateUserInfo(UserVO user, @RequestParam("updatedCheckboxArray[]") ArrayList<String> field, HttpSession session){
 		user.setUserNum((int)session.getAttribute("userNum"));
 		userSvc.updateUserInfo(user, field);
-		return "redirect:/";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value="mypage", method=RequestMethod.GET)
@@ -137,11 +137,6 @@ public class UserController implements HttpSessionListener{
 		int answersNum = userSvc.countAnswers( userNum);
 		RankVO myRank = userSvc.getMyRank( userNum);
 		
-		int cChange = userSvc.getRecentChange(userNum);
-		int pChange = userSvc.getRecentPoint(userNum);
-		
-		model.addAttribute("cChange", cChange);
-		model.addAttribute("pChange", pChange);
 		model.addAttribute("answeredField", answeredField);
 		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		

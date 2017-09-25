@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import us.duia.leejo0531.vo.AlarmVO;
+import us.duia.leejo0531.vo.QuestionVO;
 
 @Repository
 public class AlarmDAO {
@@ -60,6 +61,12 @@ public class AlarmDAO {
 	public int alarmInterest( int questionNum) {
 		AlarmMapper mapper = sqlSession.getMapper(AlarmMapper.class);
 		int result = mapper.alarmInterest(questionNum);
+		return result;
+	}
+	
+	public int alarmReply( int questionNum) {
+		AlarmMapper mapper = sqlSession.getMapper(AlarmMapper.class);
+		int result = mapper.alarmReply(questionNum);
 		return result;
 	}
 }

@@ -26,7 +26,7 @@
 	</insert>
 	
 	<select id="questionReplyList" parameterType="int" resultType="Reply">
-		select reply.*, nvl(rec.score, 0) as score from (select reply.REPLYNUM, 
+		select reply.*, nvl(rec.score, 0) as recommend from (select reply.REPLYNUM, 
 		reply.QUESTIONNUM, 
 		reply.USERNUM, 
 		to_char(reply.R_REGDATE, 'YYYY-MM-DD') as R_REGDATE, 
@@ -34,6 +34,8 @@
 		reply.REPLYTITLE, 
 		reply.REPLYCONTENT,
 		reply.videoSrc, 
+		reply.score,
+		(select selectedReplyNum from q_board where questionNum = #{questionNum}) as selectedReplyNum,
 		userinfo.id from q_reply reply, userinfo userinfo 
 		where reply.questionNum = #{questionNum} and reply.usernum = userinfo.usernum order by replyNum) reply, 
 		(select replyNum, sum(score) as score from RECOMMENDATION where questionNum = #{questionNum} group by replyNum) rec 
@@ -64,20 +66,21 @@
 	</select>
 	
 	<insert id="registReply" parameterType="Reply">
-		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, #{userNum}, sysdate, sysdate, 
+		insert into q_reply values (q_reply_seq.nextval, #{questionNum}, (select userNum from userinfo where id=#{id}), sysdate, sysdate, 
 		<if test="ReplyTitle != null">
 			#{ReplyTitle}
 		</if>
 		<if test="ReplyTitle == null">
-			null
+			null,
 		</if>
-		,#{replyContent},
+			#{replyContent},
 		<if test="videoSrc != null">
-			#{videoSrc})
+			#{videoSrc},
 		</if>
 		<if test="videoSrc == null">
-			null)
+			null,
 		</if>
+			#{score})
 	</insert>
 	
 	<delete id="deleteReply" parameterType="int">
@@ -85,8 +88,12 @@
 	</delete>
 	
 
-	<update id="selectedReply" parameterType="Question">
-		update q_board set selectedReplyNum = #{selectedReplyNum} where questionNum = #{questionNum}
+	<update id="selectedReply" parameterType="Reply">
+		update q_board set selectedReplyNum = #{replyNum} where questionNum = #{questionNum}
+	</update>
+	
+	<update id="updateReplyScore" parameterType="Reply">
+		update q_reply set score = #{score} where replyNum = #{replyNum}
 	</update>
 	
 	<select id="myAnswerList" parameterType="Page" resultType="Reply">
@@ -141,5 +148,10 @@
 	
 	<select id="checkZeroRecommend" parameterType="Reply" resultType="int">
 		select score from recommendation where replyNum = #{replyNum} and questioniNum = #{questionNum}
+	</select>
+	
+	<!-- 답변글의 시퀀스를 가져온다. -->
+	<select id="q_reply_seq_nextval" resultType="int">
+		SELECT q_reply_seq.nextval as replyNum FROM dual
 	</select>
 </mapper>

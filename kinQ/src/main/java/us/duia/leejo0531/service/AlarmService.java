@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import us.duia.leejo0531.dao.AlarmDAO;
+import us.duia.leejo0531.dao.AlarmMapper;
 import us.duia.leejo0531.dao.HomeDAO;
 import us.duia.leejo0531.vo.AlarmVO;
+import us.duia.leejo0531.vo.QuestionVO;
 
 @Service
 @Repository
@@ -83,5 +85,10 @@ public class AlarmService {
 	 */
 	public int alarmInterest( int questionNum) {
 		return alarmDao.alarmInterest(questionNum);
+	}
+	
+	public int alarmReply( int questionNum) {
+		int result = alarmDao.alarmReply(questionNum);
+		return result;
 	}
 }

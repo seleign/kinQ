@@ -10,6 +10,8 @@ public class ReplyVO extends QuestionVO{
 	private String ReplyContent;
 	private String id;
 	private int score;
+	private int recommend;
+	private int selectedReplyNum;
 	private String videoSrc; // 일반 답변, 실시간 답변에서 녹화된 동영상이, 서버의 어느 주소에 저장되어 있나 담고 있다.
 	
 	public ReplyVO() {
@@ -23,18 +25,27 @@ public class ReplyVO extends QuestionVO{
 		this.replyNum = replyNum;
 	}
 
-	public ReplyVO(int questionNum,int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle, String replyContent, String id, String videoSrc,
-			int score) {
+	public ReplyVO(int questionNum, int replyNum, int recommend) {
+		super();
+		this.questionNum = questionNum;
+		this.replyNum = replyNum;
+		this.recommend = recommend;
+	}
+
+	public ReplyVO(int questionNum, int userNum, int replyNum, String r_RegDate, String r_ModDate, String replyTitle,
+			String replyContent, String id, int score, int recommend, int selectedReplyNum, String videoSrc) {
 		super();
 		this.questionNum = questionNum;
 		this.userNum = userNum;
 		this.replyNum = replyNum;
-		this.R_RegDate = r_RegDate;
-		this.R_ModDate = r_ModDate;
-		this.ReplyTitle = replyTitle;
-		this.ReplyContent = replyContent;
+		R_RegDate = r_RegDate;
+		R_ModDate = r_ModDate;
+		ReplyTitle = replyTitle;
+		ReplyContent = replyContent;
 		this.id = id;
 		this.score = score;
+		this.recommend = recommend;
+		this.selectedReplyNum = selectedReplyNum;
 		this.videoSrc = videoSrc;
 	}
 
@@ -119,12 +130,29 @@ public class ReplyVO extends QuestionVO{
 		this.userNum = userNum;
 	}
 
+	public int getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
+	
+	public int getSelectedReplyNum() {
+		return selectedReplyNum;
+	}
+
+
+	public void setSelectedReplyNum(int selectedReplyNum) {
+		this.selectedReplyNum = selectedReplyNum;
+	}
+
 	@Override
 	public String toString() {
 		return "ReplyVO [questionNum=" + questionNum + ", userNum=" + userNum + ", replyNum=" + replyNum
 				+ ", R_RegDate=" + R_RegDate + ", R_ModDate=" + R_ModDate + ", ReplyTitle=" + ReplyTitle
-				+ ", ReplyContent=" + ReplyContent + ", id=" + id + ", score=" + score + ", videoSrc=" + videoSrc + "]";
+				+ ", ReplyContent=" + ReplyContent + ", id=" + id + ", score=" + score + ", recommend=" + recommend
+				+ ", videoSrc=" + videoSrc + "]";
 	}
-
 
 }

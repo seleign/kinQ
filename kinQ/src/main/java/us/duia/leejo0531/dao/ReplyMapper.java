@@ -22,9 +22,10 @@ public interface ReplyMapper {
 	public int deleteReply(int replyNum);
 	public ArrayList<ReplyVO> myAnswerList( PageVO page);
 	public int getReplyNum(int questionNum);
-	public int selectedReply(QuestionVO question);
+	public int selectedReply(ReplyVO reply);
 	public ReplyVO getSelectedReply(int questionNum);
 	public int updateRecommendUp(ReplyVO reply);
 	public int updateRecommendDown(ReplyVO reply);
 	public int checkZeroRecommend(ReplyVO reply);
+	public int updateReplyScore(ReplyVO reply);
 }

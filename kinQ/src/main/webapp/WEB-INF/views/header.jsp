@@ -262,17 +262,7 @@
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a></li>
 					<li class="ask_question"><a href="askQuestion">質問ボード</a></li>
-					<li><a href="addQuestion">質問</a>
-<!-- 						<ul>
-							<li><a href="cat_question.html">하위 1</a></li>
-							<li><a href="single_question.html">하위 2</a></li>
-							<li><a href="single_question_poll.html">하위 3</a></li>
-						</ul> -->
-					</li>
-					<li><a href="search">質問リスト</a>
-					</li>
-					<li><a href="javascript:void(0)" onclick="location.href='pointShop'">ポイントショップ</a></li>
-					<li><a href="shortcodes">Shortcodes</a></li>
+					<li><a href="pointShop">ポイントショップ</a></li>
 					<li><a href="javascript:void(0)">サービス案内</a>
 						<ul>
 							<li><a href="terms">利用約款</a>
