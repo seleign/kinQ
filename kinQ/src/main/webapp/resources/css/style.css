@@ -5462,5 +5462,8 @@ html[xmlns] .slides {
 }
 
 /* recommendWindow */
-
+#recommendWindow {
+	width: 100%;
+	height: 100%;
+}
 
