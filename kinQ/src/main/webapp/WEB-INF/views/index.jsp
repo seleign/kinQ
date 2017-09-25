@@ -14,13 +14,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
 	<!-- Main Style -->
-	<link rel="stylesheet" href="./resources/css/style.css"> 
+	<link rel="stylesheet" href="./resources/css/style.css?version=20170925"> 
 	
-	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/gray.css">
+	<!-- Skins --> 
+	<link rel="stylesheet" href="./resources/css/purple.css?version=20170925">
 	
 	<!-- Responsive Style -->
-	<link rel="stylesheet" href="./resources/css/responsive.css">
+	<link rel="stylesheet" href="./resources/css/responsive.css?version=20170925">
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
