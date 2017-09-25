@@ -113,9 +113,9 @@ public class UserController implements HttpSessionListener{
 	}
 	
 	@RequestMapping(value="updateUserInfo", method=RequestMethod.GET)
-	public String updateUserInfoPage(Model model, HttpSession session){
-		ArrayList<MajorVO> majorList = userSvc.getMajorList();
-		model.addAttribute("majorList", majorList);
+	public String updateUserInfoPage(){
+//		ArrayList<MajorVO> majorList = userSvc.getMajorList();
+//		model.addAttribute("majorList", majorList);
 		return "user/updateUserInfoPage";
 	}
 	

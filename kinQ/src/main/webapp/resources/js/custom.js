@@ -6,6 +6,13 @@ jQuery(document).ready(function($) {
 			$(".signupIframe").attr('src',url);
 		}	
 	);
+	
+//	jQuery("#update_button").click(
+//			function(){
+//				var url = $(".updateIframe").attr('src');
+//				$(".updateIframe").attr('src',url);
+//			}	
+//		);
 	/*askquestion video*/
 	jQuery("#ask-button").click(function () {
 		if (jQuery(this).hasClass("view-active")) {
@@ -807,6 +814,14 @@ jQuery(document).ready(function($) {
 	jQuery(".signup,.login-links-r a").click(function () {
 		jQuery(".panel-pop").animate({"top":"-100%"},10).hide();
 		jQuery("#signup").show().animate({"top":"50%"},500);
+		jQuery("body").prepend("<div class='wrap-pop'></div>");
+		wrap_pop();
+		return false;
+	});
+	
+	jQuery("#update_button").click(function () {
+		jQuery(".panel-pop").animate({"top":"-100%"},10).hide();
+		jQuery("#updateUser").show().animate({"top":"50%"},500);
 		jQuery("body").prepend("<div class='wrap-pop'></div>");
 		wrap_pop();
 		return false;
