@@ -22,6 +22,7 @@ import us.duia.leejo0531.service.AlarmService;
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.ReplyService;
 import us.duia.leejo0531.service.UserService;
+import us.duia.leejo0531.vo.AlarmVO;
 import us.duia.leejo0531.vo.DetailVO;
 import us.duia.leejo0531.vo.MajorVO;
 import us.duia.leejo0531.vo.MinorVO;
@@ -200,7 +201,13 @@ public class QuestionController {
 		return "askQuestion";
 	}
 	
-	
+	/**
+	 * 질문 수정... 여기 코드 수정 더해야됨. 혹시 누가 이거보면 준연에게 말해주길..
+	 * @param qstn
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "modifyQuestion", method=RequestMethod.POST)
 	public String modifyQuestion_POST(QuestionVO qstn, HttpSession session, Model model) { 
 		logger.info("modifyQuestion: " + qstn);
@@ -209,13 +216,15 @@ public class QuestionController {
 		tag.setQuestionNum(qstn.getQuestionNum());
 		int userNum = (int)session.getAttribute("userNum");
 		qstn.setUserNum(userNum);
-		qstnSvc.allDeleteTag(tag); // 모든 태그를 삭제 후
-		// 다시 등록
 		
+		// 글이 가지고 있던 모든 태그를 삭제 후
+		qstnSvc.allDeleteTag(tag); 
+		// 다시 등록
 		qstn.getRelatedTag().parallelStream().forEach(tags -> qstnSvc.insertTag(new TagVO(qstn.getQuestionNum(), qstn.getUserNum(), tags)) );
 		// 기존 알람 삭제 후
-		
+		almSvc.deletePreInsertedInterest(qstn.getQuestionNum());
 		// 다시 알람 등록
+		almSvc.alarmInterest(qstn.getQuestionNum());
 		
 		return "redirect:/";
 	}

@@ -528,11 +528,6 @@ function validationCheck() {
 	}
 	
 	if( !isEmpty(title) && !isEmpty(questionNum) && !isEmpty(questionContent) && !isEmpty(major) ) {
-		alert(title);
-		alert(questionNum);
-		alert(questionContent);
-		alert(major); 
-		alert(point);
 		return true;
 	} 	
 	return false;

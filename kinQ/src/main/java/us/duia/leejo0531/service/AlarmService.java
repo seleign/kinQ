@@ -91,4 +91,14 @@ public class AlarmService {
 		int result = alarmDao.alarmReply(questionNum);
 		return result;
 	}
+	
+	/**
+	 * (글을 수정하면) 기존에 등록된 모든 interest 알람을 제거한다.
+	 * @param arlarm
+	 * @return
+	 */
+	public int deletePreInsertedInterest( int alarmAdress ) {
+		int result = alarmDao.deletePreInsertedInterest(alarmAdress);
+		return result;
+	}
 }
