@@ -156,4 +156,12 @@ public class PointController {
 		return finalChange;
 	}
 	
+	@RequestMapping(value="pointCheck", method=RequestMethod.POST)
+	public @ResponseBody int pointCheck(HttpSession session){
+		int userNum = (int) session.getAttribute("userNum");
+		int finalPChange = pointSvc.getRecentPoint(userNum);
+		
+		return finalPChange;
+	}
+	
 }

@@ -170,19 +170,37 @@
      	function orderGoods(){
      		var total = $('input[name="hiddenTotalPrice"]').val();
      		if(confirm('ポイントでカートのグッズを購入しますか。')==true){
+     			
      			$.ajax({
-     				url: 'orderGoods',
+     				url: 'pointCheck',
      				method: 'POST',
-     				data: {totalPrice : total},
+     				data: {},
      				success: function(finalPChange){
-     					$('#myPoint').html(finalPChange);
-     		    		goodsName = [];
-     		    		goodsNum = [];
-     		    		totalPrice = 0;
-     					$('#goodsList').html('');
-     					$('#totalPrice').html('&nbsp;&nbsp;&nbsp;0 ポイント');
-     					$('input[name="hiddenTotalPrice"]').val(totalPrice);
-     					alert('購入完了');
+     					if(finalPChange>=total){
+     						$.ajax({
+			     				url: 'orderGoods',
+			     				method: 'POST',
+			     				data: {totalPrice : total},
+			     				success: function(finalPChange){
+			     					$('#myPoint').html(finalPChange);
+			     		    		goodsName = [];
+			     		    		goodsNum = [];
+			     		    		totalPrice = 0;
+			     					$('#goodsList').html('');
+			     					$('#totalPrice').html('&nbsp;&nbsp;&nbsp;'+totalPrice+' ポイント');
+			     					$('input[name="hiddenTotalPrice"]').val(totalPrice);
+			     					alert(totalPrice);
+			     					alert('購入完了');
+			     				}
+			     			});
+     					}else{
+     						alert('ポイントが不足します。');
+	     		    		goodsName = [];
+	     		    		goodsNum = [];
+	     		    		totalPrice = 0;
+	     		    		$('input[name="hiddenTotalPrice"]').val(0);
+     						return false;
+     					}
      				}
      			});
      		}
