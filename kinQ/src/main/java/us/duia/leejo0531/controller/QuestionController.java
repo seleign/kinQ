@@ -78,7 +78,7 @@ public class QuestionController {
 		//태그 등록
 		qstn.getRelatedTag().parallelStream().forEach(tag -> qstnSvc.insertTag(new TagVO(qstn.getQuestionNum(), qstn.getUserNum(), tag)) );
 		almSvc.alarmInterest(qstn.getQuestionNum());
-		return "redirect:/";  // 루트가 아닌 다른 페이지로 이동해야 함
+		return "redirect:index";  // 루트가 아닌 다른 페이지로 이동해야 함
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class QuestionController {
 		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
 		String userId = (String)session.getAttribute("userId");
 		if(userId == null) {
-			return "redirect:/";
+			return "redirect:index";
 		}
 		
 		ArrayList<MajorVO> majorList = userSvc.getMajorList();

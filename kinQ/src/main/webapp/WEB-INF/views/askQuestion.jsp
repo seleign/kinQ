@@ -27,7 +27,6 @@
 <script src="./resources/js/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
 <!-- chosen 설정 파일-->
-<link type="text/css" href="./resources/css/chosen.min.css" rel="stylesheet">
 <script type="text/javascript">
 	//DB에서 대분류 소분류 목록 가져오기 
 	function loadMinorList(major){	
@@ -239,13 +238,6 @@
 <!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script src="./resources/js/chosen.proto.min.js"></script>
-<!-- 수정된 chosen 플러그인입니다. 교체 불가. -->
-
-
-
-
-<script src="./resources/js/chosen.jquery.js"></script>
 <script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="./resources/js/jquery.easing.1.3.min.js"></script>
 <script src="./resources/js/html5.js"></script>
@@ -269,12 +261,6 @@ window.onload = function() {
 	CKEDITOR.replace('question_details',{ 
 		filebrowserUploadUrl: 'cKEditorFileUpload'
 	}); 
-	
-	// 3. 태그 입력 chosen 초기화
-	jQuery(".chosen-select").chosen({
-			max_select_options: 5,
-			no_result_text: "No result found. Press enter to add"
-		});
 	
 	// 4. 녹화 영역의 크기를 가로 == 세로 로 맞춤
 	var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
