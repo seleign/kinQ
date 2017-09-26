@@ -140,10 +140,10 @@
 							replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" ;
 							replyHtml += "</div>";
 							if (userId == replyList[i].id) {
-								replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
+								replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>削除</a>" ;
 							}
 							if ( "${ user.id }" == userId && replyList[i].selectedReplyNum == 0) {
-								replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>답글 선택</a>";
+								replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>答えを選択</a>";
 							}
 							replyHtml += "</div>";
 							replyHtml += "<div class=\"text\">";
@@ -395,7 +395,7 @@
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
 							<c:if test="${ user.id == sessionScope.userId && question.selectedReplyNum == 0}">
 								<form method="get" action=modifyQuestion>
-									<input type="submit" class="button color small submit" value="수정하기" style="float: right;">
+									<input type="submit" class="button color small submit" value="修正する" style="float: right;">
 									<input type="hidden" name="questionNum" value="${ question.questionNum }">
 								</form>
 							</c:if>
@@ -482,10 +482,10 @@
 							<c:if test="${ sessionScope.userId != user.id and sessionScope.userId ne null}">
 								<h>답변 하기</h2>
 								<textarea rows="" cols="" id="replyContent"></textarea>
-								<button class="button color small submit" onclick="registReply()">등록</button>
+								<button class="button color small submit" onclick="registReply()">登録</button>
 							</c:if>
 							<form method="post" action="realTimeAnswer">
-								<input type="submit" class="button color small submit" value="실시간 답변">
+								<input type="submit" class="button color small submit" value="リアルタイムーアンサー">
 								<input type="hidden" name="questionNum" value="${ question.questionNum }">
 							</form>
 							</div><!-- End related-posts -->

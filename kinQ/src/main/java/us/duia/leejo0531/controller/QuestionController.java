@@ -109,8 +109,6 @@ public class QuestionController {
 		model.addAttribute("checkTimeResult", checkTimeResult);
 		model.addAllAttributes(checkPreNextQuestionNum);
 		return "question_view";
-		//return "question/questionView";
-
 	}
 	
 	@RequestMapping(value = "question_view_test", method = RequestMethod.GET)
