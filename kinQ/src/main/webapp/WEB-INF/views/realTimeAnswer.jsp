@@ -68,6 +68,7 @@
 	var canvasStream;
 	var stop;
 	var canvasSetTime;
+	var imgSrcToBase64;
 	window.onload = function() { //onload 시작
 		$( "#tabs" ).tabs();
 		$( "#tabs2" ).tabs();
@@ -81,6 +82,9 @@
 		CKEDITOR.replace('ReplyContent',{ 
     	    		filebrowserUploadUrl: 'cKEditorFileUpload'
    		 }); // Ckeditor 초기화 종료
+   		 
+   		 // base64로 바꿀 임시 div
+   		 $("#tmpContents").hide();
    		 
    		 // 2. 녹화 시작 버튼이 눌렸을 때
 		document.getElementById('btn-record-webm').onclick = function() {
@@ -134,7 +138,8 @@
 				
 			};
 
-			canvasSetTime = setInterval(looper, 300); //이게 화면 프레임수
+			canvasSetTime = setInterval(looper, 50); //이게 화면 프레임수
+			imgSrcToBase64 = setInterval(imgSrcToBase64Src_settime, 120);
 		
 		};
 	
@@ -181,6 +186,7 @@
 					audioStream.stop();
 					canvasStream.stop();
 					clearTimeout(canvasSetTime);
+					clearTimeout(imgSrcToBase64);
 				});
 			}
 			return false;
@@ -516,7 +522,8 @@
 			console.log("부정 접근이므로 리다이렉트 시킨다.")
 			// 부정 접근이므로 로그인 페이지 리다이렉트
 		}
-
+		
+		
 } //onload End
 	
 // 데이터가 널 또는 공백인지 확인하는 함수
@@ -567,74 +574,50 @@ $.ajax({
 	}
 });
 	
-}//id로 받은 태그 내의 모든 img의 src를 base64로 변환한다.
-function imgSrcToBase64Src_In_id(id) {
-	$(id).find('img').each(function(){
-		var imgObject = this;
-		if( $(imgObject).attr('src').substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.	
-			return;
-		} else { // Base64가 아니면 ajax로 Base64로 변환한다.
-			$.ajax({
-	            url: 'imgToBase64',
-	            data: {
-	            		imgSrc: 	$(imgObject).attr('src')
-	           		},
-	            type: 'GET',
-	            success: function(result){
-					$(imgObject).attr('src', result.base64)
-	                    }
-	            });
-		}
-	}) // each 종료
-};
+}
 
+// 태그 내의 모든 img의 src를 base64로 변환한다.
+// 이 함수는 공유 화면 -> 공유 화면의으로 전송되며, img의 src를 base64로 바꾼다.
 var Content;
 var getUrl = window.location;
 var baseUrl = getUrl.protocol + "//" + getUrl.host;
-function test22() {
+var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 	// ckEditor에서 html을 가져온다.
 	Content = CKEDITOR.instances.part_of_screen_to_be_shared.getData();	
 
 	// 임시 영역에 붙인다.
-	//$("#tmpContents").hide();
 	$("#tmpContents").html(Content);
 
 	// 여기에서 img가 base64가 아닌건 base64로 바꾼다.
+	var allImageCount = $("#tmpContents").find('img').length;
+	var nowImageCount = 0;
 	$("#tmpContents").find('img').each(function(){
 		var imgObject = this;
-		var fileUrl = $(imgObject).attr('src');
 		var imgSrc = $(imgObject).attr('src');
-		
-		if( imgSrc.substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.	
+		if( imgSrc.substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.
 			return;
 		} else if(imgSrc.substring(0,1) == '.') {  // .resources 인 경우
-			imgSrc = imgSrc.substring(1, fileUrl.length);
+			imgSrc = imgSrc.substring(1, imgSrc.length);
 			imgSrc = baseUrl + imgSrc;
 			$(imgObject).attr('src', imgSrc);
-		} else if(imgSrc.substring(0,4) == 'http') { // http인 경우
-			
-		}
+			imgToBase64()
+		} 
 		
-		else { // Base64가 아니면 ajax로 Base64로 변환한다.
-			$.ajax({
-	            url: 'imgToBase64',
-	            data: {
-	            		imgSrc: fileUrl
-	           		},
-	            type: 'GET',
-	            success: function(result){
-					$(imgObject).attr('src', result.base64)
-	                    }
-	            });
-		}
-	}) // each 종료
-	
-	// 이 임시영역에 있는 텍스트를 다시 ckEditor에 넣는다.
-    //$("#part_of_screen_to_be_shared").html(Content)
-	//CKEDITOR.instances.part_of_screen_to_be_shared.setData(Content);
-}
-function test33() {
-	CKEDITOR.instances.part_of_screen_to_be_shared.setData($("#tmpContents").html());
+		// Base64가 아니면 ajax로 Base64로 변환한다.
+			function imgToBase64() {
+				$.ajax({
+		            url: 'imgToBase64',
+		            data: {
+		            		imgSrc: imgSrc
+		           		},
+		            type: 'GET',
+		            success: function(result){
+						$(imgObject).attr('src', result.base64)
+						CKEDITOR.instances.part_of_screen_to_be_shared.setData($("#tmpContents").html());
+		                    }
+		            });
+			}
+	}) 
 }
 </script>
 </head>
@@ -679,8 +662,7 @@ function test33() {
 <button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
 <button onclick="formCheck()">댓글 등록 </button>
-<button id = "test" onclick="test22()"> to base64 </button>
-<button id = "test" onclick="test33()"> wesfwef </button>
+<button id = "test" onclick="imgSrcToBase64Src_settime"> to base64 </button>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
 </fieldset>
 <table>

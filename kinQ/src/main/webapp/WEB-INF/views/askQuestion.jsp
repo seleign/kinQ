@@ -1,29 +1,32 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <!-- Basic Page Needs -->
 <meta charset="utf-8">
 <title>Ask me – Responsive Questions and Answers Template</title>
-<meta name="description" content="Ask me Responsive Questions and Answers Template">
+<meta name="description"
+	content="Ask me Responsive Questions and Answers Template">
 <meta name="author" content="vbegy">
-	
+
 <!-- Mobile Specific Metas -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+
 <!-- Main Style -->
 <link rel="stylesheet" href="./resources/css/style.css">
-	
+
 <!-- Skins -->
 <link rel="stylesheet" href="./resources/css/gray.css">
-	
+
 <!-- Responsive Style -->
 <link rel="stylesheet" href="./resources/css/responsive.css">
 
 <!-- Favicons -->
 <link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-	
+
 <script src="./resources/js/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
 <!-- chosen 설정 파일-->
@@ -50,119 +53,133 @@
 
 </head>
 <body>
-<jsp:include page="header.jsp" flush="false" />
+	<jsp:include page="header.jsp" flush="false" />
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h1>Ask Question</h1>
-					
+
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
-						<a href="#">Home</a>
-						<span class="crumbs-span">/</span>
-						<a href="#">Pages</a>
-						<span class="crumbs-span">/</span>
-						<span class="current">Ask Question</span>
+						<a href="#">Home</a> <span class="crumbs-span">/</span> <a
+							href="#">Pages</a> <span class="crumbs-span">/</span> <span
+							class="current">Ask Question</span>
 					</div>
 				</div>
-			</div><!-- End row -->
-		</section><!-- End container -->
-	</div><!-- End breadcrumbs -->
-	
+			</div>
+			<!-- End row -->
+		</section>
+		<!-- End container -->
+	</div>
+	<!-- End breadcrumbs -->
+
 	<section class="container main-content">
 		<div class="row">
 			<div class="col-md-9">
-				
+
 				<div class="page-content ask-question">
-					<div class="boxedtitle page-title"><h2>Ask Question</h2></div>
-					
+					<div class="boxedtitle page-title">
+						<h2>Ask Question</h2>
+					</div>
+
 					<p>こんにちは。KinQに知りたい質問や気になることを気軽くに質問をすることができます。</p>
-					
+
 					<div class="form-style form-style-3" id="question-submit">
-						<form action='${question.title == null? "addQuestion":"modifyQuestion"}' method="post" enctype="multipart/form-data" onsubmit="return validationCheck();">
-						
-						<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
-						<input type="hidden" value="${questionNum}" name="questionNum" id="questionNum" placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다." required="required">
-						
-						<!-- 이걸 왜 nullable로 하지 않은이유가 있습니까? 누가 설계한것인가? -->
-						<select name="qstatus" style="display: none;">
-							<option value="in progress">in progress</option>
-							<option value="solved">solved</option>
-						</select>
-						
+						<form
+							action='${question.title == null? "addQuestion":"modifyQuestion"}'
+							method="post" enctype="multipart/form-data"
+							onsubmit="return validationCheck();">
+
+							<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
+							<input type="hidden" value="${questionNum}" name="questionNum"
+								id="questionNum"
+								placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다."
+								required="required">
+
+							<!-- 이걸 왜 nullable로 하지 않은이유가 있습니까? 누가 설계한것인가? -->
+							<select name="qstatus" style="display: none;">
+								<option value="in progress">in progress</option>
+								<option value="solved">solved</option>
+							</select>
+
 							<div class="form-inputs clearfix">
 								<p>
 									<label class="required">タイトル<span>*</span></label>
 									<c:if test="${title != null? true:false }">
-										<input type="text" id="question-title" value="${title}" name="title" required="required">
+										<input type="text" id="question-title" value="${title}"
+											name="title" required="required">
 									</c:if>
 									<c:if test="${title == null? true:false }">
-										<input type="text" id="question-title" value="${question.title}" name="title" required="required">
+										<input type="text" id="question-title"
+											value="${question.title}" name="title" required="required">
 									</c:if>
 									<span class="form-description">回答者が見やすいタイトルを入力してください。</span>
 								</p>
 								<div id="form-textarea">
 									<label class="required">質問の内容<span>*</span></label>
-								<p>
-									<textarea id="question_details" name="questionContent" required="required" aria-required="true" cols="58" rows="8">${question.questionContent}</textarea>
-									<span class="form-description">質問の内容がアップロードされます。また、映像の録画にも使用されます。</span>
-								</p>
+									<p>
+										<textarea id="question_details" name="questionContent"
+											required="required" aria-required="true" cols="58" rows="8">${question.questionContent}</textarea>
+										<span class="form-description">質問の内容がアップロードされます。また、映像の録画にも使用されます。</span>
+									</p>
 								</div>
-								
-								
+
+
 								<!-- 아직 파일 업로드를 고려하여 컨트롤러를 만들지 않음. -->
-<!-- 								<label>Attachment</label> -->
-<!-- 									<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript> -->
-<!-- 								<div class="fileinputs"> -->
-<!-- 									<input type="file" class="file"> -->
-<!-- 									<div class="fakefile"> -->
-<!-- 										<button type="button" class="button small margin_0">Select file</button> -->
-<!-- 										<span><i class="icon-arrow-up"></i>Browse</span> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-								
+								<!-- 								<label>Attachment</label> -->
+								<!-- 									<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript> -->
+								<!-- 								<div class="fileinputs"> -->
+								<!-- 									<input type="file" class="file"> -->
+								<!-- 									<div class="fakefile"> -->
+								<!-- 										<button type="button" class="button small margin_0">Select file</button> -->
+								<!-- 										<span><i class="icon-arrow-up"></i>Browse</span> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
+
 								<p>
-									<label class="required">Point</label>
-									<input type="number" required="required" class="input" id="point" name="point" value="${question.point}" style="width: 82%; display: inline-block;">
-									<span class="form-description">
-										質問するためにはポイントが必要です。 MAXIUM POINT: <output id="RecentPoint"></output>
+									<label class="required">Point</label> <input type="number"
+										required="required" class="input" id="point" name="point"
+										value="${question.point}"
+										style="width: 82%; display: inline-block;"> <span
+										class="form-description"> 質問するためにはポイントが必要です。 MAXIUM
+										POINT: <output id="RecentPoint"></output>
 									</span>
 								</p>
-								
-								
+
+
 								<p>
-									<label>Tags</label>
-									<input type="text" class="input" id="question_tags" data-seperator=",">
-									<span class="form-description">質問の内容をタグで入力すると、より多くの回答者からの回答を得ることができます。<span class="color">question , poll</span> .</span>
+									<label>Tags</label> <input type="text" class="input"
+										id="question_tags" data-seperator=","> <span
+										class="form-description">質問の内容をタグで入力すると、より多くの回答者からの回答を得ることができます。<span
+										class="color">question , poll</span> .
+									</span>
 								</p>
-								
+
 								<!-- 위에 tag입력으로 받은 것이 이 div에 hidden으로 생성된다. -->
-								<div id="hiddenRelatedTag">
-								</div>
-								
+								<div id="hiddenRelatedTag"></div>
+
 								<p>
-									<label class="required">Category<span>*</span></label>
-									<span class="styled-select">
-										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)" required="required">
+									<label class="required">Category<span>*</span></label> <span
+										class="styled-select"> <select id="major" name="major"
+										onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)"
+										required="required">
 											<option value="0">選択</option>
 											<c:forEach var="major" items="${majorList }">
 												<option value="${major.majorNum}">${major.majorName}</option>
 											</c:forEach>
-										</select>
-										<span class="form-description">
-											<div id="minorSection">
-											</div>
-										</span>
-										
+									</select> <span class="form-description">
+											<div id="minorSection"></div>
+									</span>
+
 									</span>
 								</p>
 								<p>
-									<label for="urgent" class="required">緊急質問</label>
-									<span id="urgent-span">
-										<label for="selectdTime" style="">大至急です。</label>
-										<select id="selectdTime" onchange="setTimeLimit()" style="width: 200px; display: inline-block;">
+									<label for="urgent" class="required">緊急質問</label> <span
+										id="urgent-span"> <label for="selectdTime" style="">大至急です。</label>
+										<select id="selectdTime" onchange="setTimeLimit()"
+										style="width: 200px; display: inline-block;">
 											<option value="0">時間を選択してください</option>
 											<option value="1">1分</option>
 											<option value="3">3分</option>
@@ -170,103 +187,120 @@
 											<option value="10">10分</option>
 											<option value="30">30分</option>
 											<option value="60">60分</option>
-										</select>
-										以内で質問の答えをもらいたいです。
-										<input type="text"  id="timeLimit" name="timeLimit" value="${question.timeLimit}" style="width: 20%; display: none;">
+									</select> 以内で質問の答えをもらいたいです。 <input type="text" id="timeLimit"
+										name="timeLimit" value="${question.timeLimit}"
+										style="width: 20%; display: none;">
 									</span>
 								</p>
 								<p>
 								<div class="ask-video">
 									<label class="required">video<span>*</span></label>
 									<div id="step2">
-									<h1>質問の内容に音声をつけられます。</h1>
-									
-									<input type="button" id="btn-record-webm" class="button color small submit" value="画面の録画を始める">
-									<input type="button" id="btn-record-webm-stop" class="button color small submit" value="画面の録画を中止する">
-									
-									<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
-									<input type="text" name="videoSrc" value="${question.videoSrc}" id="videoSrc" style="display: none;">
-									
-									
-									<!-- 기존에 녹화된 영상과 녹화 할 영역(canvas)을 가진 DIV -->
-									<div id="video_and_cavas_container" >
-										<div id="canvas_container">
-											<div id="HtmlTagFromTheCKEDITOR" contenteditable="true" style="background-color: #FBFBEE; width: 100%;">
-												<!-- 이 안에 있는 요소만 녹화가 되기 때문에, 드래그앤 드랍으로 여기로 div를 옴겨와야 한다. -->
-												<!-- 여기에 에디터에 쓴 내용이 여기로 옴겨진다.  -->
+										<h1>質問の内容に音声をつけられます。</h1>
+
+										<input type="button" id="btn-record-webm"
+											class="button color small submit" value="画面の録画を始める">
+										<input type="button" id="btn-record-webm-stop"
+											class="button color small submit" value="画面の録画を中止する">
+
+										<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
+										<input type="text" name="videoSrc"
+											value="${question.videoSrc}" id="videoSrc"
+											style="display: none;">
+
+
+										<!-- 기존에 녹화된 영상과 녹화 할 영역(canvas)을 가진 DIV -->
+										<div id="video_and_cavas_container">
+											<div id="canvas_container">
+												<div id="HtmlTagFromTheCKEDITOR" contenteditable="true"
+													style="background-color: #FBFBEE; width: 100%;">
+													<!-- 이 안에 있는 요소만 녹화가 되기 때문에, 드래그앤 드랍으로 여기로 div를 옴겨와야 한다. -->
+													<!-- 여기에 에디터에 쓴 내용이 여기로 옴겨진다.  -->
+												</div>
+											</div>
+											<div id="video_container" style="width: 100%;">
+												<!-- 수정하기 일 땐 기존에 녹화된 파일이 여기에 보인다. -->
+												<c:if test="${question.videoSrc == null}">
+													<!-- 처음 글을 쓰거나, 기존에 영상을 녹화하지 않은 상태로 수정할 경우 녹화한 동영상이 없다. -->
+												</c:if>
+												<c:if test="${question.videoSrc != null}">
+													<video src="${question.videoSrc}" controls="controls"
+														preload="auto"></video>
+												</c:if>
 											</div>
 										</div>
-										<div id="video_container" style="width: 100%;">
-											<!-- 수정하기 일 땐 기존에 녹화된 파일이 여기에 보인다. -->
-											<c:if test="${question.videoSrc == null}">
-												<!-- 처음 글을 쓰거나, 기존에 영상을 녹화하지 않은 상태로 수정할 경우 녹화한 동영상이 없다. -->
-											</c:if>
-											<c:if test="${question.videoSrc != null}">
-												<video src="${question.videoSrc}" controls="controls" preload="auto"></video>
-											</c:if>
-										</div>
-									</div>
 									</div>
 								</div>
 								</p>
 							</div>
 							<p id="p-ask-buttons" class="form-submit">
-								<input type="submit" id="publish-question" value="質問する" class="button color small submit">
-								<input type="button" id="ask-button" value="画面の録画" class="button color small submit" onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
+								<input type="submit" id="publish-question" value="質問する"
+									class="button color small submit"> <input type="button"
+									id="ask-button" value="画面の録画" class="button color small submit"
+									onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
 							</p>
 						</form>
 					</div>
-				</div><!-- End page-content -->
-			</div><!-- End main -->
+				</div>
+				<!-- End page-content -->
+			</div>
+			<!-- End main -->
 			<jsp:include page="aside.jsp" flush="false" />
-		</div><!-- End row -->
-	</section><!-- End container -->
-	
+		</div>
+		<!-- End row -->
+	</section>
+	<!-- End container -->
+
 	<jsp:include page="footer.jsp" flush="false" />
-<!-- End wrap -->
+	<!-- End wrap -->
 
-<div class="go-up"><i class="icon-chevron-up"></i></div>
+	<div class="go-up">
+		<i class="icon-chevron-up"></i>
+	</div>
 
-<!-- js -->
+	<!-- js -->
 
-<!-- CKeditor -->
-<script src="./resources/ckeditor/ckeditor.js"></script> 
-<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
-<script src="./resources/ckeditor/adapters/jquery.js"></script>
+	<!-- CKeditor -->
+	<script src="./resources/ckeditor/ckeditor.js"></script>
+	<!-- CKeditor 내부 객체를 JQuery로 다루기 위한 adapters -->
+	<script src="./resources/ckeditor/adapters/jquery.js"></script>
 
-<!-- 음성 녹음을 위한 RTC -->
-<script src="./resources/js/RecordRTC.js"></script>
-<!-- 화면 녹화를 위한 RTC -->
-<script src="./resources/js/screenshot.js"></script>
-<!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
-<script src="./resources/js/getHTMLMediaElement.js"></script>
+	<!-- 음성 녹음을 위한 RTC -->
+	<script src="./resources/js/RecordRTC.js"></script>
+	<!-- 화면 녹화를 위한 RTC -->
+	<script src="./resources/js/screenshot.js"></script>
+	<!-- RTC에서 DOM 객체를 제어하기 위한 스크립트 -->
+	<script src="./resources/js/getHTMLMediaElement.js"></script>
 
-<!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!-- 드래그/리사이즈를 위해 사용한 jquery-ui -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="./resources/js/jquery.easing.1.3.min.js"></script>
-<script src="./resources/js/html5.js"></script>
-<script src="./resources/js/twitter/jquery.tweet.js"></script> 
-<script src="./resources/js/jflickrfeed.min.js"></script>
-<script src="./resources/js/jquery.inview.min.js"></script>
-<script src="./resources/js/jquery.tipsy.js"></script>
-<script src="./resources/js/tabs.js"></script>
-<script src="./resources/js/jquery.flexslider.js"></script>
-<script src="./resources/js/jquery.prettyPhoto.js"></script>
-<script src="./resources/js/jquery.carouFredSel-6.2.1-packed.js"></script>
-<script src="./resources/js/jquery.scrollTo.js"></script>
-<script src="./resources/js/jquery.nav.js"></script>
-<script src="./resources/js/tags.js"></script>
-<script src="./resources/js/jquery.bxslider.min.js"></script>
-<script src="./resources/js/custom.js"></script>
-<script type="text/javascript">
+	<script src="./resources/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="./resources/js/jquery.easing.1.3.min.js"></script>
+	<script src="./resources/js/html5.js"></script>
+	<script src="./resources/js/twitter/jquery.tweet.js"></script>
+	<script src="./resources/js/jflickrfeed.min.js"></script>
+	<script src="./resources/js/jquery.inview.min.js"></script>
+	<script src="./resources/js/jquery.tipsy.js"></script>
+	<script src="./resources/js/tabs.js"></script>
+	<script src="./resources/js/jquery.flexslider.js"></script>
+	<script src="./resources/js/jquery.prettyPhoto.js"></script>
+	<script src="./resources/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+	<script src="./resources/js/jquery.scrollTo.js"></script>
+	<script src="./resources/js/jquery.nav.js"></script>
+	<script src="./resources/js/tags.js"></script>
+	<script src="./resources/js/jquery.bxslider.min.js"></script>
+	<script src="./resources/js/custom.js"></script>
+	<script type="text/javascript">
 window.onload = function() {
 	
 	// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 	CKEDITOR.replace('question_details',{ 
 		filebrowserUploadUrl: 'cKEditorFileUpload'
 	}); 
+	
+	// base64로 바꿀 임시 div
+		 $("#tmpContents").hide();
 	
 	// 4. 녹화 영역의 크기를 가로 == 세로 로 맞춤
 	var elementToShare = document.getElementById('HtmlTagFromTheCKEDITOR');
@@ -418,38 +452,10 @@ window.onload = function() {
 
 } //onload 종료
 
-//글쓰기 페이지의 유효성 검사
-function formCheck() {
-	var title = $('#title').val();
-	var point = $('#point').val(); 	
-	
-	if(title==''){
-		alert('おタイトルを入力して下さい。');
-		return false;
-	}
-	
-	if(Number.isInteger(point)) {
-		if(point <= 0 ) {
-			alert('ポイントは０以上かかってください。');
-			return false;
-		}
-	} else {
-		return false;
-	}
-
-	var minor = $('#minor').val();
-	if( minor=='') {
-		alert( '分類を選んでください。');
-		return false;
-	}
-	return true;
-}
-
 //id에 해당하는 객체에 CKEDITOR에 작성된 글(html tag)를 넣는다.
 function setTo_id_HtmlTagFromTheCKEDITOR(id) {
 	$(id).empty(); //기존에 작성된 것을 삭제한다.
-	$(id).append(getHtmlTagFromTheCKEDITOR());
-	imgSrcToBase64Src_In_id(id);
+	imgSrcToBase64Src();
 };
 
 //CKEDITOR에 작성된 글(html tag)를 가져온다.
@@ -462,27 +468,49 @@ function moveableAndDragable(id) {
 	//code Here
 }
 
-//id로 받은 태그 내의 모든 img의 src를 base64로 변환한다.
-function imgSrcToBase64Src_In_id(id) {
-	$(id).find('img').each(function(){
+//태그 내의 모든 img의 src를 base64로 변환한다.
+var Content;
+var getUrl = window.location;
+var baseUrl = getUrl.protocol + "//" + getUrl.host;
+// 이 함수는 에디터 -> 녹화화면으로 내용이 옴겨질 때 사용된다.
+function imgSrcToBase64Src() {
+	// ckEditor에서 html을 가져온다.
+	Content = CKEDITOR.instances.question_details.getData();	
+
+	// 임시 영역에 붙인다.
+	$("#tmpContents").html(Content);
+
+	// 여기에서 img가 base64가 아닌건 base64로 바꾼다.
+	var allImageCount = $("#tmpContents").find('img').length;
+	var nowImageCount = 0;
+	$("#tmpContents").find('img').each(function(){
 		var imgObject = this;
-		
-		if( $(imgObject).attr('src').substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.
-			
+		var imgSrc = $(imgObject).attr('src');
+		if( imgSrc.substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.
 			return;
-		} else { // Base64가 아니면 ajax로 Base64로 변환한다.
-			$.ajax({
-	            url: 'imgToBase64',
-	            data: {
-	            		imgSrc: 	$(imgObject).attr('src')
-	           		},
-	            type: 'GET',
-	            success: function(result){
-					$(imgObject).attr('src', result.base64)
-	                    }
-	            });
-		}
-	}) // each 종료
+		} else if(imgSrc.substring(0,1) == '.') {  // .resources 인 경우
+			imgSrc = imgSrc.substring(1, imgSrc.length);
+			imgSrc = baseUrl + imgSrc;
+			$(imgObject).attr('src', imgSrc);
+			imgToBase64()
+		} 
+		
+		// Base64가 아니면 ajax로 Base64로 변환한다.
+			function imgToBase64() {
+				$.ajax({
+		            url: 'imgToBase64',
+		            data: {
+		            		imgSrc: imgSrc
+		           		},
+		            type: 'GET',
+		            success: function(result){
+						$(imgObject).attr('src', result.base64)
+						CKEDITOR.instances.HtmlTagFromTheCKEDITOR.setData($("#tmpContents").html());  //TODO
+						
+		                    }
+		            });
+			}
+	}) 
 };
 
 //데이터가 널 또는 공백인지 확인하는 함수
@@ -522,8 +550,7 @@ function validationCheck() {
 		return false;
 	}
 	
-	if(major = 0) {
-		alert(major);
+	if(major == 0) {
 		alert('Categoryを選んでください。')
 		return false;
 	}
@@ -531,6 +558,11 @@ function validationCheck() {
 	if( !isEmpty(title) && !isEmpty(questionNum) && !isEmpty(questionContent) && !isEmpty(major) ) {
 		return true;
 	} 	
+	
+//	alert(title)
+//	alert(questionNum)
+//	alert(questionContent)
+//	alert(major)
 	return false;
 }
 
@@ -598,7 +630,7 @@ function getRecentPoint() {
 	});
 }
 </script>
-<!-- End js -->
-
+	<!-- End js -->
+	<div id="tmpContents"></div>
 </body>
 </html>

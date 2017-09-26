@@ -139,7 +139,7 @@ public class QuestionController {
 	 * @return question/questionForm.jsp로 이동
 	 */
 	@RequestMapping(value="askQuestion",method= RequestMethod.GET)
-	public String ask_question(Model model, HttpSession session){
+	public String ask_question(Model model, HttpSession session, String question_title){
 		
 		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
 		String userId = (String)session.getAttribute("userId");
@@ -150,6 +150,7 @@ public class QuestionController {
 		int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
 		model.addAttribute("majorList", majorList);
 		model.addAttribute("questionNum", questionNum);
+		model.addAttribute("title", question_title);
 		return "askQuestion";
 	}
 	
