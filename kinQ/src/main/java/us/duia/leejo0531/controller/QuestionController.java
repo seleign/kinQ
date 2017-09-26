@@ -232,8 +232,7 @@ public class QuestionController {
 		almSvc.deletePreInsertedInterest(qstn.getQuestionNum());
 		// 다시 알람 등록
 		almSvc.alarmInterest(qstn.getQuestionNum());
-		
-		return "redirect:index";
+		return "forward:question_view";
 	}
 	
 	/**
