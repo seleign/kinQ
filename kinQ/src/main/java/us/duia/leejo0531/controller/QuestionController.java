@@ -145,12 +145,33 @@ public class QuestionController {
 		if(userId == null) {
 			return "redirect:index";
 		}
-		
 		ArrayList<MajorVO> majorList = userSvc.getMajorList();
 		int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
 		model.addAttribute("majorList", majorList);
 		model.addAttribute("questionNum", questionNum);
 		return "askQuestion";
+	}
+	
+	/**
+	 * index　화면에서 질문 내용을 입력했을 때, 글쓰기 페이지로 타이틀을 가지고 이동한다.
+	 * @param model
+	 * @param session
+	 * @param question_title
+	 * @return
+	 */
+	@RequestMapping(value="askQuestion",method= RequestMethod.POST)
+	public String ask_question_POST(Model model, HttpSession session, String question_title){
+		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
+				String userId = (String)session.getAttribute("userId");
+				if(userId == null) {
+					return "redirect:index";
+				}
+				ArrayList<MajorVO> majorList = userSvc.getMajorList();
+				int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
+				model.addAttribute("majorList", majorList);
+				model.addAttribute("questionNum", questionNum);
+				model.addAttribute("title", question_title);
+				return "askQuestion";
 	}
 	
 	/**
