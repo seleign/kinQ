@@ -95,6 +95,10 @@
 <body>
 	<jsp:include page="header.jsp" flush="false" />
 		
+	<form name="questionview" action="question_view" method="post">
+		<input type="hidden" name="questionNum" value="">
+	</form>	
+		
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
