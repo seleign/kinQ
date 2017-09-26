@@ -393,9 +393,13 @@
 						<ul class="single-question-vote">
 							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
-							<c:if test="${ user.id == sessionScope.userId && question.selectedReplyNum == 0}">
-								<form method="get" action=modifyQuestion>
+							<c:if test="${ user.id == sessionScope.userId && question.selectedReplyNum == 0 && question.replyCount == 0}">
+								<form method="get" action="modifyQuestion">
 									<input type="submit" class="button color small submit" value="修正する" style="float: right;">
+									<input type="hidden" name="questionNum" value="${ question.questionNum }">
+								</form>
+								<form method="get" action="deleteQuestion">
+									<input type="submit" class="button color small submit" value="削除する" style="float: right;">
 									<input type="hidden" name="questionNum" value="${ question.questionNum }">
 								</form>
 							</c:if>
@@ -484,10 +488,12 @@
 								<textarea rows="" cols="" id="replyContent"></textarea>
 								<button class="button color small submit" onclick="registReply()">登録</button>
 							</c:if>
-							<form method="post" action="realTimeAnswer">
+							<c:if test="${ sessionScope.userId != null }">
+								<form method="post" action="realTimeAnswer">
 								<input type="submit" class="button color small submit" value="リアルタイムーアンサー">
 								<input type="hidden" name="questionNum" value="${ question.questionNum }">
 							</form>
+							</c:if>
 							</div><!-- End related-posts -->
 						</c:if>
 				

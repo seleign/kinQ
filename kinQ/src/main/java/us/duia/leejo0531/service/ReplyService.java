@@ -115,4 +115,9 @@ public class ReplyService {
 		int result = replyDao.replyPointUpdatMinus(reply);
 		return result;
 	}
+	
+	public int updateQuestionProgress(int questionNum) {
+		int result = replyDao.updateQuestionProgress(questionNum);
+		return result;
+	}
 }
