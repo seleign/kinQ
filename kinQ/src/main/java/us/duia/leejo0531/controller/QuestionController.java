@@ -77,7 +77,7 @@ public class QuestionController {
 		//태그 등록
 		qstn.getRelatedTag().parallelStream().forEach(tag -> qstnSvc.insertTag(new TagVO(qstn.getQuestionNum(), qstn.getUserNum(), tag)) );
 		almSvc.alarmInterest(qstn.getQuestionNum());
-		return "redirect:index";  // 루트가 아닌 다른 페이지로 이동해야 함
+		return "redirect:index"; 
 	}
 
 	/**
@@ -140,19 +140,30 @@ public class QuestionController {
 	 * @return question/questionForm.jsp로 이동
 	 */
 	@RequestMapping(value="askQuestion",method= RequestMethod.GET)
-	public String ask_question(Model model, HttpSession session){
-		
-		// 로그인한 유저가 아니면 루트 페이지로 보낸다.
-		String userId = (String)session.getAttribute("userId");
-		if(userId == null) {
-			return "redirect:index";
-		}
-		
+	public String ask_question(Model model, HttpSession session, String question_title){
 		ArrayList<MajorVO> majorList = userSvc.getMajorList();
 		int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
 		model.addAttribute("majorList", majorList);
 		model.addAttribute("questionNum", questionNum);
+		model.addAttribute("title", question_title);
 		return "askQuestion";
+	}
+	
+	/**
+	 * index　화면에서 질문 내용을 입력했을 때, 글쓰기 페이지로 타이틀을 가지고 이동한다.
+	 * @param model
+	 * @param session
+	 * @param question_title
+	 * @return
+	 */
+	@RequestMapping(value="askQuestion",method= RequestMethod.POST)
+	public String ask_question_POST(Model model, HttpSession session, String question_title){
+				ArrayList<MajorVO> majorList = userSvc.getMajorList();
+				int questionNum = qstnSvc.Q_BOARD_SEQ_NEXTVAL();
+				model.addAttribute("majorList", majorList);
+				model.addAttribute("questionNum", questionNum);
+				model.addAttribute("title", question_title);
+				return "askQuestion";
 	}
 	
 	/**
@@ -179,10 +190,6 @@ public class QuestionController {
 	
 	@RequestMapping(value = "modifyQuestion", method=RequestMethod.GET)
 	public String modifyQuestion_GET(int questionNum, HttpSession session, Model model) {
-		String userId = (String)session.getAttribute("userId");
-		if(userId == null) {
-			return "redirect:/";
-		}		
 		int userNum = (int)session.getAttribute("userNum");
 		QuestionVO question= new QuestionVO( questionNum );
 		question = qstnSvc.getQuestion(question);
@@ -196,7 +203,8 @@ public class QuestionController {
 		
 		// 글을 수정할 권한이 없으면 메인으로 리다이렉트
 		if(question.getUserNum() != userNum) {
-			return "redirect:/";
+			logger.warn("질문글의 소유자가 아님: " + userNum);
+			return "redirect:index";
 		}
 		return "askQuestion";
 	}
@@ -225,8 +233,7 @@ public class QuestionController {
 		almSvc.deletePreInsertedInterest(qstn.getQuestionNum());
 		// 다시 알람 등록
 		almSvc.alarmInterest(qstn.getQuestionNum());
-		
-		return "redirect:/";
+		return "forward:question_view";
 	}
 	
 	/**
@@ -252,8 +259,6 @@ public class QuestionController {
 		String checkTime = qstnSvc.getQuestionTime(questionNum);
 		return checkTime;
 	}
-	
-
 	
 	@RequestMapping(value = "searchRecentPost", method = RequestMethod.POST)
 	@ResponseBody
@@ -323,6 +328,6 @@ public class QuestionController {
 		
 		ArrayList<QuestionVO> result = qstnSvc.searchRecentPost(page);
 		
-		return result; //어느 페이지로 이동시킬 것인가?
+		return result;
 	}
 }
