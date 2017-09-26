@@ -30,8 +30,8 @@
   <script type="text/javascript">
   	//웹소켓 터지면 uri문제입니다 확인해주세요 
   	// 실제 서버 인증서 있을때는 wss 뒤에 /leejo0531/ 없게 수정할 것 
- 	var webUri = "wss://" + window.location.host +"/count";
-//	var webUri = "ws://" + window.location.host +"/leejo0531/count";
+// 	var webUri = "wss://" + window.location.host +"/count";
+	var webUri = "ws://" + window.location.host +"/leejo0531/count";
 
 	websocket = new WebSocket(webUri);
 	websocket.onopen = function(evt){
@@ -106,6 +106,10 @@
  		if( isEmpty(keyWord)) {
  	 		return false;
 		} 
+ 		
+ 		if(keyWord == 'ここで検索'){
+ 			return false;
+ 		}
  		return true;
 	};
 	
@@ -229,7 +233,7 @@
 						<div class="search_text">					
 							<input type="hidden" name="from" value="1">
 							<input type="hidden" name="to" value="10">
-						    <input type="text" name="search">
+						    <input type="text" name="search" value="ここで検索" onfocus="if(this.value=='ここで検索')this.value='';" onblur="if(this.value=='')this.value='ここで検索';">
 						    <button type="submit" class="search-submit"></button>
 					    </div>
 						<div class="search_select">

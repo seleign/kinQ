@@ -49,6 +49,8 @@ body {
 .search_select {
 	float: right;
 	position: relative;
+	margin-top: 1%;
+	right: 3%;
 }
 
 .search_text {
@@ -114,7 +116,7 @@ body {
 }
 
 #askme_back {
-	background-image: url("../images/back1.png");
+	background-image: url("../images/back4.png");
 }
 /* 占쏙옙 占쏙옙 */
 #warp {

@@ -36,6 +36,7 @@
 			data: {major : major},
 			success: function(minorList){
 				$("#minorSection").empty();
+				$("#major").val(major).prop("selected", true);
 				for(var i = 0; i < minorList.length; i++) {
 					if(minorList[i].majorNum == major) {
 						$("#minorSection").append('<label for="minorNum'+ minorList[i].minorNum +'"><input type="radio" required="required" value="'+ minorList[i].minorNum +'" name="MinorNum" id="minorNum'+ minorList[i].minorNum +'">'+ minorList[i].minorName + '</label>');
@@ -94,7 +95,12 @@
 							<div class="form-inputs clearfix">
 								<p>
 									<label class="required">タイトル<span>*</span></label>
-									<input type="text" id="question-title" value="${question.title}" name="title" required="required">
+									<c:if test="${title != null? true:false }">
+										<input type="text" id="question-title" value="${title}" name="title" required="required">
+									</c:if>
+									<c:if test="${title == null? true:false }">
+										<input type="text" id="question-title" value="${question.title}" name="title" required="required">
+									</c:if>
 									<span class="form-description">回答者が見やすいタイトルを入力してください。</span>
 								</p>
 								<div id="form-textarea">
@@ -140,7 +146,7 @@
 									<label class="required">Category<span>*</span></label>
 									<span class="styled-select">
 										<select id="major" name="major" onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)" required="required">
-											<option value="0" selected="selected">選択</option>
+											<option value="0">選択</option>
 											<c:forEach var="major" items="${majorList }">
 												<option value="${major.majorNum}">${major.majorName}</option>
 											</c:forEach>
@@ -175,8 +181,8 @@
 									<div id="step2">
 									<h1>質問の内容に音声をつけられます。</h1>
 									
-									<input type="button" id="btn-record-webm" class="button color small submit" value="画面の録画を始まる">
-									<input type="button" id="btn-record-webm-stop" class="button color small submit" value="画面の中止する">
+									<input type="button" id="btn-record-webm" class="button color small submit" value="画面の録画を始める">
+									<input type="button" id="btn-record-webm-stop" class="button color small submit" value="画面の録画を中止する">
 									
 									<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
 									<input type="text" name="videoSrc" value="${question.videoSrc}" id="videoSrc" style="display: none;">
@@ -206,7 +212,7 @@
 							</div>
 							<p id="p-ask-buttons" class="form-submit">
 								<input type="submit" id="publish-question" value="質問する" class="button color small submit">
-								<input type="button" id="ask-button" value="画面の録画する" class="button color small submit" onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
+								<input type="button" id="ask-button" value="画面の録画" class="button color small submit" onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
 							</p>
 						</form>
 					</div>
@@ -285,6 +291,9 @@ window.onload = function() {
 	// 7. 수정하기일 때, 제목을 넣어준다.
 	if(${question.title != null? true:false}) {
 		$("#question-title").val("${question.title}");
+	}
+	if(${title != null? true:false}) {
+		$("#question-title").val("${title}");
 	}
 	
 	// 8. 현재 계정의 포인트를 가져온다.
@@ -504,12 +513,18 @@ function validationCheck() {
 	var title = $("#question-title").val();
 	var questionNum = $("#questionNum").val();
 	var questionContent = CKEDITOR.instances.question_details.getData();
-	var major = $("#major").val();	
+	var major = $("#major").val();
 	var point = $("#point").val();
 
 	//RecentPoint // 소유하고 있는 포인트
 	if(RecentPoint < point) { // 걸은포인트가 소유한것보다 더 큰경우
 		alert("ポイントが足りないです。")
+		return false;
+	}
+	
+	if(major = 0) {
+		alert(major);
+		alert('Categoryを選んでください。')
 		return false;
 	}
 	

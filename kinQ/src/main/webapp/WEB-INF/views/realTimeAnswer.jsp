@@ -72,10 +72,10 @@
 		$( "#tabs" ).tabs();
 		$( "#tabs2" ).tabs();
 
-		$("#part-of-screen-to-be-shared").height(  $("#part-of-screen-to-be-shared").width() );
-		$("#part-of-screen-to-be-shared").css('max-width', $("#part-of-screen-to-be-shared").width());
-		$("#part-of-screen-to-be-shared").css('max-height', $("#part-of-screen-to-be-shared").width());
-		$("#part-of-screen-to-be-shared").css('overflow', 'scroll');
+		$("#part_of_screen_to_be_shared").height(  $("#part_of_screen_to_be_shared").width() );
+		$("#part_of_screen_to_be_shared").css('max-width', $("#part_of_screen_to_be_shared").width());
+		$("#part_of_screen_to_be_shared").css('max-height', $("#part_of_screen_to_be_shared").width());
+		$("#part_of_screen_to_be_shared").css('overflow', 'scroll');
 		
 		// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 		CKEDITOR.replace('ReplyContent',{ 
@@ -109,7 +109,7 @@
 
 			//공유하는 DIV 쪽 기능
 			stop = false;
-			var elementToShare = document.getElementById('part-of-screen-to-be-shared');
+			var elementToShare = document.getElementById('part_of_screen_to_be_shared');
 			var canvas2d = document.createElement('canvas');
 			var context = canvas2d.getContext('2d');
 			canvas2d.width = elementToShare.clientWidth;
@@ -166,7 +166,8 @@
 			            data: formData, 
 			            type: 'POST',
 			            success: function(result){
-			            		$('#videos-container').html('<video controls src="'
+			            		$('#OpponentScreen').empty();
+			            		$('#OpponentScreen').html('<video controls src="'
 			 				+ window.webkitURL.createObjectURL(blob)
 			 				+ '" autoplay loop controls="controls" preload="auto"></video>');
 			                $('#videoSrc').val(result);
@@ -175,7 +176,7 @@
 							
 					$("#canvas").remove(); // 자신의 녹화중인 화면(프리뷰)를 삭제한다.
 					$("#shared-part-of-screen-preview").remove(); // 상대방의 화면을 삭제한다.
-					$("#part-of-screen-to-be-shared").remove(); // 자신이 공유중인 화면을 삭제한다
+					$("#part_of_screen_to_be_shared").remove(); // 자신이 공유중인 화면을 삭제한다
 					
 					audioStream.stop();
 					canvasStream.stop();
@@ -379,7 +380,7 @@
 
 		document.getElementById('btn-share-part-of-sreen').onclick = function() {
 			this.disabled = true;
-			connection.sharePartOfScreen(document.getElementById('part-of-screen-to-be-shared'));
+			connection.sharePartOfScreen(document.getElementById('part_of_screen_to_be_shared'));
 		};
 
 		connection.onclose = function() {
@@ -516,7 +517,6 @@
 			// 부정 접근이므로 로그인 페이지 리다이렉트
 		}
 
-		
 } //onload End
 	
 // 데이터가 널 또는 공백인지 확인하는 함수
@@ -543,10 +543,12 @@ function lastFileChat() {
 function formCheck() {
 var questionNum = '${question.questionNum}';
 var userNum = '${userNum}';
-var ReplyContent = CKEDITOR.instances.ReplyContent.getData(); //TODO
 var videoSrc = $('#videoSrc').val();
+var ReplyContent = CKEDITOR.instances.ReplyContent.getData();
+if(ReplyContent.length < 2) {
+	ReplyContent = "リアルタイムーアンサーで作成されました。";
+}
 
-alert(videoSrc);
 if(isEmpty(videoSrc)) {
 	return false;
 }
@@ -563,10 +565,77 @@ $.ajax({
 	success: function (success) {
 		alert("댓글 등록 완료")
 	}
-})
+});
 	
-}
+}//id로 받은 태그 내의 모든 img의 src를 base64로 변환한다.
+function imgSrcToBase64Src_In_id(id) {
+	$(id).find('img').each(function(){
+		var imgObject = this;
+		if( $(imgObject).attr('src').substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.	
+			return;
+		} else { // Base64가 아니면 ajax로 Base64로 변환한다.
+			$.ajax({
+	            url: 'imgToBase64',
+	            data: {
+	            		imgSrc: 	$(imgObject).attr('src')
+	           		},
+	            type: 'GET',
+	            success: function(result){
+					$(imgObject).attr('src', result.base64)
+	                    }
+	            });
+		}
+	}) // each 종료
+};
 
+var Content;
+var getUrl = window.location;
+var baseUrl = getUrl.protocol + "//" + getUrl.host;
+function test22() {
+	// ckEditor에서 html을 가져온다.
+	Content = CKEDITOR.instances.part_of_screen_to_be_shared.getData();	
+
+	// 임시 영역에 붙인다.
+	//$("#tmpContents").hide();
+	$("#tmpContents").html(Content);
+
+	// 여기에서 img가 base64가 아닌건 base64로 바꾼다.
+	$("#tmpContents").find('img').each(function(){
+		var imgObject = this;
+		var fileUrl = $(imgObject).attr('src');
+		var imgSrc = $(imgObject).attr('src');
+		
+		if( imgSrc.substring(0, 5) == 'data:') { // 이미 Base64면 변환 작업을 하지 않는다.	
+			return;
+		} else if(imgSrc.substring(0,1) == '.') {  // .resources 인 경우
+			imgSrc = imgSrc.substring(1, fileUrl.length);
+			imgSrc = baseUrl + imgSrc;
+			$(imgObject).attr('src', imgSrc);
+		} else if(imgSrc.substring(0,4) == 'http') { // http인 경우
+			
+		}
+		
+		else { // Base64가 아니면 ajax로 Base64로 변환한다.
+			$.ajax({
+	            url: 'imgToBase64',
+	            data: {
+	            		imgSrc: fileUrl
+	           		},
+	            type: 'GET',
+	            success: function(result){
+					$(imgObject).attr('src', result.base64)
+	                    }
+	            });
+		}
+	}) // each 종료
+	
+	// 이 임시영역에 있는 텍스트를 다시 ckEditor에 넣는다.
+    //$("#part_of_screen_to_be_shared").html(Content)
+	//CKEDITOR.instances.part_of_screen_to_be_shared.setData(Content);
+}
+function test33() {
+	CKEDITOR.instances.part_of_screen_to_be_shared.setData($("#tmpContents").html());
+}
 </script>
 </head>
 <body>
@@ -610,6 +679,8 @@ $.ajax({
 <button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
 <button onclick="formCheck()">댓글 등록 </button>
+<button id = "test" onclick="test22()"> to base64 </button>
+<button id = "test" onclick="test33()"> wesfwef </button>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
 </fieldset>
 <table>
@@ -617,18 +688,18 @@ $.ajax({
 		<td>
 		<div id="tabs" >
   <ul>
-    <li><a href="#tabs-1">나의 공유화면</a></li>
-    <li><a href="#tabs-2">질문자가 업로드한 동영상 / 내가 녹화한 영상 보기</a></li>
-    <li><a href="#tabs-3">상대방의 화면</a></li>
+    <li><a href="#tabs-1">自分の画面</a></li>
+    <li><a href="#tabs-2">質問者がアップロードした動画</a></li>
+    <li><a href="#tabs-3">相手の画面</a></li>
   </ul>
   <div id="tabs-1">
 		<!-- 이게 공유된다. DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
-	<div id="part-of-screen-to-be-shared" contenteditable="true" style="text-align: center; border: 5px solid gray; background: white;">
+	<div id="part_of_screen_to_be_shared" contenteditable="true" style="border: 1px solid gray; background: white; width: 760px; max-width: 760px; height: 760px; max-height: 760px;">
 		<c:if test="${question.questionContent != null? true:false }">
 			${question.questionContent}
 		</c:if>
 		<c:if test="${question.questionContent == null? true:false }">
-			<h1>여기에는 질문글의 questionContent 가 불러와진다. (이 DIV는 가로 세로가 크기가 같다.)</h1>
+			<h1>不正access</h1>
 		</c:if>
 	</div>
   </div>
@@ -657,9 +728,9 @@ $.ajax({
 		<td colspan="2">
 		<div id="tabs2">
   <ul>
-    <li><a href="#tabs-4">질문 내용</a></li>
-  	<li><a href="#tabs-5">내 에디터</a></li>
-    <li><a href="#tabs-6">내 공유화면 프리뷰 </a></li>
+    <li><a href="#tabs-4">質問の内容</a></li>
+  	<li><a href="#tabs-5">自分のEditor</a></li>
+    <li><a href="#tabs-6">録画中(後)の画面</a></li>
   </ul>
     <div id="tabs-4">
  	<!-- 상대방의 질문 내용이 여기에 보인다. -->
@@ -687,10 +758,10 @@ $.ajax({
 		<button id="share-file" disabled class="button color small submit">ファイルを送る</button> 
 
 		<!-- 채팅 및 파일이 전송된 것이 여기에 나타난다. -->
-		<div id="chat-container" style="border:3px solid gray;">
+		<div id="chat-container" style="border:1px solid gray;">
 		<button onclick="lastFileDelete()" class="button color small submit" >最後のファイルを削除</button>	
 		<button onclick="lastFileChat()" class="button color small submit">最後のチャットを削除</button>
-		<h6>채팅 내용 + 송수신된 파일 DIV</h6>
+		<h6>チャットの内容及び送信されたファイル</h6>
 			<div id="file-container"></div>
 			<div class="chat-output"></div>
 		</div>		
@@ -700,6 +771,9 @@ $.ajax({
 		</div><!-- End row -->
 	</section><!-- End container -->
 
+<div id="tmpContents">
+
+</div>
 <jsp:include page="footer.jsp" flush="false" />
 </body>
 </html>

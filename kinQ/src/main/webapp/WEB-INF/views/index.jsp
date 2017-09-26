@@ -30,6 +30,12 @@
 	<script src="./resources/js/dateFormat.min.js"></script>
   	<script type="text/javascript">
 	
+  	function questionView(questionNum) {
+  		var questionview = document.questionview;
+  		questionview.questionNum.value=questionNum ;
+  		questionview.submit();
+	}
+  	
 	function recentQlist(){
 		$.ajax({
 			url: 'searchRecentPost',
@@ -51,7 +57,7 @@
 						}else{
 							html +='<article class="question question-type-normal">';
 						}
-						html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
+						html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
 						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 						html += '<div class="question-inner"><div class="clearfix"></div>';
 						html += '<p class="question-desc">'+element.questionContent+'</p>';
@@ -99,7 +105,7 @@
 						}else{
 							html +='<article class="question question-type-normal">';
 						}
-						html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
+						html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
 						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 						html += '<div class="question-inner"><div class="clearfix"></div>';
 						html += '<p class="question-desc">'+element.questionContent+'</p>';
@@ -147,7 +153,7 @@
 						}else{
 							html +='<article class="question question-type-normal">';
 						}
-						html += '<h2><a href="question_view?questionNum='+element.questionNum+'">'+element.title+'</a></h2>';
+						html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
 						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 						html += '<div class="question-inner"><div class="clearfix"></div>';
 						html += '<p class="question-desc">'+element.questionContent+'</p>';
@@ -312,6 +318,11 @@
 </head>
 <body>
 <jsp:include page="header.jsp" flush="false" />
+
+	<form name="questionview" action="question_view" method="post">
+		<input type="hidden" name="questionNum" value="">
+	</form>
+	
 	<div class="panel-pop" id="report_panel">
 	<h2>Report<i class="icon-remove"></i></h2>
 	<div class="form-style form-style-3">
@@ -359,7 +370,7 @@
 					<div class="col-md-9">
 						<form class="form-style form-style-2">
 							<p>
-								<textarea rows="4" id="question_title" onfocus="if(this.value=='今,あなたが一番知りたいことは何ですか?')this.value='';" onblur="if(this.value=='')this.value='今,あなたが一番知りたいことは何ですか?';">今あなたが一番知りたいことは何ですか?</textarea>
+								<textarea rows="4" id="question_title" onfocus="if(this.value=='今,あなたが一番知りたいことは何ですか?')this.value='';" onblur="if(this.value=='')this.value='今,あなたが一番知りたいことは何ですか?';">今,あなたが一番知りたいことは何ですか?</textarea>
 								<i class="icon-pencil"></i>
 								<span class="color button small publish-question">質問</span>
 							</p>
