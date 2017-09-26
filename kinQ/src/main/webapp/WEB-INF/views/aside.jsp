@@ -83,7 +83,7 @@
 				var html = "";
 				$.each( result, function(index, element) {
 					html += '<li><div class="author-img">';
-//					html += '<img width="60" height="60" src="https://placehold.it/60x60/FFF/444" alt="">';
+					html += '<img width="60" height="60" src="./resources/images/rank'+(index+1)+'.png" alt="">';
 					html += '</div><h6>'+element.userId+'</h6>';
 
 //					html += '<li><h6>'+element.userId+'</h6>';
