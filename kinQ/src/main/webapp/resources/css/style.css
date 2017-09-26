@@ -49,6 +49,8 @@ body {
 .search_select {
 	float: right;
 	position: relative;
+	margin-top: 1%;
+	right: 3%;
 }
 
 .search_text {
