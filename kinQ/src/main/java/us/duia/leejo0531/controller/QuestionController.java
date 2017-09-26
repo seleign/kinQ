@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import us.duia.leejo0531.service.AlarmService;
 import us.duia.leejo0531.service.QuestionService;
 import us.duia.leejo0531.service.ReplyService;
@@ -86,21 +85,22 @@ public class QuestionController {
 	 * @param qstn QuestionVO
 	 * @return 질문보기 페이지(~~.jsp)로 이동
 	 */
-	@RequestMapping(value = "question_view", method = RequestMethod.GET)
+	@RequestMapping(value = "question_view", method = RequestMethod.POST)
 	public String viewQuestion(QuestionVO qstn, Model model) {
 		//qstnSvc.getQuestion(qstn);
 		//System.out.println(qstn);
 		// code here
 		//QuestionVO test = new QuestionVO(80);
 		QuestionVO question = qstnSvc.getQuestion(qstn);
+		//System.out.println("question : " + question.toString());
 		MinorVO minor = qstnSvc.getMinor(question.getMinorNum());
 		MajorVO major = qstnSvc.getMajor(minor.getMajorNum());
 		ArrayList<TagVO> tagList = qstnSvc.getQuestionTag(question);
 		UserVO user = qstnSvc.getUserInfo(question.getUserNum());
 		String checkTimeResult = qstnSvc.getQuestionTime(question.getQuestionNum());
 		HashMap<String, Integer> checkPreNextQuestionNum = qstnSvc.checkPreNextQuestionNum(question.getQuestionNum());
-		System.out.println("HashMap : " + checkPreNextQuestionNum.toString());
-		System.out.println("question : " + question.toString());
+		//System.out.println("HashMap : " + checkPreNextQuestionNum.toString());
+		//System.out.println("question : " + question.toString());
 		model.addAttribute("question", question);
 		model.addAttribute("minor", minor);
 		model.addAttribute("major", major);
@@ -108,9 +108,8 @@ public class QuestionController {
 		model.addAttribute("user", user);
 		model.addAttribute("checkTimeResult", checkTimeResult);
 		model.addAllAttributes(checkPreNextQuestionNum);
+		
 		return "question_view";
-		//return "question/questionView";
-
 	}
 	
 	@RequestMapping(value = "question_view_test", method = RequestMethod.GET)
