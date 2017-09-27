@@ -241,4 +241,10 @@ public class QuestionDAO {
 		int result = mapper.modifyQuestion(qstn);
 		return result;
 	}
+
+	public ArrayList<String> getTitleList() {
+		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
+		ArrayList<String> titleList = mapper.getTitleList();
+		return titleList;
+	}
 }
