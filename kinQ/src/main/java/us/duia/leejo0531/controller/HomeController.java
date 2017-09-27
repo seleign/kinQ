@@ -65,8 +65,17 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public String index(){
+	public String index(Model model){
+		ArrayList<String> titleList = homeSvc.getTitleList();
+		model.addAttribute("titleList", titleList);
+		
 		return "index";
+	}
+	
+
+	@RequestMapping(value = "loginAlert", method = RequestMethod.GET)
+	public String alret(){
+		return "loginAlert";
 	}
 
 }

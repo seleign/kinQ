@@ -340,7 +340,7 @@ public class QuestionController {
 	public ArrayList<QuestionVO> asideRecent() {
 		PageVO page = new PageVO();
 		page.setFrom(1);
-		page.setTo(3);
+		page.setTo(5);
 		
 		ArrayList<QuestionVO> result = qstnSvc.searchRecentPost(page);
 		

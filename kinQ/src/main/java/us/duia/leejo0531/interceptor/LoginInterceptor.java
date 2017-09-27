@@ -13,7 +13,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if(userId!=null){
 			return true;
 		}else{
-			response.sendRedirect("/leejo0531/index");
+			response.sendRedirect("/leejo0531/loginAlert");
 			return false;
 		}
 	}

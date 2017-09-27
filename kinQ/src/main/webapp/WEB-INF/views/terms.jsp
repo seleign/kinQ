@@ -142,13 +142,47 @@
 			<div class="col-md-9">
 					
 				<div id="alert" class="row">
-				<div class="col-md-12"><div class="boxedtitle page-title"><h2 id="termsTitle">利用約款</h2></div></div>
+				<div class="col-md-12"><div class="boxedtitle page-title"><h2 id="termsTitle">キューアンドエー</h2></div></div>
 					<div class="col-md-12">
 						<div class="page-content page-shortcode" style="padding: 4%">
 						<div id="innerTerms">
+								<div id="contact" class="row">
+									<div class="col-md-12">
+										<div class="boxedtitle page-title">
+											<h2>Contact Forms</h2>
+										</div>
+									</div>
+									<div class="col-md-8">
+										<div class="page-content">
+											<form class="form-style form-style-3 form-style-5">
+												<div class="form-inputs clearfix">
+													<p>
+														<label class="required">Name<span>*</span></label><input type="text" value="" aria-required="true">
+													</p>
+													<p>
+														<label class="required">E-Mail<span>*</span></label><input type="text" value="" aria-required="true">
+													</p>
+													<p>
+														<label>Website</label><input type="text" value="">
+													</p>
+												</div>
+												<div class="form-textarea">
+													<p>
+														<label class="required">Message<span>*</span></label>
+														<textarea aria-required="true" cols="58" rows="5"></textarea>
+													</p>
+												</div>
+												<p class="form-submit">
+													<input name="submit" type="submit" value="Submit"
+														class="submit button medium color">
+												</p>
+											</form>
+										</div>
+										</div>
+									</div>
 
-						    
-						</div><!-- End page-content -->
+								</div>
+								<!-- End page-content -->
 					</div>
 				</div><!-- End #alert -->
 				

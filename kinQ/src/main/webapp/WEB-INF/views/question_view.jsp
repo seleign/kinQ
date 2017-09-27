@@ -113,54 +113,63 @@
 				data: { questionNum: ${ question.questionNum }},
 				success: function (replyList) {
 					replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>";
-					for (var i = 0; i < replyList.length; i++) {
-						if (replyList[i].score == 0) {
-							replyHtml += "<ol class=\"commentlist clearfix\" id=\"" + replyList[i].replyNum + "\">";
-							replyHtml += "<li class=\"comment\">";
-							replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">";
-							/* replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
-							replyHtml += "<div class=\"comment-text\">";
-							replyHtml += "<div class=\"author clearfix\">";
-							replyHtml += "<div class=\"comment-author\"><a href=\"#\">" + replyList[i].id + "</a></div>";
-							replyHtml += "<div class=\"comment-vote\">";
-							replyHtml += "<ul class=\"question-vote\">";
-							//reply에 대한 다른 유저들의 추천
-							replyHtml += "<li><a href=\"javascript:updateRecommendUp("+ replyList[i].replyNum + "," + replyList[i].userNum +")\" class=\"question-vote-up\" title=\"Like\"></a></li>";
-							replyHtml += "<li><a href=\"javascript:updateRecommendDown("+ replyList[i].replyNum + "," + replyList[i].userNum +")\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
-							replyHtml += "</ul>";
-							replyHtml += "</div>";
-							if (replyList[i].recommend > 0) {
-								replyHtml += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + replyList[i].recommend + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
-							} else if (replyList[i].recommend < 0){
-								replyHtml += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + replyList[i].recommend*(-1) + "</span>";//추천을 어떻게 받아서 계산할지 정해야됨
-							} else {
-								replyHtml += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">0</span>";//추천을 어떻게 받아서 계산할지 정해야됨
+					if (!isEmpty(userId)) {
+						for (var i = 0; i < replyList.length; i++) {
+							if (replyList[i].score == 0) {
+								replyHtml += "<ol class=\"commentlist clearfix\" id=\"" + replyList[i].replyNum + "\">";
+								replyHtml += "<li class=\"comment\">";
+								replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">";
+								/* replyHtml += "<div class=\"avatar\"><img alt=\"\" src=\"http://placehold.it/60x60/FFF/444\"></div>" */
+								replyHtml += "<div class=\"comment-text\">";
+								replyHtml += "<div class=\"author clearfix\">";
+								replyHtml += "<div class=\"comment-author\"><a href=\"#\">" + replyList[i].id + "</a></div>";
+								replyHtml += "<div class=\"comment-vote\">";
+								replyHtml += "<ul class=\"question-vote\">";
+								//reply에 대한 다른 유저들의 추천
+								replyHtml += "<li><a href=\"javascript:updateRecommendUp("+ replyList[i].replyNum + "," + replyList[i].userNum +")\" class=\"question-vote-up\" title=\"Like\"></a></li>";
+								replyHtml += "<li><a href=\"javascript:updateRecommendDown("+ replyList[i].replyNum + "," + replyList[i].userNum +")\" class=\"question-vote-down\" title=\"Dislike\"></a></li>";
+								replyHtml += "</ul>";
+								replyHtml += "</div>";
+								if (replyList[i].recommend > 0) {
+									replyHtml += "<span class=\"question-vote-result\" style=\"color:green; font-weight:bold; margin-top: 5px;\">" + replyList[i].recommend + "</span>";
+								} else if (replyList[i].recommend < 0){
+									replyHtml += "<span class=\"question-vote-result\" style=\"color:red; font-weight:bold; margin-top: 5px;\">" + replyList[i].recommend*(-1) + "</span>";
+								} else {
+									replyHtml += "<span class=\"question-vote-result\" style=\"font-weight:bold; margin-top: 5px;\">0</span>";
+								}
+								replyHtml += "<div class=\"comment-meta\">";
+								replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" ;
+								replyHtml += "</div>";
+								if (userId == replyList[i].id) {
+									replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>削除</a>" ;
+								}
+								if ( "${ user.id }" == userId && replyList[i].selectedReplyNum == 0) {
+									replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>答えを選択</a>";
+								}
+								replyHtml += "</div>";
+								replyHtml += "<div class=\"text\">";
+								if (!isEmpty(replyList[i].videoSrc)) {
+									replyHtml += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
+									replyHtml += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
+									replyHtml += "</video>"
+								}
+								replyHtml += "<p>" + replyList[i].replyContent + "</p>";
+								replyHtml += "</div>";
+								replyHtml += "</div>";
+								replyHtml += "</div>";
+								replyHtml += "</li>";
+								replyHtml += "</ol>";
 							}
-							replyHtml += "<div class=\"comment-meta\">";
-							replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" ;
-							replyHtml += "</div>";
-							if (userId == replyList[i].id) {
-								replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>削除</a>" ;
-							}
-							if ( "${ user.id }" == userId && replyList[i].selectedReplyNum == 0) {
-								replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>答えを選択</a>";
-							}
-							replyHtml += "</div>";
-							replyHtml += "<div class=\"text\">";
-							if (!isEmpty(replyList[i].videoSrc)) {
-								replyHtml += "<video id=\"my-video\" class=\"video-js\" controls data-setup='{}'>"
-								replyHtml += "<source src=\"" + replyList[i].videoSrc +"\" type=\"video/webm\"></source>"
-								replyHtml += "</video>"
-							}
-							replyHtml += "<p>" + replyList[i].replyContent + "</p>";
-							replyHtml += "</div>";
-							replyHtml += "</div>";
-							replyHtml += "</div>";
-							replyHtml += "</li>";
-							replyHtml += "</ol>";
 						}
+						$("#commentlist").html(replyHtml);
+					} else {
+						/* replyHtml += "<table style=\"margin: auto;\"><tr>";
+						replyHtml += "<h2 style=\"color: gray;margin: auto;\">ログインしてください。</h2>";
+						replyHtml += "</tr></table>";
+						$("#commentlist").html(replyHtml); */
+						$("#related-posts").hide();
+						$("#commentlist").hide();
 					}
-					$("#commentlist").html(replyHtml);
 					$("#answerCount").html(replyList.length);
 					replyHtml = "";
 				}
@@ -192,8 +201,10 @@
 				type: "get",
 				data: { replyNum: replyNum },
 				success: function (success) {
-					getMAxScoreReply();
-					questionReplyList();
+					/* getMAxScoreReply();
+					questionReplyList(); */
+					window.location.reload(true);
+					
 				}
 			})
 		}
@@ -341,7 +352,7 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>여기 뭐가 들어가나요?</h1>
+					<h1>Question Detail</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
@@ -349,7 +360,7 @@
 						<span class="crumbs-span">/</span>
 						<a href="#">Questions</a>
 						<span class="crumbs-span">/</span>
-						<span class="current">${ question.title }</span>
+						<span class="current">Question Detail</span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -469,7 +480,7 @@
 						<span class="share-inside-f-arrow"></span>
 						<span class="share-inside-l-arrow"></span>
 					</div><!-- End share-inside-warp -->
-					<div class="share-inside"><i class="icon-share-alt"></i>Share</div>
+					<!-- <div class="share-inside"><i class="icon-share-alt"></i>Share</div> -->
 					<div class="clearfix"></div>
 				</div><!-- End share-tags -->
 				<div class="about-author clearfix" id="selectedReplyDiv">
@@ -483,17 +494,34 @@
 				</div><!-- End about-author -->
 						<c:if test="${ question.selectedReplyNum == 0 }">
 							<div id="related-posts">
-							<c:if test="${ sessionScope.userId != user.id and sessionScope.userId ne null}">
-								<h>답변 하기</h2>
-								<textarea rows="" cols="" id="replyContent"></textarea>
-								<button class="button color small submit" onclick="registReply()">登録</button>
-							</c:if>
-							<c:if test="${ sessionScope.userId != null }">
-								<form method="post" action="realTimeAnswer">
-								<input type="submit" class="button color small submit" value="リアルタイムーアンサー">
-								<input type="hidden" name="questionNum" value="${ question.questionNum }">
-							</form>
-							</c:if>
+								<table style="margin: auto;">
+									<tr>
+										<c:if test="${ sessionScope.userId != user.id and sessionScope.userId ne null}">
+											<h2>答える</h2>
+											<textarea rows="" cols="" id="replyContent"></textarea>
+										</c:if>
+									<tr>
+										<c:if test="${ sessionScope.userId != user.id and sessionScope.userId ne null}">
+											<td>
+												<button class="button color small submit" onclick="registReply()">登録</button>
+											</td>
+										</c:if>
+										<c:if test="${ sessionScope.userId != null }">
+											<td>
+												<form method="post" action="realTimeAnswer">
+													<input type="submit" class="button color small submit" value="リアルタイムーアンサー">
+													<input type="hidden" name="questionNum" value="${ question.questionNum }">
+												</form>
+											</td>
+											<td>
+												<form method="post" action="videoAnswer">
+													<input type="submit" class="button color small submit" value="動画でアンサー">
+													<input type="hidden" name="questionNum" value="${ question.questionNum }">
+												</form>
+											</td>
+										</c:if>
+									</tr>
+								</table>
 							</div><!-- End related-posts -->
 						</c:if>
 				

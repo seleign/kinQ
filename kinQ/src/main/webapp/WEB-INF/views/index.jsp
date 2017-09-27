@@ -1,7 +1,7 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
@@ -78,7 +78,8 @@
 					$('#rFrom').val( page.from +10);
 					$('#rTo').val( page.to +10);
 				}else {
-					$('#QuestionList_tap').html('検索結果がありません。');
+					$('#QuestionList_tap').append('当たる質問がありません。');
+					$('#QuestionList_button_recent').attr('disabled','true');
 				}
 			}
 		});
@@ -126,7 +127,8 @@
 					$('#uFrom').val( page.from +10);
 					$('#uTo').val( page.to +10);
 				}else {
-					$('#QuestionList_tap_urgent').html('検索結果がありません。');
+					$('#QuestionList_tap_urgent').append('当たる質問がありません。');
+					$('#QuestionList_button_urgent').attr('disabled','true');
 				}
 			}
 		});
@@ -173,8 +175,9 @@
 					$('#QuestionList_tap_progress').append(html);
 					$('#pFrom').val( page.from +10);
 					$('#pTo').val( page.to +10);
-				}else {
-					$('#QuestionList_tap_progress').html('検索結果がありません。');
+				}else if(html){
+					$('#QuestionList_tap_progress').append('当たる質問がありません。');
+					$('#QuestionList_button_progress').attr('disabled','true');
 				}
 			}
 		});
@@ -313,8 +316,56 @@
 		urgentUserlist();
 		progressUserlist();
 	});
- */	</script>
+ */	
+ $(function(){
+
+	 function scroller() {
+
+	   var scroll = $('div.scroll');// Sets the div with a class of scroll as a variable
+	   
+	   var height = scroll.height(); // Gets the height of the scroll div
+	   
+	   var topAdj = -height-30; /* '-height' turns the height                   of the UL into a negative #, 
+	                * '- 50' subtracts an extra 50 pixels from the height of 
+	         			 * the div so that it moves the trail of the UL higher to 
+	 							 * the top of the div before the animation                ends
+	 							 */
+	 	
+	 	scroll.animate({
+	 		'top' : [topAdj, 'linear'] 
+	 	}, 20000, function(){
+	 		scroll.css('top', 80); //resets the top position of the Ul for the next cycle
+	 		scroller(); // Recalls the animation cycle to begin.
+	 	});}
+	 	
+	 scroller();
+
+	 });
+ 
+ </script>
   
+  <style type="text/css">
+  	.box {
+  	color: black;
+ 	margin: 3em auto;
+	padding: 2em; 
+	width: 100%;
+	height: 3em;
+	position: relative;
+	overflow: hidden;
+ 	top: 1em;
+/* 	background-color: light-grey; */
+/* 	box-shadow: 7px 5px 4px rgba(0,0,0,0.5); */
+/* 	border: 1px solid black;
+	border-radius: 2px; */
+}
+
+.scroll {
+	position: absolute;
+	}
+	
+	
+  </style>
 </head>
 <body>
 <jsp:include page="header.jsp" flush="false" />
@@ -363,6 +414,17 @@
 					<div class="col-md-3">
 						<h2>なんでも質問して!</h2>
 						<p>一日にも、多くの情報を接して数多くの質問を接するあなたに最も最適化されたサイト!今、早速質問して返事して知識を共有してください</p>
+						
+								<div class="box">
+								<div class="scroll">
+									<ul>
+										<c:forEach var="title" items= "${titleList }">
+											<li><strong>${title}</strong></li><br>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+						
 						<div class="clearfix"></div>
 					</div>
 					<div class="col-md-9">
@@ -373,6 +435,7 @@
 								<span class="color button small publish-question">質問</span>
 							</p>
 						</form>
+							
 					</div>
 				</div><!-- End row -->
 			</div><!-- End box_icon -->
@@ -394,21 +457,21 @@
 						<input type="hidden" id="rTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap">
 					    </div>
-							<button class="button large gray-button" id="QuestionList_button" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+							<button class="button large gray-button load_button" id="QuestionList_button_recent" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
 						<input type="hidden" id="uFrom" value="1">
 						<input type="hidden" id="uTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap_urgent">
 					    </div>
-					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:urgentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+					    <button class="button large gray-button load_button" id="QuestionList_button_urgent" onclick="javascript:urgentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
 						<input type="hidden" id="pFrom" value="1">
 						<input type="hidden" id="pTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap_progress">
 					    </div>
-					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+					    <button class="button large gray-button load_button" id="QuestionList_button_progress" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 		        </div><!-- End page-content -->
 			</div><!-- End main -->
