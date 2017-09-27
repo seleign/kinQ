@@ -1,8 +1,6 @@
 package us.duia.leejo0531.controller;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -15,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import us.duia.leejo0531.service.HomeService;
-import us.duia.leejo0531.service.UserService;
-import us.duia.leejo0531.vo.PageVO;
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.RankVO;
 
 /**
@@ -66,9 +63,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(Model model){
-		ArrayList<String> titleList = homeSvc.getTitleList();
-		model.addAttribute("titleList", titleList);
-		
+		ArrayList<QuestionVO> qList = homeSvc.getQList();
+		model.addAttribute("qList", qList);
 		return "index";
 	}
 	

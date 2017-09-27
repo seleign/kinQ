@@ -242,9 +242,9 @@ public class QuestionDAO {
 		return result;
 	}
 
-	public ArrayList<String> getTitleList() {
+	public ArrayList<QuestionVO> getQList() {
 		QuestionMapper mapper = sqlSession.getMapper(QuestionMapper.class);
-		ArrayList<String> titleList = mapper.getTitleList();
-		return titleList;
+		ArrayList<QuestionVO> qList = mapper.getQList();
+		return qList;
 	}
 }
