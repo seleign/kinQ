@@ -237,8 +237,7 @@ public class QuestionController {
 	}
 	
 	/**
-	 * 실시간 답변 또는 동영상 녹화 답변에 사용된다.
-	 * 이 페이지의 form action"addReply"으로 해둬야 답변이 DB에 올라갈듯?
+	 * 실시간 답변에 사용된다.
 	 * @param questionNum 답변할 페이지에 출력시킬 질문의 내용
 	 * @return 실시간 답변페이지
 	 */
@@ -249,8 +248,25 @@ public class QuestionController {
 		question = qstnSvc.getQuestion(question);
 		model.addAttribute("question", question);
 		model.addAttribute("userNum", userNum);
+		model.addAttribute("mode", "realTimeAnswer");
 		
 		return "realTimeAnswer";  // 실시간 답변페이지
+	}
+	
+	/**
+	 *  동영상 녹화 답변에 사용된다.
+	 * @param questionNum
+	 * @return
+	 */
+	@RequestMapping(value = "videoAnswer", method = RequestMethod.POST)
+	public String videoAnswer(int questionNum, Model model, HttpSession session) {
+		int userNum = (int)session.getAttribute("userNum");
+		QuestionVO question= new QuestionVO( questionNum );
+		question = qstnSvc.getQuestion(question);
+		model.addAttribute("question", question);
+		model.addAttribute("userNum", userNum);
+		model.addAttribute("mode", "videoAnswer");
+		return "realTimeAnswer";
 	}
 	
 	//질문글 시간체크 
