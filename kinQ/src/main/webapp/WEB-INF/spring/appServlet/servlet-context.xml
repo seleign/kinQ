@@ -48,11 +48,21 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/mypage"/>
-
-			<mapping path="/realTimeAnswer"/>
-			<mapping path="/deleteQuestion"/>
+			<mapping path="/updateUserInfo"/>
+			<mapping path="/update"/>
+			<mapping path="/myQuestionList"/>
+			<mapping path="/myAnswerList"/>
+			<mapping path="/reportPage"/>
+			<mapping path="/reportQnA"/>
+			<mapping path="/registReply"/>
+			<mapping path="/deleteReply"/>
+			<mapping path="/selectedReply"/>
+			<mapping path="/updateRecommendUp"/>
+			<mapping path="/updateRecommendDown"/>
 			<mapping path="/askQuestion"/>
 			<mapping path="/modifyQuestion"/>
+			<mapping path="/realTimeAnswer"/>
+			<mapping path="/deleteQuestion"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
