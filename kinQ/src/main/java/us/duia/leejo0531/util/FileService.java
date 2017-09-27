@@ -149,6 +149,7 @@ public class FileService {
 	 */
 	public static HashMap<String, String> imgToBase64 (String imgSrc) {
 		HashMap<String, String> result = new HashMap<>();
+		logger.info("imgSrc: " + imgSrc);
 		if(imgSrc.substring(0, 5).equals("data:")) { //이미 base64로 인코딩 된것일 때
 			logger.info("이미 base64인 이미지");
 			result.put("base64", imgSrc);	

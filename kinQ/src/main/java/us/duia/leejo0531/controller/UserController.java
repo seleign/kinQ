@@ -86,21 +86,21 @@ public class UserController implements HttpSessionListener{
 	public String requestLogin(UserVO user,HttpSession session, Model model){	
 		UserVO loginUser = userSvc.requestLogin(user);
 		// 로그인에 성공하지 못하면 loginUser이 null이다.
-		if(loginUser == null) {
+/*		if(loginUser == null) {
 			return "redirect:index";
 		}
-		
-		if(loginSessionMonitor == null) loginSessionMonitor = new Hashtable<String, String>();
-		
-		synchronized(loginSessionMonitor){
-			loginSessionMonitor.put(session.getId(), loginUser.getId());
+*/		if( loginUser!=null) {
+			if(loginSessionMonitor == null) loginSessionMonitor = new Hashtable<String, String>();
+			
+			synchronized(loginSessionMonitor){
+				loginSessionMonitor.put(session.getId(), loginUser.getId());
+			}
+			
+			session.setAttribute("userName", loginUser.getUserName());
+			session.setAttribute("userId", loginUser.getId());
+			session.setAttribute("userNum", loginUser.getUserNum());
 		}
-		
-		session.setAttribute("userName", loginUser.getUserName());
-		session.setAttribute("userId", loginUser.getId());
-		session.setAttribute("userNum", loginUser.getUserNum());
-		
-		return "redirect:index";
+			return "redirect:index";
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
@@ -110,7 +110,7 @@ public class UserController implements HttpSessionListener{
 				loginSessionMonitor.remove(session.getId());
 			}
 		} else {
-			logger.warn("왜 loginSessionMonitor가 null이지?");
+			logger.warn("loginSessionMonitorIsNull");
 		}
 		session.invalidate();
 		return "redirect:index";

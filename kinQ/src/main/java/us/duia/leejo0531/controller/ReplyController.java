@@ -49,9 +49,8 @@ public class ReplyController {
 	 */
 	@RequestMapping(value = "questionReplyList", method = RequestMethod.GET)
 	public @ResponseBody ArrayList<ReplyVO> questionReplyList(QuestionVO qstn) {
-		int questionNum = qstn.getQuestionNum();
-//		System.out.println(questionNum);
-		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(questionNum);
+//		System.out.println(qstn.getQuestionNum());
+		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(qstn.getQuestionNum());
 		return replyList;
 	}
 	
@@ -94,6 +93,7 @@ public class ReplyController {
 		int score = reSvc.updateReplyScore(reply);
 		int pointPlus = reSvc.replyPointUpdatePlus(reply);
 		int pointMinus = reSvc.replyPointUpdatMinus(reply);
+		int qstatusUpdate = reSvc.updateQuestionProgress(reply.getQuestionNum());
 		return result;
 	}
 	

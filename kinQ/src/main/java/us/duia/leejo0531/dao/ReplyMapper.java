@@ -30,4 +30,5 @@ public interface ReplyMapper {
 	public int updateReplyScore(ReplyVO reply);
 	public int replyPointUpdatePlus(ReplyVO reply);
 	public int replyPointUpdatMinus(ReplyVO reply);
+	public int updateQuestionProgress(int questionNum);
 }

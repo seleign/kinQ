@@ -170,7 +170,12 @@
 	<!-- 대상 질문글 정보를 가져온다.(임시) -->
 	<select id="selectOneQuestion" parameterType="Question" resultMap="QuestionResult">
 		select *
-		from Q_Board, tag
+		from 
+			(
+				select q_board.*, nvl(reply.replyCount, 0) as replyCount from q_board, 
+					(select questionNum, nvl(count(*),0) as replyCount from q_reply group by questionNum) 
+				reply where q_board.questionNum = reply.questionNum(+)
+			) Q_Board, tag
 		where Q_Board.questionNum = #{questionNum}
 		and Q_Board.questionNum = tag.questionNum(+)
 	</select>
@@ -648,6 +653,6 @@
 	
 	<!-- 질문글의 내용을 수정한다. -->
 	<update id="modifyQuestion" parameterType="Question">
-		update q_board set timeLimit = #{timeLimit}, moddate = sysdate, title = #{title}, questionContent = #{questionContent}, MinorNum = #{MinorNum}, videoSrc = #{videoSrc} where questionNum = #{questionNum}
+		update q_board set timeLimit = #{timeLimit}, moddate = sysdate, point = #{point} ,title = #{title}, questionContent = #{questionContent}, MinorNum = #{MinorNum}, videoSrc = #{videoSrc} where questionNum = #{questionNum}
 	</update>
 </mapper>
