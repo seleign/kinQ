@@ -72,7 +72,7 @@ public class HomeController {
 
 	@RequestMapping(value = "loginAlert", method = RequestMethod.GET)
 	public String alret(){
-		return "alert";
+		return "loginAlert";
 	}
 
 }
