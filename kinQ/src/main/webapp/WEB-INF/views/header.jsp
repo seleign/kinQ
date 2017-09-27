@@ -233,7 +233,7 @@
 						<div class="search_text">					
 							<input type="hidden" name="from" value="1">
 							<input type="hidden" name="to" value="10">
-						    <input type="text" name="search" value="ここで検索" onfocus="if(this.value=='ここで検索')this.value='';" onblur="if(this.value=='')this.value='ここで検索';">
+						    <input type="text" class="search_title" name="search" value="..ここで検索" onfocus="if(this.value=='..ここで検索')this.value='';" onblur="if(this.value=='')this.value='..ここで検索';">
 						    <button type="submit" class="search-submit"></button>
 					    </div>
 						<div class="search_select">
