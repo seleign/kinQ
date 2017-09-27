@@ -82,6 +82,9 @@ public class HomeController {
 				} else if ("Qname".equals(cookie.getName())){
 					name = cookie.getValue();
 				} else if (!id.isEmpty() && !userNum.isEmpty() && !name.isEmpty()) {
+					synchronized(UserController.loginSessionMonitor){
+						UserController.loginSessionMonitor.put(session.getId(), id);
+					}
 					session.setAttribute("userName", name);
 					session.setAttribute("userId", id);
 					session.setAttribute("userNum", Integer.parseInt(userNum));
