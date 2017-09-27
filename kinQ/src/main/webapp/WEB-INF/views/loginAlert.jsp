@@ -5,10 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login Alert</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 	$(function(){
 		alert('ログインが必要なページです。');
-		location.href('index');
+		location.href='index';
 	});
 </script>
 </head>
