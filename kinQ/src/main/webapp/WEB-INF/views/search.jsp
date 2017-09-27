@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
 	
 	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/gray.css">
+	<link rel="stylesheet" href="./resources/css/purple.css">
 	
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
