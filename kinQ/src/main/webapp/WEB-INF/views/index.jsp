@@ -328,20 +328,17 @@
                    * the div so that it moves the trail of the UL higher to 
                  * the top of the div before the animation ends
                 */
-       
        scroll.animate({
           'top' : [topAdj, 'linear'] 
        }, 30000, function(){
-          scroll.css('top', 80); //resets the top position of the Ul for the next cycle
+          scroll.css('top',  80); //resets the top position of the Ul for the next cycle
           scroller(); // Recalls the animation cycle to begin.
        });
 }
- $(function(){
-
-    scroller();
-
-});
  
+	 $(function(){
+	    scroller();
+	});
     
     function marqeeNum(num){
        $('#selectQ').val(num);
