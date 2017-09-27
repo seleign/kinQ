@@ -513,6 +513,12 @@
 													<input type="hidden" name="questionNum" value="${ question.questionNum }">
 												</form>
 											</td>
+											<td>
+												<form method="post" action="videoAnswer">
+													<input type="submit" class="button color small submit" value="動画でアンサー">
+													<input type="hidden" name="questionNum" value="${ question.questionNum }">
+												</form>
+											</td>
 										</c:if>
 									</tr>
 								</table>
