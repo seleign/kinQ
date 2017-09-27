@@ -520,11 +520,11 @@
 		
 		if(!isEmpty(questionuserNum) && !isEmpty(userNum) ) {
 			if(questionuserNum == userNum)	{ // 질문자이다.
- 				$("#open-room").click();
+// 				$("#open-room").click();
 // 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			} else { // 답변자이다.
- 				$("#join-room").click();
+//				$("#join-room").click();
 // 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			}
@@ -591,6 +591,63 @@ if(confirm("アップロードしますか。editorでも質問に答えられ�
 
 }
 
+// 기본 맵 Map 재정의
+// http://eunsood.tistory.com/entry/javascript-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%97%90%EC%84%9C-hashmap-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+Map = function(){
+	 this.map = new Object();
+	};   
+	
+Map.prototype = {   
+	    put : function(key, value){   
+	        this.map[key] = value;
+	    },   
+	    get : function(key){   
+	        return this.map[key];
+	    },
+	    containsKey : function(key){    
+	     return key in this.map;
+	    },
+	    containsValue : function(value){    
+	     for(var prop in this.map){
+	      if(this.map[prop] == value) return true;
+	     }
+	     return false;
+	    },
+	    isEmpty : function(key){    
+	     return (this.size() == 0);
+	    },
+	    clear : function(){   
+	     for(var prop in this.map){
+	      delete this.map[prop];
+	     }
+	    },
+	    remove : function(key){    
+	     delete this.map[key];
+	    },
+	    keys : function(){   
+	        var keys = new Array();   
+	        for(var prop in this.map){   
+	            keys.push(prop);
+	        }   
+	        return keys;
+	    },
+	    values : function(){   
+	     var values = new Array();   
+	        for(var prop in this.map){   
+	         values.push(this.map[prop]);
+	        }   
+	        return values;
+	    },
+	    size : function(){
+	      var count = 0;
+	      for (var prop in this.map) {
+	        count++;
+	      }
+	      return count;
+	    }
+	};
+
+var map = new Map();
 // 태그 내의 모든 img의 src를 base64로 변환한다.
 // 이 함수는 공유 화면 -> 공유 화면의으로 전송되며, img의 src를 base64로 바꾼다.
 var Content;
@@ -605,7 +662,6 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 
 	// 여기에서 img가 base64가 아닌건 base64로 바꾼다.
 	var allImageCount = $("#tmpContents").find('img').length;
-	var nowImageCount = 0;
 	$("#tmpContents").find('img').each(function(){
 		var imgObject = this;
 		var imgSrc = $(imgObject).attr('src');
@@ -615,24 +671,37 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 			imgSrc = imgSrc.substring(1, imgSrc.length);
 			imgSrc = baseUrl + imgSrc;
 			$(imgObject).attr('src', imgSrc);
-			imgToBase64()
+			imgSrc = $(imgObject).attr('src');
+			map.put(imgSrc, "");
+			//imgToBase64()
 		} 
 		
+		if(map.containsKey(imgSrc)) {
+			alert("주소 교체")
+			$(imgObject).attr('src', map.get(imgSrc));
+		}
+		
+		//alert(map.get(imgSrc))
+		// 여기를 워커로 처리		
 		// Base64가 아니면 ajax로 Base64로 변환한다.
-			function imgToBase64() {
-				$.ajax({
-		            url: 'imgToBase64',
-		            data: {
-		            		imgSrc: imgSrc
-		           		},
-		            type: 'GET',
-		            success: function(result){
-						$(imgObject).attr('src', result.base64)
-						CKEDITOR.instances.part_of_screen_to_be_shared.setData($("#tmpContents").html());
-		                    }
-		            });
-			}
+		worker.postMessage(imgSrc);
 	}) 
+}
+
+//TODO
+var worker = new Worker("/resources/js/imgToBase64_worker.js");
+worker.addEventListener("message", function(e) {
+	// e의 키:  http:로 시작하는 img
+	// e의 밸류:  base64 img
+	//var result = JSON.stringify(e.data);
+	//console.log("메인: " + JSON.stringify(e.data)   )
+	//console.log("key="+Object.keys(e.data)[0]);
+	map.put(Object.keys(e.data)[0], e.data[Object.keys(e.data)[0]])
+});
+
+function ttt() {
+	imgSrcToBase64Src_settime();
+	//worker.postMessage({"https://junyeon.leejo0531.duia.us:8443/resources/uploadedFile/id03/201709261506434596292.png": "1번쨰"});
 }
 
 function toggleNavigation() {
@@ -669,7 +738,7 @@ function toggleNavigation() {
 					<div class="boxedtitle page-title"><h2>${question.title}</h2></div>
 					
 					<!-- here -->
-					<fieldset hidden="hidden">
+					<fieldset>
 <legend>개발용 버튼(삭제하지 말것)</legend>
 <h5>JQuery로 버튼을 자동 click하는 방식으로 실시간 연결 진행. 실제 서비스에서는 이 필드셋을 hidden으로 해둔다.</h5>
 <label>방 번호</label>
@@ -678,7 +747,7 @@ function toggleNavigation() {
 <button id="join-room">1-2. 방 Join</button>
 <button id="btn-share-part-of-sreen" disabled>1. 相手に自分の画面と音声を転送</button>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
-<button id = "test" onclick="imgSrcToBase64Src_settime"> to base64 </button>
+<button id = "test" onclick="ttt();"> to base64 </button>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
 <c:if test='${mode == "videoAnswer"? true:false }'>
 	<button id="btn-leave-room" disabled class="button color small submit">3. 接続終了</button>
