@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -83,7 +86,7 @@ public class UserController implements HttpSessionListener{
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String requestLogin(UserVO user,HttpSession session, Model model){	
+	public String requestLogin(UserVO user, String[] rememberCheck,HttpSession session, HttpServletResponse response, Model model){	
 		UserVO loginUser = userSvc.requestLogin(user);
 		// 로그인에 성공하지 못하면 loginUser이 null이다.
 /*		if(loginUser == null) {
@@ -96,6 +99,17 @@ public class UserController implements HttpSessionListener{
 				loginSessionMonitor.put(session.getId(), loginUser.getId());
 			}
 			
+			if (rememberCheck != null) {
+				Cookie cookieId = new Cookie("Qid", loginUser.getId());
+				Cookie cookieuserNum = new Cookie("Qnum", String.valueOf(loginUser.getUserNum()));
+				Cookie cookieName = new Cookie("Qname", loginUser.getUserName());
+				cookieId.setMaxAge(60*60*24);
+				cookieuserNum.setMaxAge(60*60*24);
+				cookieName.setMaxAge(60*60*24);
+				response.addCookie(cookieId);
+				response.addCookie(cookieuserNum);
+				response.addCookie(cookieName);
+			}
 			session.setAttribute("userName", loginUser.getUserName());
 			session.setAttribute("userId", loginUser.getId());
 			session.setAttribute("userNum", loginUser.getUserNum());
@@ -104,13 +118,20 @@ public class UserController implements HttpSessionListener{
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
-	public String logout(HttpSession session){
+	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		Cookie[] cookies = request.getCookies();
+		
 		if(loginSessionMonitor != null) {
 			synchronized (loginSessionMonitor) {
 				loginSessionMonitor.remove(session.getId());
 			}
 		} else {
 			logger.warn("loginSessionMonitorIsNull");
+		}
+		
+		for (Cookie cookie : cookies) {
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
 		}
 		session.invalidate();
 		return "redirect:index";
