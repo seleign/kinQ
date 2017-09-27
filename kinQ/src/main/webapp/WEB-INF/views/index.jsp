@@ -68,7 +68,9 @@
                      html +='<article class="question question-type-normal">';
                   }
                   html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
-                  html += '<a class="question-report">Report</a>';
+					if('${userNum}'!='') {
+						html += '<a class="question-report">Report</a>';
+					}
                   html += '<div class="question-inner"><div class="clearfix"></div>';
                   html += '<p class="question-desc">'+element.questionContent+'</p>';
                   html += '<div class="question-details">';
@@ -117,7 +119,9 @@
                      html +='<article class="question question-type-normal">';
                   }
                   html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
-                  html += '<a class="question-report">Report</a>';
+					if('${userNum}'!='') {
+						html += '<a class="question-report">Report</a>';
+					}
                   html += '<div class="question-inner"><div class="clearfix"></div>';
                   html += '<p class="question-desc">'+element.questionContent+'</p>';
                   html += '<div class="question-details">';
@@ -166,7 +170,9 @@
                      html +='<article class="question question-type-normal">';
                   }
                   html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
-                  html += '<a class="question-report">Report</a>';
+					if('${userNum}'!='') {
+						html += '<a class="question-report">Report</a>';
+					}
                   html += '<div class="question-inner"><div class="clearfix"></div>';
                   html += '<p class="question-desc">'+element.questionContent+'</p>';
                   html += '<div class="question-details">';
