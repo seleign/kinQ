@@ -104,7 +104,7 @@
 				var html = "";
 				$.each( result, function(index, element) {
 					html += '<li class="related-item"><h3><a href="#">'+element.title+'</a></h3>';
-					html += '<p>'+element.questionContent+'</p>';
+					html += '<p class="aside_recent_post">'+element.questionContent+'</p>';
 					html += '<div class="clear"></div><span>'+DateFormat.format.prettyDate( element.regDate)+'</span></li>';
 				})
 				$('#recentPost').html(html);

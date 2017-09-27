@@ -68,5 +68,11 @@ public class HomeController {
 	public String index(){
 		return "index";
 	}
+	
+
+	@RequestMapping(value = "loginAlert", method = RequestMethod.GET)
+	public String alret(){
+		return "loginAlert";
+	}
 
 }
