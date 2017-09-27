@@ -68,7 +68,6 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-<<<<<<< HEAD
 	public String index(HttpServletRequest request, HttpSession session, Model model){
 		Cookie[] cookies = request.getCookies();
 		String id = "";
@@ -91,14 +90,8 @@ public class HomeController {
 			}
 		}
 		
-		ArrayList<String> titleList = homeSvc.getTitleList();
-		model.addAttribute("titleList", titleList);
-		
-=======
-	public String index(Model model){
 		ArrayList<QuestionVO> qList = homeSvc.getQList();
 		model.addAttribute("qList", qList);
->>>>>>> branch 'master' of https://github.com/seleign/kinq
 		return "index";
 	}
 	
