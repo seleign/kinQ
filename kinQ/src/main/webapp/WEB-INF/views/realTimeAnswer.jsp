@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="./resources/css/style.css">
 	
 <!-- Skins -->
-<link rel="stylesheet" href="./resources/css/gray.css">
+<link rel="stylesheet" href="./resources/css/purple.css">
 	
 <!-- Responsive Style -->
 <link rel="stylesheet" href="./resources/css/responsive.css">
@@ -83,13 +83,10 @@
     	    		filebrowserUploadUrl: 'cKEditorFileUpload'
    		 }); // Ckeditor 초기화 종료
    		 
-   		 // 2. base64로 바꿀 임시 div
+   		 // base64로 바꿀 임시 div
    		 $("#tmpContents").hide();
    		 
-   		 // 3.  TODO
-   		 
-   		 
-   		 // 4. 녹화 시작 버튼이 눌렸을 때
+   		 // 2. 녹화 시작 버튼이 눌렸을 때
 		document.getElementById('btn-record-webm').onclick = function() {
 			$("#btn-record-webm-stop").attr("disabled", false);
 			
@@ -562,25 +559,21 @@ if(ReplyContent.length < 2) {
 if(isEmpty(videoSrc)) {
 	return false;
 }
-// location.href="http://hosting.websearch.kr/ ";
-if(confirm("アップロードしますか。editorでも質問に答えられます。"))　{
-	$.ajax({
-		url: "registReply",
-		type: "post",
-		data: { questionNum: ${ question.questionNum },
-				id: "${ userId }",
-				videoSrc: videoSrc,
-				userNum: ${userNum},
-				replyContent: ReplyContent
-		},
-		success: function (success) {
-			alert("成功的にアップロードしました。");
-		}
-	});
-}　else{
-	alert("アップロードしないと質問に答えなかったものになってしまいます。")
-}
 
+$.ajax({
+	url: "registReply",
+	type: "post",
+	data: { questionNum: ${ question.questionNum },
+			id: "${ userId }",
+			videoSrc: videoSrc,
+			userNum: ${userNum},
+			replyContent: ReplyContent
+	},
+	success: function (success) {
+		alert("댓글 등록 완료")
+	}
+});
+	
 }
 
 // 태그 내의 모든 img의 src를 base64로 변환한다.
@@ -626,11 +619,6 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 			}
 	}) 
 }
-
-function toggleNavigation() {
-	$('#navigation').toggle();
-	$('#navigation2').toggle();
-}
 </script>
 </head>
 <body>
@@ -658,7 +646,7 @@ function toggleNavigation() {
 			<div class="col-md-9">
 				
 				<div class="page-content ask-question">
-					<div class="boxedtitle page-title"><h2>${question.title}</h2></div>
+					<div class="boxedtitle page-title"><h2>Real-time answers</h2></div>
 					
 					<!-- here -->
 					<fieldset>
@@ -668,34 +656,15 @@ function toggleNavigation() {
 <input type="text" id="room-id" value="${question.questionNum}" size=20> <br>
 <button id="open-room">1-1. 방 Open</button>
 <button id="join-room">1-2. 방 Join</button>
-<button id="btn-share-part-of-sreen" disabled>1. 相手に自分の画面と音声を転送</button>
+<button id="btn-share-part-of-sreen" disabled>2. 공유화면 + 음성 전송</button>
+<button id="btn-record-webm">3. 자신의 공유화면 녹화</button>
+<button id="btn-leave-room" disabled>4. 접속 종료</button>
 <button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
+<button onclick="formCheck()">댓글 등록 </button>
 <button id = "test" onclick="imgSrcToBase64Src_settime"> to base64 </button>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
 </fieldset>
-
-<fieldset>
-	<legend onclick="toggleNavigation()">ナビゲーション</legend>
-<div id="navigation">
-<c:if test='${mode == "realTimeAnswer"? true:false }'>
-	<h2>1. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h2>
-	<button id="btn-record-webm" class="button color small submit">2. 自分の画面を録画</button>
-	<h2>2. 質問と回答が終了したら相手と連結を切ります。</h2>
-	<button id="btn-leave-room" disabled class="button color small submit">3. 接続終了</button>
-	<h2>3. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
-	<button onclick="formCheck()" class="button color small submit">4. 回答をアップロードする </button>
-</c:if>
-<c:if test='${mode == "videoAnswer"? true:false }'>
-	<h2>1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h2>
-	<button id="btn-record-webm" class="button color small submit">1. 自分の画面を録画</button>
-</c:if>	
-</div>
-	<div id="navigation2" hidden="hidden">
-		<h3>ナビゲーションを押すと隠されたものが見えます。</h3>
-	</div>
-</fieldset>
-
 <table>
 	<tr>
 		<td>
@@ -720,6 +689,7 @@ function toggleNavigation() {
   <div id="tabs-2">
 		<!-- 실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다. -->
 	<div id="videos-container">
+		<h6>실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다.</h6>
 		<!-- ㄹㄹ -->
 		<c:if test="${question.videoSrc != null? true:false }">
 			<video src="${question.videoSrc}" controls="controls" preload="auto" width="100%"></video>
@@ -731,7 +701,7 @@ function toggleNavigation() {
    </div>
    <div id="tabs-3">
 		<!-- 상대방의 화면이 여기에 보임 -->
-		<img id="shared-part-of-screen-preview" alt="相手の画面がここに見えます。">
+		<img id="shared-part-of-screen-preview" alt="상대방의 화면이 여기에">
 	</div>
 </div>
 		</td>

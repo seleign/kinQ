@@ -22,6 +22,7 @@ import us.duia.leejo0531.vo.RankVO;
 @Controller
 public class HomeController {
 
+
 	@Autowired(required=false)
 	HomeService homeSvc;
 	
@@ -69,9 +70,10 @@ public class HomeController {
 	}
 	
 
-	@RequestMapping(value = "loginAlert", method = RequestMethod.GET)
-	public String alret(){
-		return "loginAlert";
-	}
+
+   @RequestMapping(value = "loginAlert", method = RequestMethod.GET)
+   public String alret(){
+      return "loginAlert";
+   }
 
 }
