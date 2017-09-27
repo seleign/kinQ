@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
 	
 	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/gray.css">
+	<link rel="stylesheet" href="./resources/css/purple.css">
 	
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
@@ -55,12 +55,12 @@
 		questionReplyList();
 		
 		window.onload = function() {
-			/* if (userId != "") { */
+			if (userId != "") {
 				// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 				CKEDITOR.replace('replyContent',{ 
 		    	    		filebrowserUploadUrl: 'cKEditorFileUpload'
 		   		}); // Ckeditor 초기화 종료
-			/* } */
+			}
 		};
 		
 		var isEmpty = function(value){
@@ -348,7 +348,7 @@
 			<button class="button color small submit" style="float: right;" onclick="registReplyCancel()">취소</button>
 		</div>
 	</div>
-	<div class="breadcrumbs">
+	<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -510,12 +510,6 @@
 											<td>
 												<form method="post" action="realTimeAnswer">
 													<input type="submit" class="button color small submit" value="リアルタイムーアンサー">
-													<input type="hidden" name="questionNum" value="${ question.questionNum }">
-												</form>
-											</td>
-											<td>
-												<form method="post" action="videoAnswer">
-													<input type="submit" class="button color small submit" value="動画でアンサー">
 													<input type="hidden" name="questionNum" value="${ question.questionNum }">
 												</form>
 											</td>

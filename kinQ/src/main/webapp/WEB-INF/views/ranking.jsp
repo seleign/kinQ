@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
 	
 	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/gray.css">
+	<link rel="stylesheet" href="./resources/css/purple.css">
 	
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
@@ -37,7 +37,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
-	<div class="breadcrumbs">
+	<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
 <!-- 				<div class="col-md-12">

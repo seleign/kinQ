@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
 	
 	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/gray.css">
+	<link rel="stylesheet" href="./resources/css/purple.css">
 	
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
@@ -62,7 +62,7 @@
 							html +='<article class="question question-type-normal">';
 						}
 						html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
-						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
+//						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 						html += '<div class="question-inner"><div class="clearfix"></div>';
 						html += '<p class="question-desc">'+element.questionContent+'</p>';
 						html += '<div class="question-details">';
@@ -99,7 +99,7 @@
 		<input type="hidden" name="questionNum" value="">
 	</form>	
 		
-	<div class="breadcrumbs">
+	<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">

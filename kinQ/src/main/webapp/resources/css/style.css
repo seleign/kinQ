@@ -128,6 +128,13 @@ body {
 #askme_back {
 	background-image: url("../images/back2.png");
 }
+
+#sectionBack {
+	background-image: url("../images/menuBack.png");
+}
+.search_title input[type="text"]{
+	color: #ffffff;
+}
 /* 占쏙옙 占쏙옙 */
 #warp {
 	background-color: #f3f3f3;
@@ -212,7 +219,7 @@ body {
 /* Login panel */
 .login-panel {
 	padding: 20px 0;
-	background-color: #e7e1e1;
+	background-color: #f6f6f6;
 }
 .login-panel .page-content {
 	background: transparent;
@@ -228,12 +235,12 @@ body {
 	margin-bottom: 10px;
 }
 .login-panel p {
-	color: #c2c8d4;
+	color: #2f3239;
 }
 .login-panel input[type="text"],.login-panel input[type="password"] {
 	border: 1px solid #373b43;
-	background-color: #373b43;
-	color: #FFF;
+	background-color: #e8e3f0;
+	color: #2f3239;
 	padding-left: 37px;
 }
 .login-panel .form-inputs p {
@@ -2182,7 +2189,7 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	line-height: 23px !important;
 	font-size: 11.5px !important;
 	text-align: center;
-	background-color: #2f3239;
+	background-color: #c3b5c7;
 }
 .widget .ul_list {
 	margin-bottom: 0;
@@ -4060,7 +4067,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
     margin-right: 5px;
     display: block;
     padding: 10px 16px 11px 16px;
-	background-color: #2f3239;
+	background-color: #f3f3f3;
 	cursor: pointer;
 	font-size: 14px;
 }
@@ -4189,22 +4196,22 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 	font-size: 21px;
 }
 .alert-message.warning {
-	background-color: #f5d1a8;
+	background-color: #f3f3f3;
 }
 .alert-message.warning i {
-	background-color: #fd8900;
+	background-color: #cddc39;
 }
 .alert-message.warning span,.alert-message.warning a {
-	color: #fd8900;
+	color: #8bc34a;
 }
 .alert-message.success {
-	background-color: #aeddb6;
+	background-color: #f3f3f3;
 }
 .alert-message.success i {
-	background-color: #09a526;
+	background-color: #ff9800;
 }
 .alert-message.success a,.alert-message.success span {
-	color: #09a526;
+	color: #f44336;
 }
 .alert-message.error {
 	background-color: #f6d8d4;
@@ -4216,13 +4223,13 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 	color: #fe0000;
 }
 .alert-message.info {
-	background-color: #bccee8;
+	background-color: #f3f3f3;
 }
 .alert-message.info i {
-	background-color: #4480d6;
+	background-color: #905bef;
 }
 .alert-message.info a,.alert-message.info span {
-	color: #4480d6;
+	color: #673ab7;
 }
 .alert-message a:hover {
 	color: #5a5c5d !important;
@@ -5469,7 +5476,12 @@ html[xmlns] .slides {
 .widget_tag_cloud a,.header-search,.question-comments a,.removered,.removered i,.removered input[type="text"],.bxslider-title,.bx-prev,.bx-next,.login-password a,.question-report,.load-questions,.ask-me .publish-question {
 	color: #FFF !important;
 }
-.go-up,.header-search,.widget_bxslider .bxslider-widget-item .bxslider_img:before,.popular_posts .popular_img a:before,.widget_flickr a:before,.button,.button:hover,.pagination a:hover,.pagination span:hover,.pagination span.current,.tipsy-inner,.widget_highest_points a:before,.social_icon a,.social_icon a:hover,.social_icon_2 a,.about-author .author-image a:hover:before,.question-author-img:hover span:before,.icon_circle,.icon_square,.tabs-style-3 .tab a:hover,.ul_list_square ul li:before,.ul_list_circle ul li:before,.ul_list_square ul li i,i.ul_l_square,.ul_list_circle ul li i,i.ul_l_circle,.table-style-2 thead th,.dropcap.dropcap_circle,.dropcap.dropcap_square,.dropcap.dropcap_soft_r,.carousel-arrow a:hover,.color_white,.icon_circle,.icon_square,.icon_soft_r,.box_icon:hover .icon_circle i,.box_icon:hover .icon_soft_r i,.box_icon:hover .icon_square i,.box_warp_hover:hover,.box_warp_hover:hover .icon_i i,.box_warp_colored,.box_warp_colored a,.large_bg,.navigation_mobile_click:before,.post .boxedtitle i,.single-question-title i,.question-type,.post-type,.breadcrumbs,#header .logo a,.navigation > ul > li:hover > a,#header.header_light .navigation > ul > li:hover > a,.navigation > ul > li.current_page_item > a,#header.header_light .navigation > ul > li.current_page_item > a,.main-content .boxedtitle h1,.main-content .boxedtitle h2,.main-content .boxedtitle h3,.main-content .boxedtitle h4,.main-content .boxedtitle h5,.main-content .boxedtitle h6,.header-top-nav li a,.header-top-nav li i,.header-mypage input[type="text"],.input[type="text"],.header-mypage input:focus,.header-search input:focus,.header-mypage, .search-submit:before,.login-panel h2,.login-panel li a:hover,.login-panel .rememberme label,.flex-caption .text,.overlay-lightbox,.overlay-link,.ask-me,.ask-me h2,.ask-me p,.navigation ul li ul li:hover > a,.navigation > ul > li > a,.navigation ul li ul li.current_page_item > a,.navigation > ul > li > a:hover > .menu-nav-arrow,.navigation > ul > li.current_page_item > a > .menu-nav-arrow,.navigation > ul > li:hover > a .menu-nav-arrow,#footer-bottom,#footer,#footer .widget_contact ul li,#footer-bottom .social_icons ul li a:hover,#footer .related-item h3 a,#footer .widget_twitter ul li a,#footer a,#footer .widget a:hover,#footer .widget_contact ul li,input[type="checkbox"]:checked::before,.widget_stats li i,.widget_social li span,.widget_social li a small,.ask-me .col-md-9 p i,.tab a.current,.question-type-main,.login-panel ul.login-links a,.del-poll-li,.form-style-3 .form-inputs p #add_poll:hover i,.styled-select::before,.fileinputs:hover span i,.fileinputs span,.alert-message i,.single-question-vote-up:hover,.single-question-vote-down:hover,.user-profile-widget .ul_list li i,.post-read-more:hover:before,.widget_menu li.current_page_item a,.accordion .accordion-title a,.tab a,.tab a:hover,.ask-me .box_icon h2 {
+
+.go-up,.tab a.current,.ask-me .box_icon h2,.ask-me p,#footer-bottom,#footer .widget_contact ul li,#footer .widget_contact ul li{
+	color: #FFF;
+}
+
+.header-search,.widget_bxslider .bxslider-widget-item .bxslider_img:before,.popular_posts .popular_img a:before,.widget_flickr a:before,.button,.button:hover,.pagination a:hover,.pagination span:hover,.pagination span.current,.tipsy-inner,.widget_highest_points a:before,.social_icon a,.social_icon a:hover,.social_icon_2 a,.about-author .author-image a:hover:before,.question-author-img:hover span:before,.icon_circle,.icon_square,.tabs-style-3 .tab a:hover,.ul_list_square ul li:before,.ul_list_circle ul li:before,.ul_list_square ul li i,i.ul_l_square,.ul_list_circle ul li i,i.ul_l_circle,.table-style-2 thead th,.dropcap.dropcap_circle,.dropcap.dropcap_square,.dropcap.dropcap_soft_r,.carousel-arrow a:hover,.color_white,.icon_circle,.icon_square,.icon_soft_r,.box_icon:hover .icon_circle i,.box_icon:hover .icon_soft_r i,.box_icon:hover .icon_square i,.box_warp_hover:hover,.box_warp_hover:hover .icon_i i,.box_warp_colored,.box_warp_colored a,.large_bg,.navigation_mobile_click:before,.post .boxedtitle i,.single-question-title i,.question-type,.post-type,.breadcrumbs,#header .logo a,.navigation > ul > li:hover > a,#header.header_light .navigation > ul > li:hover > a,.navigation > ul > li.current_page_item > a,#header.header_light .navigation > ul > li.current_page_item > a,.main-content .boxedtitle h1,.main-content .boxedtitle h2,.main-content .boxedtitle h3,.main-content .boxedtitle h4,.main-content .boxedtitle h5,.main-content .boxedtitle h6,.header-top-nav li a,.header-top-nav li i,.header-mypage input[type="text"],.input[type="text"],.header-mypage input:focus,.header-search input:focus,.header-mypage, .search-submit:before,.login-panel h2,.login-panel li a:hover,.login-panel .rememberme label,.flex-caption .text,.overlay-lightbox,.overlay-link,.ask-me,.ask-me h2,.navigation ul li ul li:hover > a,.navigation > ul > li > a,.navigation ul li ul li.current_page_item > a,.navigation > ul > li > a:hover > .menu-nav-arrow,.navigation > ul > li.current_page_item > a > .menu-nav-arrow,.navigation > ul > li:hover > a .menu-nav-arrow,#footer,#footer-bottom .social_icons ul li a:hover,#footer .related-item h3 a,#footer .widget_twitter ul li a,#footer a,#footer .widget a:hover,input[type="checkbox"]:checked::before,.widget_stats li i,.widget_social li span,.widget_social li a small,.ask-me .col-md-9 p i,.question-type-main,.login-panel ul.login-links a,.del-poll-li,.form-style-3 .form-inputs p #add_poll:hover i,.styled-select::before,.fileinputs:hover span i,.fileinputs span,.alert-message i,.single-question-vote-up:hover,.single-question-vote-down:hover,.user-profile-widget .ul_list li i,.post-read-more:hover:before,.widget_menu li.current_page_item a,.accordion .accordion-title a,.tab a,.tab a:hover, {
 	color: #463b5b;
 }
 

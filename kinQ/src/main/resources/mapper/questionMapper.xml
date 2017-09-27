@@ -656,8 +656,8 @@
 		update q_board set timeLimit = #{timeLimit}, moddate = sysdate, point = #{point} ,title = #{title}, questionContent = #{questionContent}, MinorNum = #{MinorNum}, videoSrc = #{videoSrc} where questionNum = #{questionNum}
 	</update>
 	
-	<select id="getTitleList" resultType="String">
-		<![CDATA[select title from q_board where rownum<=20 order by REGDATE desc]]>
+	<select id="getQList" resultType="Question">
+		<![CDATA[select * from q_board where rownum<=20 order by REGDATE desc]]>
 	</select>
 	
 </mapper>

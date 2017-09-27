@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="./resources/css/style.css">
 
 <!-- Skins -->
-<link rel="stylesheet" href="./resources/css/gray.css">
+<link rel="stylesheet" href="./resources/css/purple.css">
 
 <!-- Responsive Style -->
 <link rel="stylesheet" href="./resources/css/responsive.css">
@@ -28,7 +28,239 @@
 <link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 
 <script src="./resources/js/jquery-3.2.1.min.js"></script>
+<<<<<<< HEAD
 <script src="./resources/js/jquery-migrate-1.4.1.js"></script>
+=======
+<script src="https://code.jquery.com/jquery-migrate-1.4.1.js"></script>
+<!-- chosen 설정 파일-->
+<script type="text/javascript">
+	//DB에서 대분류 소분류 목록 가져오기 
+	function loadMinorList(major){	
+		$.ajax({
+			url: 'minorList',
+			method: 'get',
+			data: {major : major},
+			success: function(minorList){
+				$("#minorSection").empty();
+				$("#major").val(major).prop("selected", true);
+				for(var i = 0; i < minorList.length; i++) {
+					if(minorList[i].majorNum == major) {
+						$("#minorSection").append('<label for="minorNum'+ minorList[i].minorNum +'"><input type="radio" required="required" value="'+ minorList[i].minorNum +'" name="MinorNum" id="minorNum'+ minorList[i].minorNum +'">'+ minorList[i].minorName + '</label>');
+					}
+				}
+			}
+		});
+	}
+
+</script>
+
+</head>
+<body>
+	<jsp:include page="header.jsp" flush="false" />
+	<div class="breadcrumbs" id="sectionBack">
+		<section class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Ask Question</h1>
+
+				</div>
+				<div class="col-md-12">
+					<div class="crumbs">
+						<a href="#">Home</a> <span class="crumbs-span">/</span> <a
+							href="#">Pages</a> <span class="crumbs-span">/</span> <span
+							class="current">Ask Question</span>
+					</div>
+				</div>
+			</div>
+			<!-- End row -->
+		</section>
+		<!-- End container -->
+	</div>
+	<!-- End breadcrumbs -->
+
+	<section class="container main-content">
+		<div class="row">
+			<div class="col-md-9">
+
+				<div class="page-content ask-question">
+					<div class="boxedtitle page-title">
+						<h2>Ask Question</h2>
+					</div>
+
+					<p>こんにちは。KinQに知りたい質問や気になることを気軽くに質問をすることができます。</p>
+
+					<div class="form-style form-style-3" id="question-submit">
+						<form
+							action='${question.title == null? "addQuestion":"modifyQuestion"}'
+							method="post" enctype="multipart/form-data"
+							onsubmit="return validationCheck();">
+
+							<!-- 글쓰기 번호가 여기에 hidden으로 존재한다. -->
+							<input type="hidden" value="${questionNum}" name="questionNum"
+								id="questionNum"
+								placeholder="여기에는 Q_BOARD 시퀀스로부터 가져온 questionNum가 히든으로 있는다."
+								required="required">
+
+							<!-- 이걸 왜 nullable로 하지 않은이유가 있습니까? 누가 설계한것인가? -->
+							<select name="qstatus" style="display: none;">
+								<option value="in progress">in progress</option>
+								<option value="solved">solved</option>
+							</select>
+
+							<div class="form-inputs clearfix">
+								<p>
+									<label class="required">タイトル<span>*</span></label>
+									<c:if test="${title != null? true:false }">
+										<input type="text" id="question-title" value="${title}"
+											name="title" required="required">
+									</c:if>
+									<c:if test="${title == null? true:false }">
+										<input type="text" id="question-title"
+											value="${question.title}" name="title" required="required">
+									</c:if>
+									<span class="form-description">回答者が見やすいタイトルを入力してください。</span>
+								</p>
+								<div id="form-textarea">
+									<label class="required">質問の内容<span>*</span></label>
+									<p>
+										<textarea id="question_details" name="questionContent"
+											required="required" aria-required="true" cols="58" rows="8">${question.questionContent}</textarea>
+										<span class="form-description">質問の内容がアップロードされます。また、映像の録画にも使用されます。</span>
+									</p>
+								</div>
+
+
+								<!-- 아직 파일 업로드를 고려하여 컨트롤러를 만들지 않음. -->
+								<!-- 								<label>Attachment</label> -->
+								<!-- 									<noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript> -->
+								<!-- 								<div class="fileinputs"> -->
+								<!-- 									<input type="file" class="file"> -->
+								<!-- 									<div class="fakefile"> -->
+								<!-- 										<button type="button" class="button small margin_0">Select file</button> -->
+								<!-- 										<span><i class="icon-arrow-up"></i>Browse</span> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
+
+								<p>
+									<label class="required">Point</label> <input type="number"
+										required="required" class="input" id="point" name="point"
+										value="${question.point}"
+										style="width: 82%; display: inline-block;"> <span
+										class="form-description"> 質問するためにはポイントが必要です。 MAXIUM
+										POINT: <output id="RecentPoint"></output>
+									</span>
+								</p>
+
+
+								<p>
+									<label>Tags</label> <input type="text" class="input"
+										id="question_tags" data-seperator=","> <span
+										class="form-description">質問の内容をタグで入力すると、より多くの回答者からの回答を得ることができます。<span
+										class="color">question , poll</span> .
+									</span>
+								</p>
+
+								<!-- 위에 tag입력으로 받은 것이 이 div에 hidden으로 생성된다. -->
+								<div id="hiddenRelatedTag"></div>
+
+								<p>
+									<label class="required">Category<span>*</span></label> <span
+										class="styled-select"> <select id="major" name="major"
+										onchange="javascript:loadMinorList(this.options[this.selectedIndex].value)"
+										required="required">
+											<option value="0">選択</option>
+											<c:forEach var="major" items="${majorList }">
+												<option value="${major.majorNum}">${major.majorName}</option>
+											</c:forEach>
+									</select> <span class="form-description">
+											<div id="minorSection"></div>
+									</span>
+
+									</span>
+								</p>
+								<p>
+									<label for="urgent" class="required">緊急質問</label> <span
+										id="urgent-span"> <label for="selectdTime" style="">大至急です。</label>
+										<select id="selectdTime" onchange="setTimeLimit()"
+										style="width: 200px; display: inline-block;">
+											<option value="0">時間を選択してください</option>
+											<option value="1">1分</option>
+											<option value="3">3分</option>
+											<option value="5">5分</option>
+											<option value="10">10分</option>
+											<option value="30">30分</option>
+											<option value="60">60分</option>
+									</select> 以内で質問の答えをもらいたいです。 <input type="text" id="timeLimit"
+										name="timeLimit" value="${question.timeLimit}"
+										style="width: 20%; display: none;">
+									</span>
+								</p>
+								<p>
+								<div class="ask-video">
+									<label class="required">video<span>*</span></label>
+									<div id="step2">
+										<h1>質問の内容に音声をつけられます。</h1>
+
+										<input type="button" id="btn-record-webm"
+											class="button color small submit" value="画面の録画を始める">
+										<input type="button" id="btn-record-webm-stop"
+											class="button color small submit" value="画面の録画を中止する">
+
+										<!-- 녹화한 영상이 있다면, 여기에 hidden으로 videoSrc가 존재한다. -->
+										<input type="text" name="videoSrc"
+											value="${question.videoSrc}" id="videoSrc"
+											style="display: none;">
+
+
+										<!-- 기존에 녹화된 영상과 녹화 할 영역(canvas)을 가진 DIV -->
+										<div id="video_and_cavas_container">
+											<div id="canvas_container">
+												<div id="HtmlTagFromTheCKEDITOR" contenteditable="true"
+													style="background-color: #FBFBEE; width: 100%;">
+													<!-- 이 안에 있는 요소만 녹화가 되기 때문에, 드래그앤 드랍으로 여기로 div를 옴겨와야 한다. -->
+													<!-- 여기에 에디터에 쓴 내용이 여기로 옴겨진다.  -->
+												</div>
+											</div>
+											<div id="video_container" style="width: 100%;">
+												<!-- 수정하기 일 땐 기존에 녹화된 파일이 여기에 보인다. -->
+												<c:if test="${question.videoSrc == null}">
+													<!-- 처음 글을 쓰거나, 기존에 영상을 녹화하지 않은 상태로 수정할 경우 녹화한 동영상이 없다. -->
+												</c:if>
+												<c:if test="${question.videoSrc != null}">
+													<video src="${question.videoSrc}" controls="controls"
+														preload="auto"></video>
+												</c:if>
+											</div>
+										</div>
+									</div>
+								</div>
+								</p>
+							</div>
+							<p id="p-ask-buttons" class="form-submit">
+								<input type="submit" id="publish-question" value="質問する"
+									class="button color small submit"> <input type="button"
+									id="ask-button" value="画面の録画" class="button color small submit"
+									onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
+							</p>
+						</form>
+					</div>
+				</div>
+				<!-- End page-content -->
+			</div>
+			<!-- End main -->
+			<jsp:include page="aside.jsp" flush="false" />
+		</div>
+		<!-- End row -->
+	</section>
+	<!-- End container -->
+
+	<jsp:include page="footer.jsp" flush="false" />
+	<!-- End wrap -->
+
+	<div class="go-up">
+		<i class="icon-chevron-up"></i>
+	</div>
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 
 	<!-- js -->
 
