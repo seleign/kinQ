@@ -83,10 +83,20 @@
     	    		filebrowserUploadUrl: 'cKEditorFileUpload'
    		 }); // Ckeditor 초기화 종료
    		 
-   		 // base64로 바꿀 임시 div
-   		 $("#tmpContents").hide();
+   		// 2. base64로 바꿀 임시 div
+   		//$("#tmpContents").hide();
    		 
-   		 // 2. 녹화 시작 버튼이 눌렸을 때
+   	// 3. videoAnswer 일 때  TODO 		
+   		  function videoAnswer() {
+   		    	$('#tabs ul li').filter(':last').hide();
+   		 	}
+   		    	 
+   		    	<c:if test='${mode == "videoAnswer"? true:false }'>
+   		    		videoAnswer();
+   		    	</c:if>	
+   		    		
+   		    		 
+   		   	 // 4. 녹화 시작 버튼이 눌렸을 때
 		document.getElementById('btn-record-webm').onclick = function() {
 			$("#btn-record-webm-stop").attr("disabled", false);
 			
@@ -138,8 +148,8 @@
 				
 			};
 
-			canvasSetTime = setInterval(looper, 50); //이게 화면 프레임수
-			imgSrcToBase64 = setInterval(imgSrcToBase64Src_settime, 120);
+			canvasSetTime = setInterval(looper, 100); //이게 화면 프레임수
+			imgSrcToBase64 = setInterval(imgSrcToBase64Src_settime, 500);
 		
 		};
 	
@@ -394,7 +404,7 @@
 				//alert("상대방과 연결되었습니다.");
 				console.log('You are still connected with: '+ connection.getAllParticipants().join(', '));
 			} else {  // 상대방이 연결을 끊었을 때
-				alert("상대방이 연결을 끊었습니다.");
+				alert("接続が切れました。");
 				console.log("Seems session has been closed or all participants left.");
 			}
 		};
@@ -513,7 +523,7 @@
 // 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			} else { // 답변자이다.
-// 				$("#join-room").click();
+//				$("#join-room").click();
 // 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			}
@@ -559,21 +569,25 @@ if(ReplyContent.length < 2) {
 if(isEmpty(videoSrc)) {
 	return false;
 }
+//location.href="http://hosting.websearch.kr/ ";
 
-$.ajax({
-	url: "registReply",
-	type: "post",
-	data: { questionNum: ${ question.questionNum },
+if(confirm("アップロードしますか。editorでも質問に答えられます。"))　{
+	$.ajax({
+		url: "registReply",
+		type: "post",
+		data: { questionNum: ${ question.questionNum },
 			id: "${ userId }",
 			videoSrc: videoSrc,
 			userNum: ${userNum},
 			replyContent: ReplyContent
-	},
-	success: function (success) {
-		alert("댓글 등록 완료")
-	}
-});
-	
+		},
+		success: function (success) {
+			alert("成功的にアップロードしました。");
+		}
+	});
+}　else{
+	alert("アップロードしないと質問に答えなかったものになってしまいます。")
+	}		
 }
 
 // 태그 내의 모든 img의 src를 base64로 변환한다.
@@ -590,7 +604,6 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 
 	// 여기에서 img가 base64가 아닌건 base64로 바꾼다.
 	var allImageCount = $("#tmpContents").find('img').length;
-	var nowImageCount = 0;
 	$("#tmpContents").find('img').each(function(){
 		var imgObject = this;
 		var imgSrc = $(imgObject).attr('src');
@@ -600,30 +613,42 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 			imgSrc = imgSrc.substring(1, imgSrc.length);
 			imgSrc = baseUrl + imgSrc;
 			$(imgObject).attr('src', imgSrc);
-			imgToBase64()
+			imgSrc = $(imgObject).attr('src');
 		} 
 		
 		// Base64가 아니면 ajax로 Base64로 변환한다.
-			function imgToBase64() {
-				$.ajax({
-		            url: 'imgToBase64',
-		            data: {
-		            		imgSrc: imgSrc
-		           		},
-		            type: 'GET',
-		            success: function(result){
-						$(imgObject).attr('src', result.base64)
-						CKEDITOR.instances.part_of_screen_to_be_shared.setData($("#tmpContents").html());
-		                    }
-		            });
-			}
+		worker.postMessage(imgSrc);
 	}) 
+}
+
+//TODO
+var worker = new Worker("/resources/js/imgToBase64_worker.js");
+worker.addEventListener("message", function(e) {
+	// e의 키:  http:로 시작하는 img
+	// e의 밸류:  base64 img
+	//var result = JSON.stringify(e.data);
+	//console.log("메인: " + JSON.stringify(e.data)   )
+	//console.log("key="+Object.keys(e.data)[0]);
+	//// Object.keys(e.data)[0], e.data[Object.keys(e.data)[0]]
+	
+	//console.log("밸류타입: " + typeof e.data[Object.keys(e.data)[0]])
+ 	$("#tmpContents").find('img').each(function(){
+ 		if(this.src == Object.keys(e.data)[0]) {
+ 			this.src = e.data[Object.keys(e.data)[0]];
+ 		}
+ 	}) 
+ 	Content = CKEDITOR.instances.part_of_screen_to_be_shared.setData($("#tmpContents").html());	
+});
+
+function toggleNavigation() {
+	$('#navigation').toggle();
+	$('#navigation2').toggle();
 }
 </script>
 </head>
 <body>
 <jsp:include page="header.jsp" flush="false" />
-<div class="breadcrumbs">
+<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -646,7 +671,7 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 			<div class="col-md-9">
 				
 				<div class="page-content ask-question">
-					<div class="boxedtitle page-title"><h2>Real-time answers</h2></div>
+					<div class="boxedtitle page-title"><h2>${question.title}</h2></div>
 					
 					<!-- here -->
 					<fieldset>
@@ -656,15 +681,42 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 <input type="text" id="room-id" value="${question.questionNum}" size=20> <br>
 <button id="open-room">1-1. 방 Open</button>
 <button id="join-room">1-2. 방 Join</button>
-<button id="btn-share-part-of-sreen" disabled>2. 공유화면 + 음성 전송</button>
-<button id="btn-record-webm">3. 자신의 공유화면 녹화</button>
-<button id="btn-leave-room" disabled>4. 접속 종료</button>
-<button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
+<button id="btn-share-part-of-sreen" disabled>1. 相手に自分の画面と音声を転送</button>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
-<button onclick="formCheck()">댓글 등록 </button>
-<button id = "test" onclick="imgSrcToBase64Src_settime"> to base64 </button>
+<button id = "test" onclick="ttt();"> to base64 </button>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
+<c:if test='${mode == "videoAnswer"? true:false }'>
+ 	<button id="btn-leave-room" disabled class="button color small submit">3. 接続終了</button>
+ </c:if>
 </fieldset>
+
+-<fieldset>
+ 	<legend onclick="toggleNavigation()">ナビゲーション</legend>
+ <div id="navigation">
+ <c:if test='${mode == "realTimeAnswer"? true:false }'>
+ 	<h2>1. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h2>
+ 	<button id="btn-record-webm" class="button color small submit">1) 自分の画面を録画</button>
+ 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">2) 自分の画面の録画を中止</button>
+ 	<h2>2. 質問と回答が終了したら相手と連結を切ります。</h2>
+ 	<button id="btn-leave-room" disabled class="button color small submit">3) 接続終了</button>
+ 	<h2>3. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
+ 	<button onclick="formCheck()" class="button color small submit">4) 回答をアップロードする </button>
+ 	
+ 	
+ </c:if>
+ <c:if test='${mode == "videoAnswer"? true:false }'>
+ 	<h2>1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h2>
+ 	<button id="btn-record-webm" class="button color small submit">1. 自分の画面を録画</button>
+ 	<h2>2. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
+ 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">2. 自分の画面の録画を中止</button> <br>
+ 	<button onclick="formCheck()" class="button color small submit">3. 回答をアップロードする </button>
+ </c:if>	
+ </div>
+ 	<div id="navigation2" hidden="hidden">
+ 		<h3>ナビゲーションを押すと隠されたものが見えます。</h3>
+ 	</div>
+ </fieldset>
+
 <table>
 	<tr>
 		<td>
@@ -689,7 +741,6 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
   <div id="tabs-2">
 		<!-- 실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다. -->
 	<div id="videos-container">
-		<h6>실시간 답변이 완료된 후, 녹화된 동영상이 여기에 보여진다.</h6>
 		<!-- ㄹㄹ -->
 		<c:if test="${question.videoSrc != null? true:false }">
 			<video src="${question.videoSrc}" controls="controls" preload="auto" width="100%"></video>
@@ -701,7 +752,7 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
    </div>
    <div id="tabs-3">
 		<!-- 상대방의 화면이 여기에 보임 -->
-		<img id="shared-part-of-screen-preview" alt="상대방의 화면이 여기에">
+		<img id="shared-part-of-screen-preview" alt="相手の画面がここに見えます。">
 	</div>
 </div>
 		</td>
@@ -710,17 +761,18 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 		<td colspan="2">
 		<div id="tabs2">
   <ul>
-    <li><a href="#tabs-4">質問の内容</a></li>
-  	<li><a href="#tabs-5">自分のEditor</a></li>
+  	<li><a href="#tabs-4">自分のEditor</a></li>
+    <li><a href="#tabs-5">質問の内容</a></li>
     <li><a href="#tabs-6">録画中(後)の画面</a></li>
   </ul>
+
     <div id="tabs-4">
- 	<!-- 상대방의 질문 내용이 여기에 보인다. -->
- 	${question.questionContent}
-  </div>
-    <div id="tabs-5">
 		 <!-- 내가 답변할 에디터가 여기에 보인다. -->
 		<textarea id="ReplyContent" name="ReplyContent" style="width: 1000px;"></textarea>
+  </div>
+      <div id="tabs-5">
+ 	<!-- 상대방의 질문 내용이 여기에 보인다. -->
+ 	${question.questionContent}
   </div>
     <div id="tabs-6">
 	<!-- 내가 녹화중인 화면이 여기에 보임 -->
@@ -753,7 +805,7 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 		</div><!-- End row -->
 	</section><!-- End container -->
 
-<div id="tmpContents">
+<div id="tmpContents" hidden="hidden">
 
 </div>
 <jsp:include page="footer.jsp" flush="false" />

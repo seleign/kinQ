@@ -348,7 +348,7 @@
 			<button class="button color small submit" style="float: right;" onclick="registReplyCancel()">취소</button>
 		</div>
 	</div>
-	<div class="breadcrumbs">
+	<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -515,7 +515,7 @@
 											</td>
 											<td>
 												<form method="post" action="videoAnswer">
-													<input type="submit" class="button color small submit" value="動画アンサー">
+													<input type="submit" class="button color small submit" value="動画でアンサー">
 													<input type="hidden" name="questionNum" value="${ question.questionNum }">
 												</form>
 											</td>

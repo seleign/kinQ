@@ -15,6 +15,8 @@ url: www.2code.info
 @import url("prettyPhoto.css");
 @import url("font-awesome/css/font-awesome.min.css");
 @import url("fontello/css/fontello.css");
+/* @import url("https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css"); */
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
 body {
 	background-color: #f3f3f3;
 	color: #2f3239;
@@ -32,6 +34,10 @@ body {
 }
 
 /* 占쏙옙 占쌘듸옙  */
+
+#nandemo {
+	font-family: Rounded Mplus 1c;
+}
 .signupIframe {
 	width: 100%;
 	height: 530px;
@@ -127,6 +133,10 @@ body {
 
 #askme_back {
 	background-image: url("../images/back2.png");
+}
+
+#sectionBack {
+	background-image: url("../images/menuBack.png");
 }
 .search_title input[type="text"]{
 	color: #ffffff;
@@ -3001,7 +3011,7 @@ input[type="checkbox"]:checked::before {
 	height: 22px;
 	display: block;
 	position: relative;
-	top: 1px;
+	top: -3%;
 	text-align: center;
 }
 /* Ask Question */
@@ -3973,7 +3983,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 .accordion .accordion-title a {
 	display: block;
 	padding: 10px 15px;
-	background-color: #2f3239;
+	background-color: #c3b5c7;
 }
 .accordion .accordion-title a:before,.accordion .accordion-title.active a:before {
 	font-family: "FontAwesome";
@@ -4063,7 +4073,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
     margin-right: 5px;
     display: block;
     padding: 10px 16px 11px 16px;
-	background-color: #2f3239;
+	background-color: #f3f3f3;
 	cursor: pointer;
 	font-size: 14px;
 }
@@ -4192,22 +4202,22 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 	font-size: 21px;
 }
 .alert-message.warning {
-	background-color: #f5d1a8;
+	background-color: #f3f3f3;
 }
 .alert-message.warning i {
-	background-color: #fd8900;
+	background-color: #cddc39;
 }
 .alert-message.warning span,.alert-message.warning a {
-	color: #fd8900;
+	color: #8bc34a;
 }
 .alert-message.success {
-	background-color: #aeddb6;
+	background-color: #f3f3f3;
 }
 .alert-message.success i {
-	background-color: #09a526;
+	background-color: #ff9800;
 }
 .alert-message.success a,.alert-message.success span {
-	color: #09a526;
+	color: #f44336;
 }
 .alert-message.error {
 	background-color: #f6d8d4;
@@ -4219,13 +4229,13 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 	color: #fe0000;
 }
 .alert-message.info {
-	background-color: #bccee8;
+	background-color: #f3f3f3;
 }
 .alert-message.info i {
-	background-color: #4480d6;
+	background-color: #905bef;
 }
 .alert-message.info a,.alert-message.info span {
-	color: #4480d6;
+	color: #673ab7;
 }
 .alert-message a:hover {
 	color: #5a5c5d !important;
