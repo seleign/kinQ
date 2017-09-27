@@ -80,6 +80,10 @@ body {
 	margin-top: 3px;
 }
 
+.load_button {
+	width:100%;
+}
+
 #QuestionList_button {
 	width:100%;
 }
