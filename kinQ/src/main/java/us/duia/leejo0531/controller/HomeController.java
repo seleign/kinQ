@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import us.duia.leejo0531.service.HomeService;
 import us.duia.leejo0531.service.UserService;
@@ -65,7 +70,28 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public String index(Model model){
+	public String index(HttpServletRequest request, HttpSession session, Model model){
+		Cookie[] cookies = request.getCookies();
+		String id = "";
+		String userNum = "";
+		String name = "";
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if ("Qid".equals(cookie.getName())) {
+					id = cookie.getValue();
+				} else if ("Qnum".equals(cookie.getName())) {
+					userNum = cookie.getValue();
+				} else if ("Qname".equals(cookie.getName())){
+					name = cookie.getValue();
+				} else if (!id.isEmpty() && !userNum.isEmpty() && !name.isEmpty()) {
+					session.setAttribute("userName", name);
+					session.setAttribute("userId", id);
+					session.setAttribute("userNum", Integer.parseInt(userNum));
+					break;
+				}
+			}
+		}
+		
 		ArrayList<String> titleList = homeSvc.getTitleList();
 		model.addAttribute("titleList", titleList);
 		

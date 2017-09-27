@@ -158,7 +158,7 @@
 									<input type="submit" value="Log in" class="button color small login-submit submit">
 								</p>
 								<div class="rememberme">
-									<label><input type="checkbox" checked="checked"> Remember Me</label>
+									<label><input name="rememberCheck" type="checkbox" checked="checked"> Remember Me</label>
 								</div>
 							</form>
 						</div>
