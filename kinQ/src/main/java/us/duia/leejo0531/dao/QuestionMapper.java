@@ -60,4 +60,6 @@ public interface QuestionMapper {
 	public void rebuildQContentIndex();
 
 	public void rebuildRContentIndex();
+
+	public ArrayList<String> getTitleList();
 }
