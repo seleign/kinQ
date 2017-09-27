@@ -5,7 +5,6 @@ addEventListener("message", function(e) {
 	request.onreadystatechange = function(event) {
 		if(request.readyState == 4) {
 			if(request.status == 200	) {
-				console.log("제대로 나오나?")
 				var result = request.responseText.replace("base64", e.data);
 				result = JSON.parse(result)
 				postMessage(result)

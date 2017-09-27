@@ -84,7 +84,7 @@
    		 }); // Ckeditor 초기화 종료
    		 
    		// 2. base64로 바꿀 임시 div
-   		 $("#tmpContents").hide();
+   		//$("#tmpContents").hide();
    		 
    	// 3. videoAnswer 일 때  TODO 		
    		  function videoAnswer() {
@@ -148,8 +148,8 @@
 				
 			};
 
-			canvasSetTime = setInterval(looper, 50); //이게 화면 프레임수
-			imgSrcToBase64 = setInterval(imgSrcToBase64Src_settime, 120);
+			canvasSetTime = setInterval(looper, 100); //이게 화면 프레임수
+			imgSrcToBase64 = setInterval(imgSrcToBase64Src_settime, 500);
 		
 		};
 	
@@ -404,7 +404,7 @@
 				//alert("상대방과 연결되었습니다.");
 				console.log('You are still connected with: '+ connection.getAllParticipants().join(', '));
 			} else {  // 상대방이 연결을 끊었을 때
-				alert("상대방이 연결을 끊었습니다.");
+				alert("接続が切れました。");
 				console.log("Seems session has been closed or all participants left.");
 			}
 		};
@@ -590,63 +590,6 @@ if(confirm("アップロードしますか。editorでも質問に答えられ�
 	}		
 }
 
-// 기본 맵 Map 재정의
-// http://eunsood.tistory.com/entry/javascript-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%97%90%EC%84%9C-hashmap-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
-Map = function(){
-	 this.map = new Object();
-	};   
-	
-Map.prototype = {   
-	    put : function(key, value){   
-	        this.map[key] = value;
-	    },   
-	    get : function(key){   
-	        return this.map[key];
-	    },
-	    containsKey : function(key){    
-	     return key in this.map;
-	    },
-	    containsValue : function(value){    
-	     for(var prop in this.map){
-	      if(this.map[prop] == value) return true;
-	     }
-	     return false;
-	    },
-	    isEmpty : function(key){    
-	     return (this.size() == 0);
-	    },
-	    clear : function(){   
-	     for(var prop in this.map){
-	      delete this.map[prop];
-	     }
-	    },
-	    remove : function(key){    
-	     delete this.map[key];
-	    },
-	    keys : function(){   
-	        var keys = new Array();   
-	        for(var prop in this.map){   
-	            keys.push(prop);
-	        }   
-	        return keys;
-	    },
-	    values : function(){   
-	     var values = new Array();   
-	        for(var prop in this.map){   
-	         values.push(this.map[prop]);
-	        }   
-	        return values;
-	    },
-	    size : function(){
-	      var count = 0;
-	      for (var prop in this.map) {
-	        count++;
-	      }
-	      return count;
-	    }
-	};
-
-var map = new Map();
 // 태그 내의 모든 img의 src를 base64로 변환한다.
 // 이 함수는 공유 화면 -> 공유 화면의으로 전송되며, img의 src를 base64로 바꾼다.
 var Content;
@@ -671,16 +614,8 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 			imgSrc = baseUrl + imgSrc;
 			$(imgObject).attr('src', imgSrc);
 			imgSrc = $(imgObject).attr('src');
-			map.put(imgSrc, "");
-			//imgToBase64()
 		} 
 		
-		if(map.containsKey(imgSrc)) {
-			$(imgObject).attr('src', map.get(imgSrc));
-		}
-		
-		//alert(map.get(imgSrc))
-		// 여기를 워커로 처리		
 		// Base64가 아니면 ajax로 Base64로 변환한다.
 		worker.postMessage(imgSrc);
 	}) 
@@ -694,13 +629,16 @@ worker.addEventListener("message", function(e) {
 	//var result = JSON.stringify(e.data);
 	//console.log("메인: " + JSON.stringify(e.data)   )
 	//console.log("key="+Object.keys(e.data)[0]);
-	map.put(Object.keys(e.data)[0], e.data[Object.keys(e.data)[0]])
+	//// Object.keys(e.data)[0], e.data[Object.keys(e.data)[0]]
+	
+	//console.log("밸류타입: " + typeof e.data[Object.keys(e.data)[0]])
+ 	$("#tmpContents").find('img').each(function(){
+ 		if(this.src == Object.keys(e.data)[0]) {
+ 			this.src = e.data[Object.keys(e.data)[0]];
+ 		}
+ 	}) 
+ 	Content = CKEDITOR.instances.part_of_screen_to_be_shared.setData($("#tmpContents").html());	
 });
-
-function ttt() {
-	imgSrcToBase64Src_settime();
-	//worker.postMessage({"https://junyeon.leejo0531.duia.us:8443/resources/uploadedFile/id03/201709261506434596292.png": "1번쨰"});
-}
 
 function toggleNavigation() {
 	$('#navigation').toggle();
@@ -757,12 +695,14 @@ function toggleNavigation() {
  <div id="navigation">
  <c:if test='${mode == "realTimeAnswer"? true:false }'>
  	<h2>1. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h2>
- 	<button id="btn-record-webm" class="button color small submit">2. 自分の画面を録画</button>
+ 	<button id="btn-record-webm" class="button color small submit">1) 自分の画面を録画</button>
+ 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">2) 自分の画面の録画を中止</button>
  	<h2>2. 質問と回答が終了したら相手と連結を切ります。</h2>
- 	<button id="btn-leave-room" disabled class="button color small submit">3. 接続終了</button>
+ 	<button id="btn-leave-room" disabled class="button color small submit">3) 接続終了</button>
  	<h2>3. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
- 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">4. 自分の画面の録画を中止</button> <br>
- 	<button onclick="formCheck()" class="button color small submit">5. 回答をアップロードする </button>
+ 	<button onclick="formCheck()" class="button color small submit">4) 回答をアップロードする </button>
+ 	
+ 	
  </c:if>
  <c:if test='${mode == "videoAnswer"? true:false }'>
  	<h2>1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h2>
@@ -865,7 +805,7 @@ function toggleNavigation() {
 		</div><!-- End row -->
 	</section><!-- End container -->
 
-<div id="tmpContents">
+<div id="tmpContents" hidden="hidden">
 
 </div>
 <jsp:include page="footer.jsp" flush="false" />
