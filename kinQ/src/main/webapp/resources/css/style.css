@@ -22,6 +22,12 @@ body {
 	overflow-x: hidden;
 }
 
+.aside_recent_post{
+    overflow: hidden;
+	text-overflow: ellipsis;
+	height:88px;
+}
+
 .mypage-tab-inner {
 }
 
