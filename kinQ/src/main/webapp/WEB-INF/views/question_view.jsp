@@ -348,7 +348,7 @@
 			<button class="button color small submit" style="float: right;" onclick="registReplyCancel()">취소</button>
 		</div>
 	</div>
-	<div class="breadcrumbs">
+	<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">

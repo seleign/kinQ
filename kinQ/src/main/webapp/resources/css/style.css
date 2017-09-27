@@ -128,6 +128,10 @@ body {
 #askme_back {
 	background-image: url("../images/back2.png");
 }
+
+#sectionBack {
+	background-image: url("../images/menuBack.png");
+}
 .search_title input[type="text"]{
 	color: #ffffff;
 }
@@ -4063,7 +4067,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
     margin-right: 5px;
     display: block;
     padding: 10px 16px 11px 16px;
-	background-color: #2f3239;
+	background-color: #f3f3f3;
 	cursor: pointer;
 	font-size: 14px;
 }
@@ -4192,22 +4196,22 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 	font-size: 21px;
 }
 .alert-message.warning {
-	background-color: #f5d1a8;
+	background-color: #f3f3f3;
 }
 .alert-message.warning i {
-	background-color: #fd8900;
+	background-color: #cddc39;
 }
 .alert-message.warning span,.alert-message.warning a {
-	color: #fd8900;
+	color: #8bc34a;
 }
 .alert-message.success {
-	background-color: #aeddb6;
+	background-color: #f3f3f3;
 }
 .alert-message.success i {
-	background-color: #09a526;
+	background-color: #ff9800;
 }
 .alert-message.success a,.alert-message.success span {
-	color: #09a526;
+	color: #f44336;
 }
 .alert-message.error {
 	background-color: #f6d8d4;
@@ -4219,13 +4223,13 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 	color: #fe0000;
 }
 .alert-message.info {
-	background-color: #bccee8;
+	background-color: #f3f3f3;
 }
 .alert-message.info i {
-	background-color: #4480d6;
+	background-color: #905bef;
 }
 .alert-message.info a,.alert-message.info span {
-	color: #4480d6;
+	color: #673ab7;
 }
 .alert-message a:hover {
 	color: #5a5c5d !important;

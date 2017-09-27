@@ -228,7 +228,7 @@
 		
 		#cart{
 			text-align:center;
-			background-color: #ff6600;
+			background-color: #c3b5c7;
 			color: white;
 			padding: 10%;
 			border-radius: 20px;
@@ -236,13 +236,7 @@
 
 .pointShopBtn {
    border: 1px solid #ffffff;
-   background: #ff830f;
-   background: -webkit-gradient(linear, left top, left bottom, from(#ffd1d1), to(#ff830f));
-   background: -webkit-linear-gradient(top, #ffd1d1, #ff830f);
-   background: -moz-linear-gradient(top, #ffd1d1, #ff830f);
-   background: -ms-linear-gradient(top, #ffd1d1, #ff830f);
-   background: -o-linear-gradient(top, #ffd1d1, #ff830f);
-   background-image: -ms-linear-gradient(top, #ffd1d1 0%, #ff830f 100%);
+   background: #c3b5c7;
    padding: 4.5px 9px;
    -webkit-border-radius: 12px;
    -moz-border-radius: 12px;
@@ -250,23 +244,14 @@
    -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
    -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
    box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   text-shadow: #ff6a14 0 1px 0;
    color: #ffffff;
    font-size: 15px;
-   font-family: helvetica, serif;
-   text-decoration: none;
    vertical-align: middle;
    }
 .pointShopBtn:hover {
    border: 1px solid #0a3c59;
    text-shadow: #32576e 0 1px 0;
-   background: #030d14;
-   background: -webkit-gradient(linear, left top, left bottom, from(#5b9cc7), to(#030d14));
-   background: -webkit-linear-gradient(top, #5b9cc7, #030d14);
-   background: -moz-linear-gradient(top, #5b9cc7, #030d14);
-   background: -ms-linear-gradient(top, #5b9cc7, #030d14);
-   background: -o-linear-gradient(top, #5b9cc7, #030d14);
-   background-image: -ms-linear-gradient(top, #5b9cc7 0%, #030d14 100%);
+   background: #2f3239;
    color: #fff;
    }
 .pointShopBtn:active {
@@ -302,32 +287,30 @@
    text-shadow: #99cae8 0 1px 0;
    color: #5c4c4c;
    font-size: 14px;
-   font-family: helvetica, serif;
    text-decoration: none;
    vertical-align: middle;
    }
 .psBtn:hover {
    border: 1px solid #ffffff;
-   text-shadow: #f06897 0 1px 0;
-   background: #f25c5c;
-   background: -webkit-gradient(linear, left top, left bottom, from(#f58585), to(#f25c5c));
-   background: -webkit-linear-gradient(top, #f58585, #f25c5c);
-   background: -moz-linear-gradient(top, #f58585, #f25c5c);
-   background: -ms-linear-gradient(top, #f58585, #f25c5c);
-   background: -o-linear-gradient(top, #f58585, #f25c5c);
-   background-image: -ms-linear-gradient(top, #f58585 0%, #f25c5c 100%);
+   background: #c3b5c7;
+/*    background: -webkit-gradient(linear, left top, left bottom, from(#f58585), to(#f25c5c)); */
+/*    background: -webkit-linear-gradient(top, #f58585, #f25c5c); */
+/*    background: -moz-linear-gradient(top, #f58585, #f25c5c); */
+/*    background: -ms-linear-gradient(top, #f58585, #f25c5c); */
+/*    background: -o-linear-gradient(top, #f58585, #f25c5c); */
+/*    background-image: -ms-linear-gradient(top, #f58585 0%, #f25c5c 100%); */
    color: #fff;
    }
 .psBtn:active {
    text-shadow: #e657a1 0 1px 0;
    border: 1px solid #ffffff;
-   background: #d66565;
-   background: -webkit-gradient(linear, left top, left bottom, from(#ff8f8f), to(#f25c5c));
-   background: -webkit-linear-gradient(top, #ff8f8f, #d66565);
-   background: -moz-linear-gradient(top, #ff8f8f, #d66565);
-   background: -ms-linear-gradient(top, #ff8f8f, #d66565);
-   background: -o-linear-gradient(top, #ff8f8f, #d66565);
-   background-image: -ms-linear-gradient(top, #ff8f8f 0%, #d66565 100%);
+   background: #c3b5c7;
+/*    background: -webkit-gradient(linear, left top, left bottom, from(#ff8f8f), to(#f25c5c)); */
+/*    background: -webkit-linear-gradient(top, #ff8f8f, #d66565); */
+/*    background: -moz-linear-gradient(top, #ff8f8f, #d66565); */
+/*    background: -ms-linear-gradient(top, #ff8f8f, #d66565); */
+/*    background: -o-linear-gradient(top, #ff8f8f, #d66565); */
+/*    background-image: -ms-linear-gradient(top, #ff8f8f 0%, #d66565 100%); */
    color: #fff;
    }
   	</style>
@@ -335,8 +318,7 @@
 <body>
 <jsp:include page="header.jsp" flush="false" />
 
-	<section class="container main-content page-left-sidebar">
-		<div class="breadcrumbs">
+		<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -353,6 +335,7 @@
 		</section><!-- End container -->
 	</div><!-- End breadcrumbs -->
 	
+	<section class="container main-content">
 <c:choose>
 <c:when test="${userId !=null}">
 					
@@ -653,7 +636,7 @@
 
 			<aside class="col-md-3 sidebar">
 				<div class="widget_q widget_menu_q widget_menu_jquery">
-					<div style="background-color: #fff9c4; border-radius: 20px; padding: 5%">
+					<div style="background-color: #ffffff; border-radius: 20px; padding: 5%">
 						<h2 id="cart">マイカート</h2><hr><br> 
 							<h4 style="color: black;">ショッピングリスト</h4><div><ul id="goodsList"></ul></div>
 							<br><hr><br>
