@@ -325,11 +325,11 @@
 	   
 	   var height = scroll.height(); // Gets the height of the scroll div
 	   
-	   var topAdj = -height-30; /* '-height' turns the height                   of the UL into a negative #, 
+	   var topAdj = -height-30; /* '-height' turns the height of the UL into a negative #, 
 	                * '- 50' subtracts an extra 50 pixels from the height of 
-	         			 * the div so that it moves the trail of the UL higher to 
-	 							 * the top of the div before the animation                ends
-	 							 */
+	         		 * the div so that it moves the trail of the UL higher to 
+	 				 * the top of the div before the animation ends
+	 				*/
 	 	
 	 	scroll.animate({
 	 		'top' : [topAdj, 'linear'] 
@@ -346,7 +346,7 @@
   
   <style type="text/css">
   	.box {
-  	color: black;
+  	color: #990033;
  	margin: 3em auto;
 	padding: 2em; 
 	width: 100%;
