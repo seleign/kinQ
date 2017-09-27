@@ -384,7 +384,7 @@ body {
 #header {
 	height: 86px;
 	position: relative;
-	background-color: #ffffff;
+	background-color: #f6f6f6;
 }
 div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	background-size: 100% 100%;
@@ -739,7 +739,7 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	line-height: 28px;
 	text-align: center;
 	font-size: 14px;
-	background-color: #2f3239;
+	background-color: #bfaeca;
 	top: 10px;
 	left: 10px;
 }
