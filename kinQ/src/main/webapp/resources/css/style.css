@@ -215,7 +215,7 @@ body {
 /* Login panel */
 .login-panel {
 	padding: 20px 0;
-	background-color: #e7e1e1;
+	background-color: #f6f6f6;
 }
 .login-panel .page-content {
 	background: transparent;
@@ -231,12 +231,12 @@ body {
 	margin-bottom: 10px;
 }
 .login-panel p {
-	color: #c2c8d4;
+	color: #2f3239;
 }
 .login-panel input[type="text"],.login-panel input[type="password"] {
 	border: 1px solid #373b43;
-	background-color: #373b43;
-	color: #FFF;
+	background-color: #e8e3f0;
+	color: #2f3239;
 	padding-left: 37px;
 }
 .login-panel .form-inputs p {
