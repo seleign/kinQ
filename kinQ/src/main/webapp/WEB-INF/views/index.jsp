@@ -364,8 +364,6 @@
 						<h2>なんでも質問して!</h2>
 						<p>一日にも、多くの情報を接して数多くの質問を接するあなたに最も最適化されたサイト!今、早速質問して返事して知識を共有してください</p>
 						<div class="clearfix"></div>
-						<a class="color button dark_button medium" href="#">About Us</a>
-						<a class="color button dark_button medium" href="#">Join Now</a>
 					</div>
 					<div class="col-md-9">
 						<form class="form-style form-style-2">
