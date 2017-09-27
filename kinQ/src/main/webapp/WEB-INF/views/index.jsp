@@ -78,7 +78,8 @@
 					$('#rFrom').val( page.from +10);
 					$('#rTo').val( page.to +10);
 				}else {
-					$('#QuestionList_tap').html('検索結果がありません。');
+					$('#QuestionList_tap').append('当たる質問がありません。');
+					$('#QuestionList_button_recent').attr('disabled','true');
 				}
 			}
 		});
@@ -126,7 +127,8 @@
 					$('#uFrom').val( page.from +10);
 					$('#uTo').val( page.to +10);
 				}else {
-					$('#QuestionList_tap_urgent').html('検索結果がありません。');
+					$('#QuestionList_tap_urgent').append('当たる質問がありません。');
+					$('#QuestionList_button_urgent').attr('disabled','true');
 				}
 			}
 		});
@@ -173,8 +175,9 @@
 					$('#QuestionList_tap_progress').append(html);
 					$('#pFrom').val( page.from +10);
 					$('#pTo').val( page.to +10);
-				}else {
-					$('#QuestionList_tap_progress').html('検索結果がありません。');
+				}else if(html){
+					$('#QuestionList_tap_progress').append('当たる質問がありません。');
+					$('#QuestionList_button_progress').attr('disabled','true');
 				}
 			}
 		});
@@ -454,21 +457,21 @@
 						<input type="hidden" id="rTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap">
 					    </div>
-							<button class="button large gray-button" id="QuestionList_button" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+							<button class="button large gray-button load_button" id="QuestionList_button_recent" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
 						<input type="hidden" id="uFrom" value="1">
 						<input type="hidden" id="uTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap_urgent">
 					    </div>
-					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:urgentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+					    <button class="button large gray-button load_button" id="QuestionList_button_urgent" onclick="javascript:urgentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 					<div class="tab-inner-warp">
 						<input type="hidden" id="pFrom" value="1">
 						<input type="hidden" id="pTo" value="10">
 						<div class="tab-inner" id="QuestionList_tap_progress">
 					    </div>
-					    <button class="button large gray-button" id="QuestionList_button" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+					    <button class="button large gray-button load_button" id="QuestionList_button_progress" onclick="javascript:progressQlist()"><i class="icon-refresh"></i>Load More Questions</button>
 					</div>
 		        </div><!-- End page-content -->
 			</div><!-- End main -->
