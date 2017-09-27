@@ -31,7 +31,7 @@
   	//웹소켓 터지면 uri문제입니다 확인해주세요 
   	// 실제 서버 인증서 있을때는 wss 뒤에 /leejo0531/ 없게 수정할 것 
 // 	var webUri = "wss://" + window.location.host +"/count";
-	var webUri = "ws://" + window.location.host +"/leejo0531/count";
+	var webUri = "wss://" + window.location.host +"/leejo0531/count";
 
 	websocket = new WebSocket(webUri);
 	websocket.onopen = function(evt){
@@ -233,7 +233,7 @@
 						<div class="search_text">					
 							<input type="hidden" name="from" value="1">
 							<input type="hidden" name="to" value="10">
-						    <input type="text" name="search" value="ここで検索" onfocus="if(this.value=='ここで検索')this.value='';" onblur="if(this.value=='')this.value='ここで検索';">
+						    <input type="text" class="search_title" name="search" value="..ここで検索" onfocus="if(this.value=='..ここで検索')this.value='';" onblur="if(this.value=='')this.value='..ここで検索';">
 						    <button type="submit" class="search-submit"></button>
 					    </div>
 						<div class="search_select">
@@ -261,7 +261,7 @@
 	</div><!-- End header-top -->
 	<header id="header">
 		<section class="container clearfix">
-			<div class="logo"><a href="index"><img alt="" src="images/logo_ws3.png"></a></div>
+			<div class="logo"><a href="index"><img alt="" src="images/logo_new.png"></a></div>
 			<nav class="navigation">
 				<ul>
 					<li class="current_page_item"><a href="index.html">Home</a></li>

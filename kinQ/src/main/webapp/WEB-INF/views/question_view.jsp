@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="./resources/css/style.css">
 	
 	<!-- Skins -->
-	<link rel="stylesheet" href="./resources/css/gray.css">
+	<link rel="stylesheet" href="./resources/css/purple.css">
 	
 	<!-- Responsive Style -->
 	<link rel="stylesheet" href="./resources/css/responsive.css">
@@ -510,12 +510,6 @@
 											<td>
 												<form method="post" action="realTimeAnswer">
 													<input type="submit" class="button color small submit" value="リアルタイムーアンサー">
-													<input type="hidden" name="questionNum" value="${ question.questionNum }">
-												</form>
-											</td>
-											<td>
-												<form method="post" action="videoAnswer">
-													<input type="submit" class="button color small submit" value="動画でアンサー">
 													<input type="hidden" name="questionNum" value="${ question.questionNum }">
 												</form>
 											</td>

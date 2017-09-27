@@ -1,8 +1,6 @@
 package us.duia.leejo0531.controller;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.Cookie;
@@ -20,8 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import us.duia.leejo0531.service.HomeService;
-import us.duia.leejo0531.service.UserService;
-import us.duia.leejo0531.vo.PageVO;
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.RankVO;
 
 /**
@@ -29,6 +26,7 @@ import us.duia.leejo0531.vo.RankVO;
  */
 @Controller
 public class HomeController {
+
 
 	@Autowired(required=false)
 	HomeService homeSvc;
@@ -70,6 +68,7 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "index", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public String index(HttpServletRequest request, HttpSession session, Model model){
 		Cookie[] cookies = request.getCookies();
 		String id = "";
@@ -95,13 +94,19 @@ public class HomeController {
 		ArrayList<String> titleList = homeSvc.getTitleList();
 		model.addAttribute("titleList", titleList);
 		
+=======
+	public String index(Model model){
+		ArrayList<QuestionVO> qList = homeSvc.getQList();
+		model.addAttribute("qList", qList);
+>>>>>>> branch 'master' of https://github.com/seleign/kinq
 		return "index";
 	}
 	
 
-	@RequestMapping(value = "loginAlert", method = RequestMethod.GET)
-	public String alret(){
-		return "loginAlert";
-	}
+
+   @RequestMapping(value = "loginAlert", method = RequestMethod.GET)
+   public String alret(){
+      return "loginAlert";
+   }
 
 }

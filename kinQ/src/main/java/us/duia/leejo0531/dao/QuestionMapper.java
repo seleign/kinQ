@@ -61,5 +61,5 @@ public interface QuestionMapper {
 
 	public void rebuildRContentIndex();
 
-	public ArrayList<String> getTitleList();
+	public ArrayList<QuestionVO> getQList();
 }

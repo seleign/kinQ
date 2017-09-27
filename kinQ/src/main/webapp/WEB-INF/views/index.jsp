@@ -325,15 +325,15 @@
 	   
 	   var height = scroll.height(); // Gets the height of the scroll div
 	   
-	   var topAdj = -height-30; /* '-height' turns the height                   of the UL into a negative #, 
+	   var topAdj = -height-30; /* '-height' turns the height of the UL into a negative #, 
 	                * '- 50' subtracts an extra 50 pixels from the height of 
-	         			 * the div so that it moves the trail of the UL higher to 
-	 							 * the top of the div before the animation                ends
-	 							 */
+	         		 * the div so that it moves the trail of the UL higher to 
+	 				 * the top of the div before the animation ends
+	 				*/
 	 	
 	 	scroll.animate({
 	 		'top' : [topAdj, 'linear'] 
-	 	}, 20000, function(){
+	 	}, 30000, function(){
 	 		scroll.css('top', 80); //resets the top position of the Ul for the next cycle
 	 		scroller(); // Recalls the animation cycle to begin.
 	 	});}
@@ -342,11 +342,18 @@
 
 	 });
  
+ 	
+ 	function marqeeNum(num){
+ 		$('#selectQ').val(num);
+ 		$('#qForm').submit();
+ 	}
+ 	
+	
  </script>
   
   <style type="text/css">
   	.box {
-  	color: black;
+  	color: #5b45ad;
  	margin: 3em auto;
 	padding: 2em; 
 	width: 100%;
@@ -363,7 +370,10 @@
 .scroll {
 	position: absolute;
 	}
-	
+
+#singleQid:HOVER{
+	color: white;
+}	
 	
   </style>
 </head>
@@ -415,11 +425,19 @@
 						<h2>なんでも質問して!</h2>
 						<p>一日にも、多くの情報を接して数多くの質問を接するあなたに最も最適化されたサイト!今、早速質問して返事して知識を共有してください</p>
 						
+								<strong><span style="color: white; font-size: 15px;">最近の質問リスト</span></strong>
 								<div class="box">
 								<div class="scroll">
 									<ul>
-										<c:forEach var="title" items= "${titleList }">
-											<li><strong>${title}</strong></li><br>
+										<c:forEach var="singleQ" items= "${qList }">
+											<li>
+												<form id=qForm action="question_view" method="post">
+													<strong>
+														<input type="hidden" id="selectQ" name="questionNum" value="">
+														<span onclick="javascript:marqeeNum(${singleQ.questionNum})" id="singleQid">${singleQ.title}</span>
+													</strong>
+												</form>
+											</li><br>
 										</c:forEach>
 									</ul>
 								</div>
@@ -430,7 +448,7 @@
 					<div class="col-md-9">
 						<form class="form-style form-style-2">
 							<p>
-								<textarea rows="4" id="question_title" onfocus="if(this.value=='今,あなたが一番知りたいことは何ですか?')this.value='';" onblur="if(this.value=='')this.value='今,あなたが一番知りたいことは何ですか?';">今あなたが一番知りたいことは何ですか?</textarea>
+								<textarea rows="4" id="question_title" onfocus="if(this.value=='今,あなたが一番知りたいことは何ですか?')this.value='';" onblur="if(this.value=='')this.value='今,あなたが一番知りたいことは何ですか?';">今,あなたが一番知りたいことは何ですか?</textarea>
 								<i class="icon-pencil"></i>
 								<span class="color button small publish-question">質問</span>
 							</p>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import us.duia.leejo0531.dao.HomeDAO;
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.UserDAO;
+import us.duia.leejo0531.vo.QuestionVO;
 import us.duia.leejo0531.vo.RankVO;
 
 @Service
@@ -39,9 +40,9 @@ public class HomeService {
 		return userDao.getSimpleRankingList();
 	}
 
-	public ArrayList<String> getTitleList() {
-		ArrayList<String> titleList = qstnDao.getTitleList();
-		return titleList;
+	public ArrayList<QuestionVO> getQList() {
+		ArrayList<QuestionVO> qList = qstnDao.getQList();
+		return qList;
 	}
 	
 	
