@@ -15,6 +15,8 @@ url: www.2code.info
 @import url("prettyPhoto.css");
 @import url("font-awesome/css/font-awesome.min.css");
 @import url("fontello/css/fontello.css");
+/* @import url("https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css"); */
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
 body {
 	background-color: #f3f3f3;
 	color: #2f3239;
@@ -32,6 +34,10 @@ body {
 }
 
 /* 占쏙옙 占쌘듸옙  */
+
+#nandemo {
+	font-family: Rounded Mplus 1c;
+}
 .signupIframe {
 	width: 100%;
 	height: 530px;
@@ -3005,7 +3011,7 @@ input[type="checkbox"]:checked::before {
 	height: 22px;
 	display: block;
 	position: relative;
-	top: 1px;
+	top: -3%;
 	text-align: center;
 }
 /* Ask Question */
@@ -3977,7 +3983,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 .accordion .accordion-title a {
 	display: block;
 	padding: 10px 15px;
-	background-color: #2f3239;
+	background-color: #c3b5c7;
 }
 .accordion .accordion-title a:before,.accordion .accordion-title.active a:before {
 	font-family: "FontAwesome";

@@ -24,6 +24,16 @@
    
    <!-- Favicons -->
    <link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+   <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+   <style>
+   	#question_title{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.nandemo{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	
+   </style>
    
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -428,8 +438,8 @@
          <div class="box_icon box_warp box_no_border box_no_background" box_border="transparent" box_background="transparent" box_color="#FFF">
             <div class="row">
                <div class="col-md-3">
-                  <h2>なんでも質問して!</h2>
-                  <p>一日にも、多くの情報を接して数多くの質問を接するあなたに最も最適化されたサイト!今、早速質問して返事して知識を共有してください</p>
+                  <h2 class="nandemo">なんでも質問して!</h2>
+                  <p class="nandemo">一日にも、多くの情報を接して数多くの質問を接するあなたに最も最適化されたサイト!今、早速質問して返事して知識を共有してください</p>
                   
                         <strong><span style="color: white; font-size: 15px;">最近の質問リスト</span></strong>
                         <div class="box">
