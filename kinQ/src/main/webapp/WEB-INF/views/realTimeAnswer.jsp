@@ -86,8 +86,16 @@
    		 // 2. base64로 바꿀 임시 div
    		 $("#tmpContents").hide();
    		 
-   		 // 3.  TODO
+   		 // 3. videoAnswer 일 때  TODO
+   		
+   		 function videoAnswer() {
+   			 $('#tabs ul li').filter(':last').hide();
+		}
    		 
+   		<c:if test='${mode == "videoAnswer"? true:false }'>
+   		videoAnswer();
+   		</c:if>	
+   		
    		 
    		 // 4. 녹화 시작 버튼이 눌렸을 때
 		document.getElementById('btn-record-webm').onclick = function() {
@@ -512,11 +520,11 @@
 		
 		if(!isEmpty(questionuserNum) && !isEmpty(userNum) ) {
 			if(questionuserNum == userNum)	{ // 질문자이다.
-// 				$("#open-room").click();
+ 				$("#open-room").click();
 // 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			} else { // 답변자이다.
-// 				$("#join-room").click();
+ 				$("#join-room").click();
 // 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			}
@@ -661,7 +669,7 @@ function toggleNavigation() {
 					<div class="boxedtitle page-title"><h2>${question.title}</h2></div>
 					
 					<!-- here -->
-					<fieldset>
+					<fieldset hidden="hidden">
 <legend>개발용 버튼(삭제하지 말것)</legend>
 <h5>JQuery로 버튼을 자동 click하는 방식으로 실시간 연결 진행. 실제 서비스에서는 이 필드셋을 hidden으로 해둔다.</h5>
 <label>방 번호</label>
@@ -669,10 +677,12 @@ function toggleNavigation() {
 <button id="open-room">1-1. 방 Open</button>
 <button id="join-room">1-2. 방 Join</button>
 <button id="btn-share-part-of-sreen" disabled>1. 相手に自分の画面と音声を転送</button>
-<button id="btn-record-webm-stop" disabled="disabled">5. 자신의 공유화면 녹화 중지 + 서버로 녹화된 영상 전송</button> <br>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
 <button id = "test" onclick="imgSrcToBase64Src_settime"> to base64 </button>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
+<c:if test='${mode == "videoAnswer"? true:false }'>
+	<button id="btn-leave-room" disabled class="button color small submit">3. 接続終了</button>
+</c:if>
 </fieldset>
 
 <fieldset>
@@ -684,11 +694,15 @@ function toggleNavigation() {
 	<h2>2. 質問と回答が終了したら相手と連結を切ります。</h2>
 	<button id="btn-leave-room" disabled class="button color small submit">3. 接続終了</button>
 	<h2>3. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
-	<button onclick="formCheck()" class="button color small submit">4. 回答をアップロードする </button>
+	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">4. 自分の画面の録画を中止</button> <br>
+	<button onclick="formCheck()" class="button color small submit">5. 回答をアップロードする </button>
 </c:if>
 <c:if test='${mode == "videoAnswer"? true:false }'>
 	<h2>1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h2>
 	<button id="btn-record-webm" class="button color small submit">1. 自分の画面を録画</button>
+	<h2>2. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
+	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">2. 自分の画面の録画を中止</button> <br>
+	<button onclick="formCheck()" class="button color small submit">3. 回答をアップロードする </button>
 </c:if>	
 </div>
 	<div id="navigation2" hidden="hidden">
@@ -740,17 +754,17 @@ function toggleNavigation() {
 		<td colspan="2">
 		<div id="tabs2">
   <ul>
-    <li><a href="#tabs-4">質問の内容</a></li>
-  	<li><a href="#tabs-5">自分のEditor</a></li>
+  	<li><a href="#tabs-4">自分のEditor</a></li>
+  	<li><a href="#tabs-5">質問の内容</a></li>
     <li><a href="#tabs-6">録画中(後)の画面</a></li>
   </ul>
     <div id="tabs-4">
- 	<!-- 상대방의 질문 내용이 여기에 보인다. -->
- 	${question.questionContent}
-  </div>
-    <div id="tabs-5">
 		 <!-- 내가 답변할 에디터가 여기에 보인다. -->
 		<textarea id="ReplyContent" name="ReplyContent" style="width: 1000px;"></textarea>
+  </div>
+      <div id="tabs-5">
+ 	<!-- 상대방의 질문 내용이 여기에 보인다. -->
+ 	${question.questionContent}
   </div>
     <div id="tabs-6">
 	<!-- 내가 녹화중인 화면이 여기에 보임 -->
