@@ -174,4 +174,10 @@ public class ReplyDAO {
 		int result = mapper.replyPointUpdatMinus(reply);
 		return result;
 	}
+	
+	public int updateQuestionProgress(int questionNum) {
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		int result = mapper.updateQuestionProgress(questionNum);
+		return result;
+	}
 }

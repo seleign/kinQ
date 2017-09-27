@@ -186,4 +186,8 @@
 					)
 				)
 	</insert>
+	
+	<update id="updateQuestionProgress" parameterType="int">
+		update q_board set QSTATUS = 'solved' where questionNum = #{questionNum}
+	</update>
 </mapper>
