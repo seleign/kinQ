@@ -404,7 +404,7 @@
 						<ul class="single-question-vote">
 							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
-							<c:if test="${ user.id == sessionScope.userId && question.selectedReplyNum == 0 && question.replyCount == 0}">
+							<c:if test="${ user.id == sessionScope.userId && question.qstatus eq progress && question.replyCount == 0}">
 								<form method="get" action="modifyQuestion">
 									<input type="submit" class="button color small submit" value="修正する" style="float: right;">
 									<input type="hidden" name="questionNum" value="${ question.questionNum }">
