@@ -25,6 +25,11 @@
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 	
+	<style type="text/css">
+	div { cursor: url(./resources/images/cursor2.cur), auto;
+		 }
+	</style>
+	
 	<body>
 
 		<script src="./resources/js/three.js"></script>

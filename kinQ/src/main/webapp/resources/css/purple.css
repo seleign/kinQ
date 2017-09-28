@@ -17,10 +17,10 @@ url: www.2code.info
 	color: #ffffff;
 }
 ::selection {
-    background: #c3b5c7;
+    background: #bdaddf;
 }
 .more:hover,.button.color,.button.black:hover,.go-up,.widget_portfolio .portfolio-widget-item:hover .portfolio_img:before,.popular_posts .popular_img:hover a:before,.widget_flickr a:hover:before,.widget_highest_points .author-img a:hover:before,.question-author-img:hover span,.pagination a:hover,.pagination span:hover,.pagination span.current,.about-author .author-image a:hover:before,.question-comments a,.flex-direction-nav li a:hover,.button.dark_button.color:hover,.table-style-2 thead th,.progressbar-percent,.carousel-arrow a:hover,.box_icon:hover .icon_circle,.box_icon:hover .icon_soft_r,.box_icon:hover .icon_square,.bg_default,.box_warp_colored,.box_warp_hover:hover,.post .boxedtitle i,.single-question-title i,.question-type,.post-type,.social_icon a,.page-content .boxedtitle,.main-content .boxedtitle,.flex-caption h2,.flex-control-nav li a.flex-active,.bxslider-overlay:before,.navigation ul li ul li:hover > a,.navigation ul li ul li.current_page_item > a,#header-top,.navigation > ul > li:hover > a,.navigation > ul > li.current_page_item > a,.ask-me,.breadcrumbs,#footer-bottom .social_icons ul li a:hover,.widget_tag_cloud a:hover,input[type="checkbox"],.login-password a:hover,.tab a.current,.question-type-main,.question-report:hover,.load-questions,.del-poll-li:hover,.styled-select::before,.fileinputs span,.post .post-type,.divider span,.widget_menu li.current_page_item a,.accordion .accordion-title.active a,.tab-inner-warp,.navigation_mobile_click:before {
-	 background-color: #c3b5c7;
+	 background-color: #bdaddf;
 }
 li a {
 	color: #554c57;
@@ -29,19 +29,19 @@ p a, a:hover,.button.normal:hover,span.color,#footer a:hover,.widget a:hover,.qu
 	 color: #8a7491;
 }
 .loader_html,input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,textarea:focus,.box_icon .form-style textarea:focus,.social_icon a,#footer-bottom .social_icons ul li a:hover,.widget_login input[type="text"],.widget_login input[type="password"],.panel_light.login-panel input[type="text"],.panel_light.login-panel input[type="password"] {
-	border-color: #c3b5c7;
+	border-color: #bdaddf;
 }
 .tabs {
-	border-bottom-color: #c3b5c7;
+	border-bottom-color: #bdaddf;
 }
 .tab a.current {
-	border-top-color: #c3b5c7;
+	border-top-color: #bdaddf;
 }
 .tabs-vertical .tab a.current,blockquote {
-	border-right-color: #c3b5c7;
+	border-right-color: #bdaddf;
 }
 blockquote {
-	border-left-color: #c3b5c7;
+	border-left-color: #bdaddf;
 }
 .box_warp_hover:hover,.box_warp_colored {
 	border-color: #b990c5;
