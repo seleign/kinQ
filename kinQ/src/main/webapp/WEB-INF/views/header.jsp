@@ -1,12 +1,12 @@
 <%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
     <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 	<!-- Basic Page Needs -->
 	<meta charset="utf-8">
-	<title>Ask me – Responsive Questions and Answers Template</title>
+	<title>緊Q</title>
 	<meta name="description" content="Ask me Responsive Questions and Answers Template">
 	<meta name="author" content="vbegy">
 	
@@ -29,6 +29,18 @@
 	div { cursor: url(./resources/images/cursor2.cur), auto;
 		 }
 	</style>
+	 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+	<style>
+   	#header-search{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.header{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.search_select{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   </style>
 
 <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
   <script type="text/javascript">
@@ -170,9 +182,10 @@
 				</div><!-- End col-md-6 -->
 				<div class="col-md-6">
 					<div class="page-content Register">
-						<h2>Register Now</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravdio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequa. Vivamus vulputate posuere nisl quis consequat.</p>
-						<a class="button color small signup" id="joinpagebutton">Create an account</a>
+						<h2>緊Qにようこそ！</h2>
+						<p>誰でも先生になれます。自分の持っている知識を緊Qで共有して下さい。毎日、おびただしい情報の洪水の中で有用な情報を得ることはとても難しいです。
+						そのような問題を抱えているあなたに緊Qが解決策を提供します。今すぐ加入して体験してみてください。</p>
+						<a class="button color small signup" id="joinpagebutton">新規加入</a>
 					</div><!-- End page-content -->
 				</div><!-- End col-md-6 -->
 			</div>

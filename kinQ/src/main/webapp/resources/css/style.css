@@ -16,7 +16,6 @@ url: www.2code.info
 @import url("font-awesome/css/font-awesome.min.css");
 @import url("fontello/css/fontello.css");
 /* @import url("https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css"); */
-<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
 body {
 	background-color: #f3f3f3;
 	color: #2f3239;
@@ -52,6 +51,14 @@ body {
 }
 
 /* 헤더 마이페이지 버튼설정 */
+
+#QuestionList_button_recent {
+	background-color: #bdaddf;
+}
+#QuestionList_button_recent:hover {
+	background-color: #2f3239;
+	color: white;
+}
 .header-mypage {
 	float: right;
 	position: relative;
@@ -122,6 +129,14 @@ body {
 
 #q_urgent {
 	border: 3px solid red;
+}
+
+#bestReplyDiv {
+	border: 3px solid #fff8b6;
+}
+
+#selectedReplyDiv {
+	border: 3px solid #b99ae6;
 }
 
 #home_logo {
@@ -762,7 +777,7 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	line-height: 28px;
 	text-align: center;
 	font-size: 14px;
-	background-color: #bfaeca;
+	background-color: #bdaddf;
 	top: 10px;
 	left: 10px;
 }
@@ -2195,7 +2210,7 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	line-height: 23px !important;
 	font-size: 11.5px !important;
 	text-align: center;
-	background-color: #c3b5c7;
+	background-color: #bdaddf;
 }
 .widget .ul_list {
 	margin-bottom: 0;
@@ -3983,7 +3998,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
 .accordion .accordion-title a {
 	display: block;
 	padding: 10px 15px;
-	background-color: #c3b5c7;
+	background-color: #bdaddf;
 }
 .accordion .accordion-title a:before,.accordion .accordion-title.active a:before {
 	font-family: "FontAwesome";

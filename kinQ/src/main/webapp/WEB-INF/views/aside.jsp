@@ -24,6 +24,15 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+  	 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+  	<style>
+	   	#aside_widget{
+	   		font-family: "Rounded Mplus 1c";
+	   	}
+	   	.widget_title{
+	   		font-family: "Rounded Mplus 1c";
+	   	}
+   </style>
   	
   <script src="./resources/js/dateFormat.min.js"></script>
   	<script type="text/javascript">
@@ -121,7 +130,7 @@
 
 <aside class="col-md-3 sidebar">
 				<div class="widget widget_stats">
-					<h3 class="widget_title">サイトの利用現状</h3>
+					<h3 class="widget_title" id="aside_widget">サイトの利用現状</h3>
 					
 					<div class="ul_list ul_list-icon-ok">
 						<ul>

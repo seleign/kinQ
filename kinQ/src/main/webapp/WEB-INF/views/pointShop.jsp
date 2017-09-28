@@ -6,7 +6,7 @@
 
 	<!-- Basic Page Needs -->
 	<meta charset="utf-8">
-	<title>ポイントショップ</title>
+	<title>緊Q</title>
 	<meta name="description" content="Ask me Responsive Questions and Answers Template">
 	<meta name="author" content="vbegy">
 	
@@ -24,6 +24,28 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+	 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+	<style>
+   	.t_left {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	#cart {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.alert-message{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	#submitButton {
+   	font-family: "Rounded Mplus 1c";
+   	}
+   	#submitButton2 {
+   	font-family: "Rounded Mplus 1c";
+   	}
+   	.psBtn {
+   	font-family: "Rounded Mplus 1c";
+   	}
+   </style>
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
     	
@@ -228,7 +250,7 @@
 		
 		#cart{
 			text-align:center;
-			background-color: #c3b5c7;
+			background-color: #bdaddf;
 			color: white;
 			padding: 10%;
 			border-radius: 20px;
@@ -236,7 +258,7 @@
 
 .pointShopBtn {
    border: 1px solid #ffffff;
-   background: #c3b5c7;
+   background: #bdaddf;
    padding: 4.5px 9px;
    -webkit-border-radius: 12px;
    -moz-border-radius: 12px;
@@ -271,28 +293,28 @@
 .psBtn {
    border: 1px solid #ffffff;
    background: #ffffff;
-   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
-   background: -webkit-linear-gradient(top, #ffffff, #ffffff);
-   background: -moz-linear-gradient(top, #ffffff, #ffffff);
-   background: -ms-linear-gradient(top, #ffffff, #ffffff);
-   background: -o-linear-gradient(top, #ffffff, #ffffff);
-   background-image: -ms-linear-gradient(top, #ffffff 0%, #ffffff 100%);
+/*    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff)); */
+/*    background: -webkit-linear-gradient(top, #ffffff, #ffffff); */
+/*    background: -moz-linear-gradient(top, #ffffff, #ffffff); */
+/*    background: -ms-linear-gradient(top, #ffffff, #ffffff); */
+/*    background: -o-linear-gradient(top, #ffffff, #ffffff); */
+/*    background-image: -ms-linear-gradient(top, #ffffff 0%, #ffffff 100%); */
    padding: 6px 12px;
    -webkit-border-radius: 5px;
    -moz-border-radius: 5px;
    border-radius: 5px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   text-shadow: #99cae8 0 1px 0;
-   color: #5c4c4c;
+/*    -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0; */
+/*    -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0; */
+/*    box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0; */
+/*    text-shadow: #99cae8 0 1px 0; */
+/*    color: #5c4c4c; */
    font-size: 14px;
    text-decoration: none;
    vertical-align: middle;
    }
 .psBtn:hover {
    border: 1px solid #ffffff;
-   background: #c3b5c7;
+   background: #bdaddf;
 /*    background: -webkit-gradient(linear, left top, left bottom, from(#f58585), to(#f25c5c)); */
 /*    background: -webkit-linear-gradient(top, #f58585, #f25c5c); */
 /*    background: -moz-linear-gradient(top, #f58585, #f25c5c); */
@@ -304,7 +326,7 @@
 .psBtn:active {
    text-shadow: #e657a1 0 1px 0;
    border: 1px solid #ffffff;
-   background: #c3b5c7;
+   background: #bdaddf;
 /*    background: -webkit-gradient(linear, left top, left bottom, from(#ff8f8f), to(#f25c5c)); */
 /*    background: -webkit-linear-gradient(top, #ff8f8f, #d66565); */
 /*    background: -moz-linear-gradient(top, #ff8f8f, #d66565); */
@@ -642,8 +664,8 @@
 							<br><hr><br>
 							<h4 style="color: red;">総合</h4><div id="totalPrice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 ポイント</div><br> 
 							<hr><br>
-						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button small gray-button custom-button" style="float: left; width: 50%; font-size: 80%; padding-left: 13%; border-radius: 5px;">キャンセル</a>
-						<a href="javascript:void(0)" class="button small yellow-button custom-button" style="width: 43%; font-size: 80%; padding-left: 12%; border-radius: 5px;" onclick="javascript:orderGoods()"><input type="hidden" name="hiddenTotalPrice" value="">購入する</a>
+						<a href="javascript:void(0)" onclick="javascript:cancel()" class="button color small"  id="submitButton" style="float: left; width: 50%; font-size: 80%; padding-left: 13%; border-radius: 5px;">キャンセル</a>
+						<a href="javascript:void(0)" class="button color small" id="submitButton2" style="width: 43%; font-size: 80%; padding-left: 12%; border-radius: 5px;" onclick="javascript:orderGoods()"><input type="hidden" name="hiddenTotalPrice" value="">購入する</a>
 					</div>
 				</div><!-- End widget_menu -->
 			</aside><!-- End sidebar -->

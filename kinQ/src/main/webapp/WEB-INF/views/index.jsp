@@ -6,7 +6,7 @@
 
    <!-- Basic Page Needs -->
    <meta charset="utf-8">
-   <title>Ask me – Responsive Questions and Answers Template</title>
+   <title>緊Q</title>
    <meta name="description" content="Ask me Responsive Questions and Answers Template">
    <meta name="author" content="vbegy">
    
@@ -32,7 +32,6 @@
    	.nandemo{
    		font-family: "Rounded Mplus 1c";
    	}
-   	
    </style>
    
    <style type="text/css">
@@ -490,7 +489,6 @@
    <section class="container main-content">
       <div class="row">
          <div class="col-md-9">
-            
             <div class="tabs-warp question-tab">
                   <ul class="tabs">
                       <li class="tab"><a href="#" class="current">Recent Questions</a></li>
@@ -502,7 +500,7 @@
                   <input type="hidden" id="rTo" value="10">
                   <div class="tab-inner" id="QuestionList_tap">
                    </div>
-                     <button class="button large gray-button load_button" id="QuestionList_button_recent" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
+                     <button class="button large load_button" id="QuestionList_button_recent" onclick="javascript:recentQlist()"><i class="icon-refresh"></i>Load More Questions</button>
                </div>
                <div class="tab-inner-warp">
                   <input type="hidden" id="uFrom" value="1">
