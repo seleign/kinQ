@@ -85,7 +85,7 @@
 	
 	<!-- 유저별 알람기록 가져오기 -->
 	<select id="getUserAlarm" parameterType="int" resultType="Alarm">
-		select * from useralarm where usernum = #{userNum}
+	<![CDATA[	select * from (select * from useralarm where usernum = #{userNum} order by alarmnum) where rownum < 11]]> 
 	</select>
 	
 	<select id="getMyRank" parameterType="int" resultType="Rank">
