@@ -190,10 +190,10 @@
 					html += "<div class=\"comment-meta\">";
 					html += "<div class=\"date\"><i class=\"icon-time\"></i>" + element.r_RegDate + "</div>" ;
 					html += "</div>";
-					if (${userNum} == element.userNum) {
+/* 					if (${userNum} == element.userNum) {
 						html += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + element.replyNum + ")\"><i class=\"icon-reply\"></i>삭제</a>" ;
 					}
-					html += "</div>";
+ */					html += "</div>";
 					html += "<div class=\"text\">";
 					html += "<p>" + element.replyContent + "</p>";
 					html += "</div>";
