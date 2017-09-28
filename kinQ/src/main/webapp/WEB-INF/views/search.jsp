@@ -34,10 +34,10 @@
  
   function questionView(questionNum) {
 		var questionview = document.questionview;
-		questionview.questionNum.value=questionNum ;
+		questionview.questionNum.value=questionNum;
 		questionview.submit();
 	}	
-  
+   
 	function resultList(){
 		$.ajax({
 			url: 'search',
@@ -61,7 +61,7 @@
 						}else{
 							html +='<article class="question question-type-normal">';
 						}
-						html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
+						html += '<h2><a href="#" onclick="questionView(' + element.questionNum + ')">'+element.title+'</a></h2>';
 //						html += '<a class="question-report" href="javascript:void(0)" onclick="location.href=\'reportPage?reportedQNum='+element.questionNum+'\'">Report</a>';
 						html += '<div class="question-inner"><div class="clearfix"></div>';
 						html += '<p class="question-desc">'+element.questionContent+'</p>';
@@ -95,11 +95,11 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" flush="false" />
-		
+<!-- 		
 	<form name="questionview" action="question_view" method="post">
 		<input type="hidden" name="questionNum" value="">
 	</form>	
-		
+		 -->
 	<div class="breadcrumbs" id="sectionBack">
 		<section class="container">
 			<div class="row">
