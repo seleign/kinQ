@@ -22,6 +22,27 @@
 
 <!-- Favicons -->
 <link rel="shortcut icon" href="./resources/images/favicon_qs.png">
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+   <style>
+   	.pageName {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.current{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.pageTitle{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.button.color.chat{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.widget_title{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.chatNote{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   </style>
 <!-- JQuery -->
 <script src="./resources/js/jquery-3.2.1.min.js"></script>
 <script src="./resources/js/jquery-migrate-1.4.1.js"></script>
@@ -649,15 +670,13 @@ function toggleNavigation() {
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Real-time answers</h1>
+					<h1 class="pageName">リアルタイム回答</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
 						<a href="#">Home</a>
 						<span class="crumbs-span">/</span>
-						<a href="#">Pages</a>
-						<span class="crumbs-span">/</span>
-						<span class="current">Real-time answers</span>
+						<span class="current">リアルタイム回答</span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -668,7 +687,7 @@ function toggleNavigation() {
 			<div class="col-md-9">
 				
 				<div class="page-content ask-question">
-					<div class="boxedtitle page-title"><h2>${question.title}</h2></div>
+					<div class="boxedtitle page-title"><h1 class="pageTitle">${question.title}</h1></div>
 					
 <!-- here -->
 <fieldset hidden="hidden">
@@ -686,29 +705,29 @@ function toggleNavigation() {
 </fieldset>
 
 <fieldset>
-<legend onclick="toggleNavigation()">ナビゲーション</legend>
+<legend onclick="toggleNavigation()"><h3 class="pageName">ナビゲーション</h3></legend>
  <div id="navigation">
  <c:if test='${mode == "realTimeAnswer"? true:false }'>
- 	<h2>1. 下のボタン（「１）」）が押せるようになると相手に自分の画面と音声を送ることが出来ます。</h2>
- 	<button id="btn-share-part-of-sreen" class="button color small submit" disabled>1) 相手に自分の画面と音声を転送</button>
- 	<h2>2. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h2>
- 	<button id="btn-record-webm" class="button color small submit">2) 自分の画面を録画</button>
- 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">3) 自分の画面の録画を中止</button>
- 	<h2>3. 質問と回答が終了したら相手と連結を切ります。</h2>
- 	<button id="btn-leave-room" disabled class="button color small submit">4) 接続終了</button>
- 	<h2>4. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
- 	<button onclick="formCheck()" class="button color small submit">5) 回答をアップロードする</button>
+ 	<h4 class="pageName">1. 下のボタン（「１）」）が押せるようになると相手に自分の画面と音声を送ることが出来ます。</h4>
+ 	<button id="btn-share-part-of-sreen" class="button color realtime" disabled>1) 相手に自分の画面と音声を転送</button>
+ 	<h4 class="pageName">2. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h4>
+ 	<button id="btn-record-webm" class="button color realtime">2) 自分の画面を録画</button>
+ 	<button id="btn-record-webm-stop" disabled="disabled" class="button color realtime">3) 自分の画面の録画を中止</button>
+ 	<h4 class="pageName">3. 質問と回答が終了したら相手と連結を切ります。</h4>
+ 	<button id="btn-leave-room" disabled class="button color realtime">4) 接続終了</button>
+ 	<h4 class="pageName">4. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h4>
+ 	<button onclick="formCheck()" class="button color realtime">5) 回答をアップロードする</button>
  </c:if>
  <c:if test='${mode == "videoAnswer"? true:false }'>
- 	<h2>1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h2>
- 	<button id="btn-record-webm" class="button color small submit">1. 自分の画面を録画</button>
- 	<h2>2. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
- 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">2. 自分の画面の録画を中止</button> <br>
- 	<button onclick="formCheck()" class="button color small submit">3. 回答をアップロードする </button>
+ 	<h4 class="pageName">1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h4>
+ 	<button id="btn-record-webm" class="button color realtime">1. 自分の画面を録画</button>
+ 	<h4 class="pageName">2. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h4>
+ 	<button id="btn-record-webm-stop" disabled="disabled" class="button color realtime">2. 自分の画面の録画を中止</button> <br>
+ 	<button onclick="formCheck()" class="button color realtime">3. 回答をアップロードする </button>
  </c:if>	
  </div>
  	<div id="navigation2" hidden="hidden">
- 		<h3>ナビゲーションを押すと隠されたものが見えます。</h3>
+ 		<h4 class="pageName">ナビゲーションを押すと隠されたものが見えます。</h4>
  	</div>
  </fieldset>
 
@@ -717,9 +736,9 @@ function toggleNavigation() {
 		<td>
 		<div id="tabs" >
   <ul>
-    <li><a href="#tabs-1">自分の画面</a></li>
-    <li><a href="#tabs-2">質問者がアップロードした動画</a></li>
-    <li><a href="#tabs-3">相手の画面</a></li>
+    <li><a href="#tabs-1" id="tab_one" class="pageName">自分の画面</a></li>
+    <li><a href="#tabs-2" class="pageName">質問者がアップロードした動画</a></li>
+    <li><a href="#tabs-3" class="pageName">相手の画面</a></li>
   </ul>
   <div id="tabs-1">
 		<!-- 이게 공유된다. DIV안에 있는게 이미지로 바뀌어서 전송된다. -->
@@ -756,9 +775,9 @@ function toggleNavigation() {
 		<td colspan="2">
 		<div id="tabs2">
   <ul>
-  	<li><a href="#tabs-4">自分のEditor</a></li>
-    <li><a href="#tabs-5">質問の内容</a></li>
-    <li><a href="#tabs-6">録画中(後)の画面</a></li>
+  	<li><a href="#tabs-4" class="pageName">自分のEditor</a></li>
+    <li><a href="#tabs-5" class="pageName">質問の内容</a></li>
+    <li><a href="#tabs-6" class="pageName">録画中(後)の画面</a></li>
   </ul>
 
     <div id="tabs-4">
@@ -782,15 +801,15 @@ function toggleNavigation() {
 			<!-- aside -->
 	<aside class="col-md-3 sidebar">
 	<div class="widget">
-		<h3 class="widget_title">チャット及びファイル送り</h3>
-		<input type="text" id="input-text-chat" placeholder="チャット入力" disabled style="display: inline-block;">
-		<button id="share-file" disabled class="button color small submit">ファイルを送る</button> 
+		<h2 class="widget_title">チャット</h2>
+		<input type="text" class="pageName" id="input-text-chat" placeholder="チャット入力" disabled style="display: inline-block;">
+		<button id="share-file" disabled class="button color chat">ファイルを送る</button> 
+		<button onclick="lastFileDelete()" class="button color chat" >ファイルを削除</button>	
+		<button onclick="lastFileChat()" class="button color chat">チャットを削除</button>
 
 		<!-- 채팅 및 파일이 전송된 것이 여기에 나타난다. -->
 		<div id="chat-container" style="border:1px solid gray;">
-		<button onclick="lastFileDelete()" class="button color small submit" >最後のファイルを削除</button>	
-		<button onclick="lastFileChat()" class="button color small submit">最後のチャットを削除</button>
-		<h6>チャットの内容及び送信されたファイル</h6>
+		<h6 class="chatNote">チャットの内容及び送信されたファイル</h6>
 			<div id="file-container"></div>
 			<div class="chat-output"></div>
 		</div>		
