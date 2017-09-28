@@ -141,7 +141,7 @@
 								replyHtml += "<div class=\"date\"><i class=\"icon-time\"></i>" + replyList[i].r_RegDate + "</div>" ;
 								replyHtml += "</div>";
 								if (userId == replyList[i].id) {
-									replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>削除</a>" ;
+									replyHtml += "<a class=\"comment-reply\" href=\"javascript:deleteReply(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>削除</a>";
 								}
 								if ( "${ user.id }" == userId && replyList[i].selectedReplyNum == 0) {
 									replyHtml += "<a class=\"comment-reply\" href=\"javascript:recommendPop(" + replyList[i].replyNum + ")\"><i class=\"icon-reply\"></i>答えを選択</a>";
@@ -388,11 +388,11 @@
 							<p>${ question.questionContent }</p>
 						</div>
 						<div class="question-details">
-						<c:if test="${ question.selectedReplyNum != 0 }">
-							<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>
+						<c:if test="${ question.qstatus ne solved }">
+							<span class="question-answered question-answered-done"><i class="icon-ok"></i>${ question.qstatus }</span>
 						</c:if>
-						<c:if test="${ question.selectedReplyNum == 0 }">
-							<span class="question-answered"><i class="icon-ok"></i>in progress</span>
+						<c:if test="${ question.qstatus eq progress }">
+							<span class="question-answered"><i class="icon-ok"></i>${ question.qstatus }</span>
 						</c:if>
 							<span class="question-favorite"><i class="icon-star"></i>${ question.point }</span>
 						</div>
@@ -513,6 +513,8 @@
 													<input type="hidden" name="questionNum" value="${ question.questionNum }">
 												</form>
 											</td>
+										</c:if>
+										<c:if test="${ sessionScope.userId != user.id }">
 											<td>
 												<form method="post" action="videoAnswer">
 													<input type="submit" class="button color small submit" value="動画でアンサー">
