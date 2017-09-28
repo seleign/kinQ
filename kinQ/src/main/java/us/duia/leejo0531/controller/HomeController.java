@@ -1,6 +1,7 @@
 package us.duia.leejo0531.controller;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Locale;
 
 import javax.servlet.http.Cookie;
@@ -82,6 +83,7 @@ public class HomeController {
 				} else if ("Qname".equals(cookie.getName())){
 					name = cookie.getValue();
 				} else if (!id.isEmpty() && !userNum.isEmpty() && !name.isEmpty()) {
+					UserController.loginSessionMonitor = new Hashtable<String, String>();
 					synchronized(UserController.loginSessionMonitor){
 						UserController.loginSessionMonitor.put(session.getId(), id);
 					}
