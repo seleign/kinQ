@@ -201,12 +201,7 @@
       });
    }
    
-   $(function(){
-      recentQlist();
-      urgentQlist();
-      progressQlist();
-   });
-   
+
    
    
 
@@ -334,7 +329,33 @@
       urgentUserlist();
       progressUserlist();
    });
- */   
+ */      
+ function scrollList(){
+     $.ajax({
+         url: 'searchRecentPost',
+         method: 'post',
+         data: {
+            from: 1,
+            to: 10
+         },
+         success: function(result){
+            var html = '';
+            var page = result['page'];
+            var qList = result['qList'];
+            
+            if( qList.length >0) {
+               $.each(qList, function(index, element){
+            	   html += '<li><form id=qForm action="question_view" method="post">';
+        		   html += '<strong><input type="hidden" id="selectQ" name="questionNum" value="">';
+       			   html += '<span onclick="javascript:marqeeNum('+element.questionNum+')" class="singleQid">'+element.title+'</span>';
+   				   html += '</strong></form></li><br>';
+               });
+               $('#scrollList').html(html);
+               scroller();
+            }
+         }
+      });
+   }
  function scroller() {
 
       var scroll = $('div.scroll');// Sets the div with a class of scroll as a variable
@@ -354,8 +375,11 @@
        });
 }
  
-	 $(function(){
-	    scroller();
+ 	$(function(){
+		recentQlist();
+		urgentQlist();
+		progressQlist();
+		scrollList();
 	});
     
     function marqeeNum(num){
@@ -449,8 +473,9 @@
                         <strong><span style="color: #7f62bb; font-size: 15px;">最近の質問リスト</span></strong>
                         <div class="box">
                         <div class="scroll">
-                           <ul>
-                              <c:forEach var="singleQ" items= "${qList }">
+                           <ul id="scrollList">
+                           
+<%--                               <c:forEach var="singleQ" items= "${qList }">
                                  <li>
                                     <form id=qForm action="question_view" method="post">
                                        <strong>
@@ -459,7 +484,7 @@
                                        </strong>
                                     </form>
                                  </li><br>
-                              </c:forEach>
+                              </c:forEach> --%>
                            </ul>
                         </div>
                      </div>
