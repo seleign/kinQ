@@ -26,7 +26,18 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+  	 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+   <style>
+   	.pageName {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.current{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	#update_button {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="./resources/js/dateFormat.min.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -207,13 +218,11 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>マイページ</h1>
+					<h1 class="pageName">マイページ</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
 						<a href="#">Home</a>
-						<span class="crumbs-span">/</span>
-						<a href="#">User</a>
 						<span class="crumbs-span">/</span>
 						<span class="current">Mypage</span>
 					</div>
@@ -234,9 +243,9 @@
 					<div class="user-profile">
 						<div class="col-md-12">
 							<div class="page-content">
-								<h2>活動現況</h2>
+								<h2 class="pageName">活動現況</h2>
 								<div class="ul_list ul_list-icon-ok about-user" style="float:left; padding-left:7%; padding-top: 4%; width: 30%;">
-									<ul>
+									<ul class="pageName">
 										<li><i class="icon-user"></i>ID : <span><strong>${sessionScope.userId }</strong></span></li>
 										<li><i class="icon-star-empty"></i>ランキング : <span><strong>${myRank.ranking}</strong></span>&nbsp;位</li>
 										<li><i class="icon-star"></i>ポイント : <span><strong>${pChange }</strong></span>&nbsp;ポイント</li>
@@ -244,13 +253,13 @@
 								</ul>
 								</div>
 							    <div id="piechart" style="float: left; width: 60%;"></div>
-								<br><hr><br><input type="button" id="update_button" class="button small grey-button custom-button" value="個人情報修正">
+								<br><hr><br><input type="button" id="update_button" class="button color small login-submit submit" value="個人情報修正">
 							</div><!-- End page-content -->
 						</div><!-- End col-md-12 -->
 						<div class="col-md-12">
 							<div class="page-content page-content-user-profile">
 								<div class="user-profile-widget">
-									<h2>質問・答え</h2>
+									<h2 class="pageName">質問・答え</h2>
 	
 											<div class="ul_list ul_list-icon-ok" id="leftsideContent" style="float: left; width: 40%; padding-top: 12%; padding-left: 6%;">
 											<table class="dashboard-activity-table">
