@@ -388,10 +388,10 @@
 							<p>${ question.questionContent }</p>
 						</div>
 						<div class="question-details">
-						<c:if test="${ question.qstatus ne 'solved' }">
+						<c:if test="${ question.qstatus eq solved }">
 							<span class="question-answered question-answered-done"><i class="icon-ok"></i>${ question.qstatus }</span>
 						</c:if>
-						<c:if test="${ question.qstatus eq 'in progress' }">
+						<c:if test="${ question.qstatus ne solved }">
 							<span class="question-answered"><i class="icon-ok"></i>${ question.qstatus }</span>
 						</c:if>
 							<span class="question-favorite"><i class="icon-star"></i>${ question.point }</span>
@@ -404,7 +404,7 @@
 						<ul class="single-question-vote">
 							<!-- <li><a href="#" class="single-question-vote-down" title="Dislike"><i class="icon-thumbs-down"></i></a></li>
 							<li><a href="#" class="single-question-vote-up" title="Like"><i class="icon-thumbs-up"></i></a></li> -->
-							<c:if test="${ user.id == sessionScope.userId && question.qstatus eq 'in progress' && question.replyCount == 0}">
+							<c:if test="${ user.id == sessionScope.userId && question.qstatus ne solved && question.replyCount == 0}">
 								<form method="get" action="modifyQuestion">
 									<input type="submit" class="button color small submit" value="修正する" style="float: right;">
 									<input type="hidden" name="questionNum" value="${ question.questionNum }">
