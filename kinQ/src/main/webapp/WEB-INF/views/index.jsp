@@ -455,7 +455,7 @@
                   <h2 class="nandemo">なんでも質問して!</h2>
                   <p class="nandemo">一日にも、多くの情報を接して数多くの質問を接するあなたに最も最適化されたサイト!今、早速質問して返事して知識を共有してください</p>
                   
-                        <strong><span style="color: white; font-size: 15px;">最近の質問リスト</span></strong>
+                        <strong><span style="color: #7f62bb; font-size: 15px;">最近の質問リスト</span></strong>
                         <div class="box">
                         <div class="scroll">
                            <ul>

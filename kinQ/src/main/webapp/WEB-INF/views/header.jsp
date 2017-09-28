@@ -56,6 +56,9 @@
    		font-family: "Rounded Mplus 1c";
    		font-size: 14px;
    	}
+   	.alarmNote{
+   		font-family: "Rounded Mplus 1c";
+   	}
    </style>
 
 <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
@@ -108,15 +111,15 @@
 				var html = '';
 					html += '<ul>';
 				$.each(result, function(index, element){
-					html += '<li>';
+					html += '<li class="alarmNote">';
 					if(element.alarmType =='reply'){
-						html += '<a href="question_view?questionNum='+element.alarmAdress+'">질문에 답변이 달렸습니다.';
+						html += '<a class="alarmNote" href="question_view?questionNum='+element.alarmAdress+'">ご質問に答えが登録されました。';
 					}
 					if(element.alarmType =='realtime'){
-						html += '<li><a href="question_view?questionNum='+element.alarmAdress+'">실시간 답변 요청이 왔습니다.';
+						html += '<li class="alarmNote"><a class="alarmNote" href="question_view?questionNum='+element.alarmAdress+'">リアルタイム返事要請が来ました。';
 					}
 					if(element.alarmType =='interest'){
-						html += '<li><a href="question_view?questionNum='+element.alarmAdress+'">관심 항목에 대한 질문이 있습니다.';
+						html += '<li class="alarmNote"><a class="alarmNote" href="question_view?questionNum='+element.alarmAdress+'">関心項目に関する質問があります。';
 					}
 					html +='</li>';
 				});
