@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import us.duia.leejo0531.dao.AlarmDAO;
 import us.duia.leejo0531.dao.PointDAO;
 import us.duia.leejo0531.dao.QuestionDAO;
 import us.duia.leejo0531.dao.ReplyDAO;
@@ -36,6 +37,8 @@ public class UserService {
 	private ReplyDAO replyDao;
 	@Autowired(required=false)
 	private PointDAO pointDao;
+	@Autowired(required=false)
+	private AlarmDAO alarmDao;
 	
 	public void insertUserInfo(UserVO user, ArrayList<String> field) {
 
@@ -167,7 +170,8 @@ public class UserService {
 	}
 	
 	public ArrayList<AlarmVO> getUserAlarm(int userNum){
-		ArrayList<AlarmVO> result = userDao.getUserAlarm(userNum);
+//		ArrayList<AlarmVO> result = userDao.getUserAlarm(userNum);
+		ArrayList<AlarmVO> result = alarmDao.selectMyAlarms(userNum);
 		return result;
 	}
 	

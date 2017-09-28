@@ -28,7 +28,8 @@
                 and readcheck = 0
             ) push
         where 
-            usernum = #{userNum}	
+            usernum = #{userNum}
+        order by alarmnum desc
 	</select>
 	
 	<insert id="alarmReqReply">
