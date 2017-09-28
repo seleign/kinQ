@@ -11,7 +11,14 @@
 	
 <!-- 회원 가입 시 회원 정보 저장  -->
 	<insert id="insertUserInfo" parameterType="User">
-		insert into userInfo values(#{userNum}, #{id}, #{pw}, #{userName}, #{age}, #{birth}, #{phone}, #{email})
+		insert all 
+			into userInfo
+			values(${userNum}, #{id}, #{pw}, #{userName}, #{age}, to_date(#{birth}, 'yyyymmdd'), #{phone}, #{email})
+			into CashLog(cashLogNum, userNum, cCharged, cChargedDate, cChange) 
+			values(CashLog_SEQ.nextval, #{userNum}, 0, sysdate, 0) 
+			into PointLog(pointLogNum, pUserNum, pCharged, pChargedDate, pChange) 
+			values(PointLog_SEQ.nextval, #{userNum}, 0, sysdate, 0) 
+			select * from dual
 	</insert>
 
 <!-- 회원 가입 시 회원 관심사 저장 -->
@@ -90,59 +97,12 @@
 	
 	<select id="getMyRank" parameterType="int" resultType="Rank">
 	    select
-	    	ranked.*
-	    from
-	    	(select
-		        rank() over( order by totalPoint desc) as ranking,
-		        added.*
-		    from
-		        (select
-		            myPost.*,
-		            nvl(sCount,0) as sCount,
-		            ( qCount*10 + rCount*15 + nvl(sCount,0)*2)as totalPoint    
-		        from
-		            (select
-		                myQ.*,
-		                myR.rCount
-		            from
-		                (select
-		                    usernum,
-		                    count(*) as qCount
-		                from
-		                    q_board
-		                group by usernum
-		                )myQ,
-		                (select
-		                    usernum,
-		                    count(*) as rCount
-		                from
-		                    q_reply
-		                group by usernum
-		                )myR
-		            where
-		                myQ.usernum = myR.usernum
-		            ) myPost,
-		            (select
-					    q_reply.usernum as usernum,
-					    sum( nvl(score,0)) as sCount
-					from
-					    q_reply
-					group by
-					    q_reply.usernum
-		            ) selected
-		        where 
-		            myPost.usernum = selected.usernum(+)
-		        order by 
-		            totalPoint desc
-		        )added
-			)ranked
-		where
-			usernum = #{userNum} 	
-	</select>
-	
-	<select id="getUserRank" resultType="Rank">
-	    select
-	    	ranked.*,
+	    	ranking,
+            userinfo.usernum as usernum,
+            nvl(qCount,0) as qCount,
+            nvl(rCount,0) as rCount,
+            nvl(sCount,0) as sCount,
+            nvl(totalPoint,0) as totalPoint,
 	    	userinfo.id as userId
 	    from
 	    	userinfo,
@@ -151,9 +111,11 @@
 		        added.*
 		    from
 		        (select
-		            myPost.*,
+		            myPost.usernum as usernum,
+                    nvl(qCount,0) as qCount,
+                    nvl(rCount,0) as rCount,
 		            nvl(sCount,0) as sCount,
-		            ( qCount*10 + rCount*15 + nvl(sCount,0)*2)as totalPoint    
+		            ( nvl(qCount,0)*10 + nvl(rCount,0)*15 + nvl(sCount,0)*2)as totalPoint    
 		        from
 		            (select
 		                myQ.*,
@@ -191,7 +153,69 @@
 		        )added
 			)ranked
 		where
-			ranked.usernum = userinfo.usernum
+			userinfo.usernum = ranked.usernum (+)
+			and userinfo.usernum = #{userNum} 	
+	</select>
+	
+	<select id="getUserRank" resultType="Rank">
+	    select
+	    	ranking,
+            userinfo.usernum as usernum,
+            nvl(qCount,0) as qCount,
+            nvl(rCount,0) as rCount,
+            nvl(sCount,0) as sCount,
+            nvl(totalPoint,0) as totalPoint,
+	    	userinfo.id as userId
+	    from
+	    	userinfo,
+	    	(select
+		        rank() over( order by totalPoint desc) as ranking,
+		        added.*
+		    from
+		        (select
+		            myPost.usernum as usernum,
+                    nvl(qCount,0) as qCount,
+                    nvl(rCount,0) as rCount,
+		            nvl(sCount,0) as sCount,
+		            ( nvl(qCount,0)*10 + nvl(rCount,0)*15 + nvl(sCount,0)*2)as totalPoint    
+		        from
+		            (select
+		                myQ.*,
+		                myR.rCount
+		            from
+		                (select
+		                    usernum,
+		                    count(*) as qCount
+		                from
+		                    q_board
+		                group by usernum
+		                )myQ,
+		                (select
+		                    usernum,
+		                    count(*) as rCount
+		                from
+		                    q_reply
+		                group by usernum
+		                )myR
+		            where
+		                myQ.usernum = myR.usernum
+		            ) myPost,
+		            (select
+					    q_reply.usernum as usernum,
+					    sum( nvl(score,0)) as sCount
+					from
+					    q_reply
+					group by
+					    q_reply.usernum
+		            ) selected
+		        where 
+		            myPost.usernum = selected.usernum(+)
+		        order by 
+		            totalPoint desc
+		        )added
+			)ranked
+		where
+			userinfo.usernum = ranked.usernum (+)
         order by 
             ranking
 	</select>
@@ -199,7 +223,12 @@
 	
 	<select id="getSimpleRankingList" resultType="Rank">
 	    select
-	    	ranked.*,
+	    	ranking,
+            userinfo.usernum as usernum,
+            nvl(qCount,0) as qCount,
+            nvl(rCount,0) as rCount,
+            nvl(sCount,0) as sCount,
+            nvl(totalPoint,0) as totalPoint,
 	    	userinfo.id as userId
 	    from
 	    	userinfo,
@@ -208,9 +237,11 @@
 		        added.*
 		    from
 		        (select
-		            myPost.*,
+		            myPost.usernum as usernum,
+                    nvl(qCount,0) as qCount,
+                    nvl(rCount,0) as rCount,
 		            nvl(sCount,0) as sCount,
-		            ( qCount*10 + rCount*20 + nvl(sCount,0)*30)as totalPoint    
+		            ( nvl(qCount,0)*10 + nvl(rCount,0)*15 + nvl(sCount,0)*2)as totalPoint    
 		        from
 		            (select
 		                myQ.*,
@@ -233,16 +264,13 @@
 		            where
 		                myQ.usernum = myR.usernum
 		            ) myPost,
-		            ( select
-		                q_reply.usernum as usernum,
-		                nvl(count( replynum),0) as sCount
-		            from
-		                q_board,
-		                q_reply
-		            where 
-		                q_board.selectedreplynum = q_reply.replynum(+)
-		            group by
-		                q_reply.usernum
+		            (select
+					    q_reply.usernum as usernum,
+					    sum( nvl(score,0)) as sCount
+					from
+					    q_reply
+					group by
+					    q_reply.usernum
 		            ) selected
 		        where 
 		            myPost.usernum = selected.usernum(+)
@@ -251,7 +279,7 @@
 		        )added
 			)ranked
 		where
-			ranked.usernum = userinfo.usernum
+			userinfo.usernum = ranked.usernum (+)
 			<![CDATA[and ranking <= 5]]> 
         order by 
             ranking

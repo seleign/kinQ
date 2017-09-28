@@ -128,11 +128,11 @@
 						html += '<div class="clearfix"></div>';
 						html += '</div></article>';
 					});
-					$('#QuestionList_tap').append(html);
+					$('#myQuestionArea').append(html);
 					$('#rFrom').val( page.from +10);
 					$('#rTo').val( page.to +10);
 				}else {
-					$('#QuestionList_tap').html('検索結果がありません。');
+					$('#myQuestionArea').html('検索結果がありません。');
 				}
 			}
 		});
