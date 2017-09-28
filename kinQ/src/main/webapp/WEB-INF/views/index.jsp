@@ -32,6 +32,9 @@
    	.nandemo{
    		font-family: "Rounded Mplus 1c";
    	}
+   	.singleQid{
+   		font-family: "Rounded Mplus 1c";
+   	}
    </style>
    
    <style type="text/css">
@@ -376,32 +379,33 @@
      });
    
  </script>
-  
-  <style type="text/css">
-     .box {
-     color: #5b45ad;
-    margin: 3em auto;
-   padding: 2em; 
-   width: 100%;
-   height: 3em;
-   position: relative;
-   overflow: hidden;
-    top: 1em;
-/*    background-color: light-grey; */
-/*    box-shadow: 7px 5px 4px rgba(0,0,0,0.5); */
-/*    border: 1px solid black;
+
+<style type="text/css">
+.box {
+	color: #5b45ad;
+	margin: 3em auto;
+	padding: 2em;
+	width: 100%;
+	height: 6em;
+	position: relative;
+	margin-top: 3%;
+	right: 8%;
+	overflow: hidden;
+	top: 1em;
+	/*    background-color: light-grey; */
+	/*    box-shadow: 7px 5px 4px rgba(0,0,0,0.5); */
+	/*    border: 1px solid black;
    border-radius: 2px; */
 }
 
 .scroll {
-   position: absolute;
-   }
+	position: absolute;
+}
 
-.singleQid:HOVER{
-   color: white;
-}   
-   
-  </style>
+.singleQid:HOVER {
+	color: white;
+}
+</style>
 </head>
 <body>
 <jsp:include page="header.jsp" flush="false" />

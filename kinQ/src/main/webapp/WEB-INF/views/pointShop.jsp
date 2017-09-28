@@ -35,6 +35,9 @@
    	.alert-message{
    		font-family: "Rounded Mplus 1c";
    	}
+   	.current{
+   		font-family: "Rounded Mplus 1c";
+   	}
    	#submitButton {
    	font-family: "Rounded Mplus 1c";
    	}
@@ -43,6 +46,9 @@
    	}
    	.psBtn {
    	font-family: "Rounded Mplus 1c";
+   	}
+   	.pageName {
+   		font-family: "Rounded Mplus 1c";
    	}
    </style>
    
@@ -344,7 +350,7 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Point Shop</h1>
+					<h1 class="pageName">ポイントショップ</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">

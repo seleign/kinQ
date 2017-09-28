@@ -96,10 +96,10 @@ url: www.2code.info
 		width: 30%;
 	}
 	.grid_1200 #question-title,.grid_1200 #question_details,.grid_1200 .taglist .input input,.grid_1200 .form-style-5.form-style input[type="text"],.grid_1200 .form-style-5.form-style input[type="email"],.grid_1200 .form-style-5.form-style input[type="password"],.grid_1200 .form-style-5.form-style textarea {
-		width: 82%;
+		width: 87%;
 	}
 	.grid_1200 .ask-question .form-style label,.grid_1200 .form-style-5.form-style label {
-		width: 17%;
+		width: 10%;
 	}
 	.grid_1200 .form-description,.grid_1200 #question_poll_item {
 		margin-left: 18%;

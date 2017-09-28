@@ -2342,7 +2342,7 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 .search-submit:before {
 	content: "\f002";
 	font-family: "FontAwesome";
-	color: #999;
+	color: #f6f6f6;
 	font-size: 15px;
 }
 /* Tag Cloud Widget */
