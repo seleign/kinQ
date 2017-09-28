@@ -76,12 +76,12 @@
 		        CKEDITOR.instances[instance].updateElement();
 		        CKEDITOR.instances[instance].setData('');
 		    }
-		}
+		};
 		
 		function getMAxScoreReply() {
 			$.ajax({
 				url: "getMaxScoreReply",
-				type: "get",
+				type: "post",
 				data: { questionNum: ${ question.questionNum }},
 				success: function (reply) {
 					if (!isEmpty(reply)) {
@@ -104,12 +104,12 @@
 					}
 				}
 			})
-		}
+		};
 		
 		function questionReplyList() {
 			$.ajax({
 				url: "questionReplyList",
-				type: "get",
+				type: "post",
 				data: { questionNum: ${ question.questionNum }},
 				success: function (replyList) {
 					replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>";
@@ -174,7 +174,7 @@
 					replyHtml = "";
 				}
 			})
-		}
+		};
 		
 		
 		function registReply() {
@@ -193,12 +193,12 @@
 					CKupdate();
 				}
 			})
-		}
+		};
 		
 		function deleteReply(replyNum) {
 			$.ajax({
 				url: "deleteReply",
-				type: "get",
+				type: "post",
 				data: { replyNum: replyNum },
 				success: function (success) {
 					/* getMAxScoreReply();
@@ -207,7 +207,7 @@
 					
 				}
 			})
-		}
+		};
 		
 		function registReplyScore() {
 			var score = parseInt($("#replyScore").text());
@@ -218,7 +218,7 @@
 			} else {
 				$.ajax({
 					url: "selectedReply",
-					type: "get",
+					type: "post",
 					data: { 
 							questionNum: ${ question.questionNum },
 							replyNum: selectedReply,
@@ -233,12 +233,12 @@
 					}
 				})
 			}
-		}
+		};
 		
 		function selectedReplyView() {
 			$.ajax({
 				url: "getSelectedReply",
-				type: "get",
+				type: "post",
 				data: { 
 						questionNum: ${ question.questionNum },
 					  },
@@ -263,14 +263,14 @@
 					}
 				}
 			})
-		}
+		};
 		
 		function registReplyCancel() {
 			jQuery(".panel-pop").animate({"top":"-100%"},500).hide(function () {
 				jQuery(this).animate({"top":"-100%"},500);
 			});
 			jQuery(".wrap-pop").remove();
-		}
+		};
 		
 		function recommendPop(replyNum) {
 			selectedReply = replyNum;
@@ -288,12 +288,12 @@
 				});
 				jQuery(this).remove();
 			});
-		}
+		};
 		
 		function updateRecommendUp(replyNum, userNum) {
 			$.ajax({
 				url: "updateRecommendUp",
-				type: "get",
+				type: "post",
 				data: { 
 						questionNum: ${ question.questionNum },
 						replyNum: replyNum,
@@ -309,7 +309,7 @@
 		function updateRecommendDown(replyNum, userNum) {
 			$.ajax({
 				url: "updateRecommendDown",
-				type: "get",
+				type: "post",
 				data: { 
 						questionNum: ${ question.questionNum },
 						replyNum: replyNum,
@@ -320,7 +320,7 @@
 					questionReplyList();
 				}
 			})
-		}
+		};
 		
 		
 </script>
@@ -425,7 +425,7 @@
 						</c:forEach>
 					</div>
 					<div class="share-inside-warp">
-						<ul>
+						<!-- <ul>
 							<li>
 								<a href="#" original-title="Facebook">
 									<span class="icon_i">
@@ -476,7 +476,7 @@
 								</a>
 								<a href="#" target="_blank">Pinterest</a>
 							</li>
-						</ul>
+						</ul> -->
 						<span class="share-inside-f-arrow"></span>
 						<span class="share-inside-l-arrow"></span>
 					</div><!-- End share-inside-warp -->
