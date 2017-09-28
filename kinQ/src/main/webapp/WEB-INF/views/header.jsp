@@ -29,6 +29,18 @@
 	div { cursor: url(./resources/images/cursor2.cur), auto;
 		 }
 	</style>
+	 <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+	<style>
+   	#header-search{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.header{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.search_select{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   </style>
 
 <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
   <script type="text/javascript">
