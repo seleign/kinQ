@@ -519,21 +519,18 @@
 		
 		if(!isEmpty(questionuserNum) && !isEmpty(userNum) ) {
 			if(questionuserNum == userNum)	{ // 질문자이다.
-// 				$("#open-room").click();
-// 				$("#btn-share-part-of-sreen").click();
+ 				$("#open-room").click();
+ 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			} else { // 답변자이다.
-//				$("#join-room").click();
-// 				$("#btn-share-part-of-sreen").click();
+				$("#join-room").click();
+ 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
-			}
-			
+			}			
 		} else {
 			console.log("부정 접근이므로 리다이렉트 시킨다.")
 			// 부정 접근이므로 로그인 페이지 리다이렉트
-		}
-		
-		
+		}		
 } //onload End
 	
 // 데이터가 널 또는 공백인지 확인하는 함수
@@ -569,8 +566,6 @@ if(ReplyContent.length < 2) {
 if(isEmpty(videoSrc)) {
 	return false;
 }
-//location.href="http://hosting.websearch.kr/ ";
-
 if(confirm("アップロードしますか。editorでも質問に答えられます。"))　{
 	$.ajax({
 		url: "registReply",
@@ -674,7 +669,7 @@ function toggleNavigation() {
 					<div class="boxedtitle page-title"><h2>${question.title}</h2></div>
 					
 					<!-- here -->
-					<fieldset>
+<fieldset hidden="hidden">
 <legend>개발용 버튼(삭제하지 말것)</legend>
 <h5>JQuery로 버튼을 자동 click하는 방식으로 실시간 연결 진행. 실제 서비스에서는 이 필드셋을 hidden으로 해둔다.</h5>
 <label>방 번호</label>
@@ -689,8 +684,8 @@ function toggleNavigation() {
  </c:if>
 </fieldset>
 
--<fieldset>
- 	<legend onclick="toggleNavigation()">ナビゲーション</legend>
+<fieldset>
+<legend onclick="toggleNavigation()">ナビゲーション</legend>
  <div id="navigation">
  <c:if test='${mode == "realTimeAnswer"? true:false }'>
  	<h2>1. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h2>

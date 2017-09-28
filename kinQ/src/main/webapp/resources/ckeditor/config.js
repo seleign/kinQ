@@ -27,7 +27,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.removeButtons = 'NewPage,Save,Preview,Cut,Copy,Paste,PasteText,PasteFromWord,About';
 	
-	config.extraPlugins = 'uploadimage,uploadwidget,widget,widgetselection,notificationaggregator,uploadfile,dragresize,tableresize,codesnippet,eqneditor,templates,dialog,dialogui,html5video,widget,widgetselection,clipboard,lineutils,oembed';
+	//eqneditor
+	config.extraPlugins = 'uploadimage,uploadwidget,widget,widgetselection,notificationaggregator,uploadfile,dragresize,tableresize,codesnippet,templates,dialog,dialogui,html5video,widget,widgetselection,clipboard,lineutils,oembed';
 	//config.imageUploadUrl = 'cKEditorDragAndDropFileUpload';
 	config.uploadUrl = 'cKEditorDragAndDropFileUpload';
 	config.enterMode = CKEDITOR.ENTER_BR;

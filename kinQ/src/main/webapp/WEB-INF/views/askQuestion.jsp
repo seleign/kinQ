@@ -120,6 +120,14 @@ window.onload = function() {
 	// 8. 현재 계정의 포인트를 가져온다.
 	getRecentPoint();
 	
+	// 9. 기존에 녹화된 동영상을 삭제한다.
+	$('#deleteVideo').click(function() {
+		// TODO
+		$('#videoSrc').removeAttr('value');
+		$('#video_container').empty();
+		
+	})
+	
 	//녹화 -- 현재 맥에서만 작동 함
 	//동영상 녹화 코드
 		document.getElementById('btn-record-webm').onclick = function() {
@@ -522,7 +530,6 @@ function getRecentPoint() {
 								<!-- 										<span><i class="icon-arrow-up"></i>Browse</span> -->
 								<!-- 									</div> -->
 								<!-- 								</div> -->
-
 								<p>
 									<label class="required">Point</label> <input type="number"
 										required="required" class="input" id="point" name="point"
@@ -532,8 +539,6 @@ function getRecentPoint() {
 										POINT: <output id="RecentPoint"></output>
 									</span>
 								</p>
-
-
 								<p>
 									<label>Tags</label> <input type="text" class="input"
 										id="question_tags" data-seperator=","> <span
@@ -619,10 +624,13 @@ function getRecentPoint() {
 								</p>
 							</div>
 							<p id="p-ask-buttons" class="form-submit">
-								<input type="submit" id="publish-question" value="質問する"
-									class="button color small submit"> <input type="button"
-									id="ask-button" value="画面の録画" class="button color small submit"
+				
+								<input type="submit" id="publish-question" value="質問する" class="button color small submit"> 
+								<input type="button" id="ask-button" value="画面の録画" class="button color small submit"
 									onclick="setTo_id_HtmlTagFromTheCKEDITOR(HtmlTagFromTheCKEDITOR)">
+								<c:if test="${question.videoSrc != null}">
+									<input type="button" id="deleteVideo" style="width: 52%; float: left;" class="button color small submit" value="アップロードした動画を削除" >
+								</c:if>
 							</p>
 						</form>
 					</div>

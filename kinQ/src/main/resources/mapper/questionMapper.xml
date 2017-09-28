@@ -146,7 +146,7 @@
 	
 	<!-- 질문글을 삭제한다. (임시) 테스트 되지않음.-->
 	<delete id="deleteQuestion" parameterType="Question">
-	delete Q_BOARD where usernum = #{usernum} and QuestionNum = #{QuestionNum}
+	delete Q_BOARD where userNum = #{userNum} and questionNum = #{questionNum}
 	</delete>
 	
 	<!-- 대분류 리스트 불러오기 -->	

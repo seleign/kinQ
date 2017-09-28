@@ -339,9 +339,13 @@ public class QuestionController {
 	@RequestMapping(value = "deleteQuestion", method = RequestMethod.GET)
 	public String deleteQuestion(QuestionVO question, HttpSession session) {
 		int userNum = (int) session.getAttribute("userNum");
+		TagVO tag = new TagVO();
+		tag.setQuestionNum(question.getQuestionNum());
+		qstnSvc.allDeleteTag(tag); // 이 글이 가지고 있던 태그를 모두 삭제
+		almSvc.deletePreInsertedInterest(question.getQuestionNum()); // 이 글이 가지고 있던 알람 삭제
 		question.setUserNum(userNum);
-		qstnSvc.deleteQuestion(question);
-		return "/";
+		qstnSvc.deleteQuestion(question); // 이 글을 삭제
+		return "redirect:index";
 	}
 
 	@RequestMapping(value = "updateAlarm", method = RequestMethod.GET)
