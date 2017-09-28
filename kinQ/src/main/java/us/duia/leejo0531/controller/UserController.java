@@ -162,11 +162,17 @@ public class UserController implements HttpSessionListener{
 		int answersNum = userSvc.countAnswers( userNum);
 		RankVO myRank = userSvc.getMyRank( userNum);
 		
+		int cChange = userSvc.getRecentChange(userNum);
+		int pChange = userSvc.getRecentPoint(userNum);
+		
 		model.addAttribute("answeredField", answeredField);
 		model.addAttribute("questionsNum", questionsNum);
 		model.addAttribute("completedQuestions", completedQuestions);		
 		model.addAttribute("answersNum", answersNum);
 		model.addAttribute("myRank", myRank);
+		model.addAttribute("cChange", cChange);
+		model.addAttribute("pChange", pChange);
+		
 		
 		return "mypage";
 	}
