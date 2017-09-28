@@ -86,7 +86,7 @@
    		// 2. base64로 바꿀 임시 div
    		//$("#tmpContents").hide();
    		 
-   	// 3. videoAnswer 일 때  TODO 		
+   	// 3. videoAnswer 일 때	
    		  function videoAnswer() {
    		    	$('#tabs ul li').filter(':last').hide();
    		 	}
@@ -578,6 +578,9 @@ if(confirm("アップロードしますか。editorでも質問に答えられ�
 		},
 		success: function (success) {
 			alert("成功的にアップロードしました。");
+			<c:if test='${mode == "videoAnswer"? true:false }'>
+			location.href="index";
+			</c:if>
 		}
 	});
 }　else{
@@ -616,7 +619,6 @@ var imgSrcToBase64Src_settime = function imgSrcToBase64Src() {
 	}) 
 }
 
-//TODO
 var worker = new Worker("/resources/js/imgToBase64_worker.js");
 worker.addEventListener("message", function(e) {
 	// e의 키:  http:로 시작하는 img
