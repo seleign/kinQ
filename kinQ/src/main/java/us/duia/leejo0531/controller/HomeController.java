@@ -95,9 +95,9 @@ public class HomeController {
 			}
 		}
 		
-		ArrayList<QuestionVO> qList = homeSvc.getQList();
+/*		ArrayList<QuestionVO> qList = homeSvc.getQList();
 		model.addAttribute("qList", qList);
-		return "index";
+*/		return "index";
 	}
 	
 
