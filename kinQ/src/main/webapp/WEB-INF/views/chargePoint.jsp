@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html>  
 <head>  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>ポイントチャージ</title>  
+<title>緊Q</title>  
 <script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>  
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="  crossorigin="anonymous"></script>  
 <script type="text/javascript">  

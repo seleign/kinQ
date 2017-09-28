@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<title>RealTime Answer</title>
+<title>緊Q</title>
 <meta name="description" content="Ask me Responsive Questions and Answers Template">
 <meta name="author" content="vbegy">
 	
