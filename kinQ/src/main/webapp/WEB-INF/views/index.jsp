@@ -35,6 +35,9 @@
    	.singleQid{
    		font-family: "Rounded Mplus 1c";
    	}
+   	.listTitle{
+   		font-family: "Rounded Mplus 1c";
+   	}
    </style>
    
    <style type="text/css">
@@ -69,7 +72,7 @@
                   }else{
                      html +='<article class="question question-type-normal">';
                   }
-                  html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
+                  html += '<h2 class="listTitle"><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
 					if('${userNum}'!='') {
 						html += '<a class="question-report">Report</a>';
 					}
@@ -120,7 +123,7 @@
                   }else{
                      html +='<article class="question question-type-normal">';
                   }
-                  html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
+                  html += '<h2 class="listTitle"><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
 					if('${userNum}'!='') {
 						html += '<a class="question-report">Report</a>';
 					}
@@ -171,7 +174,7 @@
                   }else{
                      html +='<article class="question question-type-normal">';
                   }
-                  html += '<h2><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
+                  html += '<h2 class="listTitle"><a href=\"#\" onclick=\"questionView(' + element.questionNum + ')\">'+element.title+'</a></h2>';
 					if('${userNum}'!='') {
 						html += '<a class="question-report">Report</a>';
 					}

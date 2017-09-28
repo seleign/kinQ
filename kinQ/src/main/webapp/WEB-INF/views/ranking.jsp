@@ -26,7 +26,13 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+  	<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+   <style>
+   	.rankTitle{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	
+   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="./resources/js/dateFormat.min.js"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -63,7 +69,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="page-content">
-							<h2>ユーザー活動ランキング</h2>
+							<h2 class="rankTitle">ユーザー活動ランキング</h2>
 							<ul>
 								<c:forEach var="rank" items="${rankList}">
 									<li>
