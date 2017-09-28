@@ -79,10 +79,11 @@
 						html += '</div></article>';
 					});
 					$('#resultArea').append(html);
-					$('#rFrom').val( page.from +10);
-					$('#rTo').val( page.to +10);
+					$('#from').val( page.from +10);
+					$('#to').val( page.to +10);
 				}else {
-					$('#resultArea').html('検索結果がありません。');
+					$('#resultArea').append('検索結果がありません。');
+		               $('#QuestionList_button_result').attr('disabled','true');
 				}
 			}
 		});
@@ -124,7 +125,7 @@
 				<input type="hidden" id="from" value="${page.from}">
 				<input type="hidden" id="to" value="${page.to}">
 				<div id="resultArea"></div>
-				<a href="javascript:resultList()" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
+                <button class="button large gray-button load_button" id="QuestionList_button_result" onclick="javascript:resultList()"><i class="icon-refresh"></i>Load More Questions</button>
 			</div><!-- End main -->
 						<jsp:include page="aside.jsp" flush="false" />
 		</div><!-- End row -->
