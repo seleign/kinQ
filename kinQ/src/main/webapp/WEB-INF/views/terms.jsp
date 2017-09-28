@@ -24,7 +24,8 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+	
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
   
   	function changeToQnA(){
@@ -192,8 +193,8 @@
 			
 			<aside class="col-md-3 sidebar">
 				<div class="widget widget_menu widget_menu_jquery">
-					<ul>
 						<div class="accordion">
+					<ul>
 						
 						<li class="accordion-title"><a href="#" onclick="javascript:changeToQnA()"><i class="icon-thumbs-up"></i>Q&A</a></li>
 							<div class="accordion-inner">
@@ -221,8 +222,8 @@
 							</ul>
 							</div>
 
-						</div>
 					</ul>
+						</div>
 				</div><!-- End widget_menu -->
 			</aside><!-- End sidebar -->
 			

@@ -11,7 +11,14 @@
 	
 <!-- 회원 가입 시 회원 정보 저장  -->
 	<insert id="insertUserInfo" parameterType="User">
-		insert into userInfo values(#{userNum}, #{id}, #{pw}, #{userName}, #{age}, #{birth}, #{phone}, #{email})
+      insert all 
+         into userInfo
+         values(${userNum}, #{id}, #{pw}, #{userName}, #{age}, to_date(#{birth}, 'yyyymmdd'), #{phone}, #{email})
+         into CashLog(cashLogNum, userNum, cCharged, cChargedDate, cChange) 
+         values(CashLog_SEQ.nextval, #{userNum}, 0, sysdate, 0) 
+         into PointLog(pointLogNum, pUserNum, pCharged, pChargedDate, pChange) 
+         values(PointLog_SEQ.nextval, #{userNum}, 0, sysdate, 0) 
+         select * from dual
 	</insert>
 
 <!-- 회원 가입 시 회원 관심사 저장 -->
