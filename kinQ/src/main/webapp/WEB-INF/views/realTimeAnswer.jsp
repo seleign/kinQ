@@ -158,7 +158,7 @@
 		document.getElementById('btn-record-webm-stop').onclick = function() {
 			stop = true;
 			this.disabled = true
-			//$("#btn-record-webm").attr("disabled", false);
+			$("#btn-record-webm").attr("disabled", false);
 			if (stop) { // 녹화 중지 버튼이 눌리면 stop = true가 된다.
 				recorder.stopRecording(function() {
 					var blob = recorder.getBlob(); //<이게 동영상 데이터
@@ -189,9 +189,9 @@
 			                }
 			            });		
 							
-					$("#canvas").remove(); // 자신의 녹화중인 화면(프리뷰)를 삭제한다.
-					$("#shared-part-of-screen-preview").remove(); // 상대방의 화면을 삭제한다.
-					$("#part_of_screen_to_be_shared").remove(); // 자신이 공유중인 화면을 삭제한다
+					// $("#canvas").remove(); // 자신의 녹화중인 화면(프리뷰)를 삭제한다.
+					// $("#shared-part-of-screen-preview").remove(); // 상대방의 화면을 삭제한다.
+					// $("#part_of_screen_to_be_shared").remove(); // 자신이 공유중인 화면을 삭제한다
 					
 					audioStream.stop();
 					canvasStream.stop();
@@ -520,11 +520,11 @@
 		if(!isEmpty(questionuserNum) && !isEmpty(userNum) ) {
 			if(questionuserNum == userNum)	{ // 질문자이다.
  				$("#open-room").click();
- 				$("#btn-share-part-of-sreen").click();
+// 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			} else { // 답변자이다.
 				$("#join-room").click();
- 				$("#btn-share-part-of-sreen").click();
+// 				$("#btn-share-part-of-sreen").click();
 // 				$("#btn-record-webm").click();
 			}			
 		} else {
@@ -668,7 +668,7 @@ function toggleNavigation() {
 				<div class="page-content ask-question">
 					<div class="boxedtitle page-title"><h2>${question.title}</h2></div>
 					
-					<!-- here -->
+<!-- here -->
 <fieldset hidden="hidden">
 <legend>개발용 버튼(삭제하지 말것)</legend>
 <h5>JQuery로 버튼을 자동 click하는 방식으로 실시간 연결 진행. 실제 서비스에서는 이 필드셋을 hidden으로 해둔다.</h5>
@@ -676,7 +676,6 @@ function toggleNavigation() {
 <input type="text" id="room-id" value="${question.questionNum}" size=20> <br>
 <button id="open-room">1-1. 방 Open</button>
 <button id="join-room">1-2. 방 Join</button>
-<button id="btn-share-part-of-sreen" disabled>1. 相手に自分の画面と音声を転送</button>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
 <c:if test='${mode == "videoAnswer"? true:false }'>
@@ -688,13 +687,15 @@ function toggleNavigation() {
 <legend onclick="toggleNavigation()">ナビゲーション</legend>
  <div id="navigation">
  <c:if test='${mode == "realTimeAnswer"? true:false }'>
- 	<h2>1. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h2>
- 	<button id="btn-record-webm" class="button color small submit">1) 自分の画面を録画</button>
- 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">2) 自分の画面の録画を中止</button>
- 	<h2>2. 質問と回答が終了したら相手と連結を切ります。</h2>
- 	<button id="btn-leave-room" disabled class="button color small submit">3) 接続終了</button>
- 	<h2>3. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
- 	<button onclick="formCheck()" class="button color small submit">4) 回答をアップロードする </button>
+ 	<h2>1. 下のボタン（「１）」）が押せるようになると相手に自分の画面と音声を送ることが出来ます。</h2>
+ 	<button id="btn-share-part-of-sreen" class="button color small submit" disabled>1) 相手に自分の画面と音声を転送</button>
+ 	<h2>2. 自分の画面と音声を録画します。録画された動画はアップロードされます。</h2>
+ 	<button id="btn-record-webm" class="button color small submit">2) 自分の画面を録画</button>
+ 	<button id="btn-record-webm-stop" disabled="disabled" class="button color small submit">3) 自分の画面の録画を中止</button>
+ 	<h2>3. 質問と回答が終了したら相手と連結を切ります。</h2>
+ 	<button id="btn-leave-room" disabled class="button color small submit">4) 接続終了</button>
+ 	<h2>4. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
+ 	<button onclick="formCheck()" class="button color small submit">5) 回答をアップロードする</button>
  </c:if>
  <c:if test='${mode == "videoAnswer"? true:false }'>
  	<h2>1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h2>
