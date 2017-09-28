@@ -115,7 +115,7 @@
 					replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>";
 					if (!isEmpty(userId)) {
 						for (var i = 0; i < replyList.length; i++) {
-							if (replyList[i].score >= 0) {
+							if (replyList[i].score == 0) {
 								replyHtml += "<ol class=\"commentlist clearfix\" id=\"" + replyList[i].replyNum + "\">";
 								replyHtml += "<li class=\"comment\">";
 								replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">";
@@ -235,6 +235,7 @@
 			}
 		};
 		
+		//유저선택
 		function selectedReplyView() {
 			$.ajax({
 				url: "getSelectedReply",
@@ -492,7 +493,7 @@
 				    </div> -->
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
-						<c:if test="${ question.selectedReplyNum >= 0 }">
+						<c:if test="${ question.selectedReplyNum == 0 }">
 							<div id="related-posts">
 								<table style="margin: auto;">
 									<tr>

@@ -35,6 +35,11 @@
    	
    </style>
    
+   <style type="text/css">
+	div { cursor: url(./resources/images/cursor2.cur), auto;
+		 }
+	</style>
+
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
    <script src="./resources/js/dateFormat.min.js"></script>

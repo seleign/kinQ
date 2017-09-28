@@ -24,7 +24,11 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-
+	
+	<style type="text/css">
+	div { cursor: url(./resources/images/cursor2.cur), auto;
+		 }
+	</style>
 
 <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
   <script type="text/javascript">
