@@ -683,7 +683,6 @@ function toggleNavigation() {
 <button id="join-room">1-2. 방 Join</button>
 <button id="btn-share-part-of-sreen" disabled>1. 相手に自分の画面と音声を転送</button>
 <button id="open-or-join-room">(기능 테스트 중)Auto Open Or Join Room</button> <br>
-<button id = "test" onclick="ttt();"> to base64 </button>
 <input type="text" id="videoSrc" name="videoSrc" placeholder="업로드된 동영상의 주소">
 <c:if test='${mode == "videoAnswer"? true:false }'>
  	<button id="btn-leave-room" disabled class="button color small submit">3. 接続終了</button>
@@ -701,8 +700,6 @@ function toggleNavigation() {
  	<button id="btn-leave-room" disabled class="button color small submit">3) 接続終了</button>
  	<h2>3. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h2>
  	<button onclick="formCheck()" class="button color small submit">4) 回答をアップロードする </button>
- 	
- 	
  </c:if>
  <c:if test='${mode == "videoAnswer"? true:false }'>
  	<h2>1. 自分の画面と音声を録画します。録画された動画をアップロードしてください。</h2>

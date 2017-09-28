@@ -81,7 +81,6 @@
 
 	
 window.onload = function() {
-	
 	// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 	CKEDITOR.replace('question_details',{ 
 		filebrowserUploadUrl: 'cKEditorFileUpload'
@@ -599,7 +598,7 @@ function getRecentPoint() {
 										<div id="video_and_cavas_container">
 											<div id="canvas_container">
 												<div id="HtmlTagFromTheCKEDITOR" contenteditable="true"
-													style="background-color: #FBFBEE; width: 100%;">
+													style="background-color: white; border: 3px solid blick; width: 100%;">
 													<!-- 이 안에 있는 요소만 녹화가 되기 때문에, 드래그앤 드랍으로 여기로 div를 옴겨와야 한다. -->
 													<!-- 여기에 에디터에 쓴 내용이 여기로 옴겨진다.  -->
 												</div>
