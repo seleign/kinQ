@@ -47,7 +47,10 @@ public class FileController {
 	 * @return --작성 필요???
 	 */
 	@RequestMapping(value = "blob_upload", method = RequestMethod.POST)
-	public @ResponseBody String blob_upload(MultipartFile blob, int questionNum, HttpSession session) {
+	public @ResponseBody String blob_upload(MultipartFile blob, String questionNum, HttpSession session) {
+		if(questionNum.substring(0,1).equals(",") ) {
+			questionNum = questionNum.substring(1, questionNum.length());
+		}
 		logger.info("blob_upload: " + blob.getOriginalFilename());
 		logger.info("blob_size: " + blob.getSize());
 		logger.info("questionNum: " + questionNum);
@@ -60,7 +63,7 @@ public class FileController {
 			userNum = (int)session.getAttribute("userNum");
 		}
 
-		String QFILEPATH = FileService.blob_upload(blob, userId, questionNum);
+		String QFILEPATH = FileService.blob_upload(blob, userId, Integer.parseInt(questionNum));
 		
 		// 근데 어차피 QuestionVO에 녹화된 파일 주소를 가지고 있을 텐데, 여기에서 다시 Q_attach테이블에 넣어줘야하나?
 		HashMap<String, String> map = new HashMap<String, String>();
