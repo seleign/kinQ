@@ -76,12 +76,12 @@
 		        CKEDITOR.instances[instance].updateElement();
 		        CKEDITOR.instances[instance].setData('');
 		    }
-		};
+		}
 		
 		function getMAxScoreReply() {
 			$.ajax({
 				url: "getMaxScoreReply",
-				type: "post",
+				type: "get",
 				data: { questionNum: ${ question.questionNum }},
 				success: function (reply) {
 					if (!isEmpty(reply)) {
@@ -104,18 +104,18 @@
 					}
 				}
 			})
-		};
+		}
 		
 		function questionReplyList() {
 			$.ajax({
 				url: "questionReplyList",
-				type: "post",
+				type: "get",
 				data: { questionNum: ${ question.questionNum }},
 				success: function (replyList) {
 					replyHtml += "<div class=\"boxedtitle page-title\"><h2>Answers ( <span class=\"color\">" + replyList.length +"</span> )</h2></div>";
 					if (!isEmpty(userId)) {
 						for (var i = 0; i < replyList.length; i++) {
-							if (replyList[i].score == 0) {
+							if (replyList[i].score >= 0) {
 								replyHtml += "<ol class=\"commentlist clearfix\" id=\"" + replyList[i].replyNum + "\">";
 								replyHtml += "<li class=\"comment\">";
 								replyHtml += "<div class=\"comment-body comment-body-answered clearfix\">";
@@ -174,7 +174,7 @@
 					replyHtml = "";
 				}
 			})
-		};
+		}
 		
 		
 		function registReply() {
@@ -193,21 +193,20 @@
 					CKupdate();
 				}
 			})
-		};
+		}
 		
 		function deleteReply(replyNum) {
 			$.ajax({
 				url: "deleteReply",
-				type: "post",
+				type: "POST",
 				data: { replyNum: replyNum },
 				success: function (success) {
-					/* getMAxScoreReply();
-					questionReplyList(); */
-					window.location.reload(true);
-					
+					getMAxScoreReply();
+					questionReplyList();
+					//window.location.reload(true);
 				}
 			})
-		};
+		}
 		
 		function registReplyScore() {
 			var score = parseInt($("#replyScore").text());
@@ -218,7 +217,7 @@
 			} else {
 				$.ajax({
 					url: "selectedReply",
-					type: "post",
+					type: "get",
 					data: { 
 							questionNum: ${ question.questionNum },
 							replyNum: selectedReply,
@@ -229,17 +228,17 @@
 						/* getMAxScoreReply();*/
 						questionReplyList();
 						registReplyCancel();
+						selectedReplyView();
 						//window.location.reload(true);
 					}
 				})
 			}
-		};
+		}
 		
-		//유저선택
 		function selectedReplyView() {
 			$.ajax({
 				url: "getSelectedReply",
-				type: "post",
+				type: "get",
 				data: { 
 						questionNum: ${ question.questionNum },
 					  },
@@ -264,14 +263,14 @@
 					}
 				}
 			})
-		};
+		}
 		
 		function registReplyCancel() {
 			jQuery(".panel-pop").animate({"top":"-100%"},500).hide(function () {
 				jQuery(this).animate({"top":"-100%"},500);
 			});
 			jQuery(".wrap-pop").remove();
-		};
+		}
 		
 		function recommendPop(replyNum) {
 			selectedReply = replyNum;
@@ -289,12 +288,12 @@
 				});
 				jQuery(this).remove();
 			});
-		};
+		}
 		
 		function updateRecommendUp(replyNum, userNum) {
 			$.ajax({
 				url: "updateRecommendUp",
-				type: "post",
+				type: "get",
 				data: { 
 						questionNum: ${ question.questionNum },
 						replyNum: replyNum,
@@ -310,7 +309,7 @@
 		function updateRecommendDown(replyNum, userNum) {
 			$.ajax({
 				url: "updateRecommendDown",
-				type: "post",
+				type: "get",
 				data: { 
 						questionNum: ${ question.questionNum },
 						replyNum: replyNum,
@@ -321,7 +320,7 @@
 					questionReplyList();
 				}
 			})
-		};
+		}
 		
 		
 </script>
@@ -426,7 +425,7 @@
 						</c:forEach>
 					</div>
 					<div class="share-inside-warp">
-						<!-- <ul>
+						<ul>
 							<li>
 								<a href="#" original-title="Facebook">
 									<span class="icon_i">
@@ -477,7 +476,7 @@
 								</a>
 								<a href="#" target="_blank">Pinterest</a>
 							</li>
-						</ul> -->
+						</ul>
 						<span class="share-inside-f-arrow"></span>
 						<span class="share-inside-l-arrow"></span>
 					</div><!-- End share-inside-warp -->
@@ -493,7 +492,7 @@
 				    </div> -->
 				    <div class="author-bio" id="bestReply"></div>
 				</div><!-- End about-author -->
-						<c:if test="${ question.selectedReplyNum == 0 }">
+						<c:if test="${ question.selectedReplyNum >= 0 }">
 							<div id="related-posts">
 								<table style="margin: auto;">
 									<tr>

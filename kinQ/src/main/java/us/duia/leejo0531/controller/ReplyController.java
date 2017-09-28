@@ -47,14 +47,14 @@ public class ReplyController {
 	 * @param Reply
 	 * @return ArrayList<ReplyVO>
 	 */
-	@RequestMapping(value = "questionReplyList", method = RequestMethod.POST)
+	@RequestMapping(value = "questionReplyList", method = RequestMethod.GET)
 	public @ResponseBody ArrayList<ReplyVO> questionReplyList(QuestionVO qstn) {
 //		System.out.println(qstn.getQuestionNum());
 		ArrayList<ReplyVO> replyList = reSvc.questionReplyList(qstn.getQuestionNum());
 		return replyList;
 	}
 	
-	@RequestMapping(value = "getMaxScoreReply", method = RequestMethod.POST)
+	@RequestMapping(value = "getMaxScoreReply", method = RequestMethod.GET)
 	public @ResponseBody ReplyVO getMaxScoreReply(QuestionVO qstn) {
 		int questionNum = qstn.getQuestionNum();
 //		System.out.println(questionNum);
@@ -74,7 +74,7 @@ public class ReplyController {
 		}
 	}
 	
-	@RequestMapping(value = "deleteReply", method = RequestMethod.POST)
+	@RequestMapping(value = "deleteReply", method = {RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody String deleteReply(ReplyVO reply) {
 //		System.out.println("reply : " + reply);
 		int result = reSvc.deleteReply(reply.getReplyNum());
@@ -86,7 +86,7 @@ public class ReplyController {
 	}
 
 	
-	@RequestMapping(value = "selectedReply", method = RequestMethod.POST)
+	@RequestMapping(value = "selectedReply", method = RequestMethod.GET)
 	public @ResponseBody int selectedReply(ReplyVO reply) {
 //		System.out.println("Reply : " + reply);
 		int result = reSvc.selectedReply(reply);
@@ -97,14 +97,14 @@ public class ReplyController {
 		return result;
 	}
 	
-	@RequestMapping(value = "getSelectedReply", method = RequestMethod.POST)
+	@RequestMapping(value = "getSelectedReply", method = RequestMethod.GET)
 	public @ResponseBody ReplyVO getSelectedReply(int questionNum) {
 //		System.out.println("QuestionNum : " + questionNum);
 		ReplyVO reply = reSvc.getSelectedReply(questionNum);
 		return reply;
 	}
 	
-	@RequestMapping(value = "updateRecommendUp", method = RequestMethod.POST)
+	@RequestMapping(value = "updateRecommendUp", method = RequestMethod.GET)
 	public @ResponseBody String updateRecommendUp(ReplyVO reply) {
 //		System.out.println("Reply : " + reply);
 		int result = reSvc.updateRecommendUp(reply);
@@ -115,7 +115,7 @@ public class ReplyController {
 		}
 	}
 	
-	@RequestMapping(value = "updateRecommendDown", method = RequestMethod.POST)
+	@RequestMapping(value = "updateRecommendDown", method = RequestMethod.GET)
 	public @ResponseBody String updateRecommendDown(ReplyVO reply) {
 //		System.out.println("Reply : " + reply);
 		int checkZero = reSvc.checkZeroRecommend(reply);
