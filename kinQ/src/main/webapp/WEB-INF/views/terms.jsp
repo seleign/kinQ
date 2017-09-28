@@ -24,7 +24,18 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-  
+  <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+   <style>
+   	.pageName {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.current {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	#termsTitle {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   </style>
   <script type="text/javascript">
   
   	function changeToQnA(){
@@ -125,7 +136,7 @@
 		<section class="container">
 		
 				<div class="col-md-12">
-					<h1>サービス案内</h1>
+					<h1 class="pageName">サービス案内</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">

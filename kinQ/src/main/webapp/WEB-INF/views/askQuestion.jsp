@@ -27,6 +27,28 @@
 <!-- Favicons -->
 <link rel="shortcut icon" href="./resources/images/favicon_qs.png">
 
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+   <style>
+   	.pageName {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.current {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.askinfo {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	#selectdTime {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.required {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.form-description {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   </style>
+
 <script src="./resources/js/jquery-3.2.1.min.js"></script>
 <script src="./resources/js/jquery-migrate-1.4.1.js"></script>
 <!-- js -->
@@ -451,14 +473,12 @@ function getRecentPoint() {
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Ask Question</h1>
-
+					<h1 class="pageName">質問ボード</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
-						<a href="#">Home</a> <span class="crumbs-span">/</span> <a
-							href="#">Pages</a> <span class="crumbs-span">/</span> <span
-							class="current">Ask Question</span>
+						<a href="#">Home</a> <span class="crumbs-span">/</span><span
+							class="current">質問ボード</span>
 					</div>
 				</div>
 			</div>
@@ -477,7 +497,7 @@ function getRecentPoint() {
 						<h2>Ask Question</h2>
 					</div>
 
-					<p>こんにちは。KinQに知りたい質問や気になることを気軽くに質問をすることができます。</p>
+					<p class="askinfo">こんにちは。KinQに知りたい質問や気になることを気軽くに質問をすることができます。</p>
 
 					<div class="form-style form-style-3" id="question-submit">
 						<form
@@ -586,7 +606,7 @@ function getRecentPoint() {
 								<div class="ask-video">
 									<label class="required">video<span>*</span></label>
 									<div id="step2">
-										<h1>質問の内容に音声をつけられます。</h1>
+										<h1 class="askinfo">質問の内容に音声をつけられます。</h1>
 
 										<input type="button" id="btn-record-webm"
 											class="button color small submit" value="画面の録画を始める">

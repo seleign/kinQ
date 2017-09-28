@@ -40,6 +40,22 @@
    	.search_select{
    		font-family: "Rounded Mplus 1c";
    	}
+   	.pageName{
+   		font-family: "Rounded Mplus 1c";
+   		font-size: 17px;
+   	}
+   	#pageName1{
+   		font-family: "Rounded Mplus 1c";
+   		font-size: 17px;
+   	}
+   	#pageName2{
+   		font-family: "Rounded Mplus 1c";
+   		font-size: 17px;
+   	}
+   	.loginName{
+   		font-family: "Rounded Mplus 1c";
+   		font-size: 14px;
+   	}
    </style>
 
 <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
@@ -240,7 +256,7 @@
 							<li><a href="#" id="login-panel"><i class="icon-user"></i>Login Area</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="#"><i class="icon-user"></i>${sessionScope.userName }様 Login 中…</a></li>
+							<li><a href="#" class="loginName"><i class="icon-user"></i>${sessionScope.userName }様 Login 中…</a></li>
 							<li><a href="logout">Logout</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -282,10 +298,10 @@
 			<div class="logo"><a href="index"><img alt="" src="images/logo_new.png"></a></div>
 			<nav class="navigation">
 				<ul>
-					<li class="current_page_item"><a href="index.html">Home</a></li>
-					<li class="ask_question"><a href="askQuestion">質問ボード</a></li>
-					<li><a href="pointShop">ポイントショップ</a></li>
-					<li><a href="javascript:void(0)">サービス案内</a>
+					<li class="current_page_item pageName" id="pageName1"><a href="index.html">Home</a></li>
+					<li class="ask_question pageName" id="pageName2"><a href="askQuestion">質問ボード</a></li>
+					<li><a href="pointShop" class="pageName">ポイントショップ</a></li>
+					<li><a href="javascript:void(0)" class="pageName">サービス案内</a>
 						<ul>
 							<li><a href="terms">利用約款</a>
 							<li><a href="terms">Q&A</a></li>
