@@ -55,7 +55,7 @@
 		questionReplyList();
 		
 		window.onload = function() {
-			if (userId != "" && userId != ${ user.id }) {
+			if (userId != "" && userId != "${ user.id }") {
 				// 1. Ckeditor 초기화, 파일 업로드 주소 설정
 				CKEDITOR.replace('replyContent',{ 
 		    	    		filebrowserUploadUrl: 'cKEditorFileUpload'
