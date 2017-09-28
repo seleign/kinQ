@@ -105,7 +105,7 @@
 	//알람을 통한 질문글 이동 function
 	function questionView(questionNum) {
         var questionview = document.questionview;
-        questionview.questionNum.value=questionNum ;
+        questionview.questionNum.value=questionNum;
         questionview.submit();
 	}
 	
@@ -120,13 +120,13 @@
 				$.each(result, function(index, element){
 					html += '<li class="alarmNote">';
 					if(element.alarmType =='reply'){
-						html += '<a class="alarmNote" href=\"#\" onclick=\"questionView(' + element.alarmAdress + ')\">ご質問に答えが登録されました。';
+						html += '<a class="alarmNote" href=\"#\" onclick=\"questionView(' + element.alarmAdress + ')\">ご質問に答えが登録されました。</a>';
 					}
 					if(element.alarmType =='realtime'){
-						html += '<li class="alarmNote"><a class="alarmNote" href=\"#\" onclick=\"questionView(' + element.alarmAdress + ')\">リアルタイム返事要請が来ました。';
+						html += '<li class="alarmNote"><a class="alarmNote" href=\"#\" onclick=\"questionView(' + element.alarmAdress + ')\">リアルタイム返事要請が来ました。</a>';
 					}
 					if(element.alarmType =='interest'){
-						html += '<li class="alarmNote"><a class="alarmNote" href=\"#\" onclick=\"questionView(' + element.alarmAdress + ')\">関心項目に関する質問があります。';
+						html += '<li class="alarmNote"><a class="alarmNote" href=\"#\" onclick=\"questionView(' + element.alarmAdress + ')\">関心項目に関する質問があります。</a>';
 					}
 					html +='</li>';
 				});
@@ -176,7 +176,6 @@
 
 <div class="loader"><div class="loader_html"></div></div>
 
-<!-- 알람을 post로 전달 -->
 <form name="questionview" action="question_view" method="post">
       <input type="hidden" name="questionNum" value="">
 </form>

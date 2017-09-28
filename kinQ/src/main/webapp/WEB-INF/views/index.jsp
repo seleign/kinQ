@@ -47,11 +47,6 @@
    <script src="./resources/js/dateFormat.min.js"></script>
      <script type="text/javascript">
    
-     function questionView(questionNum) {
-        var questionview = document.questionview;
-        questionview.questionNum.value=questionNum ;
-        questionview.submit();
-   }
      
    function recentQlist(){
       $.ajax({
@@ -410,10 +405,6 @@
 <body>
 <jsp:include page="header.jsp" flush="false" />
 
-   <form name="questionview" action="question_view" method="post">
-      <input type="hidden" name="questionNum" value="">
-   </form>
-   
    <div class="panel-pop" id="report_panel">
    <h2>Report<i class="icon-remove"></i></h2>
    <div class="form-style form-style-3">
