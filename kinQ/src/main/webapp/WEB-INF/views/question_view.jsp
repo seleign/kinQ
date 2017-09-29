@@ -29,7 +29,15 @@
 	
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="./resources/images/favicon_qs.png">
-	
+	<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+   <style>
+   	.pageName {
+   		font-family: "Rounded Mplus 1c";
+   	}
+   	.current{
+   		font-family: "Rounded Mplus 1c";
+   	}
+   </style>
 	
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -352,15 +360,13 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Question Detail</h1>
+					<h1 class="pageName">質問内容</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
 						<a href="#">Home</a>
 						<span class="crumbs-span">/</span>
-						<a href="#">Questions</a>
-						<span class="crumbs-span">/</span>
-						<span class="current">Question Detail</span>
+						<span class="current">質問内容</span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -373,7 +379,7 @@
 				<article class="question single-question question-type-normal">
 					<h2>${ user.id }</h2>
 					<h2>
-						<a href="single_question.html">${ question.title }</a>
+						<a href="single_question.html" class="qTitle">${ question.title }</a>
 					</h2>
 					<!-- <a class="question-report" href="#">Report</a>
 					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div> -->
