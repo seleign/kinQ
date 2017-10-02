@@ -17,7 +17,7 @@
          into CashLog(cashLogNum, userNum, cCharged, cChargedDate, cChange) 
          values(CashLog_SEQ.nextval, #{userNum}, 0, sysdate, 0) 
          into PointLog(pointLogNum, pUserNum, pCharged, pChargedDate, pChange) 
-         values(PointLog_SEQ.nextval, #{userNum}, 0, sysdate, 0) 
+         values(PointLog_SEQ.nextval, #{userNum}, 300, sysdate, 300) 
          select * from dual
 	</insert>
 
