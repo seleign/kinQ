@@ -28,7 +28,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
    <style>
-   	.pageName {
+   	.termsTitle {
    		font-family: "Rounded Mplus 1c";
    	}
    	.current {
@@ -141,7 +141,7 @@
 		<section class="container">
 		
 				<div class="col-md-12">
-					<h1>サービス案内</h1>
+					<h1 class="termsTitle">サービス案内</h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">

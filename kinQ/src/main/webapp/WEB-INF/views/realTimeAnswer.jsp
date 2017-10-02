@@ -724,6 +724,7 @@ function toggleNavigation() {
  	<h4 class="pageName">2. 回答をアップロードします。アップロードしないと質問に回答なかったものになってしまいます。</h4>
  	<button id="btn-record-webm-stop" disabled="disabled" class="button color realtime">2. 自分の画面の録画を中止</button> <br>
  	<button onclick="formCheck()" class="button color realtime">3. 回答をアップロードする </button>
+ 	<button id="btn-share-part-of-sreen" class="button color realtime" disabled hidden="hidden"></button>
  </c:if>	
  </div>
  	<div id="navigation2" hidden="hidden">
